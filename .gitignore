@@ -1,0 +1,4 @@
+/DotBase/obj/*
+/DotBase/bin/*
+*.dll
+
