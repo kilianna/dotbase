@@ -1,4 +1,9 @@
 /DotBase/obj/*
 /DotBase/bin/*
 *.dll
-
+*.csproj
+*.suo
+DotBase/Struktura bazy danych.*
+*.sln
+*.pdf
+*.doc
