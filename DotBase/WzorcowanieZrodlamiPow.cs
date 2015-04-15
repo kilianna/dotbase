@@ -181,7 +181,7 @@ namespace DotBase
             double odchylenie_tlo = 1.0 / Math.Sqrt(tla.Count * (tla.Count - 1.0)) * Math.Sqrt(odchylenie_czesc_tlo) / (sredniaWskazan - sredniaTel);
 
 
-            niepewnoscWspolczynnika = Math.Sqrt(Math.Pow(odchylenie_pomiar, 2.0) + Math.Pow(odchylenie_tlo, 2.0) + Math.Pow(niepewnosc, 2.0) + 0.025 * 0.025) * 2.0 * wspolczynnik_kalibracyjny;
+            niepewnoscWspolczynnika = Math.Sqrt(Math.Pow(odchylenie_pomiar, 2.0) + Math.Pow(odchylenie_tlo, 2.0) + Math.Pow(niepewnosc, 2.0) + 0.02 * 0.03) * 2.0 * wspolczynnik_kalibracyjny;
             precyzja = 0;//Narzedzia.Precyzja.Ustaw(niepewnoscWspolczynnika);
 
             return true;
