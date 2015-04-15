@@ -246,20 +246,6 @@ namespace DotBase
             {
                 int idDozymetru = ZnajdzIdDozymetru(dane.Przyrzad.Typ, dane.Przyrzad.NrFabryczny);
 
-               bool b = dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.AMERYK];
-               b = dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.CHLOR];
-               b = dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.DAWKA];
-               b = dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.MOC_DAWKI];
-               b = dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.PLUTON];
-               b = dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.STRONT_SLABY];
-               b = dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.STRONT_SILNY];
-               b = dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.SYGNALIZACJA_DAWKI];
-               b = dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.SYGNALIZACJA_MOCY_DAWKI];
-               b = dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.WEGIEL_SLABY];
-               b = dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.WEGIEL_SILNY];
-               b = dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.STRONT_NAJSILNIEJSZY];
-                
-
                 _Zapytanie = "INSERT INTO Karta_przyjecia (id_karty, id_zlecenia, rok, ameryk, chlor, dawka, moc_dawki, "
 	                       + "pluton, stront_slaby, stront_silny, syg_dawki, syg_mocy_dawki, wegiel_slaby, wegiel_silny, stront_najsilniejszy, "
                            + "akcesoria, uwagi, uszkodzony, id_dozymetru, test_na_skazenia) VALUES "
@@ -544,13 +530,12 @@ namespace DotBase
             public bool ZaladujDaneKalibracji()
             //------------------------------------------------------------------
             {
-                _Zapytanie = String.Format("SELECT id_zlecenia, ameryk, chlor, dawka, moc_dawki, pluton, stront_slaby, stront_silny, syg_dawki, syg_mocy_dawki, wegiel_slaby, wegiel_silny, stront_najsilniejszy FROM Karta_przyjecia WHERE id_karty = {0}", DaneKartyPrzyjecia.IdKarty);
+                _Zapytanie = String.Format("SELECT ameryk, chlor, dawka, moc_dawki, pluton, stront_slaby, stront_silny, syg_dawki, syg_mocy_dawki, wegiel_slaby, wegiel_silny, stront_najsilniejszy FROM Karta_przyjecia WHERE id_karty = {0}", DaneKartyPrzyjecia.IdKarty);
 
                 _OdpowiedzBazy = _BazaDanych.TworzTabeleDanych(_Zapytanie);
 
                 try
                 {
-                    //_OdpowiedzBazy.Rows[0].Field<int>("id_zlecenia");
                     DaneKartyPrzyjecia.Wymagania = new WymaganiaKalibracji(_OdpowiedzBazy.Rows[0].Field<bool>("ameryk"),
                                                                            _OdpowiedzBazy.Rows[0].Field<bool>("chlor"),
                                                                            _OdpowiedzBazy.Rows[0].Field<bool>("dawka"),

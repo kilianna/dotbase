@@ -540,39 +540,31 @@ namespace DotBase
         private void protokółToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             string sciezka = _DocumentationPathsLoader.GetPath("ProtokolySygnalizacjaMocyDawkiWynik") + textBox1.Text + "SygnalizacjaMocyDawki.html";
+            WzorcowanieSygnalizacjaMocyDawkiDataModel dataModel = new WzorcowanieSygnalizacjaMocyDawkiDataModel (
+                new DanePodstawoweModel(textBox1.Text, textBox2.Text, dateTimePicker1.Value),
+                new DanePrzyrzaduModel(textBox3.Text, textBox4.Text, textBox5.Text, comboBox1.Text, comboBox2.Text, textBox6.Text),
+                new DaneWarunkowModel(textBox7.Text, textBox8.Text, textBox9.Text, textBox10.Text),
+                new DaneWspolczynnikowModel(textBox11.Text, textBox12.Text));
 
             // opis
+            Dokumenty.Wydruki dokument = null;
             if(radioButton2.Checked)
             {
-                Dokumenty.ProtokolSygMocyDawki protokol = new Dokumenty.ProtokolSygMocyDawki(Narzedzia.StaleWzorcowan.stale.PROTOKOL_SYGNALIZACJA_MOCY_DAWKI_OPIS, radioButton2.Checked);
-
-                if (protokol.PobierzDanePodstawowe(textBox1.Text, textBox2.Text, dateTimePicker1.Value) &&
-                   protokol.PobierzDanePrzyrzadu(textBox3.Text, textBox4.Text, textBox5.Text, comboBox1.Text, comboBox2.Text, textBox6.Text) &&
-                   protokol.PobierzDaneWarunkow(textBox7.Text, textBox8.Text, textBox9.Text, textBox10.Text) &&
-                   protokol.PobierzDaneWspolczynnikow(textBox11.Text, textBox12.Text) &&
-                   protokol.PobierzDaneWzorcoweIPomiarowe(textBox13.Text))
-                { 
-                    protokol.UtworzDokument(sciezka);
-                    System.Diagnostics.Process.Start(sciezka);
-                    return;
-                }
+                dataModel.uwagiWzorcowe = textBox13.Text;
+                dokument = new Dokumenty.ProtokolSygMocyDawkiOpis(dataModel);
             }
             else
             {
-                Dokumenty.ProtokolSygMocyDawki protokol = new Dokumenty.ProtokolSygMocyDawki(Narzedzia.StaleWzorcowan.stale.PROTOKOL_SYGNALIZACJA_MOCY_DAWKI_TABELA, radioButton2.Checked);
-                if(protokol.PobierzDanePodstawowe(textBox1.Text, textBox2.Text, dateTimePicker1.Value) &&
-                   protokol.PobierzDanePrzyrzadu(textBox3.Text, textBox4.Text, textBox5.Text, comboBox1.Text, comboBox2.Text, textBox6.Text) &&
-                   protokol.PobierzDaneWarunkow(textBox7.Text, textBox8.Text, textBox9.Text, textBox10.Text) &&
-                   protokol.PobierzDaneWspolczynnikow(textBox11.Text, textBox12.Text) &&
-                   protokol.PobierzDaneWzorcoweIPomiarowe(comboBox4.Text, ref dataGridView1))
-                {
-                    protokol.UtworzDokument(sciezka);
-                    System.Diagnostics.Process.Start(sciezka);
-                    return;
-                }
+                dataModel.uwagiDoWarunkow = textBox10.Text;
+                dataModel.jednostka = comboBox4.Text;
+                dataModel.dataGridView = dataGridView1;
+                dokument = new Dokumenty.ProtokolSygMocyDawkiTabela(dataModel);
             }
-            
-            MessageBox.Show("Nie podano wszystkich potrzebnych danych!", "Uwaga");
+
+            if (false == dokument.generateDocument(sciezka))
+            {
+                MessageBox.Show("Nie podano wszystkich potrzebnych danych!", "Uwaga");
+            }
         }
 
         //****************************************************************************************

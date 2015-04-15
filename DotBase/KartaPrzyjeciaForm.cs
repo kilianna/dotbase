@@ -124,24 +124,9 @@ namespace DotBase
         //---------------------------------------------------------
         {
             string SCIEZKA_DO_ZAPISU = _DocumentationPathsLoader.GetPath("KartaPrzyjeciaWynik") + numericUpDown1.Value.ToString() + "KartaPrzyjecia.html";
-            /*
-            DaneKartyPrzyjecia dane = new DaneKartyPrzyjecia((int)numericUpDown1.Value, int.Parse(textBox1.Text), comboBox1.Text, comboBox2.Text,
-            checkBox1.Checked, checkBox2.Checked, checkBox3.Checked, checkBox4.Checked, checkBox5.Checked, checkBox6.Checked, checkBox7.Checked,
-            checkBox8.Checked, checkBox9.Checked, checkBox10.Checked, checkBox11.Checked);
-            dane.Akcesoria = textBox2.Text;
-            dane.Uwagi = textBox3.Text;
-            dane.Uszkodzony = checkBox12.Checked;
 
-            _KartaPrzyjecia.TworzProtokol(dane);
-            */
-
-            Dokumenty.KartaPrzyjecia protokol = new Dokumenty.KartaPrzyjecia();
-            protokol.UtworzDokument(numericUpDown1.Value.ToString(), SCIEZKA_DO_ZAPISU);
-            System.Diagnostics.Process.Start(SCIEZKA_DO_ZAPISU);
-
-
-            /*Protokol protokol = new Protokol(_KartaPrzyjecia._DaneProtokolu.DanePodstawowe, _KartaPrzyjecia._DaneProtokolu.DaneTabelowe);
-            protokol.UtworzProtokol(Protokol.Stale.KARTA_PRZYJECIA);*/
+            Dokumenty.KartaPrzyjecia protokol = new Dokumenty.KartaPrzyjecia(numericUpDown1.Value.ToString());
+            protokol.generateDocument(SCIEZKA_DO_ZAPISU);
         }
 
         //---------------------------------------------------------

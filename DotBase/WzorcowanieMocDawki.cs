@@ -125,7 +125,7 @@ namespace WzorcowanieMocDawkiSpace
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -207,7 +207,7 @@ namespace WzorcowanieMocDawkiSpace
                     ++licznik2;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

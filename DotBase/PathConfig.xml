@@ -10,7 +10,7 @@
   <document type="ProtokolySkazeniaSzablon" path="../Szablony/Protokoly/Skazenia/"/>
   <document type="ProtokolySygnalizacjaMocyDawkiSzablon" path="../Szablony/Protokoly/SygnalizacjaMocyDawki/"/>
   <document type="ProtokolySygnalizacjaDawkiSzablon" path="../Szablony/Protokoly/SygnalizacjaDawki/"/>
-  <document type="SwiadectwoSzablonPlikiPomocnicze" path="../Szablony/Swiadectwo/Szablony/PlikiPomocnicze/"/>
+  <document type="SwiadectwoSzablonPlikiPomocnicze" path="../Szablony/Swiadectwo/PlikiPomocnicze/"/>
 
   <document type="KartaPrzyjeciaWynik" path="../Wyniki/KartaPrzyjecia/"/>
   <document type="SwiadectwoWynik" path="../Wyniki/Swiadectwo/"/>

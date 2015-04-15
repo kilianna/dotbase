@@ -30,6 +30,11 @@ namespace DotBase
         private void button1_Click(object sender, EventArgs e)
         //----------------------------------------------------------------------------------
         {
+            LogIn();
+        }
+
+        private void LogIn()
+        {
             _Loger = new Logowanie(richTextBox1.Text, textBox2.Text, textBox3.Text);
             SetLogin();
 
@@ -88,6 +93,12 @@ namespace DotBase
         {
             if(DialogResult.OK == openFileDialog1.ShowDialog(this))
                 richTextBox1.Text = openFileDialog1.FileName;
+        }
+
+        private void textBox3_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Keys.Enter == e.KeyCode)
+                LogIn();
         }
     }
 }

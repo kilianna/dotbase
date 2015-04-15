@@ -14,7 +14,7 @@ namespace DotBase
 
         public DocumentationPathsLoader()
         {
-            XMLFile = XDocument.Load("PathConfig.xml");
+            XMLFile = XDocument.Load(basePath + @"\PathConfig.xml");
         }
 
         public String GetPath(String type)

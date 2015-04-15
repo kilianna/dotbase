@@ -559,5 +559,25 @@ namespace DotBase
             okno.ShowDialog();
         }
 
+        private void podglądToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MeldunekModel model = new MeldunekModel();
+            model.adresZleceniodawcy = textBox2.Text;
+            model.nip = textBox6.Text;
+            
+            for (int i = 0; i < dataGridView1.Rows.Count; ++i)
+            {
+                model.nrKart.Add(dataGridView1[0, i].Value.ToString());
+            }
+            model.zleceniodawca = comboBox1.Text;
+
+            string path = new DocumentationPathsLoader().GetPath("MeldunekWynik") + numericUpDown1.Value + "Meldunek.html";
+            WydrukiMeldunek wydrukiMeldunek = new WydrukiMeldunek(model);
+            if(!wydrukiMeldunek.generateDocument(path))
+            {
+                MessageBox.Show("Sprawdź czy zlecenie zostało na pewno wykonane.", "Uwaga");
+            }
+        }
+
     }
 }

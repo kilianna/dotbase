@@ -606,17 +606,19 @@ namespace DotBase
         {
             string sciezka = _DocumentationPathsLoader.GetPath("ProtokolyMocDawkiWynik") + textBox1.Text + "MocDawki.html";
 
-            Dokumenty.ProtokolMocDawki protokol = new Dokumenty.ProtokolMocDawki(Narzedzia.StaleWzorcowan.stale.PROTOKOL_MOC_DAWKI);
-            if (protokol.PobierzDanePodstawowe(textBox1.Text, textBox6.Text, dateTimePicker1.Value) &&
-                protokol.PobierzDanePrzyrzadu(textBox3.Text, textBox4.Text, textBox9.Text, comboBox1.Text, comboBox2.Text, textBox7.Text) &&
-                protokol.PobierzDaneWarunkow(textBox14.Text, textBox15.Text, textBox16.Text, textBox2.Text) &&
-                protokol.PobierzDaneWspolczynnikow(textBox21.Text, textBox22.Text) &&
-                protokol.PobierzDaneWzorcoweIPomiarowe(comboBox4.Text, comboBox5.Text, textBox5.Text, dataGridView1.Rows))
-            {
-                protokol.UtworzDokument(sciezka);
-                System.Diagnostics.Process.Start(sciezka);
-            }
-            else
+            Dokumenty.ProtokolMocDawkiModel model = new Dokumenty.ProtokolMocDawkiModel(
+                    new DanePodstawoweModel(textBox1.Text, textBox6.Text, dateTimePicker1.Value),
+                    new DanePrzyrzaduModel(textBox3.Text, textBox4.Text, textBox9.Text, comboBox1.Text, comboBox2.Text, textBox7.Text),
+                    new DaneWarunkowModel(textBox14.Text, textBox15.Text, textBox16.Text, textBox2.Text),
+                    new DaneWspolczynnikowModel(textBox21.Text, textBox22.Text));
+
+            model.jednostka = comboBox4.Text;
+            model.wielkoscFizyczna = comboBox5.Text;
+            model.tlo = textBox5.Text;
+            model.tabela = dataGridView1.Rows;
+            
+            Dokumenty.ProtokolMocDawki protokol = new Dokumenty.ProtokolMocDawki(model);
+            if (!protokol.generateDocument(sciezka))
             {
                 MessageBox.Show("Nie podano wszystkich potrzebnych danych!", "Uwaga");
             }

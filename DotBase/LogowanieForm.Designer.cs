@@ -104,6 +104,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(115, 20);
             this.textBox2.TabIndex = 6;
+            this.textBox2.Text = "npp126p";
             this.textBox2.UseSystemPasswordChar = true;
             // 
             // label1
@@ -139,7 +140,9 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(115, 20);
             this.textBox3.TabIndex = 10;
+            this.textBox3.Text = "doniczka";
             this.textBox3.UseSystemPasswordChar = true;
+            this.textBox3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox3_KeyDown);
             // 
             // button2
             // 

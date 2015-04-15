@@ -94,7 +94,7 @@ namespace DotBase
             double odchylenieStandardowe = Math.Sqrt(temporaryValues.Average(v => Math.Pow(v - wspolczynnik, 2)));
             odchylenieStandardowe /= Math.Sqrt(temporaryValues.Count-1);
             odchylenieStandardowe /= wspolczynnik;
-            odchylenieStandardowe = Math.Sqrt(odchylenieStandardowe * odchylenieStandardowe + 0.0001);
+            odchylenieStandardowe = Math.Sqrt(odchylenieStandardowe * odchylenieStandardowe + Math.Pow(SygnalizacjaMocyDawkiUtils.retrieveSkladowaStalaNiepewnosci(), 2.0)); // TODO - wynieś to (retrieveSkladowaStalaNiepewnosci) do konfiguracji pliku w xml
             odchylenieStandardowe *= 2.0;
 
             return new Narzedzia.Pair<double, double>(wspolczynnik, odchylenieStandardowe);

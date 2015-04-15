@@ -546,17 +546,20 @@ namespace DotBase
         {
             string sciezka = _DocumentationPathsLoader.GetPath("ProtokolySygnalizacjaDawkiWynik") + textBox1.Text + "SygnalizacjaDawki.html";
 
-            Dokumenty.ProtokolSygnalizacjaDawki protokol = new Dokumenty.ProtokolSygnalizacjaDawki(Narzedzia.StaleWzorcowan.stale.PROTOKOL_SYGNALIZACJA_DAWKI);
-            if (protokol.PobierzDanePodstawowe(textBox1.Text, textBox2.Text, dateTimePicker1.Value) &&
-                protokol.PobierzDanePrzyrzadu(textBox3.Text, textBox4.Text, textBox5.Text, comboBox1.Text, comboBox2.Text, textBox6.Text) &&
-                protokol.PobierzDaneWarunkow(textBox7.Text, textBox8.Text, textBox9.Text, textBox10.Text) &&
-                protokol.PobierzDaneWspolczynnikow(textBox11.Text, textBox12.Text) &&
-                protokol.PobierzDaneWzorcoweIPomiarowe(textBox14.Text, textBox15.Text, comboBox4.Text, ref dataGridView1))
-            {
-                protokol.UtworzDokument(sciezka);
-                System.Diagnostics.Process.Start(sciezka);
-            }
-            else
+            Dokumenty.ProtokolSygnalizacjaDawkiModel model = new Dokumenty.ProtokolSygnalizacjaDawkiModel(
+                new DanePodstawoweModel(textBox1.Text, textBox2.Text, dateTimePicker1.Value),
+                new DanePrzyrzaduModel(textBox3.Text, textBox4.Text, textBox5.Text, comboBox1.Text, comboBox2.Text, textBox6.Text),
+                new DaneWarunkowModel(textBox7.Text, textBox8.Text, textBox9.Text, textBox10.Text),
+                new DaneWspolczynnikowModel(textBox11.Text, textBox12.Text));
+            
+            model.odleglosc = textBox14.Text;
+            model.zrodlo = textBox15.Text;
+            model.jednostka = comboBox4.Text;
+            model.tabela = dataGridView1;
+            
+
+            Dokumenty.ProtokolSygnalizacjaDawki protokol = new Dokumenty.ProtokolSygnalizacjaDawki(model);
+            if (!protokol.generateDocument(sciezka))
             {
                 MessageBox.Show("Nie podano wszystkich potrzebnych danych!", "Uwaga");
             }

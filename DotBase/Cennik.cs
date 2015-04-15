@@ -245,7 +245,7 @@ namespace DotBase
 
             if( _NrKarty > 0 && Double.TryParse(suma, out cena) )
             {
-                _Zapytanie = String.Format("UPDATE Karta_przyjecia SET Cena = {0} WHERE id_karty = {1}", cena, _NrKarty);
+                _Zapytanie = String.Format("UPDATE Karta_przyjecia SET Cena = {0} WHERE id_karty = {1}", suma.Replace(',', '.'), _NrKarty);
 	            _BazaDanych.WykonajPolecenie(_Zapytanie);
 	        }
         }

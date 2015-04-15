@@ -147,9 +147,9 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
@@ -568,14 +568,15 @@
             this.meldunekToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.podglądToolStripMenuItem});
             this.meldunekToolStripMenuItem.Name = "meldunekToolStripMenuItem";
-            this.meldunekToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+            this.meldunekToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
             this.meldunekToolStripMenuItem.Text = "Meldunek";
             // 
             // podglądToolStripMenuItem
             // 
             this.podglądToolStripMenuItem.Name = "podglądToolStripMenuItem";
-            this.podglądToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.podglądToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.podglądToolStripMenuItem.Text = "Podgląd";
+            this.podglądToolStripMenuItem.Click += new System.EventHandler(this.podglądToolStripMenuItem_Click);
             // 
             // numericUpDown2
             // 

@@ -56,9 +56,13 @@ namespace DotBase
 
             Dokumenty.Swiadectwo swiadectwo = new Dokumenty.Swiadectwo(_NumerKarty, dateTimePicker1.Value, textBox4.Text);
             if (swiadectwo.UtworzDokument(sciezka))
+            {
                 System.Diagnostics.Process.Start(sciezka);
+            }
             else
-                MessageBox.Show("Nie istnieją dane z których można by sporządzić świadectwo.","Uwaga!");
+            {
+                MessageBox.Show("Nie istnieją dane z których można by sporządzić świadectwo.", "Uwaga!");
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -76,8 +80,10 @@ namespace DotBase
             string sciezka = _DocumentationPathsLoader.GetPath("PismoPrzewodnieWynik") + _NrPisma + "PismoPrzewodnieWynik" + _NumerKarty + ".html";
 
             Dokumenty.PismoPrzewodnie pismo = new Dokumenty.PismoPrzewodnie(_NumerKarty, dateTimePicker1.Value, textBox1.Text, textBox2.Text, checkBox1.Checked);
-            pismo.UtworzDokument(sciezka);
-            System.Diagnostics.Process.Start(sciezka);
+            if (!pismo.generateDocument(sciezka))
+            {
+                MessageBox.Show("Nie można stowrzyć dokumentu z powodu braku danych lub ich błędnych wartości.", "Uwaga");
+            }
         }
 
         private void WstawZnakSpecjalny(object sender, KeyEventArgs e)

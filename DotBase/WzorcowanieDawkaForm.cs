@@ -634,18 +634,27 @@ namespace DotBase
         private void protokółToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string sciezka = _DocumentationPathsLoader.GetPath("ProtokolyDawkaWynik") + textBox1.Text + "Dawka.html";
+            
+        
+        
+        //public DaneWarunkowModel modelDaneWarunkow;
+        //public DaneWspolczynnikowModel modelDaneWspolczynnikow;
 
-            Dokumenty.ProtokolDawka protokol = new Dokumenty.ProtokolDawka(Narzedzia.StaleWzorcowan.stale.PROTOKOL_DAWKA);
-            if (protokol.PobierzDanePodstawowe(textBox1.Text, textBox2.Text, dateTimePicker1.Value) &&
-                protokol.PobierzDanePrzyrzadu(textBox3.Text, textBox4.Text, textBox5.Text, comboBox1.Text, comboBox2.Text, textBox6.Text) &&
-                protokol.PobierzDaneWarunkow(textBox7.Text, textBox8.Text, textBox9.Text, textBox10.Text) &&
-                protokol.PobierzDaneWspolczynnikow(textBox15.Text, textBox16.Text) &&
-                protokol.PobierzDaneWzorcoweIPomiarowe(textBox17.Text, textBox18.Text, textBox11.Text, textBox12.Text, dataGridView1.Rows))
-            {
-                protokol.UtworzDokument(sciezka);
-                System.Diagnostics.Process.Start(sciezka);
-            }
-            else
+            ProtokolDawkaModel model = new ProtokolDawkaModel(
+                    new DanePodstawoweModel(textBox1.Text, textBox2.Text, dateTimePicker1.Value),
+                    new DanePrzyrzaduModel(textBox3.Text, textBox4.Text, textBox5.Text, comboBox1.Text, comboBox2.Text, comboBox3.Text),
+                    new DaneWarunkowModel(textBox7.Text, textBox8.Text, textBox9.Text, textBox10.Text),
+                    new DaneWspolczynnikowModel(textBox15.Text, textBox16.Text)
+                );
+            model.zrodlo = textBox17.Text;
+            model.odleglosc = textBox18.Text;
+            model.wspolczynnik = textBox11.Text;
+            model.niepewnosc = textBox12.Text;
+            model.tabela = dataGridView1.Rows;
+
+
+            Dokumenty.ProtokolDawka protokol = new Dokumenty.ProtokolDawka(model);
+            if (false == protokol.generateDocument(sciezka))
             {
                 MessageBox.Show("Nie podano wszystkich potrzebnych danych!", "Uwaga");
             }

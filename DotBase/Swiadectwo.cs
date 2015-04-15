@@ -9,13 +9,10 @@ namespace DotBase
 {
     namespace Dokumenty
     {
-        class Swiadectwo : Wydruki
-        {
-            StringBuilder _Tabela;
-            StringBuilder _SzablonGlownyWzorcowania;
-            StringBuilder _SzablonDrugiejStrony;
 
-            enum stale
+        class SwiadectwoData
+        {
+            public enum DataType
             {
                 ADRES,
                 CISNIENIE_MAX, CISNIENIE_MIN,
@@ -36,22 +33,43 @@ namespace DotBase
                 MAX_ELEMENTOW
             };
 
+            private readonly IDictionary<DataType, String> m_documentData = new Dictionary<DataType, String>();
+
+            public string getValue(DataType dataType)
+            {
+                return m_documentData[dataType];
+            }
+
+            public void setValue(DataType dataType, string value)
+            {
+                m_documentData[dataType] = value;
+            }
+        }
+
+        class Swiadectwo : Wydruki
+        {
+            StringBuilder _Tabela;
+            StringBuilder _SzablonGlownyWzorcowania;
+            StringBuilder _SzablonDrugiejStrony;
+            SwiadectwoData m_data = new SwiadectwoData();
+
             enum staleZrodel { STRONT_SLABY = 2, WEGIEL_SLABY, AMERYK = 7, STRONT_SILNY, WEGIEL_SILNY, CHLOR, PLUTON = 17, STRONT_NAJSILNIEJSZY };
 
             enum szablon { DAWKA, MOC_DAWKI, SKAZENIA, SYG_DAWKI, SYG_MOCY_DAWKI };
+
+
+            override protected bool fillDocument() { return true; }
+            override protected bool retrieveAllData() { return true; }
+            override protected bool saveDocument(string path) { return true; }
 
             //********************************************************************************************
             public Swiadectwo(int nrKarty, DateTime data, String sprawdzil)
             //********************************************************************************************
             {
-                InicjalizujListeDanychWypelniajacych((int)stale.MAX_ELEMENTOW);
-
-                _BazaDanych = new BazaDanychWrapper();
-
-                _DaneWypelniajace[(int)stale.NR_KARTY] = nrKarty.ToString();
-                _DaneWypelniajace[(int)stale.DATA] = data.ToString("dd MMMM yyyy");
-                _DaneWypelniajace[(int)stale.ROK] = data.Year.ToString();
-                _DaneWypelniajace[(int)stale.SPRAWDZIL] = sprawdzil;
+                m_data.setValue(SwiadectwoData.DataType.NR_KARTY, nrKarty.ToString());
+                m_data.setValue(SwiadectwoData.DataType.DATA, data.ToString("dd MMMM yyyy"));
+                m_data.setValue(SwiadectwoData.DataType.ROK, data.Year.ToString());
+                m_data.setValue(SwiadectwoData.DataType.SPRAWDZIL, sprawdzil);
             }
 
             //********************************************************************************************
@@ -61,25 +79,16 @@ namespace DotBase
                 if (false == SprawdzMozliwoscPobrania(ile, Narzedzia.StaleWzorcowan.stale.PLIK_POMOCNICZY_DAWKA))
                     return;
 
-                _Zapytanie = String.Format("SELECT id_wzorcowania FROM Wzorcowanie_cezem WHERE id_karty = {0} ", _DaneWypelniajace[(int)stale.NR_KARTY])
-                           + " AND rodzaj_wzorcowania='d' AND dolacz=true ORDER BY id_wzorcowania";
-
-                PobierzIdWzorcowania(ile - 1);
-
-                _Zapytanie = "SELECT typ, nr_fabryczny FROM Sondy WHERE id_sondy = (SELECT id_sondy FROM wzorcowanie_cezem WHERE "
-                           + String.Format("id_wzorcowania=%d)", _DaneWypelniajace[(int)stale.ID_WZORCOWANIA]);
-
+                m_data.setValue(SwiadectwoData.DataType.JEDNOSTKA, "mSv");
+                PobierzIdWzorcowania(ile - 1, "d");
                 PobierzDaneSondyDlaCezu();
-
-                _DaneWypelniajace[(int)stale.JEDNOSTKA] = "mSv";
-
                 PobierzDaneTabeloweDawka();
 
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c1>", ch.ToString());
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!sondaTyp>", _DaneWypelniajace[(int)stale.SONDA_TYP]);
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!sondaNrFab>", _DaneWypelniajace[(int)stale.SONDA_NR_FABRYCZNY]);
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c5>", _DaneWypelniajace[(int)stale.JEDNOSTKA]);
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!tabela>", _Tabela.ToString());
+                _SzablonPodstawowy.Replace("<!c1>", ch.ToString())
+                                  .Replace("<!sondaTyp>", m_data.getValue(SwiadectwoData.DataType.SONDA_TYP))
+                                  .Replace("<!sondaNrFab>", m_data.getValue(SwiadectwoData.DataType.SONDA_NR_FABRYCZNY))
+                                  .Replace("<!c5>", m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA))
+                                  .Replace("<!tabela>", _Tabela.ToString());
             }
 
             //********************************************************************************************
@@ -91,41 +100,41 @@ namespace DotBase
 
                 try
                 {
-                    for (int i = int.Parse(_DaneWypelniajace[(int)stale.WZ_MOC_DAWKI_ILE]); i > 0; --i)
+                    for (int i = int.Parse(m_data.getValue(SwiadectwoData.DataType.WZ_MOC_DAWKI_ILE)); i > 0; --i)
                     {
                         PobierzDaneMocDawki(i, ch);
                         _SzablonDrugiejStrony.Append(_SzablonPodstawowy);
                         ++ch;
                     }
 
-                    for (int i = int.Parse(_DaneWypelniajace[(int)stale.WZ_DAWKI_ILE]); i > 0; --i)
+                    for (int i = int.Parse(m_data.getValue(SwiadectwoData.DataType.WZ_DAWKI_ILE)); i > 0; --i)
                     {
                         PobierzDaneDawka(i, ch);
                         _SzablonDrugiejStrony.Append(_SzablonPodstawowy);
                         ++ch;
                     }
 
-                    for (int i = int.Parse(_DaneWypelniajace[(int)stale.WZ_SYG_MOCY_DAWKI_ILE]); i > 0; --i)
+                    for (int i = int.Parse(m_data.getValue(SwiadectwoData.DataType.WZ_SYG_MOCY_DAWKI_ILE)); i > 0; --i)
                     {
                         PobierzDaneSygnalizacjaMocyDawki(i, ch);
                         _SzablonDrugiejStrony.Append(_SzablonPodstawowy);
                         ++ch;
                     }
 
-                    for (int i = int.Parse(_DaneWypelniajace[(int)stale.WZ_SYG_DAWKI_ILE]); i > 0; --i)
+                    for (int i = int.Parse(m_data.getValue(SwiadectwoData.DataType.WZ_SYG_DAWKI_ILE)); i > 0; --i)
                     {
                         PobierzDaneSygnalizacjaDawki(i, ch);
                         _SzablonDrugiejStrony.Append(_SzablonPodstawowy);
                         ++ch;
                     }
 
-                    if (int.Parse(_DaneWypelniajace[(int)stale.WZ_ZR_POW_ILE]) > 0)
+                    if (int.Parse(m_data.getValue(SwiadectwoData.DataType.WZ_ZR_POW_ILE)) > 0)
                     {
                         PobierzDaneSkazenia(1, ch);
                         _SzablonDrugiejStrony.Append(_SzablonPodstawowy);
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     return false;
                 }
@@ -141,48 +150,47 @@ namespace DotBase
                     return;
 
                 _Zapytanie = String.Format("SELECT id_wzorcowania FROM Wzorcowanie_cezem WHERE id_karty = {0} AND rodzaj_wzorcowania = 'md' ",
-               _DaneWypelniajace[(int)stale.NR_KARTY])
-               + String.Format("AND dolacz = true ORDER BY id_wzorcowania");
+                               m_data.getValue(SwiadectwoData.DataType.NR_KARTY)) + String.Format("AND dolacz = true ORDER BY id_wzorcowania");
 
-                PobierzIdWzorcowania(ile - 1);
+                PobierzIdWzorcowania(ile - 1, "md");
 
                 _Zapytanie = "SELECT wielkosc_fizyczna FROM Wzorcowanie_cezem AS WC WHERE id_wzorcowania IN (SELECT id_wzorcowania FROM "
                            + String.Format("Wzorcowanie_cezem WHERE id_karty = {0} AND rodzaj_wzorcowania='md' AND dolacz=true) ORDER BY WC.id_wzorcowania",
-                             _DaneWypelniajace[(int)stale.NR_KARTY]);
+                             m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
 
                 PobierzWielkoscFizyczna();
 
                 _Zapytanie = "SELECT typ, nr_fabryczny FROM Sondy WHERE id_sondy = (SELECT id_sondy FROM wzorcowanie_cezem WHERE "
-                           + String.Format("id_wzorcowania = {0})", _DaneWypelniajace[(int)stale.ID_WZORCOWANIA]);
+                           + String.Format("id_wzorcowania = {0})", m_data.getValue(SwiadectwoData.DataType.ID_WZORCOWANIA));
 
                 PobierzDaneSondyDlaCezu();
 
 
                 _Zapytanie = "SELECT jednostka FROM Jednostki WHERE id_jednostki=(SELECT id_jednostki FROM wzorcowanie_cezem WHERE "
-                           + String.Format("id_wzorcowania = {0})", _DaneWypelniajace[(int)stale.ID_WZORCOWANIA]);
+                           + String.Format("id_wzorcowania = {0})", m_data.getValue(SwiadectwoData.DataType.ID_WZORCOWANIA));
 
                 PobierzJednostke();
 
                 _Zapytanie = String.Format("SELECT zakres, wspolczynnik, niepewnosc FROM Wyniki_moc_dawki WHERE id_wzorcowania = {0}",
-                           _DaneWypelniajace[(int)stale.ID_WZORCOWANIA]);
+                           m_data.getValue(SwiadectwoData.DataType.ID_WZORCOWANIA));
 
                 PobierzDaneTabelowe();
 
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c1>", ch.ToString());
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c2>", _DaneWypelniajace[(int)stale.WIELKOSC_FIZYCZNA]);
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c3>", _DaneWypelniajace[(int)stale.SONDA_TYP]);
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c4>", _DaneWypelniajace[(int)stale.SONDA_NR_FABRYCZNY]);
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c5>", _DaneWypelniajace[(int)stale.JEDNOSTKA]);
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c6>", _DaneWypelniajace[(int)stale.WIELKOSC_FIZYCZNA].Replace("moc", "mocy"));
+                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c2>", m_data.getValue(SwiadectwoData.DataType.WIELKOSC_FIZYCZNA));
+                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c3>", m_data.getValue(SwiadectwoData.DataType.SONDA_TYP));
+                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c4>", m_data.getValue(SwiadectwoData.DataType.SONDA_NR_FABRYCZNY));
+                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c5>", m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA));
+                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c6>", m_data.getValue(SwiadectwoData.DataType.WIELKOSC_FIZYCZNA).Replace("moc", "mocy"));
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!tabela>", _Tabela.ToString());
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!wielkosc_fizyczna>", _DaneWypelniajace[(int)stale.WIELKOSC_FIZYCZNA].Replace("moc", "mocy"));
+                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!wielkosc_fizyczna>", m_data.getValue(SwiadectwoData.DataType.WIELKOSC_FIZYCZNA).Replace("moc", "mocy"));
 
-                if (_DaneWypelniajace[(int)stale.JEDNOSTKA].Contains("cps") || _DaneWypelniajace[(int)stale.JEDNOSTKA].Contains("cpm") ||
-                    _DaneWypelniajace[(int)stale.JEDNOSTKA].Contains("1/s") || _DaneWypelniajace[(int)stale.JEDNOSTKA].Contains("1/min") ||
-                    _DaneWypelniajace[(int)stale.JEDNOSTKA].Contains("imp/s") || _DaneWypelniajace[(int)stale.JEDNOSTKA].Contains("imp/min") ||
-                    _DaneWypelniajace[(int)stale.JEDNOSTKA].Contains("s-1") || _DaneWypelniajace[(int)stale.JEDNOSTKA].Contains("Bq/cm2"))
+                if (m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA).Contains("cps") || m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA).Contains("cpm") ||
+                    m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA).Contains("1/s") || m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA).Contains("1/min") ||
+                    m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA).Contains("imp/s") || m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA).Contains("imp/min") ||
+                    m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA).Contains("s-1") || m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA).Contains("Bq/cm2"))
                 {
-                    _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!korekcja_jednostki>", String.Format("(\u00B5Gy/h)/({0})", _DaneWypelniajace[(int)stale.JEDNOSTKA]));
+                    _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!korekcja_jednostki>", String.Format("(\u00B5Gy/h)/({0})", m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA)));
                 }
                 else
                 {
@@ -202,17 +210,17 @@ namespace DotBase
             //********************************************************************************************
             {
                 _Zapytanie = "SELECT nazwa, typ, nr_fabryczny, producent, rok_produkcji FROM Dozymetry WHERE id_dozymetru=(SELECT id_dozymetru "
-                           + String.Format("FROM Karta_przyjecia WHERE id_karty = {0})", _DaneWypelniajace[(int)stale.NR_KARTY]);
+                           + String.Format("FROM Karta_przyjecia WHERE id_karty = {0})", m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
 
                 try
                 {
                     DataRow wiersz = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0];
 
-                    _DaneWypelniajace[(int)stale.NAZWA] = wiersz.Field<string>(0);
-                    _DaneWypelniajace[(int)stale.TYP] = wiersz.Field<string>(1);
-                    _DaneWypelniajace[(int)stale.NR_FABRYCZNY] = wiersz.Field<string>(2);
-                    _DaneWypelniajace[(int)stale.PRODUCENT] = wiersz.Field<string>(3);
-                    _DaneWypelniajace[(int)stale.ROK_PRODUKCJI] = wiersz.Field<string>(4);
+                    m_data.setValue(SwiadectwoData.DataType.NAZWA, wiersz.Field<string>(0));
+                    m_data.setValue(SwiadectwoData.DataType.TYP, wiersz.Field<string>(1));
+                    m_data.setValue(SwiadectwoData.DataType.NR_FABRYCZNY, wiersz.Field<string>(2));
+                    m_data.setValue(SwiadectwoData.DataType.PRODUCENT, wiersz.Field<string>(3));
+                    m_data.setValue(SwiadectwoData.DataType.ROK_PRODUKCJI, wiersz.Field<string>(4));
                 }
                 catch (Exception)
                 {
@@ -226,7 +234,7 @@ namespace DotBase
             private void PobierzDaneSkazenia(int ile, Char ch)
             //********************************************************************************************
             {
-                string nrKarty = _DaneWypelniajace[(int)stale.NR_KARTY];
+                string nrKarty = m_data.getValue(SwiadectwoData.DataType.NR_KARTY);
 
                 if (false == SprawdzMozliwoscPobrania(ile, Narzedzia.StaleWzorcowan.stale.PLIK_POMOCNICZY_SKAZENIA))
                     return;
@@ -247,23 +255,20 @@ namespace DotBase
 
                 for (int i = 0; i < idWzorcowan.Count; ++i)
                 {
-                    _DaneWypelniajace[(int)stale.ID_WZORCOWANIA] = idWzorcowan[i].ToString();
-                    string idWzorcowania = _DaneWypelniajace[(int)stale.ID_WZORCOWANIA];
-
+                    m_data.setValue(SwiadectwoData.DataType.ID_WZORCOWANIA, idWzorcowan[i].ToString());
+                    string idWzorcowania = m_data.getValue(SwiadectwoData.DataType.ID_WZORCOWANIA);
+                    
                     PobierzDaneSondyDlaSkazen();
-
                     PobierzDaneSpecyficzneDlaSkazen(ref skazeniaWspolczynnik, ref skazeniaNiepewnosc);
-
                     PobierzDaneZrodla();
-
                     PobierzEmisjePowierzchniowa(idWzorcowan[i]);
 
                     _Tabela.Append(String.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td>",
-                              i + 1, _DaneWypelniajace[(int)stale.SONDA_TYP], _DaneWypelniajace[(int)stale.SONDA_NR_FABRYCZNY],
-                              _DaneWypelniajace[(int)stale.NAPIECIE_ZAS_SONDY], _DaneWypelniajace[(int)stale.ZRODLO_NAZWA].Replace("(słaby)", "").Replace("(silny)", ""),
-                              _DaneWypelniajace[(int)stale.SKAZENIA_RODZAJ_PROMIENIOWANIA], _DaneWypelniajace[(int)stale.EMISJA_POW])
+                              i + 1,m_data.getValue(SwiadectwoData.DataType.SONDA_TYP), m_data.getValue(SwiadectwoData.DataType.SONDA_NR_FABRYCZNY),
+                              m_data.getValue(SwiadectwoData.DataType.NAPIECIE_ZAS_SONDY), m_data.getValue(SwiadectwoData.DataType.ZRODLO_NAZWA).Replace("(słaby)", "").Replace("(silny)", ""),
+                              m_data.getValue(SwiadectwoData.DataType.SKAZENIA_RODZAJ_PROMIENIOWANIA), m_data.getValue(SwiadectwoData.DataType.EMISJA_POW))
                               + String.Format("<td>{0}</td><td width=\"110\"><!wspol{1}> &plusmn; <!niep{1}></td></tr>",
-                              _DaneWypelniajace[(int)stale.ODLEGLOSC_ZR_SONDA], i));
+                              m_data.getValue(SwiadectwoData.DataType.ODLEGLOSC_ZR_SONDA), i));
                 }
 
 
@@ -293,7 +298,7 @@ namespace DotBase
             private void PobierzEmisjePowierzchniowa(int idWzorcowania)
             //********************************************************************************************
             {
-                _Zapytanie = String.Format("SELECT mnoznik_korekcyjny, data_wzorcowania FROM Wzorcowanie_zrodlami_powierzchniowymi WHERE id_wzorcowania = {0}", _DaneWypelniajace[(int)stale.ID_WZORCOWANIA]);
+                _Zapytanie = String.Format("SELECT mnoznik_korekcyjny, data_wzorcowania FROM Wzorcowanie_zrodlami_powierzchniowymi WHERE id_wzorcowania = {0}", m_data.getValue(SwiadectwoData.DataType.ID_WZORCOWANIA));
                 DataRow wiersz = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0];
 
                 double mnoznikKorekcyjny = wiersz.Field<double>(0);
@@ -307,8 +312,8 @@ namespace DotBase
 
                 double emisja = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<double>(0);
                 DateTime dataWzorcowaniaZrodla = wiersz.Field<DateTime>(1);
-                double czasPolowicznegoRozpadu = double.Parse(_DaneWypelniajace[(int)stale.ZRODLO_CZAS_ROZPADU]);
-                _DaneWypelniajace[(int)stale.EMISJA_POW] = (mnoznikKorekcyjny * emisja * Math.Exp(-Math.Log(2) / czasPolowicznegoRozpadu * (dataWzorcowaniaPrzyrzadu - dataWzorcowaniaZrodla).Days / 365.25)).ToString("0.00");
+                double czasPolowicznegoRozpadu = double.Parse(m_data.getValue(SwiadectwoData.DataType.ZRODLO_CZAS_ROZPADU));
+                m_data.setValue(SwiadectwoData.DataType.EMISJA_POW, (mnoznikKorekcyjny * emisja * Math.Exp(-Math.Log(2) / czasPolowicznegoRozpadu * (dataWzorcowaniaPrzyrzadu - dataWzorcowaniaZrodla).Days / 365.25)).ToString("0.00"));
             }
 
             //********************************************************************************************
@@ -316,19 +321,19 @@ namespace DotBase
             //********************************************************************************************
             {
                 _Zapytanie = "SELECT nazwa, czas_polowicznego_rozpadu FROM zrodla_powierzchniowe WHERE id_zrodla=(SELECT id_zrodla "
-                               + String.Format("FROM Wzorcowanie_zrodlami_powierzchniowymi WHERE id_wzorcowania = {0})", _DaneWypelniajace[(int)stale.ID_WZORCOWANIA]);
+                               + String.Format("FROM Wzorcowanie_zrodlami_powierzchniowymi WHERE id_wzorcowania = {0})", m_data.getValue(SwiadectwoData.DataType.ID_WZORCOWANIA));
 
                 DataRow wiersz = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0];
-                _DaneWypelniajace[(int)stale.ZRODLO_NAZWA] = wiersz.Field<string>(0);
-                _DaneWypelniajace[(int)stale.ZRODLO_CZAS_ROZPADU] = wiersz.Field<float>(1).ToString();
+                m_data.setValue(SwiadectwoData.DataType.ZRODLO_NAZWA, wiersz.Field<string>(0));
+                m_data.setValue(SwiadectwoData.DataType.ZRODLO_CZAS_ROZPADU, wiersz.Field<float>(1).ToString());
 
-                if (_DaneWypelniajace[(int)stale.ZRODLO_NAZWA] == "Am-241" || _DaneWypelniajace[(int)stale.ZRODLO_NAZWA] == "Pu-239")
+                if (m_data.getValue(SwiadectwoData.DataType.ZRODLO_NAZWA) == "Am-241" || m_data.getValue(SwiadectwoData.DataType.ZRODLO_NAZWA) == "Pu-239")
                 {
-                    _DaneWypelniajace[(int)stale.SKAZENIA_RODZAJ_PROMIENIOWANIA] = "&alpha;";
+                    m_data.setValue(SwiadectwoData.DataType.SKAZENIA_RODZAJ_PROMIENIOWANIA, "&alpha;");
                 }
                 else
                 {
-                    _DaneWypelniajace[(int)stale.SKAZENIA_RODZAJ_PROMIENIOWANIA] = "&beta;";
+                    m_data.setValue(SwiadectwoData.DataType.SKAZENIA_RODZAJ_PROMIENIOWANIA, "&beta;");
                 }
             }
 
@@ -337,11 +342,11 @@ namespace DotBase
             //********************************************************************************************
             {
                 _Zapytanie = "SELECT typ, nr_fabryczny FROM Sondy WHERE id_sondy=(SELECT id_sondy FROM Wzorcowanie_zrodlami_powierzchniowymi "
-                               + String.Format("WHERE id_wzorcowania = {0})", _DaneWypelniajace[(int)stale.ID_WZORCOWANIA]);
+                               + String.Format("WHERE id_wzorcowania = {0})", m_data.getValue(SwiadectwoData.DataType.ID_WZORCOWANIA));
 
                 DataRow wiersz = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0];
-                _DaneWypelniajace[(int)stale.SONDA_TYP] = wiersz.Field<string>(0);
-                _DaneWypelniajace[(int)stale.SONDA_NR_FABRYCZNY] = wiersz.Field<string>(1);
+                m_data.setValue(SwiadectwoData.DataType.SONDA_TYP, wiersz.Field<string>(0));
+                m_data.setValue(SwiadectwoData.DataType.SONDA_NR_FABRYCZNY, wiersz.Field<string>(1));
             }
 
             //********************************************************************************************
@@ -349,11 +354,11 @@ namespace DotBase
             //********************************************************************************************
             {
                 _Zapytanie = "SELECT typ, nr_fabryczny FROM Sondy WHERE id_sondy=(SELECT id_sondy FROM Wzorcowanie_cezem "
-                               + String.Format("WHERE id_wzorcowania = {0})", _DaneWypelniajace[(int)stale.ID_WZORCOWANIA]);
+                               + String.Format("WHERE id_wzorcowania = {0})", m_data.getValue(SwiadectwoData.DataType.ID_WZORCOWANIA));
 
                 DataRow wiersz = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0];
-                _DaneWypelniajace[(int)stale.SONDA_TYP] = wiersz.Field<string>(0);
-                _DaneWypelniajace[(int)stale.SONDA_NR_FABRYCZNY] = wiersz.Field<string>(1);
+                m_data.setValue(SwiadectwoData.DataType.SONDA_TYP, wiersz.Field<string>(0));
+                m_data.setValue(SwiadectwoData.DataType.SONDA_NR_FABRYCZNY, wiersz.Field<string>(1));
             }
 
             //********************************************************************************************
@@ -361,17 +366,17 @@ namespace DotBase
             //********************************************************************************************
             {
                 _Zapytanie = "SELECT napiecie_zasilania_sondy, odleglosc_zrodlo_sonda, wspolczynnik, niepewnosc FROM "
-                           + String.Format("Wzorcowanie_zrodlami_powierzchniowymi WHERE id_wzorcowania = {0}", _DaneWypelniajace[(int)stale.ID_WZORCOWANIA]);
+                           + String.Format("Wzorcowanie_zrodlami_powierzchniowymi WHERE id_wzorcowania = {0}", m_data.getValue(SwiadectwoData.DataType.ID_WZORCOWANIA));
 
                 DataRow wiersz = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0];
-                _DaneWypelniajace[(int)stale.NAPIECIE_ZAS_SONDY] = wiersz.Field<string>(0);
-                _DaneWypelniajace[(int)stale.ODLEGLOSC_ZR_SONDA] = wiersz.Field<double>(1).ToString();
+                m_data.setValue(SwiadectwoData.DataType.NAPIECIE_ZAS_SONDY, wiersz.Field<string>(0));
+                m_data.setValue(SwiadectwoData.DataType.ODLEGLOSC_ZR_SONDA, wiersz.Field<double>(1).ToString());
 
 
                 skazeniaWspolczynnik.Add(wiersz.Field<double>(2));
                 skazeniaNiepewnosc.Add(wiersz.Field<double>(3));
-                //_DaneWypelniajace[(int)stale.SKAZENIA_WSPOLCZYNNIK] = temp.ToString();
-                //_DaneWypelniajace[(int)stale.SKAZENIA_NIEPEWNOSC] = temp.ToString();
+                //m_data.setValue(SwiadectwoData.DataType.SKAZENIA_WSPOLCZYNNIK, temp.ToString();
+                //m_data.setValue(SwiadectwoData.DataType.SKAZENIA_NIEPEWNOSC, temp.ToString();
             }
 
             //********************************************************************************************
@@ -381,30 +386,30 @@ namespace DotBase
                 if (false == SprawdzMozliwoscPobrania(ile, Narzedzia.StaleWzorcowan.stale.PLIK_POMOCNICZY_SYGNALIZACJA_DAWKI))
                     return;
 
-                _Zapytanie = String.Format("SELECT id_wzorcowania FROM Wzorcowanie_cezem WHERE id_karty = {0} ", _DaneWypelniajace[(int)stale.NR_KARTY])
+                _Zapytanie = String.Format("SELECT id_wzorcowania FROM Wzorcowanie_cezem WHERE id_karty = {0} ", m_data.getValue(SwiadectwoData.DataType.NR_KARTY))
                            + "AND rodzaj_wzorcowania = 'sd' AND dolacz = true ORDER BY id_wzorcowania";
 
-                PobierzIdWzorcowania(ile - 1);
+                PobierzIdWzorcowania(ile - 1, "sd");
 
                 _Zapytanie = "SELECT typ, nr_fabryczny FROM Sondy WHERE id_sondy = (SELECT id_sondy FROM wzorcowanie_cezem WHERE "
-                           + String.Format("id_wzorcowania = {0})", _DaneWypelniajace[(int)stale.ID_WZORCOWANIA]);
+                           + String.Format("id_wzorcowania = {0})", m_data.getValue(SwiadectwoData.DataType.ID_WZORCOWANIA));
 
                 PobierzDaneSondyDlaCezu();
 
                 _Zapytanie = "SELECT jednostka FROM Jednostki WHERE id_jednostki=(SELECT id_jednostki FROM wzorcowanie_cezem "
-                           + String.Format("WHERE id_wzorcowania = {0})", _DaneWypelniajace[(int)stale.ID_WZORCOWANIA]);
+                           + String.Format("WHERE id_wzorcowania = {0})", m_data.getValue(SwiadectwoData.DataType.ID_WZORCOWANIA));
 
                 PobierzJednostke();
 
                 _Zapytanie = "SELECT prog, wartosc_wzorcowa, wartosc_zmierzona FROM Sygnalizacja_dawka WHERE "
-                           + String.Format("id_wzorcowania = {0}", _DaneWypelniajace[(int)stale.ID_WZORCOWANIA]);
+                           + String.Format("id_wzorcowania = {0}", m_data.getValue(SwiadectwoData.DataType.ID_WZORCOWANIA));
 
                 PobierzDaneTabeloweSygnalizacja();
 
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c1>", ch.ToString());
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c2>", _DaneWypelniajace[(int)stale.SONDA_TYP]);
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c3>", _DaneWypelniajace[(int)stale.SONDA_NR_FABRYCZNY]);
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c4>", _DaneWypelniajace[(int)stale.JEDNOSTKA]);
+                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c2>", m_data.getValue(SwiadectwoData.DataType.SONDA_TYP));
+                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c3>", m_data.getValue(SwiadectwoData.DataType.SONDA_NR_FABRYCZNY));
+                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c4>", m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA));
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!tabela>", _Tabela.ToString());
             }
 
@@ -418,36 +423,36 @@ namespace DotBase
                         return;
 
                     _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c1>", ch.ToString());
-                    _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!opis>", _DaneWypelniajace[(int)stale.UWAGI]);
+                    _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!opis>", m_data.getValue(SwiadectwoData.DataType.UWAGI));
                     return;
                 }
 
                 if (false == SprawdzMozliwoscPobrania(ile, Narzedzia.StaleWzorcowan.stale.PLIK_POMOCNICZY_SYGNALIZACJA_MOCY_DAWKI))
                     return;
 
-                _Zapytanie = String.Format("SELECT id_wzorcowania FROM Wzorcowanie_cezem WHERE id_karty = {0} AND ", _DaneWypelniajace[(int)stale.NR_KARTY])
+                _Zapytanie = String.Format("SELECT id_wzorcowania FROM Wzorcowanie_cezem WHERE id_karty = {0} AND ", m_data.getValue(SwiadectwoData.DataType.NR_KARTY))
                            + "rodzaj_wzorcowania='sm' AND dolacz=true ORDER BY id_wzorcowania";
 
-                PobierzIdWzorcowania(ile - 1);
+                PobierzIdWzorcowania(ile - 1, "sm");
 
                 _Zapytanie = "SELECT typ, nr_fabryczny FROM Sondy WHERE id_sondy=(SELECT id_sondy FROM wzorcowanie_cezem WHERE "
-                           + String.Format("id_wzorcowania = {0})", _DaneWypelniajace[(int)stale.ID_WZORCOWANIA]);
+                           + String.Format("id_wzorcowania = {0})", m_data.getValue(SwiadectwoData.DataType.ID_WZORCOWANIA));
                 PobierzDaneSondyDlaCezu();
 
 
                 _Zapytanie = "SELECT jednostka FROM Jednostki WHERE id_jednostki=(SELECT id_jednostki FROM wzorcowanie_cezem WHERE "
-                           + String.Format("id_wzorcowania = {0})", _DaneWypelniajace[(int)stale.ID_WZORCOWANIA]);
+                           + String.Format("id_wzorcowania = {0})", m_data.getValue(SwiadectwoData.DataType.ID_WZORCOWANIA));
                 PobierzJednostke();
 
                 _Zapytanie = String.Format("SELECT prog, wartosc_zmierzona, niepewnosc FROM Sygnalizacja WHERE id_wzorcowania = {0}",
-                                          _DaneWypelniajace[(int)stale.ID_WZORCOWANIA]);
+                                          m_data.getValue(SwiadectwoData.DataType.ID_WZORCOWANIA));
                 PobierzDaneTabeloweSygMocyDawki();
 
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c1>", ch.ToString());
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c2>", _DaneWypelniajace[(int)stale.SONDA_TYP]);
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c3>", _DaneWypelniajace[(int)stale.SONDA_NR_FABRYCZNY]);
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c4>", _DaneWypelniajace[(int)stale.JEDNOSTKA]);
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!tabela>", _Tabela.ToString());
+                _SzablonPodstawowy.Replace("<!c1>", ch.ToString())
+                                  .Replace("<!c2>", m_data.getValue(SwiadectwoData.DataType.SONDA_TYP))
+                                  .Replace("<!c3>", m_data.getValue(SwiadectwoData.DataType.SONDA_NR_FABRYCZNY))
+                                  .Replace("<!c4>", m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA))
+                                  .Replace("<!tabela>", _Tabela.ToString());
             }
 
             //********************************************************************************************
@@ -455,18 +460,18 @@ namespace DotBase
             //********************************************************************************************
             {
                 _Zapytanie = "SELECT Uwagi FROM Sygnalizacja WHERE id_wzorcowania IN (SELECT id_wzorcowania FROM wzorcowanie_cezem "
-                           + String.Format("WHERE id_karty = {0})", _DaneWypelniajace[(int)stale.NR_KARTY]);
+                           + String.Format("WHERE id_karty = {0})", m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
 
                 try
                 {
-                    _DaneWypelniajace[(int)stale.UWAGI] = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<string>(0);
+                    m_data.setValue(SwiadectwoData.DataType.UWAGI, _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<string>(0));
                 }
                 catch (Exception)
                 {
                     return false;
                 }
 
-                if (_DaneWypelniajace[(int)stale.UWAGI] == "")
+                if (m_data.getValue(SwiadectwoData.DataType.UWAGI) == "")
                     return false;
                 else
                     return true;
@@ -477,7 +482,7 @@ namespace DotBase
             //********************************************************************************************
             {
                 _Zapytanie = String.Format("SELECT zakres, wspolczynnik, niepewnosc, wielkosc_fizyczna FROM Wyniki_dawka WHERE id_wzorcowania = {0}",
-                                          _DaneWypelniajace[(int)stale.ID_WZORCOWANIA]);
+                                          m_data.getValue(SwiadectwoData.DataType.ID_WZORCOWANIA));
 
                 List<double> zakres = new List<double>();
                 List<double> wspolczynnik = new List<double>();
@@ -535,11 +540,18 @@ namespace DotBase
                     wartosc_zmierzona.Add(wiersz.Field<double>(2));
                 }
 
+                IList<double> computedFactors = SygnalizacjaDawkiUtils.computeFactors(m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
+                IList<double> computedUncertainity = SygnalizacjaDawkiUtils.computeUncertainity(m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
+
                 _Tabela = new StringBuilder();
 
                 for (int i = 0; i < prog.Count; ++i)
                 {
-                    _Tabela.AppendFormat("<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>", prog[i].ToString("G"), wartosc_wzorcowa[i].ToString("G"), wartosc_zmierzona[i].ToString("G"));
+                    _Tabela.AppendFormat("<tr><td>{0}</td><td>{1}</td><td>{2} &plusmn; {3} </td></tr>",
+                        prog[i].ToString("0.00"),
+                        wartosc_wzorcowa[i].ToString("0.00"),
+                        computedFactors[i].ToString("0.00"),
+                        computedUncertainity[i].ToString("0.00"));
                 }
             }
 
@@ -558,11 +570,19 @@ namespace DotBase
                     niepewnosc.Add(wiersz.Field<double>(2));
                 }
 
+                IList<double> computedFactors = SygnalizacjaMocyDawkiUtils.computeFactors(m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
+                IList<double> computedUncertainity = SygnalizacjaMocyDawkiUtils.computeUncertainity(m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
+
                 _Tabela = new StringBuilder();
 
                 for (int i = 0; i < prog.Count; ++i)
                 {
-                    _Tabela.AppendFormat("<tr><td>{0}</td><td>{1} &plusmn; {2}</td></tr>", prog[i].ToString("G"), wartosc_zmierzona[i].ToString("G"), niepewnosc[i].ToString("G"));
+                    _Tabela.AppendFormat("<tr><td>{0}</td><td>{1} &plusmn; {2}</td><td>{3} &plusmn; {4}</td></tr>",
+                        prog[i].ToString("G"),
+                        wartosc_zmierzona[i].ToString("0.00"),
+                        niepewnosc[i].ToString("0.00"),
+                        computedFactors[i].ToString("0.00"),
+                        computedUncertainity[i].ToString("0.00"));
                 }
             }
 
@@ -624,39 +644,45 @@ namespace DotBase
 
                     _Zapytanie = "Select Cisnienie, Temperatura, Wilgotnosc From ";
 
-                    if (int.Parse(_DaneWypelniajace[(int)stale.WZ_MOC_DAWKI_ILE]) > 0)
+                    if (int.Parse(m_data.getValue(SwiadectwoData.DataType.WZ_MOC_DAWKI_ILE)) > 0)
                     {
-                        _Zapytanie += String.Format("wzorcowanie_cezem where id_karty = {0} AND rodzaj_wzorcowania='md' AND dolacz=true", _DaneWypelniajace[(int)stale.NR_KARTY]);
+                        _Zapytanie += String.Format("wzorcowanie_cezem where id_karty = {0} AND rodzaj_wzorcowania='md' AND dolacz=true", m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
                         bCez = true;
                     }
-                    else if (int.Parse(_DaneWypelniajace[(int)stale.WZ_DAWKI_ILE]) > 0)
+                    else if (int.Parse(m_data.getValue(SwiadectwoData.DataType.WZ_DAWKI_ILE)) > 0)
                     {
-                        _Zapytanie += String.Format("wzorcowanie_cezem where id_karty = {0} AND rodzaj_wzorcowania='d' AND dolacz=true", _DaneWypelniajace[(int)stale.NR_KARTY]);
+                        _Zapytanie += String.Format("wzorcowanie_cezem where id_karty = {0} AND rodzaj_wzorcowania='d' AND dolacz=true", m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
                         bDawka = true;
                     }
-                    else if (int.Parse(_DaneWypelniajace[(int)stale.WZ_SYG_MOCY_DAWKI_ILE]) > 0)
+                    else if (int.Parse(m_data.getValue(SwiadectwoData.DataType.WZ_SYG_MOCY_DAWKI_ILE)) > 0)
                     {
-                        _Zapytanie += String.Format("wzorcowanie_cezem where id_karty = {0} AND rodzaj_wzorcowania='sm' AND dolacz=true", _DaneWypelniajace[(int)stale.NR_KARTY]);
+                        _Zapytanie += String.Format("wzorcowanie_cezem where id_karty = {0} AND rodzaj_wzorcowania='sm' AND dolacz=true", m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
                         bCez = true;
                     }
-                    else if (int.Parse(_DaneWypelniajace[(int)stale.WZ_SYG_DAWKI_ILE]) > 0)
+                    else if (int.Parse(m_data.getValue(SwiadectwoData.DataType.WZ_SYG_DAWKI_ILE)) > 0)
                     {
-                        _Zapytanie += String.Format("wzorcowanie_cezem where id_karty = {0} AND rodzaj_wzorcowania='sd' AND dolacz=true", _DaneWypelniajace[(int)stale.NR_KARTY]);
+                        _Zapytanie += String.Format("wzorcowanie_cezem where id_karty = {0} AND rodzaj_wzorcowania='sd' AND dolacz=true", m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
                         bCez = true;
                     }
-                    else if (int.Parse(_DaneWypelniajace[(int)stale.WZ_ZR_POW_ILE]) > 0)
+                    else if (int.Parse(m_data.getValue(SwiadectwoData.DataType.WZ_ZR_POW_ILE)) > 0)
                     {
-                        _Zapytanie += String.Format("wzorcowanie_zrodlami_powierzchniowymi where id_karty = {0} AND dolacz=true", _DaneWypelniajace[(int)stale.NR_KARTY]);
+                        _Zapytanie += String.Format("wzorcowanie_zrodlami_powierzchniowymi where id_karty = {0} AND dolacz=true", m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
                         bSkazenia = true;
                     }
 
-                    if (int.Parse(_DaneWypelniajace[(int)stale.WZ_ZR_POW_ILE]) > 0)
+                    if (int.Parse(m_data.getValue(SwiadectwoData.DataType.WZ_ZR_POW_ILE)) > 0)
                     {
                         bSkazenia = true;
                     }
-                    if (int.Parse(_DaneWypelniajace[(int)stale.WZ_DAWKI_ILE]) > 0)
+                    if (int.Parse(m_data.getValue(SwiadectwoData.DataType.WZ_DAWKI_ILE)) > 0)
                     {
                         bDawka = true;
+                    }
+                    if (int.Parse(m_data.getValue(SwiadectwoData.DataType.WZ_SYG_MOCY_DAWKI_ILE)) > 0 ||
+                        int.Parse(m_data.getValue(SwiadectwoData.DataType.WZ_SYG_DAWKI_ILE)) > 0      ||
+                        int.Parse(m_data.getValue(SwiadectwoData.DataType.WZ_MOC_DAWKI_ILE)) > 0)
+                    {
+                        bCez = true;
                     }
 
                     DataRow odpowiedzBazy = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0];
@@ -664,71 +690,60 @@ namespace DotBase
                     double temp;
 
                     temp = odpowiedzBazy.Field<double>(0);
-                    _DaneWypelniajace[(int)stale.CISNIENIE_MIN] = (temp - 0.5).ToString("0.0");
-                    _DaneWypelniajace[(int)stale.CISNIENIE_MAX] = (temp + 0.5).ToString("0.0");
+                    m_data.setValue(SwiadectwoData.DataType.CISNIENIE_MIN, (temp - 0.5).ToString("0.0"));
+                    m_data.setValue(SwiadectwoData.DataType.CISNIENIE_MAX, (temp + 0.5).ToString("0.0"));
                     temp = odpowiedzBazy.Field<double>(1);
-                    _DaneWypelniajace[(int)stale.TEMPERATURA_MIN] = (temp - 0.5).ToString("0.0");
-                    _DaneWypelniajace[(int)stale.TEMPERATURA_MAX] = (temp + 0.5).ToString("0.0");
+                    m_data.setValue(SwiadectwoData.DataType.TEMPERATURA_MIN, (temp - 0.5).ToString("0.0"));
+                    m_data.setValue(SwiadectwoData.DataType.TEMPERATURA_MAX, (temp + 0.5).ToString("0.0"));
                     temp = odpowiedzBazy.Field<double>(2);
-                    _DaneWypelniajace[(int)stale.WILGOTNOSC_MIN] = (temp - 0.5).ToString("0.0");
-                    _DaneWypelniajace[(int)stale.WILGOTNOSC_MAX] = (temp + 0.5).ToString("0.0");
+                    m_data.setValue(SwiadectwoData.DataType.WILGOTNOSC_MIN, (temp - 0.5).ToString("0.0"));
+                    m_data.setValue(SwiadectwoData.DataType.WILGOTNOSC_MAX, (temp + 0.5).ToString("0.0"));
 
+                    SwiadectwoTextsLoader stl = new SwiadectwoTextsLoader();
                     if (bDawka && bCez && bSkazenia)
                     {
-                        _DaneWypelniajace[(int)stale.METODA_WZORCOWANIA] = "Procedura wzorcowania mierników mocy dawki promieniowaniem gamma ze źródła Cs-137 (WZOR-1<br>wyd. 3 z dn. 10.06.13) oraz procedura wzorcowania dawkomierzy promieniowania jonizującego (DAWKA<br>wyd. 3 z dn. 13.06.13) oraz procedura wzorcowania mierników skażeń powierzchni przy pomocy źródeł<br>powierzchniowych (WZOR-2 wyd. 3 z dn. 10.06.13)";
-                        _DaneWypelniajace[(int)stale.INFORMACJA] =
-                        "Wyniki wzorcowania zostały odniesione do państwowego wzorca pomiarowego mocy kermy promieniowania gamma " +
-                        "w powietrzu utrzymywanego w GUM poprzez zastosowanie dawkomierza kontrolnego UNIDOS typ-ser. 10001-10551 z komorą jonizacyjną 30 cm<sup>3</sup> typ-ser. M23361-0337.<br><br>";
+                        m_data.setValue(SwiadectwoData.DataType.METODA_WZORCOWANIA, stl.GetText("metodaWzorcowania", true, true, true));
+                        m_data.setValue(SwiadectwoData.DataType.INFORMACJA, stl.GetText("informacja", true, true, true));
                     }
                     else if (bDawka && bSkazenia)
                     {
-                        _DaneWypelniajace[(int)stale.METODA_WZORCOWANIA] = "Procedura wzorcowania dawkomierzy promieniowania jonizującego (DAWKA wyd. 3 z dn. 13.06.13) oraz procedura wzorcowania mierników skażeń powierzchni przy pomocy źródeł powierzchniowych (WZOR-2<br>wyd. 3 z dn. 13.06.13) ";
-                        _DaneWypelniajace[(int)stale.INFORMACJA] =
-                        "Wyniki wzorcowania zostały odniesione do państwowego wzorca pomiarowego mocy kermy promieniowania gamma " +
-                        "w powietrzu utrzymywanego w GUM poprzez zastosowanie dawkomierza kontrolnego UNIDOS typ-ser. 10001-10551 z komorą jonizacyjną 30 cm<sup>3</sup> typ-ser. M23361-0337.<br><br>";
+                        m_data.setValue(SwiadectwoData.DataType.METODA_WZORCOWANIA, stl.GetText("metodaWzorcowania", true, false, true));
+                        m_data.setValue(SwiadectwoData.DataType.INFORMACJA, stl.GetText("informacja", true, false, true));
                     }
                     else if (bDawka && bCez)
                     {
-                        _DaneWypelniajace[(int)stale.METODA_WZORCOWANIA] = "Procedura wzorcowania mierników mocy dawki promieniowaniem gamma ze źródła Cs-137 (WZOR-1<br>wyd. 3 z dn. 10.06.13) oraz procedura wzorcowania dawkomierzy promieniowania jonizującego (DAWKA<br>wyd. 3 z dn. 13.06.13)";
-                        _DaneWypelniajace[(int)stale.INFORMACJA] =
-                        "Wyniki wzorcowania zostały odniesione do państwowego wzorca pomiarowego mocy kermy promieniowania gamma " +
-                        "w powietrzu utrzymywanego w GUM poprzez zastosowanie dawkomierza kontrolnego UNIDOS typ-ser. 10001-10551 z komorą jonizacyjną 30 cm<sup>3</sup> typ-ser. M23361-0337.<br><br>";
+                        m_data.setValue(SwiadectwoData.DataType.METODA_WZORCOWANIA, stl.GetText("metodaWzorcowania", true, true, false));
+                        m_data.setValue(SwiadectwoData.DataType.INFORMACJA, stl.GetText("informacja", true, true, false));
                     }
                     else if (bDawka)
                     {
-                        _DaneWypelniajace[(int)stale.METODA_WZORCOWANIA] = "Procedura wzorcowania dawkomierzy promieniowania jonizującego (DAWKA<br>wyd. 3 z dn. 13.06.13)";
-                        _DaneWypelniajace[(int)stale.INFORMACJA] =
-                        "Wyniki wzorcowania zostały odniesione do państwowego wzorca pomiarowego mocy kermy promieniowania gamma " +
-                        "w powietrzu utrzymywanego w GUM poprzez zastosowanie dawkomierza kontrolnego UNIDOS typ-ser. 10001-10551 z komorą jonizacyjną 30 cm<sup>3</sup> typ-ser. M23361-0337.<br><br>";
+                        m_data.setValue(SwiadectwoData.DataType.METODA_WZORCOWANIA, stl.GetText("metodaWzorcowania", true, false, false));
+                        m_data.setValue(SwiadectwoData.DataType.INFORMACJA, stl.GetText("informacja", true, false, false));
                     }
                     else if (bCez && bSkazenia)
                     {
-                        _DaneWypelniajace[(int)stale.METODA_WZORCOWANIA] = "Procedura wzorcowania mierników mocy dawki promieniowaniem gamma ze źródła Cs-137 (WZOR-1<br>wyd. 3 z dn. 10.06.13) oraz procedura wzorcowania mierników skażeń powierzchni przy pomocy źródeł<br>powierzchniowych (WZOR-2 wyd. 3 z dn. 10.06.13)";
-                        _DaneWypelniajace[(int)stale.INFORMACJA] =
-                        "Wyniki wzorcowania zostały odniesione do państwowego wzorca pomiarowego mocy kermy promieniowania gamma " +
-                        "w powietrzu utrzymywanego w GUM poprzez zastosowanie dawkomierza kontrolnego UNIDOS typ-ser. 10001-10551 z komorą jonizacyjną 30 cm<sup>3</sup> typ-ser. M23361-0337.<br><br>";
+                        m_data.setValue(SwiadectwoData.DataType.METODA_WZORCOWANIA, stl.GetText("metodaWzorcowania", false, true, true));
+                        m_data.setValue(SwiadectwoData.DataType.INFORMACJA, stl.GetText("informacja", false, true, true));
                     }
                     else if (bCez && !bSkazenia)
                     {
-                        _DaneWypelniajace[(int)stale.METODA_WZORCOWANIA] = "Procedura wzorcowania mierników mocy dawki promieniowaniem gamma ze źródła Cs-137 (WZOR-1<br>wyd. 3 z dn. 10.06.13)";
-                        _DaneWypelniajace[(int)stale.INFORMACJA] =
-                        "Wyniki wzorcowania zostały odniesione do państwowego wzorca pomiarowego mocy kermy promieniowania gamma " +
-                         "w powietrzu utrzymywanego w GUM poprzez zastosowanie dawkomierza kontrolnego UNIDOS typ-ser. 10001-10551 z komorą jonizacyjną 30 cm<sup>3</sup> typ-ser. M23361-0337.<br><br>";
+                        m_data.setValue(SwiadectwoData.DataType.METODA_WZORCOWANIA, stl.GetText("metodaWzorcowania", false, true, false));
+                        m_data.setValue(SwiadectwoData.DataType.INFORMACJA, stl.GetText("informacja", false, true, false));
                     }
                     else
                     {
-                        _DaneWypelniajace[(int)stale.METODA_WZORCOWANIA] = "Procedura wzorcowania mierników skażeń powierzchni przy pomocy źródeł powierzchniowych (WZOR-2<br>wyd. 3 z dn. 10.06.13)";
-                        _DaneWypelniajace[(int)stale.INFORMACJA] = "";
+                        m_data.setValue(SwiadectwoData.DataType.METODA_WZORCOWANIA, stl.GetText("metodaWzorcowania", false, false, true));
+                        m_data.setValue(SwiadectwoData.DataType.INFORMACJA, stl.GetText("informacja", false, false, true));
                     }
 
-                    if (int.Parse(_DaneWypelniajace[(int)stale.WZ_ZR_POW_ILE]) > 0)
+                    if (int.Parse(m_data.getValue(SwiadectwoData.DataType.WZ_ZR_POW_ILE)) > 0)
                     {
-                        _DaneWypelniajace[(int)stale.INFORMACJA2] = "Wyniki wzorcowania w zakresie emisji powierzchniowej zostały odniesione do wzorca pomiarowego utrzymywanego w ";
+                        m_data.setValue(SwiadectwoData.DataType.INFORMACJA2, stl.GetText("pocztekZdanieOMiejscuWzorcowaniaZrodelPowierzchniowych"));
 
                         bool polon = false;
                         bool bruschweig = false;
 
-                        _Zapytanie = String.Format("SELECT id_zrodla FROM Wzorcowanie_zrodlami_powierzchniowymi WHERE id_karty = {0}", _DaneWypelniajace[(int)stale.NR_KARTY]);
+                        _Zapytanie = String.Format("SELECT id_zrodla FROM Wzorcowanie_zrodlami_powierzchniowymi WHERE id_karty = {0}", m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
 
                         foreach (DataRow row in _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows)
                         {
@@ -746,24 +761,24 @@ namespace DotBase
 
                         if (polon && bruschweig)
                         {
-                            _DaneWypelniajace[(int)stale.INFORMACJA3] = "Laboratorium Wzorców Radioaktywności OBRI POLATOM i PTB Braunschweig, poprzez zastosowanie wzorcowego źródła powierzchniowego.";
+                            m_data.setValue(SwiadectwoData.DataType.INFORMACJA3, stl.GetText(true, true));
                         }
                         else if (polon)
                         {
-                            _DaneWypelniajace[(int)stale.INFORMACJA3] = "Laboratorium Wzorców Radioaktywności OBRI POLATOM, poprzez zastosowanie wzorcowego źródła powierzchniowego.";
+                            m_data.setValue(SwiadectwoData.DataType.INFORMACJA3, stl.GetText(true, false));
                         }
                         else
                         {
-                            _DaneWypelniajace[(int)stale.INFORMACJA3] = "PTB Braunschweig, poprzez zastosowanie wzorcowego źródła powierzchniowego.";
+                            m_data.setValue(SwiadectwoData.DataType.INFORMACJA3, stl.GetText(false, true));
                         }
                     }
                     else
                     {
-                        _DaneWypelniajace[(int)stale.INFORMACJA2] = "";
-                        _DaneWypelniajace[(int)stale.INFORMACJA3] = "";
+                        m_data.setValue(SwiadectwoData.DataType.INFORMACJA2, "");
+                        m_data.setValue(SwiadectwoData.DataType.INFORMACJA3, "");
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     return false;
                 }
@@ -772,22 +787,22 @@ namespace DotBase
             }
 
             //********************************************************************************************
-            private bool PobierzDaneZleceniodawcy()
+            new private bool PobierzDaneZleceniodawcy()
             //********************************************************************************************
             {
                 _Zapytanie = "SELECT Zleceniodawca, adres FROM Zleceniodawca WHERE id_zleceniodawcy = (SELECT id_zleceniodawcy FROM Zlecenia WHERE id_zlecenia = (SELECT id_zlecenia FROM "
-                           + String.Format("Karta_przyjecia WHERE id_karty = {0}))", _DaneWypelniajace[(int)stale.NR_KARTY]);
+                           + String.Format("Karta_przyjecia WHERE id_karty = {0}))", m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
 
                 try
                 {
                     DataRow wiersz = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0];
-                    _DaneWypelniajace[(int)stale.ZLECENIODAWCA] = wiersz.Field<string>(0);
-                    _DaneWypelniajace[(int)stale.ADRES] = wiersz.Field<string>(1);
+                    m_data.setValue(SwiadectwoData.DataType.ZLECENIODAWCA, wiersz.Field<string>(0));
+                    m_data.setValue(SwiadectwoData.DataType.ADRES, wiersz.Field<string>(1));
                 }
                 catch (Exception)
                 {
-                    _DaneWypelniajace[(int)stale.ZLECENIODAWCA] = "";
-                    _DaneWypelniajace[(int)stale.ADRES] = "";
+                    m_data.setValue(SwiadectwoData.DataType.ZLECENIODAWCA, "");
+                    m_data.setValue(SwiadectwoData.DataType.ADRES, "");
                     return false;
                 }
 
@@ -798,22 +813,24 @@ namespace DotBase
             private void PobierzJednostke()
             //********************************************************************************************
             {
-                _DaneWypelniajace[(int)stale.JEDNOSTKA] = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<string>(0);
-                _DaneWypelniajace[(int)stale.JEDNOSTKA] = _DaneWypelniajace[(int)stale.JEDNOSTKA].Replace("u", "&mu;");
+                m_data.setValue(SwiadectwoData.DataType.JEDNOSTKA, _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<string>(0));
+                m_data.setValue(SwiadectwoData.DataType.JEDNOSTKA, m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA).Replace("u", "&mu;"));
             }
 
             //********************************************************************************************
             private void PobierzWielkoscFizyczna()
             //********************************************************************************************
             {
-                _DaneWypelniajace[(int)stale.WIELKOSC_FIZYCZNA] = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<string>(0);
+                m_data.setValue(SwiadectwoData.DataType.WIELKOSC_FIZYCZNA, _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<string>(0));
             }
 
             //********************************************************************************************
-            private void PobierzIdWzorcowania(int ktoreWzorcowaniePobrac)
+            private void PobierzIdWzorcowania(int ktoreWzorcowaniePobrac, String rodzajWzorcowania)
             //********************************************************************************************
             {
-                _DaneWypelniajace[(int)stale.ID_WZORCOWANIA] = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[ktoreWzorcowaniePobrac].Field<int>(0).ToString();
+                _Zapytanie = String.Format("SELECT id_wzorcowania FROM Wzorcowanie_cezem WHERE id_karty = {0} ", m_data.getValue(SwiadectwoData.DataType.NR_KARTY))
+                           + String.Format(" AND rodzaj_wzorcowania='{0}' AND dolacz=true ORDER BY id_wzorcowania", rodzajWzorcowania);
+                m_data.setValue(SwiadectwoData.DataType.ID_WZORCOWANIA, _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[ktoreWzorcowaniePobrac].Field<int>(0).ToString());
             }
 
             //********************************************************************************************
@@ -830,29 +847,29 @@ namespace DotBase
                 if (false == PobierzSzablonGlowny())
                     return false;
 
-                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c1>", _DaneWypelniajace[(int)stale.DATA]);
-                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c2>", _DaneWypelniajace[(int)stale.NR_KARTY]);
-                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c3>", _DaneWypelniajace[(int)stale.ROK]);
-                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c4>", _DaneWypelniajace[(int)stale.NAZWA]);
-                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c5>", _DaneWypelniajace[(int)stale.TYP]);
-                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c6>", _DaneWypelniajace[(int)stale.NR_FABRYCZNY]);
-                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c7>", _DaneWypelniajace[(int)stale.PRODUCENT]);
-                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c8>", _DaneWypelniajace[(int)stale.ROK_PRODUKCJI]);
-                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c9>", _DaneWypelniajace[(int)stale.ZLECENIODAWCA]);
-                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c10>", _DaneWypelniajace[(int)stale.ADRES]);
-                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c11>", _DaneWypelniajace[(int)stale.CISNIENIE_MIN]);
-                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c12>", _DaneWypelniajace[(int)stale.CISNIENIE_MAX]);
-                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c13>", _DaneWypelniajace[(int)stale.TEMPERATURA_MIN]);
-                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c14>", _DaneWypelniajace[(int)stale.TEMPERATURA_MAX]);
-                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c15>", _DaneWypelniajace[(int)stale.WILGOTNOSC_MIN]);
-                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c16>", _DaneWypelniajace[(int)stale.WILGOTNOSC_MAX]);
-                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c17>", _DaneWypelniajace[(int)stale.INFORMACJA] + _DaneWypelniajace[(int)stale.INFORMACJA2] + _DaneWypelniajace[(int)stale.INFORMACJA3]);
-                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!metoda_wzorcowania>", _DaneWypelniajace[(int)stale.METODA_WZORCOWANIA]);
+                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c1>", m_data.getValue(SwiadectwoData.DataType.DATA));
+                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c2>", m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
+                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c3>", m_data.getValue(SwiadectwoData.DataType.ROK));
+                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c4>", m_data.getValue(SwiadectwoData.DataType.NAZWA));
+                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c5>", m_data.getValue(SwiadectwoData.DataType.TYP));
+                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c6>", m_data.getValue(SwiadectwoData.DataType.NR_FABRYCZNY));
+                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c7>", m_data.getValue(SwiadectwoData.DataType.PRODUCENT));
+                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c8>", m_data.getValue(SwiadectwoData.DataType.ROK_PRODUKCJI));
+                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c9>", m_data.getValue(SwiadectwoData.DataType.ZLECENIODAWCA));
+                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c10>", m_data.getValue(SwiadectwoData.DataType.ADRES));
+                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c11>", m_data.getValue(SwiadectwoData.DataType.CISNIENIE_MIN));
+                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c12>", m_data.getValue(SwiadectwoData.DataType.CISNIENIE_MAX));
+                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c13>", m_data.getValue(SwiadectwoData.DataType.TEMPERATURA_MIN));
+                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c14>", m_data.getValue(SwiadectwoData.DataType.TEMPERATURA_MAX));
+                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c15>", m_data.getValue(SwiadectwoData.DataType.WILGOTNOSC_MIN));
+                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c16>", m_data.getValue(SwiadectwoData.DataType.WILGOTNOSC_MAX));
+                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c17>", m_data.getValue(SwiadectwoData.DataType.INFORMACJA) + m_data.getValue(SwiadectwoData.DataType.INFORMACJA2) + m_data.getValue(SwiadectwoData.DataType.INFORMACJA3));
+                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!metoda_wzorcowania>", m_data.getValue(SwiadectwoData.DataType.METODA_WZORCOWANIA));
 
                 DateTime dataWzorcowaniaCez;
                 try
                 {
-                    _Zapytanie = String.Format("SELECT MAX(data_wzorcowania) FROM wzorcowanie_cezem WHERE id_karty = {0} ", _DaneWypelniajace[(int)stale.NR_KARTY]);
+                    _Zapytanie = String.Format("SELECT MAX(data_wzorcowania) FROM wzorcowanie_cezem WHERE id_karty = {0} ", m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
                     dataWzorcowaniaCez = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<DateTime>(0);
                 }
                 catch (Exception)
@@ -863,7 +880,7 @@ namespace DotBase
                 DateTime dataWzorcowaniaSkazenia;
                 try
                 {
-                    _Zapytanie = String.Format("SELECT MAX(data_wzorcowania) FROM wzorcowanie_zrodlami_powierzchniowymi WHERE id_karty = {0} ", _DaneWypelniajace[(int)stale.NR_KARTY]);
+                    _Zapytanie = String.Format("SELECT MAX(data_wzorcowania) FROM wzorcowanie_zrodlami_powierzchniowymi WHERE id_karty = {0} ", m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
                     dataWzorcowaniaSkazenia = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<DateTime>(0);
                 }
                 catch (Exception)
@@ -889,13 +906,13 @@ namespace DotBase
             private bool UtworzDrugaStrone()
             //********************************************************************************************
             {
-                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<str2>", _SzablonDrugiejStrony.ToString());
-                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!sprawdzil>", _DaneWypelniajace[(int)stale.SPRAWDZIL]);
+                _SzablonGlownyWzorcowania.Replace("<str2>", _SzablonDrugiejStrony.ToString())
+                                         .Replace("<!sprawdzil>", m_data.getValue(SwiadectwoData.DataType.SPRAWDZIL));
                 return true;
             }
 
             //********************************************************************************************
-            override public bool UtworzDokument(string sciezka)
+            public bool UtworzDokument(string sciezka)
             //********************************************************************************************
             {
                 return PobierzDanePierwszaStrona() &&
@@ -909,9 +926,11 @@ namespace DotBase
             override protected bool ZapiszPlikWynikowy(string sciezka)
             //********************************************************************************************
             {
-                _Fout = new StreamWriter(sciezka);
-                _Fout.Write(_SzablonGlownyWzorcowania.ToString());
-                _Fout.Close();
+                using (StreamWriter _Fout = new StreamWriter(sciezka))
+                {
+                    _Fout.Write(_SzablonGlownyWzorcowania.ToString());
+                    _Fout.Close();
+                }
                 return true;
             }
 
@@ -922,28 +941,28 @@ namespace DotBase
             {
                 // zliczenie liczby wpisów dot. źródeł powierzchniowych
                 _Zapytanie = String.Format("SELECT COUNT(*) FROM Wzorcowanie_zrodlami_powierzchniowymi WHERE id_karty = {0} AND Dolacz=true",
-                                           _DaneWypelniajace[(int)stale.NR_KARTY]);
-                _DaneWypelniajace[(int)stale.WZ_ZR_POW_ILE] = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0).ToString();
+                                           m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
+                m_data.setValue(SwiadectwoData.DataType.WZ_ZR_POW_ILE, _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0).ToString());
 
                 // zliczenie liczby wpisów dot. wzorcowania mocy dawki
                 _Zapytanie = String.Format("SELECT COUNT(*) FROM Wzorcowanie_cezem WHERE id_karty = {0} AND rodzaj_wzorcowania = 'md' AND Dolacz=true",
-                                           _DaneWypelniajace[(int)stale.NR_KARTY]);
-                _DaneWypelniajace[(int)stale.WZ_MOC_DAWKI_ILE] = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0).ToString();
+                                           m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
+                m_data.setValue(SwiadectwoData.DataType.WZ_MOC_DAWKI_ILE, _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0).ToString());
 
                 // zliczenie liczby wpisów dot. wzorcowania dawki
                 _Zapytanie = String.Format("SELECT COUNT(*) FROM Wzorcowanie_cezem WHERE id_karty = {0} AND rodzaj_wzorcowania = 'd' AND Dolacz=true",
-                                           _DaneWypelniajace[(int)stale.NR_KARTY]);
-                _DaneWypelniajace[(int)stale.WZ_DAWKI_ILE] = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0).ToString();
+                                           m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
+                m_data.setValue(SwiadectwoData.DataType.WZ_DAWKI_ILE, _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0).ToString());
 
                 // zliczenie liczby wpisów dot. syg. dawki
                 _Zapytanie = String.Format("SELECT COUNT(*) FROM Wzorcowanie_cezem WHERE id_karty = {0} AND rodzaj_wzorcowania = 'sd' AND Dolacz=true",
-                                           _DaneWypelniajace[(int)stale.NR_KARTY]);
-                _DaneWypelniajace[(int)stale.WZ_SYG_DAWKI_ILE] = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0).ToString();
+                                           m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
+                m_data.setValue(SwiadectwoData.DataType.WZ_SYG_DAWKI_ILE, _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0).ToString());
 
                 // zliczenie liczby wpisów dot. syg. mocy dawki
                 _Zapytanie = String.Format("SELECT COUNT(*) FROM Wzorcowanie_cezem WHERE id_karty = {0} AND rodzaj_wzorcowania = 'sm' AND Dolacz=true",
-                                           _DaneWypelniajace[(int)stale.NR_KARTY]);
-                _DaneWypelniajace[(int)stale.WZ_SYG_MOCY_DAWKI_ILE] = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0).ToString();
+                                           m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
+                m_data.setValue(SwiadectwoData.DataType.WZ_SYG_MOCY_DAWKI_ILE, _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0).ToString());
             }
         }
     }
