@@ -20,7 +20,6 @@ namespace DotBase
         int poprzedieIdKarty;
 
         //---------------------------------------------------------
-        // Konstruktor wywoływany w przypadku przeglądania Kart Przyjęcia
         public KartaPrzyjeciaForm(bool trybPrzegladaniaOrazEdycji = false)
         //---------------------------------------------------------
         {
@@ -51,6 +50,7 @@ namespace DotBase
         {
             button2.Enabled = false;
             button6.Enabled = false;
+            numericUpDownRok.Value = System.DateTime.Now.Year;
         }
 
         //-------------------------------------------------------------
@@ -70,7 +70,7 @@ namespace DotBase
                 return;
             }
 
-            DaneKartyPrzyjecia dane = new DaneKartyPrzyjecia((int)numericUpDown1.Value, int.Parse(textBox1.Text));
+            DaneKartyPrzyjecia dane = new DaneKartyPrzyjecia((int)numericUpDown1.Value, int.Parse(textBox1.Text), (int)numericUpDownRok.Value);
             dane.Przyrzad = new DanePrzyrzadu(comboBox1.Text, comboBox2.Text);
             dane.Wymagania = new WymaganiaKalibracji(checkBox1.Checked, checkBox2.Checked, checkBox3.Checked, checkBox4.Checked,
                                                      checkBox5.Checked, checkBox6.Checked, checkBox7.Checked, checkBox8.Checked,
@@ -178,7 +178,7 @@ namespace DotBase
 
             try
             {
-                dane = new DaneKartyPrzyjecia(poprzedieIdKarty, int.Parse(textBox1.Text));
+                dane = new DaneKartyPrzyjecia(poprzedieIdKarty, int.Parse(textBox1.Text), (int)numericUpDownRok.Value);
             }
             catch (Exception)
             {
@@ -322,10 +322,11 @@ namespace DotBase
             }
 
             numericUpDown1.ValueChanged -= numericUpDown1_ValueChanged;
-
+            
             DaneKartyPrzyjecia dane = _KartaPrzyjecia.DaneKartyPrzyjecia;
 
             numericUpDown1.Value = poprzedieIdKarty = dane.IdKarty;
+            numericUpDownRok.Value = dane.rok;
 
             WyswietlDanePrzyrzadu();
             WyswietlSondyDanegoPrzyrzadu();
@@ -374,6 +375,8 @@ namespace DotBase
             DaneKartyPrzyjecia dane = _KartaPrzyjecia.DaneKartyPrzyjecia;
 
             numericUpDown1.Value = poprzedieIdKarty = dane.IdKarty;
+            numericUpDownRok.Value = dane.rok;
+            numericUpDownRok.Value = dane.rok;
             
             WyswietlDanePrzyrzadu();
             WyswietlSondyDanegoPrzyrzadu();

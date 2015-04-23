@@ -81,6 +81,7 @@ namespace DotBase
             public int IdKarty { get; set; }
             public int NrZlecenia { get; set; }
             public int idDozymetru { get; set; }
+            public int rok { get; set; }
             public DaneDodatkowe DaneDodatkowe { get; set; }
             public DanePrzyrzadu Przyrzad { get; set; }
             public WymaganiaKalibracji Wymagania  { get; set; }
@@ -93,11 +94,12 @@ namespace DotBase
             }
 
             //----------------------------------------------------------------------------------------------
-            public DaneKartyPrzyjecia(int idKarty, int nrZlecenia)
+            public DaneKartyPrzyjecia(int idKarty, int nrZlecenia, int rok)
             //----------------------------------------------------------------------------------------------
             {
                 this.IdKarty = idKarty;
                 this.NrZlecenia = nrZlecenia;
+                this.rok = rok;
             }
 
             //----------------------------------------------------------------------------------------------
@@ -171,11 +173,11 @@ namespace DotBase
             }
 
             //------------------------------------------------------------------
-            public KartaPrzyjecia(int idKarty, int nrZlecenia)
+            public KartaPrzyjecia(int idKarty, int nrZlecenia, int rok)
             //------------------------------------------------------------------
             {
                 _BazaDanych = new BazaDanychWrapper();
-                DaneKartyPrzyjecia = new DaneKartyPrzyjecia(idKarty, nrZlecenia);
+                DaneKartyPrzyjecia = new DaneKartyPrzyjecia(idKarty, nrZlecenia, rok);
 
                 _WszyskieTypyDozymetrow = new List<string>();
                 _WszyskieNumeryFabryczneDlaDanegoTypuDozymetru = new List<string>();
@@ -250,7 +252,7 @@ namespace DotBase
 	                       + "pluton, stront_slaby, stront_silny, syg_dawki, syg_mocy_dawki, wegiel_slaby, wegiel_silny, stront_najsilniejszy, "
                            + "akcesoria, uwagi, uszkodzony, id_dozymetru, test_na_skazenia) VALUES "
                            + String.Format("({0},{1},'{2}',{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},'{15}','{16}',{17},{18},'brak skażeń')",
-                           dane.IdKarty, dane.NrZlecenia, System.DateTime.Now.Year, dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.AMERYK],
+                           dane.IdKarty, dane.NrZlecenia, dane.rok, dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.AMERYK],
                            dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.CHLOR],dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.DAWKA],
                            dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.MOC_DAWKI],dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.PLUTON],
                            dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.STRONT_SLABY],dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.STRONT_SILNY],
@@ -272,7 +274,7 @@ namespace DotBase
                 int idDozymetru = ZnajdzIdDozymetru(dane.Przyrzad.Typ, dane.Przyrzad.NrFabryczny);
 
                 _Zapytanie = String.Format("UPDATE Karta_przyjecia SET id_zlecenia = {0}, rok = {1}, ameryk = {2}, chlor = {3}, dawka = {4}, ",
-                                           dane.NrZlecenia, System.DateTime.Now.Year,
+                                           dane.NrZlecenia, dane.rok,
                                            dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.AMERYK],
                                            dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.CHLOR],
                                            dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.DAWKA])
@@ -739,12 +741,13 @@ namespace DotBase
             public bool ZnajdzDanePodstawowe()
             //------------------------------------------------------------------
             {
-                _OdpowiedzBazy = _BazaDanych.TworzTabeleDanych("SELECT id_karty, id_zlecenia FROM Karta_przyjecia WHERE id_karty=(SELECT MAX(id_karty) FROM Karta_przyjecia)");
+                _OdpowiedzBazy = _BazaDanych.TworzTabeleDanych("SELECT id_karty, id_zlecenia, rok FROM Karta_przyjecia WHERE id_karty=(SELECT MAX(id_karty) FROM Karta_przyjecia)");
 
                 try
                 {
                     DaneKartyPrzyjecia.IdKarty = _OdpowiedzBazy.Rows[0].Field<int>(0);
                     DaneKartyPrzyjecia.NrZlecenia = _OdpowiedzBazy.Rows[0].Field<int>(1);
+                    DaneKartyPrzyjecia.rok = _OdpowiedzBazy.Rows[0].Field<int>(2);
                 }
                 catch (Exception)
                 {
@@ -759,12 +762,14 @@ namespace DotBase
             public bool ZnajdzDanePodstawowe(int idKarty)
             //------------------------------------------------------------------
             {
-                _Zapytanie = String.Format("SELECT id_zlecenia FROM Karta_przyjecia WHERE id_karty={0}", idKarty);
+                _Zapytanie = String.Format("SELECT id_zlecenia, rok FROM Karta_przyjecia WHERE id_karty={0}", idKarty);
                 
                 try
                 {
                     DaneKartyPrzyjecia.IdKarty = idKarty;
-                    DaneKartyPrzyjecia.NrZlecenia = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0);
+                    DataTable response = _BazaDanych.TworzTabeleDanych(_Zapytanie);
+                    DaneKartyPrzyjecia.NrZlecenia = response.Rows[0].Field<int>(0);
+                    DaneKartyPrzyjecia.rok = response.Rows[0].Field<int>(1);
                 }
                 catch (Exception)
                 {
