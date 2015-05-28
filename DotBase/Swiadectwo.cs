@@ -687,17 +687,15 @@ namespace DotBase
 
                     DataRow odpowiedzBazy = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0];
 
-                    double temp;
-
-                    temp = odpowiedzBazy.Field<double>(0);
-                    m_data.setValue(SwiadectwoData.DataType.CISNIENIE_MIN, (temp - 0.5).ToString("0.0"));
-                    m_data.setValue(SwiadectwoData.DataType.CISNIENIE_MAX, (temp + 0.5).ToString("0.0"));
+                    double temp = odpowiedzBazy.Field<double>(0);
+                    m_data.setValue(SwiadectwoData.DataType.CISNIENIE_MIN, (temp - Constants.getInstance().UNCERTAINITY_PRESSURE_VALUE).ToString("0.0"));
+                    m_data.setValue(SwiadectwoData.DataType.CISNIENIE_MAX, (temp + Constants.getInstance().UNCERTAINITY_PRESSURE_VALUE).ToString("0.0"));
                     temp = odpowiedzBazy.Field<double>(1);
-                    m_data.setValue(SwiadectwoData.DataType.TEMPERATURA_MIN, (temp - 0.5).ToString("0.0"));
-                    m_data.setValue(SwiadectwoData.DataType.TEMPERATURA_MAX, (temp + 0.5).ToString("0.0"));
+                    m_data.setValue(SwiadectwoData.DataType.TEMPERATURA_MIN, (temp - Constants.getInstance().UNCERTAINITY_TEMPERATURE_VALUE).ToString("0.0"));
+                    m_data.setValue(SwiadectwoData.DataType.TEMPERATURA_MAX, (temp + Constants.getInstance().UNCERTAINITY_TEMPERATURE_VALUE).ToString("0.0"));
                     temp = odpowiedzBazy.Field<double>(2);
-                    m_data.setValue(SwiadectwoData.DataType.WILGOTNOSC_MIN, (temp - 0.5).ToString("0.0"));
-                    m_data.setValue(SwiadectwoData.DataType.WILGOTNOSC_MAX, (temp + 0.5).ToString("0.0"));
+                    m_data.setValue(SwiadectwoData.DataType.WILGOTNOSC_MIN, (temp - Constants.getInstance().UNCERTAINITY_HUMIDITY_VALUE).ToString("0.0"));
+                    m_data.setValue(SwiadectwoData.DataType.WILGOTNOSC_MAX, (temp + Constants.getInstance().UNCERTAINITY_HUMIDITY_VALUE).ToString("0.0"));
 
                     SwiadectwoTextsLoader stl = new SwiadectwoTextsLoader();
                     if (bDawka && bCez && bSkazenia)

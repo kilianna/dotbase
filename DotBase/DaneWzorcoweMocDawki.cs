@@ -68,7 +68,7 @@ namespace DotBase
             int ile = (data1 - data2).Days;
 
             // 11050.0 - czas połowicznego rozpadu cezu w dniach
-            return Math.Exp(-Math.Log(2.0) * ile / 11050.0);
+            return Math.Exp(-Math.Log(2.0) * ile / Constants.getInstance().CS_HALF_TIME_VALUE);
         }
 
         //**********************************************************

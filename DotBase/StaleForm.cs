@@ -24,6 +24,19 @@ namespace DotBase
         }
 
         //---------------------------------------------------------
+        private void button1_Click(object sender, EventArgs e)
+        //---------------------------------------------------------
+        {
+            if (false == TestujMozliwoscZapisu())
+            {
+                MessageBox.Show("Część danych jest niepoprawnych. Zapis nie jest możliwy.");
+                return;
+            }
+
+            ZapiszDane();
+        }
+
+        //---------------------------------------------------------
         private void button2_Click(object sender, EventArgs e)
         //---------------------------------------------------------
         {
@@ -54,7 +67,7 @@ namespace DotBase
         //---------------------------------------------------------
         {
             foreach(DataRow wiersz in dane.Rows)
-                dataGridView1.Rows.Add(wiersz.Field<string>("Nazwa"), wiersz.Field<double>("Wartosc").ToString());
+                dataGridView1.Rows.Add(wiersz.Field<string>("Nazwa"), wiersz.Field<double>("Wartosc"));
         }
 
         //----------------------------------------------------------
@@ -78,19 +91,20 @@ namespace DotBase
         private void ZapiszDane()
         //----------------------------------------------------------
         {
-            if (false == TestujMozliwoscZapisu())
-            {
-                MessageBox.Show("Część danych jest niepoprawnych. Zapis nie jest możliwy.");
-            }
-
             _BazaDanych.WykonajPolecenie("DELETE FROM Stale");
 
             foreach (DataGridViewRow wiersz in dataGridView1.Rows)
             {
-                _Zapytanie = String.Format("INSERT INTO Stale VALUE('{0}', {1})", wiersz.Cells["Parametr"].Value, wiersz.Cells["Wartosc"].Value);
+                String parametr = wiersz.Cells["Parametr"].Value.ToString();
+                String wartosc = SqlQueryUtils.normalize( wiersz.Cells["Wartosc"].Value.ToString() );
+
+                _Zapytanie = String.Format("INSERT INTO Stale VALUES('{0}', {1})", parametr, wartosc);
 
                 _BazaDanych.WykonajPolecenie(_Zapytanie);
             }
+
+
         }
     }
 }
+

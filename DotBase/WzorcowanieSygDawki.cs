@@ -46,7 +46,7 @@ namespace DotBase
             int roznicaDni = (dataWzorcowania - dataKalibracjiLawy).Days;
 
             // 11050.0 - czas połowicznego rozpadu cezu w dniach
-            double korektaRozpad = Math.Exp(-Math.Log(2.0) * roznicaDni / 11050.0);
+            double korektaRozpad = Math.Exp(-Math.Log(2.0) * roznicaDni / Constants.getInstance().CS_HALF_TIME_VALUE);
 
             _Zapytanie = String.Format("SELECT przelicznik FROM Jednostki WHERE jednostka='{0}'", jednostka);
             double przelicznik = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<float>(0);
@@ -85,7 +85,7 @@ namespace DotBase
              int roznicaDni = (dataWzorcowania - dataKalibracjiLawy).Days;
 
              // 11050.0 - czas połowicznego rozpadu cezu w dniach
-             double korektaRozpad = Math.Exp(-Math.Log(2.0) * roznicaDni / 11050.0);
+             double korektaRozpad = Math.Exp(-Math.Log(2.0) * roznicaDni / Constants.getInstance().CS_HALF_TIME_VALUE);
 
              List<double> listaCzasWzorcowy = new List<double>();
              

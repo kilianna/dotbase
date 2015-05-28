@@ -191,17 +191,17 @@ namespace DotBase
                             break;
                     }
 
-                    String temp;
-                    infoSondy = "wraz z sondami ";
+                    List<String> tekstySond = new List<String>();
 
                     for (int p = 0; p < licznik; ++p)
                     {
                         if (p != k)
                         {
-                            temp = String.Format("<b>{0}</b> nr&nbsp;fab. <b>{1}</b>", sondy[p].Key.Replace(" ", "&nbsp;"), sondy[p].Value.Replace(" ", "&nbsp;"));
-                            infoSondy += temp;
+                            tekstySond.Add(String.Format("<b>{0}</b> nr&nbsp;fab. <b>{1}</b>", sondy[p].Key.Replace(" ", "&nbsp;"), sondy[p].Value.Replace(" ", "&nbsp;")));
                         }
                     }
+                    
+                    infoSondy += "wraz z sondami " + String.Join(", ", tekstySond);
                 }
 
                 m_data.setValue(PismoPrzewodnieData.DataType.INFO_SONDY, infoSondy);

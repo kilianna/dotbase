@@ -106,7 +106,7 @@ namespace DotBase
                 }
 
                 double roznicaPomiarowDni = (daneWejsciowe.m_Data - DateTime.Parse(daneWejsciowe.m_Protokol)).Days;
-                double korektaNaRozpad = Math.Exp(-Math.Log(2) / 11050 * roznicaPomiarowDni);
+                double korektaNaRozpad = Math.Exp(-Math.Log(2) / Constants.getInstance().CS_HALF_TIME_VALUE * roznicaPomiarowDni);
                 temp1 *= korektaNaRozpad;
                 temp2 *= korektaNaRozpad;
 
