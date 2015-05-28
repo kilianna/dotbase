@@ -92,6 +92,7 @@
             this.dokumentyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.protokółToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.button5 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -107,9 +108,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(668, 39);
+            this.button3.Location = new System.Drawing.Point(668, 38);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(99, 41);
+            this.button3.Size = new System.Drawing.Size(99, 42);
             this.button3.TabIndex = 6;
             this.button3.Text = "Dane wzorcowe";
             this.button3.UseVisualStyleBackColor = true;
@@ -192,7 +193,7 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tabControl1.Location = new System.Drawing.Point(0, 98);
+            this.tabControl1.Location = new System.Drawing.Point(0, 87);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(776, 413);
@@ -603,6 +604,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.button5);
             this.tabPage4.Controls.Add(this.checkBox1);
             this.tabPage4.Controls.Add(this.textBox11);
             this.tabPage4.Controls.Add(this.textBox12);
@@ -673,13 +675,13 @@
             this.dokumentyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.protokółToolStripMenuItem});
             this.dokumentyToolStripMenuItem.Name = "dokumentyToolStripMenuItem";
-            this.dokumentyToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
+            this.dokumentyToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
             this.dokumentyToolStripMenuItem.Text = "Dokumenty";
             // 
             // protokółToolStripMenuItem
             // 
             this.protokółToolStripMenuItem.Name = "protokółToolStripMenuItem";
-            this.protokółToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.protokółToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.protokółToolStripMenuItem.Text = "Protokół";
             this.protokółToolStripMenuItem.Click += new System.EventHandler(this.protokółToolStripMenuItem_Click_1);
             // 
@@ -688,11 +690,21 @@
             this.toolTip1.AutomaticDelay = 0;
             this.toolTip1.ShowAlways = true;
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(664, 337);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(96, 42);
+            this.button5.TabIndex = 22;
+            this.button5.Text = "Zapisz";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // WzorcowanieSygnalizacjaMocyDawkiForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(776, 511);
+            this.ClientSize = new System.Drawing.Size(776, 500);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -796,6 +808,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Zr2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Wartosc;
         private System.Windows.Forms.DataGridViewTextBoxColumn Niepewnosc;
+        private System.Windows.Forms.Button button5;
 
 
     }

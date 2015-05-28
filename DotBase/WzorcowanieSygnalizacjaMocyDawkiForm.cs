@@ -626,5 +626,18 @@ namespace DotBase
             if (e.KeyChar == 13)
                 SelectNextControl((Control)sender, true, false, true, true);
         }
+
+        //****************************************************************
+        // Zapisz
+        //****************************************************************
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (false == ZapiszDane())
+            {
+                MessageBox.Show("Dane nie zostały zapisane z uwagi na błędy wśród wpisanych dnaych.", "Uwaga", MessageBoxButtons.OK);
+            }
+
+            MessageBox.Show("Dane zostały zapisane poprawnie.", "Sukces", MessageBoxButtons.OK);
+        }
     }
 }

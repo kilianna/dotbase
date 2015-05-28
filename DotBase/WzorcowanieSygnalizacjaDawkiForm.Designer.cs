@@ -89,6 +89,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.dokumenytToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.protokółToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button5 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -594,6 +595,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.button5);
             this.tabPage4.Controls.Add(this.checkBox1);
             this.tabPage4.Controls.Add(this.textBox11);
             this.tabPage4.Controls.Add(this.textBox12);
@@ -664,15 +666,25 @@
             this.dokumenytToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.protokółToolStripMenuItem});
             this.dokumenytToolStripMenuItem.Name = "dokumenytToolStripMenuItem";
-            this.dokumenytToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
+            this.dokumenytToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
             this.dokumenytToolStripMenuItem.Text = "Dokumenty";
             // 
             // protokółToolStripMenuItem
             // 
             this.protokółToolStripMenuItem.Name = "protokółToolStripMenuItem";
-            this.protokółToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.protokółToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.protokółToolStripMenuItem.Text = "Protokół";
             this.protokółToolStripMenuItem.Click += new System.EventHandler(this.protokółToolStripMenuItem_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(728, 390);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(99, 35);
+            this.button5.TabIndex = 10;
+            this.button5.Text = "Zapisz";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // WzorcowanieSygnalizacjaDawkiForm
             // 
@@ -779,6 +791,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem dokumenytToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem protokółToolStripMenuItem;
+        private System.Windows.Forms.Button button5;
 
     }
 }
