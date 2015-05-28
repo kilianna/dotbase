@@ -74,16 +74,6 @@ namespace DotBase
                                               bool sygnalizacja_dawki, bool sygnalizacja_mocy_dawki, bool wegiel_slaby, bool wegiel_silny)
         //-------------------------------------------------
         {
-            /*if (_Cennik.ZliczLiczbeWzorcowanDlaDawki() && _Cennik.ZliczLiczbeWzorcowanDlaMocyDawki() &&
-                _Cennik.ZliczLiczbeWzorcowanDlaSkazen() && _Cennik.ZliczLiczbeWzorcowanDlaSygnalizacji())
-            {
-                numericUpDown1.Value = _Cennik.Ile_moc_dawki;
-                numericUpDown2.Value = _Cennik.Ile_skazenia;
-                numericUpDown3.Value = _Cennik.Ile_dawka;
-                numericUpDown4.Value = _Cennik.Ile_sygnalizator;
-
-                return true;
-            }*/
             if(moc_dawki)
                 numericUpDown1.Value = 1;
             else

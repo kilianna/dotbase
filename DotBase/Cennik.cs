@@ -28,6 +28,7 @@ namespace DotBase
         private double _Cena_sygnalizator_dod;
         private double _Cena_ekspres;
         private double _Cena_dodatkowy_prog;
+        private double _Cena_sprawdzenie;
 
         //-------------------------------------------------------
         public Cennik()
@@ -73,7 +74,16 @@ namespace DotBase
         }
 
         //-------------------------------------------------------
-        public double LiczSume(int ileSk, int ileMd, int ileD, int ileSyg, bool RozszerzoneWzorcowanie, bool Ekspres, uint liczbaProgow, uint rabat)
+        public double LiczSume(int ileSk, 
+                               int ileMd, 
+                               int ileD, 
+                               int ileSyg, 
+                               bool RozszerzoneWzorcowanie, 
+                               bool Ekspres, 
+                               bool sprawdzenie,
+                               bool zepsuty,
+                               uint liczbaProgow,
+                               uint rabat)
         //-------------------------------------------------------
         {
             Ile_moc_dawki = ileMd;
@@ -128,31 +138,34 @@ namespace DotBase
                             _Cena_moc_dawki = row.Field<double>("cena");
                             break;
                         case "Moc dawki rozsz":
-                            _Cena_moc_dawki_rozsz  = row.Field<double>("cena");;
+                            _Cena_moc_dawki_rozsz  = row.Field<double>("cena");
                             break;
                         case "Skażenia same":
-                            _Cena_skazenia  = row.Field<double>("cena");;
+                            _Cena_skazenia  = row.Field<double>("cena");
                             break;
                         case "Skażenia dodatkowe":
-                            _Cena_skazenia_dod  = row.Field<double>("cena");;
+                            _Cena_skazenia_dod  = row.Field<double>("cena");
                             break;
                         case "Dawka sama":
-                            _Cena_dawka  = row.Field<double>("cena");;
+                            _Cena_dawka  = row.Field<double>("cena");
                             break;
                         case "Dawka dodatkowa":
-                            _Cena_dawka_dod  = row.Field<double>("cena");;
+                            _Cena_dawka_dod  = row.Field<double>("cena");
                             break;
                         case "Sygnalizacja 3progi":
-                            _Cena_sygnalizator  = row.Field<double>("cena");;
+                            _Cena_sygnalizator  = row.Field<double>("cena");
                             break;
                         case "Sygnalizacja 3progi dodatkowa":
-                            _Cena_sygnalizator_dod  = row.Field<double>("cena");;
+                            _Cena_sygnalizator_dod  = row.Field<double>("cena");
                             break;
                         case "Sygnalizacja dodatkowy próg":
-                            _Cena_dodatkowy_prog  = row.Field<double>("cena");;
+                            _Cena_dodatkowy_prog  = row.Field<double>("cena");
                             break;
                         case "Ekspres":
-                            _Cena_ekspres  = row.Field<double>("cena");;
+                            _Cena_ekspres  = row.Field<double>("cena");
+                            break;
+                        case "Sprawdzenie":
+                            _Cena_sprawdzenie = row.Field<double>("cena");
                             break;
                     }
                 }
@@ -236,6 +249,11 @@ namespace DotBase
 
             return true;
 		}
+
+        public double Xxx()
+        {
+            // tutaj dokończ!!! Zliczeni sprawdzenia
+        }
 
         //-----------------------------------------------------------------------------
         public void Zapisz(string suma)
