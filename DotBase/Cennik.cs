@@ -91,6 +91,16 @@ namespace DotBase
             Ile_dawka = ileD;
             Ile_sygnalizator = ileSyg;
 
+            if (zepsuty)
+            {
+                return 0;
+            }
+
+            if (sprawdzenie)
+            {
+                return _Cena_sprawdzenie * (1.0 - rabat / 100.0);
+            }
+
 	        // ostateczne kwoty wybrane z danych zawartych przez klasę (zostały de facto pobrane z bazy)
 	        // wybrane na podstawie poniższych zależności
 	        double k_moc_dawki, suma = 0.0;
@@ -249,11 +259,6 @@ namespace DotBase
 
             return true;
 		}
-
-        public double Xxx()
-        {
-            // tutaj dokończ!!! Zliczeni sprawdzenia
-        }
 
         //-----------------------------------------------------------------------------
         public void Zapisz(string suma)

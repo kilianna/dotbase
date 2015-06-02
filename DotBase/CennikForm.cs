@@ -62,10 +62,21 @@ namespace DotBase
         private void LiczSume(object sender, EventArgs args)
         //-------------------------------------------------
         {
+            LiczSume2();
+        }
+
+        private void LiczSume2()
+        {
             textBox1.Text = String.Format("{0:##.00}",
-                            _Cennik.LiczSume((int)numericUpDown1.Value, (int)numericUpDown2.Value,
-                                             (int)numericUpDown3.Value, (int)numericUpDown4.Value,
-                                             checkBox1.Checked, checkBox2.Checked, (uint)numericUpDown8.Value, 
+                            _Cennik.LiczSume((int)numericUpDown1.Value,
+                                             (int)numericUpDown2.Value,
+                                             (int)numericUpDown3.Value,
+                                             (int)numericUpDown4.Value,
+                                             checkBox1.Checked,
+                                             checkBox2.Checked,
+                                             checkBox3.Checked,
+                                             checkBox4.Checked,
+                                             (uint)numericUpDown8.Value,
                                              (uint)numericUpDown5.Value));
         }
 
@@ -115,6 +126,65 @@ namespace DotBase
         //-------------------------------------------------
         {
             _Cennik.Zapisz(textBox1.Text);
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            LiczSume2();
+
+            if (checkBox4.Checked)
+            {
+                checkBox1.Enabled = false;
+                checkBox2.Enabled = false;
+                checkBox3.Enabled = false;
+                numericUpDown1.Enabled = false;
+                numericUpDown2.Enabled = false;
+                numericUpDown3.Enabled = false;
+                numericUpDown4.Enabled = false;
+                numericUpDown5.Enabled = false;
+                numericUpDown8.Enabled = false;
+            }
+            else
+            {
+                checkBox1.Enabled = true;
+                checkBox2.Enabled = true;
+                checkBox3.Enabled = true;
+                numericUpDown1.Enabled = true;
+                numericUpDown2.Enabled = true;
+                numericUpDown3.Enabled = true;
+                numericUpDown4.Enabled = true;
+                numericUpDown5.Enabled = true;
+                numericUpDown8.Enabled = true;
+            }
+
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            LiczSume2();
+
+            if (checkBox3.Checked)
+            {
+                checkBox1.Enabled = false;
+                checkBox2.Enabled = false;
+                checkBox4.Enabled = false;
+                numericUpDown1.Enabled = false;
+                numericUpDown2.Enabled = false;
+                numericUpDown3.Enabled = false;
+                numericUpDown4.Enabled = false;
+                numericUpDown8.Enabled = false;
+            }
+            else
+            {
+                checkBox1.Enabled = true;
+                checkBox2.Enabled = true;
+                checkBox4.Enabled = true;
+                numericUpDown1.Enabled = true;
+                numericUpDown2.Enabled = true;
+                numericUpDown3.Enabled = true;
+                numericUpDown4.Enabled = true;
+                numericUpDown8.Enabled = true;
+            }
         }
     }
 }

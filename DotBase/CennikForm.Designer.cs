@@ -239,6 +239,7 @@
             this.checkBox3.TabIndex = 9;
             this.checkBox3.Text = "Sprawdzenie";
             this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
             // checkBox4
             // 
@@ -249,6 +250,7 @@
             this.checkBox4.TabIndex = 10;
             this.checkBox4.Text = "Zepsuty";
             this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
             // groupBox2
             // 
