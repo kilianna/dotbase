@@ -66,12 +66,9 @@ namespace DotBase
         {
             DateTime terminPlanowanegoWykonania;
 
-            _Zapytanie = "SELECT Z1.id_zlecenia, zleceniodawca, data_przyjecia, forma_przyjecia, data_zwrotu, forma_zwrotu, Z1.uwagi, wykonano, "
-                       + "(SELECT COUNT(*) FROM Karta_przyjecia AS K WHERE K.id_zlecenia = Z1.id_zlecenia), (SELECT COUNT(*) FROM "
-                       + "Karta_przyjecia AS K WHERE K.id_zlecenia=Z1.id_zlecenia AND K.wykonano = false), Ekspres FROM ((Zlecenia AS Z1 INNER JOIN "
-                       + "Zleceniodawca Z2 ON Z1.id_zleceniodawcy=Z2.id_zleceniodawcy) INNER JOIN Karta_przyjecia AS K ON Z1.id_zlecenia=K.id_zlecenia) "
-                       + String.Format("WHERE YEAR(data_przyjecia) = {0} AND MONTH(data_przyjecia) = {1} ORDER BY Z1.id_zlecenia", 
-                                       Rok, numericUpDown2.Value);
+            _Zapytanie = "SELECT  Z1.id_zlecenia, zleceniodawca, data_przyjecia, forma_przyjecia, data_zwrotu, forma_zwrotu, Z1.uwagi, Ekspres "
+                       + "FROM (Zlecenia AS Z1 INNER JOIN Zleceniodawca Z2 ON Z1.id_zleceniodawcy=Z2.id_zleceniodawcy) "
+                       + String.Format("WHERE YEAR(data_przyjecia) = {0} AND MONTH(data_przyjecia) = {1} ORDER BY Z1.id_zlecenia", Rok, numericUpDown2.Value);
 
             DataTable dane = _BazaDanych.TworzTabeleDanych(_Zapytanie);
             try
@@ -80,9 +77,17 @@ namespace DotBase
                 {
                     DataRow row = dane.Rows[i];
 
-                    dataGridView1.Rows.Add(row.Field<int>(0), row.Field<string>(1), "", row.Field<string>(3),
-                                           "", row.Field<string>(5), "", row.Field<string>(6), row.Field<bool>(7),
-                                           row.Field<int>(8), row.Field<int>(9));
+                    dataGridView1.Rows.Add(row.Field<int>("id_zlecenia"), 
+                                           row.Field<string>("zleceniodawca"),
+                                           "", 
+                                           row.Field<string>("forma_przyjecia"),
+                                           "",
+                                           row.Field<string>("forma_zwrotu"), 
+                                           "", 
+                                           row.Field<string>("uwagi"), 
+                                           "",
+                                           "", 
+                                           "");
                     
                     
 
@@ -122,7 +127,7 @@ namespace DotBase
         private void PodswietlPola(ref DateTime terminPlanowanegoWykonania, ref int i, ref DataRow row)
         //----------------------------------------------------------
         {
-            if (false == row.Field<bool>(7))
+            if (false == row.Field<bool>("Ekspres"))
             {
                 if (terminPlanowanegoWykonania.AddDays(3) >= DZISIAJ)
                     dataGridView1.Rows[i].DefaultCellStyle.ForeColor = Color.Yellow;
@@ -150,8 +155,9 @@ namespace DotBase
 
             for (int i = 0; i < dataGridView1.Rows.Count; ++i)
             {
+                int idZLecenia = (int)dataGridView1.Rows[i].Cells[0].Value;
                 _Zapytanie = "SELECT typ, COUNT(*) FROM Karta_przyjecia AS K INNER JOIN Dozymetry AS D ON K.id_dozymetru=D.id_dozymetru "
-                           + String.Format("WHERE id_zlecenia={0} GROUP BY typ", dataGridView1.Rows[i].Cells[0].Value);
+                           + String.Format("WHERE id_zlecenia={0} GROUP BY typ", idZLecenia);
                 
                 DataTable dane = _BazaDanych.TworzTabeleDanych(_Zapytanie);
                 
@@ -164,6 +170,15 @@ namespace DotBase
                 {
                     return false;
                 }
+                
+                _Zapytanie = String.Format("SELECT COUNT(*) FROM Karta_przyjecia WHERE id_zlecenia = {0} ", idZLecenia);
+                dane = _BazaDanych.TworzTabeleDanych(_Zapytanie);
+                dataGridView1.Rows[i].Cells[10].Value = dane.Rows[0].Field<int>(0);
+                _Zapytanie = String.Format("SELECT COUNT(*) FROM Karta_przyjecia WHERE id_zlecenia = {0} AND wykonano = false", idZLecenia);
+                dane = _BazaDanych.TworzTabeleDanych(_Zapytanie);
+                int liczbeNiewykonanych = dane.Rows[0].Field<int>(0);
+                dataGridView1.Rows[i].Cells[9].Value = liczbeNiewykonanych;
+                dataGridView1.Rows[i].Cells[8].Value = liczbeNiewykonanych == 0;
 
                 progressBar1.Value = i;
             }
