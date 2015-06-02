@@ -549,13 +549,14 @@ namespace DotBase
             if (dataGridView1.Rows.Count == 0)
                 return;
 
-            int i = e.RowIndex;
+            int rowIndex = e.RowIndex;
+            int columnIndex = e.ColumnIndex;
 
-            if (dataGridView1.Rows[i].Cells[0].Value == null)
+            if (columnIndex != 4 || dataGridView1.Rows[rowIndex].Cells[0].Value == null)
                 return;
 
             KartaPrzyjeciaForm okno = new KartaPrzyjeciaForm(true);
-            okno.WyswietlDane((int)dataGridView1.Rows[i].Cells[0].Value);
+            okno.WyswietlDane((int)dataGridView1.Rows[rowIndex].Cells[0].Value);
             okno.ShowDialog();
         }
 
