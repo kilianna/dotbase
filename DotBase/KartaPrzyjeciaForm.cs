@@ -190,6 +190,7 @@ namespace DotBase
                                                      checkBox2.Checked, checkBox6.Checked, checkBox7.Checked, checkBox11.Checked,
                                                      checkBox10.Checked, checkBox4.Checked, checkBox5.Checked, checkBox13.Checked);
             dane.DaneDodatkowe = new DaneDodatkowe(textBox2.Text, textBox3.Text, checkBox12.Checked);
+            dane.Wykonano = checkBox14.Checked;
             return dane;
         }
 
@@ -387,7 +388,7 @@ namespace DotBase
        
             numericUpDown1.ValueChanged += numericUpDown1_ValueChanged;
             comboBox1.KeyUp += AktualizujListeTypowDozymetrow;
-       
+            checkBox14.Checked = dane.Wykonano;
         }
 
         //---------------------------------------------------------
