@@ -136,7 +136,7 @@ namespace DotBase
         {
             CennikForm _Cennik = new CennikForm();
             
-            if (_Cennik.Inicjalizuj((int)numericUpDown1.Value, checkBox1.Checked, checkBox3.Checked, checkBox9.Checked, checkBox8.Checked, checkBox2.Checked, checkBox6.Checked, checkBox7.Checked, checkBox11.Checked, checkBox10.Checked, checkBox4.Checked, checkBox5.Checked))
+            if (_Cennik.Inicjalizuj((int)numericUpDown1.Value, checkBox1.Checked, checkBox3.Checked, checkBox9.Checked, checkBox8.Checked, checkBox2.Checked, checkBox6.Checked, checkBox7.Checked, checkBox11.Checked, checkBox10.Checked, checkBox4.Checked, checkBox5.Checked, checkBox13.Checked))
             {
                 _Cennik.LiczSume();
                 _Cennik.ShowDialog();

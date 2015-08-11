@@ -31,7 +31,7 @@ namespace DotBase
 
         //-------------------------------------------------
         public bool Inicjalizuj(int idKarty, bool ameryk, bool chlor, bool dawka, bool moc_dawki, bool pluton, bool stront_slaby, bool stront_silny,
-                                bool sygnalizacja_dawki, bool sygnalizacja_mocy_dawki, bool wegiel_slaby, bool wegiel_silny)
+                                bool sygnalizacja_dawki, bool sygnalizacja_mocy_dawki, bool wegiel_slaby, bool wegiel_silny, bool stront_najsilniejszy)
         //-------------------------------------------------
         {
             numericUpDown1.Enabled = false;
@@ -40,7 +40,7 @@ namespace DotBase
             numericUpDown4.Enabled = false;
 
             _Cennik = new Cennik(idKarty);
-            if (_Cennik.Inicjalizuj() && PobierzDaneAutomatycznie(ameryk, chlor, dawka, moc_dawki, pluton, stront_slaby, stront_silny, sygnalizacja_dawki, sygnalizacja_mocy_dawki,wegiel_slaby,wegiel_silny))
+            if (_Cennik.Inicjalizuj() && PobierzDaneAutomatycznie(ameryk, chlor, dawka, moc_dawki, pluton, stront_slaby, stront_silny, sygnalizacja_dawki, sygnalizacja_mocy_dawki,wegiel_slaby,wegiel_silny, stront_najsilniejszy))
             {
                 _Cennik.LiczSumeAutomatycznie();
                 return true;
@@ -82,7 +82,7 @@ namespace DotBase
 
         //-------------------------------------------------
         private bool PobierzDaneAutomatycznie(bool ameryk, bool chlor, bool dawka, bool moc_dawki, bool pluton, bool stront_slaby, bool stront_silny,
-                                              bool sygnalizacja_dawki, bool sygnalizacja_mocy_dawki, bool wegiel_slaby, bool wegiel_silny)
+                                              bool sygnalizacja_dawki, bool sygnalizacja_mocy_dawki, bool wegiel_slaby, bool wegiel_silny, bool stront_najsilniejszy)
         //-------------------------------------------------
         {
             if(moc_dawki)
@@ -117,7 +117,9 @@ namespace DotBase
                 ++numericUpDown2.Value;
             if(wegiel_slaby)
                 ++numericUpDown2.Value;
-                
+            if (stront_najsilniejszy)
+                ++numericUpDown2.Value;
+
             return true;
         }
 
