@@ -66,7 +66,8 @@ namespace WzorcowanieMocDawkiSpace
             int roznicaDni = (dataWzorcowania - dataKalibracjiLawy).Days;
 
 	        // 11050.0 - czas połowicznego rozpadu cezu w dniach
-	        double korektaRozpad = Math.Exp( -Math.Log(2.0)* roznicaDni / Constants.getInstance().CS_HALF_TIME_VALUE );
+            Constants cons = Constants.getInstance();
+            double korektaRozpad = Math.Exp(-Math.Log(2.0) * roznicaDni / cons.CS_HALF_TIME_VALUE);
 
             List<double> wartoscWzorcowa = new List<double>();
 
