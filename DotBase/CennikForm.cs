@@ -77,7 +77,7 @@ namespace DotBase
                                              checkBox3.Checked,
                                              checkBox4.Checked,
                                              (uint)numericUpDown8.Value,
-                                             (uint)numericUpDown5.Value));
+                                             (double)numericUpDown5.Value));
         }
 
         //-------------------------------------------------

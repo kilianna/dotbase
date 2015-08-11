@@ -181,6 +181,7 @@
             // 
             // numericUpDown5
             // 
+            this.numericUpDown5.DecimalPlaces = 2;
             this.numericUpDown5.Location = new System.Drawing.Point(289, 74);
             this.numericUpDown5.Name = "numericUpDown5";
             this.numericUpDown5.Size = new System.Drawing.Size(50, 20);

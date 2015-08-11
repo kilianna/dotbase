@@ -83,7 +83,7 @@ namespace DotBase
                                bool sprawdzenie,
                                bool zepsuty,
                                uint liczbaProgow,
-                               uint rabat)
+                               double rabat)
         //-------------------------------------------------------
         {
             Ile_moc_dawki = ileMd;
@@ -125,7 +125,7 @@ namespace DotBase
 		        suma += _Cena_dodatkowy_prog * liczbaProgow;
 
 	        if(rabat > 0)
-		        suma = suma*(1.0 - rabat / 100.0);
+		        suma = suma * (1.0 - rabat / 100.0);
 
             return suma;
         }
