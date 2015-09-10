@@ -265,7 +265,7 @@ namespace DotBase
 
                     _Tabela.Append(String.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td>",
                               i + 1,m_data.getValue(SwiadectwoData.DataType.SONDA_TYP), m_data.getValue(SwiadectwoData.DataType.SONDA_NR_FABRYCZNY),
-                              m_data.getValue(SwiadectwoData.DataType.NAPIECIE_ZAS_SONDY), m_data.getValue(SwiadectwoData.DataType.ZRODLO_NAZWA).Replace("(słaby)", "").Replace("(silny)", ""),
+                              m_data.getValue(SwiadectwoData.DataType.NAPIECIE_ZAS_SONDY), m_data.getValue(SwiadectwoData.DataType.ZRODLO_NAZWA).Replace("(słaby)", "").Replace("(silny)", "").Replace("(najsilniejszy)", ""),
                               m_data.getValue(SwiadectwoData.DataType.SKAZENIA_RODZAJ_PROMIENIOWANIA), m_data.getValue(SwiadectwoData.DataType.EMISJA_POW))
                               + String.Format("<td>{0}</td><td width=\"110\"><!wspol{1}> &plusmn; <!niep{1}></td></tr>",
                               m_data.getValue(SwiadectwoData.DataType.ODLEGLOSC_ZR_SONDA), i));
