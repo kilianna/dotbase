@@ -42,7 +42,7 @@ namespace DotBase
             //****************************************************************************************
             {
                 _NrKarty = nrKarty.ToString();
-                m_data.setValue(PismoPrzewodnieData.DataType.NR_KARTY, nrKarty.ToString());
+                m_data.setValue(PismoPrzewodnieData.DataType.NR_KARTY, _NrKarty);
                 m_data.setValue(PismoPrzewodnieData.DataType.DATA, data.ToString("dd.MM.yyyy"));
                 m_data.setValue(PismoPrzewodnieData.DataType.DATA_MESIAC_SLOWNIE, data.ToString("dd<!>MMMM yyyy").Replace("<!>", "&nbsp;"));
 

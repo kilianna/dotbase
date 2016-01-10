@@ -23,7 +23,7 @@ namespace DotBase
                 METODA_WZORCOWANIA,
                 NAPIECIE_ZAS_SONDY, NIEPEWNOSC, NAZWA, NR_FABRYCZNY, NR_KARTY,
                 ODLEGLOSC_ZR_SONDA,
-                PRODUCENT,
+                POPRAWA, PRODUCENT,
                 ROK, ROK_PRODUKCJI,
                 SKAZENIA_NIEPEWNOSC, SKAZENIA_RODZAJ_PROMIENIOWANIA, SKAZENIA_WSPOLCZYNNIK, SONDA_NR_FABRYCZNY, SONDA_TYP, SPRAWDZIL,
                 TEMPERATURA_MIN, TEMPERATURA_MAX, TYP,
@@ -52,6 +52,7 @@ namespace DotBase
             StringBuilder _SzablonGlownyWzorcowania;
             StringBuilder _SzablonDrugiejStrony;
             SwiadectwoData m_data = new SwiadectwoData();
+            private readonly string EVIDENCE_CORRECTION_MARKER = "P";
 
             enum staleZrodel { STRONT_SLABY = 2, WEGIEL_SLABY, AMERYK = 7, STRONT_SILNY, WEGIEL_SILNY, CHLOR, PLUTON = 17, STRONT_NAJSILNIEJSZY };
 
@@ -63,13 +64,14 @@ namespace DotBase
             override protected bool saveDocument(string path) { return true; }
 
             //********************************************************************************************
-            public Swiadectwo(int nrKarty, DateTime data, String sprawdzil)
+            public Swiadectwo(int nrKarty, DateTime data, String sprawdzil, string poprawa)
             //********************************************************************************************
             {
                 m_data.setValue(SwiadectwoData.DataType.NR_KARTY, nrKarty.ToString());
                 m_data.setValue(SwiadectwoData.DataType.DATA, data.ToString("dd MMMM yyyy"));
                 m_data.setValue(SwiadectwoData.DataType.ROK, data.Year.ToString());
                 m_data.setValue(SwiadectwoData.DataType.SPRAWDZIL, sprawdzil);
+                m_data.setValue(SwiadectwoData.DataType.POPRAWA, poprawa);
             }
 
             //********************************************************************************************
@@ -838,6 +840,16 @@ namespace DotBase
                 return 0 < ilePobran && true == WczytajSzablon(typSzablonu);
             }
 
+            private String mapEvidenceIdToDisplayableForm(String evidenceId)
+            {
+                if ( Boolean.Parse(m_data.getValue(SwiadectwoData.DataType.POPRAWA)) )
+                {
+                    return evidenceId + EVIDENCE_CORRECTION_MARKER; 
+                }
+
+                return evidenceId;
+            }
+
             //********************************************************************************************
             private bool UtworzPierwszaStrone()
             //********************************************************************************************
@@ -846,7 +858,7 @@ namespace DotBase
                     return false;
 
                 _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c1>", m_data.getValue(SwiadectwoData.DataType.DATA));
-                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c2>", m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
+                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c2>", mapEvidenceIdToDisplayableForm(m_data.getValue(SwiadectwoData.DataType.NR_KARTY)));
                 _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c3>", m_data.getValue(SwiadectwoData.DataType.ROK));
                 _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c4>", m_data.getValue(SwiadectwoData.DataType.NAZWA));
                 _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c5>", m_data.getValue(SwiadectwoData.DataType.TYP));
