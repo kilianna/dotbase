@@ -36,10 +36,11 @@ namespace DotBase
             
             try
             {
-                DataTable table = _Baza.TworzTabeleDanych("SELECT Data_wystawienia, Autoryzowal, Uwaga, Waznosc_dwa_lata, Poprawa " +
+                DataTable table = _Baza.TworzTabeleDanych("SELECT Data_wystawienia, Data_wykonania, Autoryzowal, Uwaga, Waznosc_dwa_lata, Poprawa " +
                 String.Format("FROM Swiadectwo WHERE id_karty = {0}", _NumerKarty));
 
                 dateTimePicker1.Value = table.Rows[0].Field<DateTime>("Data_wystawienia");
+                dateTimePicker2.Value = table.Rows[0].Field<DateTime>("Data_wykonania");
                 textBox4.Text = table.Rows[0].Field<String>("Autoryzowal");
                 textBox1.Text = table.Rows[0].Field<String>("Uwaga");
                 checkBox1.Checked = table.Rows[0].Field<Boolean>("Waznosc_dwa_lata");
@@ -56,7 +57,8 @@ namespace DotBase
             string sciezka = _DocumentationPathsLoader.GetPath("SwiadectwoWynik") + _NumerKarty + "SwiadectwoWynik.html";
 
             Dokumenty.Swiadectwo swiadectwo = new Dokumenty.Swiadectwo(_NumerKarty, 
-                                                                       dateTimePicker1.Value, 
+                                                                       dateTimePicker1.Value,
+                                                                       dateTimePicker2.Value,
                                                                        textBox4.Text,
                                                                        checkBox2.Checked.ToString());
             if (swiadectwo.UtworzDokument(sciezka))
@@ -161,10 +163,11 @@ namespace DotBase
 
             if (0 == _Baza.TworzTabeleDanych(String.Format("SELECT 1 FROM Swiadectwo WHERE id_karty = {0}", _NumerKarty)).Rows.Count)
             {
-                _Baza.WykonajPolecenie("INSERT INTO Swiadectwo (id_karty, Data_wystawienia, Autoryzowal, Uwaga, Waznosc_dwa_lata, Poprawa) "
-                + String.Format("VALUES ({0}, '{1}', '{2}', '{3}', {4}, {5})", 
+                _Baza.WykonajPolecenie("INSERT INTO Swiadectwo (id_karty, Data_wystawienia, Data_wykonania, Autoryzowal, Uwaga, Waznosc_dwa_lata, Poprawa) "
+                + String.Format("VALUES ({0}, '{1}', '{2}', '{3}', '{4}', {5}, {6})", 
                 _NumerKarty, 
-                dateTimePicker1.Value.ToShortDateString(), 
+                dateTimePicker1.Value.ToShortDateString(),
+                dateTimePicker2.Value.ToShortDateString(),
                 textBox4.Text, 
                 textBox1.Text, 
                 checkBox1.Checked,
@@ -172,9 +175,10 @@ namespace DotBase
             }
             else
             {
-                _Baza.WykonajPolecenie(String.Format("UPDATE Swiadectwo SET Data_wystawienia='{0}', Autoryzowal='{1}', " +
-                "Uwaga='{2}', Waznosc_dwa_lata={3}, Poprawa={4} WHERE id_karty={5}", 
-                dateTimePicker1.Value.ToShortDateString(), 
+                _Baza.WykonajPolecenie(String.Format("UPDATE Swiadectwo SET Data_wystawienia='{0}', Data_wykonania='{1}', Autoryzowal='{2}', " +
+                "Uwaga='{3}', Waznosc_dwa_lata={4}, Poprawa={5} WHERE id_karty={6}", 
+                dateTimePicker1.Value.ToShortDateString(),
+                dateTimePicker2.Value.ToShortDateString(),
                 textBox4.Text, 
                 textBox1.Text, 
                 checkBox1.Checked, 

@@ -49,11 +49,15 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.label13 = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label13);
+            this.groupBox3.Controls.Add(this.dateTimePicker2);
             this.groupBox3.Controls.Add(this.checkBox2);
             this.groupBox3.Controls.Add(this.label11);
             this.groupBox3.Controls.Add(this.label12);
@@ -83,7 +87,7 @@
             // 
             this.checkBox2.AutoSize = true;
             this.checkBox2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.checkBox2.Location = new System.Drawing.Point(12, 149);
+            this.checkBox2.Location = new System.Drawing.Point(12, 169);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.checkBox2.Size = new System.Drawing.Size(137, 17);
@@ -167,7 +171,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(12, 126);
+            this.checkBox1.Location = new System.Drawing.Point(12, 146);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.checkBox1.Size = new System.Drawing.Size(265, 17);
@@ -193,17 +197,17 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(52, 181);
+            this.textBox1.Location = new System.Drawing.Point(52, 197);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(362, 170);
+            this.textBox1.Size = new System.Drawing.Size(362, 154);
             this.textBox1.TabIndex = 6;
             this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.WstawZnakSpecjalny);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 181);
+            this.label1.Location = new System.Drawing.Point(9, 197);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 5;
@@ -214,9 +218,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(9, 103);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(33, 13);
+            this.label6.Size = new System.Drawing.Size(75, 13);
             this.label6.TabIndex = 4;
-            this.label6.Text = "Data:";
+            this.label6.Text = "Data wydania:";
             // 
             // label5
             // 
@@ -262,6 +266,22 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Location = new System.Drawing.Point(99, 123);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(197, 20);
+            this.dateTimePicker2.TabIndex = 20;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(9, 123);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(87, 13);
+            this.label13.TabIndex = 21;
+            this.label13.Text = "Data wykonania:";
+            // 
             // MenuPismaSwiadectwaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -302,5 +322,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
     }
 }
