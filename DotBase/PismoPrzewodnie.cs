@@ -17,7 +17,7 @@ namespace DotBase
             {
                 public enum DataType
                 {
-                    NR_KARTY, DATA, DATA_MESIAC_SLOWNIE, DATA_PLUS_ROK, ROK, UWAGA, NR_PISMA, INFO_SONDY, TYP, NR_FABRYCZNY,
+					NR_KARTY, DATA_WYSTAWIENIA, DATA_WYKONANIA, DATA_MESIAC_SLOWNIE, DATA_PLUS_ROK, POPRAWA, ROK, UWAGA, NR_PISMA, INFO_SONDY, TYP, NR_FABRYCZNY,
                     ZLECENIODAWCA, ADRES, INFO_WYKRES, INFO_WYKRES_KALIB
                 };
 
@@ -34,26 +34,29 @@ namespace DotBase
                 }
             }
 
+			private readonly string EVIDENCE_CORRECTION_MARKER = "P";
             PismoPrzewodnieData m_data = new PismoPrzewodnieData();
             StringBuilder m_templateToFill = DocumentsTemplatesFactory.getInstance().create(DocumentsTemplatesFactory.TemplateType.SCIEZKA_PISMO_PRZEWODNIE);
 
             //****************************************************************************************
-            public PismoPrzewodnie(int nrKarty, DateTime data, string uwaga, string nrPisma, bool przedluzonaWaznosc)
+			public PismoPrzewodnie(int nrKarty, DateTime dataWystawienia, DateTime dataWykonania, string uwaga, string nrPisma, bool przedluzonaWaznosc, bool poprawa)
             //****************************************************************************************
             {
                 _NrKarty = nrKarty.ToString();
                 m_data.setValue(PismoPrzewodnieData.DataType.NR_KARTY, _NrKarty);
-                m_data.setValue(PismoPrzewodnieData.DataType.DATA, data.ToString("dd.MM.yyyy"));
-                m_data.setValue(PismoPrzewodnieData.DataType.DATA_MESIAC_SLOWNIE, data.ToString("dd<!>MMMM yyyy").Replace("<!>", "&nbsp;"));
+                m_data.setValue(PismoPrzewodnieData.DataType.DATA_WYSTAWIENIA, dataWystawienia.ToString("dd.MM.yyyy"));
+				m_data.setValue(PismoPrzewodnieData.DataType.DATA_WYKONANIA, dataWykonania.ToString("dd.MM.yyyy"));
+				m_data.setValue(PismoPrzewodnieData.DataType.DATA_MESIAC_SLOWNIE, dataWykonania.ToString("dd<!>MMMM yyyy").Replace("<!>", "&nbsp;"));
 
                 if (przedluzonaWaznosc)
-                    m_data.setValue(PismoPrzewodnieData.DataType.DATA_PLUS_ROK, data.AddYears(2).ToString("dd<!>MMMM yyyy").Replace("<!>", "&nbsp;"));
+					m_data.setValue(PismoPrzewodnieData.DataType.DATA_PLUS_ROK, dataWykonania.AddYears(2).ToString("dd<!>MMMM yyyy").Replace("<!>", "&nbsp;"));
                 else
-                    m_data.setValue(PismoPrzewodnieData.DataType.DATA_PLUS_ROK, data.AddYears(1).ToString("dd<!>MMMM yyyy").Replace("<!>", "&nbsp;"));
+                    m_data.setValue(PismoPrzewodnieData.DataType.DATA_PLUS_ROK, dataWykonania.AddYears(1).ToString("dd<!>MMMM yyyy").Replace("<!>", "&nbsp;"));
 
-                m_data.setValue(PismoPrzewodnieData.DataType.ROK, data.Year.ToString());
+                m_data.setValue(PismoPrzewodnieData.DataType.ROK, dataWykonania.Year.ToString());
                 m_data.setValue(PismoPrzewodnieData.DataType.UWAGA, uwaga);
                 m_data.setValue(PismoPrzewodnieData.DataType.NR_PISMA, nrPisma);
+				m_data.setValue(PismoPrzewodnieData.DataType.POPRAWA, poprawa.ToString());
             }
 
             #region Document generation
@@ -61,28 +64,27 @@ namespace DotBase
             {
                 try
                 {
-                    m_templateToFill.Replace("<!c1>", m_data.getValue(PismoPrzewodnieData.DataType.DATA))
+					m_templateToFill.Replace("<!c1>", m_data.getValue(PismoPrzewodnieData.DataType.DATA_WYSTAWIENIA))
                         .Replace("<!data_slownie>", m_data.getValue(PismoPrzewodnieData.DataType.DATA_MESIAC_SLOWNIE))
                         .Replace("<!c2>", m_documentData.getValue(DocumentData.DataType.ZLECENIDOAWCA).Replace(";", "<br>"))
                         .Replace("<!c3>", m_documentData.getValue(DocumentData.DataType.ADRES).Replace(";", "<br>"))
-                        .Replace("<!c4>", m_data.getValue(PismoPrzewodnieData.DataType.NR_PISMA))
+						.Replace("<!c4>", mapEvidenceIdToDisplayableForm(m_data.getValue(PismoPrzewodnieData.DataType.NR_PISMA)))
                         .Replace("<!c5>", m_data.getValue(PismoPrzewodnieData.DataType.ROK))
                         .Replace("<!c6>", m_data.getValue(PismoPrzewodnieData.DataType.TYP))
                         .Replace("<!c7>", m_data.getValue(PismoPrzewodnieData.DataType.NR_FABRYCZNY))
-                        .Replace("<!c8>", m_data.getValue(PismoPrzewodnieData.DataType.NR_KARTY))
+						.Replace("<!c8>", mapEvidenceIdToDisplayableForm(m_data.getValue(PismoPrzewodnieData.DataType.NR_KARTY)))
                         .Replace("<!c9>", m_data.getValue(PismoPrzewodnieData.DataType.UWAGA))
                         .Replace("<!c10>", m_data.getValue(PismoPrzewodnieData.DataType.DATA_PLUS_ROK))
                         .Replace("<!sonda>", m_data.getValue(PismoPrzewodnieData.DataType.INFO_SONDY))
                         .Replace("<!c11>", m_data.getValue(PismoPrzewodnieData.DataType.INFO_WYKRES) + m_data.getValue(PismoPrzewodnieData.DataType.INFO_WYKRES_KALIB));
 
-                    return true;
+					return true;
                 }
                 catch (Exception ex)
                 {
                     return false;
                 }
 
-                return true;
             }
 
             override protected bool retrieveAllData()
@@ -142,6 +144,18 @@ namespace DotBase
                 m_data.setValue(PismoPrzewodnieData.DataType.TYP, wiersz.Field<string>(0));
                 m_data.setValue(PismoPrzewodnieData.DataType.NR_FABRYCZNY, wiersz.Field<string>(1));
             }
+
+			//********************************************************************************************
+			private String mapEvidenceIdToDisplayableForm(String evidenceId)
+			//********************************************************************************************
+			{
+				if ( Boolean.Parse(m_data.getValue(PismoPrzewodnieData.DataType.POPRAWA)) )
+				{
+					return evidenceId + EVIDENCE_CORRECTION_MARKER; 
+				}
+
+				return evidenceId;
+			}
 
             //********************************************************************************************
             private void PobierzDaneSond()
@@ -208,7 +222,7 @@ namespace DotBase
             }
 
             //********************************************************************************************
-            new private void PobierzDaneZleceniodawcy()
+            private void PobierzDaneZleceniodawcy()
             //********************************************************************************************
             {
                 _Zapytanie = "SELECT Zleceniodawca, Adres FROM Zleceniodawca WHERE id_zleceniodawcy=(SELECT id_zleceniodawcy FROM Zlecenia WHERE "

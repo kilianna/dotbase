@@ -65,46 +65,25 @@ namespace DotBase
             List<Double> wartosci = new List<double>();
             List<Double> niepewnosci = new List<double>();
 
-            Dictionary<String, Double> stale = new Dictionary<String,Double>();
 
-            _Zapytanie = "SELECT * FROM Stale";
-            foreach(DataRow wiersz in _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows)
-                stale.Add(wiersz.Field<string>(0), wiersz.Field<double>(1));
+            SortedDictionary<Double, Double>[] wzorcowe = new SortedDictionary<Double, Double>[] { new SortedDictionary<Double, Double>(), new SortedDictionary<Double, Double>(), new SortedDictionary<Double, Double>() };
+
+            _Zapytanie = String.Format("SELECT id_protokolu FROM Protokoly_kalibracji_lawy WHERE data_kalibracji=#{0}#", daneWejsciowe.m_Protokol);
+            short idProtokolu = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<short>(0);
+
+            for (int i = 1; i < 4; i++)
+            {
+                _Zapytanie = "SELECT odleglosc, moc_kermy FROM pomiary_wzorcowe WHERE id_protokolu=" + idProtokolu + " AND id_zrodla=" + i;
+                foreach (DataRow wiersz in _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows)
+                {
+                    wzorcowe[i - 1].Add(wiersz.Field<double>(0), wiersz.Field<double>(1));
+                }
+            }
 
             for (UInt16 i = 0; i < daneWejsciowe.m_Zrodlo1.Count; ++i)
             {
-                double temp1;
-                double temp2;
-
-                switch (daneWejsciowe.m_Zrodlo1[i])
-                {
-                    case 1:
-                        temp1 = LiczWartoscOrazNiepewnoscDlaZrodla1(stale, daneWejsciowe.m_Odleglosc1[i]);
-                        break;
-                    case 2:
-                        temp1 = LiczWartoscOrazNiepewnoscDlaZrodla2(stale, daneWejsciowe.m_Odleglosc1[i]);
-                        break;
-                    case 3:
-                        temp1 = LiczWartoscOrazNiepewnoscDlaZrodla3(stale, daneWejsciowe.m_Odleglosc1[i]);
-                        break;
-                    default:
-                        return null;
-                }
-                switch (daneWejsciowe.m_Zrodlo2[i])
-                {
-                    case 1:
-                        temp2 = LiczWartoscOrazNiepewnoscDlaZrodla1(stale, daneWejsciowe.m_Odleglosc2[i]);
-                        break;
-                    case 2:
-                        temp2 = LiczWartoscOrazNiepewnoscDlaZrodla2(stale, daneWejsciowe.m_Odleglosc2[i]);
-                        break;
-                    case 3:
-                        temp2 = LiczWartoscOrazNiepewnoscDlaZrodla3(stale, daneWejsciowe.m_Odleglosc2[i]);
-                        break;
-                    default:
-                        return null;
-                }
-
+                double temp1 = LiczWartoscOrazNiepewnoscDlaZrodla(wzorcowe[daneWejsciowe.m_Zrodlo1[i] - 1], daneWejsciowe.m_Odleglosc1[i]);
+                double temp2 = LiczWartoscOrazNiepewnoscDlaZrodla(wzorcowe[daneWejsciowe.m_Zrodlo2[i] - 1], daneWejsciowe.m_Odleglosc2[i]);
                 double roznicaPomiarowDni = (daneWejsciowe.m_Data - DateTime.Parse(daneWejsciowe.m_Protokol)).Days;
                 double korektaNaRozpad = Math.Exp(-Math.Log(2) / Constants.getInstance().CS_HALF_TIME_VALUE * roznicaPomiarowDni);
                 temp1 *= korektaNaRozpad;
@@ -113,20 +92,20 @@ namespace DotBase
                 switch(daneWejsciowe.m_Jednostka)
                 {
                     case "mSv/h":
+                        temp1 *= 0.0012;
+                        temp2 *= 0.0012;
+                        break;
+                    case "uSv/h":
                         temp1 *= 1.2;
                         temp2 *= 1.2;
                         break;
-                    case "uSv/h":
-                        temp1 *= 1200.0;
-                        temp2 *= 1200.0;
-                        break;
                     case "uGy/h":
-                        temp1 *= 1000.0;
-                        temp2 *= 1000.0;
+                        temp1 *= 1.0;
+                        temp2 *= 1.0;
                         break;
                     case "nA/kg":
-                        temp1 *= 1000.0 / 121.9;
-                        temp2 *= 1000.0 / 121.9;
+                        temp1 *= 1.0 / 121.9;
+                        temp2 *= 1.0 / 121.9;
                         break;
                     default:
                         return null;
@@ -138,7 +117,10 @@ namespace DotBase
 
             return new Narzedzia.Pair<List<double>, List<double>>(wartosci, niepewnosci);
         }
+        
 
+        /*
+        * The old way:
         //---------------------------------------------------------------
         private double LiczWartoscOrazNiepewnoscDlaZrodla1(Dictionary<String, Double> stale, double odleglosc)
         //---------------------------------------------------------------
@@ -183,7 +165,7 @@ namespace DotBase
 
             if (odleglosc > stale["smdx3"])
             {
-                returnValue = (stale["smdG11"] / Math.Pow(odleglosc + stale["smdE1"], 2.0)) * Math.Exp(stale["smdH14"] * (odleglosc + stale["smdE1"])) * (1 + (stale["smdH11"] * Math.Pow(odleglosc + stale["smdE1"], 3.0) + stale["smdH12"] * Math.Pow(odleglosc + stale["smdE1"], 2) + stale["smdH13"] * (odleglosc + stale["smdE1"]) - 0.02));
+                returnValue = (stale["smdG11"] / Math.Pow(odxleglosc + stale["smdE1"], 2.0)) * Math.Exp(stale["smdH14"] * (odleglosc + stale["smdE1"])) * (1 + (stale["smdH11"] * Math.Pow(odleglosc + stale["smdE1"], 3.0) + stale["smdH12"] * Math.Pow(odleglosc + stale["smdE1"], 2) + stale["smdH13"] * (odleglosc + stale["smdE1"]) - 0.02));
             }
             else
             {
@@ -191,6 +173,21 @@ namespace DotBase
             }
 
             return returnValue;
+        }*
+         */
+
+
+        private double LiczWartoscOrazNiepewnoscDlaZrodla(SortedDictionary<Double, Double> wzorcowe, double odleglosc)
+        {
+            KeyValuePair<double, double> point1 = wzorcowe.Last(pair => pair.Key <= odleglosc);
+
+            double moc1 = point1.Value * Math.Pow(((point1.Key - 67) / (odleglosc - 67)), 2);
+
+            KeyValuePair<double, double> point2 = wzorcowe.First(pair => pair.Key >= odleglosc);
+
+            double moc2 = point2.Value * Math.Pow(((point2.Key - 67) / (odleglosc - 67)), 2);
+
+            return (moc1 + moc2) / 2;
         }
 
         //---------------------------------------------------------------

@@ -77,7 +77,8 @@ namespace DotBase
                                              checkBox3.Checked,
                                              checkBox4.Checked,
                                              (uint)numericUpDown8.Value,
-                                             (double)numericUpDown5.Value));
+                                             (double)numericUpDown5.Value,
+                                             (double)numericUpDown6.Value));
         }
 
         //-------------------------------------------------
@@ -187,6 +188,11 @@ namespace DotBase
                 numericUpDown4.Enabled = true;
                 numericUpDown8.Enabled = true;
             }
+        }
+
+        private void CennikForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

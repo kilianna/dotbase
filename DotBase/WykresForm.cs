@@ -17,15 +17,17 @@ namespace Wykres
         Zakres      _DaneWejsciowe;
         LineItem    _DataLine;
         GraphPane   _ObszarRysowniczy;
+        bool        _Poprawa;
 
         //-------------------------------------------------------------------------
-        public WykresForm(bool mocDawki = false /* true == Dawka */, bool przedluzonaWaznosc = false)
+        public WykresForm(bool mocDawki = false /* true == Dawka */, bool przedluzonaWaznosc = false, bool poprawa = false)
         //-------------------------------------------------------------------------
         {
             _WykresMocyDawki = mocDawki;
             InitializeComponent();
             _DaneWejsciowe = new Zakres();
             _PrzedluzonaWaznosc = przedluzonaWaznosc;
+            _Poprawa = poprawa;
         }
 
         //-------------------------------------------------------------------------
@@ -190,7 +192,7 @@ namespace Wykres
             _ObszarRysowniczy.TitleGap = 1.1f;
             _ObszarRysowniczy.Title.FontSpec.Size = 11;
             _ObszarRysowniczy.Title.FontSpec.IsBold = true;
-            _ObszarRysowniczy.Title.Text = "Wykres kalibracyjny dotyczący Świadectwa Wzorcowania nr " + numer_karty + "/" + Rok;
+            _ObszarRysowniczy.Title.Text = "Wykres kalibracyjny dotyczący Świadectwa Wzorcowania nr " + numer_karty + (_Poprawa ? "P" : "") + "/" + Rok;
             if (false == _WykresMocyDawki)
             {
                 _ObszarRysowniczy.Title.Text += "\nWzorcowanie w zakresie dawki";

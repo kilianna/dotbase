@@ -6,6 +6,87 @@
     <metodaWzorcowania>
       Procedura wzorcowania radiometrów promieniowania jonizującego przy użyciu promieniowania gamma ze źródła Cs-137 (WZOR-1 wyd. 4 z dn. 18.06.2014) oraz procedura wzorcowania dawkomierzy promieniowania jonizującego (DAWKA&lt;br&gt; wyd. 3 z dn. 13.06.2013) oraz procedura wzorcowania mierników skażeń powierzchni przy pomocy źródeł&lt;br&gt;powierzchniowych (WZOR-2 wyd. 3 z dn. 10.06.2013)
     </metodaWzorcowania>
+  </zakresWzorcowania>
+
+  <zakresWzorcowania dawka="true" mocDawki="false" skażenia="true">
+    <metodaWzorcowania>
+      Procedura wzorcowania dawkomierzy promieniowania jonizującego (DAWKA wyd. 3 z dn. 13.06.2013) oraz procedura wzorcowania mierników skażeń powierzchni przy pomocy źródeł powierzchniowych (WZOR-2&lt;br&gt;wyd. 3 z dn. 13.06.2013)
+    </metodaWzorcowania>
+  </zakresWzorcowania>
+
+  <zakresWzorcowania dawka="true" mocDawki="true" skażenia="false">
+    <metodaWzorcowania>
+      Procedura wzorcowania radiometrów promieniowania jonizującego przy użyciu promieniowania gamma ze źródła Cs-137 (WZOR-1 wyd. 4 z dn. 18.06.2014) oraz procedura wzorcowania dawkomierzy promieniowania jonizującego (DAWKA wyd. 3 z dn. 13.06.2013)
+    </metodaWzorcowania>
+  </zakresWzorcowania>
+
+  <zakresWzorcowania dawka="true" mocDawki="false" skażenia="false">
+    <metodaWzorcowania>
+      Procedura wzorcowania dawkomierzy promieniowania jonizującego (DAWKA&lt;br&gt;wyd. 3 z dn. 13.06.2013)
+    </metodaWzorcowania>
+  </zakresWzorcowania>
+
+  <zakresWzorcowania dawka="false" mocDawki="true" skażenia="true">
+    <metodaWzorcowania>
+      Procedura wzorcowania radiometrów promieniowania jonizującego przy użyciu promieniowania gamma ze źródła Cs-137 (WZOR-1 wyd. 4 z dn. 18.06.2014) oraz procedura wzorcowania mierników skażeń powierzchni przy pomocy źródeł powierzchniowych (WZOR-2 wyd. 3 z dn. 10.06.2013)
+    </metodaWzorcowania>
+  </zakresWzorcowania>
+
+  <zakresWzorcowania dawka="false" mocDawki="true" skażenia="false">
+    <metodaWzorcowania>
+      Procedura wzorcowania radiometrów promieniowania jonizującego przy użyciu promieniowania gamma ze źródła Cs-137 (WZOR-1 wyd. 4 z dn. 18.06.2014)
+    </metodaWzorcowania>
+  </zakresWzorcowania>
+
+  <zakresWzorcowania dawka="false" mocDawki="false" skażenia="true">
+    <metodaWzorcowania>
+      Procedura wzorcowania mierników skażeń powierzchni przy pomocy źródeł powierzchniowych (WZOR-2&lt;br&gt;wyd. 3 z dn. 10.06.2013)
+    </metodaWzorcowania>
+  </zakresWzorcowania>
+
+  <informacja si="false" polon="false" braunschweig="false">
+    <tekst>
+      Świadectwo jest wydane w ramach porozumienia EA MLA w zakresie wzorcowania i potwierdza spójność wyników pomiarów z wzorcami utrzymanymi w GUM.
+    </tekst>
+  </informacja>
+
+  <informacja si="false" polon="true" braunschweig="true">
+    <tekst>
+      Świadectwo jest wydane w ramach porozumienia EA MLA w zakresie wzorcowania i potwierdza spójność wyników pomiarów z wzorcami utrzymanymi w GUM,
+      w Laboratorium Wzorców Radioaktywności OBRI POLATOM i PTB Braunschweig.
+    </tekst>
+  </informacja>
+
+  <informacja si="false" polon="true" braunschweig="false">
+    <tekst>
+      Świadectwo jest wydane w ramach porozumienia EA MLA w zakresie wzorcowania i potwierdza spójność wyników pomiarów z wzorcami utrzymanymi w GUM
+      i Laboratorium Wzorców Radioaktywności OBRI POLATOM.
+    </tekst>
+  </informacja>
+
+  <informacja si="false" polon="false" braunschweig="true">
+    <tekst>
+      Świadectwo jest wydane w ramach porozumienia EA MLA w zakresie wzorcowania i potwierdza spójność wyników pomiarów z wzorcami utrzymanymi w GUM
+      i PTB Braunschweig.
+    </tekst>
+  </informacja>
+
+  <informacja si="true">
+    <tekst>
+      Świadectwo jest wydane w ramach porozumienia EA MLA w zakresie wzorcowania i potwierdza spójność wyników pomiarów z jednostkami miar Międzynarodowego Układu Jednostek Miar (SI).
+    </tekst>
+  </informacja>
+
+</teksty>
+
+
+<!-- teksty>
+  <! - - Teksty zawarte w dokumencie pojawią się na pierwszej stronie świadectwa jako metoda wzorcowania oraz informacja o wzorcach odniesienia.
+       W zależności od tego jaki był zakres wzorcowania (moc dawki, dawka, skażenia, lub ich kombinacja). - - >
+  <zakresWzorcowania dawka="true" mocDawki="true" skażenia="true">
+    <metodaWzorcowania>
+      Procedura wzorcowania radiometrów promieniowania jonizującego przy użyciu promieniowania gamma ze źródła Cs-137 (WZOR-1 wyd. 4 z dn. 18.06.2014) oraz procedura wzorcowania dawkomierzy promieniowania jonizującego (DAWKA&lt;br&gt; wyd. 3 z dn. 13.06.2013) oraz procedura wzorcowania mierników skażeń powierzchni przy pomocy źródeł&lt;br&gt;powierzchniowych (WZOR-2 wyd. 3 z dn. 10.06.2013)
+    </metodaWzorcowania>
     <informacja>
       Wyniki wzorcowania zostały odniesione do państwowego wzorca pomiarowego mocy kermy promieniowania gamma w powietrzu utrzymywanego w GUM poprzez zastosowanie dawkomierza kontrolnego UNIDOS typ-ser. 10001-10551 z komorą jonizacyjną 30 cm&lt;sup&gt;3&lt;/sup&gt; typ-ser. M23361-0337.&lt;br&gt;&lt;br&gt;
     </informacja>
@@ -79,4 +160,4 @@
     PTB Braunschweig, poprzez zastosowanie wzorcowego źródła powierzchniowego.
   </miejsceWzorcowaniaZrodelPowierzchniowych>
 
-</teksty>
+</teksty -->

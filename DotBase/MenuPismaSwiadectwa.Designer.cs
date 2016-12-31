@@ -45,11 +45,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dataWystawienia = new System.Windows.Forms.DateTimePicker();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dataWykonania = new System.Windows.Forms.DateTimePicker();
             this.label13 = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
@@ -57,7 +57,7 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.label13);
-            this.groupBox3.Controls.Add(this.dateTimePicker2);
+            this.groupBox3.Controls.Add(this.dataWykonania);
             this.groupBox3.Controls.Add(this.checkBox2);
             this.groupBox3.Controls.Add(this.label11);
             this.groupBox3.Controls.Add(this.label12);
@@ -74,7 +74,7 @@
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Controls.Add(this.dateTimePicker1);
+            this.groupBox3.Controls.Add(this.dataWystawienia);
             this.groupBox3.Controls.Add(this.textBox4);
             this.groupBox3.Location = new System.Drawing.Point(8, 52);
             this.groupBox3.Name = "groupBox3";
@@ -233,10 +233,10 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(99, 97);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(197, 20);
-            this.dateTimePicker1.TabIndex = 1;
+            this.dataWystawienia.Location = new System.Drawing.Point(99, 97);
+            this.dataWystawienia.Name = "dateTimePicker1";
+            this.dataWystawienia.Size = new System.Drawing.Size(197, 20);
+            this.dataWystawienia.TabIndex = 1;
             // 
             // textBox4
             // 
@@ -268,10 +268,10 @@
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(99, 123);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(197, 20);
-            this.dateTimePicker2.TabIndex = 20;
+            this.dataWykonania.Location = new System.Drawing.Point(99, 123);
+            this.dataWykonania.Name = "dateTimePicker2";
+            this.dataWykonania.Size = new System.Drawing.Size(197, 20);
+            this.dataWykonania.TabIndex = 20;
             // 
             // label13
             // 
@@ -304,7 +304,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dataWystawienia;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
@@ -323,6 +323,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dataWykonania;
     }
 }

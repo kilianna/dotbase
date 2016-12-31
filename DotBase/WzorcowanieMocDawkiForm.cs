@@ -628,7 +628,7 @@ namespace DotBase
         private void wykresToolStripMenuItem_Click(object sender, EventArgs e)
         //---------------------------------------------------------------
         {
-            Wykres.WykresForm wykres = new Wykres.WykresForm(true, checkBox2.Checked);
+            Wykres.WykresForm wykres = new Wykres.WykresForm(true, checkBox2.Checked, checkBox3.Checked);
             wykres.CzyscDane();
 
             DataGridViewRow wiersz;
@@ -704,8 +704,35 @@ namespace DotBase
                 {
                     min = double.Parse(row.Cells["Min"].Value.ToString());
                     max = double.Parse(row.Cells["Max"].Value.ToString());
-                    row.Cells["Wskazanie"].Value = (min + max) / 2;
-                    row.Cells["Niepewnosc"].Value = (min + max) / 2 - min;
+                    double wskazanie = (min + max) / 2;
+                    double niepewnosc = (max - min) / 2;
+
+                    String text1 = min.ToString();
+                    int pos1 = text1.IndexOf(',');
+                    if (pos1 < 0) pos1 = text1.Length - 1;
+                    int digits1 = text1.Length - pos1 - 1;
+
+                    String text2 = max.ToString();
+                    int pos2 = text2.IndexOf(',');
+                    if (pos2 < 0) pos2 = text2.Length - 1;
+                    int digits2 = text2.Length - pos2 - 1;
+
+
+                    String text3 = wskazanie.ToString();
+                    int pos3 = text3.IndexOf(',');
+                    if (pos3 < 0) pos3 = text3.Length - 1;
+                    int digits3 = text3.Length - pos3 - 1;
+
+                    int digits = digits1;
+                    if (digits2 > digits) digits = digits2;
+                    if (digits3 > digits) digits = digits3;
+
+                    wskazanie = Math.Round(wskazanie, digits);
+                    niepewnosc = Math.Round(niepewnosc, digits);
+
+                    row.Cells["Wskazanie"].Value = wskazanie;
+                    row.Cells["Niepewnosc"].Value = niepewnosc;
+                   
                 }
                 catch (Exception)
                 {

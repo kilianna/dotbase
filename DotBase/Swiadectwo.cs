@@ -18,7 +18,7 @@ namespace DotBase
                 CISNIENIE_MAX, CISNIENIE_MIN,
                 DATA_WYDANIA, DATA_WYKONANIA,
                 EMISJA_POW,
-                ID_WZORCOWANIA, INFORMACJA, INFORMACJA2, INFORMACJA3,
+                ID_WZORCOWANIA, INFORMACJA,
                 JEDNOSTKA,
                 METODA_WZORCOWANIA,
                 NAPIECIE_ZAS_SONDY, NIEPEWNOSC, NAZWA, NR_FABRYCZNY, NR_KARTY,
@@ -61,7 +61,7 @@ namespace DotBase
 
             override protected bool fillDocument() { return true; }
             override protected bool retrieveAllData() { return true; }
-            override protected bool saveDocument(string path) { return true; }
+			override protected bool saveDocument(string path) { return true; }
 
             //********************************************************************************************
             public Swiadectwo(int nrKarty, DateTime dataWydania, DateTime dataWykonania, String sprawdzil, string poprawa)
@@ -644,6 +644,7 @@ namespace DotBase
                     bool bCez = false;
                     bool bDawka = false;
                     bool bSkazenia = false;
+                    bool bSI = true;
 
                     _Zapytanie = "Select Cisnienie, Temperatura, Wilgotnosc From ";
 
@@ -688,6 +689,16 @@ namespace DotBase
                         bCez = true;
                     }
 
+                    if (int.Parse(m_data.getValue(SwiadectwoData.DataType.WZ_MOC_DAWKI_ILE)) > 0)
+                    {
+                        DataRow odpowiedzJednostki = _BazaDanych.TworzTabeleDanych("SELECT SI FROM Jednostki WHERE ID_jednostki=(SELECT TOP 1 ID_jednostki FROM wzorcowanie_cezem WHERE ID_karty=" + m_data.getValue(SwiadectwoData.DataType.NR_KARTY) + " AND rodzaj_wzorcowania=\"md\")").Rows[0];
+                        bSI = odpowiedzJednostki.Field<bool>(0);
+                    }
+                    else
+                    {
+                        bSI = true;
+                    }
+
                     DataRow odpowiedzBazy = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0];
 
                     double temp = odpowiedzBazy.Field<double>(0);
@@ -704,42 +715,38 @@ namespace DotBase
                     if (bDawka && bCez && bSkazenia)
                     {
                         m_data.setValue(SwiadectwoData.DataType.METODA_WZORCOWANIA, stl.GetText("metodaWzorcowania", true, true, true));
-                        m_data.setValue(SwiadectwoData.DataType.INFORMACJA, stl.GetText("informacja", true, true, true));
                     }
                     else if (bDawka && bSkazenia)
                     {
                         m_data.setValue(SwiadectwoData.DataType.METODA_WZORCOWANIA, stl.GetText("metodaWzorcowania", true, false, true));
-                        m_data.setValue(SwiadectwoData.DataType.INFORMACJA, stl.GetText("informacja", true, false, true));
                     }
                     else if (bDawka && bCez)
                     {
                         m_data.setValue(SwiadectwoData.DataType.METODA_WZORCOWANIA, stl.GetText("metodaWzorcowania", true, true, false));
-                        m_data.setValue(SwiadectwoData.DataType.INFORMACJA, stl.GetText("informacja", true, true, false));
                     }
                     else if (bDawka)
                     {
                         m_data.setValue(SwiadectwoData.DataType.METODA_WZORCOWANIA, stl.GetText("metodaWzorcowania", true, false, false));
-                        m_data.setValue(SwiadectwoData.DataType.INFORMACJA, stl.GetText("informacja", true, false, false));
                     }
                     else if (bCez && bSkazenia)
                     {
                         m_data.setValue(SwiadectwoData.DataType.METODA_WZORCOWANIA, stl.GetText("metodaWzorcowania", false, true, true));
-                        m_data.setValue(SwiadectwoData.DataType.INFORMACJA, stl.GetText("informacja", false, true, true));
                     }
                     else if (bCez && !bSkazenia)
                     {
                         m_data.setValue(SwiadectwoData.DataType.METODA_WZORCOWANIA, stl.GetText("metodaWzorcowania", false, true, false));
-                        m_data.setValue(SwiadectwoData.DataType.INFORMACJA, stl.GetText("informacja", false, true, false));
                     }
                     else
                     {
                         m_data.setValue(SwiadectwoData.DataType.METODA_WZORCOWANIA, stl.GetText("metodaWzorcowania", false, false, true));
-                        m_data.setValue(SwiadectwoData.DataType.INFORMACJA, stl.GetText("informacja", false, false, true));
                     }
 
-                    if (int.Parse(m_data.getValue(SwiadectwoData.DataType.WZ_ZR_POW_ILE)) > 0)
+                    if (bSI)
                     {
-                        m_data.setValue(SwiadectwoData.DataType.INFORMACJA2, stl.GetText("pocztekZdanieOMiejscuWzorcowaniaZrodelPowierzchniowych"));
+                        m_data.setValue(SwiadectwoData.DataType.INFORMACJA, stl.GetTextInfo("tekst", bSI));
+                    }
+                    else if (int.Parse(m_data.getValue(SwiadectwoData.DataType.WZ_ZR_POW_ILE)) > 0)
+                    {
 
                         bool polon = false;
                         bool bruschweig = false;
@@ -750,33 +757,23 @@ namespace DotBase
                         {
                             int idZrodla = row.Field<int>(0);
 
-                            if ((int)staleZrodel.STRONT_SLABY == idZrodla || (int)staleZrodel.STRONT_SILNY == idZrodla || (int)staleZrodel.STRONT_NAJSILNIEJSZY == idZrodla || (int)staleZrodel.AMERYK == idZrodla)
+                            if ((int)staleZrodel.STRONT_NAJSILNIEJSZY == idZrodla)
                             {
                                 bruschweig = true;
                             }
-                            else if ((int)staleZrodel.WEGIEL_SLABY == idZrodla || (int)staleZrodel.CHLOR == idZrodla || (int)staleZrodel.PLUTON == idZrodla || (int)staleZrodel.WEGIEL_SILNY == idZrodla)
+                            else if ((int)staleZrodel.WEGIEL_SLABY == idZrodla || (int)staleZrodel.CHLOR == idZrodla || (int)staleZrodel.PLUTON == idZrodla ||
+                                (int)staleZrodel.WEGIEL_SILNY == idZrodla || (int)staleZrodel.STRONT_SLABY == idZrodla || (int)staleZrodel.STRONT_SILNY == idZrodla || (int)staleZrodel.AMERYK == idZrodla)
                             {
                                 polon = true;
                             }
                         }
 
-                        if (polon && bruschweig)
-                        {
-                            m_data.setValue(SwiadectwoData.DataType.INFORMACJA3, stl.GetText(true, true));
-                        }
-                        else if (polon)
-                        {
-                            m_data.setValue(SwiadectwoData.DataType.INFORMACJA3, stl.GetText(true, false));
-                        }
-                        else
-                        {
-                            m_data.setValue(SwiadectwoData.DataType.INFORMACJA3, stl.GetText(false, true));
-                        }
+
+                        m_data.setValue(SwiadectwoData.DataType.INFORMACJA, stl.GetTextInfo("tekst", false, polon, bruschweig));
                     }
-                    else
+                    else 
                     {
-                        m_data.setValue(SwiadectwoData.DataType.INFORMACJA2, "");
-                        m_data.setValue(SwiadectwoData.DataType.INFORMACJA3, "");
+                        m_data.setValue(SwiadectwoData.DataType.INFORMACJA, stl.GetTextInfo("tekst", false, false, false));
                     }
                 }
                 catch (Exception ex)
@@ -875,7 +872,7 @@ namespace DotBase
                 _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c14>", m_data.getValue(SwiadectwoData.DataType.TEMPERATURA_MAX));
                 _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c15>", m_data.getValue(SwiadectwoData.DataType.WILGOTNOSC_MIN));
                 _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c16>", m_data.getValue(SwiadectwoData.DataType.WILGOTNOSC_MAX));
-                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c17>", m_data.getValue(SwiadectwoData.DataType.INFORMACJA) + m_data.getValue(SwiadectwoData.DataType.INFORMACJA2) + m_data.getValue(SwiadectwoData.DataType.INFORMACJA3));
+                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c17>", m_data.getValue(SwiadectwoData.DataType.INFORMACJA));
                 _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!metoda_wzorcowania>", m_data.getValue(SwiadectwoData.DataType.METODA_WZORCOWANIA));
 
                 DateTime dataWzorcowaniaCez;
@@ -927,11 +924,12 @@ namespace DotBase
             public bool UtworzDokument(string sciezka)
             //********************************************************************************************
             {
-                return PobierzDanePierwszaStrona() &&
-                       UtworzPierwszaStrone() &&
-                       PobierzDaneDrugaStrona() &&
-                       UtworzDrugaStrone() &&
-                       ZapiszPlikWynikowy(sciezka);
+                bool ok = PobierzDanePierwszaStrona();
+                ok = ok && UtworzPierwszaStrone();
+                ok = ok && PobierzDaneDrugaStrona();
+                ok = ok && UtworzDrugaStrone();
+                ok = ok && ZapiszPlikWynikowy(sciezka);
+                return ok;
             }
 
             //********************************************************************************************

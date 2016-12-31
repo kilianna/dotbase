@@ -22,26 +22,28 @@ namespace DotBase
             var q = from document in XMLFile.Root.Descendants("zakresWzorcowania")
                     where Boolean.Parse(document.Attribute("dawka").Value) == (dawka) &&
                           Boolean.Parse(document.Attribute("mocDawki").Value) == (mocDawki) &&
-                          Boolean.Parse(document.Attribute("skażenia").Value) == (skażenia) 
+                          Boolean.Parse(document.Attribute("skażenia").Value) == (skażenia)
                     select document.Element(whatTake).Value;
             return q.ElementAt(0);
         }
 
-        public String GetText(bool polon, bool brunschweig)
+        public String GetTextInfo(String whatTake, bool si)
         {
-            var q = from document in XMLFile.Root.Descendants("miejsceWzorcowaniaZrodelPowierzchniowych")
-                    where Boolean.Parse(document.Attribute("polon").Value) == polon &&
-                          Boolean.Parse(document.Attribute("braunschweig").Value) == brunschweig
-                    select document.Value;
+            var q = from document in XMLFile.Root.Descendants("informacja")
+                    where Boolean.Parse(document.Attribute("si").Value) == (si)
+                    select document.Element(whatTake).Value;
             return q.ElementAt(0);
         }
 
-        public String GetText(String elementToFind)
+
+        internal string GetTextInfo(string whatTake, bool si, bool polon, bool bruschweig)
         {
-            var q = from document in XMLFile.Root.Descendants(elementToFind)
-                    select document.Value;
+            var q = from document in XMLFile.Root.Descendants("informacja")
+                    where Boolean.Parse(document.Attribute("si").Value) == (si) &&
+                          Boolean.Parse(document.Attribute("polon").Value) == (polon) &&
+                          Boolean.Parse(document.Attribute("braunschweig").Value) == (bruschweig)
+                    select document.Element(whatTake).Value;
             return q.ElementAt(0);
         }
-        
     }
 }

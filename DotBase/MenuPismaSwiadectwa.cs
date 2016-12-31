@@ -39,17 +39,17 @@ namespace DotBase
                 DataTable table = _Baza.TworzTabeleDanych("SELECT Data_wystawienia, Data_wykonania, Autoryzowal, Uwaga, Waznosc_dwa_lata, Poprawa " +
                 String.Format("FROM Swiadectwo WHERE id_karty = {0}", _NumerKarty));
 
-                dateTimePicker1.Value = table.Rows[0].Field<DateTime>("Data_wystawienia");
-                dateTimePicker2.Value = table.Rows[0].Field<DateTime>("Data_wykonania");
+                dataWystawienia.Value = table.Rows[0].Field<DateTime>("Data_wystawienia");
                 textBox4.Text = table.Rows[0].Field<String>("Autoryzowal");
                 textBox1.Text = table.Rows[0].Field<String>("Uwaga");
                 checkBox1.Checked = table.Rows[0].Field<Boolean>("Waznosc_dwa_lata");
                 checkBox2.Checked = table.Rows[0].Field<Boolean>("Poprawa");
+                dataWykonania.Value = table.Rows[0].Field<DateTime>("Data_wykonania");
             }
             catch (Exception)
             {}
 
-            textBox2.Text = _NrPisma.ToString();
+                textBox2.Text = _NrPisma.ToString();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -57,8 +57,8 @@ namespace DotBase
             string sciezka = _DocumentationPathsLoader.GetPath("SwiadectwoWynik") + _NumerKarty + "SwiadectwoWynik.html";
 
             Dokumenty.Swiadectwo swiadectwo = new Dokumenty.Swiadectwo(_NumerKarty, 
-                                                                       dateTimePicker1.Value,
-                                                                       dateTimePicker2.Value,
+                                                                       dataWystawienia.Value,
+                                                                       dataWykonania.Value,
                                                                        textBox4.Text,
                                                                        checkBox2.Checked.ToString());
             if (swiadectwo.UtworzDokument(sciezka))
@@ -78,14 +78,12 @@ namespace DotBase
                 MessageBox.Show("Nie podano numeru pisma! Lub numer pisma nie jest liczbą naturalną!", "Błąd!");
                 return;
             }
-            
-            BazaDanychWrapper baza = new BazaDanychWrapper();
 
             _Baza.WykonajPolecenie(String.Format("UPDATE Karta_przyjecia SET nr_Pisma = {0} WHERE id_Karty = {1}", _NrPisma, _NumerKarty));
 
             string sciezka = _DocumentationPathsLoader.GetPath("PismoPrzewodnieWynik") + _NrPisma + "PismoPrzewodnieWynik" + _NumerKarty + ".html";
 
-            Dokumenty.PismoPrzewodnie pismo = new Dokumenty.PismoPrzewodnie(_NumerKarty, dateTimePicker1.Value, textBox1.Text, textBox2.Text, checkBox1.Checked);
+			Dokumenty.PismoPrzewodnie pismo = new Dokumenty.PismoPrzewodnie(_NumerKarty, dataWystawienia.Value, dataWykonania.Value, textBox1.Text, textBox2.Text, checkBox1.Checked, checkBox2.Checked);
             if (!pismo.generateDocument(sciezka))
             {
                 MessageBox.Show("Nie można stowrzyć dokumentu z powodu braku danych lub ich błędnych wartości.", "Uwaga");
@@ -166,8 +164,8 @@ namespace DotBase
                 _Baza.WykonajPolecenie("INSERT INTO Swiadectwo (id_karty, Data_wystawienia, Data_wykonania, Autoryzowal, Uwaga, Waznosc_dwa_lata, Poprawa) "
                 + String.Format("VALUES ({0}, '{1}', '{2}', '{3}', '{4}', {5}, {6})", 
                 _NumerKarty, 
-                dateTimePicker1.Value.ToShortDateString(),
-                dateTimePicker2.Value.ToShortDateString(),
+                dataWystawienia.Value.ToShortDateString(),
+                dataWykonania.Value.ToShortDateString(),
                 textBox4.Text, 
                 textBox1.Text, 
                 checkBox1.Checked,
@@ -177,8 +175,8 @@ namespace DotBase
             {
                 _Baza.WykonajPolecenie(String.Format("UPDATE Swiadectwo SET Data_wystawienia='{0}', Data_wykonania='{1}', Autoryzowal='{2}', " +
                 "Uwaga='{3}', Waznosc_dwa_lata={4}, Poprawa={5} WHERE id_karty={6}", 
-                dateTimePicker1.Value.ToShortDateString(),
-                dateTimePicker2.Value.ToShortDateString(),
+                dataWystawienia.Value.ToShortDateString(),
+                dataWykonania.Value.ToShortDateString(),
                 textBox4.Text, 
                 textBox1.Text, 
                 checkBox1.Checked, 

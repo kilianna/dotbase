@@ -83,7 +83,8 @@ namespace DotBase
                                bool sprawdzenie,
                                bool zepsuty,
                                uint liczbaProgow,
-                               double rabat)
+                               double rabat,
+                               double transport)
         //-------------------------------------------------------
         {
             Ile_moc_dawki = ileMd;
@@ -126,6 +127,8 @@ namespace DotBase
 
 	        if(rabat > 0)
 		        suma = suma * (1.0 - rabat / 100.0);
+
+            suma += transport;
 
             return suma;
         }
