@@ -22,7 +22,7 @@ namespace DotBase
                 JEDNOSTKA,
                 METODA_WZORCOWANIA,
                 NAPIECIE_ZAS_SONDY, NIEPEWNOSC, NAZWA, NR_FABRYCZNY, NR_KARTY,
-                ODLEGLOSC_ZR_SONDA,
+                JEDNOSTKA_PRZYRZADU,
                 POPRAWA, PRODUCENT,
                 ROK, ROK_PRODUKCJI,
                 SKAZENIA_NIEPEWNOSC, SKAZENIA_RODZAJ_PROMIENIOWANIA, SKAZENIA_WSPOLCZYNNIK, SONDA_NR_FABRYCZNY, SONDA_TYP, SPRAWDZIL,
@@ -271,7 +271,7 @@ namespace DotBase
                               m_data.getValue(SwiadectwoData.DataType.NAPIECIE_ZAS_SONDY), m_data.getValue(SwiadectwoData.DataType.ZRODLO_NAZWA).Replace("(słaby)", "").Replace("(silny)", "").Replace("(najsilniejszy)", ""),
                               m_data.getValue(SwiadectwoData.DataType.SKAZENIA_RODZAJ_PROMIENIOWANIA), m_data.getValue(SwiadectwoData.DataType.EMISJA_POW))
                               + String.Format("<td>{0}</td><td width=\"110\"><!wspol{1}> &plusmn; <!niep{1}></td></tr>",
-                              m_data.getValue(SwiadectwoData.DataType.ODLEGLOSC_ZR_SONDA), i));
+                              m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA_PRZYRZADU), i));
                 }
 
 
@@ -368,12 +368,17 @@ namespace DotBase
             private void PobierzDaneSpecyficzneDlaSkazen(ref List<double> skazeniaWspolczynnik, ref List<double> skazeniaNiepewnosc)
             //********************************************************************************************
             {
-                _Zapytanie = "SELECT napiecie_zasilania_sondy, odleglosc_zrodlo_sonda, wspolczynnik, niepewnosc FROM "
+                _Zapytanie = "SELECT napiecie_zasilania_sondy, odleglosc_zrodlo_sonda, wspolczynnik, niepewnosc, ID_jednostki FROM "
                            + String.Format("Wzorcowanie_zrodlami_powierzchniowymi WHERE id_wzorcowania = {0}", m_data.getValue(SwiadectwoData.DataType.ID_WZORCOWANIA));
 
                 DataRow wiersz = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0];
+
+                _Zapytanie = String.Format("SELECT Jednostka FROM Jednostki WHERE ID_jednostki = {0}", wiersz.Field<int>(4));
+
+                DataRow wierszJedn = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0];
+
                 m_data.setValue(SwiadectwoData.DataType.NAPIECIE_ZAS_SONDY, wiersz.Field<string>(0));
-                m_data.setValue(SwiadectwoData.DataType.ODLEGLOSC_ZR_SONDA, wiersz.Field<double>(1).ToString());
+                m_data.setValue(SwiadectwoData.DataType.JEDNOSTKA_PRZYRZADU, wierszJedn.Field<string>(0));
 
 
                 skazeniaWspolczynnik.Add(wiersz.Field<double>(2));
