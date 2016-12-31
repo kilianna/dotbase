@@ -1,0 +1,245 @@
+﻿*
+{
+
+color: #000000;
+padding: 0%;
+margin: 0%;
+}
+
+span
+{
+font-size: 11 pt;
+font-weight: normal;
+color: black;
+padding-left: 10;
+}
+
+#page
+{
+margin: 0 auto;
+width: 210mm;
+height: 297mm;
+padding: 10mm 5mm 5mm 5mm;
+border: 1px solid #FFFFFF;
+}
+
+#container
+{
+position: absolute;
+margin: 0 auto;
+width: 210mm;
+height: 297mm;
+}
+
+/*----------------nagłówek 1-----------------------*/
+#header
+{
+font-family: "Arial Black";
+margin: 0 auto;
+width: 100%;
+height: 30mm;
+text-align: center;
+padding-top: 15;
+padding-bottom: 15;
+}
+
+#leftheader
+{
+height: 100%;
+width: 20.00%;
+float: left;
+padding-top: 10;
+}
+
+#rightheader
+{
+height: 100%;
+width: 80.00%;
+float: left;
+}
+
+#header h1
+{
+padding: 0;
+font-size: 21pt;
+font-weight: bold;
+}
+
+#header h2
+{
+font-family: Arial;
+padding: 10;
+font-size: 11pt;
+font-weight: bold;
+}
+
+#header h3
+{
+font-size: 12pt;
+font-weight: bold;
+}
+
+/*----------------nagłówek 2-----------------------*/
+
+#header2
+{
+font-family: "Times New Roman";
+margin: 0 auto;
+width: 90%;
+height: 30mm;
+}
+
+/*----------------nagłówek 3-----------------------*/
+
+#header3
+{
+font-family: "Times New Roman";
+font-size: 13pt;
+text-align: right;
+margin: 0 auto;
+width: 90%;
+}
+
+/*----------------nagłówek 4-----------------------*/
+
+#header4
+{
+font-family: "Times New Roman";
+font-size: 13pt;
+margin: 0 auto;
+width: 90%;
+line-height: 150%; 
+padding-left: 16mm;
+}
+
+/*----------------nagłówek 5-----------------------*/
+
+#header5
+{
+font-family: "Times New Roman";
+font-size: 13pt;
+font-weight: bold;
+text-align: right;
+margin: 0 auto;
+width: 90%;
+}
+
+/*----------------zawartość-----------------------*/
+
+#content
+{
+font-family: "Times New Roman";
+margin: 0 auto;
+width: 100%;
+font-size: 13pt;
+padding-left: 20;
+}
+
+#akapit1
+{
+width: 85%;
+padding-top: 20;
+padding-left: 50;
+padding-right: 50;
+line-height: 180%; 
+font-size: 13 pt;
+text-align: justify;
+}
+
+#akapit2
+{
+width: 85%;
+padding-top: 20;
+padding-left: 50;
+padding-right: 50;
+line-height: 180%; 
+text-align: justify;
+font-size: 13 pt;
+}
+
+#akapit3
+{
+width: 85%;
+padding-top: 20;
+padding-left: 50;
+padding-right: 50;
+line-height: 180%; 
+text-align: justify;
+font-size: 13 pt;
+}
+
+#uwaga
+{
+width: 85%;
+text-align: justify;
+padding-top: 20;
+padding-left: 50;
+padding-right: 50;
+line-height: 180%; 
+font-size: 13 pt;
+}
+
+.col70
+{
+font-size: 9pt;
+font-weight: bold;
+float:left;
+width: 70.00%;
+text-indent: 20;
+}
+
+.col75
+{
+font-size: 9pt;
+font-weight: bold;
+float:left;
+width: 75.00%;
+}
+
+.col25
+{
+font-size: 9pt;
+font-weight: bold;
+float:left;
+width: 25.00%;
+text-align: right;
+}
+
+.col30
+{
+font-size: 9pt;
+font-weight: bold;
+float:left;
+width: 30.00%;
+text-align: right;
+}
+
+.col35
+{
+font-size: 9pt;
+font-weight: bold;
+float:left;
+width: 35.00%;
+text-align: center;
+}
+
+hr
+{
+margin-bottom: 10;
+margin-top: 10;
+}
+
+/*----------------stopka-----------------------*/
+
+#footer
+{
+position: absolute; bottom: 15.01mm;
+margin: 0 auto;
+width: 100%mm;
+left: 25mm;
+}
+
+#footer p
+{
+font-size: 12pt;
+}

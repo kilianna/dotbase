@@ -1,5 +1,7 @@
 /DotBase/obj/*
-/DotBase/bin/*
+/DotBase/bin/Debug/
+/DotBase/bin/Release/
+/DotBase/bin/wyniki/
 *.dll
 *.csproj
 *.suo

@@ -1,0 +1,17 @@
+﻿<!--Sygnalizacja dawki start-->
+				<!--
+				<div class="wzornag">d) Wzorcowanie źródłem gamma: Cs-137; przestrzennegy równoważnika dawki (sygnalizator progowy)</div>
+				<div class="wzornag">Zestawienie nastawień przyrządu i odpowiadających im rzeczywistych wartości, przy których włączona zostaje sygnalizacja ostrzegawcza.</div>
+				<table id="tabnag">
+					<tr><td>Typ sondy:</td><td>Detektor własny</td><td>Numer fabryczny sondy:</td><td>nie dotyczy</td></tr>
+				</table>
+				<table id="tabwyn">
+					<tr><th>WARTOŚĆ WZORCOWA</th><th style="width: 70mm">RZECZYWISTE WARTOŚCI, PRZY<br> KTÓRYCH WŁĄCZONA ZOSTAJE<br> SYGNALIZACJA OSTRZEGAWCZA</th><th>WSKAZANIA PRZYRZĄDU</th></tr>
+					<tr><th style="font-size: 11pt">mSv</th><th style="font-size: 11pt">mSv</th><th style="font-size: 11pt">mSv</th></tr>
+					<tr><td>1,44</td><td>1,44</td><td>1,44</td></tr>
+					<tr><td>1,44</td><td>100,44</td><td>100,44</td></tr>
+				</table>
+				<div id="komentarz">Zmierzoną wartość indywidualnego równoważnika dawki należy pomnożyć przez wartość współczynnika poprawkowego.
+				</div>
+				-->
+				<!--Sygnalizacja dawki stop-->

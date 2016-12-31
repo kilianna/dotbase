@@ -1,0 +1,49 @@
+﻿<html>
+
+	<head>
+	<meta http-equiv="content-type" content="text/html;cset=utf-8">
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	</head>
+
+	<body>
+		<div id="strona">
+			<div id="naglowek">Wzorcowanie źródłem Cs-137 - Sygnalizator progowy mocy dawki</div>
+			<div>	
+				<div class="kolumna">Arkusz pomiarowy nr <span><!nrArkusza>c</span><br> Ciśnienie <span><!cisnienie></span> [hPa]</div>
+				<div class="kolumna">dla karty przyjęcia nr <span><!nrKarty>/<!rok></span><br> Temperatura <span><!temperatura></span> [<sup>o</sup>C]</div>
+				<div class="kolumna">Data <span><!data></span><br> Wilgotność względna <span><!wilgotnosc></span> [%]</div>
+				<div class="kolumna3">Stanowisko <span>Hala kalibracyjna stanowisko WZOR-1</span></div>
+				<div style="clear: left; line-height: 0.5cm">Metoda wzorcowania <span>Procedura wzorcowania radiometrów promieniowania jonizującego przy użyciu promieniowania gamma ze źródła Cs-137 (WZOR-1 wyd. 4 z dn. 18.06.2014)</span> <br></div>
+				<hr style="clear: left;">
+				<div class="kolumna80"> Zleceniodawca <span><!c3></span><br>
+				Adres <span><!c4></span><br>
+				Osoba kontaktowa <span><!c5></span></div>
+				<div class="kolumna20"> ID <span><!c6></span></div>
+				<div class="kolumna33"> Telefon <span><!c7></span></div>
+				<div class="kolumna33"> Faks <span><!c8></span></div>
+				<div class="kolumna34"> E-mail <span><!c9></span></div>
+				<hr style="clear: left;">
+				<div style="line-height: 0.5cm;">Dane przyrządu</div>
+				<div class="kolumna">Typ <span><!dozymetr_typ></span><br>Sonda <span><!sonda_typ></span></div>
+				<div class="kolumna">Numer fabryczny <span><!dozymetr_NrFab></span><br>Numer fabryczny <span><!sonda_NrFab></span></div>
+				<div class="kolumna">ID <span><!dozymetr_id></span><br>ID sondy <span><!sonda_id></span></div>
+				<hr style="clear: left;">
+				<br>
+			</div>
+			<div align = "center">Wyniki wzorcowania</div>
+			<table border="1" style="float: center" rules="all" width="100%">
+				<tr align="center" valign="middle" style="color: #000080">
+				<th>Ustawiony próg <br> <span><!jednostka></span> </th>
+				<th>Rzeczywiste wartości przy których włączona<br> zostaje sygnalizacja ostrzegawcza <br> <span><!jednostka></span></th>
+				<th>Wartość współczynnika poprawkowego</th>
+				<!tabela>
+			</table>
+			<br><br>
+			<div style="clear: left">Osoba wykonująca pomiary: <span><!wykonal></span> ..............<br>
+			Sprawdził: <span><!sprawdzil></span> ..........................</div>
+			<div id="stopka">F2/WZOR-1/15.06.2014<span class="wyrright">Baza danych-Dotbase-autor Anna Twardak & Ziemowit Stolarczyk</span></div>
+		</div>
+		
+
+	</body>
+</html>
