@@ -9,4 +9,5 @@
 					<tr><th style="font-size: 11pt">mSv</th><th style="font-size: 11pt">mSv</th><th style="font-size: 11pt">-</th></tr>
 					<!tabela>
 				</table>
+                <div class="uwaga"><!uwaga></div>
 <!--Sygnalizacja dawki stop-->

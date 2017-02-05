@@ -8,3 +8,4 @@
 		<tr><th style="font-size: 11pt"><!c4></th><th style="font-size: 11pt"><!c4></th></th><th style="font-size: 11pt">-</th></tr>
 		<!tabela>
 	</table>
+<div class="uwaga"><!uwaga></div>

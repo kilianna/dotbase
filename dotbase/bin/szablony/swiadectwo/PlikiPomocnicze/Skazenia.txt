@@ -8,3 +8,4 @@
 <div id="komentarzska"><p style="margin: 0; padding: 0;">(*) liczbę cząstek emitowanych przez powierzchnię 1 cm<sup>2</sup> w ciągu 1 sekundy oblicza się mnożąc wskazania</p>
 <p style="text-indent: 4mm; margin: 0; padding: 0;">przyrządu przez współczynnik kalibracyjny</p>
 </div>
+<div class="uwaga"><!uwaga></div>

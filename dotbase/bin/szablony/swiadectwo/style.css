@@ -268,3 +268,20 @@ margin-bottom: 5mm;
 font-family: "Times New Roman";
 font-size: 9pt;
 }
+
+.opis{
+padding-left: 10mm;
+padding-right: 10mm;
+margin-bottom: 5mm;
+font-size: 10pt;
+text-align: justify;
+}
+
+.uwaga{
+font-family: "Times New Roman";
+font-size: 9pt;
+margin-left: 20mm;
+margin-top: 1mm;
+margin-bottom: 5mm;
+}
+

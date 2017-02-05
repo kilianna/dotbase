@@ -30,6 +30,7 @@ namespace DotBase
                 UWAGI,
                 WIELKOSC_FIZYCZNA, WILGOTNOSC_MAX, WILGOTNOSC_MIN, WSPOLCZYNNIK, WZ_DAWKI_ILE, WZ_MOC_DAWKI_ILE, WZ_SYG_DAWKI_ILE, WZ_ZR_POW_ILE, WZ_SYG_MOCY_DAWKI_ILE,
                 ZAKRES, ZLECENIODAWCA, ZRODLO_CZAS_ROZPADU, ZRODLO_NAZWA,
+                UWAGA_MD, UWAGA_D, UWAGA_S, UWAGA_SMD, UWAGA_SD,
                 MAX_ELEMENTOW
             };
 
@@ -64,7 +65,7 @@ namespace DotBase
 			override protected bool saveDocument(string path) { return true; }
 
             //********************************************************************************************
-            public Swiadectwo(int nrKarty, DateTime dataWydania, DateTime dataWykonania, String sprawdzil, string poprawa)
+            public Swiadectwo(int nrKarty, DateTime dataWydania, DateTime dataWykonania, String sprawdzil, string poprawa, string uwMD, string uwD, string uwS, string uwSMD, string uwSD)
             //********************************************************************************************
             {
                 m_data.setValue(SwiadectwoData.DataType.NR_KARTY, nrKarty.ToString());
@@ -73,6 +74,11 @@ namespace DotBase
                 m_data.setValue(SwiadectwoData.DataType.DATA_WYKONANIA, dataWykonania.ToString("dd MMMM yyyy"));
                 m_data.setValue(SwiadectwoData.DataType.SPRAWDZIL, sprawdzil);
                 m_data.setValue(SwiadectwoData.DataType.POPRAWA, poprawa);
+                m_data.setValue(SwiadectwoData.DataType.UWAGA_MD, uwMD);
+                m_data.setValue(SwiadectwoData.DataType.UWAGA_D, uwD);
+                m_data.setValue(SwiadectwoData.DataType.UWAGA_S, uwS);
+                m_data.setValue(SwiadectwoData.DataType.UWAGA_SMD, uwSMD);
+                m_data.setValue(SwiadectwoData.DataType.UWAGA_SD, uwSD);
             }
 
             //********************************************************************************************
@@ -91,7 +97,8 @@ namespace DotBase
                                   .Replace("<!sondaTyp>", m_data.getValue(SwiadectwoData.DataType.SONDA_TYP))
                                   .Replace("<!sondaNrFab>", m_data.getValue(SwiadectwoData.DataType.SONDA_NR_FABRYCZNY))
                                   .Replace("<!c5>", m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA))
-                                  .Replace("<!tabela>", _Tabela.ToString());
+                                  .Replace("<!tabela>", _Tabela.ToString())
+                                  .Replace("<!uwaga>", m_data.getValue(SwiadectwoData.DataType.UWAGA_D));
             }
 
             //********************************************************************************************
@@ -185,6 +192,7 @@ namespace DotBase
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c4>", m_data.getValue(SwiadectwoData.DataType.SONDA_NR_FABRYCZNY));
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c5>", m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA));
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c6>", m_data.getValue(SwiadectwoData.DataType.WIELKOSC_FIZYCZNA).Replace("moc", "mocy"));
+                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!uwaga>", m_data.getValue(SwiadectwoData.DataType.UWAGA_MD));
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!tabela>", _Tabela.ToString());
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!wielkosc_fizyczna>", m_data.getValue(SwiadectwoData.DataType.WIELKOSC_FIZYCZNA).Replace("moc", "mocy"));
 
@@ -295,6 +303,7 @@ namespace DotBase
 
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c1>", ch.ToString());
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!tabela>", _Tabela.ToString());
+                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!uwaga>", m_data.getValue(SwiadectwoData.DataType.UWAGA_S));
             }
 
             //********************************************************************************************
@@ -419,6 +428,7 @@ namespace DotBase
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c3>", m_data.getValue(SwiadectwoData.DataType.SONDA_NR_FABRYCZNY));
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c4>", m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA));
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!tabela>", _Tabela.ToString());
+                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!uwaga>", m_data.getValue(SwiadectwoData.DataType.UWAGA_SD));
             }
 
             //********************************************************************************************
@@ -432,6 +442,7 @@ namespace DotBase
 
                     _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c1>", ch.ToString());
                     _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!opis>", m_data.getValue(SwiadectwoData.DataType.UWAGI));
+                    _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!uwaga>", m_data.getValue(SwiadectwoData.DataType.UWAGA_SMD));
                     return;
                 }
 
@@ -460,7 +471,9 @@ namespace DotBase
                                   .Replace("<!c2>", m_data.getValue(SwiadectwoData.DataType.SONDA_TYP))
                                   .Replace("<!c3>", m_data.getValue(SwiadectwoData.DataType.SONDA_NR_FABRYCZNY))
                                   .Replace("<!c4>", m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA))
-                                  .Replace("<!tabela>", _Tabela.ToString());
+                                  .Replace("<!tabela>", _Tabela.ToString())
+                                  .Replace("<!uwaga>", m_data.getValue(SwiadectwoData.DataType.UWAGA_SMD));
+
             }
 
             //********************************************************************************************

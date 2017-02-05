@@ -10,3 +10,4 @@
 				<div id="komentarz">Zmierzoną wartość <!wielkosc_fizyczna> należy pomnożyć przez odpowiednią wartość współczynnika <br>
 				poprawkowego dla danego zakresu pomiarowego przyrządu.
 				</div>
+<div class="uwaga"><!uwaga></div>

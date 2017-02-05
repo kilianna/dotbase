@@ -1,2 +1,3 @@
 ﻿<div class="wzornag"><!c1>) Wzorcowanie źródłem gamma: Cs-137; moc przestrzennego równoważnika dawki (sygnalizator progowy)</div>
 <div class="opis"><!opis></div>
+<div class="uwaga"><!uwaga></div>

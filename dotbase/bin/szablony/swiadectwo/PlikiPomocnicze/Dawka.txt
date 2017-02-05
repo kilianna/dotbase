@@ -9,3 +9,4 @@
 				</table>
 				<div id="komentarz">Zmierzoną wartość <!wielkosc2> należy pomnożyć przez wartość współczynnika poprawkowego.
 				</div>
+<div class="uwaga"><!uwaga></div>

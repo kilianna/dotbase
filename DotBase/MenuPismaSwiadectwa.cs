@@ -31,12 +31,19 @@ namespace DotBase
             }
             catch (Exception)
             {
-                _NrPisma = (uint)_Baza.TworzTabeleDanych("SELECT MAX(nr_pisma) FROM Karta_przyjecia WHERE rok=Year(Date())").Rows[0].Field<int>(0) + 1;
+                try
+                {
+                    _NrPisma = (uint)_Baza.TworzTabeleDanych("SELECT MAX(nr_pisma) FROM Karta_przyjecia WHERE rok=Year(Date())").Rows[0].Field<int>(0) + 1;
+                }
+                catch (Exception)
+                {
+                    _NrPisma = 1;
+                }
             }
             
             try
             {
-                DataTable table = _Baza.TworzTabeleDanych("SELECT Data_wystawienia, Data_wykonania, Autoryzowal, Uwaga, Waznosc_dwa_lata, Poprawa " +
+                DataTable table = _Baza.TworzTabeleDanych("SELECT Data_wystawienia, Data_wykonania, Autoryzowal, Uwaga, Waznosc_dwa_lata, Poprawa, UwagaMD, UwagaD, UwagaS, UwagaSMD, UwagaSD " +
                 String.Format("FROM Swiadectwo WHERE id_karty = {0}", _NumerKarty));
 
                 dataWystawienia.Value = table.Rows[0].Field<DateTime>("Data_wystawienia");
@@ -45,6 +52,11 @@ namespace DotBase
                 checkBox1.Checked = table.Rows[0].Field<Boolean>("Waznosc_dwa_lata");
                 checkBox2.Checked = table.Rows[0].Field<Boolean>("Poprawa");
                 dataWykonania.Value = table.Rows[0].Field<DateTime>("Data_wykonania");
+                uwMD.Text = table.Rows[0].Field<String>("UwagaMD");
+                uwD.Text = table.Rows[0].Field<String>("UwagaD");
+                uwS.Text = table.Rows[0].Field<String>("UwagaS");
+                uwSMD.Text = table.Rows[0].Field<String>("UwagaSMD");
+                uwSD.Text = table.Rows[0].Field<String>("UwagaSD");
             }
             catch (Exception)
             {}
@@ -60,7 +72,12 @@ namespace DotBase
                                                                        dataWystawienia.Value,
                                                                        dataWykonania.Value,
                                                                        textBox4.Text,
-                                                                       checkBox2.Checked.ToString());
+                                                                       checkBox2.Checked.ToString(),
+                                                                       uwMD.Text,
+                                                                       uwD.Text,
+                                                                       uwS.Text,
+                                                                       uwSMD.Text,
+                                                                       uwSD.Text);
             if (swiadectwo.UtworzDokument(sciezka))
             {
                 System.Diagnostics.Process.Start(sciezka);
@@ -92,61 +109,63 @@ namespace DotBase
 
         private void WstawZnakSpecjalny(object sender, KeyEventArgs e)
         {
-            int i = textBox1.SelectionStart;
+            TextBox uwTextBox = (TextBox)sender;
+
+            int i = uwTextBox.SelectionStart;
 
             if (e.Alt && 77 == e.KeyValue)
             {    
                 const string stringDoWstawienia = "&mu;";
                 int dlugoscWstawienia = stringDoWstawienia.Length;
 
-                textBox1.Text = textBox1.Text.Insert(textBox1.SelectionStart, stringDoWstawienia);
-                textBox1.SelectionStart = i + dlugoscWstawienia;
+                uwTextBox.Text = uwTextBox.Text.Insert(uwTextBox.SelectionStart, stringDoWstawienia);
+                uwTextBox.SelectionStart = i + dlugoscWstawienia;
             }
             else if (e.Alt && 84 == e.KeyValue)
             {
                 const string stringDoWstawienia = "&nbsp;";
                 int dlugoscWstawienia = stringDoWstawienia.Length;
 
-                textBox1.Text = textBox1.Text.Insert(textBox1.SelectionStart, stringDoWstawienia);
-                textBox1.SelectionStart = i + dlugoscWstawienia;
+                uwTextBox.Text = uwTextBox.Text.Insert(uwTextBox.SelectionStart, stringDoWstawienia);
+                uwTextBox.SelectionStart = i + dlugoscWstawienia;
             }
             else if (e.Alt && 66 == e.KeyValue)
             {
-                i = textBox1.SelectionStart;
-                int i2 = i + textBox1.SelectionLength;
+                i = uwTextBox.SelectionStart;
+                int i2 = i + uwTextBox.SelectionLength;
 
-                textBox1.Text = textBox1.Text.Insert(i2, "</b>");
-                textBox1.Text = textBox1.Text.Insert(i, "<b>");
+                uwTextBox.Text = uwTextBox.Text.Insert(i2, "</b>");
+                uwTextBox.Text = uwTextBox.Text.Insert(i, "<b>");
 
-                textBox1.SelectionStart = i2 + 7;
+                uwTextBox.SelectionStart = i2 + 7;
             }
             else if (e.Alt && 80 == e.KeyValue)
             {
                 const string stringDoWstawienia = "<br>";
                 int dlugoscWstawienia = stringDoWstawienia.Length;
 
-                textBox1.Text = textBox1.Text.Insert(textBox1.SelectionStart, stringDoWstawienia);
-                textBox1.SelectionStart = i + dlugoscWstawienia;
+                uwTextBox.Text = uwTextBox.Text.Insert(uwTextBox.SelectionStart, stringDoWstawienia);
+                uwTextBox.SelectionStart = i + dlugoscWstawienia;
             }
             else if (e.Alt && 68 == e.KeyValue)
             {
-                i = textBox1.SelectionStart;
-                int i2 = i + textBox1.SelectionLength;
+                i = uwTextBox.SelectionStart;
+                int i2 = i + uwTextBox.SelectionLength;
 
-                textBox1.Text = textBox1.Text.Insert(i2, "</sub>");
-                textBox1.Text = textBox1.Text.Insert(i, "<sub>");
+                uwTextBox.Text = uwTextBox.Text.Insert(i2, "</sub>");
+                uwTextBox.Text = uwTextBox.Text.Insert(i, "<sub>");
 
-                textBox1.SelectionStart = i2 + 11;
+                uwTextBox.SelectionStart = i2 + 11;
             }
             else if (e.Alt && 71 == e.KeyValue)
             {
-                i = textBox1.SelectionStart;
-                int i2 = i + textBox1.SelectionLength;
+                i = uwTextBox.SelectionStart;
+                int i2 = i + uwTextBox.SelectionLength;
 
-                textBox1.Text = textBox1.Text.Insert(i2, "</sup>");
-                textBox1.Text = textBox1.Text.Insert(i, "<sup>");
+                uwTextBox.Text = uwTextBox.Text.Insert(i2, "</sup>");
+                uwTextBox.Text = uwTextBox.Text.Insert(i, "<sup>");
 
-                textBox1.SelectionStart = i2 + 11;
+                uwTextBox.SelectionStart = i2 + 11;
             }
         }
 
@@ -161,26 +180,36 @@ namespace DotBase
 
             if (0 == _Baza.TworzTabeleDanych(String.Format("SELECT 1 FROM Swiadectwo WHERE id_karty = {0}", _NumerKarty)).Rows.Count)
             {
-                _Baza.WykonajPolecenie("INSERT INTO Swiadectwo (id_karty, Data_wystawienia, Data_wykonania, Autoryzowal, Uwaga, Waznosc_dwa_lata, Poprawa) "
-                + String.Format("VALUES ({0}, '{1}', '{2}', '{3}', '{4}', {5}, {6})", 
+                _Baza.WykonajPolecenie("INSERT INTO Swiadectwo (id_karty, Data_wystawienia, Data_wykonania, Autoryzowal, Uwaga, Waznosc_dwa_lata, Poprawa, UwagaMD, UwagaD, UwagaS, UwagaSMD, UwagaSD) "
+                + String.Format("VALUES ({0}, '{1}', '{2}', '{3}', '{4}', {5}, {6}, '{7}', '{8}', '{9}', '{10}', '{11}')", 
                 _NumerKarty, 
                 dataWystawienia.Value.ToShortDateString(),
                 dataWykonania.Value.ToShortDateString(),
                 textBox4.Text, 
                 textBox1.Text, 
                 checkBox1.Checked,
-                checkBox2.Checked));
+                checkBox2.Checked,
+                uwMD.Text,
+                uwD.Text,
+                uwS.Text,
+                uwSMD.Text,
+                uwSD.Text));
             }
             else
             {
                 _Baza.WykonajPolecenie(String.Format("UPDATE Swiadectwo SET Data_wystawienia='{0}', Data_wykonania='{1}', Autoryzowal='{2}', " +
-                "Uwaga='{3}', Waznosc_dwa_lata={4}, Poprawa={5} WHERE id_karty={6}", 
+                "Uwaga='{3}', Waznosc_dwa_lata={4}, Poprawa={5}, UwagaMD='{6}', UwagaD='{7}', UwagaS='{8}', UwagaSMD='{9}', UwagaSD='{10}' WHERE id_karty={11}", 
                 dataWystawienia.Value.ToShortDateString(),
                 dataWykonania.Value.ToShortDateString(),
                 textBox4.Text, 
                 textBox1.Text, 
                 checkBox1.Checked, 
                 checkBox2.Checked,
+                uwMD.Text,
+                uwD.Text,
+                uwS.Text,
+                uwSMD.Text,
+                uwSD.Text,
                 _NumerKarty));
             }
         }
