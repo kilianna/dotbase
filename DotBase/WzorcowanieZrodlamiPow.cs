@@ -183,7 +183,7 @@ namespace DotBase
             double ukj = _BazaDanych.TworzTabeleDanych("SELECT Wartosc FROM Stale WHERE Nazwa='ukj'").Rows[0].Field<double>(0);
             double ukw = _BazaDanych.TworzTabeleDanych("SELECT Wartosc FROM Stale WHERE Nazwa='ukw'").Rows[0].Field<double>(0);
 
-            niepewnoscWspolczynnika = Math.Sqrt(Math.Pow(odchylenie_pomiar, 2.0) + Math.Pow(odchylenie_tlo, 2.0) + Math.Pow(niepewnosc, 2.0) + ukw * ukj) * 2.0 * wspolczynnik_kalibracyjny;
+            niepewnoscWspolczynnika = Math.Sqrt(Math.Pow(odchylenie_pomiar, 2.0) + Math.Pow(odchylenie_tlo, 2.0) + Math.Pow(niepewnosc, 2.0) + Math.Pow(ukw, 2.0) + Math.Pow(ukj, 2.0)) * 2.0 * wspolczynnik_kalibracyjny;
             precyzja = 0;//Narzedzia.Precyzja.Ustaw(niepewnoscWspolczynnika);
 
             return true;

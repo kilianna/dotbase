@@ -373,7 +373,7 @@
             this.textBox11.Name = "textBox11";
             this.textBox11.Size = new System.Drawing.Size(157, 20);
             this.textBox11.TabIndex = 11;
-            this.textBox11.Text = "2,6";
+            this.textBox11.Text = "2";
             this.textBox11.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PrzejdzDoKolejnegoPola);
             // 
             // textBox12

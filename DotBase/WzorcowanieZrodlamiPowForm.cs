@@ -288,7 +288,7 @@ namespace DotBase
                 textBox10.Text = "1";
 
             if (textBox11.Text == "")
-                textBox11.Text = "2,6";
+                textBox11.Text = "2";
 
             if (textBox12.Text == "")
                 textBox12.Text = "-";
