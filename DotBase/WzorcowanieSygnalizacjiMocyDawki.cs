@@ -107,6 +107,10 @@ namespace DotBase
                         temp1 *= 1.0 / 121.9;
                         temp2 *= 1.0 / 121.9;
                         break;
+                    case "mR/h":
+                        temp1 *= 1.00 / 8.74;
+                        temp2 *= 1.00 / 8.74;
+                        break;
                     default:
                         return null;
                 }

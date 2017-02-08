@@ -379,7 +379,7 @@ namespace DotBase
             {
                 foreach (string nazwa in _WzorcowanieSygMocyDawki.Jednostki.Nazwy)
                 {
-                    if(nazwa == "uSv/h" || nazwa == "uGy/h" || nazwa == "mSv/h" || nazwa == "nA/kg")
+                    if(nazwa == "uSv/h" || nazwa == "uGy/h" || nazwa == "mSv/h" || nazwa == "nA/kg" || nazwa =="mR/h")
                         comboBox4.Items.Add(nazwa);
                 }
             }
