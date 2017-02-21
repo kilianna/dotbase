@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.button1 = new System.Windows.Forms.Button();
@@ -39,6 +39,13 @@
             this.button3 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.grupaPlatnika = new System.Windows.Forms.GroupBox();
+            this.nazwaPlatnika = new System.Windows.Forms.TextBox();
+            this.nipPlatnika = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.adresPlatnika = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -82,9 +89,11 @@
             this.podglądToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
+            this.innyPlatnik = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.grupaPlatnika.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -147,21 +156,23 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(0, 91);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(637, 318);
+            this.tabControl1.Size = new System.Drawing.Size(641, 372);
             this.tabControl1.TabIndex = 5;
             this.tabControl1.TabStop = false;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.innyPlatnik);
+            this.tabPage1.Controls.Add(this.grupaPlatnika);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.textBox6);
             this.tabPage1.Controls.Add(this.label8);
@@ -180,10 +191,73 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(629, 292);
+            this.tabPage1.Size = new System.Drawing.Size(633, 346);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Dane zleceniodawcy";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // grupaPlatnika
+            // 
+            this.grupaPlatnika.Controls.Add(this.nazwaPlatnika);
+            this.grupaPlatnika.Controls.Add(this.nipPlatnika);
+            this.grupaPlatnika.Controls.Add(this.label16);
+            this.grupaPlatnika.Controls.Add(this.label18);
+            this.grupaPlatnika.Controls.Add(this.label17);
+            this.grupaPlatnika.Controls.Add(this.adresPlatnika);
+            this.grupaPlatnika.Location = new System.Drawing.Point(6, 221);
+            this.grupaPlatnika.Name = "grupaPlatnika";
+            this.grupaPlatnika.Size = new System.Drawing.Size(521, 109);
+            this.grupaPlatnika.TabIndex = 21;
+            this.grupaPlatnika.TabStop = false;
+            this.grupaPlatnika.Text = "                                  ";
+            // 
+            // nazwaPlatnika
+            // 
+            this.nazwaPlatnika.Location = new System.Drawing.Point(100, 26);
+            this.nazwaPlatnika.Name = "nazwaPlatnika";
+            this.nazwaPlatnika.Size = new System.Drawing.Size(415, 20);
+            this.nazwaPlatnika.TabIndex = 16;
+            // 
+            // nipPlatnika
+            // 
+            this.nipPlatnika.Location = new System.Drawing.Point(100, 78);
+            this.nipPlatnika.Name = "nipPlatnika";
+            this.nipPlatnika.Size = new System.Drawing.Size(217, 20);
+            this.nipPlatnika.TabIndex = 20;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(17, 26);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(40, 13);
+            this.label16.TabIndex = 15;
+            this.label16.Text = "Nazwa";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(17, 78);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(25, 13);
+            this.label18.TabIndex = 19;
+            this.label18.Text = "NIP";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(17, 52);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(34, 13);
+            this.label17.TabIndex = 17;
+            this.label17.Text = "Adres";
+            // 
+            // adresPlatnika
+            // 
+            this.adresPlatnika.Location = new System.Drawing.Point(100, 52);
+            this.adresPlatnika.Name = "adresPlatnika";
+            this.adresPlatnika.Size = new System.Drawing.Size(415, 20);
+            this.adresPlatnika.TabIndex = 18;
             // 
             // groupBox1
             // 
@@ -348,7 +422,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(629, 292);
+            this.tabPage2.Size = new System.Drawing.Size(633, 345);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Dane zlecenia";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -469,7 +543,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(629, 292);
+            this.tabPage3.Size = new System.Drawing.Size(633, 345);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Lista przyrządów";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -478,8 +552,8 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -487,27 +561,27 @@
             this.Column3,
             this.Column4,
             this.Column5});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridView1.Size = new System.Drawing.Size(623, 286);
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            this.dataGridView1.Size = new System.Drawing.Size(627, 339);
             this.dataGridView1.TabIndex = 6;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
@@ -542,9 +616,9 @@
             // 
             // Column5
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Column5.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.Column5.DefaultCellStyle = dataGridViewCellStyle10;
             this.Column5.HeaderText = "Przejdź do karty";
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
@@ -559,7 +633,7 @@
             this.meldunekToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(637, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(641, 24);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -574,7 +648,7 @@
             // podglądToolStripMenuItem
             // 
             this.podglądToolStripMenuItem.Name = "podglądToolStripMenuItem";
-            this.podglądToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.podglądToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.podglądToolStripMenuItem.Text = "Podgląd";
             this.podglądToolStripMenuItem.Click += new System.EventHandler(this.podglądToolStripMenuItem_Click);
             // 
@@ -600,11 +674,22 @@
             this.label15.TabIndex = 8;
             this.label15.Text = "Numer zlecenia w rejestrze";
             // 
+            // innyPlatnik
+            // 
+            this.innyPlatnik.AutoSize = true;
+            this.innyPlatnik.Location = new System.Drawing.Point(20, 218);
+            this.innyPlatnik.Name = "innyPlatnik";
+            this.innyPlatnik.Size = new System.Drawing.Size(82, 17);
+            this.innyPlatnik.TabIndex = 22;
+            this.innyPlatnik.Text = "Inny płatnik";
+            this.innyPlatnik.UseVisualStyleBackColor = true;
+            this.innyPlatnik.CheckedChanged += new System.EventHandler(this.innyPlatnik_CheckedChanged);
+            // 
             // ZlecenieForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(637, 409);
+            this.ClientSize = new System.Drawing.Size(641, 463);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.numericUpDown2);
             this.Controls.Add(this.tabControl1);
@@ -621,6 +706,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.grupaPlatnika.ResumeLayout(false);
+            this.grupaPlatnika.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
@@ -686,5 +773,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column4;
         private System.Windows.Forms.DataGridViewButtonColumn Column5;
+        private System.Windows.Forms.GroupBox grupaPlatnika;
+        private System.Windows.Forms.TextBox nazwaPlatnika;
+        private System.Windows.Forms.TextBox nipPlatnika;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox adresPlatnika;
+        private System.Windows.Forms.CheckBox innyPlatnik;
     }
 }

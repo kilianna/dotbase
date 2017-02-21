@@ -36,8 +36,11 @@ namespace DotBase
             public string Nip { get; set; }
             public string OsobaKontaktowa { get; set; }
             public string Telefon { get; set; }
+            public string NazwaPlatnika { get; set; }
+            public string AdresPlatnika { get; set; }
+            public string NipPlatnika { get; set; }
 
-            public DaneZleceniodawcy(string Adres, string Faks, int Id, string Nazwa, string Nip, string OsobaKon, string Telefon)
+            public DaneZleceniodawcy(string Adres, string Faks, int Id, string Nazwa, string Nip, string OsobaKon, string Telefon, string NazwaPlatnika, string AdresPlatnika, string NipPlatnika)
                 : this()
             {
                 this.Adres = Adres;
@@ -47,6 +50,9 @@ namespace DotBase
                 this.Nip = Nip;
                 this.OsobaKontaktowa = OsobaKon;
                 this.Telefon = Telefon;
+                this.NazwaPlatnika = NazwaPlatnika;
+                this.AdresPlatnika = AdresPlatnika;
+                this.NipPlatnika = NipPlatnika;
             }
         }
 
@@ -62,7 +68,8 @@ namespace DotBase
             public string OsobaPrzyjmujaca { get; set; }
             public List<DanePrzyrzad> Przyrzady;
             public string Uwagi { get; set; }
-            public string Nip { get; set; } 
+            public string Nip { get; set; }
+            public bool InnyPlatnik { get; set; }
             public DaneZleceniodawcy ZleceniodawcaInfo;
         }
 
@@ -100,9 +107,10 @@ namespace DotBase
             public bool DodajZleceniodawce(ref DaneZleceniodawcy zleceniodawca)
             //--------------------------------------------------------------------
             {
-                _Zapytanie = "INSERT INTO Zleceniodawca (Adres, Faks, ID_zleceniodawcy, Nip, Osoba_kontaktowa, Telefon, Zleceniodawca) VALUES" +
-                             String.Format("('{0}','{1}',{2},'{3}','{4}','{5}','{6}')", zleceniodawca.Adres, zleceniodawca.Faks, zleceniodawca.Id,
-                             zleceniodawca.Nip, zleceniodawca.OsobaKontaktowa, zleceniodawca.Telefon, zleceniodawca.Nazwa);
+                _Zapytanie = "INSERT INTO Zleceniodawca (Adres, Faks, ID_zleceniodawcy, Nip, Osoba_kontaktowa, Telefon, Zleceniodawca, Nazwa_platnika, Adres_platnika, NIP_platnika) VALUES" +
+                             String.Format("('{0}','{1}',{2},'{3}','{4}','{5}','{6}','{7}','{8}','{9}')", zleceniodawca.Adres, zleceniodawca.Faks, zleceniodawca.Id,
+                             zleceniodawca.Nip, zleceniodawca.OsobaKontaktowa, zleceniodawca.Telefon, zleceniodawca.Nazwa,
+                             zleceniodawca.NazwaPlatnika, zleceniodawca.AdresPlatnika, zleceniodawca.NipPlatnika);
 
                 return _BazaDanych.WykonajPolecenie(_Zapytanie);
             }
@@ -113,9 +121,11 @@ namespace DotBase
             {
                 _Zapytanie = String.Format("UPDATE Zleceniodawca SET zleceniodawca='{0}', Adres='{1}', Faks='{2}', ",
                                            zleceniodawca.Nazwa, zleceniodawca.Adres, zleceniodawca.Faks)
-                           + String.Format(" telefon='{0}', Osoba_kontaktowa='{1}', nip='{2}' ",
+                           + String.Format(" telefon='{0}', Osoba_kontaktowa='{1}', nip='{2}', ",
                                             zleceniodawca.Telefon, zleceniodawca.OsobaKontaktowa, zleceniodawca.Nip)
-                           + String.Format("WHERE id_zleceniodawcy = {0}", zleceniodawca.Id);
+                           + String.Format(" Nazwa_platnika='{0}', Adres_platnika='{1}', NIP_platnika='{2}'",
+                                            zleceniodawca.NazwaPlatnika, zleceniodawca.AdresPlatnika, zleceniodawca.NipPlatnika)
+                           + String.Format(" WHERE id_zleceniodawcy = {0}", zleceniodawca.Id);
 
                 _BazaDanych.WykonajPolecenie(_Zapytanie);
 
@@ -142,10 +152,10 @@ namespace DotBase
             public void DodajZlecenie(ref DaneZlecenia dane)
             //--------------------------------------------------------------------
             {
-                _Zapytanie = String.Format("INSERT INTO Zlecenia VALUES ({0},{1},'{2}','{3}','{4}','{5}','{6}','{7}',{8},{9})",
+                _Zapytanie = String.Format("INSERT INTO Zlecenia VALUES ({0},{1},'{2}','{3}','{4}','{5}','{6}','{7}',{8},{9},{10})",
                                            dane.Id, dane.ZleceniodawcaInfo.Id, dane.DataPrzyjecia.ToShortDateString(),
                                            dane.DataZwrotu.ToShortDateString(), dane.FormaPrzyjecia, dane.FormaZwrotu, dane.OsobaPrzyjmujaca,
-                                           dane.Uwagi, dane.Ekspress, dane.Nr_rejestru);
+                                           dane.Uwagi, dane.Ekspress, dane.Nr_rejestru, dane.InnyPlatnik);
 
                 _BazaDanych.WykonajPolecenie(_Zapytanie);
             }
@@ -201,6 +211,7 @@ namespace DotBase
                 _DaneZlecenia.Uwagi = _DaneTabela.Rows[0].Field<string>("Uwagi");
                 _DaneZlecenia.OsobaPrzyjmujaca = _DaneTabela.Rows[0].Field<string>("Osoba_przyjmujaca");
                 _DaneZlecenia.Ekspress = _DaneTabela.Rows[0].Field<bool>("Ekspres");
+                _DaneZlecenia.InnyPlatnik = _DaneTabela.Rows[0].Field<bool>("Inny_platnik");
             }
 
             //--------------------------------------------------------------------
@@ -239,6 +250,9 @@ namespace DotBase
                 _DaneZlecenia.ZleceniodawcaInfo.Nip = _DaneTabela.Rows[0].Field<string>("Nip");
                 _DaneZlecenia.ZleceniodawcaInfo.OsobaKontaktowa = _DaneTabela.Rows[0].Field<string>("Osoba_kontaktowa");
                 _DaneZlecenia.ZleceniodawcaInfo.Telefon = _DaneTabela.Rows[0].Field<string>("Telefon");
+                _DaneZlecenia.ZleceniodawcaInfo.NazwaPlatnika = _DaneTabela.Rows[0].Field<string>("Nazwa_platnika");
+                _DaneZlecenia.ZleceniodawcaInfo.AdresPlatnika = _DaneTabela.Rows[0].Field<string>("Adres_platnika");
+                _DaneZlecenia.ZleceniodawcaInfo.NipPlatnika = _DaneTabela.Rows[0].Field<string>("NIP_platnika");
             }
 
             //--------------------------------------------------------------------
@@ -250,7 +264,8 @@ namespace DotBase
 
                 _Zapytanie = "SELECT Zleceniodawca, Adres, Osoba_kontaktowa, Telefon, Faks, email, Nip, ID_zlecenia, "
                            + "Zlecenia.ID_zleceniodawcy, Data_przyjecia, Data_zwrotu, Forma_przyjecia, "
-                           + "Forma_zwrotu, Osoba_przyjmujaca, Zlecenia.Uwagi, Ekspres, Nr_zlecenia_rejestr FROM Zlecenia INNER JOIN "
+                           + "Forma_zwrotu, Osoba_przyjmujaca, Zlecenia.Uwagi, Ekspres, Inny_platnik, Nr_zlecenia_rejestr, Nazwa_platnika, Adres_platnika, NIP_platnika "
+                           + "FROM Zlecenia INNER JOIN "
                            + "Zleceniodawca ON Zlecenia.ID_Zleceniodawcy=Zleceniodawca.ID_Zleceniodawcy "
                            + String.Format("WHERE id_zlecenia = {0}", idZlecenia);
 
@@ -272,7 +287,7 @@ namespace DotBase
                 if (idZlecenia <= 0)
                     return false;
 
-                _Zapytanie = "SELECT Zleceniodawca, Adres, Osoba_kontaktowa, Telefon, Faks, email, Nip, id_zleceniodawcy "
+                _Zapytanie = "SELECT Zleceniodawca, Adres, Osoba_kontaktowa, Telefon, Faks, email, Nip, id_zleceniodawcy, Nazwa_platnika, Adres_platnika, NIP_platnika "
                            + String.Format("FROM Zleceniodawca WHERE ID_zleceniodawcy = {0}", idZlecenia);
 
                 _DaneTabela = _BazaDanych.TworzTabeleDanych(_Zapytanie);
@@ -319,10 +334,10 @@ namespace DotBase
                 // jako, że id_zlecenia mogło zostać zmienione (np. przejście do innego zlecenia przez użytkownika)
                 // Id zlecenia bierzemy nie wprost z okna, ale z odczytanych wcześniej danych z bazy
                 // Dlatego też poniżej widnieje _DaneZlecenia.Id
-                _Zapytanie = String.Format("UPDATE Zlecenia SET data_przyjecia='{0}', data_zwrotu='{1}', forma_przyjecia='{2}', forma_zwrotu='{3}', uwagi='{4}', ekspres={5}, osoba_przyjmujaca='{6}', id_zleceniodawcy={7}, nr_zlecenia_rejestr={8} WHERE id_zlecenia={9}",
+                _Zapytanie = String.Format("UPDATE Zlecenia SET data_przyjecia='{0}', data_zwrotu='{1}', forma_przyjecia='{2}', forma_zwrotu='{3}', uwagi='{4}', ekspres={5}, osoba_przyjmujaca='{6}', id_zleceniodawcy={7}, nr_zlecenia_rejestr={8}, Inny_platnik={9} WHERE id_zlecenia={10}",
                                            daneDoZapisu.DataPrzyjecia.ToShortDateString(), daneDoZapisu.DataZwrotu.ToShortDateString(),
                                            daneDoZapisu.FormaPrzyjecia, daneDoZapisu.FormaZwrotu, daneDoZapisu.Uwagi, daneDoZapisu.Ekspress,
-                                           daneDoZapisu.OsobaPrzyjmujaca, daneDoZapisu.ZleceniodawcaInfo.Id, daneDoZapisu.Nr_rejestru, _DaneZlecenia.Id);
+                                           daneDoZapisu.OsobaPrzyjmujaca, daneDoZapisu.ZleceniodawcaInfo.Id, daneDoZapisu.Nr_rejestru, daneDoZapisu.InnyPlatnik, _DaneZlecenia.Id);
 
                 _BazaDanych.WykonajPolecenie(_Zapytanie);
             }

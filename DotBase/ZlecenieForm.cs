@@ -87,9 +87,14 @@ namespace DotBase
         //--------------------------------------------------------------------
         {
             if (_Zlecenie.ZnajdzPoIdZleceniodawcy(textBox1.Text))
+            {
                 WyswietlDaneZleceniodawcy(_Zlecenie.Dane);
+                SprawdzInnegoPlatnika();
+            }
             else
+            {
                 CzyscOknoZleceniodawcy();
+            }
         }
 
 
@@ -193,6 +198,9 @@ namespace DotBase
         {
             textBox1.Text = textBox2.Text = textBox3.Text = textBox4.Text = textBox5.Text =
             textBox6.Text = textBox7.Text = textBox8.Text = textBox10.Text = "";
+            nazwaPlatnika.Text = "";
+            adresPlatnika.Text = "";
+            nipPlatnika.Text = "";
 
             textBox9.Text = "Brak";
 
@@ -211,6 +219,9 @@ namespace DotBase
         {
             textBox2.Text = textBox3.Text = textBox4.Text = textBox5.Text = textBox6.Text = "";
             comboBox1.Text = "";
+            nazwaPlatnika.Text = "";
+            adresPlatnika.Text = "";
+            nipPlatnika.Text = "";
         }
 
         //--------------------------------------------------------------------
@@ -237,11 +248,19 @@ namespace DotBase
             {
                 _Zlecenie.WypelnijDaneZleceniodawcy();
                 WyswietlDaneZleceniodawcy(_Zlecenie.Dane);
+                SprawdzInnegoPlatnika();
             }
             else
             {
                 MessageBox.Show("Brak danych do wyświetlenia. Może być to problem z brakiem połączenia z bazą danych.");
             }
+        }
+
+        private void SprawdzInnegoPlatnika()
+        {
+            innyPlatnik.Checked = (nazwaPlatnika.Text.Trim() != "" && nazwaPlatnika.Text.Trim() != "-")
+                || (adresPlatnika.Text.Trim() != "" && adresPlatnika.Text.Trim() != "-")
+                || (nipPlatnika.Text.Trim() != "" && nipPlatnika.Text.Trim() != "-");
         }
         
         //--------------------------------------------------------------------
@@ -291,6 +310,14 @@ namespace DotBase
 
             textBox2.Enabled = textBox3.Enabled = textBox4.Enabled = textBox5.Enabled = textBox6.Enabled = true;
             textBox2.Text = textBox3.Text = textBox4.Text = textBox5.Text = textBox6.Text = "-";
+            nazwaPlatnika.Text = "";
+            adresPlatnika.Text = "";
+            nipPlatnika.Text = "";
+            innyPlatnik.Checked = false;
+            grupaPlatnika.Visible = false;
+            nazwaPlatnika.Enabled = true;
+            adresPlatnika.Enabled = true;
+            nipPlatnika.Enabled = true;
 
             button4.Text = "Zatwierdź dodanie zleceniodawcy";
 
@@ -323,6 +350,9 @@ namespace DotBase
 
             textBox2.Enabled = textBox3.Enabled =
             textBox4.Enabled = textBox5.Enabled = textBox6.Enabled = true;
+            nazwaPlatnika.Enabled = true;
+            adresPlatnika.Enabled = true;
+            nipPlatnika.Enabled = true;
         }
 
         //--------------------------------------------------------------------
@@ -332,10 +362,13 @@ namespace DotBase
             _TrybEdycji = false;
             button1.Enabled = button2.Enabled = button3.Enabled = button4.Enabled = true;
             textBox1.Enabled = numericUpDown1.Enabled = numericUpDown2.Enabled = true;
-            button5.Text = "Edytuj dane zleceniodawcy.";
+            button5.Text = "Edytuj dane zleceniodawcy";
 
-            textBox2.Enabled = textBox3.Enabled = textBox4.Enabled = 
+            textBox2.Enabled = textBox3.Enabled = textBox4.Enabled =
             textBox5.Enabled = textBox6.Enabled = false;
+            nazwaPlatnika.Enabled = false;
+            adresPlatnika.Enabled = false;
+            nipPlatnika.Enabled = false;
         }
 
         //--------------------------------------------------------------------
@@ -350,6 +383,7 @@ namespace DotBase
             textBox9.Text = dane.Uwagi;
             textBox10.Text = dane.OsobaPrzyjmujaca;
             checkBox1.Checked = dane.Ekspress;
+            innyPlatnik.Checked = dane.InnyPlatnik;
         }
 
         //--------------------------------------------------------------------
@@ -375,6 +409,9 @@ namespace DotBase
             textBox4.Text = dane.ZleceniodawcaInfo.Telefon;
             textBox5.Text = dane.ZleceniodawcaInfo.OsobaKontaktowa;
             textBox6.Text = dane.ZleceniodawcaInfo.Nip;
+            nazwaPlatnika.Text = dane.ZleceniodawcaInfo.NazwaPlatnika;
+            adresPlatnika.Text = dane.ZleceniodawcaInfo.AdresPlatnika;
+            nipPlatnika.Text = dane.ZleceniodawcaInfo.NipPlatnika;
         }
 
         //--------------------------------------------------------------------
@@ -413,6 +450,7 @@ namespace DotBase
             daneDoZapisu.OsobaPrzyjmujaca = textBox10.Text;
             daneDoZapisu.Ekspress = checkBox1.Checked;
             daneDoZapisu.Nip = textBox6.Text;
+            daneDoZapisu.InnyPlatnik = innyPlatnik.Checked;
             daneDoZapisu.Nr_rejestru = (int)numericUpDown2.Value;
 
             _Zlecenie.ZapiszDane(daneDoZapisu);
@@ -470,6 +508,7 @@ namespace DotBase
             daneZlecenia.Uwagi = textBox9.Text;
             daneZlecenia.OsobaPrzyjmujaca = textBox10.Text;
             daneZlecenia.Ekspress = checkBox1.Checked;
+            daneZlecenia.InnyPlatnik = innyPlatnik.Checked;
 
             _Zlecenie.DodajZlecenie(ref daneZlecenia);
             _Zlecenie.ZaladujWszystkieDane((int)numericUpDown1.Value);
@@ -499,7 +538,8 @@ namespace DotBase
                 return false;
             }
 
-            DaneZleceniodawcy zleceniodawca = new DaneZleceniodawcy(textBox2.Text, textBox3.Text, int.Parse(textBox1.Text), comboBox1.Text, textBox6.Text, textBox5.Text, textBox4.Text);
+            DaneZleceniodawcy zleceniodawca = new DaneZleceniodawcy(textBox2.Text, textBox3.Text, int.Parse(textBox1.Text), comboBox1.Text, textBox6.Text, textBox5.Text, textBox4.Text, 
+                nazwaPlatnika.Text, adresPlatnika.Text, nipPlatnika.Text);
 
             if (false == _Zlecenie.DodajZleceniodawce(ref zleceniodawca))
             {
@@ -517,7 +557,8 @@ namespace DotBase
             if (false == SprawdzPoprawnoscDanychZleceniodawcy())
                 return false;
 
-            DaneZleceniodawcy zleceniodawca = new DaneZleceniodawcy(textBox2.Text, textBox3.Text, int.Parse(textBox1.Text), comboBox1.Text, textBox6.Text, textBox5.Text, textBox4.Text);
+            DaneZleceniodawcy zleceniodawca = new DaneZleceniodawcy(textBox2.Text, textBox3.Text, int.Parse(textBox1.Text), comboBox1.Text, textBox6.Text, textBox5.Text, textBox4.Text,
+                nazwaPlatnika.Text, adresPlatnika.Text, nipPlatnika.Text);
 
             if (false == _Zlecenie.EdytujZleceniodawce(ref zleceniodawca))
                 return false;
@@ -579,6 +620,12 @@ namespace DotBase
                 MessageBox.Show("Sprawdź czy zlecenie zostało na pewno wykonane.", "Uwaga");
             }
         }
+
+        private void innyPlatnik_CheckedChanged(object sender, EventArgs e)
+        {
+            grupaPlatnika.Visible = innyPlatnik.Checked;
+        }
+
 
     }
 }
