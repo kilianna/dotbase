@@ -335,8 +335,18 @@ namespace DotBase
             _TrybDodawaniaZleceniodawcy = false;
             textBox1.ReadOnly = false;
             button1.Enabled = true;
+
+
+            button1.Enabled = button2.Enabled = button3.Enabled = button5.Enabled = true;
+            numericUpDown1.Enabled = numericUpDown2.Enabled = true;
+            textBox2.Enabled = textBox3.Enabled = textBox4.Enabled = textBox5.Enabled = textBox6.Enabled = false;
+
+            nazwaPlatnika.Enabled = false;
+            adresPlatnika.Enabled = false;
+            nipPlatnika.Enabled = false;
             
             button4.Text = "Dodaj nowego zleceniodawcę";
+
         }
 
         //--------------------------------------------------------------------
