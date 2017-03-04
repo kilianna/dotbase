@@ -11,5 +11,8 @@ namespace DotBase
         public string nip;
         public string zleceniodawca;
         public string adresZleceniodawcy;
+        public string nazwaPlatnika;
+        public string adresPlatnika;
+        public bool innyPlatnik;
     }
 }

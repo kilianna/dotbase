@@ -615,7 +615,10 @@ namespace DotBase
         {
             MeldunekModel model = new MeldunekModel();
             model.adresZleceniodawcy = textBox2.Text;
-            model.nip = textBox6.Text;
+            model.nip = (nipPlatnika.Text.Trim() != "" && innyPlatnik.Checked) ? nipPlatnika.Text : textBox6.Text;
+            model.nazwaPlatnika = nazwaPlatnika.Text;
+            model.adresPlatnika = adresPlatnika.Text;
+            model.innyPlatnik = innyPlatnik.Checked;
             
             for (int i = 0; i < dataGridView1.Rows.Count; ++i)
             {

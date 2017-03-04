@@ -13,7 +13,7 @@ namespace DotBase
         {
             public enum DataType
             {
-                DATA, NR_SWIADECTWA, DATA_SPRZEDAZY, TYP, NUMERY, CENA, LICZBA_SZTUK, NIP, KOSZT, ZLECENIODAWCA, ADRES_ZLECENIODAWCY, LISTA
+                DATA, NR_SWIADECTWA, DATA_SPRZEDAZY, TYP, NUMERY, CENA, LICZBA_SZTUK, NIP, KOSZT, ZLECENIODAWCA, ADRES_ZLECENIODAWCY, LISTA, NAZWA_PLATNIKA, ADRES_PLATNIKA
             };
 
             private readonly IDictionary<DataType, String> m_documentData = new Dictionary<DataType, String>();
@@ -50,6 +50,20 @@ namespace DotBase
             _SzablonPodstawowy.Replace("<!adres>", m_wydrukiMeldunekData.getValue(WydrukiMeldunekData.DataType.ADRES_ZLECENIODAWCY));
             _SzablonPodstawowy.Replace("<!cena>", m_wydrukiMeldunekData.getValue(WydrukiMeldunekData.DataType.CENA));
 
+            _SzablonPodstawowy.Replace("<!nazwaPlatnika>", m_wydrukiMeldunekData.getValue(WydrukiMeldunekData.DataType.NAZWA_PLATNIKA));
+            _SzablonPodstawowy.Replace("<!adresPlatnika>", m_wydrukiMeldunekData.getValue(WydrukiMeldunekData.DataType.ADRES_PLATNIKA));
+
+            if (m_meldunekModel.innyPlatnik)
+            {
+                _SzablonPodstawowy.Replace("<!platnikBegin>", "");
+                _SzablonPodstawowy.Replace("<!platnikEnd>", "");
+            }
+            else
+            {
+                _SzablonPodstawowy.Replace("<!platnikBegin>", "<!--");
+                _SzablonPodstawowy.Replace("<!platnikEnd>", "-->");
+            }
+
             return true;
         }
 
@@ -79,6 +93,8 @@ namespace DotBase
             m_wydrukiMeldunekData.setValue(WydrukiMeldunekData.DataType.NIP, m_meldunekModel.nip);
             m_wydrukiMeldunekData.setValue(WydrukiMeldunekData.DataType.ZLECENIODAWCA, m_meldunekModel.zleceniodawca.Replace(";", "<br>"));
             m_wydrukiMeldunekData.setValue(WydrukiMeldunekData.DataType.ADRES_ZLECENIODAWCY, m_meldunekModel.adresZleceniodawcy.Replace(";", "<br>"));
+            m_wydrukiMeldunekData.setValue(WydrukiMeldunekData.DataType.NAZWA_PLATNIKA, m_meldunekModel.nazwaPlatnika.Replace(";", "<br>"));
+            m_wydrukiMeldunekData.setValue(WydrukiMeldunekData.DataType.ADRES_PLATNIKA, m_meldunekModel.adresPlatnika.Replace(";", "<br>"));
             StringBuilder sb2 = new StringBuilder();
             foreach (String nrKarty in m_meldunekModel.nrKart)
             {
