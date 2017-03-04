@@ -28,6 +28,9 @@ namespace DotBase
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(ZamykanieOkna);
 
             toolTip1.SetToolTip(textBox13, "Wpisane dane nie mogą być dłuższe niż 200 znaków.");
+
+            textBox11.Text = Properties.Settings.Default.Wykonal;
+            textBox12.Text = Properties.Settings.Default.Sprawdzil;
         }
 
         //---------------------------------------------------------------
@@ -119,6 +122,9 @@ namespace DotBase
             textBox11.Clear();
             textBox12.Text = "P. Bilski";
             checkBox1.Checked = true;
+
+            textBox11.Text = Properties.Settings.Default.Wykonal;
+            textBox12.Text = Properties.Settings.Default.Sprawdzil;
         }
 
         //---------------------------------------------------------------
@@ -503,6 +509,10 @@ namespace DotBase
             {
                 if (false == PrzygotujDaneDoZapisu(false))
                     return false;
+
+                Properties.Settings.Default.Wykonal = textBox11.Text;
+                Properties.Settings.Default.Sprawdzil = textBox12.Text;
+                Properties.Settings.Default.Save();
 
                 // Zapisywanie danych
                 _WzorcowanieSygMocyDawki.ZapiszDane();

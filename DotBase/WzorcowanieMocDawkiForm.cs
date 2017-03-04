@@ -28,6 +28,9 @@ namespace DotBase
             comboBox4.SelectedIndexChanged += new System.EventHandler(LiczWartoscWzorcowa);
             
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(ZamykanieOknaWykresu);
+
+            textBox21.Text = Properties.Settings.Default.Wykonal;
+            textBox22.Text = Properties.Settings.Default.Sprawdzil;
         }
 
         //---------------------------------------------------------------
@@ -137,6 +140,9 @@ namespace DotBase
 
             dataGridView1.Rows.Clear();
             dataGridView2.Rows.Clear();
+
+            textBox21.Text = Properties.Settings.Default.Wykonal;
+            textBox22.Text = Properties.Settings.Default.Sprawdzil;
         }
 
         //---------------------------------------------------------------
@@ -538,6 +544,10 @@ namespace DotBase
                 if (false == PrzygotujDaneDoZapisu(false))
                     return false;
 
+                Properties.Settings.Default.Wykonal = textBox21.Text;
+                Properties.Settings.Default.Sprawdzil = textBox22.Text;
+                Properties.Settings.Default.Save();
+
                 // Zapisywanie danych
                 _WzorcowanieMocDawki.ZapiszDane();
             }
@@ -568,6 +578,11 @@ namespace DotBase
                     MessageBox.Show("Dane są niepoprawne. Nie można zapisać.", "Ostrzeżenie");
                     return;
                 }
+
+                Properties.Settings.Default.Wykonal = textBox21.Text;
+                Properties.Settings.Default.Sprawdzil = textBox22.Text;
+                Properties.Settings.Default.Save();
+
                 // Zapisywanie danych
                 _WzorcowanieMocDawki.ZapiszDane();
             }

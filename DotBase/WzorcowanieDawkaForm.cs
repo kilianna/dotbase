@@ -28,6 +28,9 @@ namespace DotBase
             //comboBox4.SelectedIndexChanged += new System.EventHandler(LiczWartoscWzorcowa);
 
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(ZamykanieOkna);
+
+            textBox15.Text = Properties.Settings.Default.Wykonal;
+            textBox16.Text = Properties.Settings.Default.Sprawdzil;
         }
 
         //---------------------------------------------------------------
@@ -80,6 +83,9 @@ namespace DotBase
             checkBox1.Checked = true;
 
             _WzorcowanieDawka.CzyscStareDane();
+
+            textBox15.Text = Properties.Settings.Default.Wykonal;
+            textBox16.Text = Properties.Settings.Default.Sprawdzil;
         }
 
         //---------------------------------------------------------------
@@ -467,6 +473,10 @@ namespace DotBase
             {
                 if (false == PrzygotujDaneDoZapisu(false))
                     return false;
+
+                Properties.Settings.Default.Wykonal = textBox15.Text;
+                Properties.Settings.Default.Sprawdzil = textBox16.Text;
+                Properties.Settings.Default.Save();
 
                 // Zapisywanie danych
                 _WzorcowanieDawka.ZapiszDane();

@@ -28,6 +28,9 @@ namespace DotBase
             comboBox2.SelectedIndexChanged += new System.EventHandler(comboBox2_SelectedIndexChanged);
 
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(ZamykanieOkna);
+
+            textBox11.Text = Properties.Settings.Default.Wykonal;
+            textBox12.Text = Properties.Settings.Default.Sprawdzil;
         }
 
         //---------------------------------------------------------------
@@ -119,6 +122,9 @@ namespace DotBase
             textBox11.Clear();
             textBox12.Text = "P. Bilski";
             checkBox1.Checked = true;
+
+            textBox11.Text = Properties.Settings.Default.Wykonal;
+            textBox12.Text = Properties.Settings.Default.Sprawdzil;
         }
 
         //---------------------------------------------------------------
@@ -533,6 +539,10 @@ namespace DotBase
             {
                 if (false == PrzygotujDaneDoZapisu(false))
                     return false;
+
+                Properties.Settings.Default.Wykonal = textBox11.Text;
+                Properties.Settings.Default.Sprawdzil = textBox12.Text;
+                Properties.Settings.Default.Save();
 
                 // Zapisywanie danych
                 _WzorcowanieSygDawki.ZapiszDane();
