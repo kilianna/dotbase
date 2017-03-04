@@ -600,7 +600,6 @@
             this.textBox22.Name = "textBox22";
             this.textBox22.Size = new System.Drawing.Size(149, 20);
             this.textBox22.TabIndex = 12;
-            this.textBox22.Text = "P. Bilski";
             // 
             // label25
             // 

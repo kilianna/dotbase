@@ -40,6 +40,9 @@ namespace DotBase
                 WyswietlDane();
             else
                 WyswietlDanePodstawowe();
+
+            textBox21.Text = Properties.Settings.Default.Wykonal;
+            textBox22.Text = Properties.Settings.Default.Sprawdzil;
         }
         //---------------------------------------------------------------
         private void BlokujPrzyciski()
@@ -147,6 +150,9 @@ namespace DotBase
             comboBox2.Items.Clear();
             comboBox3.Items.Clear();
             dataGridView1.Rows.Clear();
+
+            textBox21.Text = Properties.Settings.Default.Wykonal;
+            textBox22.Text = Properties.Settings.Default.Sprawdzil;
         }
 
         //---------------------------------------------------------------
@@ -519,6 +525,10 @@ namespace DotBase
             {
                 if (true == PrzygotujDaneDoZapisu(false))
                 {
+                    Properties.Settings.Default.Wykonal = textBox21.Text;
+                    Properties.Settings.Default.Sprawdzil = textBox22.Text;
+                    Properties.Settings.Default.Save();
+
                     ZapiszDaneOgolne();
                     ZapiszDanePrzyrzadu();
                     ZapiszDaneWarunkow();

@@ -24,6 +24,8 @@ namespace DotBase
             InitializeComponent();
 
             button4.Enabled = false;
+
+            textBox10.Text = Properties.Settings.Default.Przyjal;
             
             _Zlecenie = new Zlecenie();
 
@@ -211,6 +213,8 @@ namespace DotBase
             dateTimePicker2.Value = dateTimePicker1.MinDate.AddDays(14);
 
             dataGridView1.Rows.Clear();
+
+            textBox10.Text = Properties.Settings.Default.Przyjal;
         }
 
         //--------------------------------------------------------------------
@@ -505,6 +509,9 @@ namespace DotBase
             }
 
             WylaczTrybDodawaniaZlecenia();
+
+            Properties.Settings.Default.Przyjal = textBox10.Text;
+            Properties.Settings.Default.Save();
 
             DaneZlecenia daneZlecenia = new DaneZlecenia();
             daneZlecenia.ZleceniodawcaInfo = new DaneZleceniodawcy();
