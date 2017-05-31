@@ -321,10 +321,10 @@ namespace DotBase
                 comboBox1.SelectedIndex = comboBox1.Items.IndexOf("s-1");
 
             if (textBox21.Text == "")
-                textBox21.Text = "B. Winiarska";
+                textBox21.Text = Properties.Settings.Default.Wykonal;
 
             if (textBox22.Text == "")
-                textBox22.Text = "P. Bilski";
+                textBox22.Text = Properties.Settings.Default.Sprawdzil;
 
             return true;
         }
