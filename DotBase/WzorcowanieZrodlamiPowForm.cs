@@ -36,13 +36,13 @@ namespace DotBase
 
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(ZamykanieOkna);
 
+            textBox21.Text = Properties.Settings.Default.Wykonal;
+            textBox22.Text = Properties.Settings.Default.Sprawdzil;
+
             if (_WzorcowanieZrodlamiPow.SprawdzCzyArkuszJestJuzZapisany(idZrodla))
                 WyswietlDane();
             else
                 WyswietlDanePodstawowe();
-
-            textBox21.Text = Properties.Settings.Default.Wykonal;
-            textBox22.Text = Properties.Settings.Default.Sprawdzil;
         }
         //---------------------------------------------------------------
         private void BlokujPrzyciski()
