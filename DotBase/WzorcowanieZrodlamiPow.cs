@@ -973,8 +973,8 @@ namespace DotBase
             }
             catch (Exception)
             {
-                textBox19.Text = "nie istnieje";
-                textBox20.Text = "nie istnieje";
+                textBox19.Text = "Brak wyników dla wybranego wzorcowania";
+                textBox20.Text = "Brak wyników dla wybranego wzorcowania";
             }
         }
 

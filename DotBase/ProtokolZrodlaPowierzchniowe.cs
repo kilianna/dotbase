@@ -18,7 +18,8 @@ namespace DotBase
                 DOZYMETR_ID, SONDA_ID, DOZYMETR_TYP, DOZYMETR_NR_FAB, INNE_NASTAWY, SONDA_TYP, SONDA_NR_FAB,
                 NAPIECIE_ZAS_SONDY, ZAKRES_POMIAROWY, CISNIENIE, TEMPERATURA, WILGOTNOSC,
                 UWAGI, PODSAWKA, ODL_ZRODLA_SONDA, MNOZNIK_KOREKCYJNY, JEDNOSTKA, TABELA,
-                WZORCOWAL, SPRAWDZIL, NIEPEWNOSC, WSPOL_KALIBRACYJNY, PO_WSPOL_KALIBRACYJNY
+                WZORCOWAL, SPRAWDZIL, NIEPEWNOSC, WSPOL_KALIBRACYJNY, PO_WSPOL_KALIBRACYJNY,
+                NIEPEWNOSC_WZGLEDNA
             }
             
             private readonly IDictionary<DataType, String> m_documentData = new Dictionary<DataType, String>();
@@ -111,7 +112,8 @@ namespace DotBase
                                         .Replace("<!sprawdzil>", m_data.getValue(ProtokolZrodlaPowierzchnioweData.DataType.SPRAWDZIL))
                                         .Replace("<!niepewnosc>", m_data.getValue(ProtokolZrodlaPowierzchnioweData.DataType.NIEPEWNOSC))
                                         .Replace("<!wspol_kalibracyjny>", m_data.getValue(ProtokolZrodlaPowierzchnioweData.DataType.WSPOL_KALIBRACYJNY))
-                                        .Replace("<!pop_wspol_kalibracyjny>", m_data.getValue(ProtokolZrodlaPowierzchnioweData.DataType.PO_WSPOL_KALIBRACYJNY));
+                                        .Replace("<!pop_wspol_kalibracyjny>", m_data.getValue(ProtokolZrodlaPowierzchnioweData.DataType.PO_WSPOL_KALIBRACYJNY))
+                                        .Replace("<!niepewnosc_wzgledna>", m_data.getValue(ProtokolZrodlaPowierzchnioweData.DataType.NIEPEWNOSC_WZGLEDNA));
 
                     return WypelnijDaneZleceniodawcy(m_templateToFill);
                 }
@@ -258,25 +260,34 @@ namespace DotBase
                 m_data.setValue(ProtokolZrodlaPowierzchnioweData.DataType.WZORCOWAL, model.wykonal);
                 m_data.setValue(ProtokolZrodlaPowierzchnioweData.DataType.SPRAWDZIL, model.sprawdzil);
 
-                double temp;
+                double dNiepewnosc;
+                double dWspolczynnik;
+                double dPopWspolczynnik;
                 string format = "G";
 
                 m_data.setValue(ProtokolZrodlaPowierzchnioweData.DataType.NIEPEWNOSC, "");
-                if (Double.TryParse(niepewnosc_wspol_kalibracyjnego, out temp))
+                if (Double.TryParse(niepewnosc_wspol_kalibracyjnego, out dNiepewnosc))
                 {
-                    format = Narzedzia.Precyzja.Ustaw(temp);
-                    m_data.setValue(ProtokolZrodlaPowierzchnioweData.DataType.NIEPEWNOSC, temp.ToString(format));
+                    format = Narzedzia.Precyzja.Ustaw(dNiepewnosc);
+                    m_data.setValue(ProtokolZrodlaPowierzchnioweData.DataType.NIEPEWNOSC, dNiepewnosc.ToString(format));
                 }
 
                 m_data.setValue(ProtokolZrodlaPowierzchnioweData.DataType.WSPOL_KALIBRACYJNY, "");
-                if (Double.TryParse(wspol_kalibracyjny, out temp))
+                if (Double.TryParse(wspol_kalibracyjny, out dWspolczynnik))
                 {
-                    m_data.setValue(ProtokolZrodlaPowierzchnioweData.DataType.WSPOL_KALIBRACYJNY, temp.ToString(format));
+                    m_data.setValue(ProtokolZrodlaPowierzchnioweData.DataType.WSPOL_KALIBRACYJNY, dWspolczynnik.ToString(format));
                 }
 
-                if (Double.TryParse(poprz_wspol_kalibracyjny, out temp))
+                m_data.setValue(ProtokolZrodlaPowierzchnioweData.DataType.NIEPEWNOSC_WZGLEDNA, "");
+                if (Double.TryParse(niepewnosc_wspol_kalibracyjnego, out dNiepewnosc) && Double.TryParse(wspol_kalibracyjny, out dWspolczynnik) && dWspolczynnik != 0.0)
                 {
-                    m_data.setValue(ProtokolZrodlaPowierzchnioweData.DataType.PO_WSPOL_KALIBRACYJNY, temp.ToString(format));
+                    double wzgledna = dNiepewnosc / dWspolczynnik * 100.0;
+                    m_data.setValue(ProtokolZrodlaPowierzchnioweData.DataType.NIEPEWNOSC_WZGLEDNA, wzgledna.ToString(wzgledna < 10 ? "0.#" : "0"));
+                }
+
+                if (Double.TryParse(poprz_wspol_kalibracyjny, out dPopWspolczynnik))
+                {
+                    m_data.setValue(ProtokolZrodlaPowierzchnioweData.DataType.PO_WSPOL_KALIBRACYJNY, dPopWspolczynnik.ToString(format));
                 }
                 else
                 {
