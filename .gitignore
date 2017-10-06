@@ -2,8 +2,7 @@
 /dotbase/bin/Debug/
 /dotbase/bin/Release/
 /dotbase/bin/wyniki/
-*.dll
-*.csproj.user
+*.user
 *.suo
 /*.pdf
 /*.doc
