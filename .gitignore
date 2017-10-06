@@ -1,10 +1,9 @@
-/DotBase/obj/
-/DotBase/bin/Debug/
-/DotBase/bin/Release/
-/DotBase/bin/wyniki/
+/dotbase/obj/
+/dotbase/bin/Debug/
+/dotbase/bin/Release/
+/dotbase/bin/wyniki/
 *.dll
 *.csproj.user
 *.suo
-DotBase/Struktura bazy danych.*
 /*.pdf
 /*.doc
