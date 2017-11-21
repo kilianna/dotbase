@@ -282,7 +282,7 @@ namespace DotBase
                 if (Double.TryParse(niepewnosc_wspol_kalibracyjnego, out dNiepewnosc) && Double.TryParse(wspol_kalibracyjny, out dWspolczynnik) && dWspolczynnik != 0.0)
                 {
                     double wzgledna = dNiepewnosc / dWspolczynnik * 100.0;
-                    m_data.setValue(ProtokolZrodlaPowierzchnioweData.DataType.NIEPEWNOSC_WZGLEDNA, wzgledna.ToString(wzgledna < 10 ? "0.#" : "0"));
+                    m_data.setValue(ProtokolZrodlaPowierzchnioweData.DataType.NIEPEWNOSC_WZGLEDNA, wzgledna.ToString("0.00"));
                 }
 
                 if (Double.TryParse(poprz_wspol_kalibracyjny, out dPopWspolczynnik))
