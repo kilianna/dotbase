@@ -97,7 +97,7 @@ namespace DotBase
 
             foreach (DataRow row in _Protokol.OdpowiedzBazy.Rows)
             {
-                dataGridView1.Rows.Add(row.Field<short>(2), row.Field<double>(3), row.Field<double>(4));
+                dataGridView1.Rows.Add(row.Field<short>(2), row.Field<double>(3), row.Field<double>(4), row.Field<double>(5));
             }
 
             _TrybWpisywaniaDanych = false;
@@ -135,11 +135,11 @@ namespace DotBase
                 {
                     DataTable danePobraneZExcela = PobierzDaneZExcela(openFileDialog1.FileName, "Arkusz1$");
 
-                    if (danePobraneZExcela == null || danePobraneZExcela.Rows.Count == 0 || danePobraneZExcela.Columns.Count != 3)
+                    if (danePobraneZExcela == null || danePobraneZExcela.Rows.Count == 0 || danePobraneZExcela.Columns.Count != 4)
                     {
                         string wiadomosc =  "Wskazany plik nie mógł zostać przetworzony! ";
                                wiadomosc += "Plik wejściowy Excel'a powinien składać się z 1 wiersza będącego nagłówkiem oraz ";
-                               wiadomosc += "pozostałych wierszy danych. Powinien zawierać 3 kolumny. ";
+                               wiadomosc += "pozostałych wierszy danych. Powinien zawierać 4 kolumny. ";
                                wiadomosc += "Dane powinny znajdować się w arkuszu = Arkusz1.";
                                
                         MessageBox.Show(wiadomosc, "Błąd");
@@ -191,15 +191,17 @@ namespace DotBase
             List<int> idZrodla = new List<int>();
             List<double> odleglosc = new List<double>();
             List<double> mocKermy = new List<double>();
+            List<double> niepewnosc = new List<double>();
 
             for (int i = 0; i < dataGridView1.Rows.Count - 1; ++i)
             {
                 idZrodla.Add(int.Parse(dataGridView1.Rows[i].Cells[0].Value.ToString()));
                 odleglosc.Add(double.Parse(dataGridView1.Rows[i].Cells[1].Value.ToString()));
                 mocKermy.Add(double.Parse(dataGridView1.Rows[i].Cells[2].Value.ToString()));
+                niepewnosc.Add(double.Parse(dataGridView1.Rows[i].Cells[3].Value.ToString()));
             }
 
-            _Protokol.ZapiszDane((int)numericUpDown1.Value, dateTimePicker1.Value, idZrodla, odleglosc, mocKermy);
+            _Protokol.ZapiszDane((int)numericUpDown1.Value, dateTimePicker1.Value, idZrodla, odleglosc, mocKermy, niepewnosc);
         }
 
         //----------------------------------------------------
@@ -216,6 +218,7 @@ namespace DotBase
                     int.Parse(dataGridView1.Rows[i].Cells[0].Value.ToString());
                     double.Parse(dataGridView1.Rows[i].Cells[1].Value.ToString());
                     double.Parse(dataGridView1.Rows[i].Cells[2].Value.ToString());
+                    double.Parse(dataGridView1.Rows[i].Cells[3].Value.ToString());
                 }
                 catch(Exception)
                 {

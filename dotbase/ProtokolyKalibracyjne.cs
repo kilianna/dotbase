@@ -20,7 +20,7 @@ namespace DotBase
         }
 
         //--------------------------------------------------------------------------------------
-        public bool ZapiszDane(int idProtokolu, DateTime data, List<int> id, List<double> odleglosc, List<double> mocKermy)
+        public bool ZapiszDane(int idProtokolu, DateTime data, List<int> id, List<double> odleglosc, List<double> mocKermy, List<double> niepewnosc)
         //--------------------------------------------------------------------------------------
         {
             _Zapytanie = String.Format("DELETE FROM Protokoly_Kalibracji_Lawy WHERE id_protokolu = {0}", idProtokolu);
@@ -36,7 +36,7 @@ namespace DotBase
                 
             for(int i = 0; i < id.Count; ++i)
             {
-                _Zapytanie = String.Format("INSERT INTO Pomiary_Wzorcowe VALUES ('{0}','{1}','{2}','{3}')", odleglosc[i], id[i], mocKermy[i].ToString(), idProtokolu);
+                _Zapytanie = String.Format("INSERT INTO Pomiary_Wzorcowe VALUES ('{0}','{1}','{2}','{3}','{4}')", odleglosc[i], id[i], mocKermy[i].ToString(), idProtokolu, niepewnosc[i].ToString());
              
                 _BazaDanych.WykonajPolecenie(_Zapytanie);
             }
@@ -60,7 +60,7 @@ namespace DotBase
         public bool WyszukajProtokolPoDacie(DateTime data)
         //--------------------------------------------------------------------------------------
         {
-            _Zapytanie = "SELECT P.ID_Protokolu, Data_kalibracji, ID_Zrodla, Odleglosc, Moc_Kermy FROM Protokoly_Kalibracji_Lawy AS K "
+            _Zapytanie = "SELECT P.ID_Protokolu, Data_kalibracji, ID_Zrodla, Odleglosc, Moc_Kermy, Niepewnosc FROM Protokoly_Kalibracji_Lawy AS K "
                        + String.Format("INNER JOIN Pomiary_Wzorcowe AS P ON K.id_protokolu=P.id_protokolu WHERE Data_kalibracji=#{0}#",
                                        data.ToShortDateString());
             
@@ -71,7 +71,7 @@ namespace DotBase
         public bool WyszukajProtokolPoId(int id)
         //--------------------------------------------------------------------------------------
         {
-            _Zapytanie = "SELECT P.ID_Protokolu, Data_kalibracji, ID_Zrodla, Odleglosc, Moc_Kermy FROM Protokoly_Kalibracji_Lawy AS K "
+            _Zapytanie = "SELECT P.ID_Protokolu, Data_kalibracji, ID_Zrodla, Odleglosc, Moc_Kermy, Niepewnosc FROM Protokoly_Kalibracji_Lawy AS K "
                        + String.Format("INNER JOIN Pomiary_Wzorcowe AS P ON K.id_protokolu=P.id_protokolu WHERE P.ID_protokolu={0}", id);
 
             return TworzOdpowiedz(_Zapytanie);
@@ -81,7 +81,7 @@ namespace DotBase
         public bool ZnajdzOstatni()
         //----------------------------------------------------
         {
-            _Zapytanie = "SELECT P.ID_Protokolu, Data_kalibracji, ID_Zrodla, Odleglosc,Moc_Kermy FROM Protokoly_Kalibracji_Lawy AS K "
+            _Zapytanie = "SELECT P.ID_Protokolu, Data_kalibracji, ID_Zrodla, Odleglosc,Moc_Kermy, Niepewnosc FROM Protokoly_Kalibracji_Lawy AS K "
                        + "INNER JOIN Pomiary_Wzorcowe AS P ON K.id_protokolu=P.id_protokolu WHERE P.ID_protokolu IN (SELECT ID_Protokolu "
                        + "FROM Protokoly_kalibracji_lawy WHERE Data_kalibracji=(SELECT MAX(Data_kalibracji) FROM Protokoly_kalibracji_lawy))";
 
