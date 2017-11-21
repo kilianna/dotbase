@@ -1,7 +1,7 @@
 /dotbase/obj/
 /dotbase/bin/Debug/
 /dotbase/bin/Release/
-/dotbase/bin/wyniki/
+/dotbase/bin/wyniki/**/*.html
 *.user
 *.suo
 /*.pdf

@@ -1,0 +1,287 @@
+﻿*{
+font-family: arial;
+}
+
+/*-----------------BUDOWA STRONY---------------------*/
+
+#strona {
+margin: 0 auto;
+width: 210mm;
+height: 297mm;
+border: 1px solid #FFFFFF;
+}
+
+#strona2 {
+margin: 0 auto;
+width: 210mm;
+height: 297mm;
+border: 1px solid #FFFFFF;
+}
+
+#łamanie{
+page-break-after: always;
+}
+
+.ramka{
+margin: 0 auto;
+margin-top: 5mm;
+width: 200mm;
+height: 290mm;
+border: 2px solid black;
+}
+
+/*-----------------NAGLOWEK---------------------*/
+
+#naglowek{
+margin: auto;
+height: 80mm;
+width: 188mm;
+border-bottom: 1px solid black;
+}
+
+#logol{
+height: 50mm;
+width: 30mm;
+float: left;
+}
+
+#logop{
+height: 50mm;
+width: 30mm;
+float: left;
+}
+
+#centrum{
+height: 50mm;
+width: 128mm;
+float: left;
+}
+
+#centrum h1{
+font-size: 11pt;
+font-weight: bold;
+padding: 0;
+margin: 0;
+}
+
+#centrum div{
+text-align: center;
+width: 100%;
+font-size: 10pt;
+}
+
+#napis{
+clear: left;
+width: 188mm;
+font-size: 22pt;
+font-weight: bold;
+text-align: center;
+padding-top: 5mm;
+padding-bottom: 5mm;
+}
+
+#naglowek2{
+margin: auto;
+margin-top: 0;
+height: 20mm;
+width: 188mm;
+border-bottom: 1px solid black; 
+
+}
+
+#napis2{
+clear: left;
+width: 188mm;
+font-size: 10pt;
+text-align: center;
+padding-top: 3mm;
+padding-bottom: 3mm;
+}
+
+#kol201{
+text-align: right;
+width: 20%;
+float: left; 
+font-size: 10pt;
+}
+
+
+#kol202{
+text-align: left;
+width: 20%;
+float: left; 
+font-size: 10pt;
+}
+
+#kol101{
+text-align: right;
+width: 10%;
+float: left;  
+font-size: 10pt;
+}
+
+#kol102{
+text-align: left;
+width: 10%;
+float: left;  
+font-size: 10pt;
+}
+
+/*----------------ZAWARTOŚĆ----------------------*/
+
+#zawartosc1{
+height: 186mm;
+}
+
+#tabela1{
+padding-top: 5mm;
+width: 100%;
+}
+
+th{
+width: 35mm;
+font-size: 9pt;
+font-weight: bold;
+padding-left: 5mm;
+text-align: left;
+}
+
+td{
+font-size: 9pt;
+padding: 1mm;
+text-align: left;
+}
+
+#zawartosc2{
+height: 186mm;
+}
+
+#sprawdzil{
+font-size: 9pt;
+text-align: right;
+padding-right: 40mm;
+padding-top: 20mm;
+}
+
+/*----------------STOPKA----------------------*/
+
+#stopka{
+font-size: 10pt;
+height: 10mm;
+text-align: center;
+}
+
+/*--------------------------Wzorcowania---------------------------*/
+
+.wzornag{
+padding-left: 10mm;
+margin-bottom: 5mm;
+font-size: 10pt;
+}
+
+/*-----------Gamma----------------*/
+
+
+#tabnag{
+margin: auto;
+font-family: "Times New Roman";
+font-size: 10pt;
+font-weight: bold;
+margin-bottom: 2mm;
+}
+
+#tabnag td{
+padding-left: 5mm;
+padding-right: 5mm;
+font-family: "Times New Roman";
+}
+
+#tabwyn{
+width: 60%;
+margin: auto;
+border: 1px solid black;
+border-collapse: collapse;
+}
+
+#tabwyn th{
+padding: 0;
+font-family: "Times New Roman";
+font-size: 10pt;
+font-weight: bold;
+border: 1px solid black;
+text-align: center;
+}
+
+#tabwyn td{
+font-size: 10pt;
+font-weight: bold;
+border: 1px solid black;
+text-align: center;
+}
+
+#komentarz{
+font-family: "Times New Roman";
+font-size: 9pt;
+margin-left: 20mm;
+margin-top: 1mm;
+margin-bottom: 5mm;
+}
+
+/*-------------Skażenia-------------------*/
+#wynikiska{
+margin: auto;
+padding:0;
+border: 1px solid black;
+border-collapse: collapse;
+width: 180mm;
+}
+
+#wynikiska th{
+padding: 0;
+font-family: "Times New Roman";
+font-size: 9pt;
+font-weight: bold;
+border: 1px solid black;
+text-align: center;
+width: auto;
+}
+
+#wynikiska td{
+padding: 0;
+font-size: 9pt;
+font-weight: normal;
+border: 1px solid black;
+text-align: center;
+}
+
+
+#komentarzska{
+padding: 0;
+font-family: "Times New Roman";
+font-size: 9pt;
+margin-left: 20mm;
+margin-top: 1mm;
+margin-bottom: 5mm;
+}
+
+#komentarzska p {
+font-family: "Times New Roman";
+font-size: 9pt;
+}
+
+.opis{
+padding-left: 10mm;
+padding-right: 10mm;
+margin-bottom: 5mm;
+font-size: 10pt;
+text-align: justify;
+}
+
+.uwaga{
+font-family: "Times New Roman";
+font-size: 9pt;
+margin-left: 20mm;
+margin-top: 1mm;
+margin-bottom: 5mm;
+}
+
