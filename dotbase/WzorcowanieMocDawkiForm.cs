@@ -676,7 +676,7 @@ namespace DotBase
 
             tabela2.Rows.Clear();
 
-            if (_WzorcowanieMocDawki.LiczWspolczynnikINiepewnosc(ref tabela, ref tabela2, out zakresPrzyrzadu, out wspolczynniki, out niepewnosc))
+            if (_WzorcowanieMocDawki.LiczWspolczynnikINiepewnosc(ref tabela, ref tabela2, comboBox3.Text, out zakresPrzyrzadu, out wspolczynniki, out niepewnosc))
             {
                 string format = "";
 

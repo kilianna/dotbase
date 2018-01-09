@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using System.Linq;
 using Narzedzia;
 using DotBase;
 using System.Windows.Forms;
@@ -93,8 +94,93 @@ namespace WzorcowanieMocDawkiSpace
             return wartoscWzorcowa;
         }
 
+        public bool LiczWspolczynnikINiepewnosc(ref DataGridView tabela, ref DataGridView tabela2, string protokol, out List<double> zakresyPrzyrzadu, out List<double> wspolczynniki, out List<double> niepewnoscWspolczynnika)
+        {
+            zakresyPrzyrzadu = new List<double>();
+            wspolczynniki = new List<double>();
+            niepewnoscWspolczynnika = new List<double>();
+
+            if (tabela.Rows == null || tabela.Rows.Count <= 1)
+                return false;
+
+            List<double> wskazania = new List<double>();
+            List<double> wartosci = new List<double>();
+            List<double> zakresy = new List<double>();
+            List<double> niepewnosci = new List<double>();
+            HashSet<double> zakresySet = new HashSet<double>();
+
+            for (int i = 0; i < tabela.Rows.Count - 1; ++i)
+            {
+                try
+                {
+                    DataGridViewRow wiersz = tabela.Rows[i];
+                    if ((bool)wiersz.Cells[6].Value)
+                    {
+                        wskazania.Add(Double.Parse(wiersz.Cells[2].Value.ToString()));
+                        wartosci.Add(Double.Parse(wiersz.Cells[5].Value.ToString()));
+                        zakresy.Add(Double.Parse(wiersz.Cells[4].Value.ToString()));
+                        niepewnosci.Add(Double.Parse(wiersz.Cells[3].Value.ToString()));
+                        zakresySet.Add(Double.Parse(wiersz.Cells[4].Value.ToString()));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Dane w wierszu {0} są nieprawidłowe. Sprawdź poprawność wprowadzonych liczb.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+
+            zakresyPrzyrzadu = zakresySet.ToList();
+            zakresyPrzyrzadu.Sort();
+
+            double kpr = -1.0;
+            double kT = -1.0;
+            double kt = -1.0;
+            double kr = -1.0;
+
+            foreach (DataRow wiersz in _BazaDanych.TworzTabeleDanych("SELECT Wielkosc, wartosc FROM Budzetniepewnosci").Rows)
+            {
+                var wielkosc = wiersz.Field<string>(0);
+                var wartosc = wiersz.Field<double>(1);
+                if (wielkosc == "kpr") kpr = wartosc;
+                if (wielkosc == "kT") kT = wartosc;
+                if (wielkosc == "kt") kt = wartosc;
+                if (wielkosc == "kr") kr = wartosc;
+            }
+
+            if (kpr < 0 || kT < 0 || kt < 0 || kr < 0)
+            {
+                MessageBox.Show("Brakuje niezbędnych danych w tabeli 'Budzetniepewnosci' w bazie danych", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            _Zapytanie = String.Format("SELECT Data_kalibracji, id_protokolu FROM Protokoly_kalibracji_lawy WHERE data_kalibracji=#{0}#", protokol);
+            int idProtokolu = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<short>(1);
+
+            for (int zakresIndex = 0; zakresIndex < zakresyPrzyrzadu.Count; zakresIndex++)
+            {
+                double zakres = zakresyPrzyrzadu[zakresIndex];
+                double wspKal = 0.0;
+                int liczba = 0;
+                for (int punktIndex = 0; punktIndex < wskazania.Count; punktIndex++)
+                {
+                    if (zakresy[punktIndex] == zakres)
+                    {
+                        double wspKalPukntu = wartosci[punktIndex] / wskazania[punktIndex];
+                        wspKal += wspKalPukntu;
+                        liczba++;
+                    }
+                }
+                wspKal /= liczba;
+                wspolczynniki.Add(wspKal);
+                niepewnoscWspolczynnika.Add(wspKal);
+            }
+
+            return true;
+        }
+
         //---------------------------------------------------------------
-        public bool LiczWspolczynnikINiepewnosc(ref DataGridView tabela, ref DataGridView tabela2, out List<double> zakresyPrzyrzadu, out List<double> wspolczynniki, out List<double> niepewnoscWspolczynnika)
+        public bool LiczWspolczynnikINiepewnosc1(ref DataGridView tabela, ref DataGridView tabela2, string protokol, out List<double> zakresyPrzyrzadu, out List<double> wspolczynniki, out List<double> niepewnoscWspolczynnika)
         //---------------------------------------------------------------
         {
             zakresyPrzyrzadu = new List<double>();
