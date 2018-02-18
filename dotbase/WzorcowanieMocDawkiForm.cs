@@ -678,7 +678,7 @@ namespace DotBase
 
             bool result;
 
-            if (dateTimePicker1.Value >= DateTime.Parse("2017-01-01"))
+            if (dateTimePicker1.Value >= DateTime.Parse("2018-03-01"))
             {
                 result = _WzorcowanieMocDawki.LiczWspolczynnikINiepewnosc(ref tabela, ref tabela2, comboBox3.Text, out zakresPrzyrzadu, out wspolczynniki, out niepewnosc);
             }
