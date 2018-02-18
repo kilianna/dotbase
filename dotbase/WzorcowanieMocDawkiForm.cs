@@ -676,7 +676,18 @@ namespace DotBase
 
             tabela2.Rows.Clear();
 
-            if (_WzorcowanieMocDawki.LiczWspolczynnikINiepewnosc(ref tabela, ref tabela2, comboBox3.Text, out zakresPrzyrzadu, out wspolczynniki, out niepewnosc))
+            bool result;
+
+            if (dateTimePicker1.Value >= DateTime.Parse("2017-01-01"))
+            {
+                result = _WzorcowanieMocDawki.LiczWspolczynnikINiepewnosc(ref tabela, ref tabela2, comboBox3.Text, out zakresPrzyrzadu, out wspolczynniki, out niepewnosc);
+            }
+            else
+            {
+                result = _WzorcowanieMocDawki.LiczWspolczynnikINiepewnoscOld(ref tabela, ref tabela2, comboBox3.Text, out zakresPrzyrzadu, out wspolczynniki, out niepewnosc);
+            }
+
+            if (result)
             {
                 string format = "";
 
