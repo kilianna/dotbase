@@ -11,7 +11,9 @@ namespace DotBase
         public enum Stale
         {
             SKAZENIA, PROMIENIOWANIE_GAMMA, AMERYK, CHLOR, DAWKA, MOC_DAWKI, PLUTON, STRONT_SLABY, STRONT_SILNY, STRONT_NAJSILNIEJSZY, SYGNALIZACJA,
-            WEGIEL_SLABY, WEGIEL_SILNY, LICZBA_ZLECEN, LICZBA_PRZYRZADOW, LICZBA_WZORCOWAN, LICZBA_WYSTAWIONYCH_SWIADECTW, LICZBA_ELEMENTOW
+            WEGIEL_SLABY, WEGIEL_SILNY, LICZBA_ZLECEN, LICZBA_PRZYRZADOW, LICZBA_WZORCOWAN, LICZBA_WYSTAWIONYCH_SWIADECTW, 
+            WZORCOWANE_CEZEM, WZORCOWANE_NA_SKAZENIA,
+            LICZBA_ELEMENTOW
         };
 
         private BazaDanychWrapper _BazaDanych;
@@ -47,6 +49,8 @@ namespace DotBase
             ZnajdzLiczbeWzorcowanMocDawki(ref szukajOd, ref SzukajDo);
             ZnajdzLiczbeWzorcowanSygnalizacji(ref szukajOd, ref SzukajDo);
             ZnajdzLiczbeZlecen(ref szukajOd, ref SzukajDo);
+            ZnajdzLiczbeWzorcowanCezem(ref szukajOd, ref SzukajDo);
+            ZnajdzLiczbeWzorcowanNaSkarzenia(ref szukajOd, ref SzukajDo);
 
             
             ZnajdzLiczbeWzorcowanNaSkazenia(ref szukajOd, ref SzukajDo);
@@ -54,6 +58,40 @@ namespace DotBase
             ObliczLiczbeWzorcowanGamma();
             ObliczLiczbeWzorcowan();
         }
+
+        //-------------------------------------------------------------
+        // znajdź liczbę przyrządów w danym okresie
+        private void ZnajdzLiczbeWzorcowanCezem(ref DateTime szukajOd, ref DateTime SzukajDo)
+        //-------------------------------------------------------------
+        {
+            _Zapytanie = @"SELECT Count(*)
+                FROM (
+                    SELECT ID_karty
+                    FROM wzorcowanie_cezem
+                    WHERE Data_wzorcowania BETWEEN ? AND ?
+                    GROUP BY ID_karty
+                )";
+
+            _Wyniki[(int)Stale.WZORCOWANE_CEZEM] = _BazaDanych.TworzTabeleDanych(_Zapytanie, szukajOd, SzukajDo).Rows[0].Field<int>(0);
+        }
+
+
+        //-------------------------------------------------------------
+        // znajdź liczbę przyrządów w danym okresie
+        private void ZnajdzLiczbeWzorcowanNaSkarzenia(ref DateTime szukajOd, ref DateTime SzukajDo)
+        //-------------------------------------------------------------
+        {
+            _Zapytanie = @"SELECT Count(*)
+                FROM (
+                    SELECT ID_karty
+                    FROM Wzorcowanie_zrodlami_powierzchniowymi
+                    WHERE Data_wzorcowania BETWEEN ? AND ?
+                    GROUP BY ID_karty
+                )";
+
+            _Wyniki[(int)Stale.WZORCOWANE_NA_SKAZENIA] = _BazaDanych.TworzTabeleDanych(_Zapytanie, szukajOd, SzukajDo).Rows[0].Field<int>(0);
+        }
+
 
         //-------------------------------------------------------------
         // znajdź liczbę przyrządów w danym okresie

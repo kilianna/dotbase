@@ -33,8 +33,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.CzymWzorcowane = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LiczbaWzorcowan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -43,6 +41,8 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
+            this.CzymWzorcowane = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LiczbaWzorcowan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -96,20 +96,6 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(497, 327);
             this.dataGridView1.TabIndex = 4;
-            // 
-            // CzymWzorcowane
-            // 
-            this.CzymWzorcowane.HeaderText = "Czym Wzorcowane";
-            this.CzymWzorcowane.Name = "CzymWzorcowane";
-            this.CzymWzorcowane.ReadOnly = true;
-            this.CzymWzorcowane.Width = 150;
-            // 
-            // LiczbaWzorcowan
-            // 
-            this.LiczbaWzorcowan.HeaderText = "Liczba wzorcowań";
-            this.LiczbaWzorcowan.Name = "LiczbaWzorcowan";
-            this.LiczbaWzorcowan.ReadOnly = true;
-            this.LiczbaWzorcowan.Width = 150;
             // 
             // label3
             // 
@@ -181,6 +167,20 @@
             this.textBox4.ReadOnly = true;
             this.textBox4.Size = new System.Drawing.Size(100, 20);
             this.textBox4.TabIndex = 12;
+            // 
+            // CzymWzorcowane
+            // 
+            this.CzymWzorcowane.HeaderText = "Czym Wzorcowane";
+            this.CzymWzorcowane.Name = "CzymWzorcowane";
+            this.CzymWzorcowane.ReadOnly = true;
+            this.CzymWzorcowane.Width = 200;
+            // 
+            // LiczbaWzorcowan
+            // 
+            this.LiczbaWzorcowan.HeaderText = "Liczba wzorcowań";
+            this.LiczbaWzorcowan.Name = "LiczbaWzorcowan";
+            this.LiczbaWzorcowan.ReadOnly = true;
+            this.LiczbaWzorcowan.Width = 150;
             // 
             // StatystykaWzorcowanForm
             // 

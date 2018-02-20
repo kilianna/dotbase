@@ -11,7 +11,7 @@ namespace DotBase
 {
     public partial class StatystykaWzorcowanForm : Form
     {
-        private static int MAX_WIERSZY = 13;
+        private static int MAX_WIERSZY = 15;
         StatystykaWzorcowan _StatystykaWzorcowan;
 
         //--------------------------------------------------------
@@ -37,6 +37,8 @@ namespace DotBase
             dataGridView1.Rows[10].Cells[0].Value = "Stront najsilniejszy";
             dataGridView1.Rows[11].Cells[0].Value = "Węgiel słaby";
             dataGridView1.Rows[12].Cells[0].Value = "Węgiel silny";
+            dataGridView1.Rows[13].Cells[0].Value = "Przyrządy wzorcowane cezem";
+            dataGridView1.Rows[14].Cells[0].Value = "Przyrządy wzorcowane na skażenia";
 
             dataGridView1.Columns[1].ValueType = typeof(int);
         }
@@ -71,8 +73,8 @@ namespace DotBase
         {
             CzyscStareDane();
 
-            DateTime SzukajOd = dateTimePicker1.Value;
-            DateTime SzukajDo = dateTimePicker2.Value;
+            DateTime SzukajOd = dateTimePicker1.Value.Date;
+            DateTime SzukajDo = dateTimePicker2.Value.Date.AddDays(1).AddTicks(-1);
 
             if (SzukajOd > SzukajDo)
             {
@@ -100,6 +102,8 @@ namespace DotBase
             dataGridView1.Rows[10].Cells[1].Value = _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.STRONT_NAJSILNIEJSZY];
             dataGridView1.Rows[11].Cells[1].Value = _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.WEGIEL_SLABY];
             dataGridView1.Rows[12].Cells[1].Value = _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.WEGIEL_SILNY];
+            dataGridView1.Rows[13].Cells[1].Value = _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.WZORCOWANE_CEZEM];
+            dataGridView1.Rows[14].Cells[1].Value = _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.WZORCOWANE_NA_SKAZENIA];
         }
     }
 }
