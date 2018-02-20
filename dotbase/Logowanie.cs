@@ -38,8 +38,8 @@ namespace DotBase
 
             _BazaDanych = new BazaDanychWrapper();
             _BazaDanych.TworzConnectionString(_SciezkaDoBazy, _HasloDoBazy);
-            
-            if (false == _BazaDanych.Polacz())
+
+            if (false == BazaDanychWrapper.Polacz())
                 return false;
 
             string zapytanie = String.Format("SELECT haslo FROM Hasla WHERE login='{0}'", _Login);
@@ -54,7 +54,7 @@ namespace DotBase
 
             dane = null;
 
-            _BazaDanych.Rozlacz();
+            BazaDanychWrapper.Rozlacz();
 
             return true;
         }

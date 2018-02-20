@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this._Kierownik = new System.Windows.Forms.RadioButton();
             this._PracownikBiurowy = new System.Windows.Forms.RadioButton();
@@ -41,6 +42,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.timerDoRozlaczania = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -169,6 +171,11 @@
             this.openFileDialog1.Filter = "(*.mdb)|*.mdb";
             this.openFileDialog1.Tag = "";
             // 
+            // timerDoRozlaczania
+            // 
+            this.timerDoRozlaczania.Interval = 350;
+            this.timerDoRozlaczania.Tick += new System.EventHandler(this.timerDoRozlaczania_Tick);
+            // 
             // LogowanieForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -186,6 +193,7 @@
             this.MaximizeBox = false;
             this.Name = "LogowanieForm";
             this.Text = "Logowanie do bazy danych.";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MenuGlowneForm_FormClosing);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -208,6 +216,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Timer timerDoRozlaczania;
     }
 }
 

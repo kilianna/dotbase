@@ -17,10 +17,13 @@ namespace DotBase
     {
         private Logowanie _Loger;
 
+        private static LogowanieForm instancja = null;
+
         //----------------------------------------------------------------------------------
         public LogowanieForm()
         //----------------------------------------------------------------------------------
         {
+            instancja = this;
             InitializeComponent();
             Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.CreateSpecificCulture("pl-PL");
             richTextBox1.Text = Properties.Settings.Default.DataBaseLocation;
@@ -99,6 +102,28 @@ namespace DotBase
         {
             if (Keys.Enter == e.KeyCode)
                 LogIn();
+        }
+
+        private void timerDoRozlaczania_Tick(object sender, EventArgs e)
+        {
+            if (BazaDanychWrapper.Zakoncz(false))
+            {
+                timerDoRozlaczania.Stop();
+            }
+        }
+
+        private void MenuGlowneForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            BazaDanychWrapper.Zakoncz(true);
+        }
+
+
+        public static void AktywujLicznikRozlaczania()
+        {
+            if (instancja != null)
+            {
+                instancja.timerDoRozlaczania.Start();
+            }
         }
     }
 }
