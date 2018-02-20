@@ -61,9 +61,9 @@ namespace DotBase
         //-------------------------------------------------------------
         {
             _Zapytanie = "SELECT COUNT(*) FROM Karta_przyjecia AS K INNER JOIN Zlecenia AS Z ON K.id_zlecenia=Z.id_zlecenia WHERE "
-                       + String.Format("data_przyjecia >= #{0}# AND data_przyjecia <= #{1}#", szukajOd.ToShortDateString(), SzukajDo.ToShortDateString());
+                       + "data_przyjecia >= ? AND data_przyjecia <= ?";
 
-            _Wyniki[(int)Stale.LICZBA_PRZYRZADOW] = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0);
+            _Wyniki[(int)Stale.LICZBA_PRZYRZADOW] = _BazaDanych.TworzTabeleDanych(_Zapytanie, szukajOd, SzukajDo).Rows[0].Field<int>(0);
         }
 
         //-------------------------------------------------------------
@@ -71,9 +71,9 @@ namespace DotBase
         private void ZnajdzLiczbeSwiadectw(ref DateTime szukajOd, ref DateTime SzukajDo)
         //-------------------------------------------------------------
         {
-            _Zapytanie = String.Format("SELECT COUNT(*) FROM Swiadectwo WHERE data_wystawienia >= #{0}# AND data_wystawienia <= #{1}#", szukajOd.ToShortDateString(), SzukajDo.ToShortDateString());
+            _Zapytanie = "SELECT COUNT(*) FROM Swiadectwo WHERE data_wystawienia >= ? AND data_wystawienia <= ?";
 
-            _Wyniki[(int)Stale.LICZBA_WYSTAWIONYCH_SWIADECTW] = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0);
+            _Wyniki[(int)Stale.LICZBA_WYSTAWIONYCH_SWIADECTW] = _BazaDanych.TworzTabeleDanych(_Zapytanie, szukajOd, SzukajDo).Rows[0].Field<int>(0);
         }
         
         // znajdz liczbę wzorcowan w danym okresie
@@ -90,10 +90,9 @@ namespace DotBase
         //-------------------------------------------------------------
         {
             _Zapytanie = "SELECT COUNT(*) FROM (SELECT DISTINCT id_wzorcowania FROM Wyniki_dawka) AS W INNER JOIN Wzorcowanie_cezem AS C "
-                       + String.Format("ON W.id_wzorcowania=C.id_wzorcowania WHERE C.data_wzorcowania BETWEEN #{0}# AND #{1}#",
-                         szukajOd.ToShortDateString(), SzukajDo.ToShortDateString());
+                       + "ON W.id_wzorcowania=C.id_wzorcowania WHERE C.data_wzorcowania BETWEEN ? AND ?";
 
-            _Wyniki[(int)Stale.DAWKA] = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0);
+            _Wyniki[(int)Stale.DAWKA] = _BazaDanych.TworzTabeleDanych(_Zapytanie, szukajOd, SzukajDo).Rows[0].Field<int>(0);
         }
         
         //-------------------------------------------------------------
@@ -113,12 +112,11 @@ namespace DotBase
         {
 
             _Zapytanie = "SELECT Z.id_zrodla, ( SELECT COUNT(*) FROM Wzorcowanie_zrodlami_powierzchniowymi AS W "
-                       + String.Format("WHERE W.data_wzorcowania >= #{0}# AND data_wzorcowania <= #{1}# AND W.id_zrodla=Z.id_zrodla)",
-                                        szukajOd.ToShortDateString(), SzukajDo.ToShortDateString() )
+                       + "WHERE W.data_wzorcowania >= ? AND data_wzorcowania <= ? AND W.id_zrodla=Z.id_zrodla)"
                        + " FROM Zrodla_powierzchniowe AS Z "
                        + "GROUP BY Z.id_zrodla ORDER BY Z.id_zrodla";
             
-            DataTable dane = _BazaDanych.TworzTabeleDanych(_Zapytanie);
+            DataTable dane = _BazaDanych.TworzTabeleDanych(_Zapytanie, szukajOd, SzukajDo);
 
             if (dane.Rows.Count != 8)
                 return;
@@ -160,10 +158,9 @@ namespace DotBase
         //-------------------------------------------------------------
         {
             _Zapytanie = "SELECT COUNT(*) FROM (SELECT DISTINCT id_wzorcowania FROM Wyniki_moc_dawki) AS W INNER JOIN Wzorcowanie_cezem AS C "
-                       +  String.Format("ON W.id_wzorcowania=C.id_wzorcowania WHERE C.data_wzorcowania BETWEEN #{0}# AND #{1}#", 
-                          szukajOd.ToShortDateString(), SzukajDo.ToShortDateString());
+                       +  "ON W.id_wzorcowania=C.id_wzorcowania WHERE C.data_wzorcowania BETWEEN ? AND ?";
             
-            _Wyniki[(int)Stale.MOC_DAWKI] = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0);    
+            _Wyniki[(int)Stale.MOC_DAWKI] = _BazaDanych.TworzTabeleDanych(_Zapytanie, szukajOd, SzukajDo).Rows[0].Field<int>(0);    
         }
 
         // znajdź liczbę wzorcowań na sygnalizację
@@ -172,10 +169,9 @@ namespace DotBase
         //-------------------------------------------------------------
         {
             _Zapytanie = "SELECT COUNT(*) FROM (SELECT DISTINCT id_wzorcowania FROM Sygnalizacja) AS S INNER JOIN Wzorcowanie_cezem AS C "
-                       + String.Format("ON S.id_wzorcowania=C.id_wzorcowania WHERE C.data_wzorcowania BETWEEN #{0}# AND #{1}#",
-                         szukajOd.ToShortDateString(), SzukajDo.ToShortDateString());
+                       + "ON S.id_wzorcowania=C.id_wzorcowania WHERE C.data_wzorcowania BETWEEN ? AND ?";
 
-            _Wyniki[(int)Stale.SYGNALIZACJA] = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0);
+            _Wyniki[(int)Stale.SYGNALIZACJA] = _BazaDanych.TworzTabeleDanych(_Zapytanie, szukajOd, SzukajDo).Rows[0].Field<int>(0);
         }
 
         //-------------------------------------------------------------
@@ -183,10 +179,9 @@ namespace DotBase
         private void ZnajdzLiczbeZlecen(ref DateTime szukajOd, ref DateTime SzukajDo)
         //-------------------------------------------------------------
         {
-            _Zapytanie = String.Format("SELECT COUNT(*) FROM Zlecenia WHERE data_przyjecia >= #{0}# AND data_przyjecia <= #{1}#",
-                         szukajOd.ToShortDateString(), SzukajDo.ToShortDateString());
+            _Zapytanie = "SELECT COUNT(*) FROM Zlecenia WHERE data_przyjecia >= ? AND data_przyjecia <= ?";
 
-            _Wyniki[(int)Stale.LICZBA_ZLECEN] = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0);
+            _Wyniki[(int)Stale.LICZBA_ZLECEN] = _BazaDanych.TworzTabeleDanych(_Zapytanie, szukajOd, SzukajDo).Rows[0].Field<int>(0);
         }
     }
 }
