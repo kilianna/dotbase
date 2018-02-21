@@ -144,7 +144,7 @@ namespace DotBase
                         _SzablonDrugiejStrony.Append(_SzablonPodstawowy);
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return false;
                 }
@@ -794,7 +794,7 @@ namespace DotBase
                         m_data.setValue(SwiadectwoData.DataType.INFORMACJA, stl.GetTextInfo("tekst", false, false, false));
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return false;
                 }
@@ -803,7 +803,7 @@ namespace DotBase
             }
 
             //********************************************************************************************
-            new private bool PobierzDaneZleceniodawcy()
+            private bool PobierzDaneZleceniodawcy()
             //********************************************************************************************
             {
                 _Zapytanie = "SELECT Zleceniodawca, adres FROM Zleceniodawca WHERE id_zleceniodawcy = (SELECT id_zleceniodawcy FROM Zlecenia WHERE id_zlecenia = (SELECT id_zlecenia FROM "

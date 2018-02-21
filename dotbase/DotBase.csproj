@@ -281,7 +281,6 @@
     <Compile Include="WykresForm.Designer.cs">
       <DependentUpon>WykresForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="WzorcowanieDawkaModel.cs" />
     <Compile Include="WzorcowanieMocDawki.cs" />
     <Compile Include="WzorcowanieMocDawkiForm.cs">
       <SubType>Form</SubType>

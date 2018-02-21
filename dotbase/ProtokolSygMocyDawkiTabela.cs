@@ -75,7 +75,7 @@ namespace DotBase
                            PobierzDaneWzorcoweIPomiarowe(m_dataModel.jednostka, ref m_dataModel.dataGridView) &&
                            PobierzDaneZleceniodawcy(m_dataModel.modelDanePodstawowe.nrKarty);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return false;
                 }

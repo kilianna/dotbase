@@ -117,12 +117,9 @@ namespace DotBase
 
                     return WypelnijDaneZleceniodawcy(m_templateToFill);
                 }
-                catch (Exception)
-                {
-                    return false;
-                }
+                catch (Exception) { }
 
-                return true;
+                return false;
             }
 
             override protected bool retrieveAllData()
@@ -137,7 +134,7 @@ namespace DotBase
                            PobierzDaneWspolczynnikow(m_model.modelDaneWspolczynnikow, m_model.wspol_kalibracyjny, m_model.niep_wspol_kalibracyjnego, m_model.pop_wspol_kalibracyjny) &&
                            PobierzDaneZleceniodawcy(m_model.modelDanePodstawowe.nrKarty);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return false;
                 }
