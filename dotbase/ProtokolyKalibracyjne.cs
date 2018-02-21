@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using System.Windows.Forms;
 
 namespace DotBase
 {
@@ -23,12 +24,41 @@ namespace DotBase
         public bool ZapiszDane(int idProtokolu, DateTime data, List<int> id, List<double> odleglosc, List<double> mocKermy, List<double> niepewnosc)
         //--------------------------------------------------------------------------------------
         {
+            string nazwa = null;
+            try
+            {
+                var tab = _BazaDanych.TworzTabeleDanych("SELECT Nazwa FROM Protokoly_Kalibracji_Lawy WHERE id_protokolu = ?", idProtokolu);
+                var riw = tab.Rows[0];
+                nazwa = tab.Rows[0].Field<string>(0);
+            }
+            catch (Exception) { }
+
+            if (nazwa == null)
+            {
+                try
+                {
+                    var tab = _BazaDanych.TworzTabeleDanych("SELECT Nazwa FROM Protokoly_Kalibracji_Lawy ORDER BY id_protokolu DESC");
+                    var riw = tab.Rows[0];
+                    nazwa = tab.Rows[0].Field<string>(0);
+                    var numText = nazwa.Substring(0, nazwa.Length - 4).Trim('/');
+                    var number = Int32.Parse(numText) + 1;
+                    nazwa = number.ToString("000") + data.Year;
+                }
+                catch (Exception) { }
+            }
+
+            if (nazwa == null)
+            {
+                nazwa = idProtokolu.ToString("000") + data.Year;
+                MessageBox.Show("Nazwa protokołu nie może zostać automatycznie wyznaczona! Używam " + nazwa + ".");
+            }
+
             _Zapytanie = String.Format("DELETE FROM Protokoly_Kalibracji_Lawy WHERE id_protokolu = {0}", idProtokolu);
             _BazaDanych.WykonajPolecenie(_Zapytanie);
 
-            _Zapytanie = String.Format("INSERT INTO Protokoly_Kalibracji_Lawy (ID_protokolu, Data_kalibracji) VALUES ({0}, #{1}#)",
-                                       idProtokolu, data.ToShortDateString());
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
+
+            _Zapytanie = "INSERT INTO Protokoly_Kalibracji_Lawy (ID_protokolu, Data_kalibracji, Nazwa) VALUES (?, ?, ?)";
+            _BazaDanych.WykonajPolecenie(_Zapytanie, idProtokolu, data, nazwa);
 
 
             _Zapytanie = String.Format("DELETE FROM Pomiary_wzorcowe WHERE id_protokolu = {0}", idProtokolu);

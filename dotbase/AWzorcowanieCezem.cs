@@ -300,7 +300,7 @@ namespace DotBase
             Protokoly.Czysc();
             try
             {
-                foreach (DataRow row in _BazaDanych.TworzTabeleDanych("SELECT id_protokolu, data_kalibracji FROM Protokoly_kalibracji_lawy").Rows)
+                foreach (DataRow row in _BazaDanych.TworzTabeleDanych("SELECT id_protokolu, data_kalibracji FROM Protokoly_kalibracji_lawy ORDER BY id_protokolu").Rows)
                 {
                     Protokoly.Dodaj(row.Field<short>("id_protokolu"), row.Field<DateTime>("data_kalibracji"));
                 }
