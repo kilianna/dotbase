@@ -6,7 +6,7 @@
 				</table>
 				<table id="tabwyn">
 					<tr><th>USTAWIONY PRÓG</th><th style="width: 70mm">RZECZYWISTE WARTOŚCI, PRZY<br> KTÓRYCH WŁĄCZONA ZOSTAJE<br> SYGNALIZACJA OSTRZEGAWCZA</th><th>WARTOŚĆ<br>WSPÓŁCZYNNIKA<br>POPRAWKOWEGO</th></tr>
-					<tr><th style="font-size: 11pt">mSv</th><th style="font-size: 11pt">mSv</th><th style="font-size: 11pt">-</th></tr>
+					<tr><th style="font-size: 11pt"><!jednDawka></th><th style="font-size: 11pt"><!jednDawka></th><th style="font-size: 11pt">-</th></tr>
 					<!tabela>
 				</table>
                 <div class="uwaga"><!uwaga></div>

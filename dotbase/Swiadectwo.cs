@@ -427,6 +427,9 @@ namespace DotBase
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c2>", m_data.getValue(SwiadectwoData.DataType.SONDA_TYP));
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c3>", m_data.getValue(SwiadectwoData.DataType.SONDA_NR_FABRYCZNY));
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c4>", m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA));
+                var jedn = m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA);
+                var parts = jedn.Split('/');
+                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!jednDawka>", parts[0]);
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!tabela>", _Tabela.ToString());
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!uwaga>", m_data.getValue(SwiadectwoData.DataType.UWAGA_SD));
             }
