@@ -25,7 +25,6 @@ namespace DotBase
         {
             instancja = this;
             InitializeComponent();
-            Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.CreateSpecificCulture("pl-PL");
             richTextBox1.Text = Properties.Settings.Default.DataBaseLocation;
         }
 
