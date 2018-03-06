@@ -117,7 +117,7 @@ namespace WzorcowanieMocDawkiSpace
                 try
                 {
                     DataGridViewRow wiersz = tabela.Rows[i];
-                    if ((bool)wiersz.Cells[6].Value)
+                    if (Boolean.Parse(wiersz.Cells[6].Value.ToString()))
                     {
                         odleglosci.Add(Double.Parse(wiersz.Cells[0].Value.ToString()));
                         zrodla.Add(Int32.Parse(wiersz.Cells[1].Value.ToString()));
