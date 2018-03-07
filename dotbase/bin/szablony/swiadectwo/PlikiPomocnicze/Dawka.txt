@@ -4,7 +4,7 @@
 				</table>
 				<table id="tabwyn">
 					<tr><th>ZAKRES POMIAROWY<BR>PRZYRZĄDU</th><th>WARTOŚĆ <BR> WSPÓŁCZYNNIKA <BR> POPRAWKOWEGO</th></tr>
-					<tr><th style="font-size: 11pt">mSv</th><th style="font-size: 11pt">-</th></tr>
+					<tr><th style="font-size: 10pt">mSv</th><th style="font-size: 10pt">-</th></tr>
 					<!tabela>
 				</table>
 				<div id="komentarz">Zmierzoną wartość <!wielkosc2> należy pomnożyć przez wartość współczynnika poprawkowego.
