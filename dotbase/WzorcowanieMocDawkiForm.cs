@@ -678,9 +678,13 @@ namespace DotBase
 
             bool result;
 
-            if (dateTimePicker1.Value >= DateTime.Parse("2018-03-01"))
+            if (dateTimePicker1.Value >= DateTime.Parse("2018-06-11"))
             {
-                result = _WzorcowanieMocDawki.LiczWspolczynnikINiepewnosc(ref tabela, ref tabela2, comboBox3.Text, out zakresPrzyrzadu, out wspolczynniki, out niepewnosc);
+                result = _WzorcowanieMocDawki.LiczWspolczynnikINiepewnoscOd20180611(ref tabela, ref tabela2, comboBox3.Text, dateTimePicker1.Value, out zakresPrzyrzadu, out wspolczynniki, out niepewnosc);
+            }
+            else if (dateTimePicker1.Value >= DateTime.Parse("2018-03-01"))
+            {
+                result = _WzorcowanieMocDawki.LiczWspolczynnikINiepewnoscOd20180301(ref tabela, ref tabela2, comboBox3.Text, out zakresPrzyrzadu, out wspolczynniki, out niepewnosc);
             }
             else
             {
