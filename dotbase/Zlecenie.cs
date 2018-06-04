@@ -36,11 +36,12 @@ namespace DotBase
             public string Nip { get; set; }
             public string OsobaKontaktowa { get; set; }
             public string Telefon { get; set; }
+            public string Email { get; set; }
             public string NazwaPlatnika { get; set; }
             public string AdresPlatnika { get; set; }
             public string NipPlatnika { get; set; }
 
-            public DaneZleceniodawcy(string Adres, string Faks, int Id, string Nazwa, string Nip, string OsobaKon, string Telefon, string NazwaPlatnika, string AdresPlatnika, string NipPlatnika)
+            public DaneZleceniodawcy(string Adres, string Faks, int Id, string Nazwa, string Nip, string OsobaKon, string Telefon, string Email, string NazwaPlatnika, string AdresPlatnika, string NipPlatnika)
                 : this()
             {
                 this.Adres = Adres;
@@ -50,6 +51,7 @@ namespace DotBase
                 this.Nip = Nip;
                 this.OsobaKontaktowa = OsobaKon;
                 this.Telefon = Telefon;
+                this.Email = Email;
                 this.NazwaPlatnika = NazwaPlatnika;
                 this.AdresPlatnika = AdresPlatnika;
                 this.NipPlatnika = NipPlatnika;
@@ -107,9 +109,9 @@ namespace DotBase
             public bool DodajZleceniodawce(ref DaneZleceniodawcy zleceniodawca)
             //--------------------------------------------------------------------
             {
-                _Zapytanie = "INSERT INTO Zleceniodawca (Adres, Faks, ID_zleceniodawcy, Nip, Osoba_kontaktowa, Telefon, Zleceniodawca, Nazwa_platnika, Adres_platnika, NIP_platnika) VALUES" +
-                             String.Format("('{0}','{1}',{2},'{3}','{4}','{5}','{6}','{7}','{8}','{9}')", zleceniodawca.Adres, zleceniodawca.Faks, zleceniodawca.Id,
-                             zleceniodawca.Nip, zleceniodawca.OsobaKontaktowa, zleceniodawca.Telefon, zleceniodawca.Nazwa,
+                _Zapytanie = "INSERT INTO Zleceniodawca (Adres, Faks, ID_zleceniodawcy, Nip, Osoba_kontaktowa, Telefon, email, Zleceniodawca, Nazwa_platnika, Adres_platnika, NIP_platnika) VALUES" +
+                             String.Format("('{0}','{1}',{2},'{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}')", zleceniodawca.Adres, zleceniodawca.Faks, zleceniodawca.Id,
+                             zleceniodawca.Nip, zleceniodawca.OsobaKontaktowa, zleceniodawca.Telefon, zleceniodawca.Email, zleceniodawca.Nazwa,
                              zleceniodawca.NazwaPlatnika, zleceniodawca.AdresPlatnika, zleceniodawca.NipPlatnika);
 
                 return _BazaDanych.WykonajPolecenie(_Zapytanie);
@@ -121,8 +123,8 @@ namespace DotBase
             {
                 _Zapytanie = String.Format("UPDATE Zleceniodawca SET zleceniodawca='{0}', Adres='{1}', Faks='{2}', ",
                                            zleceniodawca.Nazwa, zleceniodawca.Adres, zleceniodawca.Faks)
-                           + String.Format(" telefon='{0}', Osoba_kontaktowa='{1}', nip='{2}', ",
-                                            zleceniodawca.Telefon, zleceniodawca.OsobaKontaktowa, zleceniodawca.Nip)
+                           + String.Format(" telefon='{0}', email='{1}', Osoba_kontaktowa='{2}', nip='{3}', ",
+                                            zleceniodawca.Telefon, zleceniodawca.Email, zleceniodawca.OsobaKontaktowa, zleceniodawca.Nip)
                            + String.Format(" Nazwa_platnika='{0}', Adres_platnika='{1}', NIP_platnika='{2}'",
                                             zleceniodawca.NazwaPlatnika, zleceniodawca.AdresPlatnika, zleceniodawca.NipPlatnika)
                            + String.Format(" WHERE id_zleceniodawcy = {0}", zleceniodawca.Id);
@@ -250,6 +252,7 @@ namespace DotBase
                 _DaneZlecenia.ZleceniodawcaInfo.Nip = _DaneTabela.Rows[0].Field<string>("Nip");
                 _DaneZlecenia.ZleceniodawcaInfo.OsobaKontaktowa = _DaneTabela.Rows[0].Field<string>("Osoba_kontaktowa");
                 _DaneZlecenia.ZleceniodawcaInfo.Telefon = _DaneTabela.Rows[0].Field<string>("Telefon");
+                _DaneZlecenia.ZleceniodawcaInfo.Email = _DaneTabela.Rows[0].Field<string>("email");
                 _DaneZlecenia.ZleceniodawcaInfo.NazwaPlatnika = _DaneTabela.Rows[0].Field<string>("Nazwa_platnika");
                 _DaneZlecenia.ZleceniodawcaInfo.AdresPlatnika = _DaneTabela.Rows[0].Field<string>("Adres_platnika");
                 _DaneZlecenia.ZleceniodawcaInfo.NipPlatnika = _DaneTabela.Rows[0].Field<string>("NIP_platnika");
