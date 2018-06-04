@@ -51,6 +51,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
+            this.ostrzerzenieLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
@@ -287,11 +288,23 @@
             this.label9.TabIndex = 12;
             this.label9.Text = "Transport";
             // 
+            // ostrzerzenieLabel
+            // 
+            this.ostrzerzenieLabel.AutoSize = true;
+            this.ostrzerzenieLabel.ForeColor = System.Drawing.Color.Red;
+            this.ostrzerzenieLabel.Location = new System.Drawing.Point(220, 204);
+            this.ostrzerzenieLabel.Name = "ostrzerzenieLabel";
+            this.ostrzerzenieLabel.Size = new System.Drawing.Size(158, 26);
+            this.ostrzerzenieLabel.TabIndex = 14;
+            this.ostrzerzenieLabel.Text = "<-- Najprawdopodobniej jest\r\n      to rozszerzone wzorcowanie";
+            this.ostrzerzenieLabel.Visible = false;
+            // 
             // CennikForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(391, 318);
+            this.Controls.Add(this.ostrzerzenieLabel);
             this.Controls.Add(this.numericUpDown6);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.groupBox2);
@@ -347,5 +360,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.NumericUpDown numericUpDown6;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label ostrzerzenieLabel;
     }
 }

@@ -12,11 +12,13 @@ namespace DotBase
     public partial class CennikForm : Form
     {
         Cennik _Cennik;
+        BazaDanychWrapper _BazaDanych;
 
         //-------------------------------------------------
         public CennikForm()
         //-------------------------------------------------
         {
+            _BazaDanych = new BazaDanychWrapper();
             InitializeComponent();
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(Zapisz);
         }
@@ -39,10 +41,42 @@ namespace DotBase
             numericUpDown3.Enabled = false;
             numericUpDown4.Enabled = false;
 
+            // ========================= Wyświetlenie ostrzerzenia
+
+            var tab = _BazaDanych.TworzTabeleDanych("SELECT Wartosc, Nazwa FROM Stale WHERE Nazwa=?", "d");
+            var d = tab.Rows[0].Field<double>(0);
+
+            bool pokazOstrzerzenie = false;
+            tab = _BazaDanych.TworzTabeleDanych("SELECT ID_wzorcowania, Rodzaj_wzorcowania, ID_karty FROM wzorcowanie_cezem WHERE ID_karty=? AND Rodzaj_wzorcowania=?", idKarty, "md");
+            for (var i = 0; i < tab.Rows.Count && !pokazOstrzerzenie; i++)
+            {
+                var tab2 = _BazaDanych.TworzTabeleDanych("SELECT Odleglosc, ID_zrodla, ID_wzorcowania FROM Pomiary_cez WHERE ID_wzorcowania=? AND ID_zrodla=3", tab.Rows[i].Field<int>(0));
+                for (var j = 0; j < tab2.Rows.Count && !pokazOstrzerzenie; j++)
+                {
+                    if (tab2.Rows[j].Field<double>(0) <= d)
+                    {
+                        pokazOstrzerzenie = true;
+                    }
+                }
+            }
+
+            ostrzerzenieLabel.Visible = pokazOstrzerzenie;
+
+
             _Cennik = new Cennik(idKarty);
             if (_Cennik.Inicjalizuj() && PobierzDaneAutomatycznie(ameryk, chlor, dawka, moc_dawki, pluton, stront_slaby, stront_silny, sygnalizacja_dawki, sygnalizacja_mocy_dawki,wegiel_slaby,wegiel_silny, stront_najsilniejszy))
             {
                 _Cennik.LiczSumeAutomatycznie();
+
+                // ========================= Pole Ekspres
+
+                tab = _BazaDanych.TworzTabeleDanych("SELECT ID_zlecenia, ID_karty FROM Karta_przyjecia WHERE ID_karty=?", idKarty);
+                var idZlecenia = tab.Rows[0].Field<int>(0);
+                tab = _BazaDanych.TworzTabeleDanych("SELECT Ekspres, ID_zlecenia FROM Zlecenia WHERE ID_zlecenia=?", idZlecenia);
+                var ekspres = tab.Rows[0].Field<Boolean>(0);
+
+                checkBox2.Checked = ekspres;
+
                 return true;
             }
             else
