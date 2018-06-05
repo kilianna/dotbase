@@ -29,173 +29,184 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.button1 = new System.Windows.Forms.Button();
-            this._Kierownik = new System.Windows.Forms.RadioButton();
-            this._PracownikBiurowy = new System.Windows.Forms.RadioButton();
-            this._PracownikPomiarowy = new System.Windows.Forms.RadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            System.Windows.Forms.Button zakonczBtn;
+            System.Windows.Forms.Label label4;
+            System.Windows.Forms.Label label5;
+            System.Windows.Forms.Label label6;
+            System.Windows.Forms.Button wybierzBtn;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogowanieForm));
+            this.zalogujBtn = new System.Windows.Forms.Button();
+            this.bazaFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.timerDoRozlaczania = new System.Windows.Forms.Timer(this.components);
-            this.groupBox1.SuspendLayout();
+            this.hasloTextBox = new System.Windows.Forms.TextBox();
+            this.infoLabel = new System.Windows.Forms.Label();
+            this.bazaTextBox = new System.Windows.Forms.TextBox();
+            this.uzytkownikTextBox = new System.Windows.Forms.TextBox();
+            this.administracjaBtn = new System.Windows.Forms.Button();
+            zakonczBtn = new System.Windows.Forms.Button();
+            label4 = new System.Windows.Forms.Label();
+            label5 = new System.Windows.Forms.Label();
+            label6 = new System.Windows.Forms.Label();
+            wybierzBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // zakonczBtn
             // 
-            this.button1.Location = new System.Drawing.Point(176, 218);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(116, 36);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Zaloguj";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            zakonczBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            zakonczBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            zakonczBtn.Location = new System.Drawing.Point(321, 209);
+            zakonczBtn.Name = "zakonczBtn";
+            zakonczBtn.Size = new System.Drawing.Size(115, 34);
+            zakonczBtn.TabIndex = 8;
+            zakonczBtn.Text = "Zakończ";
+            zakonczBtn.UseVisualStyleBackColor = true;
+            zakonczBtn.Click += new System.EventHandler(this.button2_Click);
             // 
-            // _Kierownik
+            // label4
             // 
-            this._Kierownik.AutoSize = true;
-            this._Kierownik.Checked = true;
-            this._Kierownik.Location = new System.Drawing.Point(6, 19);
-            this._Kierownik.Name = "_Kierownik";
-            this._Kierownik.Size = new System.Drawing.Size(71, 17);
-            this._Kierownik.TabIndex = 1;
-            this._Kierownik.TabStop = true;
-            this._Kierownik.Text = "Kierownik";
-            this._Kierownik.UseVisualStyleBackColor = true;
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(12, 9);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(65, 13);
+            label4.TabIndex = 0;
+            label4.Text = "&Użytkownik:";
             // 
-            // _PracownikBiurowy
+            // label5
             // 
-            this._PracownikBiurowy.AutoSize = true;
-            this._PracownikBiurowy.Location = new System.Drawing.Point(6, 42);
-            this._PracownikBiurowy.Name = "_PracownikBiurowy";
-            this._PracownikBiurowy.Size = new System.Drawing.Size(115, 17);
-            this._PracownikBiurowy.TabIndex = 2;
-            this._PracownikBiurowy.Text = "Pracownik Biurowy";
-            this._PracownikBiurowy.UseVisualStyleBackColor = true;
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(12, 68);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(39, 13);
+            label5.TabIndex = 2;
+            label5.Text = "&Hasło:";
             // 
-            // _PracownikPomiarowy
+            // label6
             // 
-            this._PracownikPomiarowy.AutoSize = true;
-            this._PracownikPomiarowy.Location = new System.Drawing.Point(6, 65);
-            this._PracownikPomiarowy.Name = "_PracownikPomiarowy";
-            this._PracownikPomiarowy.Size = new System.Drawing.Size(129, 17);
-            this._PracownikPomiarowy.TabIndex = 3;
-            this._PracownikPomiarowy.Text = "Pracownik Pomiarowy";
-            this._PracownikPomiarowy.UseVisualStyleBackColor = true;
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(12, 133);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(90, 13);
+            label6.TabIndex = 4;
+            label6.Text = "&Plik bazy danych:";
             // 
-            // groupBox1
+            // wybierzBtn
             // 
-            this.groupBox1.Controls.Add(this._Kierownik);
-            this.groupBox1.Controls.Add(this._PracownikPomiarowy);
-            this.groupBox1.Controls.Add(this._PracownikBiurowy);
-            this.groupBox1.Location = new System.Drawing.Point(18, 198);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(138, 96);
-            this.groupBox1.TabIndex = 4;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Pracownicy";
+            wybierzBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            wybierzBtn.Location = new System.Drawing.Point(359, 147);
+            wybierzBtn.Name = "wybierzBtn";
+            wybierzBtn.Size = new System.Drawing.Size(124, 24);
+            wybierzBtn.TabIndex = 6;
+            wybierzBtn.Text = "&Wybierz...";
+            wybierzBtn.UseVisualStyleBackColor = true;
+            wybierzBtn.Click += new System.EventHandler(this.wybierzBtn_Click);
             // 
-            // textBox2
+            // zalogujBtn
             // 
-            this.textBox2.Location = new System.Drawing.Point(18, 117);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(115, 20);
-            this.textBox2.TabIndex = 6;
-            this.textBox2.Text = "npp126p";
-            this.textBox2.UseSystemPasswordChar = true;
+            this.zalogujBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.zalogujBtn.Location = new System.Drawing.Point(59, 209);
+            this.zalogujBtn.Name = "zalogujBtn";
+            this.zalogujBtn.Size = new System.Drawing.Size(116, 34);
+            this.zalogujBtn.TabIndex = 7;
+            this.zalogujBtn.Text = "Zaloguj";
+            this.zalogujBtn.UseVisualStyleBackColor = true;
+            this.zalogujBtn.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label1
+            // bazaFileDialog
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(126, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Lokalizacja bazy danych:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 101);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(117, 13);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Hasło do bazy danych:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 152);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(153, 13);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Hasło dla danego pracownika:";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(18, 168);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(115, 20);
-            this.textBox3.TabIndex = 10;
-            this.textBox3.Text = "doniczka";
-            this.textBox3.UseSystemPasswordChar = true;
-            this.textBox3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox3_KeyDown);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(177, 260);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(115, 34);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "Zakończ";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(21, 26);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(271, 58);
-            this.richTextBox1.TabIndex = 12;
-            this.richTextBox1.Text = "";
-            this.richTextBox1.Click += new System.EventHandler(this.richTextBox1_Click);
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Filter = "(*.mdb)|*.mdb";
-            this.openFileDialog1.Tag = "";
+            this.bazaFileDialog.Filter = "(*.mdb)|*.mdb";
+            this.bazaFileDialog.Tag = "";
             // 
             // timerDoRozlaczania
             // 
             this.timerDoRozlaczania.Interval = 350;
             this.timerDoRozlaczania.Tick += new System.EventHandler(this.timerDoRozlaczania_Tick);
             // 
+            // hasloTextBox
+            // 
+            this.hasloTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.hasloTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.hasloTextBox.Location = new System.Drawing.Point(15, 84);
+            this.hasloTextBox.Name = "hasloTextBox";
+            this.hasloTextBox.Size = new System.Drawing.Size(468, 32);
+            this.hasloTextBox.TabIndex = 3;
+            this.hasloTextBox.UseSystemPasswordChar = true;
+            this.hasloTextBox.TextChanged += new System.EventHandler(this.hasloTextBox_TextChanged);
+            // 
+            // infoLabel
+            // 
+            this.infoLabel.AutoSize = true;
+            this.infoLabel.ForeColor = System.Drawing.Color.Red;
+            this.infoLabel.Location = new System.Drawing.Point(12, 181);
+            this.infoLabel.Name = "infoLabel";
+            this.infoLabel.Size = new System.Drawing.Size(16, 13);
+            this.infoLabel.TabIndex = 13;
+            this.infoLabel.Text = "...";
+            // 
+            // bazaTextBox
+            // 
+            this.bazaTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.bazaTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DotBase.Properties.Settings.Default, "PlikBazy", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.bazaTextBox.Location = new System.Drawing.Point(15, 149);
+            this.bazaTextBox.Name = "bazaTextBox";
+            this.bazaTextBox.Size = new System.Drawing.Size(338, 20);
+            this.bazaTextBox.TabIndex = 5;
+            this.bazaTextBox.Text = global::DotBase.Properties.Settings.Default.PlikBazy;
+            this.bazaTextBox.TextChanged += new System.EventHandler(this.bazaTextBox_TextChanged);
+            // 
+            // uzytkownikTextBox
+            // 
+            this.uzytkownikTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.uzytkownikTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DotBase.Properties.Settings.Default, "OstatniUzytkownik", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.uzytkownikTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.uzytkownikTextBox.Location = new System.Drawing.Point(15, 25);
+            this.uzytkownikTextBox.Name = "uzytkownikTextBox";
+            this.uzytkownikTextBox.Size = new System.Drawing.Size(468, 32);
+            this.uzytkownikTextBox.TabIndex = 1;
+            this.uzytkownikTextBox.Text = global::DotBase.Properties.Settings.Default.OstatniUzytkownik;
+            this.uzytkownikTextBox.TextChanged += new System.EventHandler(this.uzytkownikTextBox_TextChanged);
+            // 
+            // administracjaBtn
+            // 
+            this.administracjaBtn.Location = new System.Drawing.Point(190, 209);
+            this.administracjaBtn.Name = "administracjaBtn";
+            this.administracjaBtn.Size = new System.Drawing.Size(116, 34);
+            this.administracjaBtn.TabIndex = 14;
+            this.administracjaBtn.Text = "Administracja";
+            this.administracjaBtn.UseVisualStyleBackColor = true;
+            this.administracjaBtn.Visible = false;
+            this.administracjaBtn.Click += new System.EventHandler(this.administracjaBtn_Click);
+            // 
             // LogowanieForm
             // 
+            this.AcceptButton = this.zalogujBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(304, 308);
-            this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button1);
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.CancelButton = zakonczBtn;
+            this.ClientSize = new System.Drawing.Size(495, 261);
+            this.Controls.Add(this.administracjaBtn);
+            this.Controls.Add(this.infoLabel);
+            this.Controls.Add(wybierzBtn);
+            this.Controls.Add(label6);
+            this.Controls.Add(this.bazaTextBox);
+            this.Controls.Add(label5);
+            this.Controls.Add(this.hasloTextBox);
+            this.Controls.Add(label4);
+            this.Controls.Add(this.uzytkownikTextBox);
+            this.Controls.Add(zakonczBtn);
+            this.Controls.Add(this.zalogujBtn);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(20000, 300);
+            this.MinimumSize = new System.Drawing.Size(437, 300);
             this.Name = "LogowanieForm";
-            this.Text = "Logowanie do bazy danych.";
+            this.Text = "Logowanie do bazy danych";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MenuGlowneForm_FormClosing);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LogowanieForm_FormClosed);
+            this.Load += new System.EventHandler(this.LogowanieForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,20 +214,14 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.RadioButton _Kierownik;
-        private System.Windows.Forms.RadioButton _PracownikBiurowy;
-        private System.Windows.Forms.RadioButton _PracownikPomiarowy;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.OpenFileDialog bazaFileDialog;
         private System.Windows.Forms.Timer timerDoRozlaczania;
+        private System.Windows.Forms.TextBox uzytkownikTextBox;
+        private System.Windows.Forms.TextBox hasloTextBox;
+        private System.Windows.Forms.TextBox bazaTextBox;
+        private System.Windows.Forms.Label infoLabel;
+        private System.Windows.Forms.Button zalogujBtn;
+        private System.Windows.Forms.Button administracjaBtn;
     }
 }
 

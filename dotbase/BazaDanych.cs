@@ -76,6 +76,7 @@ namespace DotBase
             catch(Exception ex)
             {
                 Debug.WriteLine("Exception: " + ex.ToString());
+                LastException = ex;
                 return false;
             }
 
@@ -96,7 +97,7 @@ namespace DotBase
         //----------------------------------------------------------------------------------
         {
            // if (null == BazaDanychWrapper._ConnectionString)            
-            BazaDanychWrapper._ConnectionString = String.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0};Jet OLEDB:Database Password={1};", SciezkaDoBazy, HasloDoBazy);
+            BazaDanychWrapper._ConnectionString = String.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source='{0}';Jet OLEDB:Database Password={1};", SciezkaDoBazy, HasloDoBazy);
             
         }
         
@@ -512,6 +513,8 @@ namespace DotBase
             // LongVarBinary = 205,
             typeof(byte[]),
         };
+
+        public static Exception LastException { get; set; }
 
 #endregion
 

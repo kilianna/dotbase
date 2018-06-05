@@ -11,8 +11,6 @@ namespace DotBase
 {
     public partial class MenuGlowneForm : Form
     {
-        public enum UZYTKOWNIK { KIEROWNIK, PRACOWNIK_BIUROWY, PRACOWNIK_POMIAROWY };
-
         private MenuWyszukiwanieForm _MenuWyszukiwanie;
         private MenuBiuroForm        _MenuBiuro;
         private MenuWzorcowanieForm      _Wzorcowanie;
@@ -23,26 +21,6 @@ namespace DotBase
         //-------------------------------------------------------------------
         {
             InitializeComponent();
-        }
-
-        //-------------------------------------------------------------------
-        public void AktywujPrzyciskiDlaUzytkwonika(UZYTKOWNIK typPracownika)
-        //-------------------------------------------------------------------
-        {
-            button1.Enabled = button2.Enabled = button3.Enabled = button4.Enabled = false;
-
-            switch (typPracownika)
-            {
-                case UZYTKOWNIK.KIEROWNIK:
-                    button1.Enabled = button2.Enabled = button3.Enabled = button4.Enabled = true;
-                    break;
-                case UZYTKOWNIK.PRACOWNIK_BIUROWY:
-                    button1.Enabled = button3.Enabled = true;
-                    break;
-                case UZYTKOWNIK.PRACOWNIK_POMIAROWY:
-                    button1.Enabled = button2.Enabled = button3.Enabled = true;
-                    break;
-            }
         }
 
         //-------------------------------------------------------------------

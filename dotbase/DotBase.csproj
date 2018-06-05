@@ -65,6 +65,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdministracjaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdministracjaForm.Designer.cs">
+      <DependentUpon>AdministracjaForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="BazaDanych.cs" />
     <Compile Include="BudzetNiepewnosciForm.cs">
       <SubType>Form</SubType>
@@ -80,6 +86,12 @@
       <DependentUpon>CennikForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="HasloForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HasloForm.Designer.cs">
+      <DependentUpon>HasloForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MeldunekModel.cs" />
     <Compile Include="Multimap.cs" />
     <Compile Include="QueryUtils.cs" />
@@ -330,6 +342,9 @@
     <Compile Include="ZnajdowaniePoPrzyrzadzieForm.Designer.cs">
       <DependentUpon>ZnajdowaniePoPrzyrzadzieForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AdministracjaForm.resx">
+      <DependentUpon>AdministracjaForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BudzetNiepewnosciForm.resx">
       <DependentUpon>BudzetNiepewnosciForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -339,6 +354,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DaneWzorcoweMocDawki.resx">
       <DependentUpon>DaneWzorcoweMocDawki.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HasloForm.resx">
+      <DependentUpon>HasloForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HistoriaWzorcowanForm.resx">
       <DependentUpon>HistoriaWzorcowanForm.cs</DependentUpon>

@@ -86,5 +86,14 @@ namespace DotBase
             Close();
         }
 
+        private void hasloBtn_Click(object sender, EventArgs e)
+        {
+            var form = new HasloForm();
+            if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+            {
+                LogowanieForm.Instancja.zmienHaslo(form.Nazwa, form.Haslo);
+            }
+        }
+
     }
 }
