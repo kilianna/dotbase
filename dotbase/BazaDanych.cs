@@ -641,5 +641,28 @@ namespace DotBase
             Debug.WriteLine("Closed");
             return true;
         }
+
+        internal static bool ZmienHaslo(string SciezkaDoBazy, string noweHaslo, string stareHaslo)
+        {
+            try
+            {
+                Zakoncz(true);
+                _Polaczenie = new OleDbConnection(String.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source='{0}';Jet OLEDB:Database Password={1};Mode=Share Exclusive", SciezkaDoBazy, stareHaslo));
+                _Polaczenie.Open();
+                var baza = new BazaDanychWrapper();
+                OleDbCommand polecenie = baza.UtworzPolecenie("ALTER DATABASE PASSWORD [" + noweHaslo + "] [" + stareHaslo + "]", new object[0]);
+                polecenie.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                Zakoncz(true);
+            }
+
+            return true;
+        }
     }
 }

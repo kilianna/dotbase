@@ -11,11 +11,14 @@ namespace DotBase
 {
     public partial class HasloForm : Form
     {
+        string aktHaslo = "";
+
         public HasloForm()
         {
             InitializeComponent();
             nazwaTextBox.Text = LogowanieForm.Instancja.Wybrany.nazwa;
             hasloAktTextBox.Enabled = true;
+            aktHaslo = LogowanieForm.Instancja.Wybrany.haslo;
         }
 
         private void hasloTextBox_TextChanged(object sender, EventArgs e)
@@ -28,9 +31,9 @@ namespace DotBase
             bool ok = true;
             ok = ok && (hasloTextBox.Text == hasloPowtTextBox.Text);
             ok = ok && poprawneHaslo(hasloTextBox.Text);
-            if (hasloAktTextBox.Enabled)
+            if (hasloAktTextBox.Enabled && aktHaslo.Length > 0)
             {
-                ok = ok && LogowanieForm.Instancja.Wybrany.haslo == hasloAktTextBox.Text;
+                ok = ok && aktHaslo == hasloAktTextBox.Text;
             }
             okBtn.Enabled = ok;
             return ok;
@@ -46,7 +49,7 @@ namespace DotBase
                 if (c >= 'a' && c <= 'z') litery = true;
                 if (c >= 'A' && c <= 'Z') litery = true;
             }
-            return litery && cyfry && haslo.Length >= 8;
+            return litery && cyfry && haslo.Length >= 7;
         }
 
         public void zmienUzytkownika(string nazwa)
@@ -89,6 +92,21 @@ namespace DotBase
         public string Nazwa
         {
             get { return nazwaTextBox.Text; }
+        }
+
+        internal void zmienWlasne(string nazwa, string haslo)
+        {
+            nazwaTextBox.Text = nazwa;
+            hasloTextBox.Text = "";
+            hasloPowtTextBox.Text = "";
+            hasloAktTextBox.Text = "";
+            hasloAktTextBox.Enabled = (haslo != null);
+            aktHaslo = haslo;
+        }
+
+        public string AktHaslo
+        {
+            get { return hasloAktTextBox.Text; }
         }
     }
 }

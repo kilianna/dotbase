@@ -17,6 +17,8 @@ namespace DotBase
         }
 
         LogowanieForm.Uzytkownik[] uzytkownicy = new LogowanieForm.Uzytkownik[0];
+        string hasloBazy = "";
+        private string stareHasloBazy = "";
 
         private void AdministracjaForm_Load(object sender, EventArgs e)
         {
@@ -28,6 +30,7 @@ namespace DotBase
                 listaView.Rows[i].Cells[2].ReadOnly = (usr.nazwa == LogowanieForm.Instancja.Wybrany.nazwa);
                 var r = listaView.Rows[i];
             }
+            hasloBazy = LogowanieForm.Instancja.hasloBazy;
         }
 
         private void listaView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -112,7 +115,7 @@ namespace DotBase
 
         private void okBtn_Click(object sender, EventArgs e)
         {
-            HashSet<string> unique= new HashSet<string>();
+            HashSet<string> unique = new HashSet<string>();
             foreach (var usr in uzytkownicy)
             {
                 if (unique.Contains(usr.nazwa))
@@ -122,9 +125,32 @@ namespace DotBase
                 }
                 unique.Add(usr.nazwa);
             }
+            if (LogowanieForm.Instancja.hasloBazy != hasloBazy)
+            {
+                if (!BazaDanychWrapper.ZmienHaslo(LogowanieForm.Instancja.PlikBazy, hasloBazy, stareHasloBazy))
+                {
+                    if (MessageBox.Show(this, "Nie udało się zmienić hasła w pliku bazy!\r\nCzy zmienić je tylko w pliku użytkowników?", "Błąd", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == System.Windows.Forms.DialogResult.No)
+                    {
+                        this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+                        return;
+                    }
+                }
+            }
+            LogowanieForm.Instancja.hasloBazy = hasloBazy;
             LogowanieForm.Instancja.uzytkownicy = uzytkownicy;
             LogowanieForm.Instancja.zapiszUzytkownikow();
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var form = new HasloForm();
+            form.zmienWlasne("[BAZA DANYCH]", "");
+            if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+            {
+                hasloBazy = form.Haslo;
+                stareHasloBazy = form.AktHaslo;
+            }
         }
 
     }

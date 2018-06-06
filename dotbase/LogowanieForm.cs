@@ -389,5 +389,13 @@ namespace DotBase
                 hasloTextBox.Focus();
             }
         }
+
+        public string PlikBazy
+        {
+            get
+            {
+                return Path.GetFullPath(bazaTextBox.Text);
+            }
+        }
     }
 }
