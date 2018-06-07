@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button6 = new System.Windows.Forms.Button();
@@ -71,6 +71,7 @@
             this.numericUpDownRok = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.checkBox14 = new System.Windows.Forms.CheckBox();
+            this.sprawdzenieCheckBox = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -147,14 +148,14 @@
             this.dataGridView1.Location = new System.Drawing.Point(3, 104);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView1.RowTemplate.ReadOnly = true;
             this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -211,6 +212,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.sprawdzenieCheckBox);
             this.tabPage2.Controls.Add(this.checkBox13);
             this.tabPage2.Controls.Add(this.checkBox11);
             this.tabPage2.Controls.Add(this.checkBox10);
@@ -226,7 +228,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(419, 307);
+            this.tabPage2.Size = new System.Drawing.Size(419, 312);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Wymagania dotyczące kalibracji";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -362,7 +364,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(419, 307);
+            this.tabPage3.Size = new System.Drawing.Size(419, 312);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Informacje inne";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -545,6 +547,16 @@
             this.checkBox14.Text = "Wykonano";
             this.checkBox14.UseVisualStyleBackColor = true;
             // 
+            // sprawdzenieCheckBox
+            // 
+            this.sprawdzenieCheckBox.AutoSize = true;
+            this.sprawdzenieCheckBox.Location = new System.Drawing.Point(30, 228);
+            this.sprawdzenieCheckBox.Name = "sprawdzenieCheckBox";
+            this.sprawdzenieCheckBox.Size = new System.Drawing.Size(87, 17);
+            this.sprawdzenieCheckBox.TabIndex = 12;
+            this.sprawdzenieCheckBox.Text = "Sprawdzenie";
+            this.sprawdzenieCheckBox.UseVisualStyleBackColor = true;
+            // 
             // KartaPrzyjeciaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -623,6 +635,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDownRok;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox checkBox14;
+        private System.Windows.Forms.CheckBox sprawdzenieCheckBox;
 
     }
 }

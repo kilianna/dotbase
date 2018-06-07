@@ -14,17 +14,19 @@ namespace DotBase
         public class DaneDodatkowe
         {
             //----------------------------------------------
-            public DaneDodatkowe(string akcesoria, string uwagi, bool uszkodzony)
+            public DaneDodatkowe(string akcesoria, string uwagi, bool uszkodzony, bool sprawdzenie)
             //----------------------------------------------
             {
                 Akcesoria = akcesoria;
                 Uwagi = uwagi;
                 Uszkodzony = uszkodzony;
+                Sprawdzenie = sprawdzenie;
             }
 
             public string Akcesoria { get; private set; }
             public string Uwagi { get;  private set; }
             public bool Uszkodzony { get; private set; }
+            public bool Sprawdzenie { get; private set; }
         }
         #endregion
         
@@ -104,10 +106,10 @@ namespace DotBase
             }
 
             //----------------------------------------------------------------------------------------------
-            public void UstawDaneDodatkowe(string akcesoria, string uwagi, bool uszkodzony)
+            public void UstawDaneDodatkowe(string akcesoria, string uwagi, bool uszkodzony, bool sprawdzenie)
             //----------------------------------------------------------------------------------------------
             {
-                DaneDodatkowe = new DaneDodatkowe(akcesoria, uwagi, uszkodzony);
+                DaneDodatkowe = new DaneDodatkowe(akcesoria, uwagi, uszkodzony, sprawdzenie);
             }
 
             //----------------------------------------------------------------------------------------------
@@ -195,8 +197,8 @@ namespace DotBase
                 _Zapytanie = String.Format("UPDATE Karta_przyjecia SET id_dozymetru = {0}, Wykonano = {1}", idDozymetru, dane.Wykonano);
                 _BazaDanych.WykonajPolecenie(_Zapytanie);
 
-                _Zapytanie = String.Format("UPDATE Karta_przyjecia SET akcesoria='{0}', uwagi='{1}', uszkodzony={2} WHERE id_karty={3}",
-                                           dane.DaneDodatkowe.Akcesoria, dane.DaneDodatkowe.Uwagi, dane.DaneDodatkowe.Uszkodzony, dane.IdKarty);
+                _Zapytanie = String.Format("UPDATE Karta_przyjecia SET akcesoria='{0}', uwagi='{1}', uszkodzony={2}, uszkodzony={3} WHERE id_karty={4}",
+                                           dane.DaneDodatkowe.Akcesoria, dane.DaneDodatkowe.Uwagi, dane.DaneDodatkowe.Uszkodzony, dane.DaneDodatkowe.Sprawdzenie, dane.IdKarty);
                 _BazaDanych.WykonajPolecenie(_Zapytanie);
 
                 _Zapytanie = String.Format("UPDATE Karta_przyjecia SET ameryk={0}, chlor={1}, dawka={2}, moc_dawki={3} pluton={4}, ",
@@ -251,16 +253,16 @@ namespace DotBase
 
                 _Zapytanie = "INSERT INTO Karta_przyjecia (id_karty, id_zlecenia, rok, ameryk, chlor, dawka, moc_dawki, "
 	                       + "pluton, stront_slaby, stront_silny, syg_dawki, syg_mocy_dawki, wegiel_slaby, wegiel_silny, stront_najsilniejszy, "
-                           + "akcesoria, uwagi, uszkodzony, id_dozymetru, test_na_skazenia, wykonano) VALUES "
-                           + String.Format("({0},{1},'{2}',{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},'{15}','{16}',{17},{18},'brak skażeń',{19})",
+                           + "akcesoria, uwagi, uszkodzony, Sprawdzenie, id_dozymetru, test_na_skazenia, wykonano) VALUES "
+                           + String.Format("({0},{1},'{2}',{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},'{15}','{16}',{17},{18},{19},'brak skażeń',{20})",
                            dane.IdKarty, dane.NrZlecenia, dane.rok, dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.AMERYK],
                            dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.CHLOR],dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.DAWKA],
                            dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.MOC_DAWKI],dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.PLUTON],
                            dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.STRONT_SLABY],dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.STRONT_SILNY],
                            dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.SYGNALIZACJA_DAWKI],dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.SYGNALIZACJA_MOCY_DAWKI],
                            dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.WEGIEL_SLABY],dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.WEGIEL_SILNY],
-                           dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.STRONT_NAJSILNIEJSZY], dane.DaneDodatkowe.Akcesoria, 
-                           dane.DaneDodatkowe.Uwagi, dane.DaneDodatkowe.Uszkodzony, idDozymetru, dane.Wykonano);
+                           dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.STRONT_NAJSILNIEJSZY], dane.DaneDodatkowe.Akcesoria,
+                           dane.DaneDodatkowe.Uwagi, dane.DaneDodatkowe.Uszkodzony, dane.DaneDodatkowe.Sprawdzenie, idDozymetru, dane.Wykonano);
 
                 _BazaDanych.WykonajPolecenie(_Zapytanie);
             }
@@ -291,8 +293,9 @@ namespace DotBase
                                            dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.WEGIEL_SILNY],
                                            dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.STRONT_NAJSILNIEJSZY],
                                            dane.DaneDodatkowe.Akcesoria, dane.DaneDodatkowe.Uwagi)
-                           + String.Format("uszkodzony = {0}, id_dozymetru = {1}, Wykonano = {2} WHERE id_karty = {3}",
+                           + String.Format("uszkodzony = {0}, Sprawdzenie = {1}, id_dozymetru = {2}, Wykonano = {3} WHERE id_karty = {4}",
                                            dane.DaneDodatkowe.Uszkodzony,
+                                           dane.DaneDodatkowe.Sprawdzenie,
                                            idDozymetru,
                                            dane.Wykonano,
                                            dane.IdKarty);
@@ -500,7 +503,7 @@ namespace DotBase
             public bool ZaladujDaneDodatkowe()
             //------------------------------------------------------------------
             {
-                _Zapytanie = String.Format("SELECT akcesoria, uwagi, uszkodzony FROM Karta_przyjecia WHERE id_karty = {0}", DaneKartyPrzyjecia.IdKarty);
+                _Zapytanie = String.Format("SELECT akcesoria, uwagi, uszkodzony, Sprawdzenie FROM Karta_przyjecia WHERE id_karty = {0}", DaneKartyPrzyjecia.IdKarty);
 
                 _OdpowiedzBazy = _BazaDanych.TworzTabeleDanych(_Zapytanie);
 
@@ -508,7 +511,8 @@ namespace DotBase
                 {
                     DaneKartyPrzyjecia.DaneDodatkowe = new DaneDodatkowe(_OdpowiedzBazy.Rows[0].Field<string>(0),
                                                                          _OdpowiedzBazy.Rows[0].Field<string>(1),
-                                                                         _OdpowiedzBazy.Rows[0].Field<bool>(2));
+                                                                         _OdpowiedzBazy.Rows[0].Field<bool>(2),
+                                                                         _OdpowiedzBazy.Rows[0].Field<bool>(3));
                 }
                 catch (Exception)
                 {

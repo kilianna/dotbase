@@ -46,8 +46,8 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.sprawdzenieCheckBox = new System.Windows.Forms.CheckBox();
+            this.zepsutyCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
@@ -235,34 +235,34 @@
             this.label7.TabIndex = 8;
             this.label7.Text = "SUMA";
             // 
-            // checkBox3
+            // sprawdzenieCheckBox
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(11, 66);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(87, 17);
-            this.checkBox3.TabIndex = 9;
-            this.checkBox3.Text = "Sprawdzenie";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
+            this.sprawdzenieCheckBox.AutoSize = true;
+            this.sprawdzenieCheckBox.Location = new System.Drawing.Point(11, 66);
+            this.sprawdzenieCheckBox.Name = "sprawdzenieCheckBox";
+            this.sprawdzenieCheckBox.Size = new System.Drawing.Size(87, 17);
+            this.sprawdzenieCheckBox.TabIndex = 9;
+            this.sprawdzenieCheckBox.Text = "Sprawdzenie";
+            this.sprawdzenieCheckBox.UseVisualStyleBackColor = true;
+            this.sprawdzenieCheckBox.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
-            // checkBox4
+            // zepsutyCheckBox
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(11, 89);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(64, 17);
-            this.checkBox4.TabIndex = 10;
-            this.checkBox4.Text = "Zepsuty";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
+            this.zepsutyCheckBox.AutoSize = true;
+            this.zepsutyCheckBox.Location = new System.Drawing.Point(11, 89);
+            this.zepsutyCheckBox.Name = "zepsutyCheckBox";
+            this.zepsutyCheckBox.Size = new System.Drawing.Size(64, 17);
+            this.zepsutyCheckBox.TabIndex = 10;
+            this.zepsutyCheckBox.Text = "Zepsuty";
+            this.zepsutyCheckBox.UseVisualStyleBackColor = true;
+            this.zepsutyCheckBox.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.checkBox1);
-            this.groupBox2.Controls.Add(this.checkBox4);
+            this.groupBox2.Controls.Add(this.zepsutyCheckBox);
             this.groupBox2.Controls.Add(this.checkBox2);
-            this.groupBox2.Controls.Add(this.checkBox3);
+            this.groupBox2.Controls.Add(this.sprawdzenieCheckBox);
             this.groupBox2.Location = new System.Drawing.Point(13, 184);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(200, 120);
@@ -355,8 +355,8 @@
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.CheckBox sprawdzenieCheckBox;
+        private System.Windows.Forms.CheckBox zepsutyCheckBox;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.NumericUpDown numericUpDown6;
         private System.Windows.Forms.Label label9;

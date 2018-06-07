@@ -70,12 +70,16 @@ namespace DotBase
 
                 // ========================= Pole Ekspres
 
-                tab = _BazaDanych.TworzTabeleDanych("SELECT ID_zlecenia, ID_karty FROM Karta_przyjecia WHERE ID_karty=?", idKarty);
+                tab = _BazaDanych.TworzTabeleDanych("SELECT ID_zlecenia, Uszkodzony, Sprawdzenie, ID_karty FROM Karta_przyjecia WHERE ID_karty=?", idKarty);
                 var idZlecenia = tab.Rows[0].Field<int>(0);
+                var uszkodzony = tab.Rows[0].Field<Boolean>(1);
+                var sprawdzenie = tab.Rows[0].Field<Boolean>(2);
                 tab = _BazaDanych.TworzTabeleDanych("SELECT Ekspres, ID_zlecenia FROM Zlecenia WHERE ID_zlecenia=?", idZlecenia);
                 var ekspres = tab.Rows[0].Field<Boolean>(0);
 
                 checkBox2.Checked = ekspres;
+                zepsutyCheckBox.Checked = uszkodzony;
+                sprawdzenieCheckBox.Checked = sprawdzenie;
 
                 return true;
             }
@@ -108,8 +112,8 @@ namespace DotBase
                                              (int)numericUpDown4.Value,
                                              checkBox1.Checked,
                                              checkBox2.Checked,
-                                             checkBox3.Checked,
-                                             checkBox4.Checked,
+                                             sprawdzenieCheckBox.Checked,
+                                             zepsutyCheckBox.Checked,
                                              (uint)numericUpDown8.Value,
                                              (double)numericUpDown5.Value,
                                              (double)numericUpDown6.Value));
@@ -169,11 +173,11 @@ namespace DotBase
         {
             LiczSume2();
 
-            if (checkBox4.Checked)
+            if (zepsutyCheckBox.Checked)
             {
                 checkBox1.Enabled = false;
                 checkBox2.Enabled = false;
-                checkBox3.Enabled = false;
+                sprawdzenieCheckBox.Enabled = false;
                 numericUpDown1.Enabled = false;
                 numericUpDown2.Enabled = false;
                 numericUpDown3.Enabled = false;
@@ -185,7 +189,7 @@ namespace DotBase
             {
                 checkBox1.Enabled = true;
                 checkBox2.Enabled = true;
-                checkBox3.Enabled = true;
+                sprawdzenieCheckBox.Enabled = true;
                 numericUpDown1.Enabled = true;
                 numericUpDown2.Enabled = true;
                 numericUpDown3.Enabled = true;
@@ -200,11 +204,11 @@ namespace DotBase
         {
             LiczSume2();
 
-            if (checkBox3.Checked)
+            if (sprawdzenieCheckBox.Checked)
             {
                 checkBox1.Enabled = false;
                 checkBox2.Enabled = false;
-                checkBox4.Enabled = false;
+                zepsutyCheckBox.Enabled = false;
                 numericUpDown1.Enabled = false;
                 numericUpDown2.Enabled = false;
                 numericUpDown3.Enabled = false;
@@ -215,7 +219,7 @@ namespace DotBase
             {
                 checkBox1.Enabled = true;
                 checkBox2.Enabled = true;
-                checkBox4.Enabled = true;
+                zepsutyCheckBox.Enabled = true;
                 numericUpDown1.Enabled = true;
                 numericUpDown2.Enabled = true;
                 numericUpDown3.Enabled = true;

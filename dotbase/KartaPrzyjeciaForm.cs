@@ -75,7 +75,7 @@ namespace DotBase
             dane.Wymagania = new WymaganiaKalibracji(checkBox1.Checked, checkBox2.Checked, checkBox3.Checked, checkBox4.Checked,
                                                      checkBox5.Checked, checkBox6.Checked, checkBox7.Checked, checkBox8.Checked,
                                                      checkBox9.Checked, checkBox10.Checked, checkBox11.Checked, checkBox13.Checked);
-            dane.DaneDodatkowe = new DaneDodatkowe(textBox2.Text, textBox3.Text, checkBox12.Checked);
+            dane.DaneDodatkowe = new DaneDodatkowe(textBox2.Text, textBox3.Text, checkBox12.Checked, sprawdzenieCheckBox.Checked);
 
             _KartaPrzyjecia.AktualizujDane(ref dane);
         }
@@ -189,7 +189,7 @@ namespace DotBase
             dane.Wymagania = new WymaganiaKalibracji(checkBox1.Checked, checkBox3.Checked, checkBox9.Checked, checkBox8.Checked,
                                                      checkBox2.Checked, checkBox6.Checked, checkBox7.Checked, checkBox11.Checked,
                                                      checkBox10.Checked, checkBox4.Checked, checkBox5.Checked, checkBox13.Checked);
-            dane.DaneDodatkowe = new DaneDodatkowe(textBox2.Text, textBox3.Text, checkBox12.Checked);
+            dane.DaneDodatkowe = new DaneDodatkowe(textBox2.Text, textBox3.Text, checkBox12.Checked, sprawdzenieCheckBox.Checked);
             dane.Wykonano = checkBox14.Checked;
             return dane;
         }
@@ -295,7 +295,7 @@ namespace DotBase
             if (0 == String.Empty.CompareTo(comboBox1.Text) || 0 == String.Empty.CompareTo(comboBox2.Text))
                 return false;
 
-            return  checkBox1.Checked == true ||
+            return checkBox1.Checked == true ||
                     checkBox2.Checked == true ||
                     checkBox3.Checked == true ||
                     checkBox4.Checked == true ||
@@ -307,7 +307,8 @@ namespace DotBase
                     checkBox10.Checked == true ||
                     checkBox11.Checked == true ||
                     checkBox12.Checked == true ||
-                    checkBox13.Checked == true;
+                    checkBox13.Checked == true ||
+                    sprawdzenieCheckBox.Checked == true;
         }
 
         //---------------------------------------------------------
@@ -409,6 +410,7 @@ namespace DotBase
             textBox2.Text = dane.DaneDodatkowe.Akcesoria;
             textBox3.Text = dane.DaneDodatkowe.Uwagi;
             checkBox12.Checked = dane.DaneDodatkowe.Uszkodzony;
+            sprawdzenieCheckBox.Checked = dane.DaneDodatkowe.Sprawdzenie;
         }
 
         //-------------------------------------------------------------
