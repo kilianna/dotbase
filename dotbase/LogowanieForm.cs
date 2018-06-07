@@ -30,9 +30,6 @@ namespace DotBase
 
         private byte[] kk = new byte[16] { 134, 42, 156, 192, 244, 11, 93, 192, 167, 238, 250, 46, 132, 38, 87, 16 };
 
-
-        private Logowanie _Loger;
-        
         //----------------------------------------------------------------------------------
         public LogowanieForm()
         //----------------------------------------------------------------------------------
@@ -84,12 +81,18 @@ namespace DotBase
             
             MenuGlowneForm Menu = new MenuGlowneForm();
             Hide();
-            Menu.ShowDialog();
+            var result = Menu.ShowDialog();
             Show();
             Focus();
             BringToFront();
             Focus();
             hasloTextBox.Focus();
+#if DEBUG
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                Close();
+            }
+#endif
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -317,8 +320,10 @@ namespace DotBase
 
             try
             {
+#if !DEBUG
                 if (hasloTextBox.Text == "") throw new Exception("Podaj hasło użytkownika!");
                 if (Wybrany.haslo != hasloTextBox.Text) throw new Exception("Nieprawidłowe hasło!");
+#endif
                 hasloTextBox.BackColor = SystemColors.Window;
                 odswierzInfo(2, "");
             }
@@ -396,6 +401,13 @@ namespace DotBase
             {
                 return Path.GetFullPath(bazaTextBox.Text);
             }
+        }
+
+        private void LogowanieForm_Shown(object sender, EventArgs e)
+        {
+#if DEBUG
+            LogIn();
+#endif
         }
     }
 }

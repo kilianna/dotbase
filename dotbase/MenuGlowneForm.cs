@@ -83,6 +83,7 @@ namespace DotBase
             if (_MenuUstawienia != null && _MenuUstawienia.Visible)
                 _MenuUstawienia.Close();
 
+            DialogResult = System.Windows.Forms.DialogResult.Retry;
             Close();
         }
 
@@ -98,6 +99,14 @@ namespace DotBase
                 button3.Enabled = true;
             else if (sender.Equals(_MenuUstawienia))
                 button4.Enabled = true;
+        }
+
+        private void MenuGlowneForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (DialogResult != System.Windows.Forms.DialogResult.Retry)
+            {
+                DialogResult = System.Windows.Forms.DialogResult.OK;
+            }
         }
 
     }

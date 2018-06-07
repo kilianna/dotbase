@@ -103,6 +103,7 @@
             this.MaximizeBox = false;
             this.Name = "MenuGlowneForm";
             this.Text = "Menu - Główne";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MenuGlowneForm_FormClosing);
             this.ResumeLayout(false);
 
         }
