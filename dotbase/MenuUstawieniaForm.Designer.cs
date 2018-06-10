@@ -35,6 +35,8 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.hasloBtn = new System.Windows.Forms.Button();
+            this.eksportujBtn = new System.Windows.Forms.Button();
+            this.eksportujDlg = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
             // 
             // button1
@@ -79,10 +81,23 @@
             this.hasloBtn.UseVisualStyleBackColor = true;
             this.hasloBtn.Click += new System.EventHandler(this.hasloBtn_Click);
             // 
+            // eksportujBtn
+            // 
+            resources.ApplyResources(this.eksportujBtn, "eksportujBtn");
+            this.eksportujBtn.Name = "eksportujBtn";
+            this.eksportujBtn.UseVisualStyleBackColor = true;
+            this.eksportujBtn.Click += new System.EventHandler(this.eksportujBtn_Click);
+            // 
+            // eksportujDlg
+            // 
+            this.eksportujDlg.DefaultExt = "mdb";
+            resources.ApplyResources(this.eksportujDlg, "eksportujDlg");
+            // 
             // MenuUstawieniaForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.eksportujBtn);
             this.Controls.Add(this.hasloBtn);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -102,5 +117,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button hasloBtn;
+        private System.Windows.Forms.Button eksportujBtn;
+        private System.Windows.Forms.SaveFileDialog eksportujDlg;
     }
 }

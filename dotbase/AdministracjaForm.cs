@@ -145,7 +145,7 @@ namespace DotBase
         private void button1_Click(object sender, EventArgs e)
         {
             var form = new HasloForm();
-            form.zmienWlasne("[BAZA DANYCH]", "");
+            form.zmienWlasne("BAZA DANYCH", "");
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 hasloBazy = form.Haslo;

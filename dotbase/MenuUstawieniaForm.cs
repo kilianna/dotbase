@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace DotBase
 {
@@ -93,6 +94,27 @@ namespace DotBase
             {
                 LogowanieForm.Instancja.zmienHaslo(form.Nazwa, form.Haslo);
             }
+        }
+
+        private void eksportujBtn_Click(object sender, EventArgs e)
+        {
+            if (eksportujDlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+            {
+                var form = new HasloForm();
+                form.zmienWlasne("NOWA BAZA DANYCH", null);
+                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                {
+                    if (!BazaDanychWrapper.Eksportuj(LogowanieForm.Instancja.PlikBazy, LogowanieForm.Instancja.hasloBazy, eksportujDlg.FileName, form.Haslo, new BazaDanychWrapper.TransformujBazeDelegate(UsunDanePersonalne)))
+                    {
+                        MessageBox.Show(this, "Nie udało się wyeskportować bazy danych.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void UsunDanePersonalne(BazaDanychWrapper baza)
+        {
+            baza.WykonajPolecenie("UPDATE Zleceniodawca SET Osoba_kontaktowa='Xxxx Yyyy', Telefon='000 000 000', Faks='000 000 000', email='xxxx.yyyy@zzzz.ww'");
         }
 
     }

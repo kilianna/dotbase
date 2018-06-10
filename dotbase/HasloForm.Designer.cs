@@ -28,18 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.Label label1;
             System.Windows.Forms.Label label2;
             System.Windows.Forms.Button anulujBtn;
             System.Windows.Forms.Label label3;
             System.Windows.Forms.Label label4;
             System.Windows.Forms.Label label5;
+            this.uzytkownikLabel = new System.Windows.Forms.Label();
             this.nazwaTextBox = new System.Windows.Forms.TextBox();
             this.hasloTextBox = new System.Windows.Forms.TextBox();
             this.okBtn = new System.Windows.Forms.Button();
             this.hasloPowtTextBox = new System.Windows.Forms.TextBox();
             this.hasloAktTextBox = new System.Windows.Forms.TextBox();
-            label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             anulujBtn = new System.Windows.Forms.Button();
             label3 = new System.Windows.Forms.Label();
@@ -47,14 +46,14 @@
             label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label1
+            // uzytkownikLabel
             // 
-            label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(12, 26);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(65, 13);
-            label1.TabIndex = 0;
-            label1.Text = "Użytkownik:";
+            this.uzytkownikLabel.AutoSize = true;
+            this.uzytkownikLabel.Location = new System.Drawing.Point(12, 26);
+            this.uzytkownikLabel.Name = "uzytkownikLabel";
+            this.uzytkownikLabel.Size = new System.Drawing.Size(65, 13);
+            this.uzytkownikLabel.TabIndex = 0;
+            this.uzytkownikLabel.Text = "Użytkownik:";
             // 
             // label2
             // 
@@ -95,6 +94,15 @@
             label4.Text = "Hasło musi być niekrótsze niż 8 znaków, zawierać\r\nco najmniej jedną literę i co n" +
                 "ajmniej jendą cyfrę.";
             label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(12, 52);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(82, 13);
+            label5.TabIndex = 2;
+            label5.Text = "Aktualne hasło:";
             // 
             // nazwaTextBox
             // 
@@ -141,15 +149,6 @@
             this.hasloAktTextBox.UseSystemPasswordChar = true;
             this.hasloAktTextBox.TextChanged += new System.EventHandler(this.hasloTextBox_TextChanged);
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(12, 52);
-            label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(82, 13);
-            label5.TabIndex = 2;
-            label5.Text = "Aktualne hasło:";
-            // 
             // HasloForm
             // 
             this.AcceptButton = this.okBtn;
@@ -167,7 +166,7 @@
             this.Controls.Add(this.hasloTextBox);
             this.Controls.Add(label2);
             this.Controls.Add(this.nazwaTextBox);
-            this.Controls.Add(label1);
+            this.Controls.Add(this.uzytkownikLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -186,5 +185,6 @@
         private System.Windows.Forms.TextBox hasloPowtTextBox;
         private System.Windows.Forms.Button okBtn;
         private System.Windows.Forms.TextBox hasloAktTextBox;
+        private System.Windows.Forms.Label uzytkownikLabel;
     }
 }

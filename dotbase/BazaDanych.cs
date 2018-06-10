@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.OleDb;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.IO;
 
 namespace DotBase
 {
@@ -655,6 +656,47 @@ namespace DotBase
             }
             catch (Exception)
             {
+                return false;
+            }
+            finally
+            {
+                Zakoncz(true);
+            }
+
+            return true;
+        }
+
+        public delegate void TransformujBazeDelegate(BazaDanychWrapper baza);
+
+        public static bool Eksportuj(string staraSciezka, string stareHaslo, string nowaSciezka, string noweHaslo, TransformujBazeDelegate transformacja)
+        {
+            bool usunGdyNiepowodzenie = false;
+            try
+            {
+                Zakoncz(true);
+                File.Copy(staraSciezka, nowaSciezka, true);
+                usunGdyNiepowodzenie = true;
+                _Polaczenie = new OleDbConnection(String.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source='{0}';Jet OLEDB:Database Password={1};Mode=Share Exclusive", nowaSciezka, stareHaslo));
+                _Polaczenie.Open();
+                var baza = new BazaDanychWrapper();
+                OleDbCommand polecenie = baza.UtworzPolecenie("ALTER DATABASE PASSWORD [" + noweHaslo + "] [" + stareHaslo + "]", new object[0]);
+                polecenie.ExecuteNonQuery();
+                if (transformacja != null)
+                {
+                    transformacja(baza);
+                }
+                Zakoncz(true);
+            }
+            catch (Exception)
+            {
+                if (usunGdyNiepowodzenie)
+                {
+                    try
+                    {
+                        File.Delete(nowaSciezka);
+                    }
+                    catch (Exception) { }
+                }
                 return false;
             }
             finally

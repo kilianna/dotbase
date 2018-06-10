@@ -16,7 +16,9 @@ namespace DotBase
         public HasloForm()
         {
             InitializeComponent();
+            uzytkownikLabel.Text = "Użytkownik:";
             nazwaTextBox.Text = LogowanieForm.Instancja.Wybrany.nazwa;
+            nazwaTextBox.Visible = true;
             hasloAktTextBox.Enabled = true;
             aktHaslo = LogowanieForm.Instancja.Wybrany.haslo;
         }
@@ -54,7 +56,9 @@ namespace DotBase
 
         public void zmienUzytkownika(string nazwa)
         {
+            uzytkownikLabel.Text = "Użytkownik:";
             nazwaTextBox.Text = nazwa;
+            nazwaTextBox.Visible = true;
             hasloTextBox.Text = "";
             hasloPowtTextBox.Text = "";
             hasloAktTextBox.Text = "";
@@ -96,7 +100,8 @@ namespace DotBase
 
         internal void zmienWlasne(string nazwa, string haslo)
         {
-            nazwaTextBox.Text = nazwa;
+            uzytkownikLabel.Text = nazwa;
+            nazwaTextBox.Visible = false;
             hasloTextBox.Text = "";
             hasloPowtTextBox.Text = "";
             hasloAktTextBox.Text = "";
