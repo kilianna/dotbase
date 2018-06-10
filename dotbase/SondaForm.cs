@@ -94,8 +94,8 @@ namespace PrzestrzenSody
                 button1.Text = "Zatwierdź dodanie";
                 button2.Enabled = button3.Enabled = button4.Enabled = false;
                 textBox3.Text = _Sonda.UtworzNowyNumerSondy().ToString();
-                textBox1.Clear();
-                textBox2.Clear();
+                textBox1.Text = "detektor własny";
+                textBox2.Text = "nie dotyczy";
             }
         }
 
