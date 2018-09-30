@@ -1,5 +1,5 @@
 ﻿<!--Sygnalizacja dawki start-->
-				<div class="wzornag"><!c1>) Wzorcowanie źródłem gamma: Cs-137; przestrzennegy równoważnika dawki (sygnalizator progowy)</div>
+				<div class="wzornag"><!c1>) Wzorcowanie źródłem gamma: Cs-137; przestrzenny równoważnik dawki (sygnalizator progowy)</div>
 				<div class="wzornag">Zestawienie nastawień przyrządu i odpowiadających im rzeczywistych wartości, przy których włączona zostaje sygnalizacja ostrzegawcza.</div>
 				<table id="tabnag">
 					<tr><td>Typ sondy:</td><td>Detektor własny</td><td>Numer fabryczny sondy:</td><td>nie dotyczy</td></tr>
