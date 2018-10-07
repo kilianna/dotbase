@@ -147,8 +147,14 @@ namespace DotBase
         {
             if (_TrybEdycji)
             {
-                if( ZatwierdzEdycjeZleceniodawcy() )
+                if (ZatwierdzEdycjeZleceniodawcy())
+                {
                     WylaczTrybPrzegladania();
+                }
+                else
+                {
+                    MessageBox.Show(this, "Nie zapisano danych z powodu błędu.", "Błąd zapisu do bazy danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {

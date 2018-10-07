@@ -129,9 +129,7 @@ namespace DotBase
                                             zleceniodawca.NazwaPlatnika, zleceniodawca.AdresPlatnika, zleceniodawca.NipPlatnika)
                            + String.Format(" WHERE id_zleceniodawcy = {0}", zleceniodawca.Id);
 
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
-
-                return true;
+                return _BazaDanych.WykonajPolecenie(_Zapytanie);
             }
 
             //--------------------------------------------------------------------
