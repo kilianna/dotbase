@@ -113,3 +113,9 @@ line-height: 0.5cm;
  padding: 0;
  line-height: 0.5cm;
 }
+
+.niekolumna
+{clear: left;
+ padding: 0px;
+ line-height: 0.5cm;
+}
