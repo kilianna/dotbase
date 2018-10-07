@@ -124,7 +124,7 @@ namespace DotBase
             {
                 ZnajdzIdZlecenia(nrKarty);
 
-                _Zapytanie = "SELECT zleceniodawca, adres, osoba_kontaktowa, Z.id_zleceniodawcy, telefon, faks, email FROM Zleceniodawca "
+                _Zapytanie = "SELECT zleceniodawca, adres, osoba_kontaktowa, Z.id_zleceniodawcy, telefon, faks, email, ZL.Nr_zlecenia_rejestr FROM Zleceniodawca "
                            + "AS Z INNER JOIN ZLECENIA AS ZL ON Z.id_zleceniodawcy = ZL.id_zleceniodawcy WHERE "
                            + String.Format("ZL.id_zlecenia={0}", m_documentData.getValue(DocumentData.DataType.ID_ZLECENIA));
 
@@ -144,6 +144,8 @@ namespace DotBase
                 m_documentData.setValue(DocumentData.DataType.FAKS, wiersz.Field<string>(5));
                 // dodanie e-mail'u
                 m_documentData.setValue(DocumentData.DataType.EMAIL, wiersz.Field<string>(6));
+                // dodanie nr rejestru
+                m_documentData.setValue(DocumentData.DataType.NR_REJESTRU, wiersz.Field<int>(7).ToString());
 
                 return true;
             }
@@ -293,6 +295,7 @@ namespace DotBase
                             .Replace("<!c4>", m_documentData.getValue(DocumentData.DataType.ADRES))           //.Replace(";", "<br>")
                             .Replace("<!c5>", m_documentData.getValue(DocumentData.DataType.OSOBA_KONTAKTOWA))
                             .Replace("<!c6>", m_documentData.getValue(DocumentData.DataType.ID_ZLECENIODAWCY))
+                            .Replace("<!nrrejestru>", m_documentData.getValue(DocumentData.DataType.NR_REJESTRU))
                             .Replace("<!c7>", m_documentData.getValue(DocumentData.DataType.TELEFON))
                             .Replace("<!c8>", m_documentData.getValue(DocumentData.DataType.FAKS))
                             .Replace("<!c9>", m_documentData.getValue(DocumentData.DataType.EMAIL));

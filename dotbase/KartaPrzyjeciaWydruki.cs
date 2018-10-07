@@ -30,6 +30,7 @@ namespace DotBase
                     templateToFill = templateToFill.Replace("<!c4>", m_documentData.getValue(DocumentData.DataType.ADRES).Replace(";", "<br>"));
                     templateToFill = templateToFill.Replace("<!c5>", m_documentData.getValue(DocumentData.DataType.OSOBA_KONTAKTOWA));
                     templateToFill = templateToFill.Replace("<!c6>", m_documentData.getValue(DocumentData.DataType.ID_ZLECENIODAWCY));
+                    templateToFill = templateToFill.Replace("<!nrrejestru>", m_documentData.getValue(DocumentData.DataType.NR_REJESTRU));
                     templateToFill = templateToFill.Replace("<!c7>", m_documentData.getValue(DocumentData.DataType.TELEFON));
                     templateToFill = templateToFill.Replace("<!c8>", m_documentData.getValue(DocumentData.DataType.FAKS));
                     templateToFill = templateToFill.Replace("<!c9>", m_documentData.getValue(DocumentData.DataType.EMAIL));

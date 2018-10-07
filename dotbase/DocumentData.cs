@@ -21,6 +21,7 @@ namespace DotBase
             UWAGI,
             WYMAGANIA,
             ZLECENIDOAWCA,
+            NR_REJESTRU,
         };
 
         readonly private IDictionary<DataType, String> m_documentData = new Dictionary<DataType, String>();
