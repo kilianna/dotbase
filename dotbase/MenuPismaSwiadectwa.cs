@@ -68,9 +68,15 @@ namespace DotBase
         {
             string sciezka = _DocumentationPathsLoader.GetPath("SwiadectwoWynik") + _NumerKarty + "SwiadectwoWynik.html";
 
+            DataTable table = _Baza.TworzTabeleDanych("SELECT Data_przyjecia " +
+                "FROM Zlecenia INNER JOIN Karta_przyjecia " +
+                "ON Zlecenia.ID_zlecenia = Karta_przyjecia.ID_zlecenia " +
+                "WHERE Karta_przyjecia.ID_karty=?", _NumerKarty);
+
             Dokumenty.Swiadectwo swiadectwo = new Dokumenty.Swiadectwo(_NumerKarty, 
                                                                        dataWystawienia.Value,
                                                                        dataWykonania.Value,
+                                                                       table.Rows[0].Field<DateTime>("Data_przyjecia"),
                                                                        textBox4.Text,
                                                                        checkBox2.Checked.ToString(),
                                                                        uwMD.Text,

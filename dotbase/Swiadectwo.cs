@@ -16,7 +16,7 @@ namespace DotBase
             {
                 ADRES,
                 CISNIENIE_MAX, CISNIENIE_MIN,
-                DATA_WYDANIA, DATA_WYKONANIA,
+                DATA_WYDANIA, DATA_WYKONANIA, DATA_PRZYJECIA,
                 EMISJA_POW,
                 ID_WZORCOWANIA, INFORMACJA,
                 JEDNOSTKA,
@@ -65,13 +65,14 @@ namespace DotBase
 			override protected bool saveDocument(string path) { return true; }
 
             //********************************************************************************************
-            public Swiadectwo(int nrKarty, DateTime dataWydania, DateTime dataWykonania, String sprawdzil, string poprawa, string uwMD, string uwD, string uwS, string uwSMD, string uwSD)
+            public Swiadectwo(int nrKarty, DateTime dataWydania, DateTime dataWykonania, DateTime dataPrzyjecia, String sprawdzil, string poprawa, string uwMD, string uwD, string uwS, string uwSMD, string uwSD)
             //********************************************************************************************
             {
                 m_data.setValue(SwiadectwoData.DataType.NR_KARTY, nrKarty.ToString());
                 m_data.setValue(SwiadectwoData.DataType.DATA_WYDANIA, dataWydania.ToString("dd MMMM yyyy"));
                 m_data.setValue(SwiadectwoData.DataType.ROK, dataWydania.Year.ToString());
                 m_data.setValue(SwiadectwoData.DataType.DATA_WYKONANIA, dataWykonania.ToString("dd MMMM yyyy"));
+                m_data.setValue(SwiadectwoData.DataType.DATA_PRZYJECIA, dataPrzyjecia.ToString("dd MMMM yyyy"));
                 m_data.setValue(SwiadectwoData.DataType.SPRAWDZIL, sprawdzil);
                 m_data.setValue(SwiadectwoData.DataType.POPRAWA, poprawa);
                 m_data.setValue(SwiadectwoData.DataType.UWAGA_MD, uwMD);
@@ -878,6 +879,7 @@ namespace DotBase
 
                 _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c1>", m_data.getValue(SwiadectwoData.DataType.DATA_WYDANIA));
                 _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!dataWykonania>", m_data.getValue(SwiadectwoData.DataType.DATA_WYKONANIA));
+                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!dataPrzyjecia>", m_data.getValue(SwiadectwoData.DataType.DATA_PRZYJECIA));
                 _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c2>", mapEvidenceIdToDisplayableForm(m_data.getValue(SwiadectwoData.DataType.NR_KARTY)));
                 _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c3>", m_data.getValue(SwiadectwoData.DataType.ROK));
                 _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c4>", m_data.getValue(SwiadectwoData.DataType.NAZWA));
