@@ -98,7 +98,7 @@ namespace DotBase
         //----------------------------------------------------------------------------------
         {
            // if (null == BazaDanychWrapper._ConnectionString)            
-            BazaDanychWrapper._ConnectionString = String.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source='{0}';Jet OLEDB:Database Password={1};", SciezkaDoBazy, HasloDoBazy);
+            BazaDanychWrapper._ConnectionString = String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}';Jet OLEDB:Database Password={1};", SciezkaDoBazy, HasloDoBazy);
             
         }
         
@@ -648,7 +648,7 @@ namespace DotBase
             try
             {
                 Zakoncz(true);
-                _Polaczenie = new OleDbConnection(String.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source='{0}';Jet OLEDB:Database Password={1};Mode=Share Exclusive", SciezkaDoBazy, stareHaslo));
+                _Polaczenie = new OleDbConnection(String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}';Jet OLEDB:Database Password={1};Mode=Share Exclusive", SciezkaDoBazy, stareHaslo));
                 _Polaczenie.Open();
                 var baza = new BazaDanychWrapper();
                 OleDbCommand polecenie = baza.UtworzPolecenie("ALTER DATABASE PASSWORD [" + noweHaslo + "] [" + stareHaslo + "]", new object[0]);
@@ -676,7 +676,7 @@ namespace DotBase
                 Zakoncz(true);
                 File.Copy(staraSciezka, nowaSciezka, true);
                 usunGdyNiepowodzenie = true;
-                _Polaczenie = new OleDbConnection(String.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source='{0}';Jet OLEDB:Database Password={1};Mode=Share Exclusive", nowaSciezka, stareHaslo));
+                _Polaczenie = new OleDbConnection(String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}';Jet OLEDB:Database Password={1};Mode=Share Exclusive", nowaSciezka, stareHaslo));
                 _Polaczenie.Open();
                 var baza = new BazaDanychWrapper();
                 OleDbCommand polecenie = baza.UtworzPolecenie("ALTER DATABASE PASSWORD [" + noweHaslo + "] [" + stareHaslo + "]", new object[0]);
