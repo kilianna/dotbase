@@ -92,6 +92,7 @@
     <Compile Include="HasloForm.Designer.cs">
       <DependentUpon>HasloForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Log.cs" />
     <Compile Include="MeldunekModel.cs" />
     <Compile Include="Multimap.cs" />
     <Compile Include="QueryUtils.cs" />
@@ -107,6 +108,8 @@
       <DependentUpon>DaneWzorcoweMocDawki.cs</DependentUpon>
     </Compile>
     <Compile Include="DaneZleceniodawcyData.cs" />
+    <Compile Include="Szablon.cs" />
+    <Compile Include="Szablon.Generated.cs" />
     <Compile Include="WydrukiCez.cs" />
     <Compile Include="DocumentationPathsLoader.cs" />
     <Compile Include="DocumentData.cs" />
@@ -463,6 +466,7 @@
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\logTemplate.accdb.gz" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

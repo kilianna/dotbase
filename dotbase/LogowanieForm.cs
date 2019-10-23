@@ -78,7 +78,11 @@ namespace DotBase
                 MessageBox.Show(this, "Nie można połączyć się z bazą danych.\r\nSprawdź, czy z bazą jest skojażony poprawny plik użytkowników.\r\n"+ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
+
+#if DEBUG
+            _BazaDanych.TworzSzablon();
+#endif
+
             MenuGlowneForm Menu = new MenuGlowneForm();
             Hide();
             var result = Menu.ShowDialog();

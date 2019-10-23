@@ -6,3 +6,4 @@
 *.suo
 /*.pdf
 /*.doc
+/dotbase/Resources/logTemplate.accdb
