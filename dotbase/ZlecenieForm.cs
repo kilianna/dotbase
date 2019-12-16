@@ -214,6 +214,7 @@ namespace DotBase
 
             comboBox1.Text = "";
             checkBox1.Checked = false;
+            jestIFJ.Checked = false;
 
             dateTimePicker1.Value = dateTimePicker1.MinDate;
             dateTimePicker2.Value = dateTimePicker1.MinDate.AddDays(14);
@@ -232,6 +233,7 @@ namespace DotBase
             nazwaPlatnika.Text = "";
             adresPlatnika.Text = "";
             nipPlatnika.Text = "";
+            jestIFJ.Checked = false;
         }
 
         //--------------------------------------------------------------------
@@ -318,8 +320,9 @@ namespace DotBase
 
             numericUpDown1.Enabled = numericUpDown2.Enabled = false;
 
-            textBox2.Enabled = textBox3.Enabled = textBox4.Enabled = emailTextBox.Enabled = textBox5.Enabled = textBox6.Enabled = true;
+            textBox2.Enabled = textBox3.Enabled = textBox4.Enabled = emailTextBox.Enabled = textBox5.Enabled = textBox6.Enabled = jestIFJ.Enabled = true;
             textBox2.Text = textBox3.Text = textBox4.Text = emailTextBox.Text = textBox5.Text = textBox6.Text = "-";
+            jestIFJ.Checked = false;
             nazwaPlatnika.Text = "";
             adresPlatnika.Text = "";
             nipPlatnika.Text = "";
@@ -349,7 +352,7 @@ namespace DotBase
 
             button1.Enabled = button2.Enabled = button3.Enabled = button5.Enabled = true;
             numericUpDown1.Enabled = numericUpDown2.Enabled = true;
-            textBox2.Enabled = textBox3.Enabled = textBox4.Enabled = emailTextBox.Enabled = textBox5.Enabled = textBox6.Enabled = false;
+            textBox2.Enabled = textBox3.Enabled = textBox4.Enabled = emailTextBox.Enabled = textBox5.Enabled = textBox6.Enabled = jestIFJ.Enabled = false;
 
             nazwaPlatnika.Enabled = false;
             adresPlatnika.Enabled = false;
@@ -369,7 +372,7 @@ namespace DotBase
             button5.Text = "Zatwierdź edycję.";
 
             textBox2.Enabled = textBox3.Enabled =
-            textBox4.Enabled = textBox5.Enabled = emailTextBox.Enabled = textBox6.Enabled = true;
+            textBox4.Enabled = textBox5.Enabled = emailTextBox.Enabled = textBox6.Enabled = jestIFJ.Enabled = true;
             nazwaPlatnika.Enabled = true;
             adresPlatnika.Enabled = true;
             nipPlatnika.Enabled = true;
@@ -385,7 +388,7 @@ namespace DotBase
             button5.Text = "Edytuj dane zleceniodawcy";
 
             textBox2.Enabled = textBox3.Enabled = textBox4.Enabled = emailTextBox.Enabled =
-            textBox5.Enabled = textBox6.Enabled = false;
+            textBox5.Enabled = textBox6.Enabled = jestIFJ.Enabled = false;
             nazwaPlatnika.Enabled = false;
             adresPlatnika.Enabled = false;
             nipPlatnika.Enabled = false;
@@ -433,6 +436,7 @@ namespace DotBase
             nazwaPlatnika.Text = dane.ZleceniodawcaInfo.NazwaPlatnika;
             adresPlatnika.Text = dane.ZleceniodawcaInfo.AdresPlatnika;
             nipPlatnika.Text = dane.ZleceniodawcaInfo.NipPlatnika;
+            jestIFJ.Checked = dane.ZleceniodawcaInfo.Ifj;
         }
 
         //--------------------------------------------------------------------
@@ -563,7 +567,7 @@ namespace DotBase
             }
 
             DaneZleceniodawcy zleceniodawca = new DaneZleceniodawcy(textBox2.Text, textBox3.Text, int.Parse(textBox1.Text), comboBox1.Text, textBox6.Text, textBox5.Text, textBox4.Text, emailTextBox.Text,
-                nazwaPlatnika.Text, adresPlatnika.Text, nipPlatnika.Text);
+                nazwaPlatnika.Text, adresPlatnika.Text, nipPlatnika.Text, jestIFJ.Checked);
 
             if (false == _Zlecenie.DodajZleceniodawce(ref zleceniodawca))
             {
@@ -582,7 +586,7 @@ namespace DotBase
                 return false;
 
             DaneZleceniodawcy zleceniodawca = new DaneZleceniodawcy(textBox2.Text, textBox3.Text, int.Parse(textBox1.Text), comboBox1.Text, textBox6.Text, textBox5.Text, textBox4.Text, emailTextBox.Text,
-                nazwaPlatnika.Text, adresPlatnika.Text, nipPlatnika.Text);
+                nazwaPlatnika.Text, adresPlatnika.Text, nipPlatnika.Text, jestIFJ.Checked);
 
             if (false == _Zlecenie.EdytujZleceniodawce(ref zleceniodawca))
                 return false;

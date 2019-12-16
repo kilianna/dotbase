@@ -39,6 +39,8 @@
             this.button3 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label19 = new System.Windows.Forms.Label();
+            this.emailTextBox = new System.Windows.Forms.TextBox();
             this.innyPlatnik = new System.Windows.Forms.CheckBox();
             this.grupaPlatnika = new System.Windows.Forms.GroupBox();
             this.nazwaPlatnika = new System.Windows.Forms.TextBox();
@@ -90,8 +92,7 @@
             this.podglądToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
-            this.emailTextBox = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
+            this.jestIFJ = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -173,6 +174,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.jestIFJ);
             this.tabPage1.Controls.Add(this.label19);
             this.tabPage1.Controls.Add(this.emailTextBox);
             this.tabPage1.Controls.Add(this.innyPlatnik);
@@ -199,6 +201,24 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Dane zleceniodawcy";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(23, 164);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(35, 13);
+            this.label19.TabIndex = 24;
+            this.label19.Text = "E-mail";
+            // 
+            // emailTextBox
+            // 
+            this.emailTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.emailTextBox.Location = new System.Drawing.Point(130, 161);
+            this.emailTextBox.Name = "emailTextBox";
+            this.emailTextBox.Size = new System.Drawing.Size(316, 20);
+            this.emailTextBox.TabIndex = 23;
             // 
             // innyPlatnik
             // 
@@ -458,7 +478,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(666, 346);
+            this.tabPage2.Size = new System.Drawing.Size(673, 368);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Dane zlecenia";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -581,7 +601,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(666, 346);
+            this.tabPage3.Size = new System.Drawing.Size(673, 368);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Lista przyrządów";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -619,7 +639,7 @@
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
-            this.dataGridView1.Size = new System.Drawing.Size(660, 340);
+            this.dataGridView1.Size = new System.Drawing.Size(667, 362);
             this.dataGridView1.TabIndex = 6;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
@@ -712,23 +732,16 @@
             this.label15.TabIndex = 8;
             this.label15.Text = "Numer zlecenia w rejestrze";
             // 
-            // emailTextBox
+            // jestIFJ
             // 
-            this.emailTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.emailTextBox.Location = new System.Drawing.Point(130, 161);
-            this.emailTextBox.Name = "emailTextBox";
-            this.emailTextBox.Size = new System.Drawing.Size(316, 20);
-            this.emailTextBox.TabIndex = 23;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(23, 164);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(35, 13);
-            this.label19.TabIndex = 24;
-            this.label19.Text = "E-mail";
+            this.jestIFJ.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.jestIFJ.AutoSize = true;
+            this.jestIFJ.Location = new System.Drawing.Point(608, 29);
+            this.jestIFJ.Name = "jestIFJ";
+            this.jestIFJ.Size = new System.Drawing.Size(40, 17);
+            this.jestIFJ.TabIndex = 25;
+            this.jestIFJ.Text = "IFJ";
+            this.jestIFJ.UseVisualStyleBackColor = true;
             // 
             // ZlecenieForm
             // 
@@ -828,5 +841,6 @@
         private System.Windows.Forms.CheckBox innyPlatnik;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox emailTextBox;
+        private System.Windows.Forms.CheckBox jestIFJ;
     }
 }
