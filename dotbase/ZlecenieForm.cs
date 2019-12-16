@@ -413,11 +413,15 @@ namespace DotBase
         private void WyswietlDanePrzyrzadow(DaneZlecenia dane)
         //--------------------------------------------------------------------
         {
+            int lp = 1;
             dataGridView1.Rows.Clear();
 
             foreach(DanePrzyrzad przyrzad in _Zlecenie.Dane.Przyrzady)
             {
                 dataGridView1.Rows.Add(przyrzad.IdKarty, przyrzad.Typ, przyrzad.NrFabryczny, przyrzad.Wykalibrowany);
+                var row = dataGridView1.Rows[dataGridView1.Rows.Count - 1];
+                row.HeaderCell.Value = lp.ToString();
+                lp++;
             }
         }
 
