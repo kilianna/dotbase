@@ -63,10 +63,14 @@ namespace DotBase
         public bool NadpiszDaneOgolne()
         //---------------------------------------------------------------
         {
-            _Zapytanie = String.Format("UPDATE Wzorcowanie_cezem SET Data_wzorcowania=#{0}# WHERE id_wzorcowania={1} AND id_arkusza={2}",
-                                       _DaneOgolneDoZapisu.Data, _DaneOgolneDoZapisu.IdWzorcowania, _DaneOgolneDoZapisu.IdArkusza);
-
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
+            _BazaDanych.wzorcowanie_cezem
+                .UPDATE()
+                    .Data_wzorcowania(DateTime.Parse(_DaneOgolneDoZapisu.Data))
+                .WHERE()
+                    .ID_wzorcowania(int.Parse(_DaneOgolneDoZapisu.IdWzorcowania))
+                    .ID_arkusza(int.Parse(_DaneOgolneDoZapisu.IdArkusza))
+                .INFO("Zmiana danych ogólnych wzorcowania cezem")
+                .EXECUTE();
 
             return true;
         }
@@ -336,9 +340,9 @@ namespace DotBase
 
             try
             {
-                _WarunkiDoZapisu.Cisnienie = Double.Parse(cisnienie);
-                _WarunkiDoZapisu.Temperatura = Double.Parse(temperatura);
-                _WarunkiDoZapisu.Wilgotnosc = Double.Parse(wilgotnosc);
+                _WarunkiDoZapisu.Cisnienie = N.doubleParse(cisnienie);
+                _WarunkiDoZapisu.Temperatura = N.doubleParse(temperatura);
+                _WarunkiDoZapisu.Wilgotnosc = N.doubleParse(wilgotnosc);
                 _WarunkiDoZapisu.Uwagi = uwagi;
             }
             catch (Exception)
@@ -436,10 +440,16 @@ namespace DotBase
                        _DaneOgolneDoZapisu.IdKarty, _PrzyrzadDoZapisu.Sondy.Lista[0].Typ, _PrzyrzadDoZapisu.Sondy.Lista[0].NrFabryczny);
             int idSondy = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0);
 
-            _Zapytanie = String.Format("UPDATE Wzorcowanie_cezem SET Id_Sondy = {0},  Napiecie_zasilania_sondy = '{1}', ", idSondy, _PrzyrzadDoZapisu.NapiecieZasilaniaSondy)
-                       + String.Format("inne_nastawy = '{0}' WHERE Id_wzorcowania = {1} AND id_arkusza={2}", _PrzyrzadDoZapisu.InneNastawy, _DaneOgolneDoZapisu.IdWzorcowania, _DaneOgolneDoZapisu.IdArkusza);
-
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
+            _BazaDanych.wzorcowanie_cezem
+                .UPDATE()
+                    .ID_sondy(idSondy)
+                    .Napiecie_zasilania_sondy(_PrzyrzadDoZapisu.NapiecieZasilaniaSondy)
+                    .Inne_nastawy(_PrzyrzadDoZapisu.InneNastawy)
+                .WHERE()
+                    .ID_wzorcowania(int.Parse(_DaneOgolneDoZapisu.IdWzorcowania))
+                    .ID_arkusza(int.Parse(_DaneOgolneDoZapisu.IdArkusza))
+                .INFO("Zapis danych przyrządu")
+                .EXECUTE();
 
             return true;
         }
@@ -448,12 +458,17 @@ namespace DotBase
         public bool ZapiszDaneWarunkow()
         //---------------------------------------------------------------
         {
-            _Zapytanie = String.Format("UPDATE Wzorcowanie_cezem SET Cisnienie = '{0}', Temperatura = '{1}', ", 
-                                       _WarunkiDoZapisu.Cisnienie, _WarunkiDoZapisu.Temperatura)
-                       + String.Format("Wilgotnosc = '{0}', Uwagi = '{1}' WHERE id_wzorcowania={2} AND id_arkusza = {3}", 
-                                       _WarunkiDoZapisu.Wilgotnosc, _WarunkiDoZapisu.Uwagi, _DaneOgolneDoZapisu.IdWzorcowania, _DaneOgolneDoZapisu.IdArkusza);
-
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
+            _BazaDanych.wzorcowanie_cezem
+                .UPDATE()
+                    .Cisnienie(_WarunkiDoZapisu.Cisnienie)
+                    .Temperatura(_WarunkiDoZapisu.Temperatura)
+                    .wilgotnosc(_WarunkiDoZapisu.Wilgotnosc)
+                    .Uwagi(_WarunkiDoZapisu.Uwagi)
+                .WHERE()
+                    .ID_wzorcowania(int.Parse(_DaneOgolneDoZapisu.IdWzorcowania))
+                    .ID_arkusza(int.Parse(_DaneOgolneDoZapisu.IdArkusza))
+                .INFO("Zapisanie warunków wzorcowania cezem")
+                .EXECUTE();
 
             return true;
         }

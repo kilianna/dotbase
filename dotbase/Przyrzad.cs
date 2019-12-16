@@ -161,22 +161,33 @@ namespace DotBase
         public void NapiszDane(string typ, string nrFabryczny, string rokProdukcji, string producent, string nazwa)
         //****************************************
         {
-            _Zapytanie = String.Format("UPDATE Dozymetry SET typ = '{0}', nr_fabryczny = '{1}', rok_produkcji = '{2}', ",
-                         typ, nrFabryczny, rokProdukcji)
-                       + String.Format("producent = '{0}', nazwa = '{1}' WHERE id_dozymetru = {2}",
-                         producent, nazwa, NumerPrzyrzadu);
-
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
+            _BazaDanych.Dozymetry
+                .UPDATE()
+                    .Typ(typ)
+                    .Nr_fabryczny(nrFabryczny)
+                    .Rok_produkcji(rokProdukcji)
+                    .Producent(producent)
+                    .Nazwa(nazwa)
+                .WHERE()
+                    .ID_dozymetru(NumerPrzyrzadu)
+                .INFO("Nadpisywanie danych przyrządu")
+                .EXECUTE();
         }
 
         //****************************************
         public void Zapisz(string typ, string nrFabryczny, string rokProdukcji, string producent, string nazwa)
         //****************************************
         {
-            _Zapytanie = "INSERT INTO Dozymetry (id_dozymetru, typ, nr_fabryczny, rok_produkcji, producent, nazwa) VALUES "
-                       + String.Format("({0},'{1}','{2}','{3}','{4}','{5}')", NumerPrzyrzadu, typ, nrFabryczny, rokProdukcji, producent, nazwa);
-
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
+            _BazaDanych.Dozymetry
+                .INSERT()
+                    .ID_dozymetru(NumerPrzyrzadu)
+                    .Typ(typ)
+                    .Nr_fabryczny(nrFabryczny)
+                    .Rok_produkcji(rokProdukcji)
+                    .Producent(producent)
+                    .Nazwa(nazwa)
+                .INFO("Zapisanie danych nowego przyrządu")
+                .EXECUTE();
         }
 
         //****************************************

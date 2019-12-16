@@ -188,6 +188,8 @@ namespace DotBase
                 ZnajdzWszystkieTypyDozymetrow();
             }
 
+#if false
+
             //------------------------------------------------------------------
             public void AktualizujDane(ref DaneKartyPrzyjecia dane)
             //------------------------------------------------------------------
@@ -214,6 +216,8 @@ namespace DotBase
                             
                 _BazaDanych.WykonajPolecenie(_Zapytanie);
             }
+
+#endif
 
             //------------------------------------------------------------------
             public DataTable Dane
@@ -276,32 +280,32 @@ namespace DotBase
 
                 int idDozymetru = ZnajdzIdDozymetru(dane.Przyrzad.Typ, dane.Przyrzad.NrFabryczny);
 
-                _Zapytanie = String.Format("UPDATE Karta_przyjecia SET id_zlecenia = {0}, rok = {1}, ameryk = {2}, chlor = {3}, dawka = {4}, ",
-                                           dane.NrZlecenia, dane.rok,
-                                           dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.AMERYK],
-                                           dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.CHLOR],
-                                           dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.DAWKA])
-                           + String.Format("moc_dawki = {0}, pluton = {1}, stront_slaby = {2}, stront_silny = {3}, syg_dawki = {4}, ",
-                                           dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.MOC_DAWKI],
-                                           dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.PLUTON],
-                                           dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.STRONT_SLABY],
-                                           dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.STRONT_SILNY],
-                                           dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.SYGNALIZACJA_DAWKI])
-                           + String.Format("syg_mocy_dawki = {0}, wegiel_slaby = {1}, wegiel_silny = {2}, stront_najsilniejszy={3}, akcesoria = '{4}', uwagi = '{5}', ",
-                                           dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.SYGNALIZACJA_MOCY_DAWKI],
-                                           dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.WEGIEL_SLABY],
-                                           dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.WEGIEL_SILNY],
-                                           dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.STRONT_NAJSILNIEJSZY],
-                                           dane.DaneDodatkowe.Akcesoria, dane.DaneDodatkowe.Uwagi)
-                           + String.Format("uszkodzony = {0}, Sprawdzenie = {1}, id_dozymetru = {2}, Wykonano = {3} WHERE id_karty = {4}",
-                                           dane.DaneDodatkowe.Uszkodzony,
-                                           dane.DaneDodatkowe.Sprawdzenie,
-                                           idDozymetru,
-                                           dane.Wykonano,
-                                           dane.IdKarty);
-                           
-
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
+                _BazaDanych.Karta_przyjecia
+                    .UPDATE()
+                        .ID_zlecenia(dane.NrZlecenia)
+                        .Rok(dane.rok)
+                        .Ameryk(dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.AMERYK])
+                        .Chlor(dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.CHLOR])
+                        .Dawka(dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.DAWKA])
+                        .Moc_dawki(dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.MOC_DAWKI])
+                        .Pluton(dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.PLUTON])
+                        .Stront_slaby(dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.STRONT_SLABY])
+                        .Stront_silny(dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.STRONT_SILNY])
+                        .Syg_dawki(dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.SYGNALIZACJA_DAWKI])
+                        .Syg_mocy_dawki(dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.SYGNALIZACJA_MOCY_DAWKI])
+                        .Wegiel_slaby(dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.WEGIEL_SLABY])
+                        .Wegiel_silny(dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.WEGIEL_SILNY])
+                        .Stront_najsilniejszy(dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.STRONT_NAJSILNIEJSZY])
+                        .Akcesoria(dane.DaneDodatkowe.Akcesoria)
+                        .Uwagi(dane.DaneDodatkowe.Uwagi)
+                        .Uszkodzony(dane.DaneDodatkowe.Uszkodzony)
+                        .Sprawdzenie(dane.DaneDodatkowe.Sprawdzenie)
+                        .ID_dozymetru(idDozymetru)
+                        .Wykonano(dane.Wykonano)
+                    .WHERE()
+                        .ID_karty(dane.IdKarty)
+                    .INFO("Zmiana danych karty przyjęcia")
+                    .EXECUTE();
             }
 
             //--------------------------------------------------------------------

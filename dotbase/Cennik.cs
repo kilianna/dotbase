@@ -269,10 +269,15 @@ namespace DotBase
         {
             double cena;
 
-            if( _NrKarty > 0 && Double.TryParse(suma, out cena) )
+            if( _NrKarty > 0 && N.doubleTryParse(suma, out cena) )
             {
-                _Zapytanie = String.Format("UPDATE Karta_przyjecia SET Cena = {0} WHERE id_karty = {1}", suma.Replace(',', '.'), _NrKarty);
-	            _BazaDanych.WykonajPolecenie(_Zapytanie);
+                _BazaDanych.Karta_przyjecia
+                    .UPDATE()
+                        .Cena(N.doubleParse(suma))
+                    .WHERE()
+                        .ID_karty(_NrKarty)
+                    .INFO("Zapis ceny w karcie przyjęcia")
+                    .EXECUTE();
 	        }
         }
 

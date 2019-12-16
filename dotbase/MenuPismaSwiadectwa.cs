@@ -102,7 +102,13 @@ namespace DotBase
                 return;
             }
 
-            _Baza.WykonajPolecenie(String.Format("UPDATE Karta_przyjecia SET nr_Pisma = {0} WHERE id_Karty = {1}", _NrPisma, _NumerKarty));
+            _Baza.Karta_przyjecia
+                .UPDATE()
+                    .Nr_pisma((int)_NrPisma)
+                .WHERE()
+                    .ID_karty(_NumerKarty)
+                .INFO("Zmieniono nr pisma w karcie przyjęcia")
+                .EXECUTE();
 
             string sciezka = _DocumentationPathsLoader.GetPath("PismoPrzewodnieWynik") + _NrPisma + "PismoPrzewodnieWynik" + _NumerKarty + ".html";
 
@@ -186,37 +192,42 @@ namespace DotBase
 
             if (0 == _Baza.TworzTabeleDanych(String.Format("SELECT 1 FROM Swiadectwo WHERE id_karty = {0}", _NumerKarty)).Rows.Count)
             {
-                _Baza.WykonajPolecenie("INSERT INTO Swiadectwo (id_karty, Data_wystawienia, Data_wykonania, Autoryzowal, Uwaga, Waznosc_dwa_lata, Poprawa, UwagaMD, UwagaD, UwagaS, UwagaSMD, UwagaSD) "
-                + String.Format("VALUES ({0}, '{1}', '{2}', '{3}', '{4}', {5}, {6}, '{7}', '{8}', '{9}', '{10}', '{11}')", 
-                _NumerKarty, 
-                dataWystawienia.Value.ToShortDateString(),
-                dataWykonania.Value.ToShortDateString(),
-                textBox4.Text, 
-                textBox1.Text, 
-                checkBox1.Checked,
-                checkBox2.Checked,
-                uwMD.Text,
-                uwD.Text,
-                uwS.Text,
-                uwSMD.Text,
-                uwSD.Text));
+                _Baza.Swiadectwo
+                    .INSERT()
+                        .Id_karty(_NumerKarty)
+                        .Data_wystawienia(dataWystawienia.Value)
+                        .Data_wykonania(dataWykonania.Value)
+                        .Autoryzowal(textBox4.Text)
+                        .Uwaga(textBox1.Text)
+                        .Waznosc_dwa_lata(checkBox1.Checked)
+                        .Poprawa(checkBox2.Checked)
+                        .UwagaMD(uwMD.Text)
+                        .UwagaD(uwD.Text)
+                        .UwagaS(uwS.Text)
+                        .UwagaSMD(uwSMD.Text)
+                        .UwagaSD(uwSD.Text)
+                    .INFO("Dodanie nowego świadectwa")
+                    .EXECUTE();
             }
             else
             {
-                _Baza.WykonajPolecenie(String.Format("UPDATE Swiadectwo SET Data_wystawienia='{0}', Data_wykonania='{1}', Autoryzowal='{2}', " +
-                "Uwaga='{3}', Waznosc_dwa_lata={4}, Poprawa={5}, UwagaMD='{6}', UwagaD='{7}', UwagaS='{8}', UwagaSMD='{9}', UwagaSD='{10}' WHERE id_karty={11}", 
-                dataWystawienia.Value.ToShortDateString(),
-                dataWykonania.Value.ToShortDateString(),
-                textBox4.Text, 
-                textBox1.Text, 
-                checkBox1.Checked, 
-                checkBox2.Checked,
-                uwMD.Text,
-                uwD.Text,
-                uwS.Text,
-                uwSMD.Text,
-                uwSD.Text,
-                _NumerKarty));
+                _Baza.Swiadectwo
+                    .UPDATE()
+                        .Data_wystawienia(dataWystawienia.Value)
+                        .Data_wykonania(dataWykonania.Value)
+                        .Autoryzowal(textBox4.Text)
+                        .Uwaga(textBox1.Text)
+                        .Waznosc_dwa_lata(checkBox1.Checked)
+                        .Poprawa(checkBox2.Checked)
+                        .UwagaMD(uwMD.Text)
+                        .UwagaD(uwD.Text)
+                        .UwagaS(uwS.Text)
+                        .UwagaSMD(uwSMD.Text)
+                        .UwagaSD(uwSD.Text)
+                    .WHERE()
+                        .Id_karty(_NumerKarty)
+                    .INFO("Zapis danych świadectwa")
+                    .EXECUTE();
             }
         }
         

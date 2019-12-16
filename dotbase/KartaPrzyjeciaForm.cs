@@ -61,6 +61,8 @@ namespace DotBase
             button6.Enabled = true;
         }
 
+#if false
+
         //-------------------------------------------------------------
         private void AktualizujDane()
         //-------------------------------------------------------------
@@ -79,6 +81,8 @@ namespace DotBase
 
             _KartaPrzyjecia.AktualizujDane(ref dane);
         }
+
+#endif
 
         //-------------------------------------------------------------
         private void AktualizujListeTypowDozymetrow(object sender = null, EventArgs args = null)

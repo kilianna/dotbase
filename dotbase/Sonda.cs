@@ -29,9 +29,14 @@ namespace PrzestrzenSody
         public void AktualizujDaneSondy(int idSondy, string typ, string nrFabryczny)
         //**************************************************
         {
-            _Zapytanie = String.Format("UPDATE Sondy SET typ = '{0}', nr_fabryczny = '{1}' WHERE id_sondy = {2}", typ, nrFabryczny, idSondy);
-
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
+            _BazaDanych.Sondy
+                .UPDATE()
+                    .Typ(typ)
+                    .Nr_fabryczny(nrFabryczny)
+                .WHERE()
+                    .ID_sondy(idSondy)
+                .INFO("Aktualizacja danych sondy")
+                .EXECUTE();
         }
 
         //**************************************************
@@ -41,10 +46,14 @@ namespace PrzestrzenSody
             if (idSondy < 0)
                 return false;
 
-            _Zapytanie = String.Format("INSERT INTO Sondy (id_sondy, typ, nr_fabryczny, id_dozymetru) VALUES ({0},'{1}','{2}',{3})", 
-                         idSondy, typ, nrFabryczny, _idPrzyrzadu);
-
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
+            _BazaDanych.Sondy
+                .INSERT()
+                    .ID_sondy(idSondy)
+                    .Typ(typ)
+                    .Nr_fabryczny(nrFabryczny)
+                    .ID_dozymetru(_idPrzyrzadu)
+                .INFO("Dodano nową sondę")
+                .EXECUTE();
 
             return true;
         }

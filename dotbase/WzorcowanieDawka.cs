@@ -49,11 +49,15 @@ namespace DotBase
 
             for (int i = 0; i < Pomiary.Dane.Count; ++i)
             {
-                _Zapytanie = String.Format("INSERT INTO Pomiary_dawka VALUES ({0}, '{1}', '{2}', {3}, '{4}')",
-                             _DaneOgolneDoZapisu.IdWzorcowania, Pomiary.Dane[i].Czas, Pomiary.Dane[i].Wskazanie,
-                             Pomiary.Dane[i].Dolaczyc, Pomiary.Dane[i].WartoscWzorcowa);
-
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
+                _BazaDanych.Pomiary_dawka
+                    .INSERT()
+                        .ID_wzorcowania(int.Parse(_DaneOgolneDoZapisu.IdWzorcowania))
+                        .Czas(Pomiary.Dane[i].Czas)
+                        .Wskazanie(Pomiary.Dane[i].Wskazanie)
+                        .Dolaczyc(Pomiary.Dane[i].Dolaczyc)
+                        .Wartosc_wzorcowa(Pomiary.Dane[i].WartoscWzorcowa)
+                    .INFO("Nadpisanie danych wzorcowych i pomiarowych")
+                    .EXECUTE();
             }
 
             try
@@ -61,12 +65,29 @@ namespace DotBase
                 _Zapytanie = String.Format("SELECT id_protokolu FROM Protokoly_kalibracji_lawy WHERE data_kalibracji=#{0}#", Pomiary.protokol);
                 short idProtokolu = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<short>(0);
 
-                _Zapytanie = String.Format("UPDATE Wzorcowanie_cezem SET id_protokolu = {0}, id_jednostki = 0, tlo = 0.0, wielkosc_fizyczna='nie dotyczy' WHERE id_wzorcowania = {1}",
-                                           idProtokolu, IdWzorcowania);
+                _BazaDanych.wzorcowanie_cezem
+                    .UPDATE()
+                        .ID_protokolu(idProtokolu)
+                        .ID_jednostki(0)
+                        .Tlo("0.0")
+                        .Wielkosc_fizyczna("nie dotyczy")
+                    .WHERE()
+                        .ID_wzorcowania(IdWzorcowania)
+                    .INFO("Nadpisanie danych wzorcowania i pomiarowych")
+                    .EXECUTE();
+
+                _Zapytanie = String.Format("UPDATE Wyniki_dawka SET id_zrodla = {0}, odleglosc = '{1}' WHERE id_wzorcowania = {2}",
+                    Pomiary.zrodlo, Pomiary.odleglosc, _DaneOgolneDoZapisu.IdWzorcowania);
                 _BazaDanych.WykonajPolecenie(_Zapytanie);
 
-                _Zapytanie = String.Format("UPDATE Wyniki_dawka SET id_zrodla = {0}, odleglosc = '{1}' WHERE id_wzorcowania = {2}", Pomiary.zrodlo, Pomiary.odleglosc, _DaneOgolneDoZapisu.IdWzorcowania);
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
+                _BazaDanych.Wyniki_dawka
+                    .UPDATE()
+                        .ID_zrodla(int.Parse(Pomiary.zrodlo))
+                        .Odleglosc(N.doubleParse(Pomiary.odleglosc))
+                    .WHERE()
+                        .ID_wzorcowania(int.Parse(_DaneOgolneDoZapisu.IdWzorcowania))
+                    .INFO("Nadpisanie danych wzorcowania i pomiarowych")
+                    .EXECUTE();
             }
             catch (Exception)
             {
@@ -145,7 +166,7 @@ namespace DotBase
                     continue;
                 }
 
-                if (tabela.Rows[i].Cells["WartoscWzorcowa"].Value != null && Double.TryParse(tabela.Rows[i].Cells["WartoscWzorcowa"].Value.ToString(), out czas))
+                if (tabela.Rows[i].Cells["WartoscWzorcowa"].Value != null && N.doubleTryParse(tabela.Rows[i].Cells["WartoscWzorcowa"].Value.ToString(), out czas))
                 {
                     czas = czas * (1000 * 3600 / (dzielnik * mocKermy * korektaRozpad)) - sumaCzasowPoprzednich;
                     sumaCzasowPoprzednich += czas;
@@ -305,7 +326,7 @@ namespace DotBase
                     sTemp = tabela.Rows[i].Cells[0].Value.ToString();
 
                     if (sTemp != "")
-                        temp.WartoscWzorcowa = double.Parse(sTemp);
+                        temp.WartoscWzorcowa = N.doubleParse(sTemp);
                     else
                         temp.WartoscWzorcowa = 0.0;
 
@@ -313,7 +334,7 @@ namespace DotBase
                     sTemp = tabela.Rows[i].Cells[1].Value.ToString();
 
                     if (sTemp != "")
-                        temp.Czas = double.Parse(sTemp);
+                        temp.Czas = N.doubleParse(sTemp);
                     else
                         temp.Czas = 0.0;
 
@@ -321,7 +342,7 @@ namespace DotBase
                     sTemp = tabela.Rows[i].Cells[2].Value.ToString();
 
                     if (sTemp != "")
-                        temp.Wskazanie = double.Parse(sTemp);
+                        temp.Wskazanie = N.doubleParse(sTemp);
                     else
                         temp.Wskazanie = 0.0;
 
@@ -355,22 +376,22 @@ namespace DotBase
 
             double temp;
 
-            if (Double.TryParse(wspolczynnik, out temp))
+            if (N.doubleTryParse(wspolczynnik, out temp))
                 Wspolczynniki.Wspolczynnik = temp;
             else
                 Wspolczynniki.Wspolczynnik = 0.0;
 
-            if (Double.TryParse(niepewnosc, out temp))
+            if (N.doubleTryParse(niepewnosc, out temp))
                 Wspolczynniki.Niepewnosc = temp;
             else
                 Wspolczynniki.Niepewnosc = 0.0;
 
-            if (Double.TryParse(odleglosc, out temp))
+            if (N.doubleTryParse(odleglosc, out temp))
                 Wspolczynniki.Odleglosc = temp;
             else
                 Wspolczynniki.Odleglosc = 0.0;
 
-            if (Double.TryParse(zakres, out temp))
+            if (N.doubleTryParse(zakres, out temp))
                 Wspolczynniki.Zakres = temp;
             else
                 Wspolczynniki.Zakres = 0.0;
