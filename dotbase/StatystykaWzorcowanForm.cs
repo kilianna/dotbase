@@ -11,46 +11,40 @@ namespace DotBase
 {
     public partial class StatystykaWzorcowanForm : Form
     {
-        private static int MAX_WIERSZY = 15;
         StatystykaWzorcowan _StatystykaWzorcowan;
-
+        
         //--------------------------------------------------------
         public StatystykaWzorcowanForm()
         //--------------------------------------------------------
         {
             InitializeComponent();
-
             _StatystykaWzorcowan = new StatystykaWzorcowan();
-
-            dataGridView1.Rows.Add(MAX_WIERSZY);
-
-            dataGridView1.Rows[0].Cells[0].Value = "Promieniowanie gamma";
-            dataGridView1.Rows[1].Cells[0].Value = "Moc dawki";
-            dataGridView1.Rows[2].Cells[0].Value = "Dawka";
-            dataGridView1.Rows[3].Cells[0].Value = "Sygnalizacja";
-            dataGridView1.Rows[4].Cells[0].Value = "Skażenia";
-            dataGridView1.Rows[5].Cells[0].Value = "Ameryk";
-            dataGridView1.Rows[6].Cells[0].Value = "Chlor";
-            dataGridView1.Rows[7].Cells[0].Value = "Pluton";
-            dataGridView1.Rows[8].Cells[0].Value = "Stront słaby";
-            dataGridView1.Rows[9].Cells[0].Value = "Stront silny";
-            dataGridView1.Rows[10].Cells[0].Value = "Stront najsilniejszy";
-            dataGridView1.Rows[11].Cells[0].Value = "Węgiel słaby";
-            dataGridView1.Rows[12].Cells[0].Value = "Węgiel silny";
-            dataGridView1.Rows[13].Cells[0].Value = "Przyrządy wzorcowane cezem";
-            dataGridView1.Rows[14].Cells[0].Value = "Przyrządy wzorcowane na skażenia";
-
-            dataGridView1.Columns[1].ValueType = typeof(int);
+        }
+           
+        private void dodajWiersz(string nazwa, object wartosc = null)
+        {
+            dataGridView1.Rows.Add();
+            var row = dataGridView1.Rows[dataGridView1.Rows.Count - 1];
+            row.HeaderCell.Value = nazwa;
+            if (wartosc == null)
+            {
+                row.HeaderCell.Style.Font = new Font(Font.FontFamily, Font.Size * 1.2f, FontStyle.Bold);
+                row.HeaderCell.Style.ForeColor = Color.DarkBlue;
+                row.HeaderCell.Style.BackColor = Color.FromArgb(240, 240, 240);
+                row.Cells[0].Style.BackColor = Color.FromArgb(240, 240, 240);
+                row.Height = (int)Math.Round((double)row.Height * 1.3);
+                return;
+            }
+            row.Cells[0].Value = wartosc;
         }
 
         //--------------------------------------------------------
         private void CzyscStareDane()
         //--------------------------------------------------------
         {
-            for(int i = 0; i < MAX_WIERSZY; ++i)
-            {
-                dataGridView1.Rows[i].Cells[1].Value = 0;
-            }
+            dataGridView1.Rows.Clear();
+            dataGridView1.RowHeadersWidth = 240;
+            dataGridView1.Columns[0].Visible = true;
         }
 
         //--------------------------------------------------------
@@ -75,35 +69,44 @@ namespace DotBase
 
             DateTime SzukajOd = dateTimePicker1.Value.Date;
             DateTime SzukajDo = dateTimePicker2.Value.Date.AddDays(1).AddTicks(-1);
-
+            
             if (SzukajOd > SzukajDo)
             {
-                MessageBox.Show("Data do której szukać nie może być mniejsza niż data od której szuakć.");
+                dodajWiersz("Podane daty są błędne.", "");
+                dodajWiersz("Brak danych do wyświetlenia.", "");
+                dataGridView1.RowHeadersWidth = dataGridView1.Width - 8;
+                dataGridView1.Columns[0].Visible = false;
                 return;
             }
 
             _StatystykaWzorcowan.ZbierzStatystyki(ref SzukajOd, ref SzukajDo);
-            
-            textBox1.Text = _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.LICZBA_ZLECEN].ToString();
-            textBox2.Text = _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.LICZBA_WZORCOWAN].ToString();
-            textBox3.Text = _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.LICZBA_PRZYRZADOW].ToString();
-            textBox4.Text = _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.LICZBA_WYSTAWIONYCH_SWIADECTW].ToString();
 
-            dataGridView1.Rows[0].Cells[1].Value = _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.PROMIENIOWANIE_GAMMA];
-            dataGridView1.Rows[1].Cells[1].Value = _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.MOC_DAWKI];
-            dataGridView1.Rows[2].Cells[1].Value = _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.DAWKA];
-            dataGridView1.Rows[3].Cells[1].Value = _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.SYGNALIZACJA];
-            dataGridView1.Rows[4].Cells[1].Value = _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.SKAZENIA];
-            dataGridView1.Rows[5].Cells[1].Value = _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.AMERYK];
-            dataGridView1.Rows[6].Cells[1].Value = _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.CHLOR];
-            dataGridView1.Rows[7].Cells[1].Value = _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.PLUTON];
-            dataGridView1.Rows[8].Cells[1].Value = _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.STRONT_SLABY];
-            dataGridView1.Rows[9].Cells[1].Value = _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.STRONT_SILNY];
-            dataGridView1.Rows[10].Cells[1].Value = _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.STRONT_NAJSILNIEJSZY];
-            dataGridView1.Rows[11].Cells[1].Value = _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.WEGIEL_SLABY];
-            dataGridView1.Rows[12].Cells[1].Value = _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.WEGIEL_SILNY];
-            dataGridView1.Rows[13].Cells[1].Value = _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.WZORCOWANE_CEZEM];
-            dataGridView1.Rows[14].Cells[1].Value = _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.WZORCOWANE_NA_SKAZENIA];
+            dodajWiersz("Ogólne");
+            dodajWiersz("Liczb zleceń", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.LICZBA_ZLECEN]);
+            dodajWiersz("Liczba przyrządów", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.LICZBA_PRZYRZADOW]);
+            dodajWiersz("Liczba wzorcowań", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.LICZBA_WZORCOWAN]);
+            dodajWiersz("Liczba wystawionych świadectw", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.LICZBA_WYSTAWIONYCH_SWIADECTW]);
+
+            dodajWiersz("Dziedzina 18.01");
+            dodajWiersz("Wystawione świadetwa", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.WZORCOWANE_CEZEM]);
+            dodajWiersz("Wykonane wzorcowania", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.PROMIENIOWANIE_GAMMA]);
+            dodajWiersz("Moc dawki", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.MOC_DAWKI]);
+            dodajWiersz("Dawka", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.DAWKA]);
+            dodajWiersz("Sygnalizacja mocy dawki", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.SYGNALIZACJA_MOCY_DAWKI]);
+            dodajWiersz("Sygnalizacja dawki", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.SYGNALIZACJA_DAWKI]);
+
+            dodajWiersz("Dziedzina 18.02");
+            dodajWiersz("Wystawione świadetwa", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.WZORCOWANE_NA_SKAZENIA]);
+            dodajWiersz("Wykonane wzorcowania", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.SKAZENIA]);
+            dodajWiersz("Ameryk", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.AMERYK]);
+            dodajWiersz("Chlor", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.CHLOR]);
+            dodajWiersz("Pluton", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.PLUTON]);
+            dodajWiersz("Stront słaby", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.STRONT_SLABY]);
+            dodajWiersz("Stront silny", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.STRONT_SILNY]);
+            dodajWiersz("Stront najsilniejszy", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.STRONT_NAJSILNIEJSZY]);
+            dodajWiersz("Węgiel słaby", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.WEGIEL_SLABY]);
+            dodajWiersz("Węgiel silny", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.WEGIEL_SILNY]);
+
         }
     }
 }

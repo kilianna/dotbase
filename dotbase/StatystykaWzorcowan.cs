@@ -10,9 +10,9 @@ namespace DotBase
     {
         public enum Stale
         {
-            SKAZENIA, PROMIENIOWANIE_GAMMA, AMERYK, CHLOR, DAWKA, MOC_DAWKI, PLUTON, STRONT_SLABY, STRONT_SILNY, STRONT_NAJSILNIEJSZY, SYGNALIZACJA,
-            WEGIEL_SLABY, WEGIEL_SILNY, LICZBA_ZLECEN, LICZBA_PRZYRZADOW, LICZBA_WZORCOWAN, LICZBA_WYSTAWIONYCH_SWIADECTW, 
-            WZORCOWANE_CEZEM, WZORCOWANE_NA_SKAZENIA,
+            SKAZENIA, PROMIENIOWANIE_GAMMA, AMERYK, CHLOR, DAWKA, MOC_DAWKI, PLUTON, STRONT_SLABY, STRONT_SILNY, STRONT_NAJSILNIEJSZY, SYGNALIZACJA_MOCY_DAWKI,
+            WEGIEL_SLABY, WEGIEL_SILNY, LICZBA_ZLECEN, LICZBA_PRZYRZADOW, LICZBA_WZORCOWAN, LICZBA_WYSTAWIONYCH_SWIADECTW,
+            WZORCOWANE_CEZEM, WZORCOWANE_NA_SKAZENIA, SYGNALIZACJA_DAWKI,
             LICZBA_ELEMENTOW
         };
 
@@ -47,7 +47,8 @@ namespace DotBase
             ZnajdzLiczbeSwiadectw(ref szukajOd, ref SzukajDo);
             ZnajdzLiczbeWzorcowanDawki(ref szukajOd, ref SzukajDo);
             ZnajdzLiczbeWzorcowanMocDawki(ref szukajOd, ref SzukajDo);
-            ZnajdzLiczbeWzorcowanSygnalizacji(ref szukajOd, ref SzukajDo);
+            ZnajdzLiczbeWzorcowanSygnalizacjiDawki(ref szukajOd, ref SzukajDo);
+            ZnajdzLiczbeWzorcowanSygnalizacjiMocyDawki(ref szukajOd, ref SzukajDo);
             ZnajdzLiczbeZlecen(ref szukajOd, ref SzukajDo);
             ZnajdzLiczbeWzorcowanCezem(ref szukajOd, ref SzukajDo);
             ZnajdzLiczbeWzorcowanNaSkarzenia(ref szukajOd, ref SzukajDo);
@@ -66,10 +67,12 @@ namespace DotBase
         {
             _Zapytanie = @"SELECT Count(*)
                 FROM (
-                    SELECT ID_karty
+                    SELECT wzorcowanie_cezem.ID_karty
                     FROM wzorcowanie_cezem
-                    WHERE Data_wzorcowania BETWEEN ? AND ?
-                    GROUP BY ID_karty
+                        INNER JOIN Karta_przyjecia
+                            ON wzorcowanie_cezem.ID_karty = Karta_przyjecia.ID_karty
+                    WHERE (wzorcowanie_cezem.Data_wzorcowania BETWEEN ? AND ?) AND Karta_przyjecia.Uszkodzony = False
+                    GROUP BY wzorcowanie_cezem.ID_karty
                 )";
 
             _Wyniki[(int)Stale.WZORCOWANE_CEZEM] = _BazaDanych.TworzTabeleDanych(_Zapytanie, szukajOd, SzukajDo).Rows[0].Field<int>(0);
@@ -83,10 +86,12 @@ namespace DotBase
         {
             _Zapytanie = @"SELECT Count(*)
                 FROM (
-                    SELECT ID_karty
+                    SELECT Wzorcowanie_zrodlami_powierzchniowymi.ID_karty
                     FROM Wzorcowanie_zrodlami_powierzchniowymi
-                    WHERE Data_wzorcowania BETWEEN ? AND ?
-                    GROUP BY ID_karty
+                        INNER JOIN Karta_przyjecia
+                            ON Wzorcowanie_zrodlami_powierzchniowymi.ID_karty = Karta_przyjecia.ID_karty
+                    WHERE (Wzorcowanie_zrodlami_powierzchniowymi.Data_wzorcowania BETWEEN ? AND ?) AND Karta_przyjecia.Uszkodzony = False
+                    GROUP BY Wzorcowanie_zrodlami_powierzchniowymi.ID_karty
                 )";
 
             _Wyniki[(int)Stale.WZORCOWANE_NA_SKAZENIA] = _BazaDanych.TworzTabeleDanych(_Zapytanie, szukajOd, SzukajDo).Rows[0].Field<int>(0);
@@ -140,7 +145,8 @@ namespace DotBase
         {
             _Wyniki[(int)Stale.PROMIENIOWANIE_GAMMA] = _Wyniki[(int)Stale.DAWKA]
                                                      + _Wyniki[(int)Stale.MOC_DAWKI]
-                                                     + _Wyniki[(int)Stale.SYGNALIZACJA];
+                                                     + _Wyniki[(int)Stale.SYGNALIZACJA_MOCY_DAWKI]
+                                                     + _Wyniki[(int)Stale.SYGNALIZACJA_DAWKI];
         }
 
         //-------------------------------------------------------------
@@ -201,15 +207,27 @@ namespace DotBase
             _Wyniki[(int)Stale.MOC_DAWKI] = _BazaDanych.TworzTabeleDanych(_Zapytanie, szukajOd, SzukajDo).Rows[0].Field<int>(0);    
         }
 
-        // znajdź liczbę wzorcowań na sygnalizację
+
         //-------------------------------------------------------------
-        private void ZnajdzLiczbeWzorcowanSygnalizacji(ref DateTime szukajOd, ref DateTime SzukajDo)
+        // znajdź liczbę wyorcowań na sygnalizację dawki
+        private void ZnajdzLiczbeWzorcowanSygnalizacjiDawki(ref DateTime szukajOd, ref DateTime SzukajDo)
+        //-------------------------------------------------------------
+        {
+            _Zapytanie = "SELECT COUNT(*) FROM (SELECT DISTINCT id_wzorcowania FROM Sygnalizacja_dawka) AS W INNER JOIN Wzorcowanie_cezem AS C "
+                       + "ON W.id_wzorcowania=C.id_wzorcowania WHERE C.data_wzorcowania BETWEEN ? AND ?";
+
+            _Wyniki[(int)Stale.SYGNALIZACJA_DAWKI] = _BazaDanych.TworzTabeleDanych(_Zapytanie, szukajOd, SzukajDo).Rows[0].Field<int>(0);
+        }
+
+        // znajdź liczbę wzorcowań na sygnalizację mocy dawki
+        //-------------------------------------------------------------
+        private void ZnajdzLiczbeWzorcowanSygnalizacjiMocyDawki(ref DateTime szukajOd, ref DateTime SzukajDo)
         //-------------------------------------------------------------
         {
             _Zapytanie = "SELECT COUNT(*) FROM (SELECT DISTINCT id_wzorcowania FROM Sygnalizacja) AS S INNER JOIN Wzorcowanie_cezem AS C "
                        + "ON S.id_wzorcowania=C.id_wzorcowania WHERE C.data_wzorcowania BETWEEN ? AND ?";
 
-            _Wyniki[(int)Stale.SYGNALIZACJA] = _BazaDanych.TworzTabeleDanych(_Zapytanie, szukajOd, SzukajDo).Rows[0].Field<int>(0);
+            _Wyniki[(int)Stale.SYGNALIZACJA_MOCY_DAWKI] = _BazaDanych.TworzTabeleDanych(_Zapytanie, szukajOd, SzukajDo).Rows[0].Field<int>(0);
         }
 
         //-------------------------------------------------------------
