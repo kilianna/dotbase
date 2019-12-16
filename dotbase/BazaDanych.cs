@@ -968,7 +968,6 @@ namespace DotBase
             public Szablon_{0} INSERT() {{ _INSERT(); return this; }}
             public Szablon_{0} DELETE() {{ _DELETE(); return this; }}
             public Szablon_{0} WHERE() {{ _WHERE(); return this; }}
-            public Szablon_{0} EXECUTE() {{ _EXECUTE(); return this; }}
             public Szablon_{0} INFO(string text) {{ _INFO(text); return this; }}"
             /*public Szablon_{0} SELECT() {{ _SELECT(); return this; }}" - jeżeli potrzeba SELECT */, tabela);
                 tabele += String.Format(@"

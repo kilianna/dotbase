@@ -12,7 +12,6 @@ namespace DotBase
             public Szablon_Atesty_zrodel INSERT() { _INSERT(); return this; }
             public Szablon_Atesty_zrodel DELETE() { _DELETE(); return this; }
             public Szablon_Atesty_zrodel WHERE() { _WHERE(); return this; }
-            public Szablon_Atesty_zrodel EXECUTE() { _EXECUTE(); return this; }
             public Szablon_Atesty_zrodel INFO(string text) { _INFO(text); return this; }
             public Szablon_Atesty_zrodel Data_wzorcowania(DateTime value)
             {
@@ -47,7 +46,6 @@ namespace DotBase
             public Szablon_Budzetniepewnosci INSERT() { _INSERT(); return this; }
             public Szablon_Budzetniepewnosci DELETE() { _DELETE(); return this; }
             public Szablon_Budzetniepewnosci WHERE() { _WHERE(); return this; }
-            public Szablon_Budzetniepewnosci EXECUTE() { _EXECUTE(); return this; }
             public Szablon_Budzetniepewnosci INFO(string text) { _INFO(text); return this; }
             public Szablon_Budzetniepewnosci Uwagi(string value)
             {
@@ -72,7 +70,6 @@ namespace DotBase
             public Szablon_Cennik INSERT() { _INSERT(); return this; }
             public Szablon_Cennik DELETE() { _DELETE(); return this; }
             public Szablon_Cennik WHERE() { _WHERE(); return this; }
-            public Szablon_Cennik EXECUTE() { _EXECUTE(); return this; }
             public Szablon_Cennik INFO(string text) { _INFO(text); return this; }
             public Szablon_Cennik Cena(double value)
             {
@@ -92,7 +89,6 @@ namespace DotBase
             public Szablon_Dozymetry INSERT() { _INSERT(); return this; }
             public Szablon_Dozymetry DELETE() { _DELETE(); return this; }
             public Szablon_Dozymetry WHERE() { _WHERE(); return this; }
-            public Szablon_Dozymetry EXECUTE() { _EXECUTE(); return this; }
             public Szablon_Dozymetry INFO(string text) { _INFO(text); return this; }
             public Szablon_Dozymetry ID_dozymetru(int value)
             {
@@ -132,7 +128,6 @@ namespace DotBase
             public Szablon_Hasla INSERT() { _INSERT(); return this; }
             public Szablon_Hasla DELETE() { _DELETE(); return this; }
             public Szablon_Hasla WHERE() { _WHERE(); return this; }
-            public Szablon_Hasla EXECUTE() { _EXECUTE(); return this; }
             public Szablon_Hasla INFO(string text) { _INFO(text); return this; }
             public Szablon_Hasla Haslo(string value)
             {
@@ -152,7 +147,6 @@ namespace DotBase
             public Szablon_Jednostki INSERT() { _INSERT(); return this; }
             public Szablon_Jednostki DELETE() { _DELETE(); return this; }
             public Szablon_Jednostki WHERE() { _WHERE(); return this; }
-            public Szablon_Jednostki EXECUTE() { _EXECUTE(); return this; }
             public Szablon_Jednostki INFO(string text) { _INFO(text); return this; }
             public Szablon_Jednostki ID_jednostki(int value)
             {
@@ -187,7 +181,6 @@ namespace DotBase
             public Szablon_Karta_przyjecia INSERT() { _INSERT(); return this; }
             public Szablon_Karta_przyjecia DELETE() { _DELETE(); return this; }
             public Szablon_Karta_przyjecia WHERE() { _WHERE(); return this; }
-            public Szablon_Karta_przyjecia EXECUTE() { _EXECUTE(); return this; }
             public Szablon_Karta_przyjecia INFO(string text) { _INFO(text); return this; }
             public Szablon_Karta_przyjecia Akcesoria(string value)
             {
@@ -317,7 +310,6 @@ namespace DotBase
             public Szablon_Pomiary_cez INSERT() { _INSERT(); return this; }
             public Szablon_Pomiary_cez DELETE() { _DELETE(); return this; }
             public Szablon_Pomiary_cez WHERE() { _WHERE(); return this; }
-            public Szablon_Pomiary_cez EXECUTE() { _EXECUTE(); return this; }
             public Szablon_Pomiary_cez INFO(string text) { _INFO(text); return this; }
             public Szablon_Pomiary_cez Dolaczyc(bool value)
             {
@@ -362,7 +354,6 @@ namespace DotBase
             public Szablon_Pomiary_dawka INSERT() { _INSERT(); return this; }
             public Szablon_Pomiary_dawka DELETE() { _DELETE(); return this; }
             public Szablon_Pomiary_dawka WHERE() { _WHERE(); return this; }
-            public Szablon_Pomiary_dawka EXECUTE() { _EXECUTE(); return this; }
             public Szablon_Pomiary_dawka INFO(string text) { _INFO(text); return this; }
             public Szablon_Pomiary_dawka Czas(double value)
             {
@@ -397,7 +388,6 @@ namespace DotBase
             public Szablon_Pomiary_powierzchniowe INSERT() { _INSERT(); return this; }
             public Szablon_Pomiary_powierzchniowe DELETE() { _DELETE(); return this; }
             public Szablon_Pomiary_powierzchniowe WHERE() { _WHERE(); return this; }
-            public Szablon_Pomiary_powierzchniowe EXECUTE() { _EXECUTE(); return this; }
             public Szablon_Pomiary_powierzchniowe INFO(string text) { _INFO(text); return this; }
             public Szablon_Pomiary_powierzchniowe ID_pomiaru(int value)
             {
@@ -427,7 +417,6 @@ namespace DotBase
             public Szablon_Pomiary_wzorcowe INSERT() { _INSERT(); return this; }
             public Szablon_Pomiary_wzorcowe DELETE() { _DELETE(); return this; }
             public Szablon_Pomiary_wzorcowe WHERE() { _WHERE(); return this; }
-            public Szablon_Pomiary_wzorcowe EXECUTE() { _EXECUTE(); return this; }
             public Szablon_Pomiary_wzorcowe INFO(string text) { _INFO(text); return this; }
             public Szablon_Pomiary_wzorcowe ID_protokolu(short value)
             {
@@ -462,7 +451,6 @@ namespace DotBase
             public Szablon_Protokoly_kalibracji_lawy INSERT() { _INSERT(); return this; }
             public Szablon_Protokoly_kalibracji_lawy DELETE() { _DELETE(); return this; }
             public Szablon_Protokoly_kalibracji_lawy WHERE() { _WHERE(); return this; }
-            public Szablon_Protokoly_kalibracji_lawy EXECUTE() { _EXECUTE(); return this; }
             public Szablon_Protokoly_kalibracji_lawy INFO(string text) { _INFO(text); return this; }
             public Szablon_Protokoly_kalibracji_lawy Data_kalibracji(DateTime value)
             {
@@ -487,7 +475,6 @@ namespace DotBase
             public Szablon_Sondy INSERT() { _INSERT(); return this; }
             public Szablon_Sondy DELETE() { _DELETE(); return this; }
             public Szablon_Sondy WHERE() { _WHERE(); return this; }
-            public Szablon_Sondy EXECUTE() { _EXECUTE(); return this; }
             public Szablon_Sondy INFO(string text) { _INFO(text); return this; }
             public Szablon_Sondy ID_dozymetru(int value)
             {
@@ -517,7 +504,6 @@ namespace DotBase
             public Szablon_Stale INSERT() { _INSERT(); return this; }
             public Szablon_Stale DELETE() { _DELETE(); return this; }
             public Szablon_Stale WHERE() { _WHERE(); return this; }
-            public Szablon_Stale EXECUTE() { _EXECUTE(); return this; }
             public Szablon_Stale INFO(string text) { _INFO(text); return this; }
             public Szablon_Stale Nazwa(string value)
             {
@@ -542,7 +528,6 @@ namespace DotBase
             public Szablon_Swiadectwo INSERT() { _INSERT(); return this; }
             public Szablon_Swiadectwo DELETE() { _DELETE(); return this; }
             public Szablon_Swiadectwo WHERE() { _WHERE(); return this; }
-            public Szablon_Swiadectwo EXECUTE() { _EXECUTE(); return this; }
             public Szablon_Swiadectwo INFO(string text) { _INFO(text); return this; }
             public Szablon_Swiadectwo Autoryzowal(string value)
             {
@@ -612,7 +597,6 @@ namespace DotBase
             public Szablon_Sygnalizacja INSERT() { _INSERT(); return this; }
             public Szablon_Sygnalizacja DELETE() { _DELETE(); return this; }
             public Szablon_Sygnalizacja WHERE() { _WHERE(); return this; }
-            public Szablon_Sygnalizacja EXECUTE() { _EXECUTE(); return this; }
             public Szablon_Sygnalizacja INFO(string text) { _INFO(text); return this; }
             public Szablon_Sygnalizacja ID_wzorcowania(int value)
             {
@@ -667,7 +651,6 @@ namespace DotBase
             public Szablon_Sygnalizacja_dawka INSERT() { _INSERT(); return this; }
             public Szablon_Sygnalizacja_dawka DELETE() { _DELETE(); return this; }
             public Szablon_Sygnalizacja_dawka WHERE() { _WHERE(); return this; }
-            public Szablon_Sygnalizacja_dawka EXECUTE() { _EXECUTE(); return this; }
             public Szablon_Sygnalizacja_dawka INFO(string text) { _INFO(text); return this; }
             public Szablon_Sygnalizacja_dawka Czas_zmierzony(double value)
             {
@@ -712,7 +695,6 @@ namespace DotBase
             public Szablon_Wyniki_dawka INSERT() { _INSERT(); return this; }
             public Szablon_Wyniki_dawka DELETE() { _DELETE(); return this; }
             public Szablon_Wyniki_dawka WHERE() { _WHERE(); return this; }
-            public Szablon_Wyniki_dawka EXECUTE() { _EXECUTE(); return this; }
             public Szablon_Wyniki_dawka INFO(string text) { _INFO(text); return this; }
             public Szablon_Wyniki_dawka ID_wzorcowania(int value)
             {
@@ -757,7 +739,6 @@ namespace DotBase
             public Szablon_wyniki_moc_dawki INSERT() { _INSERT(); return this; }
             public Szablon_wyniki_moc_dawki DELETE() { _DELETE(); return this; }
             public Szablon_wyniki_moc_dawki WHERE() { _WHERE(); return this; }
-            public Szablon_wyniki_moc_dawki EXECUTE() { _EXECUTE(); return this; }
             public Szablon_wyniki_moc_dawki INFO(string text) { _INFO(text); return this; }
             public Szablon_wyniki_moc_dawki ID_wzorcowania(int value)
             {
@@ -787,7 +768,6 @@ namespace DotBase
             public Szablon_wzorcowanie_cezem INSERT() { _INSERT(); return this; }
             public Szablon_wzorcowanie_cezem DELETE() { _DELETE(); return this; }
             public Szablon_wzorcowanie_cezem WHERE() { _WHERE(); return this; }
-            public Szablon_wzorcowanie_cezem EXECUTE() { _EXECUTE(); return this; }
             public Szablon_wzorcowanie_cezem INFO(string text) { _INFO(text); return this; }
             public Szablon_wzorcowanie_cezem Cisnienie(double value)
             {
@@ -892,7 +872,6 @@ namespace DotBase
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi INSERT() { _INSERT(); return this; }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi DELETE() { _DELETE(); return this; }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi WHERE() { _WHERE(); return this; }
-            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi EXECUTE() { _EXECUTE(); return this; }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi INFO(string text) { _INFO(text); return this; }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Cisnienie(double value)
             {
@@ -1017,7 +996,6 @@ namespace DotBase
             public Szablon_Zlecenia INSERT() { _INSERT(); return this; }
             public Szablon_Zlecenia DELETE() { _DELETE(); return this; }
             public Szablon_Zlecenia WHERE() { _WHERE(); return this; }
-            public Szablon_Zlecenia EXECUTE() { _EXECUTE(); return this; }
             public Szablon_Zlecenia INFO(string text) { _INFO(text); return this; }
             public Szablon_Zlecenia Data_przyjecia(DateTime value)
             {
@@ -1082,7 +1060,6 @@ namespace DotBase
             public Szablon_Zleceniodawca INSERT() { _INSERT(); return this; }
             public Szablon_Zleceniodawca DELETE() { _DELETE(); return this; }
             public Szablon_Zleceniodawca WHERE() { _WHERE(); return this; }
-            public Szablon_Zleceniodawca EXECUTE() { _EXECUTE(); return this; }
             public Szablon_Zleceniodawca INFO(string text) { _INFO(text); return this; }
             public Szablon_Zleceniodawca Adres(string value)
             {
@@ -1107,6 +1084,11 @@ namespace DotBase
             public Szablon_Zleceniodawca ID_zleceniodawcy(int value)
             {
                 SetField("ID_zleceniodawcy", value, OleDbType.Integer);
+                return this;
+            }
+            public Szablon_Zleceniodawca IFJ(bool value)
+            {
+                SetField("IFJ", value, OleDbType.Boolean);
                 return this;
             }
             public Szablon_Zleceniodawca Nazwa_platnika(string value)
@@ -1157,7 +1139,6 @@ namespace DotBase
             public Szablon_zrodla_powierzchniowe INSERT() { _INSERT(); return this; }
             public Szablon_zrodla_powierzchniowe DELETE() { _DELETE(); return this; }
             public Szablon_zrodla_powierzchniowe WHERE() { _WHERE(); return this; }
-            public Szablon_zrodla_powierzchniowe EXECUTE() { _EXECUTE(); return this; }
             public Szablon_zrodla_powierzchniowe INFO(string text) { _INFO(text); return this; }
             public Szablon_zrodla_powierzchniowe Czas_polowicznego_rozpadu(float value)
             {

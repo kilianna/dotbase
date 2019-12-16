@@ -160,7 +160,7 @@ namespace DotBase
                 firstEntry = true;
             }
 
-            protected void _EXECUTE()
+            public bool EXECUTE(bool returnResult = false)
             {
                 OleDbCommand cmd;
                 CloseQuery();
@@ -221,8 +221,17 @@ namespace DotBase
                 catch (Exception ex)
                 {
                     Log.log(baza, "Błąd wykonywania polecenia: " + ex.Message, query, logParameters);
-                    throw;
+                    if (returnResult)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
+
+                return true;
             }
 
             private void addParameters(OleDbCommand cmd)
