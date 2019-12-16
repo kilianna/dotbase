@@ -167,9 +167,9 @@ namespace DotBase
             {
                 try
                 {
-                    daneWejsciowe.m_Odleglosc1.Add( Double.Parse(dataGridView1.Rows[i].Cells[1].Value.ToString()));
+                    daneWejsciowe.m_Odleglosc1.Add( N.doubleParse(dataGridView1.Rows[i].Cells[1].Value.ToString()));
                     daneWejsciowe.m_Zrodlo1.Add( UInt16.Parse(dataGridView1.Rows[i].Cells[2].Value.ToString()));
-                    daneWejsciowe.m_Odleglosc2.Add( Double.Parse(dataGridView1.Rows[i].Cells[3].Value.ToString()));
+                    daneWejsciowe.m_Odleglosc2.Add( N.doubleParse(dataGridView1.Rows[i].Cells[3].Value.ToString()));
                     daneWejsciowe.m_Zrodlo2.Add( UInt16.Parse(dataGridView1.Rows[i].Cells[4].Value.ToString()));
                 }
                 catch (Exception)

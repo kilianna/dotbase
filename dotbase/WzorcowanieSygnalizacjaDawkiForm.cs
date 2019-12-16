@@ -157,7 +157,7 @@ namespace DotBase
 
             if (progi != null)
             {
-                List<double> wyniki = _WzorcowanieSygDawki.LiczCzasWzorcowy(Double.Parse(textBox14.Text), Int32.Parse(textBox15.Text), comboBox3.Text, comboBox4.Text, progi, dateTimePicker1.Value);
+                List<double> wyniki = _WzorcowanieSygDawki.LiczCzasWzorcowy(N.doubleParse(textBox14.Text), Int32.Parse(textBox15.Text), comboBox3.Text, comboBox4.Text, progi, dateTimePicker1.Value);
 
                 for (UInt16 i = 0; i < wyniki.Count; ++i)
                     dataGridView1.Rows[i].Cells["tWzorcowy"].Value = wyniki[i].ToString("0.0");      
@@ -168,7 +168,7 @@ namespace DotBase
 
             if (progi != null)
             {
-                List<double> wyniki = _WzorcowanieSygDawki.LiczWartoscRzecyzwista(Double.Parse(textBox14.Text), Int32.Parse(textBox15.Text), comboBox3.Text, comboBox4.Text, czas, dateTimePicker1.Value);
+                List<double> wyniki = _WzorcowanieSygDawki.LiczWartoscRzecyzwista(N.doubleParse(textBox14.Text), Int32.Parse(textBox15.Text), comboBox3.Text, comboBox4.Text, czas, dateTimePicker1.Value);
 
                 for (UInt16 i = 0; i < wyniki.Count; ++i)
                     dataGridView1.Rows[i].Cells["wartRzeczywista"].Value = wyniki[i].ToString("0.00");
@@ -455,7 +455,7 @@ namespace DotBase
             int zmiennaTestowaInt;
             double zmiennaTestowaDouble;
 
-            if (!Double.TryParse(textBox14.Text, out zmiennaTestowaDouble) ||
+            if (!N.doubleTryParse(textBox14.Text, out zmiennaTestowaDouble) ||
                 !Int32.TryParse(textBox15.Text, out zmiennaTestowaInt) ||
                 "" == comboBox3.Text || "" == comboBox4.Text)
                 return null;
@@ -467,7 +467,7 @@ namespace DotBase
                                dataGridView1.Rows[i].Cells[2].Value != null && i < dataGridView1.Rows.Count - 1; ++i)
             {
                 if (dataGridView1.Rows[i].Cells["tZmierzony"].Value != null &&
-                    Double.TryParse(dataGridView1.Rows[i].Cells["tZmierzony"].Value.ToString(), out zmiennaTestowaDouble))
+                    N.doubleTryParse(dataGridView1.Rows[i].Cells["tZmierzony"].Value.ToString(), out zmiennaTestowaDouble))
                 {
                     czasZmierzony.Add(zmiennaTestowaDouble);
                 }
@@ -488,7 +488,7 @@ namespace DotBase
             int zmiennaTestowaInt;
             double zmiennaTestowaDouble;
 
-            if (!Double.TryParse(textBox14.Text, out zmiennaTestowaDouble) || 
+            if (!N.doubleTryParse(textBox14.Text, out zmiennaTestowaDouble) || 
                 !Int32.TryParse(textBox15.Text, out zmiennaTestowaInt)     ||
                 "" == comboBox3.Text || "" == comboBox4.Text)
                 return null;
@@ -499,7 +499,7 @@ namespace DotBase
             for (UInt16 i = 0; dataGridView1.Rows[i].Cells[0].Value != null && i < dataGridView1.Rows.Count - 1; ++i)
             {
                 if (dataGridView1.Rows[i].Cells["Prog"].Value != null && 
-                    Double.TryParse(dataGridView1.Rows[i].Cells["Prog"].Value.ToString(), out zmiennaTestowaDouble))
+                    N.doubleTryParse(dataGridView1.Rows[i].Cells["Prog"].Value.ToString(), out zmiennaTestowaDouble))
                 {
                     progi.Add(zmiennaTestowaDouble);
                 }

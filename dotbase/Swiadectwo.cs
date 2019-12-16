@@ -325,7 +325,7 @@ namespace DotBase
 
                 double emisja = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<double>(0);
                 DateTime dataWzorcowaniaZrodla = wiersz.Field<DateTime>(1);
-                double czasPolowicznegoRozpadu = double.Parse(m_data.getValue(SwiadectwoData.DataType.ZRODLO_CZAS_ROZPADU));
+                double czasPolowicznegoRozpadu = N.doubleParse(m_data.getValue(SwiadectwoData.DataType.ZRODLO_CZAS_ROZPADU));
                 m_data.setValue(SwiadectwoData.DataType.EMISJA_POW, (mnoznikKorekcyjny * emisja * Math.Exp(-Math.Log(2) / czasPolowicznegoRozpadu * (dataWzorcowaniaPrzyrzadu - dataWzorcowaniaZrodla).Days / 365.25)).ToString("0.00"));
             }
 

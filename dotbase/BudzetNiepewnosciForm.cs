@@ -127,13 +127,13 @@ namespace DotBase
 
             try
             {
-                wartosci[0] = double.Parse(textBox8.Text);
-                wartosci[1] = double.Parse(textBox9.Text);
-                wartosci[2] = double.Parse(textBox10.Text);
-                wartosci[3] = double.Parse(textBox11.Text);
-                wartosci[4] = double.Parse(textBox12.Text);
-                wartosci[5] = double.Parse(textBox13.Text);
-                wartosci[6] = double.Parse(textBox14.Text);
+                wartosci[0] = N.doubleParse(textBox8.Text);
+                wartosci[1] = N.doubleParse(textBox9.Text);
+                wartosci[2] = N.doubleParse(textBox10.Text);
+                wartosci[3] = N.doubleParse(textBox11.Text);
+                wartosci[4] = N.doubleParse(textBox12.Text);
+                wartosci[5] = N.doubleParse(textBox13.Text);
+                wartosci[6] = N.doubleParse(textBox14.Text);
             }
             catch(Exception)
             {

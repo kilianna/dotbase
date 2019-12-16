@@ -196,9 +196,9 @@ namespace DotBase
             for (int i = 0; i < dataGridView1.Rows.Count - 1; ++i)
             {
                 idZrodla.Add(int.Parse(dataGridView1.Rows[i].Cells[0].Value.ToString()));
-                odleglosc.Add(double.Parse(dataGridView1.Rows[i].Cells[1].Value.ToString()));
-                mocKermy.Add(double.Parse(dataGridView1.Rows[i].Cells[2].Value.ToString()));
-                niepewnosc.Add(double.Parse(dataGridView1.Rows[i].Cells[3].Value.ToString()));
+                odleglosc.Add(N.doubleParse(dataGridView1.Rows[i].Cells[1].Value.ToString()));
+                mocKermy.Add(N.doubleParse(dataGridView1.Rows[i].Cells[2].Value.ToString()));
+                niepewnosc.Add(N.doubleParse(dataGridView1.Rows[i].Cells[3].Value.ToString()));
             }
 
             _Protokol.ZapiszDane((int)numericUpDown1.Value, dateTimePicker1.Value, idZrodla, odleglosc, mocKermy, niepewnosc);
@@ -216,9 +216,9 @@ namespace DotBase
                 try
                 {
                     int.Parse(dataGridView1.Rows[i].Cells[0].Value.ToString());
-                    double.Parse(dataGridView1.Rows[i].Cells[1].Value.ToString());
-                    double.Parse(dataGridView1.Rows[i].Cells[2].Value.ToString());
-                    double.Parse(dataGridView1.Rows[i].Cells[3].Value.ToString());
+                    N.doubleParse(dataGridView1.Rows[i].Cells[1].Value.ToString());
+                    N.doubleParse(dataGridView1.Rows[i].Cells[2].Value.ToString());
+                    N.doubleParse(dataGridView1.Rows[i].Cells[3].Value.ToString());
                 }
                 catch(Exception)
                 {

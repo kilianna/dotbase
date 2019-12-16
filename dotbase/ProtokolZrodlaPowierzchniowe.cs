@@ -176,7 +176,7 @@ namespace DotBase
                 + String.Format("id_zrodla = {0} AND data_wzorcowania=(SELECT MAX(data_wzorcowania) FROM Atesty_zrodel WHERE id_zrodla = {0})", idZrodla);
 
                 double emisjaPowierzchniowa = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<double>(0);
-                double czas = double.Parse((model.data - _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<DateTime>(1)).Days.ToString());
+                double czas = N.doubleParse((model.data - _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<DateTime>(1)).Days.ToString());
 
                 _Zapytanie = String.Format("SELECT czas_polowicznego_rozpadu FROM Zrodla_powierzchniowe WHERE id_zrodla = {0}", idZrodla);
                 double czas_polowicznego_rozpadu = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<float>(0);
@@ -263,26 +263,26 @@ namespace DotBase
                 string format = "G";
 
                 m_data.setValue(ProtokolZrodlaPowierzchnioweData.DataType.NIEPEWNOSC, "");
-                if (Double.TryParse(niepewnosc_wspol_kalibracyjnego, out dNiepewnosc))
+                if (N.doubleTryParse(niepewnosc_wspol_kalibracyjnego, out dNiepewnosc))
                 {
                     format = Narzedzia.Precyzja.Ustaw(dNiepewnosc);
                     m_data.setValue(ProtokolZrodlaPowierzchnioweData.DataType.NIEPEWNOSC, dNiepewnosc.ToString(format));
                 }
 
                 m_data.setValue(ProtokolZrodlaPowierzchnioweData.DataType.WSPOL_KALIBRACYJNY, "");
-                if (Double.TryParse(wspol_kalibracyjny, out dWspolczynnik))
+                if (N.doubleTryParse(wspol_kalibracyjny, out dWspolczynnik))
                 {
                     m_data.setValue(ProtokolZrodlaPowierzchnioweData.DataType.WSPOL_KALIBRACYJNY, dWspolczynnik.ToString(format));
                 }
 
                 m_data.setValue(ProtokolZrodlaPowierzchnioweData.DataType.NIEPEWNOSC_WZGLEDNA, "");
-                if (Double.TryParse(niepewnosc_wspol_kalibracyjnego, out dNiepewnosc) && Double.TryParse(wspol_kalibracyjny, out dWspolczynnik) && dWspolczynnik != 0.0)
+                if (N.doubleTryParse(niepewnosc_wspol_kalibracyjnego, out dNiepewnosc) && N.doubleTryParse(wspol_kalibracyjny, out dWspolczynnik) && dWspolczynnik != 0.0)
                 {
                     double wzgledna = dNiepewnosc / dWspolczynnik * 100.0;
                     m_data.setValue(ProtokolZrodlaPowierzchnioweData.DataType.NIEPEWNOSC_WZGLEDNA, wzgledna.ToString("0.00"));
                 }
 
-                if (Double.TryParse(poprz_wspol_kalibracyjny, out dPopWspolczynnik))
+                if (N.doubleTryParse(poprz_wspol_kalibracyjny, out dPopWspolczynnik))
                 {
                     m_data.setValue(ProtokolZrodlaPowierzchnioweData.DataType.PO_WSPOL_KALIBRACYJNY, dPopWspolczynnik.ToString(format));
                 }

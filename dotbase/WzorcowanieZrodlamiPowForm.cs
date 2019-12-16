@@ -165,7 +165,7 @@ namespace DotBase
             {
                 try
                 {
-                    if (true == double.TryParse(row.Cells["Min"].Value.ToString(), out min) && true == double.TryParse(row.Cells["Max"].Value.ToString(), out max))
+                    if (true == N.doubleTryParse(row.Cells["Min"].Value.ToString(), out min) && true == N.doubleTryParse(row.Cells["Max"].Value.ToString(), out max))
                     {
                         row.Cells["Wskazanie"].Value = (min + max) / 2;
                     }
@@ -614,7 +614,7 @@ namespace DotBase
             double niepewnosc;
             int precyzja;
 
-            _WzorcowanieZrodlamiPow.LiczWspolczynnikiOrazNiepewnosc(out wspolczynnik_kalibracyjny, out niepewnosc, out precyzja, ref dataGridView1, dateTimePicker1.Value, double.Parse(textBox10.Text));
+            _WzorcowanieZrodlamiPow.LiczWspolczynnikiOrazNiepewnosc(out wspolczynnik_kalibracyjny, out niepewnosc, out precyzja, ref dataGridView1, dateTimePicker1.Value, N.doubleParse(textBox10.Text));
 
             if (Double.IsInfinity(niepewnosc) || Double.IsNaN(niepewnosc))
                 textBox18.Text = "-1";

@@ -659,7 +659,7 @@ namespace DotBase
             {
                 wiersz = dataGridView1.Rows[i];
 
-                wykres.DodajPunkt(double.Parse(wiersz.Cells[5].Value.ToString()), double.Parse(wiersz.Cells[2].Value.ToString()), double.Parse(wiersz.Cells[3].Value.ToString()), double.Parse(wiersz.Cells[4].Value.ToString()), bool.Parse(wiersz.Cells[6].Value.ToString()));
+                wykres.DodajPunkt(N.doubleParse(wiersz.Cells[5].Value.ToString()), N.doubleParse(wiersz.Cells[2].Value.ToString()), N.doubleParse(wiersz.Cells[3].Value.ToString()), N.doubleParse(wiersz.Cells[4].Value.ToString()), bool.Parse(wiersz.Cells[6].Value.ToString()));
             }
 
             wykres.Show();
@@ -732,8 +732,8 @@ namespace DotBase
             {
                 try
                 {
-                    min = double.Parse(row.Cells["Min"].Value.ToString());
-                    max = double.Parse(row.Cells["Max"].Value.ToString());
+                    min = N.doubleParse(row.Cells["Min"].Value.ToString());
+                    max = N.doubleParse(row.Cells["Max"].Value.ToString());
                     double wskazanie = (min + max) / 2;
                     double niepewnosc = (max - min) / 2;
 

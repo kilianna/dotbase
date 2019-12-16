@@ -300,7 +300,7 @@ namespace DotBase
                     sTemp = tabela.Rows[i].Cells["Prog"].Value.ToString();
 
                     if (sTemp != "")
-                        temp.Prog = double.Parse(sTemp);
+                        temp.Prog = N.doubleParse(sTemp);
                     else
                         temp.Prog = 0.0;
 
@@ -308,7 +308,7 @@ namespace DotBase
                     sTemp = tabela.Rows[i].Cells["wartRzeczywista"].Value.ToString();
 
                     if (sTemp != "")
-                        temp.WartRzeczywista = double.Parse(sTemp);
+                        temp.WartRzeczywista = N.doubleParse(sTemp);
                     else
                         temp.WartRzeczywista = 0.0;
 
@@ -316,7 +316,7 @@ namespace DotBase
                     sTemp = tabela.Rows[i].Cells["Wskazanie"].Value.ToString();
 
                     if (sTemp != "")
-                        temp.WartZmierzona = double.Parse(sTemp);
+                        temp.WartZmierzona = N.doubleParse(sTemp);
                     else
                         temp.WartZmierzona = 0.0;
 
@@ -324,7 +324,7 @@ namespace DotBase
                     sTemp = tabela.Rows[i].Cells["tZmierzony"].Value.ToString();
 
                     if (sTemp != "")
-                        temp.Tzmierzony = double.Parse(sTemp);
+                        temp.Tzmierzony = N.doubleParse(sTemp);
                     else
                         temp.Tzmierzony = 0.0;
 

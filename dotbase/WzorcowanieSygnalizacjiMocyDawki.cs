@@ -409,7 +409,7 @@ namespace DotBase
                     sTemp = tabela.Rows[i].Cells["Prog"].Value.ToString();
 
                     if (sTemp != "")
-                        temp.Prog = double.Parse(sTemp);
+                        temp.Prog = N.doubleParse(sTemp);
                     else
                         temp.Prog = 0.0;
 
@@ -417,7 +417,7 @@ namespace DotBase
                     sTemp = tabela.Rows[i].Cells["Odl1"].Value.ToString();
 
                     if (sTemp != "")
-                        temp.Odleglosc1 = double.Parse(sTemp);
+                        temp.Odleglosc1 = N.doubleParse(sTemp);
                     else
                         temp.Odleglosc1 = 0.0;
 
@@ -425,7 +425,7 @@ namespace DotBase
                     sTemp = tabela.Rows[i].Cells["Odl2"].Value.ToString();
 
                     if (sTemp != "")
-                        temp.Odleglosc2 = double.Parse(sTemp);
+                        temp.Odleglosc2 = N.doubleParse(sTemp);
                     else
                         temp.Odleglosc2 = 0.0;
 
@@ -433,7 +433,7 @@ namespace DotBase
                     sTemp = tabela.Rows[i].Cells["Zr1"].Value.ToString();
 
                     if (sTemp != "")
-                        temp.Zrodlo1 = double.Parse(sTemp);
+                        temp.Zrodlo1 = N.doubleParse(sTemp);
                     else
                         temp.Zrodlo1 = 0.0;
 
@@ -441,7 +441,7 @@ namespace DotBase
                     sTemp = tabela.Rows[i].Cells["Zr2"].Value.ToString();
 
                     if (sTemp != "")
-                        temp.Zrodlo2 = double.Parse(sTemp);
+                        temp.Zrodlo2 = N.doubleParse(sTemp);
                     else
                         temp.Zrodlo2 = 0.0;
 
@@ -449,7 +449,7 @@ namespace DotBase
                     sTemp = tabela.Rows[i].Cells["Niepewnosc"].Value.ToString();
 
                     if (sTemp != "")
-                        temp.Niepewnosc = double.Parse(sTemp);
+                        temp.Niepewnosc = N.doubleParse(sTemp);
                     else
                         temp.Niepewnosc = 0.0;
 
@@ -457,7 +457,7 @@ namespace DotBase
                     sTemp = tabela.Rows[i].Cells["Wartosc"].Value.ToString();
 
                     if (sTemp != "")
-                        temp.WartoscZmierzona = double.Parse(sTemp);
+                        temp.WartoscZmierzona = N.doubleParse(sTemp);
                     else
                         temp.WartoscZmierzona = 0.0;
 

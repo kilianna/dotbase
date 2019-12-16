@@ -119,13 +119,13 @@ namespace WzorcowanieMocDawkiSpace
                     DataGridViewRow wiersz = tabela.Rows[i];
                     if (Boolean.Parse(wiersz.Cells[6].Value.ToString()))
                     {
-                        odleglosci.Add(Double.Parse(wiersz.Cells[0].Value.ToString()));
+                        odleglosci.Add(N.doubleParse(wiersz.Cells[0].Value.ToString()));
                         zrodla.Add(Int32.Parse(wiersz.Cells[1].Value.ToString()));
-                        wskazania.Add(Double.Parse(wiersz.Cells[2].Value.ToString()));
-                        wartosci.Add(Double.Parse(wiersz.Cells[5].Value.ToString()));
-                        zakresy.Add(Double.Parse(wiersz.Cells[4].Value.ToString()));
-                        niepewnosci.Add(Double.Parse(wiersz.Cells[3].Value.ToString()));
-                        zakresySet.Add(Double.Parse(wiersz.Cells[4].Value.ToString()));
+                        wskazania.Add(N.doubleParse(wiersz.Cells[2].Value.ToString()));
+                        wartosci.Add(N.doubleParse(wiersz.Cells[5].Value.ToString()));
+                        zakresy.Add(N.doubleParse(wiersz.Cells[4].Value.ToString()));
+                        niepewnosci.Add(N.doubleParse(wiersz.Cells[3].Value.ToString()));
+                        zakresySet.Add(N.doubleParse(wiersz.Cells[4].Value.ToString()));
                     }
                 }
                 catch (Exception)
@@ -282,13 +282,13 @@ namespace WzorcowanieMocDawkiSpace
                     DataGridViewRow wiersz = tabela.Rows[i];
                     if (Boolean.Parse(wiersz.Cells[6].Value.ToString()))
                     {
-                        odleglosci.Add(Double.Parse(wiersz.Cells[0].Value.ToString()));
+                        odleglosci.Add(N.doubleParse(wiersz.Cells[0].Value.ToString()));
                         zrodla.Add(Int32.Parse(wiersz.Cells[1].Value.ToString()));
-                        wskazania.Add(Double.Parse(wiersz.Cells[2].Value.ToString()));
-                        wartosci.Add(Double.Parse(wiersz.Cells[5].Value.ToString()));
-                        zakresy.Add(Double.Parse(wiersz.Cells[4].Value.ToString()));
-                        niepewnosci.Add(Double.Parse(wiersz.Cells[3].Value.ToString()));
-                        zakresySet.Add(Double.Parse(wiersz.Cells[4].Value.ToString()));
+                        wskazania.Add(N.doubleParse(wiersz.Cells[2].Value.ToString()));
+                        wartosci.Add(N.doubleParse(wiersz.Cells[5].Value.ToString()));
+                        zakresy.Add(N.doubleParse(wiersz.Cells[4].Value.ToString()));
+                        niepewnosci.Add(N.doubleParse(wiersz.Cells[3].Value.ToString()));
+                        zakresySet.Add(N.doubleParse(wiersz.Cells[4].Value.ToString()));
                     }
                 }
                 catch (Exception)
@@ -464,7 +464,7 @@ namespace WzorcowanieMocDawkiSpace
             if (zakres.Count <= 0)
                 return true;
 
-            zakresyPrzyrzadu.Add(double.Parse(zakres[0]));
+            zakresyPrzyrzadu.Add(N.doubleParse(zakres[0]));
 
             bool znaleziono;
             double temp;
@@ -472,7 +472,7 @@ namespace WzorcowanieMocDawkiSpace
             for (int i = 1; i < zakres.Count; ++i)
             {
                 znaleziono = false;
-                temp = double.Parse(zakres[i]);
+                temp = N.doubleParse(zakres[i]);
 
                 for (int k = 0; k < zakresyPrzyrzadu.Count; ++k)
                 {
@@ -508,13 +508,13 @@ namespace WzorcowanieMocDawkiSpace
                     suma = 0.0;
                     for (int k = 0; k < wskazanie.Count; ++k)
                     {
-                        zakres_temp = double.Parse(zakres[k]);
+                        zakres_temp = N.doubleParse(zakres[k]);
 
                         // jeżeli użytkownik wybrał dołączenie
                         if (zakresyPrzyrzadu[i] == zakres_temp && "0" != dolaczyc[k])
                         {
-                            wskazanie_temp = Double.Parse(wskazanie[k]);
-                            wartosc_temp = Double.Parse(wartosc[k]);
+                            wskazanie_temp = N.doubleParse(wskazanie[k]);
+                            wartosc_temp = N.doubleParse(wartosc[k]);
                             suma += wartosc_temp / wskazanie_temp;
                             ++licznik;
                         }
@@ -568,10 +568,10 @@ namespace WzorcowanieMocDawkiSpace
                     if (zakresyPrzyrzadu[i].ToString() == zakres[k] && "false" != dolaczyc[k])
                     {
                         ++licznik;
-                        suma3 += Double.Parse(niepewnosc[k]) / Double.Parse(wskazanie[k]) / Math.Sqrt(3.0);
+                        suma3 += N.doubleParse(niepewnosc[k]) / N.doubleParse(wskazanie[k]) / Math.Sqrt(3.0);
 
-                        if (Math.Abs(wspolczynniki[i] - Double.Parse(wartosc[k]) / Double.Parse(wskazanie[k])) > max)
-                            max = Math.Abs(wspolczynniki[i] - Double.Parse(wartosc[k]) / Double.Parse(wskazanie[k]));
+                        if (Math.Abs(wspolczynniki[i] - N.doubleParse(wartosc[k]) / N.doubleParse(wskazanie[k])) > max)
+                            max = Math.Abs(wspolczynniki[i] - N.doubleParse(wartosc[k]) / N.doubleParse(wskazanie[k]));
                     }
                 }
 
@@ -809,7 +809,7 @@ namespace WzorcowanieMocDawkiSpace
                     sTemp = tabela.Rows[i].Cells[0].Value.ToString();
 
                     if (sTemp != "")
-                        temp.Odleglosc = double.Parse(sTemp);
+                        temp.Odleglosc = N.doubleParse(sTemp);
                     else
                         temp.Odleglosc = 0.0;
 
@@ -825,7 +825,7 @@ namespace WzorcowanieMocDawkiSpace
                     sTemp = tabela.Rows[i].Cells[2].Value.ToString();
 
                     if (sTemp != "")
-                        temp.Wskazanie = double.Parse(sTemp);
+                        temp.Wskazanie = N.doubleParse(sTemp);
                     else
                         temp.Wskazanie = 0.0;
 
@@ -833,7 +833,7 @@ namespace WzorcowanieMocDawkiSpace
                     sTemp = tabela.Rows[i].Cells[3].Value.ToString();
 
                     if (sTemp != "")
-                        temp.Wahanie = double.Parse(sTemp);
+                        temp.Wahanie = N.doubleParse(sTemp);
                     else
                         temp.Wahanie = 0.0;
                     
@@ -873,17 +873,17 @@ namespace WzorcowanieMocDawkiSpace
                     MocDawkiWspolczynniki.Wspolczynnik temp = new MocDawkiWspolczynniki.Wspolczynnik();
 
                     if ( tabela.Rows[i].Cells[0].Value.ToString() != "" )
-                        temp.Zakres = double.Parse(tabela.Rows[i].Cells[0].Value.ToString());
+                        temp.Zakres = N.doubleParse(tabela.Rows[i].Cells[0].Value.ToString());
                     else
                         temp.Zakres = 0.0;
 
                     if ( tabela.Rows[i].Cells[1].Value.ToString() != "" )
-                        temp.Wartosc = double.Parse(tabela.Rows[i].Cells[1].Value.ToString());
+                        temp.Wartosc = N.doubleParse(tabela.Rows[i].Cells[1].Value.ToString());
                     else
                         temp.Wartosc = 0.0;
 
                     if ( tabela.Rows[i].Cells[2].Value.ToString() != "" )
-                        temp.Niepewnosc = double.Parse(tabela.Rows[i].Cells[2].Value.ToString());
+                        temp.Niepewnosc = N.doubleParse(tabela.Rows[i].Cells[2].Value.ToString());
                     else
                         temp.Niepewnosc = 0.0;
 

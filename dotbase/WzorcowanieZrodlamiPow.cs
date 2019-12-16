@@ -117,8 +117,8 @@ namespace DotBase
 
                 try
                 {
-                    wskazania.Add(Double.Parse(wiersz.Cells["Wskazanie"].Value.ToString()));
-                    tla.Add(Double.Parse(wiersz.Cells["Tlo"].Value.ToString()));
+                    wskazania.Add(N.doubleParse(wiersz.Cells["Wskazanie"].Value.ToString()));
+                    tla.Add(N.doubleParse(wiersz.Cells["Tlo"].Value.ToString()));
                 }
                 catch (Exception)
                 {
@@ -149,7 +149,7 @@ namespace DotBase
 
             double emisja_powierzchniowa = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<double>(0);
             double niepewnosc = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<double>(1);
-            double czas = double.Parse((data - _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<DateTime>(2)).Days.ToString());
+            double czas = N.doubleParse((data - _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<DateTime>(2)).Days.ToString());
 
 
             //--------------------------------------OBLICZENIE WSPÓŁCZYNNIKA KALIBRACYJNEGO-------------------------------------------
@@ -773,12 +773,12 @@ namespace DotBase
 
             try
             {
-                _WarunkiDoZapisu.Cisnienie = Double.Parse(cisnienie);
-                _WarunkiDoZapisu.Temperatura = Double.Parse(temperatura);
-                _WarunkiDoZapisu.Wilgotnosc = Double.Parse(wilgotnosc);
+                _WarunkiDoZapisu.Cisnienie = N.doubleParse(cisnienie);
+                _WarunkiDoZapisu.Temperatura = N.doubleParse(temperatura);
+                _WarunkiDoZapisu.Wilgotnosc = N.doubleParse(wilgotnosc);
                 _WarunkiDoZapisu.Podstawka = podstawka;
-                _WarunkiDoZapisu.OdlegloscZrodloSonda = Double.Parse(odlegloscZrSonda);
-                _WarunkiDoZapisu.WspolczynnikKorekcyjny = Double.Parse(wspolKorekcyjny);
+                _WarunkiDoZapisu.OdlegloscZrodloSonda = N.doubleParse(odlegloscZrSonda);
+                _WarunkiDoZapisu.WspolczynnikKorekcyjny = N.doubleParse(wspolKorekcyjny);
             }
             catch (Exception)
             {
@@ -809,7 +809,7 @@ namespace DotBase
                     sTemp = tabela.Rows[i].Cells[0].Value.ToString();
 
                     if (sTemp != "")
-                        temp.Wskazanie = double.Parse(sTemp);
+                        temp.Wskazanie = N.doubleParse(sTemp);
                     else
                         temp.Wskazanie = 0.0;
 
@@ -817,7 +817,7 @@ namespace DotBase
                     sTemp = tabela.Rows[i].Cells[1].Value.ToString();
 
                     if (sTemp != "")
-                        temp.Tlo = double.Parse(sTemp);
+                        temp.Tlo = N.doubleParse(sTemp);
                     else
                         temp.Tlo = 0.0;
 
@@ -844,8 +844,8 @@ namespace DotBase
 
             try
             {
-                _WspolczynnikiDoZapisu.WspolczynnikKalibracyjny = double.Parse(wspolczynnikKlaibracyjny);
-                _WspolczynnikiDoZapisu.Niepewnosc = double.Parse(niepewnosc);
+                _WspolczynnikiDoZapisu.WspolczynnikKalibracyjny = N.doubleParse(wspolczynnikKlaibracyjny);
+                _WspolczynnikiDoZapisu.Niepewnosc = N.doubleParse(niepewnosc);
             }
             catch (Exception)
             {

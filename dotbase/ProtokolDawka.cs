@@ -104,7 +104,7 @@ namespace DotBase
 
                 double tempWspolczynnik, tempNiepewnosc;
 
-                if (!Double.TryParse(wspolczynnik, out tempWspolczynnik) || !Double.TryParse(niepewnosc, out tempNiepewnosc))
+                if (!N.doubleTryParse(wspolczynnik, out tempWspolczynnik) || !N.doubleTryParse(niepewnosc, out tempNiepewnosc))
                 {
                     return false;
                 }

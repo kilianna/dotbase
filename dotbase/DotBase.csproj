@@ -95,6 +95,7 @@
     <Compile Include="Log.cs" />
     <Compile Include="MeldunekModel.cs" />
     <Compile Include="Multimap.cs" />
+    <Compile Include="N.cs" />
     <Compile Include="QueryUtils.cs" />
     <Compile Include="SygnalizacjaDawkiUtils.cs" />
     <Compile Include="DanePodstawoweModel.cs" />

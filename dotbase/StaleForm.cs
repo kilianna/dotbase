@@ -78,7 +78,7 @@ namespace DotBase
 
             foreach(DataGridViewRow wiersz in dataGridView1.Rows)
             {
-                if ("" == wiersz.Cells["Parametr"].Value.ToString() || false == double.TryParse(dataGridView1.Rows[1].Cells["Wartosc"].Value.ToString(), out temp))
+                if ("" == wiersz.Cells["Parametr"].Value.ToString() || false == N.doubleTryParse(dataGridView1.Rows[1].Cells["Wartosc"].Value.ToString(), out temp))
                 {
                     return false;
                 }

@@ -595,7 +595,7 @@ namespace DotBase
                     if (row.Cells["WartoscWzorcowa"].Value != null && row.Cells["Wskazanie"].Value != null && row.Cells["Dolaczyc"].Value != null)
                     {
                         if ((bool)row.Cells["Dolaczyc"].Value == true)
-                            inputList.Add(new Narzedzia.Pair<double, double>(Double.Parse(row.Cells["WartoscWzorcowa"].Value.ToString()), Double.Parse(row.Cells["Wskazanie"].Value.ToString())));
+                            inputList.Add(new Narzedzia.Pair<double, double>(N.doubleParse(row.Cells["WartoscWzorcowa"].Value.ToString()), N.doubleParse(row.Cells["Wskazanie"].Value.ToString())));
                     }
                     else
                         return;
@@ -630,7 +630,7 @@ namespace DotBase
                 wiersz = dataGridView1.Rows[i];
                 
                 // Dla dawki zakres zawsze jest ten sam oraz nie bierzemy pod uwagę niepewności
-                wykres.DodajPunkt(double.Parse(wiersz.Cells["WartoscWzorcowa"].Value.ToString()), double.Parse(wiersz.Cells["Wskazanie"].Value.ToString()), 0.0, 0.0, bool.Parse(wiersz.Cells["Dolaczyc"].Value.ToString()));
+                wykres.DodajPunkt(N.doubleParse(wiersz.Cells["WartoscWzorcowa"].Value.ToString()), N.doubleParse(wiersz.Cells["Wskazanie"].Value.ToString()), 0.0, 0.0, bool.Parse(wiersz.Cells["Dolaczyc"].Value.ToString()));
             }
 
             wykres.Show();

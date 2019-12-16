@@ -143,7 +143,7 @@ namespace DotBase
 
                     zrodlo.Add(short.Parse(row.Cells[0].Value.ToString()));
                     dataWzorcowania.Add(row.Cells[1].Value.ToString());
-                    emisjaPowierzchniowa.Add(double.Parse(row.Cells[2].Value.ToString()));
+                    emisjaPowierzchniowa.Add(N.doubleParse(row.Cells[2].Value.ToString()));
                 }
 
                 _WzorcowanieZrodel.DodajDane(zrodlo, dataWzorcowania, emisjaPowierzchniowa);
@@ -180,7 +180,7 @@ namespace DotBase
 
                 zrodlo.Add((short)row.Cells[0].Value);
                 dataWzorcowania.Add(row.Cells[1].Value.ToString());
-                emisjaPowierzchniowa.Add(double.Parse(row.Cells[2].Value.ToString()));
+                emisjaPowierzchniowa.Add(N.doubleParse(row.Cells[2].Value.ToString()));
                 idAtestu.Add((short)row.Cells[3].Value);
             }
 
@@ -195,7 +195,7 @@ namespace DotBase
             {
                 try
                 {
-                    double.Parse(dataGridView1.Rows[i].Cells[2].Value.ToString());
+                    N.doubleParse(dataGridView1.Rows[i].Cells[2].Value.ToString());
                 }
                 catch (Exception)
                 {
