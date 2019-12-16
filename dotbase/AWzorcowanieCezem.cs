@@ -68,7 +68,7 @@ namespace DotBase
                     .Data_wzorcowania(DateTime.Parse(_DaneOgolneDoZapisu.Data))
                 .WHERE()
                     .ID_wzorcowania(int.Parse(_DaneOgolneDoZapisu.IdWzorcowania))
-                    .ID_arkusza(int.Parse(_DaneOgolneDoZapisu.IdArkusza))
+                    .ID_arkusza(short.Parse(_DaneOgolneDoZapisu.IdArkusza))
                 .INFO("Zmiana danych ogólnych wzorcowania cezem")
                 .EXECUTE();
 
@@ -447,7 +447,7 @@ namespace DotBase
                     .Inne_nastawy(_PrzyrzadDoZapisu.InneNastawy)
                 .WHERE()
                     .ID_wzorcowania(int.Parse(_DaneOgolneDoZapisu.IdWzorcowania))
-                    .ID_arkusza(int.Parse(_DaneOgolneDoZapisu.IdArkusza))
+                    .ID_arkusza(short.Parse(_DaneOgolneDoZapisu.IdArkusza))
                 .INFO("Zapis danych przyrządu")
                 .EXECUTE();
 
@@ -466,7 +466,7 @@ namespace DotBase
                     .Uwagi(_WarunkiDoZapisu.Uwagi)
                 .WHERE()
                     .ID_wzorcowania(int.Parse(_DaneOgolneDoZapisu.IdWzorcowania))
-                    .ID_arkusza(int.Parse(_DaneOgolneDoZapisu.IdArkusza))
+                    .ID_arkusza(short.Parse(_DaneOgolneDoZapisu.IdArkusza))
                 .INFO("Zapisanie warunków wzorcowania cezem")
                 .EXECUTE();
 

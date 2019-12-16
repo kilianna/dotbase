@@ -804,9 +804,9 @@ namespace DotBase
                 SetField("Dolacz", value, OleDbType.Boolean);
                 return this;
             }
-            public Szablon_wzorcowanie_cezem ID_arkusza(int value)
+            public Szablon_wzorcowanie_cezem ID_arkusza(short value)
             {
-                SetField("ID_arkusza", value, OleDbType.Integer);
+                SetField("ID_arkusza", value, OleDbType.SmallInt);
                 return this;
             }
             public Szablon_wzorcowanie_cezem ID_jednostki(int value)
@@ -819,9 +819,9 @@ namespace DotBase
                 SetField("ID_karty", value, OleDbType.Integer);
                 return this;
             }
-            public Szablon_wzorcowanie_cezem ID_protokolu(int value)
+            public Szablon_wzorcowanie_cezem ID_protokolu(short value)
             {
-                SetField("ID_protokolu", value, OleDbType.Integer);
+                SetField("ID_protokolu", value, OleDbType.SmallInt);
                 return this;
             }
             public Szablon_wzorcowanie_cezem ID_sondy(int value)
