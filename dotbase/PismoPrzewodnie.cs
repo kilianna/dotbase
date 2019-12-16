@@ -261,7 +261,7 @@ namespace DotBase
             //********************************************************************************************
             {
                 if ("" != m_data.getValue(PismoPrzewodnieData.DataType.UWAGA))
-                    m_data.setValue(PismoPrzewodnieData.DataType.UWAGA, "<b>Uwaga:</b> " + m_data.getValue(PismoPrzewodnieData.DataType.UWAGA));
+                    m_data.setValue(PismoPrzewodnieData.DataType.UWAGA, "Uwagi: " + m_data.getValue(PismoPrzewodnieData.DataType.UWAGA));
             }
 
             //********************************************************************************************
