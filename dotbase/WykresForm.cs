@@ -46,7 +46,7 @@ namespace Wykres
 
 
         //-------------------------------------------------------------------------
-        public bool Rysuj(string nrKarty, DateTime data, string jednostka, int rownowaznik_dawki = -1)
+        public bool Rysuj(string nrKarty, DateTime data, string jednostka, string sonda, int rownowaznik_dawki = -1)
         //-------------------------------------------------------------------------
         {
             _ObszarRysowniczy = zedGraphControl1.GraphPane;
@@ -57,6 +57,9 @@ namespace Wykres
 
             if (SprawdzJednostke(jednostka) != "")
                 UstawieniaPrzelicznika(SprawdzJednostke(jednostka));
+
+            if (sonda != "" && sonda != "Detektor własny")
+                UstawieniaSondy(sonda);
 
             foreach (Punkty zakres in _DaneWejsciowe.Zakresy)
             {
@@ -409,6 +412,22 @@ namespace Wykres
         //-------------------------------------------------------------------------
         {
             TextObj myText = new TextObj("Zastosowano przelicznik: " + przelicznik, 0.26, 0.085, CoordType.PaneFraction);
+            myText.FontSpec.FontColor = Color.Black;
+            myText.FontSpec.Family = "Arial";
+            myText.FontSpec.Size = 9;
+            myText.FontSpec.Border.IsVisible = false;
+            myText.FontSpec.IsBold = true;
+            myText.IsClippedToChartRect = false;
+            myText.FontSpec.StringAlignment = StringAlignment.Near;
+            _ObszarRysowniczy.GraphObjList.Add(myText);
+            _ObszarRysowniczy.GraphObjList[1].ZOrder = ZOrder.H_BehindAll;
+        }
+
+        //-------------------------------------------------------------------------
+        private void UstawieniaSondy(String sonda)
+        //-------------------------------------------------------------------------
+        {
+            TextObj myText = new TextObj("Sonda: " + sonda, 0.097, 0.96, CoordType.PaneFraction, AlignH.Left, AlignV.Center);
             myText.FontSpec.FontColor = Color.Black;
             myText.FontSpec.Family = "Arial";
             myText.FontSpec.Size = 9;

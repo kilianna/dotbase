@@ -663,7 +663,7 @@ namespace DotBase
             }
 
             wykres.Show();
-            wykres.Rysuj(textBox1.Text, dateTimePicker1.Value, comboBox4.Text);
+            wykres.Rysuj(textBox1.Text, dateTimePicker1.Value, comboBox4.Text, comboBox1.Text);
         }
 
         //-------------------------------------------------------------------
