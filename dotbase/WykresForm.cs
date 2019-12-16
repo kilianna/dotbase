@@ -224,9 +224,9 @@ namespace Wykres
             TextObj myText;
             
             if(_WykresMocyDawki)
-                myText = new TextObj("Data zalecanej kalibracji: " + wpisData, 0.84, 0.085, CoordType.PaneFraction);
+                myText = new TextObj("Data zalecanej kalibracji: " + wpisData + " r.", 0.83, 0.085, CoordType.PaneFraction);
             else
-                myText = new TextObj("Data zalecanej kalibracji: " + wpisData, 0.84, 0.12, CoordType.PaneFraction);
+                myText = new TextObj("Data zalecanej kalibracji: " + wpisData + " r.", 0.83, 0.12, CoordType.PaneFraction);
 
             myText.FontSpec.FontColor = Color.Black;
             myText.FontSpec.Family = "Arial";
