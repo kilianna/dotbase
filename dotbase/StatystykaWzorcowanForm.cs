@@ -18,6 +18,7 @@ namespace DotBase
         //--------------------------------------------------------
         {
             InitializeComponent();
+            typZleceniodawcy.SelectedIndex = 0;
             _StatystykaWzorcowan = new StatystykaWzorcowan();
         }
            
@@ -65,10 +66,16 @@ namespace DotBase
         private void WyswietlDane()
         //--------------------------------------------------------
         {
+            if (_StatystykaWzorcowan == null) return;
+
             CzyscStareDane();
 
             DateTime SzukajOd = dateTimePicker1.Value.Date;
             DateTime SzukajDo = dateTimePicker2.Value.Date.AddDays(1).AddTicks(-1);
+            StatystykaWzorcowan.WidokIFJ ifj =
+                typZleceniodawcy.SelectedIndex == 1 ? StatystykaWzorcowan.WidokIFJ.Nie :
+                typZleceniodawcy.SelectedIndex == 2 ? StatystykaWzorcowan.WidokIFJ.Tak :
+                StatystykaWzorcowan.WidokIFJ.Wszystko;
             
             if (SzukajOd > SzukajDo)
             {
@@ -79,7 +86,7 @@ namespace DotBase
                 return;
             }
 
-            _StatystykaWzorcowan.ZbierzStatystyki(ref SzukajOd, ref SzukajDo);
+            _StatystykaWzorcowan.ZbierzStatystyki(ref SzukajOd, ref SzukajDo, ifj);
 
             dodajWiersz("Ogólne");
             dodajWiersz("Liczb zleceń", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.LICZBA_ZLECEN]);
@@ -107,6 +114,11 @@ namespace DotBase
             dodajWiersz("Węgiel słaby", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.WEGIEL_SLABY]);
             dodajWiersz("Węgiel silny", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.WEGIEL_SILNY]);
 
+        }
+
+        private void typZleceniodawcy_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            WyswietlDane();
         }
     }
 }
