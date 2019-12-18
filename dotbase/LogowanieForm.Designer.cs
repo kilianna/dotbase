@@ -43,6 +43,7 @@
             this.bazaTextBox = new System.Windows.Forms.TextBox();
             this.uzytkownikTextBox = new System.Windows.Forms.TextBox();
             this.administracjaBtn = new System.Windows.Forms.Button();
+            this.wersjaLabel = new System.Windows.Forms.TextBox();
             zakonczBtn = new System.Windows.Forms.Button();
             label4 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
@@ -52,9 +53,8 @@
             // 
             // zakonczBtn
             // 
-            zakonczBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             zakonczBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            zakonczBtn.Location = new System.Drawing.Point(321, 209);
+            zakonczBtn.Location = new System.Drawing.Point(321, 201);
             zakonczBtn.Name = "zakonczBtn";
             zakonczBtn.Size = new System.Drawing.Size(115, 34);
             zakonczBtn.TabIndex = 8;
@@ -103,7 +103,7 @@
             // zalogujBtn
             // 
             this.zalogujBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.zalogujBtn.Location = new System.Drawing.Point(59, 209);
+            this.zalogujBtn.Location = new System.Drawing.Point(59, 201);
             this.zalogujBtn.Name = "zalogujBtn";
             this.zalogujBtn.Size = new System.Drawing.Size(116, 34);
             this.zalogujBtn.TabIndex = 7;
@@ -170,7 +170,7 @@
             // 
             // administracjaBtn
             // 
-            this.administracjaBtn.Location = new System.Drawing.Point(190, 209);
+            this.administracjaBtn.Location = new System.Drawing.Point(190, 201);
             this.administracjaBtn.Name = "administracjaBtn";
             this.administracjaBtn.Size = new System.Drawing.Size(116, 34);
             this.administracjaBtn.TabIndex = 14;
@@ -179,6 +179,19 @@
             this.administracjaBtn.Visible = false;
             this.administracjaBtn.Click += new System.EventHandler(this.administracjaBtn_Click);
             // 
+            // wersjaLabel
+            // 
+            this.wersjaLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.wersjaLabel.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.wersjaLabel.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.wersjaLabel.ForeColor = System.Drawing.Color.Gray;
+            this.wersjaLabel.Location = new System.Drawing.Point(193, 254);
+            this.wersjaLabel.Name = "wersjaLabel";
+            this.wersjaLabel.Size = new System.Drawing.Size(298, 14);
+            this.wersjaLabel.TabIndex = 16;
+            this.wersjaLabel.Text = "Wersja programu: ";
+            this.wersjaLabel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // LogowanieForm
             // 
             this.AcceptButton = this.zalogujBtn;
@@ -186,7 +199,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.CancelButton = zakonczBtn;
-            this.ClientSize = new System.Drawing.Size(495, 261);
+            this.ClientSize = new System.Drawing.Size(495, 271);
+            this.Controls.Add(this.wersjaLabel);
             this.Controls.Add(this.administracjaBtn);
             this.Controls.Add(this.infoLabel);
             this.Controls.Add(wybierzBtn);
@@ -200,8 +214,8 @@
             this.Controls.Add(this.zalogujBtn);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(20000, 300);
-            this.MinimumSize = new System.Drawing.Size(437, 300);
+            this.MaximumSize = new System.Drawing.Size(20000, 310);
+            this.MinimumSize = new System.Drawing.Size(437, 310);
             this.Name = "LogowanieForm";
             this.Text = "Logowanie do bazy danych";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MenuGlowneForm_FormClosing);
@@ -223,6 +237,7 @@
         private System.Windows.Forms.Label infoLabel;
         private System.Windows.Forms.Button zalogujBtn;
         private System.Windows.Forms.Button administracjaBtn;
+        private System.Windows.Forms.TextBox wersjaLabel;
     }
 }
 

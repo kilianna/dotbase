@@ -36,6 +36,7 @@ namespace DotBase
         {
             Instancja = this;
             InitializeComponent();
+            wersjaLabel.Text += N.Wersja();
         }
 
         //----------------------------------------------------------------------------------

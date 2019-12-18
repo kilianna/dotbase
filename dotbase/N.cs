@@ -26,5 +26,15 @@ namespace DotBase
             return double.TryParse(text, out result);
         }
 
+        public static string Wersja()
+        {
+            string gitLog = Properties.Resources.GitVersion.Trim();
+            if (gitLog.Length == 0) return "N/A";
+            string[] parts = gitLog.Split(' ');
+            if (parts.Length < 2) return "N/A";
+            if (parts[0].Length < 7) return "N/A";
+            return parts[1] + " [" + parts[0].Substring(0, 7).ToLower() + "]";
+        }
+
     }
 }

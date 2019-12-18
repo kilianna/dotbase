@@ -61,6 +61,16 @@ namespace DotBase.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 234234234234 2019-02-22
+        ///.
+        /// </summary>
+        internal static string GitVersion {
+            get {
+                return ResourceManager.GetString("GitVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] logTemplate {
