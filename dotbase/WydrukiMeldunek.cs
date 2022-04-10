@@ -13,7 +13,7 @@ namespace DotBase
         {
             public enum DataType
             {
-                DATA, NR_SWIADECTWA, DATA_SPRZEDAZY, TYP, NUMERY, CENA, LICZBA_SZTUK, NIP, KOSZT, ZLECENIODAWCA, ADRES_ZLECENIODAWCY, LISTA, NAZWA_PLATNIKA, ADRES_PLATNIKA
+                DATA, NR_SWIADECTWA, DATA_SPRZEDAZY, TYP, NUMERY, CENA, LICZBA_SZTUK, NIP, KOSZT, ZLECENIODAWCA, ADRES_ZLECENIODAWCY, LISTA, NAZWA_PLATNIKA, ADRES_PLATNIKA, NR_ZLECENIA_PLATNIKA
             };
 
             private readonly IDictionary<DataType, String> m_documentData = new Dictionary<DataType, String>();
@@ -52,6 +52,7 @@ namespace DotBase
 
             _SzablonPodstawowy.Replace("<!nazwaPlatnika>", m_wydrukiMeldunekData.getValue(WydrukiMeldunekData.DataType.NAZWA_PLATNIKA));
             _SzablonPodstawowy.Replace("<!adresPlatnika>", m_wydrukiMeldunekData.getValue(WydrukiMeldunekData.DataType.ADRES_PLATNIKA));
+            _SzablonPodstawowy.Replace("<!nrZleceniaKlienta>", m_wydrukiMeldunekData.getValue(WydrukiMeldunekData.DataType.NR_ZLECENIA_PLATNIKA));
 
             if (m_meldunekModel.innyPlatnik)
             {
@@ -95,6 +96,7 @@ namespace DotBase
             m_wydrukiMeldunekData.setValue(WydrukiMeldunekData.DataType.ADRES_ZLECENIODAWCY, m_meldunekModel.adresZleceniodawcy.Replace(";", "<br>"));
             m_wydrukiMeldunekData.setValue(WydrukiMeldunekData.DataType.NAZWA_PLATNIKA, m_meldunekModel.nazwaPlatnika.Replace(";", "<br>"));
             m_wydrukiMeldunekData.setValue(WydrukiMeldunekData.DataType.ADRES_PLATNIKA, m_meldunekModel.adresPlatnika.Replace(";", "<br>"));
+            m_wydrukiMeldunekData.setValue(WydrukiMeldunekData.DataType.NR_ZLECENIA_PLATNIKA, m_meldunekModel.nrZleceniaKlienta.Replace(";", "<br>"));
             StringBuilder sb2 = new StringBuilder();
             foreach (String nrKarty in m_meldunekModel.nrKart)
             {

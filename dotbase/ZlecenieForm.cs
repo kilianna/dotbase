@@ -206,6 +206,7 @@ namespace DotBase
         {
             textBox1.Text = textBox2.Text = textBox3.Text = textBox4.Text = textBox5.Text =
             textBox6.Text = textBox7.Text = textBox8.Text = textBox10.Text = emailTextBox.Text = "";
+            nrZleceniaKlientaText.Text = "";
             nazwaPlatnika.Text = "";
             adresPlatnika.Text = "";
             nipPlatnika.Text = "";
@@ -405,6 +406,7 @@ namespace DotBase
             textBox8.Text = dane.FormaZwrotu;
             textBox9.Text = dane.Uwagi;
             textBox10.Text = dane.OsobaPrzyjmujaca;
+            nrZleceniaKlientaText.Text = dane.NrZleceniaKlienta;
             checkBox1.Checked = dane.Ekspress;
             innyPlatnik.Checked = dane.InnyPlatnik;
         }
@@ -477,6 +479,7 @@ namespace DotBase
             daneDoZapisu.FormaZwrotu = textBox8.Text;
             daneDoZapisu.Uwagi = textBox9.Text;
             daneDoZapisu.OsobaPrzyjmujaca = textBox10.Text;
+            daneDoZapisu.NrZleceniaKlienta = nrZleceniaKlientaText.Text;
             daneDoZapisu.Ekspress = checkBox1.Checked;
             daneDoZapisu.Nip = textBox6.Text;
             daneDoZapisu.InnyPlatnik = innyPlatnik.Checked;
@@ -539,6 +542,7 @@ namespace DotBase
             daneZlecenia.FormaZwrotu = textBox8.Text;
             daneZlecenia.Uwagi = textBox9.Text;
             daneZlecenia.OsobaPrzyjmujaca = textBox10.Text;
+            daneZlecenia.NrZleceniaKlienta = nrZleceniaKlientaText.Text;
             daneZlecenia.Ekspress = checkBox1.Checked;
             daneZlecenia.InnyPlatnik = innyPlatnik.Checked;
 
@@ -641,6 +645,7 @@ namespace DotBase
             model.nazwaPlatnika = nazwaPlatnika.Text;
             model.adresPlatnika = adresPlatnika.Text;
             model.innyPlatnik = innyPlatnik.Checked;
+            model.nrZleceniaKlienta = nrZleceniaKlientaText.Text;
             
             for (int i = 0; i < dataGridView1.Rows.Count; ++i)
             {

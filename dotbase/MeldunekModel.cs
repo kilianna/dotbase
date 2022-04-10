@@ -14,5 +14,6 @@ namespace DotBase
         public string nazwaPlatnika;
         public string adresPlatnika;
         public bool innyPlatnik;
+        public string nrZleceniaKlienta;
     }
 }

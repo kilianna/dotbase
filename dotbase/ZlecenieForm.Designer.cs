@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.button1 = new System.Windows.Forms.Button();
@@ -39,6 +39,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.jestIFJ = new System.Windows.Forms.CheckBox();
             this.label19 = new System.Windows.Forms.Label();
             this.emailTextBox = new System.Windows.Forms.TextBox();
             this.innyPlatnik = new System.Windows.Forms.CheckBox();
@@ -92,7 +93,8 @@
             this.podglądToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
-            this.jestIFJ = new System.Windows.Forms.CheckBox();
+            this.nrZleceniaKlientaText = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -201,6 +203,17 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Dane zleceniodawcy";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // jestIFJ
+            // 
+            this.jestIFJ.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.jestIFJ.AutoSize = true;
+            this.jestIFJ.Location = new System.Drawing.Point(608, 29);
+            this.jestIFJ.Name = "jestIFJ";
+            this.jestIFJ.Size = new System.Drawing.Size(40, 17);
+            this.jestIFJ.TabIndex = 25;
+            this.jestIFJ.Text = "IFJ";
+            this.jestIFJ.UseVisualStyleBackColor = true;
             // 
             // label19
             // 
@@ -462,6 +475,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.nrZleceniaKlientaText);
+            this.tabPage2.Controls.Add(this.label20);
             this.tabPage2.Controls.Add(this.textBox10);
             this.tabPage2.Controls.Add(this.label14);
             this.tabPage2.Controls.Add(this.checkBox1);
@@ -485,7 +500,7 @@
             // 
             // textBox10
             // 
-            this.textBox10.Location = new System.Drawing.Point(108, 264);
+            this.textBox10.Location = new System.Drawing.Point(108, 290);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(200, 20);
             this.textBox10.TabIndex = 11;
@@ -493,7 +508,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 267);
+            this.label14.Location = new System.Drawing.Point(6, 293);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(96, 13);
             this.label14.TabIndex = 11;
@@ -610,8 +625,8 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -619,26 +634,26 @@
             this.Column3,
             this.Column4,
             this.Column5});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.Size = new System.Drawing.Size(667, 362);
             this.dataGridView1.TabIndex = 6;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
@@ -674,9 +689,9 @@
             // 
             // Column5
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Column5.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.Column5.DefaultCellStyle = dataGridViewCellStyle2;
             this.Column5.HeaderText = "Przejdź do karty";
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
@@ -732,16 +747,23 @@
             this.label15.TabIndex = 8;
             this.label15.Text = "Numer zlecenia w rejestrze";
             // 
-            // jestIFJ
+            // nrZleceniaKlientaText
             // 
-            this.jestIFJ.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.jestIFJ.AutoSize = true;
-            this.jestIFJ.Location = new System.Drawing.Point(608, 29);
-            this.jestIFJ.Name = "jestIFJ";
-            this.jestIFJ.Size = new System.Drawing.Size(40, 17);
-            this.jestIFJ.TabIndex = 25;
-            this.jestIFJ.Text = "IFJ";
-            this.jestIFJ.UseVisualStyleBackColor = true;
+            this.nrZleceniaKlientaText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.nrZleceniaKlientaText.Location = new System.Drawing.Point(108, 264);
+            this.nrZleceniaKlientaText.Name = "nrZleceniaKlientaText";
+            this.nrZleceniaKlientaText.Size = new System.Drawing.Size(536, 20);
+            this.nrZleceniaKlientaText.TabIndex = 14;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(6, 267);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(94, 13);
+            this.label20.TabIndex = 13;
+            this.label20.Text = "Nr zlecenia klienta";
             // 
             // ZlecenieForm
             // 
@@ -842,5 +864,7 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox emailTextBox;
         private System.Windows.Forms.CheckBox jestIFJ;
+        private System.Windows.Forms.TextBox nrZleceniaKlientaText;
+        private System.Windows.Forms.Label label20;
     }
 }

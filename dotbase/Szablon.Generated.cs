@@ -1037,6 +1037,11 @@ namespace DotBase
                 SetField("Inny_platnik", value, OleDbType.Boolean);
                 return this;
             }
+            public Szablon_Zlecenia Nr_zlecenia_klienta(string value)
+            {
+                SetField("Nr_zlecenia_klienta", value, OleDbType.WChar);
+                return this;
+            }
             public Szablon_Zlecenia Nr_zlecenia_rejestr(int value)
             {
                 SetField("Nr_zlecenia_rejestr", value, OleDbType.Integer);

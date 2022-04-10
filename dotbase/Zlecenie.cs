@@ -70,6 +70,7 @@ namespace DotBase
             public string FormaPrzyjecia { get; set; }
             public string FormaZwrotu { get; set; }
             public string OsobaPrzyjmujaca { get; set; }
+            public string NrZleceniaKlienta { get; set; }
             public List<DanePrzyrzad> Przyrzady;
             public string Uwagi { get; set; }
             public string Nip { get; set; }
@@ -172,12 +173,22 @@ namespace DotBase
             public void DodajZlecenie(ref DaneZlecenia dane)
             //--------------------------------------------------------------------
             {
-                _Zapytanie = String.Format("INSERT INTO Zlecenia VALUES ({0},{1},'{2}','{3}','{4}','{5}','{6}','{7}',{8},{9},{10})",
-                                           dane.Id, dane.ZleceniodawcaInfo.Id, dane.DataPrzyjecia.ToShortDateString(),
-                                           dane.DataZwrotu.ToShortDateString(), dane.FormaPrzyjecia, dane.FormaZwrotu, dane.OsobaPrzyjmujaca,
-                                           dane.Uwagi, dane.Ekspress, dane.Nr_rejestru, dane.InnyPlatnik);
-
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
+                _BazaDanych.Zlecenia
+                    .INSERT()
+                        .ID_zlecenia(dane.Id)
+                        .ID_zleceniodawcy(dane.ZleceniodawcaInfo.Id)
+                        .Data_przyjecia(dane.DataPrzyjecia)
+                        .Data_zwrotu(dane.DataZwrotu)
+                        .Forma_przyjecia(dane.FormaPrzyjecia)
+                        .Forma_zwrotu(dane.FormaZwrotu)
+                        .Osoba_przyjmujaca(dane.OsobaPrzyjmujaca)
+                        .Uwagi(dane.Uwagi)
+                        .Ekspres(dane.Ekspress)
+                        .Nr_zlecenia_rejestr(dane.Nr_rejestru)
+                        .Inny_platnik(dane.InnyPlatnik)
+                        .Nr_zlecenia_klienta(dane.NrZleceniaKlienta)
+                    .INFO("Dodanie nowego zlecenia")
+                    .EXECUTE();
             }
 
             //--------------------------------------------------------------------
@@ -230,6 +241,7 @@ namespace DotBase
                 _DaneZlecenia.FormaZwrotu = _DaneTabela.Rows[0].Field<string>("Forma_zwrotu");
                 _DaneZlecenia.Uwagi = _DaneTabela.Rows[0].Field<string>("Uwagi");
                 _DaneZlecenia.OsobaPrzyjmujaca = _DaneTabela.Rows[0].Field<string>("Osoba_przyjmujaca");
+                _DaneZlecenia.NrZleceniaKlienta = _DaneTabela.Rows[0].Field<string>("Nr_zlecenia_klienta");
                 _DaneZlecenia.Ekspress = _DaneTabela.Rows[0].Field<bool>("Ekspres");
                 _DaneZlecenia.InnyPlatnik = _DaneTabela.Rows[0].Field<bool>("Inny_platnik");
             }
@@ -286,7 +298,7 @@ namespace DotBase
 
                 _Zapytanie = "SELECT Zleceniodawca, Adres, Osoba_kontaktowa, Telefon, Faks, email, Nip, ID_zlecenia, "
                            + "Zlecenia.ID_zleceniodawcy, Data_przyjecia, Data_zwrotu, Forma_przyjecia, "
-                           + "Forma_zwrotu, Osoba_przyjmujaca, Zlecenia.Uwagi, Ekspres, Inny_platnik, Nr_zlecenia_rejestr, Nazwa_platnika, Adres_platnika, NIP_platnika, IFJ "
+                           + "Forma_zwrotu, Osoba_przyjmujaca, Zlecenia.Uwagi, Ekspres, Inny_platnik, Nr_zlecenia_klienta, Nr_zlecenia_rejestr, Nazwa_platnika, Adres_platnika, NIP_platnika, IFJ "
                            + "FROM Zlecenia INNER JOIN "
                            + "Zleceniodawca ON Zlecenia.ID_Zleceniodawcy=Zleceniodawca.ID_Zleceniodawcy "
                            + String.Format("WHERE id_zlecenia = {0}", idZlecenia);
@@ -356,12 +368,24 @@ namespace DotBase
                 // jako, że id_zlecenia mogło zostać zmienione (np. przejście do innego zlecenia przez użytkownika)
                 // Id zlecenia bierzemy nie wprost z okna, ale z odczytanych wcześniej danych z bazy
                 // Dlatego też poniżej widnieje _DaneZlecenia.Id
-                _Zapytanie = String.Format("UPDATE Zlecenia SET data_przyjecia='{0}', data_zwrotu='{1}', forma_przyjecia='{2}', forma_zwrotu='{3}', uwagi='{4}', ekspres={5}, osoba_przyjmujaca='{6}', id_zleceniodawcy={7}, nr_zlecenia_rejestr={8}, Inny_platnik={9} WHERE id_zlecenia={10}",
-                                           daneDoZapisu.DataPrzyjecia.ToShortDateString(), daneDoZapisu.DataZwrotu.ToShortDateString(),
-                                           daneDoZapisu.FormaPrzyjecia, daneDoZapisu.FormaZwrotu, daneDoZapisu.Uwagi, daneDoZapisu.Ekspress,
-                                           daneDoZapisu.OsobaPrzyjmujaca, daneDoZapisu.ZleceniodawcaInfo.Id, daneDoZapisu.Nr_rejestru, daneDoZapisu.InnyPlatnik, _DaneZlecenia.Id);
-
                 _BazaDanych.WykonajPolecenie(_Zapytanie);
+                _BazaDanych.Zlecenia
+                    .UPDATE()
+                        .Data_przyjecia(daneDoZapisu.DataPrzyjecia)
+                        .Data_zwrotu(daneDoZapisu.DataZwrotu)
+                        .Forma_przyjecia(daneDoZapisu.FormaPrzyjecia)
+                        .Forma_zwrotu(daneDoZapisu.FormaZwrotu)
+                        .Uwagi(daneDoZapisu.Uwagi)
+                        .Ekspres(daneDoZapisu.Ekspress)
+                        .Osoba_przyjmujaca(daneDoZapisu.OsobaPrzyjmujaca)
+                        .ID_zleceniodawcy(daneDoZapisu.ZleceniodawcaInfo.Id)
+                        .Nr_zlecenia_rejestr(daneDoZapisu.Nr_rejestru)
+                        .Inny_platnik(daneDoZapisu.InnyPlatnik)
+                        .Nr_zlecenia_klienta(daneDoZapisu.NrZleceniaKlienta)
+                    .WHERE()
+                        .ID_zlecenia(_DaneZlecenia.Id)
+                    .INFO("Aktualizacja danych zlecenia")
+                    .EXECUTE();
             }
 
             //--------------------------------------------------------------------
