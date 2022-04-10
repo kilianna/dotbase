@@ -113,7 +113,7 @@
             // 
             // bazaFileDialog
             // 
-            this.bazaFileDialog.Filter = "(*.mdb)|*.mdb";
+            this.bazaFileDialog.Filter = "(*.accdb)|*.accdb";
             this.bazaFileDialog.Tag = "";
             // 
             // timerDoRozlaczania
