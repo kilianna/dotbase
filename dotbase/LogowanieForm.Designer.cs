@@ -181,13 +181,14 @@
             // 
             // wersjaLabel
             // 
-            this.wersjaLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.wersjaLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.wersjaLabel.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.wersjaLabel.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.wersjaLabel.ForeColor = System.Drawing.Color.Gray;
-            this.wersjaLabel.Location = new System.Drawing.Point(193, 254);
+            this.wersjaLabel.Location = new System.Drawing.Point(12, 254);
             this.wersjaLabel.Name = "wersjaLabel";
-            this.wersjaLabel.Size = new System.Drawing.Size(298, 14);
+            this.wersjaLabel.Size = new System.Drawing.Size(479, 14);
             this.wersjaLabel.TabIndex = 16;
             this.wersjaLabel.Text = "Wersja programu: ";
             this.wersjaLabel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;

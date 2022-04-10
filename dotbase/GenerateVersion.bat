@@ -20,8 +20,11 @@ exit /b 50
 
 :run_git
 cd %2
+git diff --stat HEAD > "%TEMP%\dfn39834GitStatus_tmp.txt"
 git log -n 1 --oneline --pretty=format:"%%H %%ci" > "%~1\Resources\GitVersion_tmp.txt"
 set GIT_CODE=%ERRORLEVEL%
+echo. >> "%~1\Resources\GitVersion_tmp.txt"
+type "%TEMP%\dfn39834GitStatus_tmp.txt" >> "%~1\Resources\GitVersion_tmp.txt"
 git update-index --skip-worktree dotbase/Resources/GitVersion.txt
 if not '%GIT_CODE%'=='0' goto skip_copy
 fc "%~1\Resources\GitVersion_tmp.txt" "%~1\Resources\GitVersion.txt" > NUL

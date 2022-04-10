@@ -36,7 +36,16 @@ namespace DotBase
         {
             Instancja = this;
             InitializeComponent();
-            wersjaLabel.Text += N.Wersja();
+            string wersja = N.Wersja();
+            if (wersja.StartsWith("!"))
+            {
+                wersjaLabel.ForeColor = Color.Red;
+                wersjaLabel.Text += wersja.Substring(1);
+            }
+            else
+            {
+                wersjaLabel.Text += wersja;
+            }
         }
 
         //----------------------------------------------------------------------------------

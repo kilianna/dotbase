@@ -30,10 +30,24 @@ namespace DotBase
         {
             string gitLog = Properties.Resources.GitVersion.Trim();
             if (gitLog.Length == 0) return "N/A";
-            string[] parts = gitLog.Split(' ');
+            string[] lines = gitLog.Split('\n');
+            if (lines.Length < 1) return "N/A";
+            string gitStatus = "";
+            for (int i = 1; i < lines.Length; i++)
+            {
+                gitStatus += lines[i].Trim();
+            }
+            string[] parts = lines[0].Trim().Split(' ');
             if (parts.Length < 2) return "N/A";
             if (parts[0].Length < 7) return "N/A";
-            return parts[1] + " [" + parts[0].Substring(0, 7).ToLower() + "]";
+            if (gitStatus == "")
+            {
+                return parts[1] + " [" + parts[0].Substring(0, 7).ToLower() + "]";
+            }
+            else
+            {
+                return "!Zmodyfikowana oparta o " + parts[1] + " [" + parts[0].Substring(0, 7).ToLower() + "]";
+            }
         }
 
     }
