@@ -450,13 +450,9 @@ namespace DotBase
         private void ZamykanieOkna(object sender, FormClosingEventArgs e)
         //---------------------------------------------------------------
         {
-            if (false == ZapiszDane())
-            {
-                if (MessageBox.Show("Czy na pewno chcesz zamknąć okno? Dane nie zostaną zapisane z uwagi na błędy wśród wpisanych dnaych.", "Uwaga", MessageBoxButtons.YesNo) == DialogResult.No)
-                    e.Cancel = true;
-            }
+            e.Cancel = !N.PotwierdzenieZapisz(this, ZapiszDane, true, false);
         }
-        
+                
         //---------------------------------------------------------------
         private bool ZapiszDane()
         //---------------------------------------------------------------
@@ -489,7 +485,7 @@ namespace DotBase
         private void PoprzedniArkusz(object sender, EventArgs e)
         //---------------------------------------------------------------
         {
-            if (false == ZapiszDane())
+            if (!N.PotwierdzenieZapisz(this, ZapiszDane, true, false))
                 return;
 
             if (true == _WzorcowanieDawka.ZnajdzMniejszyArkusz())
@@ -506,7 +502,7 @@ namespace DotBase
         private void NastepnyArkusz(object sender, EventArgs e)
         //---------------------------------------------------------------
         {
-            if (false == ZapiszDane())
+            if (!N.PotwierdzenieZapisz(this, ZapiszDane, true, false))
                 return;
 
             if (true == _WzorcowanieDawka.ZnajdzWiekszyArkusz())
@@ -526,7 +522,7 @@ namespace DotBase
         private void button1_Click(object sender, EventArgs e)
         //---------------------------------------------------------------
         {
-            if (false == ZapiszDane())
+            if (!N.PotwierdzenieZapisz(this, ZapiszDane, true, false))
                 return;
 
             if (true == _WzorcowanieDawka.ZnajdzMniejszyArkusz())
@@ -544,7 +540,7 @@ namespace DotBase
         private void button2_Click(object sender, EventArgs e)
         //---------------------------------------------------------------
         {
-            if (false == ZapiszDane())
+            if (!N.PotwierdzenieZapisz(this, ZapiszDane, true, false))
                 return;
 
             if (true == _WzorcowanieDawka.ZnajdzWiekszyArkusz())
@@ -705,6 +701,11 @@ namespace DotBase
         private void textBox9_Leave(object sender, EventArgs e)
         {
             textBox9.Text = Narzedzia.Format.PoprawFormat(textBox9.Text, 1);
+        }
+
+        private void zapiszToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            N.PotwierdzenieZapisz(this, ZapiszDane, false, true);
         }
     }
 }

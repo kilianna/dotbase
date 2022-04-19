@@ -56,7 +56,7 @@ namespace DotBase
         private void button3_Click(object sender, EventArgs e)
         //---------------------------------------------------------------
         {
-            if ( false == ZapiszDane() )
+            if (!N.PotwierdzenieZapisz(this, ZapiszDane, true, false))
                 return;
 
             if (false == _WzorcowanieZrodlamiPow.ZnajdzMniejszyArkusz())
@@ -75,7 +75,7 @@ namespace DotBase
         private void button4_Click(object sender, EventArgs e)
         //---------------------------------------------------------------
         {
-            if ( false == ZapiszDane() )
+            if (!N.PotwierdzenieZapisz(this, ZapiszDane, true, false))
                 return;
 
             CzyscOkna();
@@ -633,11 +633,7 @@ namespace DotBase
         void ZamykanieOkna(object sender, FormClosingEventArgs args)
         //---------------------------------------------------------------
         {
-            if (false == ZapiszDane())
-            {
-                if (MessageBox.Show("Czy na pewno chcesz zamknąć okno? Dane nie zostaną zapisany z uwagi na błędy wśród wpisanych danych.", "Uwaga", MessageBoxButtons.YesNo) == DialogResult.No)
-                    args.Cancel = true;
-            }
+            args.Cancel = !N.PotwierdzenieZapisz(this, ZapiszDane, true, false);
         }
 
         //---------------------------------------------------------------
@@ -691,6 +687,11 @@ namespace DotBase
         private void textBox16_Leave(object sender, EventArgs e)
         {
             textBox16.Text = Narzedzia.Format.PoprawFormat(textBox16.Text, 1);
+        }
+
+        private void zapiszToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            N.PotwierdzenieZapisz(this, ZapiszDane, false, true);
         }
     }
 }

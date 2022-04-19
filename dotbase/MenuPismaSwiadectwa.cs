@@ -183,11 +183,14 @@ namespace DotBase
 
         private void ZamykanieOkna(object sender, FormClosingEventArgs e)
         {
+            e.Cancel = !N.PotwierdzenieZapisz(this, ZapiszDane, true, false);
+        }
+
+        private bool ZapiszDane()
+        {
             if (textBox4.Text == "" || false == UInt32.TryParse(textBox2.Text, out _NrPisma))
             {
-                MessageBox.Show("Błędne dane. Nie można zapisać.", "Uwaga");
-                e.Cancel = true;
-                return;
+                return false;
             }
 
             if (0 == _Baza.TworzTabeleDanych(String.Format("SELECT 1 FROM Swiadectwo WHERE id_karty = {0}", _NumerKarty)).Rows.Count)
@@ -229,6 +232,12 @@ namespace DotBase
                     .INFO("Zapis danych świadectwa")
                     .EXECUTE();
             }
+            return true;
+        }
+
+        private void zapiszToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            N.PotwierdzenieZapisz(this, ZapiszDane, false, true);
         }
         
     }

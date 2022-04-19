@@ -29,6 +29,16 @@
         private void InitializeComponent()
         {
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.uwD = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.uwSD = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.uwSMD = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.uwS = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.uwMD = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.dataWykonania = new System.Windows.Forms.DateTimePicker();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
@@ -51,24 +61,16 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.uwMD = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.uwS = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.uwSMD = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.uwSD = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.uwD = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.zapiszToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox3.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox3
             // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.uwD);
             this.groupBox3.Controls.Add(this.label18);
             this.groupBox3.Controls.Add(this.uwSD);
@@ -99,12 +101,102 @@
             this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Controls.Add(this.dataWystawienia);
             this.groupBox3.Controls.Add(this.textBox4);
-            this.groupBox3.Location = new System.Drawing.Point(8, 52);
+            this.groupBox3.Location = new System.Drawing.Point(7, 67);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(768, 636);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Dane dotyczące świadectwa\\pisma przewodniego";
+            // 
+            // uwD
+            // 
+            this.uwD.Location = new System.Drawing.Point(387, 107);
+            this.uwD.Multiline = true;
+            this.uwD.Name = "uwD";
+            this.uwD.Size = new System.Drawing.Size(362, 72);
+            this.uwD.TabIndex = 13;
+            this.uwD.KeyDown += new System.Windows.Forms.KeyEventHandler(this.WstawZnakSpecjalny);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(384, 91);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(85, 13);
+            this.label18.TabIndex = 12;
+            this.label18.Text = "Uwaga - dawka:";
+            // 
+            // uwSD
+            // 
+            this.uwSD.Location = new System.Drawing.Point(387, 208);
+            this.uwSD.Multiline = true;
+            this.uwSD.Name = "uwSD";
+            this.uwSD.Size = new System.Drawing.Size(362, 72);
+            this.uwSD.TabIndex = 17;
+            this.uwSD.KeyDown += new System.Windows.Forms.KeyEventHandler(this.WstawZnakSpecjalny);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(384, 192);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(141, 13);
+            this.label17.TabIndex = 16;
+            this.label17.Text = "Uwaga - sygnalizacja dawki:";
+            // 
+            // uwSMD
+            // 
+            this.uwSMD.Location = new System.Drawing.Point(10, 208);
+            this.uwSMD.Multiline = true;
+            this.uwSMD.Name = "uwSMD";
+            this.uwSMD.Size = new System.Drawing.Size(362, 72);
+            this.uwSMD.TabIndex = 15;
+            this.uwSMD.KeyDown += new System.Windows.Forms.KeyEventHandler(this.WstawZnakSpecjalny);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(7, 192);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(169, 13);
+            this.label16.TabIndex = 14;
+            this.label16.Text = "Uwaga - sygnalizacja mocy dawki:";
+            // 
+            // uwS
+            // 
+            this.uwS.Location = new System.Drawing.Point(10, 308);
+            this.uwS.Multiline = true;
+            this.uwS.Name = "uwS";
+            this.uwS.Size = new System.Drawing.Size(362, 72);
+            this.uwS.TabIndex = 19;
+            this.uwS.KeyDown += new System.Windows.Forms.KeyEventHandler(this.WstawZnakSpecjalny);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(7, 292);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(95, 13);
+            this.label15.TabIndex = 18;
+            this.label15.Text = "Uwaga - skażenia:";
+            // 
+            // uwMD
+            // 
+            this.uwMD.Location = new System.Drawing.Point(10, 107);
+            this.uwMD.Multiline = true;
+            this.uwMD.Name = "uwMD";
+            this.uwMD.Size = new System.Drawing.Size(362, 72);
+            this.uwMD.TabIndex = 11;
+            this.uwMD.KeyDown += new System.Windows.Forms.KeyEventHandler(this.WstawZnakSpecjalny);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(7, 91);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(104, 13);
+            this.label14.TabIndex = 10;
+            this.label14.Text = "Uwaga - moc dawki:";
             // 
             // label13
             // 
@@ -297,7 +389,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(8, 12);
+            this.button1.Location = new System.Drawing.Point(7, 27);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(116, 34);
             this.button1.TabIndex = 0;
@@ -307,7 +399,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(148, 12);
+            this.button2.Location = new System.Drawing.Point(147, 27);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(121, 34);
             this.button2.TabIndex = 1;
@@ -315,110 +407,42 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // uwMD
+            // menuStrip1
             // 
-            this.uwMD.Location = new System.Drawing.Point(10, 107);
-            this.uwMD.Multiline = true;
-            this.uwMD.Name = "uwMD";
-            this.uwMD.Size = new System.Drawing.Size(362, 72);
-            this.uwMD.TabIndex = 11;
-            this.uwMD.KeyDown += new System.Windows.Forms.KeyEventHandler(this.WstawZnakSpecjalny);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.zapiszToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(792, 24);
+            this.menuStrip1.TabIndex = 2;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // label14
+            // zapiszToolStripMenuItem
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(7, 91);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(104, 13);
-            this.label14.TabIndex = 10;
-            this.label14.Text = "Uwaga - moc dawki:";
-            // 
-            // uwS
-            // 
-            this.uwS.Location = new System.Drawing.Point(10, 308);
-            this.uwS.Multiline = true;
-            this.uwS.Name = "uwS";
-            this.uwS.Size = new System.Drawing.Size(362, 72);
-            this.uwS.TabIndex = 19;
-            this.uwS.KeyDown += new System.Windows.Forms.KeyEventHandler(this.WstawZnakSpecjalny);
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(7, 292);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(95, 13);
-            this.label15.TabIndex = 18;
-            this.label15.Text = "Uwaga - skażenia:";
-            // 
-            // uwSMD
-            // 
-            this.uwSMD.Location = new System.Drawing.Point(10, 208);
-            this.uwSMD.Multiline = true;
-            this.uwSMD.Name = "uwSMD";
-            this.uwSMD.Size = new System.Drawing.Size(362, 72);
-            this.uwSMD.TabIndex = 15;
-            this.uwSMD.KeyDown += new System.Windows.Forms.KeyEventHandler(this.WstawZnakSpecjalny);
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(7, 192);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(169, 13);
-            this.label16.TabIndex = 14;
-            this.label16.Text = "Uwaga - sygnalizacja mocy dawki:";
-            // 
-            // uwSD
-            // 
-            this.uwSD.Location = new System.Drawing.Point(387, 208);
-            this.uwSD.Multiline = true;
-            this.uwSD.Name = "uwSD";
-            this.uwSD.Size = new System.Drawing.Size(362, 72);
-            this.uwSD.TabIndex = 17;
-            this.uwSD.KeyDown += new System.Windows.Forms.KeyEventHandler(this.WstawZnakSpecjalny);
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(384, 192);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(141, 13);
-            this.label17.TabIndex = 16;
-            this.label17.Text = "Uwaga - sygnalizacja dawki:";
-            // 
-            // uwD
-            // 
-            this.uwD.Location = new System.Drawing.Point(387, 107);
-            this.uwD.Multiline = true;
-            this.uwD.Name = "uwD";
-            this.uwD.Size = new System.Drawing.Size(362, 72);
-            this.uwD.TabIndex = 13;
-            this.uwD.KeyDown += new System.Windows.Forms.KeyEventHandler(this.WstawZnakSpecjalny);
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(384, 91);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(85, 13);
-            this.label18.TabIndex = 12;
-            this.label18.Text = "Uwaga - dawka:";
+            this.zapiszToolStripMenuItem.Name = "zapiszToolStripMenuItem";
+            this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.zapiszToolStripMenuItem.Text = "Zapisz";
+            this.zapiszToolStripMenuItem.Click += new System.EventHandler(this.zapiszToolStripMenuItem_Click);
             // 
             // MenuPismaSwiadectwaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 700);
+            this.ClientSize = new System.Drawing.Size(792, 717);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "MenuPismaSwiadectwaForm";
             this.Text = "Dokumenty dla klienta";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ZamykanieOkna);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -457,5 +481,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox uwD;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem zapiszToolStripMenuItem;
     }
 }

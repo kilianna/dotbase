@@ -59,7 +59,7 @@ namespace DotBase
         private void PoprzedniArkusz(object sender, EventArgs e)
         //---------------------------------------------------------------
         {
-            if ( false == ZapiszDane() )
+            if (!N.PotwierdzenieZapisz(this, ZapiszDane, true, false))
                 return;
 
             czyscOkno();
@@ -79,7 +79,7 @@ namespace DotBase
         private void NastepnyArkusz(object sender, EventArgs e)
         //---------------------------------------------------------------
         {
-            if( false == ZapiszDane() )
+            if (!N.PotwierdzenieZapisz(this, ZapiszDane, true, false))
                 return;
 
             czyscOkno();
@@ -608,11 +608,7 @@ namespace DotBase
         private void ZamykanieOknaWykresu(object sender, FormClosingEventArgs e)
         //---------------------------------------------------------------
         {
-            if (false == ZapiszDane())
-            {
-                if (MessageBox.Show("Czy na pewno chcesz zamknąć okno? Dane nie zostaną zapisane z uwagi na błędy wśród wpisanych dnaych.", "Uwaga", MessageBoxButtons.YesNo) == DialogResult.No)
-                    e.Cancel = true;
-            }
+            e.Cancel = !N.PotwierdzenieZapisz(this, ZapiszDane, true, false);
         }
 
         //---------------------------------------------------------------
@@ -845,6 +841,11 @@ namespace DotBase
         private void textBox16_Leave(object sender, EventArgs e)
         {
             textBox16.Text = Narzedzia.Format.PoprawFormat(textBox16.Text, 1);
+        }
+
+        private void zapiszToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            N.PotwierdzenieZapisz(this, ZapiszDane, false, true);
         }
     }
 }

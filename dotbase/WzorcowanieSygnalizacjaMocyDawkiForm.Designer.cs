@@ -92,7 +92,7 @@
             this.dokumentyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.protokółToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.button5 = new System.Windows.Forms.Button();
+            this.zapiszToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -604,7 +604,6 @@
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.button5);
             this.tabPage4.Controls.Add(this.checkBox1);
             this.tabPage4.Controls.Add(this.textBox11);
             this.tabPage4.Controls.Add(this.textBox12);
@@ -663,6 +662,7 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.zapiszToolStripMenuItem,
             this.dokumentyToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -690,15 +690,12 @@
             this.toolTip1.AutomaticDelay = 0;
             this.toolTip1.ShowAlways = true;
             // 
-            // button5
+            // zapiszToolStripMenuItem
             // 
-            this.button5.Location = new System.Drawing.Point(664, 337);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(96, 42);
-            this.button5.TabIndex = 22;
-            this.button5.Text = "Zapisz";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.zapiszToolStripMenuItem.Name = "zapiszToolStripMenuItem";
+            this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.zapiszToolStripMenuItem.Text = "Zapisz";
+            this.zapiszToolStripMenuItem.Click += new System.EventHandler(this.zapiszToolStripMenuItem_Click);
             // 
             // WzorcowanieSygnalizacjaMocyDawkiForm
             // 
@@ -808,7 +805,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Zr2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Wartosc;
         private System.Windows.Forms.DataGridViewTextBoxColumn Niepewnosc;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.ToolStripMenuItem zapiszToolStripMenuItem;
 
 
     }

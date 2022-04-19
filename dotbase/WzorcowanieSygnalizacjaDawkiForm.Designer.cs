@@ -87,9 +87,9 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.zapiszToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dokumenytToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.protokółToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button5 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -595,7 +595,6 @@
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.button5);
             this.tabPage4.Controls.Add(this.checkBox1);
             this.tabPage4.Controls.Add(this.textBox11);
             this.tabPage4.Controls.Add(this.textBox12);
@@ -654,12 +653,20 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.zapiszToolStripMenuItem,
             this.dokumenytToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(843, 24);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // zapiszToolStripMenuItem
+            // 
+            this.zapiszToolStripMenuItem.Name = "zapiszToolStripMenuItem";
+            this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.zapiszToolStripMenuItem.Text = "Zapisz";
+            this.zapiszToolStripMenuItem.Click += new System.EventHandler(this.zapiszToolStripMenuItem_Click);
             // 
             // dokumenytToolStripMenuItem
             // 
@@ -675,16 +682,6 @@
             this.protokółToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.protokółToolStripMenuItem.Text = "Protokół";
             this.protokółToolStripMenuItem.Click += new System.EventHandler(this.protokółToolStripMenuItem_Click);
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(728, 390);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(99, 35);
-            this.button5.TabIndex = 10;
-            this.button5.Text = "Zapisz";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // WzorcowanieSygnalizacjaDawkiForm
             // 
@@ -791,7 +788,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem dokumenytToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem protokółToolStripMenuItem;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.ToolStripMenuItem zapiszToolStripMenuItem;
 
     }
 }

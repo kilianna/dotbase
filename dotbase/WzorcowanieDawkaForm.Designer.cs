@@ -75,6 +75,7 @@
             this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
@@ -107,7 +108,7 @@
             this.wydrukiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wykresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.protokółToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.zapiszToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -581,6 +582,17 @@
             this.tabPage4.Text = "Obliczone współczynniki";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(368, 258);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(77, 17);
+            this.radioButton4.TabIndex = 20;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "Moc kermy";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
@@ -836,6 +848,7 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.zapiszToolStripMenuItem,
             this.wydrukiToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -855,27 +868,23 @@
             // wykresToolStripMenuItem
             // 
             this.wykresToolStripMenuItem.Name = "wykresToolStripMenuItem";
-            this.wykresToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.wykresToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.wykresToolStripMenuItem.Text = "Wykres";
             this.wykresToolStripMenuItem.Click += new System.EventHandler(this.wykresToolStripMenuItem_Click);
             // 
             // protokółToolStripMenuItem
             // 
             this.protokółToolStripMenuItem.Name = "protokółToolStripMenuItem";
-            this.protokółToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.protokółToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.protokółToolStripMenuItem.Text = "Protokół";
             this.protokółToolStripMenuItem.Click += new System.EventHandler(this.protokółToolStripMenuItem_Click);
             // 
-            // radioButton4
+            // zapiszToolStripMenuItem
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(368, 258);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(77, 17);
-            this.radioButton4.TabIndex = 20;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Moc kermy";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.zapiszToolStripMenuItem.Name = "zapiszToolStripMenuItem";
+            this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.zapiszToolStripMenuItem.Text = "Zapisz";
+            this.zapiszToolStripMenuItem.Click += new System.EventHandler(this.zapiszToolStripMenuItem_Click);
             // 
             // WzorcowanieDawkaForm
             // 
@@ -1002,6 +1011,7 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.ToolStripMenuItem zapiszToolStripMenuItem;
 
     }
 }

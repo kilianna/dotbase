@@ -110,6 +110,7 @@
             this.wydrukiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.protokółToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wykresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zapiszToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -866,6 +867,7 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.zapiszToolStripMenuItem,
             this.wydrukiToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -895,6 +897,13 @@
             this.wykresToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.wykresToolStripMenuItem.Text = "Wykres";
             this.wykresToolStripMenuItem.Click += new System.EventHandler(this.wykresToolStripMenuItem_Click);
+            // 
+            // zapiszToolStripMenuItem
+            // 
+            this.zapiszToolStripMenuItem.Name = "zapiszToolStripMenuItem";
+            this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.zapiszToolStripMenuItem.Text = "Zapisz";
+            this.zapiszToolStripMenuItem.Click += new System.EventHandler(this.zapiszToolStripMenuItem_Click);
             // 
             // WzorcowanieMocDawkiForm
             // 
@@ -1020,5 +1029,6 @@
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.ToolStripMenuItem zapiszToolStripMenuItem;
     }
 }

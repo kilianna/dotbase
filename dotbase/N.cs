@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -48,6 +49,33 @@ namespace DotBase
             {
                 return "!Zmodyfikowana oparta o " + parts[1] + " [" + parts[0].Substring(0, 7).ToLower() + "]";
             }
+        }
+
+        public delegate bool ZapiszDaneFunc();
+
+        public static bool PotwierdzenieZapisz(Form form, ZapiszDaneFunc func, bool canContinue, bool force)
+        {
+            if (!force)
+            {
+                if (MessageBox.Show(form, "Czy zapisać dane?", "Potwierdzenie", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                {
+                    return true;
+                }
+            }
+
+            if (!func())
+            {
+                if (canContinue)
+                {
+                    return MessageBox.Show(form, "Czy na pewno chcesz kontunuować?\r\nDane nie zostaną zapisane z uwagi na błędy wśród wpisanych dnaych.", "Uwaga", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes;
+                }
+                else
+                {
+                    MessageBox.Show(form, "Nie można kontunuować.\r\nDane nie zostaną zapisane z uwagi na błędy wśród wpisanych dnaych.", "Uwaga", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            return true;
         }
 
     }

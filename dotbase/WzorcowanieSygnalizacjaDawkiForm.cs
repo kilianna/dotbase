@@ -516,11 +516,7 @@ namespace DotBase
         private void ZamykanieOkna(object sender, FormClosingEventArgs e)
         //---------------------------------------------------------------
         {
-            if (false == ZapiszDane())
-            {
-                if (MessageBox.Show("Czy na pewno chcesz zamknąć okno? Dane nie zostaną zapisane z uwagi na błędy wśród wpisanych dnaych.", "Uwaga", MessageBoxButtons.YesNo) == DialogResult.No)
-                    e.Cancel = true;
-            }
+            e.Cancel = !N.PotwierdzenieZapisz(this, ZapiszDane, true, false);
         }
 
         //---------------------------------------------------------------
@@ -621,17 +617,9 @@ namespace DotBase
             textBox9.Text = Narzedzia.Format.PoprawFormat(textBox9.Text, 1);
         }
 
-        //****************************************************************
-        // Zapisz
-        //****************************************************************
-        private void button5_Click(object sender, EventArgs e)
+        private void zapiszToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (false == ZapiszDane())
-            {
-                MessageBox.Show("Dane nie zostały zapisane z uwagi na błędy wśród wpisanych dnaych.", "Uwaga", MessageBoxButtons.OK);
-            }
-
-            MessageBox.Show("Dane zostały zapisane poprawnie.", "Sukces", MessageBoxButtons.OK);
+            N.PotwierdzenieZapisz(this, ZapiszDane, false, true);
         }
     }
 }
