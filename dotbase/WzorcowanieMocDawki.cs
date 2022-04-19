@@ -16,8 +16,8 @@ namespace WzorcowanieMocDawkiSpace
         public MocDawkiWspolczynniki Wspolczynniki { get; protected set; }
 
         #region Dane będące jedynie zapisywanymi
-        private MocDawkiWartosciWzorcowoPomiarowe _WartosciWzorcowoPomiaroweDoZapisu;
-        private MocDawkiWspolczynniki _WspolczynnikiDoZapisu;
+        private MocDawkiWartosciWzorcowoPomiarowe _WartosciWzorcowoPomiaroweDoZapisu = new MocDawkiWartosciWzorcowoPomiarowe();
+        private MocDawkiWspolczynniki _WspolczynnikiDoZapisu = new MocDawkiWspolczynniki();
         #endregion
 
         //--------------------------------------------------------------------
@@ -790,9 +790,6 @@ namespace WzorcowanieMocDawkiSpace
         public bool PrzygotujDaneWzorcowoPomiaroweDoZapisu(ref DataGridView tabela, string protokol, string jednostka, string tlo, string wielkoscFizyczna)
         //---------------------------------------------------------------
         {
-            _WartosciWzorcowoPomiaroweDoZapisu = new MocDawkiWartosciWzorcowoPomiarowe();
-
-            
             string sTemp;
 
             _WartosciWzorcowoPomiaroweDoZapisu.jednostka = jednostka;
@@ -860,8 +857,6 @@ namespace WzorcowanieMocDawkiSpace
         public bool PrzygotujDaneWspolczynnikowDoZapisu(ref DataGridView tabela, string wzorcujacy, string sprawdzajacy, bool dolacz)
         //---------------------------------------------------------------
         {
-            _WspolczynnikiDoZapisu = new MocDawkiWspolczynniki();
-
             _WspolczynnikiDoZapisu.Wzorcujacy = wzorcujacy;
             _WspolczynnikiDoZapisu.Sprawdzajacy = sprawdzajacy;
             _WspolczynnikiDoZapisu.Dolacz = dolacz;
