@@ -1116,9 +1116,9 @@ namespace DotBase
                 SetField("Osoba_kontaktowa", value, OleDbType.WChar);
                 return this;
             }
-            public Szablon_Zleceniodawca Rabat(float value)
+            public Szablon_Zleceniodawca Rabat(string value)
             {
-                SetField("Rabat", value, OleDbType.Single);
+                SetField("Rabat", value, OleDbType.WChar);
                 return this;
             }
             public Szablon_Zleceniodawca Telefon(string value)

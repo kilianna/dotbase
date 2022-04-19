@@ -204,7 +204,7 @@ namespace DotBase
         private void CzyscOkno()
         //--------------------------------------------------------------------
         {
-            textBox1.Text = textBox2.Text = textBox3.Text = textBox4.Text = textBox5.Text =
+            textBox1.Text = textBox2.Text = textBox3.Text = textBox4.Text = textBox5.Text = rabatBox.Text =
             textBox6.Text = textBox7.Text = textBox8.Text = textBox10.Text = emailTextBox.Text = "";
             nrZleceniaKlientaText.Text = "";
             nazwaPlatnika.Text = "";
@@ -230,6 +230,7 @@ namespace DotBase
         //--------------------------------------------------------------------
         {
             textBox2.Text = textBox3.Text = textBox4.Text = textBox5.Text = textBox6.Text = emailTextBox.Text = "";
+            rabatBox.Text = "";
             comboBox1.Text = "";
             nazwaPlatnika.Text = "";
             adresPlatnika.Text = "";
@@ -322,7 +323,9 @@ namespace DotBase
             numericUpDown1.Enabled = numericUpDown2.Enabled = false;
 
             textBox2.Enabled = textBox3.Enabled = textBox4.Enabled = emailTextBox.Enabled = textBox5.Enabled = textBox6.Enabled = jestIFJ.Enabled = true;
+            rabatBox.Enabled = true;
             textBox2.Text = textBox3.Text = textBox4.Text = emailTextBox.Text = textBox5.Text = textBox6.Text = "-";
+            rabatBox.Text = "";
             jestIFJ.Checked = false;
             nazwaPlatnika.Text = "";
             adresPlatnika.Text = "";
@@ -353,7 +356,7 @@ namespace DotBase
 
             button1.Enabled = button2.Enabled = button3.Enabled = button5.Enabled = true;
             numericUpDown1.Enabled = numericUpDown2.Enabled = true;
-            textBox2.Enabled = textBox3.Enabled = textBox4.Enabled = emailTextBox.Enabled = textBox5.Enabled = textBox6.Enabled = jestIFJ.Enabled = false;
+            textBox2.Enabled = textBox3.Enabled = textBox4.Enabled = emailTextBox.Enabled = textBox5.Enabled = textBox6.Enabled = jestIFJ.Enabled = rabatBox.Enabled = false;
 
             nazwaPlatnika.Enabled = false;
             adresPlatnika.Enabled = false;
@@ -372,7 +375,7 @@ namespace DotBase
             textBox1.Enabled = numericUpDown1.Enabled = numericUpDown2.Enabled = false;
             button5.Text = "Zatwierdź edycję.";
 
-            textBox2.Enabled = textBox3.Enabled =
+            textBox2.Enabled = textBox3.Enabled = rabatBox.Enabled =
             textBox4.Enabled = textBox5.Enabled = emailTextBox.Enabled = textBox6.Enabled = jestIFJ.Enabled = true;
             nazwaPlatnika.Enabled = true;
             adresPlatnika.Enabled = true;
@@ -389,7 +392,7 @@ namespace DotBase
             button5.Text = "Edytuj dane zleceniodawcy";
 
             textBox2.Enabled = textBox3.Enabled = textBox4.Enabled = emailTextBox.Enabled =
-            textBox5.Enabled = textBox6.Enabled = jestIFJ.Enabled = false;
+            textBox5.Enabled = textBox6.Enabled = jestIFJ.Enabled = rabatBox.Enabled = false;
             nazwaPlatnika.Enabled = false;
             adresPlatnika.Enabled = false;
             nipPlatnika.Enabled = false;
@@ -443,6 +446,7 @@ namespace DotBase
             adresPlatnika.Text = dane.ZleceniodawcaInfo.AdresPlatnika;
             nipPlatnika.Text = dane.ZleceniodawcaInfo.NipPlatnika;
             jestIFJ.Checked = dane.ZleceniodawcaInfo.Ifj;
+            rabatBox.Text = dane.ZleceniodawcaInfo.Rabat;
         }
 
         //--------------------------------------------------------------------
@@ -575,7 +579,7 @@ namespace DotBase
             }
 
             DaneZleceniodawcy zleceniodawca = new DaneZleceniodawcy(textBox2.Text, textBox3.Text, int.Parse(textBox1.Text), comboBox1.Text, textBox6.Text, textBox5.Text, textBox4.Text, emailTextBox.Text,
-                nazwaPlatnika.Text, adresPlatnika.Text, nipPlatnika.Text, jestIFJ.Checked);
+                nazwaPlatnika.Text, adresPlatnika.Text, nipPlatnika.Text, jestIFJ.Checked, rabatBox.Text);
 
             if (false == _Zlecenie.DodajZleceniodawce(ref zleceniodawca))
             {
@@ -594,7 +598,7 @@ namespace DotBase
                 return false;
 
             DaneZleceniodawcy zleceniodawca = new DaneZleceniodawcy(textBox2.Text, textBox3.Text, int.Parse(textBox1.Text), comboBox1.Text, textBox6.Text, textBox5.Text, textBox4.Text, emailTextBox.Text,
-                nazwaPlatnika.Text, adresPlatnika.Text, nipPlatnika.Text, jestIFJ.Checked);
+                nazwaPlatnika.Text, adresPlatnika.Text, nipPlatnika.Text, jestIFJ.Checked, rabatBox.Text);
 
             if (false == _Zlecenie.EdytujZleceniodawce(ref zleceniodawca))
                 return false;
@@ -664,6 +668,23 @@ namespace DotBase
         private void innyPlatnik_CheckedChanged(object sender, EventArgs e)
         {
             grupaPlatnika.Visible = innyPlatnik.Checked;
+        }
+
+        private void rabatBox_TextChanged(object sender, EventArgs e)
+        {
+            kolorujRabat();
+        }
+
+        private void kolorujRabat()
+        {
+            if (rabatBox.Text.Trim() == "")
+            {
+                rabatBox.BackColor = SystemColors.Window;
+            }
+            else
+            {
+                rabatBox.BackColor = Color.Thistle;
+            }
         }
 
 

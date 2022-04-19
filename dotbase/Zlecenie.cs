@@ -41,8 +41,9 @@ namespace DotBase
             public string AdresPlatnika { get; set; }
             public string NipPlatnika { get; set; }
             public bool Ifj;
+            public string Rabat;
 
-            public DaneZleceniodawcy(string Adres, string Faks, int Id, string Nazwa, string Nip, string OsobaKon, string Telefon, string Email, string NazwaPlatnika, string AdresPlatnika, string NipPlatnika, bool Ifj)
+            public DaneZleceniodawcy(string Adres, string Faks, int Id, string Nazwa, string Nip, string OsobaKon, string Telefon, string Email, string NazwaPlatnika, string AdresPlatnika, string NipPlatnika, bool Ifj, string Rabat)
                 : this()
             {
                 this.Adres = Adres;
@@ -57,6 +58,7 @@ namespace DotBase
                 this.AdresPlatnika = AdresPlatnika;
                 this.NipPlatnika = NipPlatnika;
                 this.Ifj = Ifj;
+                this.Rabat = Rabat;
             }
         }
 
@@ -126,6 +128,7 @@ namespace DotBase
                         .Adres_platnika(zleceniodawca.AdresPlatnika)
                         .NIP_platnika(zleceniodawca.NipPlatnika)
                         .IFJ(zleceniodawca.Ifj)
+                        .Rabat(zleceniodawca.Rabat)
                     .INFO("Dodano nowe dane zleceniodawcy")
                     .EXECUTE(true);
             }
@@ -147,6 +150,7 @@ namespace DotBase
                         .Adres_platnika(zleceniodawca.AdresPlatnika)
                         .NIP_platnika(zleceniodawca.NipPlatnika)
                         .IFJ(zleceniodawca.Ifj)
+                        .Rabat(zleceniodawca.Rabat)
                     .WHERE()
                         .ID_zleceniodawcy(zleceniodawca.Id)
                     .INFO("Zmiana danych zleceniodawcy")
@@ -287,6 +291,7 @@ namespace DotBase
                 _DaneZlecenia.ZleceniodawcaInfo.AdresPlatnika = _DaneTabela.Rows[0].Field<string>("Adres_platnika");
                 _DaneZlecenia.ZleceniodawcaInfo.NipPlatnika = _DaneTabela.Rows[0].Field<string>("NIP_platnika");
                 _DaneZlecenia.ZleceniodawcaInfo.Ifj = _DaneTabela.Rows[0].Field<bool>("IFJ");
+                _DaneZlecenia.ZleceniodawcaInfo.Rabat = _DaneTabela.Rows[0].Field<string>("Rabat");
             }
 
             //--------------------------------------------------------------------
@@ -298,7 +303,7 @@ namespace DotBase
 
                 _Zapytanie = "SELECT Zleceniodawca, Adres, Osoba_kontaktowa, Telefon, Faks, email, Nip, ID_zlecenia, "
                            + "Zlecenia.ID_zleceniodawcy, Data_przyjecia, Data_zwrotu, Forma_przyjecia, "
-                           + "Forma_zwrotu, Osoba_przyjmujaca, Zlecenia.Uwagi, Ekspres, Inny_platnik, Nr_zlecenia_klienta, Nr_zlecenia_rejestr, Nazwa_platnika, Adres_platnika, NIP_platnika, IFJ "
+                           + "Forma_zwrotu, Osoba_przyjmujaca, Zlecenia.Uwagi, Ekspres, Inny_platnik, Nr_zlecenia_klienta, Nr_zlecenia_rejestr, Nazwa_platnika, Adres_platnika, NIP_platnika, IFJ, Rabat "
                            + "FROM Zlecenia INNER JOIN "
                            + "Zleceniodawca ON Zlecenia.ID_Zleceniodawcy=Zleceniodawca.ID_Zleceniodawcy "
                            + String.Format("WHERE id_zlecenia = {0}", idZlecenia);
