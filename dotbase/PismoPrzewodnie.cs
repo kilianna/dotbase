@@ -162,12 +162,16 @@ namespace DotBase
             //********************************************************************************************
             {
                 List<KeyValuePair<string, string>> sondy = new List<KeyValuePair<string, string>>();
-                _Zapytanie = "SELECT typ, nr_fabryczny FROM Sondy WHERE id_dozymetru=(SELECT id_dozymetru FROM Karta_przyjecia "
-                           + String.Format("WHERE id_karty = {0})", _NrKarty);
+
+                var table = _BazaDanych.TworzTabeleDanych(@"
+                    SELECT typ, nr_fabryczny
+                    FROM Sondy
+                    WHERE ID_sondy IN (SELECT ID_sondy FROM wzorcowanie_cezem WHERE ID_karty=?)
+                        OR ID_sondy IN (SELECT ID_sondy FROM Wzorcowanie_zrodlami_powierzchniowymi WHERE ID_karty=?)", _NrKarty, _NrKarty);
 
                 int licznik = 0;
 
-                foreach (DataRow wiersz in _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows)
+                foreach (DataRow wiersz in table.Rows)
                 {
                     ++licznik;
                     sondy.Add(new KeyValuePair<string, string>(wiersz.Field<string>(0), wiersz.Field<string>(1)));
