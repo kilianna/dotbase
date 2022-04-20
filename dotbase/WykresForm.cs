@@ -131,6 +131,9 @@ namespace Wykres
 
             for (int i = 0; i < zakres.PobierzRozmiarDanych(); ++i)
             {
+                if (false == zakres.Dolaczyc[i])
+                    continue;
+
                 if (zakres.X[i] < min_x)
                     min_x = zakres.X[i];
             }
