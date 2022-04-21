@@ -1073,5 +1073,10 @@ namespace DotBase
         {
             throw new NotImplementedException();
         }
+
+        internal string LikeEscape(string text)
+        {
+            return text.Replace("[", "[[]").Replace("%", "[%]").Replace("_", "[_]");
+        }
     }
 }

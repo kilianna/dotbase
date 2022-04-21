@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.button1 = new System.Windows.Forms.Button();
@@ -46,7 +47,9 @@
             this.emailTextBox = new System.Windows.Forms.TextBox();
             this.innyPlatnik = new System.Windows.Forms.CheckBox();
             this.grupaPlatnika = new System.Windows.Forms.GroupBox();
-            this.nazwaPlatnika = new System.Windows.Forms.TextBox();
+            this.nazwaPlatnikaBtn = new System.Windows.Forms.Button();
+            this.nazwaPlatnikaBox = new System.Windows.Forms.TextBox();
+            this.nazwaPlatnikaList = new System.Windows.Forms.ComboBox();
             this.nipPlatnika = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -97,6 +100,7 @@
             this.podglądToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
+            this.nazwaPlatnikaTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -210,8 +214,6 @@
             // 
             // rabatBox
             // 
-            this.rabatBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.rabatBox.BackColor = System.Drawing.SystemColors.Window;
             this.rabatBox.Location = new System.Drawing.Point(130, 239);
             this.rabatBox.Name = "rabatBox";
@@ -274,7 +276,9 @@
             // 
             this.grupaPlatnika.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.grupaPlatnika.Controls.Add(this.nazwaPlatnika);
+            this.grupaPlatnika.Controls.Add(this.nazwaPlatnikaBtn);
+            this.grupaPlatnika.Controls.Add(this.nazwaPlatnikaBox);
+            this.grupaPlatnika.Controls.Add(this.nazwaPlatnikaList);
             this.grupaPlatnika.Controls.Add(this.nipPlatnika);
             this.grupaPlatnika.Controls.Add(this.label16);
             this.grupaPlatnika.Controls.Add(this.label18);
@@ -287,14 +291,39 @@
             this.grupaPlatnika.TabStop = false;
             this.grupaPlatnika.Text = "                                  ";
             // 
-            // nazwaPlatnika
+            // nazwaPlatnikaBtn
             // 
-            this.nazwaPlatnika.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.nazwaPlatnikaBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nazwaPlatnikaBtn.Location = new System.Drawing.Point(604, 22);
+            this.nazwaPlatnikaBtn.Name = "nazwaPlatnikaBtn";
+            this.nazwaPlatnikaBtn.Size = new System.Drawing.Size(26, 23);
+            this.nazwaPlatnikaBtn.TabIndex = 28;
+            this.nazwaPlatnikaBtn.Text = "▼";
+            this.nazwaPlatnikaBtn.UseVisualStyleBackColor = true;
+            this.nazwaPlatnikaBtn.Click += new System.EventHandler(this.nazwaPlatnikaBtn_Click);
+            // 
+            // nazwaPlatnikaBox
+            // 
+            this.nazwaPlatnikaBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.nazwaPlatnika.Location = new System.Drawing.Point(124, 26);
-            this.nazwaPlatnika.Name = "nazwaPlatnika";
-            this.nazwaPlatnika.Size = new System.Drawing.Size(506, 20);
-            this.nazwaPlatnika.TabIndex = 16;
+            this.nazwaPlatnikaBox.Location = new System.Drawing.Point(124, 23);
+            this.nazwaPlatnikaBox.Name = "nazwaPlatnikaBox";
+            this.nazwaPlatnikaBox.Size = new System.Drawing.Size(480, 20);
+            this.nazwaPlatnikaBox.TabIndex = 29;
+            this.nazwaPlatnikaBox.TextChanged += new System.EventHandler(this.nazwaPlatnikaBox_TextChanged);
+            this.nazwaPlatnikaBox.Enter += new System.EventHandler(this.nazwaPlatnikaBox_Enter);
+            this.nazwaPlatnikaBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.nazwaPlatnikaBox_KeyUp);
+            // 
+            // nazwaPlatnikaList
+            // 
+            this.nazwaPlatnikaList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.nazwaPlatnikaList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.nazwaPlatnikaList.Location = new System.Drawing.Point(124, 23);
+            this.nazwaPlatnikaList.Name = "nazwaPlatnikaList";
+            this.nazwaPlatnikaList.Size = new System.Drawing.Size(480, 21);
+            this.nazwaPlatnikaList.TabIndex = 21;
+            this.nazwaPlatnikaList.SelectedIndexChanged += new System.EventHandler(this.nazwaPlatnikaList_SelectedIndexChanged);
             // 
             // nipPlatnika
             // 
@@ -667,8 +696,8 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -676,26 +705,26 @@
             this.Column3,
             this.Column4,
             this.Column5});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.Size = new System.Drawing.Size(667, 386);
             this.dataGridView1.TabIndex = 6;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
@@ -731,9 +760,9 @@
             // 
             // Column5
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Column5.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.Column5.DefaultCellStyle = dataGridViewCellStyle2;
             this.Column5.HeaderText = "Przejdź do karty";
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
@@ -788,6 +817,11 @@
             this.label15.Size = new System.Drawing.Size(159, 13);
             this.label15.TabIndex = 8;
             this.label15.Text = "Numer zlecenia w rejestrze";
+            // 
+            // nazwaPlatnikaTimer
+            // 
+            this.nazwaPlatnikaTimer.Interval = 50;
+            this.nazwaPlatnikaTimer.Tick += new System.EventHandler(this.nazwaPlatnikaTimer_Tick);
             // 
             // ZlecenieForm
             // 
@@ -878,7 +912,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column4;
         private System.Windows.Forms.DataGridViewButtonColumn Column5;
         private System.Windows.Forms.GroupBox grupaPlatnika;
-        private System.Windows.Forms.TextBox nazwaPlatnika;
         private System.Windows.Forms.TextBox nipPlatnika;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label18;
@@ -892,5 +925,9 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox rabatBox;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.ComboBox nazwaPlatnikaList;
+        private System.Windows.Forms.Button nazwaPlatnikaBtn;
+        private System.Windows.Forms.TextBox nazwaPlatnikaBox;
+        private System.Windows.Forms.Timer nazwaPlatnikaTimer;
     }
 }

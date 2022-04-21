@@ -16,6 +16,7 @@ namespace DotBase
         bool _TrybDodawaniaZlecenia;
         bool _TrybDodawaniaZleceniodawcy;
         bool _TrybEdycji;
+        BazaDanychWrapper _BazaDanych = new BazaDanychWrapper();
         
         //--------------------------------------------------------------------
         public ZlecenieForm()
@@ -91,7 +92,6 @@ namespace DotBase
             if (_Zlecenie.ZnajdzPoIdZleceniodawcy(textBox1.Text))
             {
                 WyswietlDaneZleceniodawcy(_Zlecenie.Dane);
-                SprawdzInnegoPlatnika();
             }
             else
             {
@@ -207,7 +207,7 @@ namespace DotBase
             textBox1.Text = textBox2.Text = textBox3.Text = textBox4.Text = textBox5.Text = rabatBox.Text =
             textBox6.Text = textBox7.Text = textBox8.Text = textBox10.Text = emailTextBox.Text = "";
             nrZleceniaKlientaText.Text = "";
-            nazwaPlatnika.Text = "";
+            nazwaPlatnikaBox.Text = "";
             adresPlatnika.Text = "";
             nipPlatnika.Text = "";
 
@@ -232,7 +232,7 @@ namespace DotBase
             textBox2.Text = textBox3.Text = textBox4.Text = textBox5.Text = textBox6.Text = emailTextBox.Text = "";
             rabatBox.Text = "";
             comboBox1.Text = "";
-            nazwaPlatnika.Text = "";
+            nazwaPlatnikaBox.Text = "";
             adresPlatnika.Text = "";
             nipPlatnika.Text = "";
             jestIFJ.Checked = false;
@@ -262,7 +262,6 @@ namespace DotBase
             {
                 _Zlecenie.WypelnijDaneZleceniodawcy();
                 WyswietlDaneZleceniodawcy(_Zlecenie.Dane);
-                SprawdzInnegoPlatnika();
             }
             else
             {
@@ -270,13 +269,6 @@ namespace DotBase
             }
         }
 
-        private void SprawdzInnegoPlatnika()
-        {
-            innyPlatnik.Checked = (nazwaPlatnika.Text.Trim() != "" && nazwaPlatnika.Text.Trim() != "-")
-                || (adresPlatnika.Text.Trim() != "" && adresPlatnika.Text.Trim() != "-")
-                || (nipPlatnika.Text.Trim() != "" && nipPlatnika.Text.Trim() != "-");
-        }
-        
         //--------------------------------------------------------------------
         private void WlaczTrybDodawaniaZlecenia()
         //--------------------------------------------------------------------
@@ -327,14 +319,13 @@ namespace DotBase
             textBox2.Text = textBox3.Text = textBox4.Text = emailTextBox.Text = textBox5.Text = textBox6.Text = "-";
             rabatBox.Text = "";
             jestIFJ.Checked = false;
-            nazwaPlatnika.Text = "";
-            adresPlatnika.Text = "";
-            nipPlatnika.Text = "";
-            innyPlatnik.Checked = false;
-            grupaPlatnika.Visible = false;
-            nazwaPlatnika.Enabled = true;
-            adresPlatnika.Enabled = true;
-            nipPlatnika.Enabled = true;
+
+            innyPlatnik.Enabled = false;
+            nazwaPlatnikaBox.Enabled = false;
+            nazwaPlatnikaList.Enabled = false;
+            nazwaPlatnikaBtn.Enabled = false;
+            adresPlatnika.Enabled = false;
+            nipPlatnika.Enabled = false;
 
             button4.Text = "Zatwierdź dodanie zleceniodawcy";
 
@@ -358,9 +349,11 @@ namespace DotBase
             numericUpDown1.Enabled = numericUpDown2.Enabled = true;
             textBox2.Enabled = textBox3.Enabled = textBox4.Enabled = emailTextBox.Enabled = textBox5.Enabled = textBox6.Enabled = jestIFJ.Enabled = rabatBox.Enabled = false;
 
-            nazwaPlatnika.Enabled = false;
-            adresPlatnika.Enabled = false;
-            nipPlatnika.Enabled = false;
+            nazwaPlatnikaBox.Enabled = true;
+            nazwaPlatnikaList.Enabled = true;
+            nazwaPlatnikaBtn.Enabled = true;
+            adresPlatnika.Enabled = true;
+            nipPlatnika.Enabled = true;
             
             button4.Text = "Dodaj nowego zleceniodawcę";
 
@@ -377,9 +370,11 @@ namespace DotBase
 
             textBox2.Enabled = textBox3.Enabled = rabatBox.Enabled =
             textBox4.Enabled = textBox5.Enabled = emailTextBox.Enabled = textBox6.Enabled = jestIFJ.Enabled = true;
-            nazwaPlatnika.Enabled = true;
-            adresPlatnika.Enabled = true;
-            nipPlatnika.Enabled = true;
+            nazwaPlatnikaBox.Enabled = false;
+            nazwaPlatnikaList.Enabled = false;
+            nazwaPlatnikaBtn.Enabled = false;
+            adresPlatnika.Enabled = false;
+            nipPlatnika.Enabled = false;
         }
 
         //--------------------------------------------------------------------
@@ -393,9 +388,11 @@ namespace DotBase
 
             textBox2.Enabled = textBox3.Enabled = textBox4.Enabled = emailTextBox.Enabled =
             textBox5.Enabled = textBox6.Enabled = jestIFJ.Enabled = rabatBox.Enabled = false;
-            nazwaPlatnika.Enabled = false;
-            adresPlatnika.Enabled = false;
-            nipPlatnika.Enabled = false;
+            nazwaPlatnikaBox.Enabled = true;
+            nazwaPlatnikaList.Enabled = true;
+            nazwaPlatnikaBtn.Enabled = true;
+            adresPlatnika.Enabled = true;
+            nipPlatnika.Enabled = true;
         }
 
         //--------------------------------------------------------------------
@@ -411,7 +408,10 @@ namespace DotBase
             textBox10.Text = dane.OsobaPrzyjmujaca;
             nrZleceniaKlientaText.Text = dane.NrZleceniaKlienta;
             checkBox1.Checked = dane.Ekspress;
-            innyPlatnik.Checked = dane.InnyPlatnik;
+            innyPlatnik.Checked = dane.NazwaPlatnika.Trim() != "";
+            nazwaPlatnikaBox.Text = innyPlatnik.Checked ? dane.NazwaPlatnika : "";
+            adresPlatnika.Text = innyPlatnik.Checked ? dane.AdresPlatnika : "";
+            nipPlatnika.Text = innyPlatnik.Checked ? dane.NipPlatnika : "";
         }
 
         //--------------------------------------------------------------------
@@ -442,9 +442,6 @@ namespace DotBase
             emailTextBox.Text = dane.ZleceniodawcaInfo.Email;
             textBox5.Text = dane.ZleceniodawcaInfo.OsobaKontaktowa;
             textBox6.Text = dane.ZleceniodawcaInfo.Nip;
-            nazwaPlatnika.Text = dane.ZleceniodawcaInfo.NazwaPlatnika;
-            adresPlatnika.Text = dane.ZleceniodawcaInfo.AdresPlatnika;
-            nipPlatnika.Text = dane.ZleceniodawcaInfo.NipPlatnika;
             jestIFJ.Checked = dane.ZleceniodawcaInfo.Ifj;
             rabatBox.Text = dane.ZleceniodawcaInfo.Rabat;
         }
@@ -486,7 +483,9 @@ namespace DotBase
             daneDoZapisu.NrZleceniaKlienta = nrZleceniaKlientaText.Text;
             daneDoZapisu.Ekspress = checkBox1.Checked;
             daneDoZapisu.Nip = textBox6.Text;
-            daneDoZapisu.InnyPlatnik = innyPlatnik.Checked;
+            daneDoZapisu.NazwaPlatnika = innyPlatnik.Checked ? nazwaPlatnikaBox.Text : "";
+            daneDoZapisu.AdresPlatnika = innyPlatnik.Checked ? adresPlatnika.Text : "";
+            daneDoZapisu.NipPlatnika = innyPlatnik.Checked ? nipPlatnika.Text : "";
             daneDoZapisu.Nr_rejestru = (int)numericUpDown2.Value;
 
             _Zlecenie.ZapiszDane(daneDoZapisu);
@@ -548,7 +547,9 @@ namespace DotBase
             daneZlecenia.OsobaPrzyjmujaca = textBox10.Text;
             daneZlecenia.NrZleceniaKlienta = nrZleceniaKlientaText.Text;
             daneZlecenia.Ekspress = checkBox1.Checked;
-            daneZlecenia.InnyPlatnik = innyPlatnik.Checked;
+            daneZlecenia.NazwaPlatnika = innyPlatnik.Checked ? nazwaPlatnikaBox.Text : "";
+            daneZlecenia.AdresPlatnika = innyPlatnik.Checked ? adresPlatnika.Text : "";
+            daneZlecenia.NipPlatnika = innyPlatnik.Checked ? nipPlatnika.Text : "";
 
             _Zlecenie.DodajZlecenie(ref daneZlecenia);
             _Zlecenie.ZaladujWszystkieDane((int)numericUpDown1.Value);
@@ -579,7 +580,7 @@ namespace DotBase
             }
 
             DaneZleceniodawcy zleceniodawca = new DaneZleceniodawcy(textBox2.Text, textBox3.Text, int.Parse(textBox1.Text), comboBox1.Text, textBox6.Text, textBox5.Text, textBox4.Text, emailTextBox.Text,
-                nazwaPlatnika.Text, adresPlatnika.Text, nipPlatnika.Text, jestIFJ.Checked, rabatBox.Text);
+                jestIFJ.Checked, rabatBox.Text);
 
             if (false == _Zlecenie.DodajZleceniodawce(ref zleceniodawca))
             {
@@ -598,7 +599,7 @@ namespace DotBase
                 return false;
 
             DaneZleceniodawcy zleceniodawca = new DaneZleceniodawcy(textBox2.Text, textBox3.Text, int.Parse(textBox1.Text), comboBox1.Text, textBox6.Text, textBox5.Text, textBox4.Text, emailTextBox.Text,
-                nazwaPlatnika.Text, adresPlatnika.Text, nipPlatnika.Text, jestIFJ.Checked, rabatBox.Text);
+                jestIFJ.Checked, rabatBox.Text);
 
             if (false == _Zlecenie.EdytujZleceniodawce(ref zleceniodawca))
                 return false;
@@ -646,7 +647,7 @@ namespace DotBase
             MeldunekModel model = new MeldunekModel();
             model.adresZleceniodawcy = textBox2.Text;
             model.nip = (nipPlatnika.Text.Trim() != "" && innyPlatnik.Checked) ? nipPlatnika.Text : textBox6.Text;
-            model.nazwaPlatnika = nazwaPlatnika.Text;
+            model.nazwaPlatnika = nazwaPlatnikaBox.Text;
             model.adresPlatnika = adresPlatnika.Text;
             model.innyPlatnik = innyPlatnik.Checked;
             model.nrZleceniaKlienta = nrZleceniaKlientaText.Text;
@@ -687,6 +688,156 @@ namespace DotBase
             }
         }
 
+        class PlatnikHint
+        {
+            public string nazwa;
+            public string adres;
+            public string nip;
+            public override string ToString()
+            {
+                return nazwa;
+            }
+        }
+
+        private PlatnikHint[] podpowiedziPlatnika(string text)
+        {
+            List<PlatnikHint> list = new List<PlatnikHint>();
+
+            var like = "%" + _BazaDanych.LikeEscape(text) + "%";
+            var tabela = _BazaDanych.TworzTabeleDanych(@"
+                SELECT Zleceniodawca, NIP, Adres FROM Zleceniodawca
+                WHERE Zleceniodawca Like ? OR Adres Like ? OR email Like ? OR Uwagi Like ? OR NIP Like ?
+                ORDER BY Switch(Zleceniodawca Like ?, 4, NIP Like ?, 3, Adres Like ?, 2, Uwagi Like ?, 1, True, 0) DESC
+                ", like, like, like, like, like, like, like, like, like);
+
+            HashSet<string> added = new HashSet<string>();
+
+            foreach (DataRow row in tabela.Rows)
+            {
+                var a = new PlatnikHint();
+                a.nazwa = row.Field<string>("Zleceniodawca");
+                a.adres = row.Field<string>("Adres");
+                a.nip = row.Field<string>("NIP");
+                if (a.nazwa == null)
+                {
+                    continue;
+                }
+                if (a.adres == null)
+                {
+                    a.adres = "";
+                }
+                if (a.nip == null)
+                {
+                    a.nip = "";
+                }
+                added.Add(a.nazwa);
+                list.Add(a);
+            }
+
+            tabela = _BazaDanych.TworzTabeleDanych(@"
+                SELECT Nazwa_platnika, FIRST(Adres_platnika) as Adres, FIRST(NIP_platnika) as NIP FROM Zlecenia
+                WHERE Nazwa_platnika <> """" AND (Nazwa_platnika Like ? OR Adres_platnika Like ? OR NIP_platnika Like ?)
+                GROUP BY Nazwa_platnika
+                ORDER BY Nazwa_platnika
+            ", like, like, like);
+
+            foreach (DataRow row in tabela.Rows)
+            {
+                var a = new PlatnikHint();
+                a.nazwa = row.Field<string>("Nazwa_platnika");
+                a.adres = row.Field<string>("Adres");
+                a.nip = row.Field<string>("NIP");
+                if (a.nazwa == null)
+                {
+                    continue;
+                }
+                if (a.adres == null)
+                {
+                    a.adres = "";
+                }
+                if (a.nip == null)
+                {
+                    a.nip = "";
+                }
+                if (added.Contains(a.nazwa))
+                {
+                    continue;
+                }
+                added.Add(a.nazwa);
+                list.Add(a);
+            }
+
+           if (list.Count == 0)
+            {
+                var a = new PlatnikHint();
+                a.nazwa = "Brak wyników wyszukiwania.";
+                a.adres = null;
+                a.nip = null;
+                list.Add(a);
+            }
+
+            return list.ToArray();
+        }
+
+        private void odswierzPodpowiedziPlatnika()
+        {
+            PlatnikHint[] list = podpowiedziPlatnika(nazwaPlatnikaBox.Text.Trim());
+            nazwaPlatnikaList.BeginUpdate();
+            nazwaPlatnikaList.Items.Clear();
+            nazwaPlatnikaList.Items.AddRange(list);
+            nazwaPlatnikaList.EndUpdate();
+        }
+
+        private void nazwaPlatnikaList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (nazwaPlatnikaList.SelectedIndex >= 0)
+            {
+                PlatnikHint platnik = nazwaPlatnikaList.SelectedItem as PlatnikHint;
+                if (platnik.adres == null)
+                {
+                    return;
+                }
+                adresPlatnika.Text = platnik.adres;
+                nipPlatnika.Text = platnik.nip;
+                nazwaPlatnikaBox.Text = platnik.nazwa;
+                adresPlatnika.Focus();
+            }
+        }
+
+        private void nazwaPlatnikaBtn_Click(object sender, EventArgs e)
+        {
+            odswierzPodpowiedziPlatnika();
+            nazwaPlatnikaBox.Focus();
+            nazwaPlatnikaList.DroppedDown = true;
+        }
+
+        private void nazwaPlatnikaBox_TextChanged(object sender, EventArgs e)
+        {
+            odswierzPodpowiedziPlatnika();
+        }
+
+        private void nazwaPlatnikaBox_Enter(object sender, EventArgs e)
+        {
+            if (!nazwaPlatnikaTimer.Enabled)
+            {
+                nazwaPlatnikaTimer.Start();
+            }
+        }
+
+        private void nazwaPlatnikaTimer_Tick(object sender, EventArgs e)
+        {
+            nazwaPlatnikaTimer.Stop();
+            odswierzPodpowiedziPlatnika();
+            nazwaPlatnikaBox.Focus();
+            nazwaPlatnikaList.DroppedDown = true;
+        }
+
+        private void nazwaPlatnikaBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            Cursor = Cursors.Arrow;
+            odswierzPodpowiedziPlatnika();
+            nazwaPlatnikaList.DroppedDown = true;
+        }
 
     }
 }

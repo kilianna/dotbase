@@ -997,6 +997,11 @@ namespace DotBase
             public Szablon_Zlecenia DELETE() { _DELETE(); return this; }
             public Szablon_Zlecenia WHERE() { _WHERE(); return this; }
             public Szablon_Zlecenia INFO(string text) { _INFO(text); return this; }
+            public Szablon_Zlecenia Adres_platnika(string value)
+            {
+                SetField("Adres_platnika", value, OleDbType.WChar);
+                return this;
+            }
             public Szablon_Zlecenia Data_przyjecia(DateTime value)
             {
                 SetField("Data_przyjecia", value, OleDbType.Date);
@@ -1032,9 +1037,14 @@ namespace DotBase
                 SetField("ID_zleceniodawcy", value, OleDbType.Integer);
                 return this;
             }
-            public Szablon_Zlecenia Inny_platnik(bool value)
+            public Szablon_Zlecenia Nazwa_platnika(string value)
             {
-                SetField("Inny_platnik", value, OleDbType.Boolean);
+                SetField("Nazwa_platnika", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Zlecenia NIP_platnika(string value)
+            {
+                SetField("NIP_platnika", value, OleDbType.WChar);
                 return this;
             }
             public Szablon_Zlecenia Nr_zlecenia_klienta(string value)
@@ -1071,11 +1081,6 @@ namespace DotBase
                 SetField("Adres", value, OleDbType.WChar);
                 return this;
             }
-            public Szablon_Zleceniodawca Adres_platnika(string value)
-            {
-                SetField("Adres_platnika", value, OleDbType.WChar);
-                return this;
-            }
             public Szablon_Zleceniodawca email(string value)
             {
                 SetField("email", value, OleDbType.WChar);
@@ -1096,19 +1101,9 @@ namespace DotBase
                 SetField("IFJ", value, OleDbType.Boolean);
                 return this;
             }
-            public Szablon_Zleceniodawca Nazwa_platnika(string value)
-            {
-                SetField("Nazwa_platnika", value, OleDbType.WChar);
-                return this;
-            }
             public Szablon_Zleceniodawca NIP(string value)
             {
                 SetField("NIP", value, OleDbType.WChar);
-                return this;
-            }
-            public Szablon_Zleceniodawca NIP_platnika(string value)
-            {
-                SetField("NIP_platnika", value, OleDbType.WChar);
                 return this;
             }
             public Szablon_Zleceniodawca Osoba_kontaktowa(string value)
