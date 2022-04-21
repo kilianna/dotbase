@@ -959,7 +959,8 @@ namespace DotBase
             foreach (DataRow row in table.Rows)
             {
                 string tabela = row.Field<string>("TABLE_NAME");
-                if (tabela.StartsWith("~") || tabela.StartsWith("MSys")) continue;
+                string typTabeli = row.Field<string>("TABLE_TYPE");
+                if (tabela.StartsWith("~") || tabela.StartsWith("MSys") || typTabeli != "TABLE") continue;
                 szablon += String.Format(@"
         public class Szablon_{0} : Tabela
         {{
@@ -1020,6 +1021,95 @@ namespace DotBase
                 File.WriteAllText(path, szablon);
             }
 
+            StringBuilder sb = new StringBuilder();
+            foreach (DataRow row in table.Rows)
+            {
+                string tabela = row.Field<string>("TABLE_NAME");
+                string typTabeli = row.Field<string>("TABLE_TYPE");
+                if (tabela.StartsWith("~") || tabela.StartsWith("MSys") || typTabeli != "TABLE") continue;
+                sb.AppendLine("");
+                sb.AppendLine("---------------------------------------------------------------------");
+                sb.AppendLine(String.Format(" {0}", tabela));
+                sb.AppendLine("---------------------------------------------------------------------");
+                DataTable schemaTable = _Polaczenie.GetOleDbSchemaTable(System.Data.OleDb.OleDbSchemaGuid.Columns,new object[] { null, null, tabela, null });
+                List<string> strRows = new List<string>();
+                foreach (DataRow row2 in schemaTable.Rows)
+                {
+                    StringBuilder sb2 = new StringBuilder();
+                    var type = (OleDbType)row2.Field<int>("DATA_TYPE");
+                    var pos = row2.Field<long>("ORDINAL_POSITION");
+                    sb2.AppendFormat("    {0}.{1}, typ {2}",
+                        row2.Field<string>("TABLE_NAME"),
+                        row2.Field<string>("COLUMN_NAME"),
+                        type.ToString());
+                    if (row2.Field<bool>("COLUMN_HASDEFAULT"))
+                    {
+                        prostePoleSzablonu(row2, sb2, "domyślnie", "COLUMN_DEFAULT");
+                    }
+                    if (type != OleDbType.Boolean)
+                    {
+                        prostePoleSzablonu(row2, sb2, "długość", "CHARACTER_MAXIMUM_LENGTH");
+                    }
+                    prostePoleSzablonu(row2, sb2, "precyzja", "NUMERIC_PRECISION");
+                    prostePoleSzablonu(row2, sb2, "precyzja", "DATETIME_PRECISION");
+                    prostePoleSzablonu(row2, sb2, "skala", "NUMERIC_SCALE");
+                    prostePoleSzablonu(row2, sb2, "niewymagane", "IS_NULLABLE");
+                    prostePoleSzablonu(row2, sb2, "pozycja", "ORDINAL_POSITION");
+                    sb2.AppendFormat(", flagi {0}", flagiSzablonu(row2.Field<long>("COLUMN_FLAGS")));
+                    prostePoleSzablonu(row2, sb2, "opis", "DESCRIPTION");
+                    while (strRows.Count <= pos)
+                    {
+                        strRows.Add("");
+                    }
+                    strRows[(int)pos] = sb2.ToString();
+                }
+                sb.AppendLine(string.Join("\r\n", strRows));
+            }
+            szablon = sb.ToString();
+
+            path = (new Uri(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase) + @"\..\..\SzablonBazy.txt")).LocalPath;
+            write = true;
+            try
+            {
+                string old = File.ReadAllText(path);
+                write = (old != szablon);
+            }
+            catch (Exception) { };
+            if (write)
+            {
+                File.WriteAllText(path, szablon);
+            }
+
+        }
+
+        private string flagiSzablonu(long p)
+        {
+            string result = "";
+            do
+            {
+                var x = Convert.ToString((p & 0xF) | 0x10, 2).Substring(1).Replace('0', '-').Replace('1', 'X');
+                result += " " + x;
+                p >>= 4;
+            } while (p != 0);
+            return result.Substring(1);
+        }
+
+        private void prostePoleSzablonu(DataRow row2, StringBuilder sb, string format, string name)
+        {
+            var value = row2.Field<object>(name);
+            var fmt = ", " + format + " {0}";
+            if (value == null)
+            {
+                return;
+            }
+            if (value is bool)
+            {
+                sb.AppendFormat(fmt, (bool)value ? "Tak" : "Nie");
+            }
+            else
+            {
+                sb.AppendFormat(fmt, value.ToString());
+            }
         }
 
 #endif

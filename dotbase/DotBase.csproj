@@ -518,6 +518,7 @@
     <Content Include="PathConfig.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="SzablonBazy.txt" />
     <None Include="Resources\GitVersion.txt" />
     <Content Include="SwiadectwoWydrukTeksty.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

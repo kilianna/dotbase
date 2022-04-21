@@ -1,0 +1,308 @@
+
+---------------------------------------------------------------------
+ Atesty_zrodel
+---------------------------------------------------------------------
+
+    Atesty_zrodel.ID_atestu, typ SmallInt, domyślnie 0, precyzja 5, niewymagane Tak, pozycja 1, flagi X-X- -XXX
+    Atesty_zrodel.Emisja_powierzchniowa, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 2, flagi X-X- -XXX
+    Atesty_zrodel.Data_wzorcowania, typ Date, precyzja 0, niewymagane Tak, pozycja 3, flagi X-X- -XXX
+    Atesty_zrodel.ID_zrodla, typ SmallInt, domyślnie 0, precyzja 5, niewymagane Tak, pozycja 4, flagi X-X- -XXX
+    Atesty_zrodel.Niepewnosc, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 5, flagi X-X- -XXX
+
+---------------------------------------------------------------------
+ Budzetniepewnosci
+---------------------------------------------------------------------
+
+    Budzetniepewnosci.Wielkosc, typ WChar, długość 10, niewymagane Tak, pozycja 1, flagi X-X- -XX-
+    Budzetniepewnosci.wartosc, typ Double, precyzja 15, niewymagane Tak, pozycja 2, flagi X-X- -XXX
+    Budzetniepewnosci.Uwagi, typ WChar, długość 255, niewymagane Tak, pozycja 3, flagi X-X- -XX-
+
+---------------------------------------------------------------------
+ Cennik
+---------------------------------------------------------------------
+
+    Cennik.Usluga, typ WChar, długość 50, niewymagane Tak, pozycja 1, flagi X-X- -XX-
+    Cennik.Cena, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 2, flagi X-X- -XXX
+
+---------------------------------------------------------------------
+ Dozymetry
+---------------------------------------------------------------------
+
+    Dozymetry.ID_dozymetru, typ Integer, precyzja 10, niewymagane Nie, pozycja 1, flagi X-X- -X-X
+    Dozymetry.Typ, typ WChar, długość 50, niewymagane Tak, pozycja 2, flagi X-X- -XX-
+    Dozymetry.Nr_fabryczny, typ WChar, długość 50, niewymagane Tak, pozycja 3, flagi X-X- -XX-
+    Dozymetry.Rok_produkcji, typ WChar, długość 50, niewymagane Tak, pozycja 4, flagi X-X- -XX-
+    Dozymetry.Producent, typ WChar, długość 100, niewymagane Tak, pozycja 5, flagi X-X- -XX-
+    Dozymetry.Nazwa, typ WChar, długość 255, niewymagane Tak, pozycja 6, flagi X-X- -XX-
+
+---------------------------------------------------------------------
+ Hasla
+---------------------------------------------------------------------
+
+    Hasla.Login, typ WChar, długość 50, niewymagane Tak, pozycja 1, flagi X-X- -XX-
+    Hasla.Haslo, typ WChar, długość 50, niewymagane Tak, pozycja 2, flagi X-X- -XX-
+
+---------------------------------------------------------------------
+ Jednostki
+---------------------------------------------------------------------
+
+    Jednostki.ID_jednostki, typ Integer, precyzja 10, niewymagane Nie, pozycja 1, flagi X-X- -X-X
+    Jednostki.Jednostka, typ WChar, długość 50, niewymagane Tak, pozycja 2, flagi X-X- -XX-, opis Jednostka pomiarowa
+    Jednostki.Przelicznik, typ Single, domyślnie 1, precyzja 7, niewymagane Tak, pozycja 3, flagi X-X- -XXX, opis Przelicznik dla każdej jednostki z uGy/h
+    Jednostki.Wielkosc_fizyczna, typ WChar, długość 50, niewymagane Tak, pozycja 4, flagi X-X- -XX-
+    Jednostki.SI, typ Boolean, domyślnie No, niewymagane Nie, pozycja 5, flagi X-X- -X-X
+
+---------------------------------------------------------------------
+ Karta_przyjecia
+---------------------------------------------------------------------
+
+    Karta_przyjecia.ID_karty, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 1, flagi X-X- -XXX
+    Karta_przyjecia.ID_dozymetru, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 2, flagi X-X- -XXX
+    Karta_przyjecia.Akcesoria, typ WChar, długość 250, niewymagane Tak, pozycja 3, flagi X-X- -XX-
+    Karta_przyjecia.Test_na_skazenia, typ WChar, długość 50, niewymagane Tak, pozycja 4, flagi X-X- -XX-
+    Karta_przyjecia.Uwagi, typ WChar, długość 255, niewymagane Tak, pozycja 5, flagi X-X- -XX-
+    Karta_przyjecia.Rok, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 6, flagi X-X- -XXX
+    Karta_przyjecia.Stront_slaby, typ Boolean, niewymagane Nie, pozycja 7, flagi X-X- -X-X
+    Karta_przyjecia.Stront_silny, typ Boolean, niewymagane Nie, pozycja 8, flagi X-X- -X-X
+    Karta_przyjecia.Wegiel_silny, typ Boolean, niewymagane Nie, pozycja 9, flagi X-X- -X-X
+    Karta_przyjecia.Wegiel_slaby, typ Boolean, niewymagane Nie, pozycja 10, flagi X-X- -X-X
+    Karta_przyjecia.Pluton, typ Boolean, niewymagane Nie, pozycja 11, flagi X-X- -X-X
+    Karta_przyjecia.Chlor, typ Boolean, niewymagane Nie, pozycja 12, flagi X-X- -X-X
+    Karta_przyjecia.Ameryk, typ Boolean, niewymagane Nie, pozycja 13, flagi X-X- -X-X
+    Karta_przyjecia.Moc_dawki, typ Boolean, niewymagane Nie, pozycja 14, flagi X-X- -X-X
+    Karta_przyjecia.Dawka, typ Boolean, niewymagane Nie, pozycja 15, flagi X-X- -X-X
+    Karta_przyjecia.Syg_mocy_dawki, typ Boolean, niewymagane Nie, pozycja 16, flagi X-X- -X-X
+    Karta_przyjecia.Syg_dawki, typ Boolean, niewymagane Nie, pozycja 17, flagi X-X- -X-X
+    Karta_przyjecia.ID_zlecenia, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 18, flagi X-X- -XXX
+    Karta_przyjecia.Uszkodzony, typ Boolean, niewymagane Nie, pozycja 19, flagi X-X- -X-X
+    Karta_przyjecia.Sprawdzenie, typ Boolean, domyślnie No, niewymagane Nie, pozycja 20, flagi X-X- -X-X
+    Karta_przyjecia.Wykonano, typ Boolean, niewymagane Nie, pozycja 21, flagi X-X- -X-X
+    Karta_przyjecia.Cena, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 22, flagi X-X- -XXX
+    Karta_przyjecia.Nr_pisma, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 23, flagi X-X- -XXX
+    Karta_przyjecia.Stront_najsilniejszy, typ Boolean, niewymagane Nie, pozycja 24, flagi X-X- -X-X
+
+---------------------------------------------------------------------
+ Pomiary_cez
+---------------------------------------------------------------------
+
+    Pomiary_cez.ID_wzorcowania, typ Integer, precyzja 10, niewymagane Tak, pozycja 1, flagi X-X- -XXX
+    Pomiary_cez.Odleglosc, typ Double, precyzja 15, niewymagane Tak, pozycja 2, flagi X-X- -XXX
+    Pomiary_cez.ID_zrodla, typ SmallInt, precyzja 5, niewymagane Tak, pozycja 3, flagi X-X- -XXX
+    Pomiary_cez.Wskazanie, typ Double, precyzja 15, niewymagane Tak, pozycja 4, flagi X-X- -XXX
+    Pomiary_cez.Wahanie, typ Double, precyzja 15, niewymagane Tak, pozycja 5, flagi X-X- -XXX
+    Pomiary_cez.Zakres, typ WChar, długość 50, niewymagane Tak, pozycja 6, flagi X-X- -XX-
+    Pomiary_cez.Dolaczyc, typ Boolean, niewymagane Nie, pozycja 7, flagi X-X- -X-X
+
+---------------------------------------------------------------------
+ Pomiary_dawka
+---------------------------------------------------------------------
+
+    Pomiary_dawka.ID_wzorcowania, typ Integer, precyzja 10, niewymagane Tak, pozycja 1, flagi X-X- -XXX
+    Pomiary_dawka.Czas, typ Double, precyzja 15, niewymagane Tak, pozycja 2, flagi X-X- -XXX
+    Pomiary_dawka.Wskazanie, typ Double, precyzja 15, niewymagane Tak, pozycja 3, flagi X-X- -XXX
+    Pomiary_dawka.Dolaczyc, typ Boolean, niewymagane Nie, pozycja 4, flagi X-X- -X-X
+    Pomiary_dawka.Wartosc_wzorcowa, typ Double, precyzja 15, niewymagane Tak, pozycja 5, flagi X-X- -XXX
+
+---------------------------------------------------------------------
+ Pomiary_powierzchniowe
+---------------------------------------------------------------------
+
+    Pomiary_powierzchniowe.ID_pomiaru, typ Integer, precyzja 10, niewymagane Nie, pozycja 1, flagi X-X- -X-X
+    Pomiary_powierzchniowe.Pomiar, typ Double, precyzja 15, niewymagane Tak, pozycja 2, flagi X-X- -XXX
+    Pomiary_powierzchniowe.ID_wzorcowania, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 3, flagi X-X- -XXX
+    Pomiary_powierzchniowe.Tlo, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 4, flagi X-X- -XXX
+
+---------------------------------------------------------------------
+ Pomiary_wzorcowe
+---------------------------------------------------------------------
+
+    Pomiary_wzorcowe.Odleglosc, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 1, flagi X-X- -XXX
+    Pomiary_wzorcowe.ID_zrodla, typ SmallInt, domyślnie 0, precyzja 5, niewymagane Tak, pozycja 2, flagi X-X- -XXX
+    Pomiary_wzorcowe.Moc_kermy, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 3, flagi X-X- -XXX
+    Pomiary_wzorcowe.ID_protokolu, typ SmallInt, domyślnie 0, precyzja 5, niewymagane Tak, pozycja 4, flagi X-X- -XXX
+    Pomiary_wzorcowe.Niepewnosc, typ Double, domyślnie 0.064, precyzja 15, niewymagane Tak, pozycja 5, flagi X-X- -XXX
+
+---------------------------------------------------------------------
+ Protokoly_kalibracji_lawy
+---------------------------------------------------------------------
+
+    Protokoly_kalibracji_lawy.Nazwa, typ WChar, długość 50, niewymagane Tak, pozycja 1, flagi X-X- -XX-
+    Protokoly_kalibracji_lawy.Data_kalibracji, typ Date, precyzja 0, niewymagane Tak, pozycja 2, flagi X-X- -XXX
+    Protokoly_kalibracji_lawy.ID_protokolu, typ SmallInt, domyślnie 0, precyzja 5, niewymagane Tak, pozycja 3, flagi X-X- -XXX
+
+---------------------------------------------------------------------
+ Sondy
+---------------------------------------------------------------------
+
+    Sondy.ID_sondy, typ Integer, precyzja 10, niewymagane Nie, pozycja 1, flagi X-X- -X-X
+    Sondy.Typ, typ WChar, domyślnie "Detektor własny", długość 50, niewymagane Tak, pozycja 2, flagi X-X- -XX-
+    Sondy.Nr_fabryczny, typ WChar, domyślnie "-", długość 50, niewymagane Tak, pozycja 3, flagi X-X- -XX-
+    Sondy.ID_dozymetru, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 4, flagi X-X- -XXX
+
+---------------------------------------------------------------------
+ Stale
+---------------------------------------------------------------------
+
+    Stale.Nazwa, typ WChar, długość 30, niewymagane Tak, pozycja 1, flagi X-X- -XX-
+    Stale.Wartosc, typ Double, precyzja 15, niewymagane Tak, pozycja 2, flagi X-X- -XXX
+    Stale.Uwagi, typ WChar, długość 255, niewymagane Tak, pozycja 3, flagi X-X- -XX-
+
+---------------------------------------------------------------------
+ Swiadectwo
+---------------------------------------------------------------------
+
+    Swiadectwo.Id_karty, typ Integer, domyślnie 0, precyzja 10, niewymagane Nie, pozycja 1, flagi X-X- -X-X
+    Swiadectwo.Data_wystawienia, typ Date, precyzja 0, niewymagane Tak, pozycja 2, flagi X-X- -XXX
+    Swiadectwo.Autoryzowal, typ WChar, długość 50, niewymagane Tak, pozycja 3, flagi X-X- -XX-
+    Swiadectwo.Uwaga, typ WChar, długość 0, niewymagane Tak, pozycja 4, flagi X-X- XXX-
+    Swiadectwo.Waznosc_dwa_lata, typ Boolean, niewymagane Nie, pozycja 5, flagi X-X- -X-X
+    Swiadectwo.Poprawa, typ Boolean, domyślnie No, niewymagane Nie, pozycja 6, flagi X-X- -X-X
+    Swiadectwo.Data_wykonania, typ Date, precyzja 0, niewymagane Tak, pozycja 7, flagi X-X- -XXX
+    Swiadectwo.UwagaMD, typ WChar, długość 0, niewymagane Tak, pozycja 8, flagi X-X- XXX-
+    Swiadectwo.UwagaD, typ WChar, długość 0, niewymagane Tak, pozycja 9, flagi X-X- XXX-
+    Swiadectwo.UwagaS, typ WChar, długość 0, niewymagane Tak, pozycja 10, flagi X-X- XXX-
+    Swiadectwo.UwagaSMD, typ WChar, długość 0, niewymagane Tak, pozycja 11, flagi X-X- XXX-
+    Swiadectwo.UwagaSD, typ WChar, długość 0, niewymagane Tak, pozycja 12, flagi X-X- XXX-
+
+---------------------------------------------------------------------
+ Sygnalizacja
+---------------------------------------------------------------------
+
+    Sygnalizacja.ID_wzorcowania, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 1, flagi X-X- -XXX
+    Sygnalizacja.Prog, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 2, flagi X-X- -XXX
+    Sygnalizacja.Niepewnosc, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 3, flagi X-X- -XXX
+    Sygnalizacja.Wartosc_zmierzona, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 4, flagi X-X- -XXX
+    Sygnalizacja.Uwagi, typ WChar, długość 0, niewymagane Tak, pozycja 5, flagi X-X- XXX-
+    Sygnalizacja.odleglosc1, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 6, flagi X-X- -XXX
+    Sygnalizacja.odleglosc2, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 7, flagi X-X- -XXX
+    Sygnalizacja.zrodlo1, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 8, flagi X-X- -XXX
+    Sygnalizacja.zrodlo2, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 9, flagi X-X- -XXX
+
+---------------------------------------------------------------------
+ Sygnalizacja_dawka
+---------------------------------------------------------------------
+
+    Sygnalizacja_dawka.ID_wzorcowania, typ Integer, precyzja 10, niewymagane Tak, pozycja 1, flagi X-X- -XXX
+    Sygnalizacja_dawka.Prog, typ Double, precyzja 15, niewymagane Tak, pozycja 2, flagi X-X- -XXX
+    Sygnalizacja_dawka.Wartosc_wzorcowa, typ Double, precyzja 15, niewymagane Tak, pozycja 3, flagi X-X- -XXX
+    Sygnalizacja_dawka.Wartosc_zmierzona, typ Double, precyzja 15, niewymagane Tak, pozycja 4, flagi X-X- -XXX
+    Sygnalizacja_dawka.Odleglosc, typ Double, precyzja 15, niewymagane Tak, pozycja 5, flagi X-X- -XXX
+    Sygnalizacja_dawka.ID_zrodla, typ Integer, precyzja 10, niewymagane Tak, pozycja 6, flagi X-X- -XXX
+    Sygnalizacja_dawka.Czas_zmierzony, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 7, flagi X-X- -XXX
+
+---------------------------------------------------------------------
+ Wyniki_dawka
+---------------------------------------------------------------------
+
+    Wyniki_dawka.ID_wzorcowania, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 1, flagi X-X- -XXX
+    Wyniki_dawka.ID_zrodla, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 2, flagi X-X- -XXX
+    Wyniki_dawka.Odleglosc, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 3, flagi X-X- -XXX
+    Wyniki_dawka.Wspolczynnik, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 4, flagi X-X- -XXX
+    Wyniki_dawka.Niepewnosc, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 5, flagi X-X- -XXX
+    Wyniki_dawka.Zakres, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 6, flagi X-X- -XXX
+    Wyniki_dawka.Wielkosc_fizyczna, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 7, flagi X-X- -XXX
+
+---------------------------------------------------------------------
+ wyniki_moc_dawki
+---------------------------------------------------------------------
+
+    wyniki_moc_dawki.ID_wzorcowania, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 1, flagi X-X- -XXX
+    wyniki_moc_dawki.ZAKRES, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 2, flagi X-X- -XXX
+    wyniki_moc_dawki.Wspolczynnik, typ Double, precyzja 15, niewymagane Tak, pozycja 3, flagi X-X- -XXX
+    wyniki_moc_dawki.Niepewnosc, typ Double, precyzja 15, niewymagane Tak, pozycja 4, flagi X-X- -XXX
+
+---------------------------------------------------------------------
+ wzorcowanie_cezem
+---------------------------------------------------------------------
+
+    wzorcowanie_cezem.ID_wzorcowania, typ Integer, precyzja 10, niewymagane Nie, pozycja 1, flagi X-X- -X-X
+    wzorcowanie_cezem.ID_arkusza, typ SmallInt, domyślnie 0, precyzja 5, niewymagane Tak, pozycja 2, flagi X-X- -XXX
+    wzorcowanie_cezem.ID_protokolu, typ SmallInt, domyślnie 0, precyzja 5, niewymagane Tak, pozycja 3, flagi X-X- -XXX
+    wzorcowanie_cezem.ID_karty, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 4, flagi X-X- -XXX
+    wzorcowanie_cezem.Data_wzorcowania, typ Date, precyzja 0, niewymagane Tak, pozycja 5, flagi X-X- -XXX
+    wzorcowanie_cezem.Cisnienie, typ Double, precyzja 15, niewymagane Tak, pozycja 6, flagi X-X- -XXX
+    wzorcowanie_cezem.Temperatura, typ Double, precyzja 15, niewymagane Tak, pozycja 7, flagi X-X- -XXX
+    wzorcowanie_cezem.wilgotnosc, typ Double, precyzja 15, niewymagane Tak, pozycja 8, flagi X-X- -XXX
+    wzorcowanie_cezem.ID_sondy, typ Integer, precyzja 10, niewymagane Tak, pozycja 9, flagi X-X- -XXX
+    wzorcowanie_cezem.Napiecie_zasilania_sondy, typ WChar, długość 50, niewymagane Tak, pozycja 10, flagi X-X- -XX-
+    wzorcowanie_cezem.Inne_nastawy, typ WChar, długość 255, niewymagane Tak, pozycja 11, flagi X-X- -XX-
+    wzorcowanie_cezem.ID_jednostki, typ Integer, domyślnie 1, precyzja 10, niewymagane Tak, pozycja 12, flagi X-X- -XXX
+    wzorcowanie_cezem.Tlo, typ WChar, długość 50, niewymagane Tak, pozycja 13, flagi X-X- -XX-
+    wzorcowanie_cezem.Uwagi, typ WChar, długość 0, niewymagane Tak, pozycja 14, flagi X-X- XXX-
+    wzorcowanie_cezem.Osoba_wzorcujaca, typ WChar, długość 50, niewymagane Tak, pozycja 15, flagi X-X- -XX-
+    wzorcowanie_cezem.Dolacz, typ Boolean, niewymagane Nie, pozycja 16, flagi X-X- -X-X
+    wzorcowanie_cezem.Osoba_sprawdzajaca, typ WChar, długość 50, niewymagane Tak, pozycja 17, flagi X-X- -XX-
+    wzorcowanie_cezem.Wielkosc_fizyczna, typ WChar, długość 50, niewymagane Tak, pozycja 18, flagi X-X- -XX-
+    wzorcowanie_cezem.Rodzaj_wzorcowania, typ WChar, długość 4, niewymagane Tak, pozycja 19, flagi X-X- -XX-
+
+---------------------------------------------------------------------
+ Wzorcowanie_zrodlami_powierzchniowymi
+---------------------------------------------------------------------
+
+    Wzorcowanie_zrodlami_powierzchniowymi.ID_wzorcowania, typ Integer, precyzja 10, niewymagane Nie, pozycja 1, flagi X-X- -X-X, opis Numer arkusza pomiarowego.
+    Wzorcowanie_zrodlami_powierzchniowymi.ID_arkusza, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 2, flagi X-X- -XXX, opis Numer arkusza pomiarowego ręcznie wprowadzany
+    Wzorcowanie_zrodlami_powierzchniowymi.ID_karty, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 3, flagi X-X- -XXX, opis Numer arkusza pomiarowego.
+    Wzorcowanie_zrodlami_powierzchniowymi.Data_wzorcowania, typ Date, precyzja 0, niewymagane Tak, pozycja 4, flagi X-X- -XXX, opis Data kalibracji.
+    Wzorcowanie_zrodlami_powierzchniowymi.Cisnienie, typ Double, precyzja 15, niewymagane Tak, pozycja 5, flagi X-X- -XXX, opis Wartość ciśnienia atmosferycznego [hPa].
+    Wzorcowanie_zrodlami_powierzchniowymi.Temperatura, typ Double, precyzja 15, niewymagane Tak, pozycja 6, flagi X-X- -XXX, opis Temperatura [C].
+    Wzorcowanie_zrodlami_powierzchniowymi.Wilgotnosc, typ Double, precyzja 15, niewymagane Tak, pozycja 7, flagi X-X- -XXX, opis Wigotnośc względna [%].
+    Wzorcowanie_zrodlami_powierzchniowymi.ID_zrodla, typ Integer, precyzja 10, niewymagane Tak, pozycja 8, flagi X-X- -XXX, opis Źródło promieniowania.
+    Wzorcowanie_zrodlami_powierzchniowymi.Mnoznik_korekcyjny, typ Double, domyślnie 1, precyzja 15, niewymagane Tak, pozycja 9, flagi X-X- -XXX
+    Wzorcowanie_zrodlami_powierzchniowymi.ID_sondy, typ Integer, precyzja 10, niewymagane Tak, pozycja 10, flagi X-X- -XXX, opis Identyfikator sondy lub numer seryjny dla kórej wykkonywane jest wzorocowanie.
+    Wzorcowanie_zrodlami_powierzchniowymi.Odleglosc_zrodlo_sonda, typ Double, precyzja 15, niewymagane Tak, pozycja 11, flagi X-X- -XXX, opis Odległość sonda-źródło [mm]
+    Wzorcowanie_zrodlami_powierzchniowymi.Podstawka, typ WChar, długość 50, niewymagane Tak, pozycja 12, flagi X-X- -XX-, opis Typ podstawki pozycjonujacej.
+    Wzorcowanie_zrodlami_powierzchniowymi.Zakres, typ WChar, długość 250, niewymagane Tak, pozycja 13, flagi X-X- -XX-, opis Zakres pomiarowy
+    Wzorcowanie_zrodlami_powierzchniowymi.Napiecie_zasilania_sondy, typ WChar, długość 50, niewymagane Tak, pozycja 14, flagi X-X- -XX-, opis Napięcie sondy [V]
+    Wzorcowanie_zrodlami_powierzchniowymi.Inne_nastawy, typ WChar, długość 250, niewymagane Tak, pozycja 15, flagi X-X- -XX-, opis Inne nastawy przyrządu
+    Wzorcowanie_zrodlami_powierzchniowymi.ID_jednostki, typ Integer, precyzja 10, niewymagane Tak, pozycja 16, flagi X-X- -XXX, opis Jednostka
+    Wzorcowanie_zrodlami_powierzchniowymi.Tlo, typ Double, precyzja 15, niewymagane Tak, pozycja 17, flagi X-X- -XXX, opis Tło własne
+    Wzorcowanie_zrodlami_powierzchniowymi.Uwagi, typ WChar, długość 0, niewymagane Tak, pozycja 18, flagi X-X- XXX-, opis Uwagi dotyczące pomiarów lub kalibracji.
+    Wzorcowanie_zrodlami_powierzchniowymi.Osoba_wzorcujaca, typ WChar, długość 50, niewymagane Tak, pozycja 19, flagi X-X- -XX-, opis Osoba wykonująca pomiary.
+    Wzorcowanie_zrodlami_powierzchniowymi.Dolacz, typ Boolean, niewymagane Nie, pozycja 20, flagi X-X- -X-X
+    Wzorcowanie_zrodlami_powierzchniowymi.Osoba_sprawdzajaca, typ WChar, długość 50, niewymagane Tak, pozycja 21, flagi X-X- -XX-
+    Wzorcowanie_zrodlami_powierzchniowymi.wspolczynnik, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 22, flagi X-X- -XXX
+    Wzorcowanie_zrodlami_powierzchniowymi.Niepewnosc, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 23, flagi X-X- -XXX
+
+---------------------------------------------------------------------
+ Zlecenia
+---------------------------------------------------------------------
+
+    Zlecenia.ID_zlecenia, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 1, flagi X-X- -XXX
+    Zlecenia.ID_zleceniodawcy, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 2, flagi X-X- -XXX
+    Zlecenia.Data_przyjecia, typ Date, precyzja 0, niewymagane Tak, pozycja 3, flagi X-X- -XXX
+    Zlecenia.Data_zwrotu, typ Date, precyzja 0, niewymagane Tak, pozycja 4, flagi X-X- -XXX
+    Zlecenia.Forma_przyjecia, typ WChar, długość 50, niewymagane Tak, pozycja 5, flagi X-X- -XX-
+    Zlecenia.Forma_zwrotu, typ WChar, długość 50, niewymagane Tak, pozycja 6, flagi X-X- -XX-
+    Zlecenia.Osoba_przyjmujaca, typ WChar, długość 50, niewymagane Tak, pozycja 7, flagi X-X- -XX-
+    Zlecenia.Uwagi, typ WChar, długość 255, niewymagane Tak, pozycja 8, flagi X-X- -XX-
+    Zlecenia.Ekspres, typ Boolean, niewymagane Nie, pozycja 9, flagi X-X- -X-X
+    Zlecenia.Nr_zlecenia_rejestr, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 10, flagi X-X- -XXX
+    Zlecenia.Nazwa_platnika, typ WChar, długość 255, niewymagane Nie, pozycja 11, flagi X-X- -X--
+    Zlecenia.Adres_platnika, typ WChar, długość 255, niewymagane Nie, pozycja 12, flagi X-X- -X--
+    Zlecenia.NIP_platnika, typ WChar, długość 255, niewymagane Nie, pozycja 13, flagi X-X- -X--
+    Zlecenia.Nr_zlecenia_klienta, typ WChar, długość 255, niewymagane Tak, pozycja 14, flagi X-X- -XX-
+
+---------------------------------------------------------------------
+ Zleceniodawca
+---------------------------------------------------------------------
+
+    Zleceniodawca.ID_zleceniodawcy, typ Integer, precyzja 10, niewymagane Nie, pozycja 1, flagi X-X- -X-X, opis Identyfikator zleceniodawcy
+    Zleceniodawca.Zleceniodawca, typ WChar, długość 255, niewymagane Tak, pozycja 2, flagi X-X- -XX-, opis Dane dotyczące zleceniodawcy (dane osobowe)
+    Zleceniodawca.Adres, typ WChar, długość 255, niewymagane Tak, pozycja 3, flagi X-X- -XX-, opis Adres zleceniodawcy
+    Zleceniodawca.Osoba_kontaktowa, typ WChar, długość 30, niewymagane Tak, pozycja 4, flagi X-X- -XX-, opis Osoba kontaktowa odpowiedzialna za zlecenie,odbiór itp.
+    Zleceniodawca.Telefon, typ WChar, długość 30, niewymagane Tak, pozycja 5, flagi X-X- -XX-, opis Telefon kontaktowy
+    Zleceniodawca.Faks, typ WChar, długość 30, niewymagane Tak, pozycja 6, flagi X-X- -XX-, opis Faks
+    Zleceniodawca.email, typ WChar, długość 50, niewymagane Tak, pozycja 7, flagi X-X- -XX-, opis Email instytucji,zleceniodawcy lub osoby kontaktowej
+    Zleceniodawca.Uwagi, typ WChar, długość 0, niewymagane Tak, pozycja 8, flagi X-X- XXX-
+    Zleceniodawca.Rabat, typ WChar, długość 255, niewymagane Tak, pozycja 9, flagi X-X- -XX-
+    Zleceniodawca.NIP, typ WChar, długość 30, niewymagane Tak, pozycja 10, flagi X-X- -XX-
+    Zleceniodawca.IFJ, typ Boolean, domyślnie No, niewymagane Nie, pozycja 11, flagi X-X- -X-X
+
+---------------------------------------------------------------------
+ zrodla_powierzchniowe
+---------------------------------------------------------------------
+
+    zrodla_powierzchniowe.Id_zrodla, typ Integer, precyzja 10, niewymagane Nie, pozycja 1, flagi X-X- -X-X, opis Identyfikator żródła promieniowania.
+    zrodla_powierzchniowe.Nazwa, typ WChar, długość 50, niewymagane Tak, pozycja 2, flagi X-X- -XX-, opis Typ źródła.
+    zrodla_powierzchniowe.Numer, typ Integer, precyzja 10, niewymagane Tak, pozycja 3, flagi X-X- -XXX, opis Numer ewidencyjny źródła.
+    zrodla_powierzchniowe.Czas_polowicznego_rozpadu, typ Single, precyzja 7, niewymagane Tak, pozycja 4, flagi X-X- -XXX, opis Czas połopwicznego rpzpadu w latach
