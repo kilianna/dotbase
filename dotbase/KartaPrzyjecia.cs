@@ -188,37 +188,6 @@ namespace DotBase
                 ZnajdzWszystkieTypyDozymetrow();
             }
 
-#if false
-
-            //------------------------------------------------------------------
-            public void AktualizujDane(ref DaneKartyPrzyjecia dane)
-            //------------------------------------------------------------------
-            {
-                int idDozymetru = ZnajdzIdDozymetru(dane.Przyrzad.Typ, dane.Przyrzad.NrFabryczny);
-
-                _Zapytanie = String.Format("UPDATE Karta_przyjecia SET id_dozymetru = {0}, Wykonano = {1}", idDozymetru, dane.Wykonano);
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
-
-                _Zapytanie = String.Format("UPDATE Karta_przyjecia SET akcesoria='{0}', uwagi='{1}', uszkodzony={2}, uszkodzony={3} WHERE id_karty={4}",
-                                           dane.DaneDodatkowe.Akcesoria, dane.DaneDodatkowe.Uwagi, dane.DaneDodatkowe.Uszkodzony, dane.DaneDodatkowe.Sprawdzenie, dane.IdKarty);
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
-
-                _Zapytanie = String.Format("UPDATE Karta_przyjecia SET ameryk={0}, chlor={1}, dawka={2}, moc_dawki={3} pluton={4}, ",
-                             dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.AMERYK], dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.CHLOR],
-                             dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.DAWKA], dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.MOC_DAWKI],
-                             dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.PLUTON])
-                           + String.Format("stront_slaby={0}, stront_silny={1}, syg_dawki={2}, syg_mocy_dawki={3}, wegiel_slaby={4}, ",
-                             dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.STRONT_SLABY], dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.STRONT_SILNY],
-                             dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.SYGNALIZACJA_DAWKI], dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.SYGNALIZACJA_MOCY_DAWKI],
-                             dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.WEGIEL_SLABY])
-                           + String.Format("wegiel_silny={0}, stront_najsilniejszy={1} WHERE id_karty={2}",
-                             dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.WEGIEL_SILNY], dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.STRONT_NAJSILNIEJSZY], idDozymetru);
-                            
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
-            }
-
-#endif
-
             //------------------------------------------------------------------
             public DataTable Dane
             //------------------------------------------------------------------

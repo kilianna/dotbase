@@ -66,8 +66,6 @@ namespace DotBase
             _Cennik = new Cennik(idKarty);
             if (_Cennik.Inicjalizuj() && PobierzDaneAutomatycznie(ameryk, chlor, dawka, moc_dawki, pluton, stront_slaby, stront_silny, sygnalizacja_dawki, sygnalizacja_mocy_dawki,wegiel_slaby,wegiel_silny, stront_najsilniejszy))
             {
-                _Cennik.LiczSumeAutomatycznie();
-
                 // ========================= Pole Ekspres
 
                 tab = _BazaDanych.TworzTabeleDanych("SELECT ID_zlecenia, Uszkodzony, Sprawdzenie, ID_karty FROM Karta_przyjecia WHERE ID_karty=?", idKarty);
@@ -81,21 +79,16 @@ namespace DotBase
                 zepsutyCheckBox.Checked = uszkodzony;
                 sprawdzenieCheckBox.Checked = sprawdzenie;
 
+                LiczSume2();
                 return true;
             }
             else
             {
+                LiczSume2();
                 return false;
             }
         }
-
-        //-------------------------------------------------
-        public void LiczSume()
-        //-------------------------------------------------
-        {
-            textBox1.Text = _Cennik.LiczSumeAutomatycznie().ToString();
-        }
-
+       
         //-------------------------------------------------
         private void LiczSume(object sender, EventArgs args)
         //-------------------------------------------------
@@ -105,18 +98,22 @@ namespace DotBase
 
         private void LiczSume2()
         {
-            textBox1.Text = String.Format("{0:##.00}",
+            textBox1.Text = String.Format("{0:0.00}",
                             _Cennik.LiczSume((int)numericUpDown1.Value,
                                              (int)numericUpDown2.Value,
                                              (int)numericUpDown3.Value,
                                              (int)numericUpDown4.Value,
-                                             checkBox1.Checked,
+                                             wariantRozszerzonyBox.Checked,
+                                             wariantTrudnyBox.Checked,
+                                             dawkaDlugaBox.Checked,
+                                             skazeniaDlugieBox.Checked,
                                              checkBox2.Checked,
                                              sprawdzenieCheckBox.Checked,
                                              zepsutyCheckBox.Checked,
                                              (uint)numericUpDown8.Value,
                                              (double)numericUpDown5.Value,
                                              (double)numericUpDown6.Value));
+            zablokujKontrolki();
         }
 
         //-------------------------------------------------
@@ -169,68 +166,44 @@ namespace DotBase
             _Cennik.Zapisz(textBox1.Text);
         }
 
+        private void zablokujKontrolki()
+        {
+            var enabled = !zepsutyCheckBox.Checked && !sprawdzenieCheckBox.Checked;
+
+            var jestMocDawki = (int)numericUpDown1.Value > 0;
+            wariantPodstawowyBox.Enabled = enabled && jestMocDawki;
+            wariantRozszerzonyBox.Enabled = enabled && jestMocDawki;
+            wariantTrudnyBox.Enabled = enabled && jestMocDawki;
+
+            checkBox2.Enabled = enabled;
+            sprawdzenieCheckBox.Enabled = enabled;
+            dawkaDlugaBox.Enabled = enabled && (int)numericUpDown3.Value > 0;
+            skazeniaDlugieBox.Enabled = enabled && (int)numericUpDown2.Value > 0;
+            numericUpDown1.Enabled = enabled;
+            numericUpDown2.Enabled = enabled;
+            numericUpDown3.Enabled = enabled;
+            numericUpDown4.Enabled = enabled;
+            numericUpDown8.Enabled = enabled && (int)numericUpDown4.Value > 0;
+
+            numericUpDown5.Enabled = !zepsutyCheckBox.Checked;
+            sprawdzenieCheckBox.Enabled = !zepsutyCheckBox.Checked;
+            zepsutyCheckBox.Enabled = !sprawdzenieCheckBox.Checked;
+        }
+
         private void checkBox4_CheckedChanged(object sender, EventArgs e)
         {
             LiczSume2();
-
-            if (zepsutyCheckBox.Checked)
-            {
-                checkBox1.Enabled = false;
-                checkBox2.Enabled = false;
-                sprawdzenieCheckBox.Enabled = false;
-                numericUpDown1.Enabled = false;
-                numericUpDown2.Enabled = false;
-                numericUpDown3.Enabled = false;
-                numericUpDown4.Enabled = false;
-                numericUpDown5.Enabled = false;
-                numericUpDown8.Enabled = false;
-            }
-            else
-            {
-                checkBox1.Enabled = true;
-                checkBox2.Enabled = true;
-                sprawdzenieCheckBox.Enabled = true;
-                numericUpDown1.Enabled = true;
-                numericUpDown2.Enabled = true;
-                numericUpDown3.Enabled = true;
-                numericUpDown4.Enabled = true;
-                numericUpDown5.Enabled = true;
-                numericUpDown8.Enabled = true;
-            }
-
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
             LiczSume2();
-
-            if (sprawdzenieCheckBox.Checked)
-            {
-                checkBox1.Enabled = false;
-                checkBox2.Enabled = false;
-                zepsutyCheckBox.Enabled = false;
-                numericUpDown1.Enabled = false;
-                numericUpDown2.Enabled = false;
-                numericUpDown3.Enabled = false;
-                numericUpDown4.Enabled = false;
-                numericUpDown8.Enabled = false;
-            }
-            else
-            {
-                checkBox1.Enabled = true;
-                checkBox2.Enabled = true;
-                zepsutyCheckBox.Enabled = true;
-                numericUpDown1.Enabled = true;
-                numericUpDown2.Enabled = true;
-                numericUpDown3.Enabled = true;
-                numericUpDown4.Enabled = true;
-                numericUpDown8.Enabled = true;
-            }
         }
 
         private void CennikForm_Load(object sender, EventArgs e)
         {
-
+            LiczSume2();
         }
+
     }
 }

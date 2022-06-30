@@ -61,29 +61,6 @@ namespace DotBase
             button6.Enabled = true;
         }
 
-#if false
-
-        //-------------------------------------------------------------
-        private void AktualizujDane()
-        //-------------------------------------------------------------
-        {
-            if (false == SprawdzPoprawnoscDanych())
-            {
-                return;
-            }
-
-            DaneKartyPrzyjecia dane = new DaneKartyPrzyjecia((int)numericUpDown1.Value, int.Parse(textBox1.Text), (int)numericUpDownRok.Value);
-            dane.Przyrzad = new DanePrzyrzadu(comboBox1.Text, comboBox2.Text);
-            dane.Wymagania = new WymaganiaKalibracji(checkBox1.Checked, checkBox2.Checked, checkBox3.Checked, checkBox4.Checked,
-                                                     checkBox5.Checked, checkBox6.Checked, checkBox7.Checked, checkBox8.Checked,
-                                                     checkBox9.Checked, checkBox10.Checked, checkBox11.Checked, checkBox13.Checked);
-            dane.DaneDodatkowe = new DaneDodatkowe(textBox2.Text, textBox3.Text, checkBox12.Checked, sprawdzenieCheckBox.Checked);
-
-            _KartaPrzyjecia.AktualizujDane(ref dane);
-        }
-
-#endif
-
         //-------------------------------------------------------------
         private void AktualizujListeTypowDozymetrow(object sender = null, EventArgs args = null)
         //-------------------------------------------------------------

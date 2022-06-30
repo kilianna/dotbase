@@ -39,10 +39,8 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.numericUpDown8 = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -52,6 +50,13 @@
             this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.ostrzerzenieLabel = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.wariantTrudnyBox = new System.Windows.Forms.RadioButton();
+            this.wariantRozszerzonyBox = new System.Windows.Forms.RadioButton();
+            this.wariantPodstawowyBox = new System.Windows.Forms.RadioButton();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.skazeniaDlugieBox = new System.Windows.Forms.CheckBox();
+            this.dawkaDlugaBox = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
@@ -61,6 +66,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -92,6 +99,11 @@
             // numericUpDown4
             // 
             this.numericUpDown4.Location = new System.Drawing.Point(83, 135);
+            this.numericUpDown4.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.numericUpDown4.Name = "numericUpDown4";
             this.numericUpDown4.Size = new System.Drawing.Size(50, 20);
             this.numericUpDown4.TabIndex = 6;
@@ -109,6 +121,11 @@
             // numericUpDown3
             // 
             this.numericUpDown3.Location = new System.Drawing.Point(83, 98);
+            this.numericUpDown3.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.Size = new System.Drawing.Size(50, 20);
             this.numericUpDown3.TabIndex = 4;
@@ -126,6 +143,11 @@
             // numericUpDown2
             // 
             this.numericUpDown2.Location = new System.Drawing.Point(83, 61);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(50, 20);
             this.numericUpDown2.TabIndex = 2;
@@ -143,6 +165,11 @@
             // numericUpDown1
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(83, 24);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(50, 20);
             this.numericUpDown1.TabIndex = 0;
@@ -151,33 +178,29 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(204, 32);
+            this.label8.Location = new System.Drawing.Point(6, 21);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(79, 13);
+            this.label8.Size = new System.Drawing.Size(155, 13);
             this.label8.TabIndex = 1;
-            this.label8.Text = "Liczba progów ";
+            this.label8.Text = "Liczba progów sygnalizatora >3";
             // 
             // numericUpDown8
             // 
-            this.numericUpDown8.Location = new System.Drawing.Point(289, 37);
+            this.numericUpDown8.Location = new System.Drawing.Point(181, 19);
+            this.numericUpDown8.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.numericUpDown8.Name = "numericUpDown8";
             this.numericUpDown8.Size = new System.Drawing.Size(50, 20);
             this.numericUpDown8.TabIndex = 0;
             this.numericUpDown8.ValueChanged += new System.EventHandler(this.LiczSume);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(200, 45);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(83, 13);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "sygnalizatora >3";
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(215, 73);
+            this.label6.Location = new System.Drawing.Point(12, 419);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 13);
             this.label6.TabIndex = 3;
@@ -186,27 +209,16 @@
             // numericUpDown5
             // 
             this.numericUpDown5.DecimalPlaces = 2;
-            this.numericUpDown5.Location = new System.Drawing.Point(289, 71);
+            this.numericUpDown5.Location = new System.Drawing.Point(86, 417);
             this.numericUpDown5.Name = "numericUpDown5";
-            this.numericUpDown5.Size = new System.Drawing.Size(50, 20);
+            this.numericUpDown5.Size = new System.Drawing.Size(69, 20);
             this.numericUpDown5.TabIndex = 4;
             this.numericUpDown5.ValueChanged += new System.EventHandler(this.LiczSume);
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(11, 19);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(152, 17);
-            this.checkBox1.TabIndex = 5;
-            this.checkBox1.Text = "Rozszerzone wzorcowanie";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.LiczSume);
             // 
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(11, 43);
+            this.checkBox2.Location = new System.Drawing.Point(6, 19);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(64, 17);
             this.checkBox2.TabIndex = 6;
@@ -218,9 +230,9 @@
             // 
             this.textBox1.BackColor = System.Drawing.SystemColors.Window;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Location = new System.Drawing.Point(260, 142);
+            this.textBox1.Location = new System.Drawing.Point(230, 433);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.Size = new System.Drawing.Size(84, 20);
             this.textBox1.TabIndex = 7;
             // 
             // label7
@@ -228,7 +240,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label7.Location = new System.Drawing.Point(203, 143);
+            this.label7.Location = new System.Drawing.Point(173, 434);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(51, 16);
             this.label7.TabIndex = 8;
@@ -237,7 +249,7 @@
             // sprawdzenieCheckBox
             // 
             this.sprawdzenieCheckBox.AutoSize = true;
-            this.sprawdzenieCheckBox.Location = new System.Drawing.Point(11, 66);
+            this.sprawdzenieCheckBox.Location = new System.Drawing.Point(6, 42);
             this.sprawdzenieCheckBox.Name = "sprawdzenieCheckBox";
             this.sprawdzenieCheckBox.Size = new System.Drawing.Size(87, 17);
             this.sprawdzenieCheckBox.TabIndex = 9;
@@ -248,7 +260,7 @@
             // zepsutyCheckBox
             // 
             this.zepsutyCheckBox.AutoSize = true;
-            this.zepsutyCheckBox.Location = new System.Drawing.Point(11, 89);
+            this.zepsutyCheckBox.Location = new System.Drawing.Point(6, 65);
             this.zepsutyCheckBox.Name = "zepsutyCheckBox";
             this.zepsutyCheckBox.Size = new System.Drawing.Size(64, 17);
             this.zepsutyCheckBox.TabIndex = 10;
@@ -258,30 +270,34 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.checkBox1);
             this.groupBox2.Controls.Add(this.zepsutyCheckBox);
             this.groupBox2.Controls.Add(this.checkBox2);
             this.groupBox2.Controls.Add(this.sprawdzenieCheckBox);
-            this.groupBox2.Location = new System.Drawing.Point(13, 184);
+            this.groupBox2.Location = new System.Drawing.Point(187, 13);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 120);
+            this.groupBox2.Size = new System.Drawing.Size(128, 164);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Opcje";
+            this.groupBox2.Text = "Inne";
             // 
             // numericUpDown6
             // 
             this.numericUpDown6.DecimalPlaces = 2;
-            this.numericUpDown6.Location = new System.Drawing.Point(289, 104);
+            this.numericUpDown6.Location = new System.Drawing.Point(86, 450);
+            this.numericUpDown6.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.numericUpDown6.Name = "numericUpDown6";
-            this.numericUpDown6.Size = new System.Drawing.Size(50, 20);
+            this.numericUpDown6.Size = new System.Drawing.Size(69, 20);
             this.numericUpDown6.TabIndex = 13;
             this.numericUpDown6.ValueChanged += new System.EventHandler(this.LiczSume);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(215, 106);
+            this.label9.Location = new System.Drawing.Point(12, 452);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(52, 13);
             this.label9.TabIndex = 12;
@@ -291,19 +307,103 @@
             // 
             this.ostrzerzenieLabel.AutoSize = true;
             this.ostrzerzenieLabel.ForeColor = System.Drawing.Color.Red;
-            this.ostrzerzenieLabel.Location = new System.Drawing.Point(220, 204);
+            this.ostrzerzenieLabel.Location = new System.Drawing.Point(109, 44);
             this.ostrzerzenieLabel.Name = "ostrzerzenieLabel";
             this.ostrzerzenieLabel.Size = new System.Drawing.Size(158, 26);
             this.ostrzerzenieLabel.TabIndex = 14;
             this.ostrzerzenieLabel.Text = "<-- Najprawdopodobniej jest\r\n      to rozszerzone wzorcowanie";
             this.ostrzerzenieLabel.Visible = false;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.wariantTrudnyBox);
+            this.groupBox3.Controls.Add(this.wariantRozszerzonyBox);
+            this.groupBox3.Controls.Add(this.ostrzerzenieLabel);
+            this.groupBox3.Controls.Add(this.wariantPodstawowyBox);
+            this.groupBox3.Location = new System.Drawing.Point(13, 193);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(302, 92);
+            this.groupBox3.TabIndex = 15;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Wariant wzorcowania mocy dawki";
+            // 
+            // wariantTrudnyBox
+            // 
+            this.wariantTrudnyBox.AutoSize = true;
+            this.wariantTrudnyBox.Location = new System.Drawing.Point(6, 65);
+            this.wariantTrudnyBox.Name = "wariantTrudnyBox";
+            this.wariantTrudnyBox.Size = new System.Drawing.Size(58, 17);
+            this.wariantTrudnyBox.TabIndex = 2;
+            this.wariantTrudnyBox.Text = "Trudny";
+            this.wariantTrudnyBox.UseVisualStyleBackColor = true;
+            this.wariantTrudnyBox.CheckedChanged += new System.EventHandler(this.LiczSume);
+            // 
+            // wariantRozszerzonyBox
+            // 
+            this.wariantRozszerzonyBox.AutoSize = true;
+            this.wariantRozszerzonyBox.Location = new System.Drawing.Point(6, 42);
+            this.wariantRozszerzonyBox.Name = "wariantRozszerzonyBox";
+            this.wariantRozszerzonyBox.Size = new System.Drawing.Size(85, 17);
+            this.wariantRozszerzonyBox.TabIndex = 1;
+            this.wariantRozszerzonyBox.Text = "Rozszerzony";
+            this.wariantRozszerzonyBox.UseVisualStyleBackColor = true;
+            this.wariantRozszerzonyBox.CheckedChanged += new System.EventHandler(this.LiczSume);
+            // 
+            // wariantPodstawowyBox
+            // 
+            this.wariantPodstawowyBox.AutoSize = true;
+            this.wariantPodstawowyBox.Checked = true;
+            this.wariantPodstawowyBox.Location = new System.Drawing.Point(6, 19);
+            this.wariantPodstawowyBox.Name = "wariantPodstawowyBox";
+            this.wariantPodstawowyBox.Size = new System.Drawing.Size(85, 17);
+            this.wariantPodstawowyBox.TabIndex = 0;
+            this.wariantPodstawowyBox.TabStop = true;
+            this.wariantPodstawowyBox.Text = "Podstawowy";
+            this.wariantPodstawowyBox.UseVisualStyleBackColor = true;
+            this.wariantPodstawowyBox.CheckedChanged += new System.EventHandler(this.LiczSume);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.skazeniaDlugieBox);
+            this.groupBox4.Controls.Add(this.dawkaDlugaBox);
+            this.groupBox4.Controls.Add(this.numericUpDown8);
+            this.groupBox4.Controls.Add(this.label8);
+            this.groupBox4.Location = new System.Drawing.Point(12, 301);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(303, 95);
+            this.groupBox4.TabIndex = 16;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Opcje dodatkowe";
+            // 
+            // skazeniaDlugieBox
+            // 
+            this.skazeniaDlugieBox.AutoSize = true;
+            this.skazeniaDlugieBox.Location = new System.Drawing.Point(6, 68);
+            this.skazeniaDlugieBox.Name = "skazeniaDlugieBox";
+            this.skazeniaDlugieBox.Size = new System.Drawing.Size(103, 17);
+            this.skazeniaDlugieBox.TabIndex = 12;
+            this.skazeniaDlugieBox.Text = "Skażenia długie";
+            this.skazeniaDlugieBox.UseVisualStyleBackColor = true;
+            this.skazeniaDlugieBox.CheckedChanged += new System.EventHandler(this.LiczSume);
+            // 
+            // dawkaDlugaBox
+            // 
+            this.dawkaDlugaBox.AutoSize = true;
+            this.dawkaDlugaBox.Location = new System.Drawing.Point(6, 45);
+            this.dawkaDlugaBox.Name = "dawkaDlugaBox";
+            this.dawkaDlugaBox.Size = new System.Drawing.Size(91, 17);
+            this.dawkaDlugaBox.TabIndex = 11;
+            this.dawkaDlugaBox.Text = "Dawka długa";
+            this.dawkaDlugaBox.UseVisualStyleBackColor = true;
+            this.dawkaDlugaBox.CheckedChanged += new System.EventHandler(this.LiczSume);
+            // 
             // CennikForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(391, 318);
-            this.Controls.Add(this.ostrzerzenieLabel);
+            this.ClientSize = new System.Drawing.Size(330, 484);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.numericUpDown6);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.groupBox2);
@@ -311,10 +411,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.numericUpDown5);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.numericUpDown8);
-            this.Controls.Add(this.label8);
             this.Name = "CennikForm";
             this.Text = "Cennik";
             this.Load += new System.EventHandler(this.CennikForm_Load);
@@ -329,6 +426,10 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -347,10 +448,8 @@
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown numericUpDown8;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown numericUpDown5;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label7;
@@ -360,5 +459,12 @@
         private System.Windows.Forms.NumericUpDown numericUpDown6;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label ostrzerzenieLabel;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.RadioButton wariantTrudnyBox;
+        private System.Windows.Forms.RadioButton wariantRozszerzonyBox;
+        private System.Windows.Forms.RadioButton wariantPodstawowyBox;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.CheckBox skazeniaDlugieBox;
+        private System.Windows.Forms.CheckBox dawkaDlugaBox;
     }
 }

@@ -9,7 +9,6 @@ namespace DotBase
     class Cennik
     {
         private BazaDanychWrapper _BazaDanych;
-        private String _Zapytanie;
 
         private int _NrKarty;
 
@@ -18,17 +17,21 @@ namespace DotBase
         public int Ile_dawka{ get; private set; }
         public int Ile_sygnalizator{ get; private set; }
 
-        private double _Cena_moc_dawki;
-        private double _Cena_moc_dawki_rozsz;
-        private double _Cena_skazenia;
-        private double _Cena_skazenia_dod;
-        private double _Cena_dawka;
-        private double _Cena_dawka_dod;
-        private double _Cena_sygnalizator;
-        private double _Cena_sygnalizator_dod;
-        private double _Cena_ekspres;
-        private double _Cena_dodatkowy_prog;
-        private double _Cena_sprawdzenie;
+        private double _Cena_Moc_dawki_podst;
+        private double _Cena_Dawka_podst;
+        private double _Cena_Skażenia_podst;
+        private double _Cena_Sygnalizacja_3progi_podst;
+        private double _Cena_Moc_dawki_dod;
+        private double _Cena_Skazenia_dod;
+        private double _Cena_Dawka_dod;
+        private double _Cena_Sygnalizacja_3progi_dod;
+        private double _Cena_Moc_dawki_rozsz;
+        private double _Cena_Moc_dawki_trudna;
+        private double _Cena_Skazenia_dlugie;
+        private double _Cena_Dawka_dluga;
+        private double _Cena_Sygnalizacja_dodatkowy_prog;
+        private double _Cena_Ekspres;
+        private double _Cena_Sprawdzenie;
 
         //-------------------------------------------------------
         public Cennik()
@@ -53,24 +56,21 @@ namespace DotBase
             return WczytajCenyUslug();
         }
 
-        //-------------------------------------------------------
-        public double LiczSumeAutomatycznie()
-        //-------------------------------------------------------
+        private double JEŻELI(bool warunek, double prawda, double falsz)
         {
-            // ostateczne kwoty wybrane z danych zawartych przez klasę (zostały de facto pobrane z bazy)
-            // wybrane na podstawie poniższych zależności
-            double k_moc_dawki, suma = 0.0;
+            return warunek ? prawda : falsz;
+        }
 
-            k_moc_dawki = _Cena_moc_dawki;
+        private double SUMA(params double[] x)
+        {
+            double sum = 0.0;
+            foreach (double v in x)sum += v;
+            return sum;
+        }
 
-
-            if (Ile_moc_dawki + Ile_skazenia + Ile_sygnalizator > 0)
-                suma = (Ile_moc_dawki + Ile_skazenia + Ile_sygnalizator - 1) * _Cena_skazenia_dod
-                        + k_moc_dawki + Ile_dawka * _Cena_dawka_dod;
-            else
-                suma = Ile_dawka * _Cena_dawka;
-
-            return suma;
+        private double NUM(bool x)
+        {
+            return x ? 1 : 0;
         }
 
         //-------------------------------------------------------
@@ -78,7 +78,10 @@ namespace DotBase
                                int ileMd, 
                                int ileD, 
                                int ileSyg, 
-                               bool RozszerzoneWzorcowanie, 
+                               bool RozszerzoneWzorcowanie,
+                               bool TrudneWzorcowanie,
+                               bool DawkaDluga,
+                               bool SkazeniaDlugie,
                                bool Ekspres, 
                                bool sprawdzenie,
                                bool zepsuty,
@@ -94,43 +97,64 @@ namespace DotBase
 
             if (zepsuty)
             {
-                return 0;
+                return transport;
             }
 
             if (sprawdzenie)
             {
-                return _Cena_sprawdzenie * (1.0 - rabat / 100.0);
+                return _Cena_Sprawdzenie * (1.0 - rabat / 100.0) + transport;
             }
+            
+            var C5 = Ile_moc_dawki;
+            var D5 = Ile_skazenia;
+            var E5 = Ile_sygnalizator;
+            var F5 = Ile_dawka;
 
-	        // ostateczne kwoty wybrane z danych zawartych przez klasę (zostały de facto pobrane z bazy)
-	        // wybrane na podstawie poniższych zależności
-	        double k_moc_dawki, suma = 0.0;
+            var D10 = RozszerzoneWzorcowanie;
+            var E10 = sprawdzenie;
+            var F10 = Ekspres;
+            var G10 = liczbaProgow;
+            var H10 = TrudneWzorcowanie;
+            var I10 = DawkaDluga;
+            var J10 = SkazeniaDlugie;
+            
+            var L14 = _Cena_Moc_dawki_podst;
+            var L15 = _Cena_Dawka_podst;
+            var L16 = _Cena_Skażenia_podst;
+            var L17 = _Cena_Sygnalizacja_3progi_podst;
+            var L18 = _Cena_Moc_dawki_dod;
+            var L19 = _Cena_Skazenia_dod;
+            var L20 = _Cena_Dawka_dod;
+            var L21 = _Cena_Sygnalizacja_3progi_dod;
+            var L22 = _Cena_Moc_dawki_rozsz;
+            var L23 = _Cena_Moc_dawki_trudna;
+            var L24 = _Cena_Skazenia_dlugie;
+            var L25 = _Cena_Dawka_dluga;
+            var L26 = _Cena_Sygnalizacja_dodatkowy_prog;
+            var L27 = _Cena_Ekspres;
+            var L28 = _Cena_Sprawdzenie;
 
-	        // sprawdzenie czy wybrane jest rozszerzone wzorcowanie
-            if (RozszerzoneWzorcowanie)
-                k_moc_dawki = _Cena_moc_dawki_rozsz;
-            else
-                k_moc_dawki = _Cena_moc_dawki;
-	
+            var C12 = rabat;
+            var C13 = transport;
 
-	        if( Ile_moc_dawki + Ile_skazenia + Ile_sygnalizator > 0 )
-		        suma = (Ile_moc_dawki + Ile_skazenia + Ile_sygnalizator-1) * _Cena_skazenia_dod 
-                        + k_moc_dawki + Ile_dawka * _Cena_dawka_dod;
-	        else
-		        suma = Ile_dawka*_Cena_dawka;
+            double subtotal_moc_dawki = (L14 + (C5 - 1) * L18) * NUM(C5 != 0);
+            double subtotal_skazenia = JEŻELI(C5 > 0, D5 * L19, (L16 + (D5 - 1) * L19) * NUM(D5 != 0));
+            double subtotal_sygnalizator = JEŻELI(SUMA(C5, D5) > 0, E5 * L21, (L17 + (E5 - 1) * L21) * NUM(E5 != 0));
+            double subtotal_dawka = JEŻELI(SUMA(C5, D5, E5) > 0, F5 * L20, (L15 + (F5 - 1) * L20) * NUM(F5 != 0));
 
-            if (Ekspres)
-		        suma += _Cena_ekspres;
+            double dopl_rozszerzone_wzorcowanie = JEŻELI(D10, L22, 0);
+            double dopl_sprawdzenie = JEŻELI(E10, L28, 0);
+            double dopl_ekspres = JEŻELI(F10, L27, 0);
+            double dopl_dodatkowe_progi = G10 * L26;
+            double dopl_trudny = JEŻELI(H10, L23, 0);
+            double dopl_dawka_dluga = JEŻELI(I10, L25, 0);
+            double dopl_skazenia_dlugie = JEŻELI(J10, L24, 0);
 
-            if (liczbaProgow + 3 > 3)
-		        suma += _Cena_dodatkowy_prog * liczbaProgow;
+            double total = C13 + (1 - C12 / 100) * SUMA(subtotal_moc_dawki, subtotal_skazenia, subtotal_sygnalizator,
+                subtotal_dawka, dopl_rozszerzone_wzorcowanie, dopl_sprawdzenie, dopl_ekspres,
+                dopl_dodatkowe_progi, dopl_trudny, dopl_dawka_dluga, dopl_skazenia_dlugie);
 
-	        if(rabat > 0)
-		        suma = suma * (1.0 - rabat / 100.0);
-
-            suma += transport;
-
-            return suma;
+            return total;
         }
 
         //-------------------------------------------------------
@@ -148,38 +172,52 @@ namespace DotBase
                     switch(usluga)
                     {
                         case "Moc dawki podst":
-                            _Cena_moc_dawki = row.Field<double>("cena");
+                            _Cena_Moc_dawki_podst = row.Field<double>("cena");
+                            break;
+                        case "Dawka podst":
+                            _Cena_Dawka_podst = row.Field<double>("cena");
+                            break;
+                        case "Skażenia podst":
+                            _Cena_Skażenia_podst = row.Field<double>("cena");
+                            break;
+                        case "Sygnalizacja 3progi podst":
+                            _Cena_Sygnalizacja_3progi_podst = row.Field<double>("cena");
+                            break;
+                        case "Moc dawki dod":
+                            _Cena_Moc_dawki_dod = row.Field<double>("cena");
+                            break;
+                        case "Skażenia dod":
+                            _Cena_Skazenia_dod = row.Field<double>("cena");
+                            break;
+                        case "Dawka dod":
+                            _Cena_Dawka_dod = row.Field<double>("cena");
+                            break;
+                        case "Sygnalizacja 3progi dod":
+                            _Cena_Sygnalizacja_3progi_dod = row.Field<double>("cena");
                             break;
                         case "Moc dawki rozsz":
-                            _Cena_moc_dawki_rozsz  = row.Field<double>("cena");
+                            _Cena_Moc_dawki_rozsz = row.Field<double>("cena");
                             break;
-                        case "Skażenia same":
-                            _Cena_skazenia  = row.Field<double>("cena");
+                        case "Moc dawki trudna":
+                            _Cena_Moc_dawki_trudna = row.Field<double>("cena");
                             break;
-                        case "Skażenia dodatkowe":
-                            _Cena_skazenia_dod  = row.Field<double>("cena");
+                        case "Skażenia długie":
+                            _Cena_Skazenia_dlugie = row.Field<double>("cena");
                             break;
-                        case "Dawka sama":
-                            _Cena_dawka  = row.Field<double>("cena");
-                            break;
-                        case "Dawka dodatkowa":
-                            _Cena_dawka_dod  = row.Field<double>("cena");
-                            break;
-                        case "Sygnalizacja 3progi":
-                            _Cena_sygnalizator  = row.Field<double>("cena");
-                            break;
-                        case "Sygnalizacja 3progi dodatkowa":
-                            _Cena_sygnalizator_dod  = row.Field<double>("cena");
+                        case "Dawka długa":
+                            _Cena_Dawka_dluga = row.Field<double>("cena");
                             break;
                         case "Sygnalizacja dodatkowy próg":
-                            _Cena_dodatkowy_prog  = row.Field<double>("cena");
+                            _Cena_Sygnalizacja_dodatkowy_prog = row.Field<double>("cena");
                             break;
                         case "Ekspres":
-                            _Cena_ekspres  = row.Field<double>("cena");
+                            _Cena_Ekspres = row.Field<double>("cena");
                             break;
                         case "Sprawdzenie":
-                            _Cena_sprawdzenie = row.Field<double>("cena");
+                            _Cena_Sprawdzenie = row.Field<double>("cena");
                             break;
+                        default:
+                            return false;
                     }
                 }
             }
@@ -190,78 +228,6 @@ namespace DotBase
             
             return true;
         }
-
-        //-----------------------------------------------------------------------------
-        public bool ZliczLiczbeWzorcowanDlaMocyDawki()
-        //-----------------------------------------------------------------------------
-        {
-	        _Zapytanie = "SELECT COUNT(id_arkusza) FROM Wzorcowanie_cezem WHERE id_karty="
-                       + String.Format("{0} AND rodzaj_wzorcowania='md'", _NrKarty);
-	        try
-            {
-                Ile_moc_dawki = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0);
-	        }
-            catch(Exception)
-            {
-                return false;
-            }
-
-            return true;
-		}
-
-        //-----------------------------------------------------------------------------
-        public bool ZliczLiczbeWzorcowanDlaSkazen()
-        //-----------------------------------------------------------------------------
-        {
-	        _Zapytanie = "SELECT COUNT(id_arkusza) FROM Wzorcowanie_zrodlami_powierzchniowymi WHERE "
-                       + String.Format("id_karty = {0}", _NrKarty);
-	        try
-            {
-                Ile_skazenia = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0);
-	        }
-            catch(Exception)
-            {
-                return false;
-            }
-
-            return true;
-		}
-
-        //-----------------------------------------------------------------------------
-        public bool ZliczLiczbeWzorcowanDlaDawki()
-        //-----------------------------------------------------------------------------
-        {
-	        _Zapytanie = "SELECT COUNT(id_arkusza) FROM Wzorcowanie_cezem WHERE id_karty="
-                       + String.Format("{0} AND rodzaj_wzorcowania='d'", _NrKarty);
-	        try
-            {
-                Ile_dawka = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0);
-	        }
-            catch(Exception)
-            {
-                return false;
-            }
-
-            return true;
-		}
-
-        //-----------------------------------------------------------------------------
-        public bool ZliczLiczbeWzorcowanDlaSygnalizacji()
-        //-----------------------------------------------------------------------------
-        {
-	        _Zapytanie = "SELECT COUNT(id_arkusza) FROM Wzorcowanie_cezem WHERE id_karty="
-                       + String.Format("{0} AND rodzaj_wzorcowania='sd'", _NrKarty);
-	        try
-            {
-                Ile_sygnalizator = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0);
-	        }
-            catch(Exception)
-            {
-                return false;
-            }
-
-            return true;
-		}
 
         //-----------------------------------------------------------------------------
         public void Zapisz(string suma)
