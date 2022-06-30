@@ -21,9 +21,9 @@ namespace DotBase
         {
             IList<double> computedFactors = new List<double>();
 
-            foreach (DataRow row in _BazaDanych.TworzTabeleDanych(String.Format("SELECT prog, wartosc_zmierzona FROM Sygnalizacja_dawka WHERE id_wzorcowania = {0} ORDER BY prog", retrieveIdWzorcowania(idKarty))).Rows)
+            foreach (DataRow row in _BazaDanych.TworzTabeleDanych(String.Format("SELECT prog, Wartosc_wzorcowa FROM Sygnalizacja_dawka WHERE id_wzorcowania = {0} ORDER BY prog", retrieveIdWzorcowania(idKarty))).Rows)
             {
-                computedFactors.Add(row.Field<double>("prog") / row.Field<double>("wartosc_zmierzona"));
+                computedFactors.Add(row.Field<double>("prog") / row.Field<double>("Wartosc_wzorcowa"));
             }
 
             return computedFactors;

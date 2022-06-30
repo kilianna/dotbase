@@ -573,7 +573,7 @@ namespace DotBase
                 for (int i = 0; i < prog.Count; ++i)
                 {
                     _Tabela.AppendFormat("<tr><td>{0}</td><td>{1}</td><td>{2} &plusmn; {3} </td></tr>",
-                        prog[i].ToString("0.00"),
+                        prog[i].ToString("G"),
                         wartosc_wzorcowa[i].ToString("0.00"),
                         computedFactors[i].ToString("0.00"),
                         computedUncertainity[i].ToString("0.00"));
