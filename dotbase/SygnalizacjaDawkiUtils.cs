@@ -23,7 +23,7 @@ namespace DotBase
 
             foreach (DataRow row in _BazaDanych.TworzTabeleDanych(String.Format("SELECT prog, Wartosc_wzorcowa FROM Sygnalizacja_dawka WHERE id_wzorcowania = {0} ORDER BY prog", retrieveIdWzorcowania(idKarty))).Rows)
             {
-                computedFactors.Add(row.Field<double>("prog") / row.Field<double>("Wartosc_wzorcowa"));
+                computedFactors.Add(row.Field<double>("Wartosc_wzorcowa") / row.Field<double>("prog"));
             }
 
             return computedFactors;
