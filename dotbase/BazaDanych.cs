@@ -775,7 +775,7 @@ namespace DotBase
                 return true;
             }
 
-            if (!wymus && DateTime.Now < (_OstatniaAktywnosc + new TimeSpan(0, 0, 0, 0, 300)))
+            if (!wymus && DateTime.Now < (_OstatniaAktywnosc + new TimeSpan(0, 0, 0, 0, 1000)))
             {
                 Debug.WriteLine("Not ready to close");
                 return false;

@@ -796,6 +796,7 @@ namespace WzorcowanieMocDawkiSpace
             _WartosciWzorcowoPomiaroweDoZapisu.protokol = protokol;
             _WartosciWzorcowoPomiaroweDoZapisu.tlo = tlo;
             _WartosciWzorcowoPomiaroweDoZapisu.WielkoscFizyczna = wielkoscFizyczna;
+            _WartosciWzorcowoPomiaroweDoZapisu.Dane.Clear();
 
             try
             {
@@ -860,6 +861,7 @@ namespace WzorcowanieMocDawkiSpace
             _WspolczynnikiDoZapisu.Wzorcujacy = wzorcujacy;
             _WspolczynnikiDoZapisu.Sprawdzajacy = sprawdzajacy;
             _WspolczynnikiDoZapisu.Dolacz = dolacz;
+            _WspolczynnikiDoZapisu.Dane.Clear();
 
             try
             {

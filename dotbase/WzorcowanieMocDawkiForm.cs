@@ -556,39 +556,6 @@ namespace DotBase
         }
 
         //---------------------------------------------------------------
-        private void ZapiszDane(object sender, EventArgs args)
-        //---------------------------------------------------------------
-        {
-            if (true == _WzorcowanieMocDawki.SprawdzCzyArkuszJestJuzZapisany())
-            {
-                if (false == PrzygotujDaneDoZapisu(true))
-                {
-                    
-                    MessageBox.Show("Dane są niepoprawne. Nie można zapisać.", "Ostrzeżenie");
-                    return;
-                }
-             
-                // Nadpisywanie danych
-                _WzorcowanieMocDawki.NadpiszDane();
-            }
-            else
-            {
-                if (false == PrzygotujDaneDoZapisu(false))
-                {
-                    MessageBox.Show("Dane są niepoprawne. Nie można zapisać.", "Ostrzeżenie");
-                    return;
-                }
-
-                Properties.Settings.Default.Wykonal = textBox21.Text;
-                Properties.Settings.Default.Sprawdzil = textBox22.Text;
-                Properties.Settings.Default.Save();
-
-                // Zapisywanie danych
-                _WzorcowanieMocDawki.ZapiszDane();
-            }
-        }
-
-        //---------------------------------------------------------------
         private void ZnajdzWszystkieWielkoscFizyczne(object sender, EventArgs e)
         //---------------------------------------------------------------
         {
