@@ -9,7 +9,6 @@ namespace DotBase
 {
     namespace Dokumenty
     {
-
         class SwiadectwoData
         {
             public enum DataType
@@ -65,7 +64,7 @@ namespace DotBase
 			override protected bool saveDocument(string path) { return true; }
 
             //********************************************************************************************
-            public Swiadectwo(int nrKarty, DateTime dataWydania, DateTime dataWykonania, DateTime dataPrzyjecia, String sprawdzil, string poprawa, string uwMD, string uwD, string uwS, string uwSMD, string uwSD)
+            public Swiadectwo(int nrKarty, DateTime dataWydania, DateTime dataWykonania, DateTime dataPrzyjecia, String sprawdzil, string poprawa, string uwMD, string uwD, string uwS, string uwSMD, string uwSD, Jezyk jezykSwiadectwa) : base(jezykSwiadectwa)
             //********************************************************************************************
             {
                 m_data.setValue(SwiadectwoData.DataType.NR_KARTY, nrKarty.ToString());

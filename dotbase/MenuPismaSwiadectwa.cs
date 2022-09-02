@@ -66,14 +66,24 @@ namespace DotBase
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string sciezka = _DocumentationPathsLoader.GetPath("SwiadectwoWynik") + _NumerKarty + "SwiadectwoWynik.html";
+            generujSwiadectwo(Jezyk.PL);
+        }
+
+        private void generujSwiadectwo(Jezyk jezykSwiadectwa)
+        {
+            string sciezka = _DocumentationPathsLoader.GetPath("SwiadectwoWynik", jezykSwiadectwa) + _NumerKarty + "SwiadectwoWynik";
+            if (jezykSwiadectwa == Jezyk.EN)
+            {
+                sciezka += "-EN";
+            }
+            sciezka += ".html";
 
             DataTable table = _Baza.TworzTabeleDanych("SELECT Data_przyjecia " +
                 "FROM Zlecenia INNER JOIN Karta_przyjecia " +
                 "ON Zlecenia.ID_zlecenia = Karta_przyjecia.ID_zlecenia " +
                 "WHERE Karta_przyjecia.ID_karty=?", _NumerKarty);
 
-            Dokumenty.Swiadectwo swiadectwo = new Dokumenty.Swiadectwo(_NumerKarty, 
+            Dokumenty.Swiadectwo swiadectwo = new Dokumenty.Swiadectwo(_NumerKarty,
                                                                        dataWystawienia.Value,
                                                                        dataWykonania.Value,
                                                                        table.Rows[0].Field<DateTime>("Data_przyjecia"),
@@ -83,7 +93,8 @@ namespace DotBase
                                                                        uwD.Text,
                                                                        uwS.Text,
                                                                        uwSMD.Text,
-                                                                       uwSD.Text);
+                                                                       uwSD.Text,
+                                                                       jezykSwiadectwa);
             if (swiadectwo.UtworzDokument(sciezka))
             {
                 System.Diagnostics.Process.Start(sciezka);
@@ -110,7 +121,7 @@ namespace DotBase
                 .INFO("Zmieniono nr pisma w karcie przyjęcia")
                 .EXECUTE();
 
-            string sciezka = _DocumentationPathsLoader.GetPath("PismoPrzewodnieWynik") + _NrPisma + "PismoPrzewodnieWynik" + _NumerKarty + ".html";
+            string sciezka = _DocumentationPathsLoader.GetPath("PismoPrzewodnieWynik", Jezyk.PL) + _NrPisma + "PismoPrzewodnieWynik" + _NumerKarty + ".html";
 
 			Dokumenty.PismoPrzewodnie pismo = new Dokumenty.PismoPrzewodnie(_NumerKarty, dataWystawienia.Value, dataWykonania.Value, textBox1.Text, textBox2.Text, checkBox1.Checked, checkBox2.Checked);
             if (!pismo.generateDocument(sciezka))
@@ -238,6 +249,11 @@ namespace DotBase
         private void zapiszToolStripMenuItem_Click(object sender, EventArgs e)
         {
             N.PotwierdzenieZapisz(this, ZapiszDane, false, true);
+        }
+
+        private void swiadectEnBtn_Click(object sender, EventArgs e)
+        {
+            generujSwiadectwo(Jezyk.EN);
         }
         
     }

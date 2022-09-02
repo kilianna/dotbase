@@ -49,8 +49,9 @@
     Jednostki.ID_jednostki, typ Integer, precyzja 10, niewymagane Nie, pozycja 1, flagi X-X- -X-X
     Jednostki.Jednostka, typ WChar, długość 50, niewymagane Tak, pozycja 2, flagi X-X- -XX-, opis Jednostka pomiarowa
     Jednostki.Przelicznik, typ Single, domyślnie 1, precyzja 7, niewymagane Tak, pozycja 3, flagi X-X- -XXX, opis Przelicznik dla każdej jednostki z uGy/h
-    Jednostki.Wielkosc_fizyczna, typ WChar, długość 50, niewymagane Tak, pozycja 4, flagi X-X- -XX-
-    Jednostki.SI, typ Boolean, domyślnie No, niewymagane Nie, pozycja 5, flagi X-X- -X-X
+    Jednostki.SI, typ Boolean, domyślnie No, niewymagane Nie, pozycja 4, flagi X-X- -X-X
+    Jednostki.Wielkosc_fizyczna, typ WChar, długość 50, niewymagane Tak, pozycja 5, flagi X-X- -XX-
+    Jednostki.Wielkosc_fizyczna_en, typ WChar, długość 50, niewymagane Tak, pozycja 6, flagi X-X- -XX-
 
 ---------------------------------------------------------------------
  Karta_przyjecia

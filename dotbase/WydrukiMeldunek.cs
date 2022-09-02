@@ -32,7 +32,7 @@ namespace DotBase
         MeldunekModel m_meldunekModel;
         WydrukiMeldunekData m_wydrukiMeldunekData = new WydrukiMeldunekData();
 
-        public WydrukiMeldunek(MeldunekModel meldunekModel)
+        public WydrukiMeldunek(MeldunekModel meldunekModel) : base(Jezyk.PL)
         {
             m_meldunekModel = meldunekModel;
             WczytajSzablon(Narzedzia.StaleWzorcowan.stale.MELDUNEK);

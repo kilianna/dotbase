@@ -63,6 +63,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.zapiszToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.swiadectEnBtn = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -393,13 +394,13 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(116, 34);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Świadectwo";
+            this.button1.Text = "Świadectwo (PL)";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(147, 27);
+            this.button2.Location = new System.Drawing.Point(251, 27);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(121, 34);
             this.button2.TabIndex = 1;
@@ -424,11 +425,22 @@
             this.zapiszToolStripMenuItem.Text = "Zapisz";
             this.zapiszToolStripMenuItem.Click += new System.EventHandler(this.zapiszToolStripMenuItem_Click);
             // 
+            // swiadectEnBtn
+            // 
+            this.swiadectEnBtn.Location = new System.Drawing.Point(129, 27);
+            this.swiadectEnBtn.Name = "swiadectEnBtn";
+            this.swiadectEnBtn.Size = new System.Drawing.Size(116, 34);
+            this.swiadectEnBtn.TabIndex = 3;
+            this.swiadectEnBtn.Text = "Świadectwo (EN)";
+            this.swiadectEnBtn.UseVisualStyleBackColor = true;
+            this.swiadectEnBtn.Click += new System.EventHandler(this.swiadectEnBtn_Click);
+            // 
             // MenuPismaSwiadectwaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(792, 717);
+            this.Controls.Add(this.swiadectEnBtn);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox3);
@@ -483,5 +495,6 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem zapiszToolStripMenuItem;
+        private System.Windows.Forms.Button swiadectEnBtn;
     }
 }

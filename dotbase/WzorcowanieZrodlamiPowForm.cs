@@ -640,7 +640,7 @@ namespace DotBase
         private void button2_Click(object sender, EventArgs e)
         //---------------------------------------------------------------
         {
-            string sciezka = _DocumentationPathsLoader.GetPath("ProtokolySkazeniaWynik") + textBox1.Text + "WynikSkazenia.html";
+            string sciezka = _DocumentationPathsLoader.GetPath("ProtokolySkazeniaWynik", Jezyk.PL) + textBox1.Text + "WynikSkazenia.html";
 
             Dokumenty.ProtokolZrodlaPowierzchnioweModel model = new Dokumenty.ProtokolZrodlaPowierzchnioweModel(
                 new DanePodstawoweModel(textBox1.Text, textBoxArkusz.Text, dateTimePicker1.Value),

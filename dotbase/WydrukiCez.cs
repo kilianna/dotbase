@@ -17,7 +17,7 @@ namespace DotBase
             private WydrukiCezData m_data;
 
             //***************************************************
-            public WydrukiCez(DocumentsTemplatesFactory.TemplateType type)
+            public WydrukiCez(DocumentsTemplatesFactory.TemplateType type) : base(Jezyk.PL)
             //***************************************************
             {
                 _BazaDanych = new BazaDanychWrapper();

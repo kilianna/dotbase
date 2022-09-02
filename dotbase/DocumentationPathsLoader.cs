@@ -7,6 +7,12 @@ using System.Xml.Linq;
 
 namespace DotBase
 {
+    enum Jezyk
+    {
+        PL,
+        EN,
+    }
+
     class DocumentationPathsLoader
     {
         private XDocument XMLFile = new XDocument();
@@ -17,12 +23,21 @@ namespace DotBase
             XMLFile = XDocument.Load(basePath + @"\PathConfig.xml");
         }
 
-        public String GetPath(String type)
+        public String GetPath(String type, Jezyk jezyk)
         {
-            var q = from document in XMLFile.Descendants("document")
-                    where document.Attribute("type").Value == type
-                    select document.Attribute("path").Value;
-            return String.Format("{0}/{1}", basePath, q.ElementAt(0));
+            var a = jezyk.ToString().ToLower();
+            try
+            {
+                var q1 = from document in XMLFile.Descendants("document")
+                         where document.Attribute("type").Value == type + "-" + jezyk.ToString().ToLower()
+                         select document.Attribute("path").Value;
+                return String.Format("{0}/{1}", basePath, q1.ElementAt(0));
+            }
+            catch (Exception) { }
+            var q2 = from document in XMLFile.Descendants("document")
+                     where document.Attribute("type").Value == type
+                     select document.Attribute("path").Value;
+            return String.Format("{0}/{1}", basePath, q2.ElementAt(0));
         }
     }
 }
