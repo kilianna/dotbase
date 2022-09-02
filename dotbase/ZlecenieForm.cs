@@ -658,7 +658,7 @@ namespace DotBase
             }
             model.zleceniodawca = comboBox1.Text;
 
-            string path = new DocumentationPathsLoader().GetPath("MeldunekWynik") + numericUpDown1.Value + "Meldunek.html";
+            string path = new DocumentationPathsLoader().GetPath("MeldunekWynik", Jezyk.PL) + numericUpDown1.Value + "Meldunek.html";
             WydrukiMeldunek wydrukiMeldunek = new WydrukiMeldunek(model);
             if(!wydrukiMeldunek.generateDocument(path))
             {

@@ -550,7 +550,7 @@ namespace DotBase
         // tworzenie protokołu
         private void protokółToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string sciezka = _DocumentationPathsLoader.GetPath("ProtokolySygnalizacjaDawkiWynik") + textBox1.Text + "SygnalizacjaDawki.html";
+            string sciezka = _DocumentationPathsLoader.GetPath("ProtokolySygnalizacjaDawkiWynik", Jezyk.PL) + textBox1.Text + "SygnalizacjaDawki.html";
 
             Dokumenty.ProtokolSygnalizacjaDawkiModel model = new Dokumenty.ProtokolSygnalizacjaDawkiModel(
                 new DanePodstawoweModel(textBox1.Text, textBox2.Text, dateTimePicker1.Value),

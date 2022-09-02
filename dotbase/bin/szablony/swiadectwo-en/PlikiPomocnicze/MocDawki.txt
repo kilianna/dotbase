@@ -1,0 +1,13 @@
+﻿<div class="wzornag"><!c1>) Calibration with Cs-137 gamma-rays in terms of <!c2></div>
+				<table id="tabnag">
+					<tr><td>Type of probe:</td><td><!c3></td><td>Serial number of probe:</td><td><!c4></td></tr>
+				</table>
+				<table id="tabwyn">
+					<tr><th>INSTRUMENT MEASURING<BR>RANGE</th><th>CALIBRATION<BR>FACTOR</th></tr>
+					<tr><th style="font-size: 10pt"><!c5></th><th style="font-size: 10pt"><!korekcja_jednostki></th></tr>
+					<!tabela>
+				</table>
+				<div id="komentarz">The measured value of <!wielkosc_fizyczna> should be multiplied by the respective value of calibration factor for the given
+measuring range.
+				</div>
+<div class="uwaga"><!uwaga></div>

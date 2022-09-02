@@ -1,0 +1,12 @@
+﻿				<div class="wzornag"><!c1>) Calibration with Cs-137 gamma-rays in terms of ambient dose equivalent (threshold indicator)</div>
+				<div class="wzornag">List of instrument settings and the corresponding actual values ​​at which the warning signal is turned on.</div>
+				<table id="tabnag">
+					<tr><td>Type of probe:</td><td>built-in probe</td><td>Serial number of probe:</td><td>NA</td></tr>
+				</table>
+				<table id="tabwyn">
+					<tr><th>SET THRESHOLD</th><th style="width: 70mm">ACTUAL VALUES ON WHICH ARE SWITCHED <br> WARNING SIGNALS</th><th>CALIBRATION<BR>FACTOR</th></tr>
+					<tr><th style="font-size: 10pt"><!jednDawka></th><th style="font-size: 10pt"><!jednDawka></th><th style="font-size: 10pt">-</th></tr>
+					<!tabela>
+				</table>
+<div id="komentarz">The set threshold should be multiplied by the respective value of calibration factor.</div>
+                <div class="uwaga"><!uwaga></div>

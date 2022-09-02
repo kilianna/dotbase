@@ -1,7 +1,0 @@
-﻿<div class="wzornag"><!c>) Wzorcowanie źródłem gamma: Cs-137; indywidualny równoważnik dawki</div>
-	<table id="tabnag">
-					<tr><td>Typ sondy:</td><td><!c></td><td>Numer fabryczny sondy:</td><td><!c></td></tr>
-				</table>
-				<!tabela>
-				<div id="komentarz">Zmierzoną wartość indywidualnego równoważnika dawki należy pomnożyć przez wartość współczynnika poprawkowego.
-				</div>
