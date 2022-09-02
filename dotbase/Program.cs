@@ -13,8 +13,12 @@ namespace DotBase
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
+            if (args.Length > 0 && args[0] == "--version") {
+                System.Console.Out.Write(N.Wersja(true));
+                return;
+            }
             var ci = System.Globalization.CultureInfo.CreateSpecificCulture("pl-PL");
             ci.NumberFormat.CurrencyDecimalSeparator = ",";
             ci.NumberFormat.NumberDecimalSeparator = ",";

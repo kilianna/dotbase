@@ -27,27 +27,42 @@ namespace DotBase
             return double.TryParse(text, out result);
         }
 
-        public static string Wersja()
+        public static string Wersja(bool nazwaPliku = false)
         {
+            var na = nazwaPliku ? "unknown" : "N/A";
             string gitLog = Properties.Resources.GitVersion.Trim();
-            if (gitLog.Length == 0) return "N/A";
+            if (gitLog.Length == 0) return na;
             string[] lines = gitLog.Split('\n');
-            if (lines.Length < 1) return "N/A";
+            if (lines.Length < 1) return na;
             string gitStatus = "";
             for (int i = 1; i < lines.Length; i++)
             {
                 gitStatus += lines[i].Trim();
             }
             string[] parts = lines[0].Trim().Split(' ');
-            if (parts.Length < 2) return "N/A";
-            if (parts[0].Length < 7) return "N/A";
-            if (gitStatus == "")
+            if (parts.Length < 2) return na;
+            if (parts[0].Length < 7) return na;
+            if (nazwaPliku)
             {
-                return parts[1] + " [" + parts[0].Substring(0, 7).ToLower() + "]";
+                if (gitStatus == "")
+                {
+                    return parts[1] + "-" + parts[0].Substring(0, 7).ToLower();
+                }
+                else
+                {
+                    return "patched-" + parts[1] + "-" + parts[0].Substring(0, 7).ToLower();
+                }
             }
             else
             {
-                return "!Zmodyfikowana oparta o " + parts[1] + " [" + parts[0].Substring(0, 7).ToLower() + "]";
+                if (gitStatus == "")
+                {
+                    return parts[1] + " [" + parts[0].Substring(0, 7).ToLower() + "]";
+                }
+                else
+                {
+                    return "!Zmodyfikowana oparta o " + parts[1] + " [" + parts[0].Substring(0, 7).ToLower() + "]";
+                }
             }
         }
 
