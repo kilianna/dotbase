@@ -87,26 +87,26 @@ goto create_package
 
 :use_vsexpress
 where VCSExpress
-del /s /q %~dp0\bin\Release
-del /s /q %~dp0\obj
-rmdir /s /q %~dp0\bin\Release
-rmdir /s /q %~dp0\obj
-VCSExpress %~dp0\DotBase.csproj /build Release
-if not exist %~dp0\bin\Release\DotBase.exe goto compile_error
+del /s /q %~dp0\dotbase\bin\Release
+del /s /q %~dp0\dotbase\obj
+rmdir /s /q %~dp0\dotbase\bin\Release
+rmdir /s /q %~dp0\dotbase\obj
+VCSExpress %~dp0\dotbase\DotBase.csproj /build Release
+if not exist %~dp0\dotbase\bin\Release\DotBase.exe goto compile_error
 
 :create_package
-del /s /q %~dp0\..\dist
-rmdir /s /q %~dp0\..\dist
-mkdir %~dp0\..\dist
-xcopy %~dp0\bin\Release %~dp0\..\dist\Release\ /E /Q /R /Y
-xcopy %~dp0\bin\szablony %~dp0\..\dist\szablony\ /E /Q /R /Y
-xcopy %~dp0\bin\wyniki %~dp0\..\dist\wyniki\ /E /Q /R /Y
-del /q %~dp0\..\dist\Release\*.pdb
-del /s /q %~dp0\..\dist\wyniki\*.html
-%~dp0\..\dist\Release\DotBase --version > %~dp0\..\dist\VERSION.txt
+del /s /q %~dp0\dist
+rmdir /s /q %~dp0\dist
+mkdir %~dp0\dist
+xcopy %~dp0\dotbase\bin\Release %~dp0\dist\Release\ /E /Q /R /Y
+xcopy %~dp0\dotbase\bin\szablony %~dp0\dist\szablony\ /E /Q /R /Y
+xcopy %~dp0\dotbase\bin\wyniki %~dp0\dist\wyniki\ /E /Q /R /Y
+del /q %~dp0\dist\Release\*.pdb
+del /s /q %~dp0\dist\wyniki\*.html
+%~dp0\dist\Release\DotBase --version > %~dp0\dist\VERSION.txt
 if errorlevel 1 goto compile_error
-set /p VERSION=<%~dp0\..\dist\VERSION.txt
-7z a %~dp0\..\dist\DotBase-%VERSION%.7z %~dp0\..\dist\Release %~dp0\..\dist\szablony %~dp0\..\dist\wyniki
+set /p VERSION=<%~dp0\dist\VERSION.txt
+7z a %~dp0\dist\DotBase-%VERSION%.7z %~dp0\dist\Release %~dp0\dist\szablony %~dp0\dist\wyniki
 exit /b 0
 
 :compile_error

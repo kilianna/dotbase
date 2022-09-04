@@ -1,10 +1,17 @@
 name: Build
 on:
-  #push:
-  #  branches: [ "master" ]
-  #pull_request:
-  #  branches: [ "master" ]
+  push:
+    branches: [ "master" ]
   workflow_dispatch:
+    inputs:
+      create_release:
+        type: choice
+        required: true
+        description: Create release
+        default: 'no'
+        options:
+        - 'no'
+        - 'yes'
 jobs:
   build:
     runs-on: windows-2019
@@ -13,9 +20,25 @@ jobs:
       - name: Generate Release Package
         shell: cmd
         run: |
-          dotbase\GeneratePackage.bat
+          GeneratePackage.bat
+      - name: Show version
+        shell: cmd
+        run: |
+          set /p VERSION=<dist\VERSION.txt
+          echo VERSION=v-%VERSION% >> %GITHUB_ENV%
+          echo v-%VERSION%
       - uses: actions/upload-artifact@v3
         with:
           name: DotBase
           path: dist\*.7z
           retention-days: 2
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: "${{ github.event.inputs.create_release == 'yes' }}"
+        with:
+          files: dist\*.7z
+          draft: false
+          tag_name: ${{ env.VERSION }}
+          fail_on_unmatched_files: true
+          target_commitish: ${{ env.commit_hash }}
+          generate_release_notes: true
