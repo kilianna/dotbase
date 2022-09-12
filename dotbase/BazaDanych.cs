@@ -868,12 +868,12 @@ namespace DotBase
             return true;
         }
 
-        public static Dictionary<string, long> stackTraceCache = new Dictionary<string, long>();
+        public static Dictionary<string, int> stackTraceCache = new Dictionary<string, int>();
 
         public void log(DateTime now, string user, string wiadomosc, string zapytanie, string stackTrace, string dodatkowe)
         {
             OleDbCommand polecenie;
-            long programId = 0;
+            int programId = 0;
             if (stackTraceCache.ContainsKey(stackTrace))
             {
                 programId = stackTraceCache[stackTrace];
@@ -895,7 +895,7 @@ namespace DotBase
                 {
                     id = 0;
                 }
-                programId = Int64.Parse(id.ToString());
+                programId = Int32.Parse(id.ToString());
                 stackTraceCache[stackTrace] = programId;
             }
             polecenie = new OleDbCommand("INSERT INTO Historia (Czas, Kto, Opis, Zapytanie, Dodatkowe, Program) VALUES (?,?,?,?,?,?)", _PolaczenieLog);
