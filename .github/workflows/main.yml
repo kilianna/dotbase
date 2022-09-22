@@ -41,3 +41,4 @@ jobs:
           tag_name: ${{ env.VERSION }}
           fail_on_unmatched_files: true
           target_commitish: ${{ github.sha }}
+          generate_release_notes: true
