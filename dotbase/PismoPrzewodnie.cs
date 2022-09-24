@@ -39,7 +39,7 @@ namespace DotBase
             StringBuilder m_templateToFill = DocumentsTemplatesFactory.getInstance().create(DocumentsTemplatesFactory.TemplateType.SCIEZKA_PISMO_PRZEWODNIE);
 
             //****************************************************************************************
-			public PismoPrzewodnie(int nrKarty, DateTime dataWystawienia, DateTime dataWykonania, string uwaga, string nrPisma, bool przedluzonaWaznosc, bool poprawa)
+			public PismoPrzewodnie(int nrKarty, DateTime dataWystawienia, DateTime dataWykonania, string uwaga, string nrPisma, bool przedluzonaWaznosc, bool poprawa) : base(Jezyk.PL)
             //****************************************************************************************
             {
                 _NrKarty = nrKarty.ToString();

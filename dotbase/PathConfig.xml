@@ -2,7 +2,8 @@
 <configuration>
   <!--Wszystkie ścieżki są ścieżkami względnymi w stosunku do pliku wykonywalnego DotBase.exe-->
   <document type="KartaPrzyjeciaSzablon" path="../Szablony/KartaPrzyjecia/"/>
-  <document type="SwiadectwoSzablon" path="../Szablony/Swiadectwo/"/>
+  <document type="SwiadectwoSzablon-pl" path="../Szablony/Swiadectwo/"/>
+  <document type="SwiadectwoSzablon-en" path="../Szablony/Swiadectwo-en/"/>
   <document type="MeldunekSzablon" path="../Szablony/Meldunek/"/>
   <document type="PismoPrzewodnieSzablon" path="../Szablony/PismoPrzewodnie/"/>
   <document type="ProtokolyDawkaSzablon" path="../Szablony/Protokoly/Dawka/"/>
@@ -10,7 +11,8 @@
   <document type="ProtokolySkazeniaSzablon" path="../Szablony/Protokoly/Skazenia/"/>
   <document type="ProtokolySygnalizacjaMocyDawkiSzablon" path="../Szablony/Protokoly/SygnalizacjaMocyDawki/"/>
   <document type="ProtokolySygnalizacjaDawkiSzablon" path="../Szablony/Protokoly/SygnalizacjaDawki/"/>
-  <document type="SwiadectwoSzablonPlikiPomocnicze" path="../Szablony/Swiadectwo/PlikiPomocnicze/"/>
+  <document type="SwiadectwoSzablonPlikiPomocnicze-pl" path="../Szablony/Swiadectwo/PlikiPomocnicze/"/>
+  <document type="SwiadectwoSzablonPlikiPomocnicze-en" path="../Szablony/Swiadectwo-en/PlikiPomocnicze/"/>
 
   <document type="KartaPrzyjeciaWynik" path="../Wyniki/KartaPrzyjecia/"/>
   <document type="SwiadectwoWynik" path="../Wyniki/Swiadectwo/"/>

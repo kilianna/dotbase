@@ -104,7 +104,7 @@ namespace DotBase
         private void button1_Click(object sender, EventArgs e)
         //---------------------------------------------------------
         {
-            string SCIEZKA_DO_ZAPISU = _DocumentationPathsLoader.GetPath("KartaPrzyjeciaWynik") + numericUpDown1.Value.ToString() + "KartaPrzyjecia.html";
+            string SCIEZKA_DO_ZAPISU = _DocumentationPathsLoader.GetPath("KartaPrzyjeciaWynik", Jezyk.PL) + numericUpDown1.Value.ToString() + "KartaPrzyjecia.html";
 
             Dokumenty.KartaPrzyjecia protokol = new Dokumenty.KartaPrzyjecia(numericUpDown1.Value.ToString());
             protokol.generateDocument(SCIEZKA_DO_ZAPISU);

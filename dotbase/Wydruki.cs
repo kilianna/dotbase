@@ -45,40 +45,42 @@ namespace DotBase
             protected String _Zapytanie;
             protected string _NrKarty;
             protected DocumentData m_documentData;
+            private Jezyk jezyk;
 
             //****************************************************************************************
-            public Wydruki(string nrKarty) : this()
+            public Wydruki(string nrKarty, Jezyk jezyk = Jezyk.PL) : this(jezyk)
             //****************************************************************************************
             {
                 this._NrKarty = nrKarty;
             }
 
             //****************************************************************************************
-            public Wydruki()
+            public Wydruki(Jezyk jezyk = Jezyk.PL)
             //****************************************************************************************
             {
+                this.jezyk = jezyk;
                 _BazaDanych = new BazaDanychWrapper();
                 
                 // pisma pomocnicze
-                SCIEZKA_PLIK_POMOCNICZY_DAWKA = _DocumentationPathsLoader.GetPath("SwiadectwoSzablonPlikiPomocnicze") + "Dawka.txt";
-                SCIEZKA_PLIK_POMOCNICZY_MOC_DAWKI = _DocumentationPathsLoader.GetPath("SwiadectwoSzablonPlikiPomocnicze") + "MocDawki.txt";
-                SCIEZKA_PLIK_POMOCNICZY_SKAZENIA = _DocumentationPathsLoader.GetPath("SwiadectwoSzablonPlikiPomocnicze") + "Skazenia.txt";
-                SCIEZKA_PLIK_POMOCNICZY_SYGNALIZACJA_DAWKI = _DocumentationPathsLoader.GetPath("SwiadectwoSzablonPlikiPomocnicze") + "SygDawki.txt";
-                SCIEZKA_PLIK_POMOCNICZY_SYGNALIZACJA_MOCY_DAWKI = _DocumentationPathsLoader.GetPath("SwiadectwoSzablonPlikiPomocnicze") + "SygMocyDawki.txt";
-                SCIEZKA_PLIK_POMOCNICZY_SYGNALIZACJA_MOCY_DAWKI_OPIS = _DocumentationPathsLoader.GetPath("SwiadectwoSzablonPlikiPomocnicze") + "SygMocyDawkiOpis.txt";
+                SCIEZKA_PLIK_POMOCNICZY_DAWKA = _DocumentationPathsLoader.GetPath("SwiadectwoSzablonPlikiPomocnicze", jezyk) + "Dawka.txt";
+                SCIEZKA_PLIK_POMOCNICZY_MOC_DAWKI = _DocumentationPathsLoader.GetPath("SwiadectwoSzablonPlikiPomocnicze", jezyk) + "MocDawki.txt";
+                SCIEZKA_PLIK_POMOCNICZY_SKAZENIA = _DocumentationPathsLoader.GetPath("SwiadectwoSzablonPlikiPomocnicze", jezyk) + "Skazenia.txt";
+                SCIEZKA_PLIK_POMOCNICZY_SYGNALIZACJA_DAWKI = _DocumentationPathsLoader.GetPath("SwiadectwoSzablonPlikiPomocnicze", jezyk) + "SygDawki.txt";
+                SCIEZKA_PLIK_POMOCNICZY_SYGNALIZACJA_MOCY_DAWKI = _DocumentationPathsLoader.GetPath("SwiadectwoSzablonPlikiPomocnicze", jezyk) + "SygMocyDawki.txt";
+                SCIEZKA_PLIK_POMOCNICZY_SYGNALIZACJA_MOCY_DAWKI_OPIS = _DocumentationPathsLoader.GetPath("SwiadectwoSzablonPlikiPomocnicze", jezyk) + "SygMocyDawkiOpis.txt";
 
                 // pliki całościowe
-                SCIEZKA_KARTA_PRZYJECIA = _DocumentationPathsLoader.GetPath("KartaPrzyjeciaSzablon") + "KartaPrzyjecia.html";
-                SCIEZKA_MELDUNEK = _DocumentationPathsLoader.GetPath("MeldunekSzablon") + "Meldunek.html";
-                SCIEZKA_PISMO_PRZEWODNIE = _DocumentationPathsLoader.GetPath("PismoPrzewodnieSzablon") + "PismoPrzewodnie.html";
-                SCIEZKA_SWIADECTWO = _DocumentationPathsLoader.GetPath("SwiadectwoSzablon") + "Swiadectwo.html";
+                SCIEZKA_KARTA_PRZYJECIA = _DocumentationPathsLoader.GetPath("KartaPrzyjeciaSzablon", jezyk) + "KartaPrzyjecia.html";
+                SCIEZKA_MELDUNEK = _DocumentationPathsLoader.GetPath("MeldunekSzablon", jezyk) + "Meldunek.html";
+                SCIEZKA_PISMO_PRZEWODNIE = _DocumentationPathsLoader.GetPath("PismoPrzewodnieSzablon", jezyk) + "PismoPrzewodnie.html";
+                SCIEZKA_SWIADECTWO = _DocumentationPathsLoader.GetPath("SwiadectwoSzablon", jezyk) + "Swiadectwo.html";
 
-                SCIEZKA_PROTOKOL_DAWKA = _DocumentationPathsLoader.GetPath("ProtokolyDawkaSzablon") + "Dawka.html";
-                SCIEZKA_PROTOKOL_MOC_DAWKI = _DocumentationPathsLoader.GetPath("ProtokolyMocDawkiSzablon") + "MocDawki.html";
-                SCIEZKA_PROTOKOL_SKAZENIA = _DocumentationPathsLoader.GetPath("ProtokolySkazeniaSzablon") + "Skazenia.html";
-                SCIEZKA_PROTOKOL_SYGNALIZACJA_DAWKI = _DocumentationPathsLoader.GetPath("ProtokolySygnalizacjaDawkiSzablon") + "SygDawki.html";
-                SCIEZKA_PROTOKOL_SYGNALIZACJA_MOCY_DAWKI_OPIS = _DocumentationPathsLoader.GetPath("ProtokolySygnalizacjaMocyDawkiSzablon") + "SygMocyDawkiOpis.html";
-                SCIEZKA_PROTOKOL_SYGNALIZACJA_MOCY_DAWKI_TABELA = _DocumentationPathsLoader.GetPath("ProtokolySygnalizacjaMocyDawkiSzablon") + "SygMocyDawkiTabela.html";
+                SCIEZKA_PROTOKOL_DAWKA = _DocumentationPathsLoader.GetPath("ProtokolyDawkaSzablon", jezyk) + "Dawka.html";
+                SCIEZKA_PROTOKOL_MOC_DAWKI = _DocumentationPathsLoader.GetPath("ProtokolyMocDawkiSzablon", jezyk) + "MocDawki.html";
+                SCIEZKA_PROTOKOL_SKAZENIA = _DocumentationPathsLoader.GetPath("ProtokolySkazeniaSzablon", jezyk) + "Skazenia.html";
+                SCIEZKA_PROTOKOL_SYGNALIZACJA_DAWKI = _DocumentationPathsLoader.GetPath("ProtokolySygnalizacjaDawkiSzablon", jezyk) + "SygDawki.html";
+                SCIEZKA_PROTOKOL_SYGNALIZACJA_MOCY_DAWKI_OPIS = _DocumentationPathsLoader.GetPath("ProtokolySygnalizacjaMocyDawkiSzablon", jezyk) + "SygMocyDawkiOpis.html";
+                SCIEZKA_PROTOKOL_SYGNALIZACJA_MOCY_DAWKI_TABELA = _DocumentationPathsLoader.GetPath("ProtokolySygnalizacjaMocyDawkiSzablon", jezyk) + "SygMocyDawkiTabela.html";
 
                 m_documentData = new DocumentData();
             }

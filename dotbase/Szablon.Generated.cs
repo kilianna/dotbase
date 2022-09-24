@@ -173,6 +173,11 @@ namespace DotBase
                 SetField("Wielkosc_fizyczna", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Jednostki Wielkosc_fizyczna_en(string value)
+            {
+                SetField("Wielkosc_fizyczna_en", value, OleDbType.WChar);
+                return this;
+            }
         }
         public class Szablon_Karta_przyjecia : Tabela
         {

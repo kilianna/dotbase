@@ -1,0 +1,12 @@
+﻿<div class="wzornag"><!c1>) Calibration with surface sources</div>
+<table id="wynikiska">
+	<tr><th rowspan="3">Lp.</th><th colspan="3">Probe</th><th colspan="3">Source</th><th rowspan="3">Instrument unit</th><th rowspan="2">Calibration factor <br> per instrument unit (*)</th></tr>
+	<tr><td rowspan="2">Type</td><td rowspan="2">Serial number</td><td>U<sub>z</sub></td><td rowspan="2">Isotope</td><td rowspan="2">Type of radiation</td><td>Surface emission</td></tr>
+	<tr><td>V</td><td>1/(cm<sup>2</sup>&sdot;s)</td><td>1/(cm<sup>2</sup>&sdot;s)</td></tr>				
+	<!tabela>	
+	</table>
+<div id="komentarzska"><p style="margin: 0; padding: 0;">(*) 
+the number of particles emitted by a surface of 1 cm<sup>2</sup> in 1 second is calculated by multiplying the instrument indications</p>
+<p style="text-indent: 4mm; margin: 0; padding: 0;">(expressed in the units given in the table) by the calibration factor</p>
+</div>
+<div class="uwaga"><!uwaga></div>

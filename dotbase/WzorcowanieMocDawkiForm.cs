@@ -582,7 +582,7 @@ namespace DotBase
         private void protokółToolStripMenuItem_Click(object sender, EventArgs e)
         //---------------------------------------------------------------
         {
-            string sciezka = _DocumentationPathsLoader.GetPath("ProtokolyMocDawkiWynik") + textBox1.Text + "MocDawki.html";
+            string sciezka = _DocumentationPathsLoader.GetPath("ProtokolyMocDawkiWynik", Jezyk.PL) + textBox1.Text + "MocDawki.html";
 
             Dokumenty.ProtokolMocDawkiModel model = new Dokumenty.ProtokolMocDawkiModel(
                     new DanePodstawoweModel(textBox1.Text, textBox6.Text, dateTimePicker1.Value),

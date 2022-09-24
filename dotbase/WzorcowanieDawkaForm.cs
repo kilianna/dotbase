@@ -639,7 +639,7 @@ namespace DotBase
         // tworzenie protokołu
         private void protokółToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string sciezka = _DocumentationPathsLoader.GetPath("ProtokolyDawkaWynik") + textBox1.Text + "Dawka.html";
+            string sciezka = _DocumentationPathsLoader.GetPath("ProtokolyDawkaWynik", Jezyk.PL) + textBox1.Text + "Dawka.html";
             
         
         

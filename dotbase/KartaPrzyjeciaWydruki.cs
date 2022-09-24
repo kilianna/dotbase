@@ -16,7 +16,7 @@ namespace DotBase
 
             public KartaPrzyjecia(string idKarty) : base(idKarty)
             {
-                templateToFill = DocumentsTemplatesFactory.getInstance().create(DocumentsTemplatesFactory.TemplateType.SCIEZKA_KARTA_PRZYJECIA);
+                templateToFill = DocumentsTemplatesFactory.getInstance(Jezyk.PL).create(DocumentsTemplatesFactory.TemplateType.SCIEZKA_KARTA_PRZYJECIA);
             }
 
             #region Document generation
