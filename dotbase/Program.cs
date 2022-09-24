@@ -26,6 +26,8 @@ namespace DotBase
             ci.NumberFormat.CurrencyGroupSeparator = ".";
             ci.NumberFormat.NumberGroupSeparator = ".";
             ci.NumberFormat.PercentGroupSeparator = ".";
+            ci.DateTimeFormat.DateSeparator = "-";
+            ci.DateTimeFormat.ShortDatePattern = "yyyy-MM-dd";
             Thread.CurrentThread.CurrentCulture = ci;
             Thread.CurrentThread.CurrentUICulture = ci;
             Application.EnableVisualStyles();
