@@ -8,6 +8,9 @@ call :check_tools_first
 call :check_tools %ProgramFiles%\Git\mingw64\bin;%ProgramFiles%\Git\usr\local\bin;%ProgramFiles%\Git\usr\bin
 call :check_tools %ProgramFiles(x86)%\Git\mingw64\bin;%ProgramFiles(x86)%\Git\usr\local\bin;%ProgramFiles(x86)%\Git\usr\bin
 call :check_tools %ProgramW6432%\Git\mingw64\bin;%ProgramW6432%\Git\usr\local\bin;%ProgramW6432%\Git\usr\bin
+call :check_tools %ProgramFiles%\Git\mingw32\bin;%ProgramFiles%\Git\usr\local\bin;%ProgramFiles%\Git\usr\bin
+call :check_tools %ProgramFiles(x86)%\Git\mingw32\bin;%ProgramFiles(x86)%\Git\usr\local\bin;%ProgramFiles(x86)%\Git\usr\bin
+call :check_tools %ProgramW6432%\Git\mingw32\bin;%ProgramW6432%\Git\usr\local\bin;%ProgramW6432%\Git\usr\bin
 call :check_reg HKEY_LOCAL_MACHINE\SOFTWARE\GitForWindows InstallPath /reg:32
 call :check_reg HKEY_CURRENT_USER\SOFTWARE\GitForWindows InstallPath /reg:32
 call :check_reg HKEY_LOCAL_MACHINE\SOFTWARE\GitForWindows InstallPath /reg:64
