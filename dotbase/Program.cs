@@ -32,6 +32,7 @@ namespace DotBase
             Thread.CurrentThread.CurrentUICulture = ci;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Application.AddMessageFilter(new HelpKeyFilter());
             Application.Run(new LogowanieForm());
         }
     }

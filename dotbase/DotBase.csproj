@@ -92,6 +92,7 @@
     <Compile Include="HasloForm.Designer.cs">
       <DependentUpon>HasloForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelpKeyFilter.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="MeldunekModel.cs" />
     <Compile Include="Multimap.cs" />
