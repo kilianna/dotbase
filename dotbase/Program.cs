@@ -15,8 +15,8 @@ namespace DotBase
         [STAThread]
         static void Main(string[] args)
         {
-            if (args.Length > 0 && args[0] == "--version") {
-                System.Console.Out.Write(N.Wersja(true));
+            if (args.Length > 0 && (args[0] == "--version" || args[0] == "--pretty-version")) {
+                System.Console.Out.Write(N.Wersja(args[0] == "--version").TrimStart('!'));
                 return;
             }
             var ci = System.Globalization.CultureInfo.CreateSpecificCulture("pl-PL");

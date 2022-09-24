@@ -1,0 +1,133 @@
+% !TeX spellcheck = pl_PL
+
+% Dokument
+\documentclass[a4paper,12pt,twoside]{article}
+
+% Pakiety
+\usepackage{ifpdf}
+\usepackage{polski}
+\usepackage{ifthen}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{longtable}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{indentfirst}
+\usepackage{multirow}
+\ifpdf
+\usepackage[pdftex]{graphicx}
+\usepackage{epstopdf}
+\usepackage[
+	hidelinks,
+	linktoc=all,
+	pdfauthor={Anna Kilian},
+	pdftitle={TODO: Tytył dokumentu},
+	pdfsubject={TODO: Opis dokumentu},
+	pdfkeywords={TODO: słowa kluczowe},
+	pdfproducer={Latex},
+	pdfcreator={pdflatex}
+	]{hyperref}
+\else
+\usepackage{graphicx}
+\fi
+\usepackage{caption}
+\usepackage{tokenizer}
+\usepackage[justification=centering]{caption}
+\usepackage{rotating}
+\usepackage[all]{nowidow}
+\usepackage{subcaption}
+
+% Wymiary strony
+\setlength{\voffset}{-25.4mm}
+\setlength{\hoffset}{-25.4mm}
+\setlength{\textheight}{236mm}
+\setlength{\textwidth}{160mm}
+\setlength{\footskip}{10mm}
+\setlength{\oddsidemargin}{30mm}
+\setlength{\evensidemargin}{20mm}
+\setlength{\topmargin}{20mm}
+\setlength{\headsep}{10mm}
+\setlength{\headheight}{0mm}
+
+% Styl akapitu
+\setlength{\parindent}{8mm}
+\setlength{\parskip}{2.5mm}
+\linespread{1.25}
+\raggedbottom
+
+% Dzielenie wyrazów
+%\tolerance=1
+\emergencystretch=\maxdimen
+%\hyphenpenalty=10000
+%\hbadness=10000
+\righthyphenmin=6
+\lefthyphenmin=6
+
+% Style nagłówków
+\titleformat{\section}{\normalfont\LARGE\bfseries\sffamily}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\Large\bfseries\sffamily}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\large\bfseries\sffamily}{\thesubsubsection}{1em}{}
+
+% Nagłówek i stopka
+\newcommand{\normalnastopka}{
+	\lhead{~\ifthenelse{\isodd{\thepage}}{\small{TODO: A}}{\small{TODO: B}}}
+	\chead{\ifthenelse{\isodd{\thepage}}{\small{TODO: C}}{\small{TODO: D}}}
+	\rhead{\ifthenelse{\isodd{\thepage}}{\small{TODO: E}}{\small{TODO: F}}~}
+	\lfoot{~\ifthenelse{\isodd{\thepage}}{TODO: G}{\thepage}}
+	\cfoot{\ifthenelse{\isodd{\thepage}}{TODO: H}{TODO: I}}
+	\rfoot{\ifthenelse{\isodd{\thepage}}{\thepage}{TODO: J}~}
+	\renewcommand{\headrulewidth}{0.3pt}
+	\renewcommand{\footrulewidth}{0.3pt}
+}
+
+
+\newcommand{\czystastopka}{
+	\lhead{}
+	\chead{}
+	\rhead{}
+	\lfoot{}
+	\cfoot{}
+	\rfoot{}
+	\renewcommand{\headrulewidth}{0pt}
+	\renewcommand{\footrulewidth}{0pt}
+}
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+\renewcommand{\subsectionmark}[1]{}
+\renewcommand{\subsubsectionmark}[1]{}
+
+% Numerowanie rysunków
+\captionsetup{labelsep = period}
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+
+% Prefix na początek rozdziału rozdziały
+\newcommand{\rozdzial}{
+	\cleardoublepage
+	\setcounter{figure}{0}
+}
+
+% Nowa komenda dodająca poprawnie PNG
+\ifpdf
+\newcommand{\obrazpng}[3]{\includegraphics[width=#2]{#3}}
+\else
+\newcommand{\obrazpng}[3]{\includegraphics[bb = #1, width=#2]{#3}}
+\fi
+
+% Wymuszenie wysokiej jakości przy konwersji EPS do PDF
+% (chyba już nie potrzebne w nowszej wersji)
+%\ifpdf
+%\epstopdfDeclareGraphicsRule{.eps}{pdf}{.pdf}{%
+%	epstopdf --gsopt=-dPDFSETTINGS=/prepress #1 --outfile=\OutputFile 
+%	%ps2pdf -dEPSCrop -dPDFSETTINGS=/prepress #1 \OutputFile
+%}
+%\fi
+
+\titleformat{\section}
+{\rmfamily\LARGE\bfseries}
+{\thesection}{1em}{}
+
+\titleformat{\subsection}
+{\rmfamily\large\bfseries}
+{\thesubsection}{1em}{}

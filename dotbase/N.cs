@@ -61,7 +61,7 @@ namespace DotBase
                 }
                 else
                 {
-                    return "!Zmodyfikowana oparta o " + parts[1] + " [" + parts[0].Substring(0, 7).ToLower() + "]";
+                    return "!zmodyfikowana " + parts[1] + " [" + parts[0].Substring(0, 7).ToLower() + "]";
                 }
             }
         }

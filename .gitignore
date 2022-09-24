@@ -8,3 +8,7 @@
 /*.doc
 /dotbase/Resources/logTemplate.accdb
 /dist/
+/manual/**/*-converted-to.pdf
+/manual/Instrukcja.*
+!/manual/Instrukcja.tex
+/manual/Wersja.tex

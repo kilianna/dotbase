@@ -103,9 +103,10 @@ xcopy %~dp0\dotbase\bin\szablony %~dp0\dist\szablony\ /E /Q /R /Y
 xcopy %~dp0\dotbase\bin\wyniki %~dp0\dist\wyniki\ /E /Q /R /Y
 del /q %~dp0\dist\Release\*.pdb
 del /s /q %~dp0\dist\wyniki\*.html
-%~dp0\dist\Release\DotBase --version > %~dp0\dist\VERSION.txt
+%~dp0\dist\Release\DotBase --version > %~dp0\dist\FN-VERSION.txt
+%~dp0\dist\Release\DotBase --pretty-version > %~dp0\dist\VERSION.txt
 if errorlevel 1 goto compile_error
-set /p VERSION=<%~dp0\dist\VERSION.txt
+set /p VERSION=<%~dp0\dist\FN-VERSION.txt
 7z a %~dp0\dist\DotBase-%VERSION%.7z %~dp0\dist\Release %~dp0\dist\szablony %~dp0\dist\wyniki
 exit /b 0
 
