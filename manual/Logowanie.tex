@@ -24,7 +24,7 @@ W pierwszej kolejności należy podać bezwzględną ścieżkę do pliku bazy da
 \textbf{TIP:} Program zapamiętuje ostatnią podaną ścieżkę i automatycznie wpisuje ją przy kolejnym uruchomieniu.
 
 Jeżeli ścieżka do bazy danych jest wybrana należy wpisać przydzielony login i hasło i nacisnąć przycisk \textbf{"Zaloguj"}.
-Jeżeli mamy uprawnienia administratora, to po wpisaniu poprawnego loginu i hasła pojawia się dodatkowy przycisk \textbf{"Administracja"} (rys. \ref{oknoLogowaniaAdmina}). Przycisk ten przenosi nas do części programu związanej z zarządzaniem hasłami i dostępem użytkowników (patrz \ref{}).
+Jeżeli mamy uprawnienia administratora, to po wpisaniu poprawnego loginu i hasła pojawia się dodatkowy przycisk \textbf{"Administracja"} (rys. \ref{oknoLogowaniaAdmina}). Przycisk ten przenosi nas do części programu związanej z zarządzaniem hasłami i dostępem użytkowników (patrz \ref{admin}).
 
 \begin{figure}[htb]
 	\centering
@@ -33,6 +33,28 @@ Jeżeli mamy uprawnienia administratora, to po wpisaniu poprawnego loginu i has�
 	\label{oknoLogowaniaAdmina}
 \end{figure}
 
+Po zalogowaniu przechodzimy bezpośrednio do menu głównego programu \ref{menuGlowne}. Stąd możemy przejść do poszczególnych sekcji programu:
+\begin{itemize}
+	\item \textbf{"Biuro"} - wprowadzanie zleceń i przyrządów, ustalanie cen, przygotowywanie meldunków - rozdz. \ref{biuro}
+	\item \textbf{"Wzorcowanie"} - wprowadzanie wyników wzorcowania, obliczenia parametrów kalibracji, przygotowywanie protokołów, świadectw i pism przewodnich - rozdz. \ref{wzorcowanie}
+	\item \textbf{"Wyszukiwanie"} - różnego rodzaju wyszukiwania i statystyki - rozdz. \ref{wyszukiwanie}
+	\item \textbf{"Ustawienia"} - zmiana ustawień, parametrów, wprowadzanie danych wzorcowych - rozdz. \ref{ustawienia}
+\end{itemize}
+
+Wciśnięcie przycisku \textbf{"Wyloguj"} spowoduje wylogowanie z bazy i przejście ponownie do okna logowania.
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics{obrazki/Logowanie/menu_glowne.png}
+	\caption{Menu główne}
+	\label{menuGlowne}
+\end{figure}
+
+\subsection{Administracja}
+\label{admin}
+
+Ta część programu pozwala administrować dostępem użytkowników do bazy danych. Jest tu lista wszystkich użytkowników mających dostęp do bazy danych. Można dodawać kolejnych poprzez wpisanie ich do tabeli. Usunięcie zaznaczonego użytkownika następuje po wciśnięciu przycisku \textbf{"Usuń użytkownika"}. Z tego poziomu można także nadawać lub odbierać uprawnienia administratora poprzez zaznaczenie lub odznaczenie pola wyboru w kolumnie \textbf{"Administrator"}.
+
 \begin{figure}[htb]
 	\centering
 	\includegraphics{obrazki/Logowanie/administracja.png}
@@ -40,12 +62,22 @@ Jeżeli mamy uprawnienia administratora, to po wpisaniu poprawnego loginu i has�
 	\label{administracja}
 \end{figure}
 
+Po wciśnięciu przycisku \textbf{"Hasło do bazy"} otwiera się kolejne okno umożliwiające zmianę ogólnego hasła do bazy danych. Hasło powinno być nie krótsze niż 8 znaków i zawierać co najmniej jedną literę i jedną cyfrę. Zmianę hasła należy zatwierdzić wciskając przycisk \textbf{"OK"}.
+
+\textbf{Ważne:} Aby zmienić ogólne hasło do bazy danych należy znać aktualne hasło.
+
 \begin{figure}[htb]
 	\centering
 	\includegraphics{obrazki/Logowanie/zmiana_hasla_bazy.png}
 	\caption{Okno zmiany hasła do bazy danych}
 	\label{zmianaHaslaBazy}
 \end{figure}
+
+Aby zmienić hasło do programu dla danego użytkownika należy wcisnąć odpowiadający mu przycisk "Zmień hasło" (kolumna "Hasło"). Hasło powinno być nie krótsze niż 8 znaków i zawierać co najmniej jedną literę i jedną cyfrę. Zmianę hasła należy zatwierdzić wciskając przycisk \textbf{"OK"}.
+
+\textbf{TIP:} Aby zmienić hasło użytkownika nie trzeba znać jego aktualnego hasła. Jest to więc funkcja przydatna do zresetowania hasła w przypadku, kiedy użytkownik zapomni swojego hasła.
+
+Użytkownik może sam zmienić swoje hasło. Jest to opcja dostępna w menu \textbf{"Ustawienia"} - patrz rozdz. \ref{zmiana_hasla}. 
 
 \begin{figure}[htb]
 	\centering

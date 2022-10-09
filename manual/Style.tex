@@ -23,9 +23,9 @@
 	hidelinks,
 	linktoc=all,
 	pdfauthor={Anna Kilian},
-	pdftitle={TODO: Tytył dokumentu},
-	pdfsubject={TODO: Opis dokumentu},
-	pdfkeywords={TODO: słowa kluczowe},
+	pdftitle={DotBase Manual},
+	pdfsubject={Instrukcja obsługi programu DotBase.},
+	pdfkeywords={DotBase, instrukcja, manual},
 	pdfproducer={Latex},
 	pdfcreator={pdflatex}
 	]{hyperref}
@@ -72,12 +72,12 @@
 
 % Nagłówek i stopka
 \newcommand{\normalnastopka}{
-	\lhead{~\ifthenelse{\isodd{\thepage}}{\small{TODO: A}}{\small{TODO: B}}}
-	\chead{\ifthenelse{\isodd{\thepage}}{\small{TODO: C}}{\small{TODO: D}}}
-	\rhead{\ifthenelse{\isodd{\thepage}}{\small{TODO: E}}{\small{TODO: F}}~}
-	\lfoot{~\ifthenelse{\isodd{\thepage}}{TODO: G}{\thepage}}
-	\cfoot{\ifthenelse{\isodd{\thepage}}{TODO: H}{TODO: I}}
-	\rfoot{\ifthenelse{\isodd{\thepage}}{\thepage}{TODO: J}~}
+	\lhead{~\ifthenelse{\isodd{\thepage}}{\small{IFJ PAN}}{\small{20 października 2022}}}
+	\chead{\ifthenelse{\isodd{\thepage}}{\small{Instrukcja obsługi programu DotBase }}{\small{}}}
+	\rhead{\ifthenelse{\isodd{\thepage}}{\small{Anna Kilian}}{\small{Laboratorium Wzorcowania Przyrządów Dozymetrycznych}}~}
+	\lfoot{~\ifthenelse{\isodd{\thepage}}{}{\thepage}}
+	\cfoot{\ifthenelse{\isodd{\thepage}}{DotBase manual}{DotBase manual}}
+	\rfoot{\ifthenelse{\isodd{\thepage}}{\thepage}{Ver. TODO: zrobić wersję}~}
 	\renewcommand{\headrulewidth}{0.3pt}
 	\renewcommand{\footrulewidth}{0.3pt}
 }
