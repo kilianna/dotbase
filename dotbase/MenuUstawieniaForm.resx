@@ -123,10 +123,13 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>62, 30</value>
+    <value>83, 150</value>
+  </data>
+  <data name="button1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 40</value>
+    <value>240, 49</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="button1.TabIndex" type="System.Int32, mscorlib">
@@ -154,10 +157,13 @@
     <value>NoControl</value>
   </data>
   <data name="button2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>62, 76</value>
+    <value>83, 36</value>
+  </data>
+  <data name="button2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="button2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 40</value>
+    <value>240, 49</value>
   </data>
   <data name="button2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -184,16 +190,19 @@
     <value>NoControl</value>
   </data>
   <data name="button3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>62, 122</value>
+    <value>83, 93</value>
+  </data>
+  <data name="button3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="button3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 40</value>
+    <value>240, 49</value>
   </data>
   <data name="button3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="button3.Text" xml:space="preserve">
-    <value>Wzorcowanie Źródeł</value>
+    <value>Dane wzorcowe źródeł powierzchniowych</value>
   </data>
   <data name="&gt;&gt;button3.Name" xml:space="preserve">
     <value>button3</value>
@@ -214,10 +223,13 @@
     <value>NoControl</value>
   </data>
   <data name="button4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>62, 168</value>
+    <value>83, 207</value>
+  </data>
+  <data name="button4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="button4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 40</value>
+    <value>240, 49</value>
   </data>
   <data name="button4.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -244,10 +256,13 @@
     <value>NoControl</value>
   </data>
   <data name="button5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>62, 306</value>
+    <value>83, 377</value>
+  </data>
+  <data name="button5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="button5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 40</value>
+    <value>240, 49</value>
   </data>
   <data name="button5.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -274,16 +289,19 @@
     <value>NoControl</value>
   </data>
   <data name="hasloBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>62, 214</value>
+    <value>83, 263</value>
+  </data>
+  <data name="hasloBtn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="hasloBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 40</value>
+    <value>240, 49</value>
   </data>
   <data name="hasloBtn.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="hasloBtn.Text" xml:space="preserve">
-    <value>Zmień hasło</value>
+    <value>Zmiana hasła użytkownika</value>
   </data>
   <data name="&gt;&gt;hasloBtn.Name" xml:space="preserve">
     <value>hasloBtn</value>
@@ -304,16 +322,19 @@
     <value>NoControl</value>
   </data>
   <data name="eksportujBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>62, 260</value>
+    <value>83, 320</value>
+  </data>
+  <data name="eksportujBtn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="eksportujBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 40</value>
+    <value>240, 49</value>
   </data>
   <data name="eksportujBtn.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="eksportujBtn.Text" xml:space="preserve">
-    <value>Eksportuj</value>
+    <value>Eksport bazy danych</value>
   </data>
   <data name="&gt;&gt;eksportujBtn.Name" xml:space="preserve">
     <value>eksportujBtn</value>
@@ -340,10 +361,13 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>8, 16</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>310, 373</value>
+    <value>413, 459</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Menu - Ustawienia</value>

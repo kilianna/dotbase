@@ -37,49 +37,54 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(76, 12);
+            this.button1.Location = new System.Drawing.Point(90, 15);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(140, 40);
+            this.button1.Size = new System.Drawing.Size(228, 49);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Sortowanie Zleceniodawców";
+            this.button1.Text = "Liczba przyrządów zleceniodawców w danym okresie";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(76, 58);
+            this.button2.Location = new System.Drawing.Point(90, 71);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(140, 40);
+            this.button2.Size = new System.Drawing.Size(228, 49);
             this.button2.TabIndex = 1;
-            this.button2.Text = "Sortowanie nieprzysyłających";
+            this.button2.Text = "Nieaktywni zleceniodawcy";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(76, 104);
+            this.button3.Location = new System.Drawing.Point(90, 128);
+            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(140, 40);
+            this.button3.Size = new System.Drawing.Size(228, 49);
             this.button3.TabIndex = 2;
-            this.button3.Text = "Wyszukiwanie po przyrządzie";
+            this.button3.Text = "Zleceniodawcy posiadający dany typ przyrządu";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(76, 150);
+            this.button4.Location = new System.Drawing.Point(90, 185);
+            this.button4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(140, 40);
+            this.button4.Size = new System.Drawing.Size(228, 49);
             this.button4.TabIndex = 3;
-            this.button4.Text = "Pokaż przyrządy zleceniodawcy";
+            this.button4.Text = "Przyrządy danego zleceniodawcy";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(76, 196);
+            this.button5.Location = new System.Drawing.Point(90, 241);
+            this.button5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(140, 40);
+            this.button5.Size = new System.Drawing.Size(228, 49);
             this.button5.TabIndex = 4;
             this.button5.Text = "Zakończ";
             this.button5.UseVisualStyleBackColor = true;
@@ -87,14 +92,15 @@
             // 
             // MenuStatystykiZleceniodawcy
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 255);
+            this.ClientSize = new System.Drawing.Size(411, 314);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MenuStatystykiZleceniodawcy";
             this.Text = "Menu Statystyki Zleceniodawcy";
             this.ResumeLayout(false);

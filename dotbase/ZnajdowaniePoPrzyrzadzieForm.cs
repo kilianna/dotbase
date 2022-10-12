@@ -78,5 +78,10 @@ namespace DotBase
             comboBox1.Items.AddRange(wynik.ToArray<string>());
             comboBox1.SelectionStart = comboBox1.Text.Length;
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

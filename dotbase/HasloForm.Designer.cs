@@ -91,8 +91,8 @@
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(244, 26);
             label4.TabIndex = 10;
-            label4.Text = "Hasło musi być niekrótsze niż 8 znaków, zawierać\r\nco najmniej jedną literę i co n" +
-                "ajmniej jendą cyfrę.";
+            label4.Text = "Hasło musi być nie krótsze niż 8 znaków, zawierać\r\nco najmniej jedną literę i co n" +
+                "ajmniej jedną cyfrę.";
             label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label5

@@ -366,7 +366,7 @@ namespace DotBase
             _TrybEdycji = true;
             button1.Enabled = button2.Enabled = button3.Enabled = button4.Enabled = false;
             textBox1.Enabled = numericUpDown1.Enabled = numericUpDown2.Enabled = false;
-            button5.Text = "Zatwierdź edycję.";
+            button5.Text = "Zatwierdź edycję";
 
             textBox2.Enabled = textBox3.Enabled = rabatBox.Enabled =
             textBox4.Enabled = textBox5.Enabled = emailTextBox.Enabled = textBox6.Enabled = jestIFJ.Enabled = true;

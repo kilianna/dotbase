@@ -54,9 +54,10 @@
             // zakonczBtn
             // 
             zakonczBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            zakonczBtn.Location = new System.Drawing.Point(321, 201);
+            zakonczBtn.Location = new System.Drawing.Point(79, 247);
+            zakonczBtn.Margin = new System.Windows.Forms.Padding(4);
             zakonczBtn.Name = "zakonczBtn";
-            zakonczBtn.Size = new System.Drawing.Size(115, 34);
+            zakonczBtn.Size = new System.Drawing.Size(153, 42);
             zakonczBtn.TabIndex = 8;
             zakonczBtn.Text = "Zakończ";
             zakonczBtn.UseVisualStyleBackColor = true;
@@ -65,36 +66,40 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(12, 9);
+            label4.Location = new System.Drawing.Point(16, 11);
+            label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(65, 13);
+            label4.Size = new System.Drawing.Size(82, 17);
             label4.TabIndex = 0;
             label4.Text = "&Użytkownik:";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(12, 68);
+            label5.Location = new System.Drawing.Point(16, 84);
+            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(39, 13);
+            label5.Size = new System.Drawing.Size(48, 17);
             label5.TabIndex = 2;
             label5.Text = "&Hasło:";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(12, 133);
+            label6.Location = new System.Drawing.Point(16, 164);
+            label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(90, 13);
+            label6.Size = new System.Drawing.Size(118, 17);
             label6.TabIndex = 4;
             label6.Text = "&Plik bazy danych:";
             // 
             // wybierzBtn
             // 
             wybierzBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            wybierzBtn.Location = new System.Drawing.Point(359, 147);
+            wybierzBtn.Location = new System.Drawing.Point(482, 181);
+            wybierzBtn.Margin = new System.Windows.Forms.Padding(4);
             wybierzBtn.Name = "wybierzBtn";
-            wybierzBtn.Size = new System.Drawing.Size(124, 24);
+            wybierzBtn.Size = new System.Drawing.Size(165, 30);
             wybierzBtn.TabIndex = 6;
             wybierzBtn.Text = "&Wybierz...";
             wybierzBtn.UseVisualStyleBackColor = true;
@@ -103,9 +108,10 @@
             // zalogujBtn
             // 
             this.zalogujBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.zalogujBtn.Location = new System.Drawing.Point(59, 201);
+            this.zalogujBtn.Location = new System.Drawing.Point(428, 247);
+            this.zalogujBtn.Margin = new System.Windows.Forms.Padding(4);
             this.zalogujBtn.Name = "zalogujBtn";
-            this.zalogujBtn.Size = new System.Drawing.Size(116, 34);
+            this.zalogujBtn.Size = new System.Drawing.Size(155, 42);
             this.zalogujBtn.TabIndex = 7;
             this.zalogujBtn.Text = "Zaloguj";
             this.zalogujBtn.UseVisualStyleBackColor = true;
@@ -126,9 +132,10 @@
             this.hasloTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.hasloTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.hasloTextBox.Location = new System.Drawing.Point(15, 84);
+            this.hasloTextBox.Location = new System.Drawing.Point(20, 103);
+            this.hasloTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.hasloTextBox.Name = "hasloTextBox";
-            this.hasloTextBox.Size = new System.Drawing.Size(468, 32);
+            this.hasloTextBox.Size = new System.Drawing.Size(626, 38);
             this.hasloTextBox.TabIndex = 3;
             this.hasloTextBox.UseSystemPasswordChar = true;
             this.hasloTextBox.TextChanged += new System.EventHandler(this.hasloTextBox_TextChanged);
@@ -137,9 +144,10 @@
             // 
             this.infoLabel.AutoSize = true;
             this.infoLabel.ForeColor = System.Drawing.Color.Red;
-            this.infoLabel.Location = new System.Drawing.Point(12, 181);
+            this.infoLabel.Location = new System.Drawing.Point(16, 223);
+            this.infoLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.infoLabel.Name = "infoLabel";
-            this.infoLabel.Size = new System.Drawing.Size(16, 13);
+            this.infoLabel.Size = new System.Drawing.Size(20, 17);
             this.infoLabel.TabIndex = 13;
             this.infoLabel.Text = "...";
             // 
@@ -148,9 +156,10 @@
             this.bazaTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.bazaTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DotBase.Properties.Settings.Default, "PlikBazy", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.bazaTextBox.Location = new System.Drawing.Point(15, 149);
+            this.bazaTextBox.Location = new System.Drawing.Point(20, 183);
+            this.bazaTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.bazaTextBox.Name = "bazaTextBox";
-            this.bazaTextBox.Size = new System.Drawing.Size(338, 20);
+            this.bazaTextBox.Size = new System.Drawing.Size(452, 22);
             this.bazaTextBox.TabIndex = 5;
             this.bazaTextBox.Text = global::DotBase.Properties.Settings.Default.PlikBazy;
             this.bazaTextBox.TextChanged += new System.EventHandler(this.bazaTextBox_TextChanged);
@@ -161,18 +170,20 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.uzytkownikTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DotBase.Properties.Settings.Default, "OstatniUzytkownik", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.uzytkownikTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.uzytkownikTextBox.Location = new System.Drawing.Point(15, 25);
+            this.uzytkownikTextBox.Location = new System.Drawing.Point(20, 31);
+            this.uzytkownikTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.uzytkownikTextBox.Name = "uzytkownikTextBox";
-            this.uzytkownikTextBox.Size = new System.Drawing.Size(468, 32);
+            this.uzytkownikTextBox.Size = new System.Drawing.Size(626, 38);
             this.uzytkownikTextBox.TabIndex = 1;
             this.uzytkownikTextBox.Text = global::DotBase.Properties.Settings.Default.OstatniUzytkownik;
             this.uzytkownikTextBox.TextChanged += new System.EventHandler(this.uzytkownikTextBox_TextChanged);
             // 
             // administracjaBtn
             // 
-            this.administracjaBtn.Location = new System.Drawing.Point(190, 201);
+            this.administracjaBtn.Location = new System.Drawing.Point(253, 247);
+            this.administracjaBtn.Margin = new System.Windows.Forms.Padding(4);
             this.administracjaBtn.Name = "administracjaBtn";
-            this.administracjaBtn.Size = new System.Drawing.Size(116, 34);
+            this.administracjaBtn.Size = new System.Drawing.Size(155, 42);
             this.administracjaBtn.TabIndex = 14;
             this.administracjaBtn.Text = "Administracja";
             this.administracjaBtn.UseVisualStyleBackColor = true;
@@ -186,9 +197,10 @@
             this.wersjaLabel.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.wersjaLabel.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.wersjaLabel.ForeColor = System.Drawing.Color.Gray;
-            this.wersjaLabel.Location = new System.Drawing.Point(12, 254);
+            this.wersjaLabel.Location = new System.Drawing.Point(16, 309);
+            this.wersjaLabel.Margin = new System.Windows.Forms.Padding(4);
             this.wersjaLabel.Name = "wersjaLabel";
-            this.wersjaLabel.Size = new System.Drawing.Size(479, 14);
+            this.wersjaLabel.Size = new System.Drawing.Size(642, 17);
             this.wersjaLabel.TabIndex = 16;
             this.wersjaLabel.Text = "Wersja programu: ";
             this.wersjaLabel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -196,11 +208,11 @@
             // LogowanieForm
             // 
             this.AcceptButton = this.zalogujBtn;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.CancelButton = zakonczBtn;
-            this.ClientSize = new System.Drawing.Size(495, 271);
+            this.ClientSize = new System.Drawing.Size(663, 334);
             this.Controls.Add(this.wersjaLabel);
             this.Controls.Add(this.administracjaBtn);
             this.Controls.Add(this.infoLabel);
@@ -214,9 +226,9 @@
             this.Controls.Add(zakonczBtn);
             this.Controls.Add(this.zalogujBtn);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(20000, 310);
-            this.MinimumSize = new System.Drawing.Size(437, 310);
+            this.MinimumSize = new System.Drawing.Size(577, 371);
             this.Name = "LogowanieForm";
             this.Text = "Logowanie do bazy danych";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MenuGlowneForm_FormClosing);

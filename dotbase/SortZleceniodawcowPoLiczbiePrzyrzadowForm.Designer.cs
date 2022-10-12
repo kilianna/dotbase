@@ -49,8 +49,10 @@
             this.groupBox1.Controls.Add(this.dateTimePicker1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(804, 52);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Size = new System.Drawing.Size(814, 64);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Przysyłano";
@@ -58,34 +60,38 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(239, 23);
+            this.label2.Location = new System.Drawing.Point(319, 28);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(21, 13);
+            this.label2.Size = new System.Drawing.Size(26, 17);
             this.label2.TabIndex = 3;
             this.label2.Text = "Do";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 23);
+            this.label1.Location = new System.Drawing.Point(20, 28);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(21, 13);
+            this.label1.Size = new System.Drawing.Size(27, 17);
             this.label1.TabIndex = 2;
             this.label1.Text = "Od";
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(42, 19);
+            this.dateTimePicker2.Location = new System.Drawing.Point(56, 23);
+            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(175, 20);
+            this.dateTimePicker2.Size = new System.Drawing.Size(237, 22);
             this.dateTimePicker2.TabIndex = 1;
             this.dateTimePicker2.ValueChanged += new System.EventHandler(this.FiltrujDane);
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(266, 19);
+            this.dateTimePicker1.Location = new System.Drawing.Point(355, 23);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(175, 20);
+            this.dateTimePicker1.Size = new System.Drawing.Size(236, 22);
             this.dateTimePicker1.TabIndex = 0;
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.FiltrujDane);
             // 
@@ -100,9 +106,10 @@
             this.Column1,
             this.Column2,
             this.Column3});
-            this.dataGridView1.Location = new System.Drawing.Point(0, 58);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 71);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(804, 449);
+            this.dataGridView1.Size = new System.Drawing.Size(814, 553);
             this.dataGridView1.TabIndex = 7;
             // 
             // Column1
@@ -121,15 +128,15 @@
             // 
             this.Column3.HeaderText = "Liczba przyrządów";
             this.Column3.Name = "Column3";
-            this.Column3.Width = 75;
             // 
             // SortZleceniodawcowPoLiczbiePrzyrzadow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(804, 508);
+            this.ClientSize = new System.Drawing.Size(814, 625);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "SortZleceniodawcowPoLiczbiePrzyrzadow";
             this.Text = "Ilość przyrządów zleceniodawców";
             this.groupBox1.ResumeLayout(false);

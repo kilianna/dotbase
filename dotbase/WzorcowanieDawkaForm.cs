@@ -707,5 +707,10 @@ namespace DotBase
         {
             N.PotwierdzenieZapisz(this, ZapiszDane, false, true);
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

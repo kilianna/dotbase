@@ -89,7 +89,7 @@ namespace DotBase
             _StatystykaWzorcowan.ZbierzStatystyki(ref SzukajOd, ref SzukajDo, ifj);
 
             dodajWiersz("Ogólne");
-            dodajWiersz("Liczb zleceń", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.LICZBA_ZLECEN]);
+            dodajWiersz("Liczba zleceń", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.LICZBA_ZLECEN]);
             dodajWiersz("Liczba przyrządów", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.LICZBA_PRZYRZADOW]);
             dodajWiersz("Liczba wzorcowań", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.LICZBA_WZORCOWAN]);
             dodajWiersz("Liczba wystawionych świadectw", _StatystykaWzorcowan.Wyniki[(int)StatystykaWzorcowan.Stale.LICZBA_WYSTAWIONYCH_SWIADECTW]);

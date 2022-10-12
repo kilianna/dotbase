@@ -6,6 +6,7 @@
 % Pakiety
 \usepackage{ifpdf}
 \usepackage{polski}
+\usepackage{float}
 \usepackage{ifthen}
 \usepackage[utf8]{inputenc}
 \usepackage{fancyhdr}
@@ -77,7 +78,7 @@
 	\rhead{\ifthenelse{\isodd{\thepage}}{\small{Anna Kilian}}{\small{Laboratorium Wzorcowania Przyrządów Dozymetrycznych}}~}
 	\lfoot{~\ifthenelse{\isodd{\thepage}}{}{\thepage}}
 	\cfoot{\ifthenelse{\isodd{\thepage}}{DotBase manual}{DotBase manual}}
-	\rfoot{\ifthenelse{\isodd{\thepage}}{\thepage}{Ver. TODO: zrobić wersję}~}
+	\rfoot{\ifthenelse{\isodd{\thepage}}{\thepage}{\IfFileExists{Wersja.tex}{wer. \input{Wersja}\unskip}{~}}~}
 	\renewcommand{\headrulewidth}{0.3pt}
 	\renewcommand{\footrulewidth}{0.3pt}
 }
