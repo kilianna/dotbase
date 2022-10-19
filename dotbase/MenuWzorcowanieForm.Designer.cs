@@ -165,12 +165,12 @@
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(221, 415);
+            this.button13.Location = new System.Drawing.Point(143, 405);
             this.button13.Margin = new System.Windows.Forms.Padding(4);
             this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(177, 60);
+            this.button13.Size = new System.Drawing.Size(320, 60);
             this.button13.TabIndex = 6;
-            this.button13.Text = "Świadectwo wzorcowania i pismo przewodnie";
+            this.button13.Text = "Świadectwo Wzorcowania i Pismo przewodnie";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 

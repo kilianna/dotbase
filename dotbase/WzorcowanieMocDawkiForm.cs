@@ -814,5 +814,10 @@ namespace DotBase
         {
             N.PotwierdzenieZapisz(this, ZapiszDane, false, true);
         }
+
+        private void label20_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

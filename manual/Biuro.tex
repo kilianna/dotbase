@@ -63,6 +63,8 @@ Jeżeli nie znaleźliśmy zleceniodawcy w bazie danych należy wprowadzić go u�
 
 \textbf{TIP3:} Jedynie wprowadzenie nazwy zleceniodawcy jest obligatoryjne, jednak zaleca się podanie wszystkich posiadanych danych.
 
+\textbf{TIP4:} W nazwie zleceniodawcy i jego adresie, w miejscu gdzie na Świadectwie Wzorcowania chcemy uzyskać przejście do nowej linii należy wstawić \textbf{";"}. 
+
 \begin{figure}[htb]
 	\centering
 	\includegraphics[width=\columnwidth]{obrazki/Biuro/zlecenie/zlecenie_dane_zlecenia.png}
@@ -72,7 +74,7 @@ Jeżeli nie znaleźliśmy zleceniodawcy w bazie danych należy wprowadzić go u�
 
 Po wybraniu (lub wprowadzeniu) zleceniodawcy oraz uzupełnieniu pola \textbf{"Numer zlecenia w rejestrze"} możemy dodatkowo uzupełnić dane płatnika. Jest to przydatne w przypadku, gdy zleceniodawca i płatnik nie sa tym samym podmiotem. W tym celu należy zaznaczyć checkbox \textbf{"Inny płatnik"} (rys. \ref{zlecenieDaneZleceniodawcy}). Aktywuje to pola pozwalające na wprowadzenie danych płatnika. Jeżeli płatnik jest jednym ze zleceniodawców wprowadzonych wcześniej do bazy danych można wybrać jego nazwę z listy rozwijanej \textbf{"Nazwa"}. Po wpisaniu kilku liter lista ogranicza się do nazw zleceniodawców odpowiadających podanym literom (wielkość liter nie ma znaczenia). Po wybraniu nazwy pola \textbf{"Adres"} i \textbf{"NIP"} uzupełnią się automatycznie danymi z bazy. Jeżeli natomiast w bazie danych nie ma danych płatnika należy ręcznie wprowadzić je w odpowiednie pola (\textbf{"Nazwa"}, \textbf{"Adres"}, \textbf{"NIP"}). Dane te zostają przypisane tylko do tego zlecenia.
 
-\textbf{TIP4:} Jeżeli dany płatnik pojawia się regularnie warto wprowadzić jego dane do zleceniodawców, aby móc w przyszłości wyszukiwać je na liście rozwijanej, zamiast kolejny raz wprowadzać ręcznie.
+\textbf{TIP5:} Jeżeli dany płatnik pojawia się regularnie warto wprowadzić jego dane do zleceniodawców, aby móc w przyszłości wyszukiwać je na liście rozwijanej, zamiast kolejny raz wprowadzać ręcznie.
 
 \begin{figure}[htb]
 	\centering
@@ -83,7 +85,7 @@ Po wybraniu (lub wprowadzeniu) zleceniodawcy oraz uzupełnieniu pola \textbf{"Nu
 
 W zakładce \textbf{"Dane zlecenia"} znajdują się różne dodatkowe dane dotyczące zlecenia, takie jak: data przyjęcia zlecenia, data zwrotu, forma przyjęcia przyrządów i forma ich zwrotu, numer zlecenia klienta, osoba przyjmująca zlecenie oraz dodatkowe uwagi. Tutaj także należy oznaczyć zlecenia, które mają być wykonane w trybie ekspresowym (pole wyboru \textbf{"Ekspres"}). 
 
-TIP4: Po wybraniu daty przyjęcia przyrządu, data zwrotu ustala się automatycznie na 14 dni po dacie przyjęcia. Jest to aktualnie ustalony maksymalny termin wykonania zlecenia. Jako formę zwrotu przyjmuje się domyślnie taką samą jak forma przyjęcia.
+TIP6: Po wybraniu daty przyjęcia przyrządu, data zwrotu ustala się automatycznie na 14 dni po dacie przyjęcia. Jest to aktualnie ustalony maksymalny termin wykonania zlecenia. Jako formę zwrotu przyjmuje się domyślnie taką samą jak forma przyjęcia.
 
 W zakładce \textbf{"Lista przyrządów"} wyświetla się tabela zawierająca informacje o przyrządach, które mają być wywzorcowane w ramach danego zlecenia (rys. \ref{zlecenieLista}). Dla każdego z przypisanych do zlecenia przyrządów tabela podaje numer jego karty przyjęcia, typ, numer fabryczny oraz informację czy wzorcowanie danego przyrządu zostało już wykonane. W ostatniej kolumnie znajduje się przycisk \textbf{"Przejdź"}, który otwiera okno z kartą przyjęcia tego przyrządu (patrz \ref{karta_przyjecia}).
 
@@ -117,8 +119,6 @@ Jeżeli w bazie nie ma danego numeru fabrycznego lub (co rzadsze) nie ma danego 
 	\label{edytujPrzyrzad}
 \end{figure}
 
-Kolejno należy podać wszystkie sondy przyrządu. W tym celu używamy przycisku \textbf{"Dodaj sondę"}, która otwiera nowe okno - Sonda (rys. \ref{edytujSonde}). W przypadku sondy podajemy tylko jej typ i numer fabryczny umieszczony na tabliczce znamionowej.
-
 \begin{figure}[H]
 	\centering
 	\includegraphics{obrazki/Biuro/karta/edytuj_sonde.png}
@@ -126,13 +126,11 @@ Kolejno należy podać wszystkie sondy przyrządu. W tym celu używamy przycisku
 	\label{edytujSonde}
 \end{figure}
 
+Kolejno należy podać wszystkie sondy przyrządu. W tym celu używamy przycisku \textbf{"Dodaj sondę"}, która otwiera nowe okno - Sonda (rys. \ref{edytujSonde}). W przypadku sondy podajemy tylko jej typ i numer fabryczny umieszczony na tabliczce znamionowej.
+
 \textbf{TIP:} Jeżeli przyrząd posiada wyłącznie wbudowany detektor bez osobnego numeru fabrycznego w polu \textbf{"Typ"} należy podać "detektor własny", a w polu \textbf{"Numer fabryczny"} - "nie dotyczy". 
 
 Po wprowadzeniu sondy należy zatwierdzić przyciskiem \textbf{"Zapisz zmiany"}. 
-
-\textbf{TIP2:} Zaleca się takie wprowadzanie danych, aby poszczególne sondy dozymetru były łatwo rozróżnialne.
-
-W tabeli w oknie \textbf{"Przyrząd"} (rys. \ref{edytujPrzyrzad}) w ostatniej kolumnie przy każdej z sond znajduje się przycisk \textbf{"Edytuj"}, który przechodzi do analogicznego okna \textbf{"Sonda"} (rys. \ref{edytujSonde}), w którym można edytować dane istniejących sond. 
 
 \begin{figure}[H]
 	\centering
@@ -141,17 +139,20 @@ W tabeli w oknie \textbf{"Przyrząd"} (rys. \ref{edytujPrzyrzad}) w ostatniej ko
 	\label{kartaDaneKalibracji}
 \end{figure}
 
+\textbf{TIP2:} Zaleca się takie wprowadzanie danych, aby poszczególne sondy dozymetru były łatwo rozróżnialne.
+
+W tabeli w oknie \textbf{"Przyrząd"} (rys. \ref{edytujPrzyrzad}) w ostatniej kolumnie przy każdej z sond znajduje się przycisk \textbf{"Edytuj"}, który przechodzi do analogicznego okna \textbf{"Sonda"} (rys. \ref{edytujSonde}), w którym można edytować dane istniejących sond. 
+
 Okno \textbf{"Przyrząd"} (rys. \ref{edytujPrzyrzad}) uruchamia się także w przypadku edycji przyrządu, do której można przejść za pomocą przycisku \textbf{"Edytuj przyrząd"} w zakładce \textbf{"Dane przyrządu"} (rys. \ref{kartaDanePrzyrzadu}). Każdorazowo po wprowadzeniu zmian należy pamiętać o ich zatwierdzeniu przyciskiem \textbf{"Zatwierdź zmiany"}.
  
+ \begin{figure}[H]
+ 	\centering
+ 	\includegraphics{obrazki/Biuro/karta/karta_dane_inne.png}
+ 	\caption{Karta przyjęcia - zakładka z pozostałymi danymi.}
+ 	\label{kartaDaneInne}
+ \end{figure}
 
 W zakładce \textbf{"Wymagania dotyczące kalibracji"} znajdują się informacje odnośnie tego jaki jest zakres wzorcowania danego przyrządu. Można wybrać jeden z czterech rodzajów wzorcowania promieniowaniem gamma (moc dawki, dawka, sygnalizacja i sygnalizacja mocy dawki) oraz dowolne z ośmiu źródeł stosowanych do wzorcowania w zakresie emisji powierzchniowej. W przypadku promieniowania alfa są to Am-241 oraz Pu-239, a w przypadku promieniowania beta mamy do dyspozycji, dwa źródła C-14 o różnej wartości emisji powierzchniowej, trzy źródła Sr-90/Y-90 o różnej wartości emisji powierzchniowej oraz Cl-36. 
-
-\begin{figure}[H]
-	\centering
-	\includegraphics{obrazki/Biuro/karta/karta_dane_inne.png}
-	\caption{Karta przyjęcia - zakładka z pozostałymi danymi.}
-	\label{kartaDaneInne}
-\end{figure}
 
 Jest też dostępna opcja \textbf{"Sprawdzenie"}. Zaznaczenie tej opcji spowoduje odznaczenie wszystkich innych.
 Podany w karcie przyjęcia zakres wzorcowania jest stosowany automatycznym wyliczeniu ceny wzorcowania dla tej karty (patrz \ref{cennik}) oraz odblokowuje odpowiednie przyciski w głównym oknie wzorcowania (patrz \ref{wzorcowanie}).
@@ -183,7 +184,7 @@ Jeżeli wybrana została opcja mocy dawki należy wybrać odpowiedni wariant wzo
 
 W szczególnych przypadkach możliwe jest zaznaczenie opcji dodatkowych (część \textbf{"Opcje dodatkowe"}):
 \begin{itemize}
-	\item \textbf{Liczba progów sygnalizatora  3} - należy podać jaka liczba progów (ponad podstawowe 3) została wywzorcowana
+	\item \textbf{Liczba progów sygnalizatora $>$ 3} - należy podać jaka liczba progów (ponad podstawowe 3) została wywzorcowana
 	\item \textbf{Dawka długa} - w przypadku przyrządów, dla których wzorcowanie w zakresie dawki trwa dłużej niż standardowo (np. przyrząd można naświetlać jedynie z niską mocą dawki)
 	\item \textbf{Skażenia długie} - dłuższe i bardziej pracochłonne wzorcowanie w zakresie emisji powierzchniowej
 \end{itemize}
@@ -202,7 +203,6 @@ Wynik podawany jest w złotówkach w polu \textbf{"Suma"}.
 \textbf{TIP:} Wszystkie podstawowe ceny przechowywane są w pliku bazy danych w tabeli \textbf{"Cennik"}. 
 
 
-
 \subsection{Rejestr zleceń}
 \label{rejestr}
 
@@ -211,9 +211,9 @@ Rejestr można wyświetlić dla danego miesiąca wprowadzając wybrany miesiąc 
 
 \textbf{TIP:} Korzystając z rejestru zleceń można w prosty sposób przejrzeć listę aktualnych zleceń i wydajnie zaplanować pracę np. łącząc kalibracje tych samych typów przyrządów w jeden blok, co pozwala uniknąć wielokrotnego pozycjonowania przyrządów tego samego typu.
 
-\begin{figure}[htb]
+\begin{sidewaysfigure}[p]
 	\centering
-	\includegraphics{obrazki/Biuro/rejestr_zlecen.png}
+	\includegraphics[width=\columnwidth]{obrazki/Biuro/rejestr_zlecen.png}
 	\caption{Rejestr zleceń}
 	\label{rejestrZlecen}
-\end{figure}
+\end{sidewaysfigure}
