@@ -4,76 +4,76 @@
        W zależności od tego jaki był zakres wzorcowania (moc dawki, dawka, skażenia, lub ich kombinacja). -->
   <zakresWzorcowania dawka="true" mocDawki="true" skażenia="true">
     <metodaWzorcowania>
-      Procedura pomiarowa WZOR-1 (wyd. 6 z dn. 01.09.2022) oraz procedura pomiarowa WZOR-2 (wyd. 5 z dn. 01.09.2022)
+      Calibration procedure WZOR-1 (ed. 6 of 01.09.2022) and calibration procedure WZOR-2 (ed. 5 of 01.09.2022)
     </metodaWzorcowania>
   </zakresWzorcowania>
 
   <zakresWzorcowania dawka="true" mocDawki="false" skażenia="true">
     <metodaWzorcowania>
-      Procedura pomiarowa WZOR-1 (wyd. 6 z dn. 01.09.2022) oraz procedura pomiarowa WZOR-2 (wyd. 5 z dn. 01.09.2022)
+      Calibration procedure WZOR-1 (ed. 6 of 01.09.2022) and calibration procedure WZOR-2 (ed. 5 of 01.09.2022)
     </metodaWzorcowania>
   </zakresWzorcowania>
 
   <zakresWzorcowania dawka="true" mocDawki="true" skażenia="false">
     <metodaWzorcowania>
-      Procedura pomiarowa WZOR-1 (wyd. 6 z dn. 01.09.2022)
+      Calibration procedure WZOR-1 (ed. 6 of 01.09.2022)
     </metodaWzorcowania>
   </zakresWzorcowania>
 
   <zakresWzorcowania dawka="true" mocDawki="false" skażenia="false">
     <metodaWzorcowania>
-      Procedura pomiarowa WZOR-1 (wyd. 6 z dn. 01.09.2022)
+      Calibration procedure WZOR-1 (ed. 6 of 01.09.2022)
     </metodaWzorcowania>
   </zakresWzorcowania>
 
   <zakresWzorcowania dawka="false" mocDawki="true" skażenia="true">
     <metodaWzorcowania>
-      Procedura pomiarowa WZOR-1 (wyd. 6 z dn. 01.09.2022) oraz procedura pomiarowa WZOR-2 (wyd. 5 z dn. 01.09.2022)
+      Calibration procedure WZOR-1 (ed. 6 of 01.09.2022) and calibration procedure WZOR-2 (ed. 5 of 01.09.2022)
     </metodaWzorcowania>
   </zakresWzorcowania>
 
   <zakresWzorcowania dawka="false" mocDawki="true" skażenia="false">
     <metodaWzorcowania>
-      Procedura pomiarowa WZOR-1 (wyd. 6 z dn. 01.09.2022)
+      Calibration procedure WZOR-1 (ed. 6 of 01.09.2022)
     </metodaWzorcowania>
   </zakresWzorcowania>
 
   <zakresWzorcowania dawka="false" mocDawki="false" skażenia="true">
     <metodaWzorcowania>
-      Procedura pomiarowa WZOR-2 (wyd. 5 z dn. 01.09.2022)
+      Calibration procedure WZOR-2 (ed. 5 of 01.09.2022)
     </metodaWzorcowania>
   </zakresWzorcowania>
 
   <informacja si="false" polon="false" braunschweig="false">
     <tekst>
-      Świadectwo jest wydane w ramach porozumienia EA MLA w zakresie wzorcowania i potwierdza spójność wyników pomiarów z wzorcami utrzymanymi w GUM.
+      This certificate is issued under the agreement EA MLA in the field of calibration and provides traceability of measurement results to the International System of Units (SI). The results are traceable to the national standard of gamma-ray kerma in air maintained at the Central Office of Measures (GUM) in Warsaw.
     </tekst>
   </informacja>
 
   <informacja si="false" polon="true" braunschweig="true">
     <tekst>
-      Świadectwo jest wydane w ramach porozumienia EA MLA w zakresie wzorcowania i potwierdza spójność wyników pomiarów z wzorcami utrzymanymi w GUM,
-      w Laboratorium Wzorców Radioaktywności OBRI POLATOM i PTB Braunschweig.
+      This certificate is issued under the agreement EA MLA in the field of calibration and provides traceability of measurement results to the International System of Units (SI). The results are traceable to the national standard of gamma-ray kerma in air maintained at the Central Office of Measures (GUM) in Warsaw,
+      and in Radioactivity Standard Laboratory OBRI POLATOM and PTB Braunschweig.
     </tekst>
   </informacja>
 
   <informacja si="false" polon="true" braunschweig="false">
     <tekst>
-      Świadectwo jest wydane w ramach porozumienia EA MLA w zakresie wzorcowania i potwierdza spójność wyników pomiarów z wzorcami utrzymanymi w GUM
-      i Laboratorium Wzorców Radioaktywności OBRI POLATOM.
+      This certificate is issued under the agreement EA MLA in the field of calibration and provides traceability of measurement results to the International System of Units (SI). The results are traceable to the national standard of gamma-ray kerma in air maintained at the Central Office of Measures (GUM) in Warsaw,
+      and in Radioactivity Standard Laboratory OBRI POLATOM.
     </tekst>
   </informacja>
 
   <informacja si="false" polon="false" braunschweig="true">
     <tekst>
-      Świadectwo jest wydane w ramach porozumienia EA MLA w zakresie wzorcowania i potwierdza spójność wyników pomiarów z wzorcami utrzymanymi w GUM
-      i PTB Braunschweig.
+      This certificate is issued under the agreement EA MLA in the field of calibration and provides traceability of measurement results to the International System of Units (SI). The results are traceable to the national standard of gamma-ray kerma in air maintained at the Central Office of Measures (GUM) in Warsaw,
+      and PTB Braunschweig.
     </tekst>
   </informacja>
 
   <informacja si="true">
     <tekst>
-      Świadectwo jest wydane w ramach porozumienia EA MLA w zakresie wzorcowania i potwierdza spójność wyników pomiarów z jednostkami miar Międzynarodowego Układu Jednostek Miar (SI).
+      This certificate is issued under the agreement EA MLA in the field of calibration and provides traceability of measurement results to the International System of Units (SI).
     </tekst>
   </informacja>
 
