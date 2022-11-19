@@ -71,6 +71,7 @@ namespace DotBase
 
         private void generujSwiadectwo(Jezyk jezykSwiadectwa)
         {
+            Program.zmienJezyk(jezykSwiadectwa);
             string sciezka = _DocumentationPathsLoader.GetPath("SwiadectwoWynik", jezykSwiadectwa) + _NumerKarty + "SwiadectwoWynik";
             sciezka += JezykTools.kocowka(jezykSwiadectwa);
             sciezka += ".html";
@@ -80,25 +81,33 @@ namespace DotBase
                 "ON Zlecenia.ID_zlecenia = Karta_przyjecia.ID_zlecenia " +
                 "WHERE Karta_przyjecia.ID_karty=?", _NumerKarty);
 
-            Dokumenty.Swiadectwo swiadectwo = new Dokumenty.Swiadectwo(_NumerKarty,
-                                                                       dataWystawienia.Value,
-                                                                       dataWykonania.Value,
-                                                                       table.Rows[0].Field<DateTime>("Data_przyjecia"),
-                                                                       textBox4.Text,
-                                                                       checkBox2.Checked.ToString(),
-                                                                       uwMD.Text,
-                                                                       uwD.Text,
-                                                                       uwS.Text,
-                                                                       uwSMD.Text,
-                                                                       uwSD.Text,
-                                                                       jezykSwiadectwa);
-            if (swiadectwo.UtworzDokument(sciezka))
+            try
             {
-                System.Diagnostics.Process.Start(sciezka);
+
+                Dokumenty.Swiadectwo swiadectwo = new Dokumenty.Swiadectwo(_NumerKarty,
+                                                                           dataWystawienia.Value,
+                                                                           dataWykonania.Value,
+                                                                           table.Rows[0].Field<DateTime>("Data_przyjecia"),
+                                                                           textBox4.Text,
+                                                                           checkBox2.Checked.ToString(),
+                                                                           uwMD.Text,
+                                                                           uwD.Text,
+                                                                           uwS.Text,
+                                                                           uwSMD.Text,
+                                                                           uwSD.Text,
+                                                                           jezykSwiadectwa);
+                if (swiadectwo.UtworzDokument(sciezka))
+                {
+                    System.Diagnostics.Process.Start(sciezka);
+                }
+                else
+                {
+                    MessageBox.Show("Nie istnieją dane z których można by sporządzić świadectwo.", "Uwaga!");
+                }
             }
-            else
+            finally
             {
-                MessageBox.Show("Nie istnieją dane z których można by sporządzić świadectwo.", "Uwaga!");
+                Program.zmienJezyk(Jezyk.PL);
             }
         }
 
