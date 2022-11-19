@@ -7,10 +7,22 @@ using System.Xml.Linq;
 
 namespace DotBase
 {
-    enum Jezyk
+    public enum Jezyk
     {
         PL,
         EN,
+    }
+
+    public static class JezykTools
+    {
+        public static string kocowka(Jezyk jezyk)
+        {
+            switch (jezyk)
+            {
+                case Jezyk.PL: return "";
+                default: return "-" + jezyk.ToString().ToLower();
+            }
+        }
     }
 
     class DocumentationPathsLoader
@@ -29,7 +41,7 @@ namespace DotBase
             try
             {
                 var q1 = from document in XMLFile.Descendants("document")
-                         where document.Attribute("type").Value == type + "-" + jezyk.ToString().ToLower()
+                         where document.Attribute("type").Value == type + JezykTools.kocowka(jezyk)
                          select document.Attribute("path").Value;
                 return String.Format("{0}/{1}", basePath, q1.ElementAt(0));
             }

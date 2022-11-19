@@ -173,11 +173,6 @@ namespace DotBase
                 SetField("Wielkosc_fizyczna", value, OleDbType.WChar);
                 return this;
             }
-            public Szablon_Jednostki Wielkosc_fizyczna_en(string value)
-            {
-                SetField("Wielkosc_fizyczna_en", value, OleDbType.WChar);
-                return this;
-            }
         }
         public class Szablon_Karta_przyjecia : Tabela
         {
@@ -470,6 +465,25 @@ namespace DotBase
             public Szablon_Protokoly_kalibracji_lawy Nazwa(string value)
             {
                 SetField("Nazwa", value, OleDbType.WChar);
+                return this;
+            }
+        }
+        public class Szablon_Slownik : Tabela
+        {
+            public Szablon_Slownik(BazaDanychWrapper baza, string nazwa) : base(baza, nazwa) { }
+            public Szablon_Slownik UPDATE() { _UPDATE(); return this; }
+            public Szablon_Slownik INSERT() { _INSERT(); return this; }
+            public Szablon_Slownik DELETE() { _DELETE(); return this; }
+            public Szablon_Slownik WHERE() { _WHERE(); return this; }
+            public Szablon_Slownik INFO(string text) { _INFO(text); return this; }
+            public Szablon_Slownik EN(string value)
+            {
+                SetField("EN", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Slownik PL(string value)
+            {
+                SetField("PL", value, OleDbType.WChar);
                 return this;
             }
         }
@@ -1182,6 +1196,7 @@ namespace DotBase
         public Szablon.Szablon_Pomiary_powierzchniowe Pomiary_powierzchniowe { get { return new Szablon.Szablon_Pomiary_powierzchniowe(this, "Pomiary_powierzchniowe"); } }
         public Szablon.Szablon_Pomiary_wzorcowe Pomiary_wzorcowe { get { return new Szablon.Szablon_Pomiary_wzorcowe(this, "Pomiary_wzorcowe"); } }
         public Szablon.Szablon_Protokoly_kalibracji_lawy Protokoly_kalibracji_lawy { get { return new Szablon.Szablon_Protokoly_kalibracji_lawy(this, "Protokoly_kalibracji_lawy"); } }
+        public Szablon.Szablon_Slownik Slownik { get { return new Szablon.Szablon_Slownik(this, "Slownik"); } }
         public Szablon.Szablon_Sondy Sondy { get { return new Szablon.Szablon_Sondy(this, "Sondy"); } }
         public Szablon.Szablon_Stale Stale { get { return new Szablon.Szablon_Stale(this, "Stale"); } }
         public Szablon.Szablon_Swiadectwo Swiadectwo { get { return new Szablon.Szablon_Swiadectwo(this, "Swiadectwo"); } }

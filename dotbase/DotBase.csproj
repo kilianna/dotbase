@@ -86,6 +86,12 @@
       <DependentUpon>CennikForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="TranslacjaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TranslacjaForm.Designer.cs">
+      <DependentUpon>TranslacjaForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="HasloForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -360,6 +366,9 @@
     <EmbeddedResource Include="DaneWzorcoweMocDawki.resx">
       <DependentUpon>DaneWzorcoweMocDawki.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TranslacjaForm.resx">
+      <DependentUpon>TranslacjaForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HasloForm.resx">
       <DependentUpon>HasloForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -516,6 +525,10 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SwiadectwoWydrukTeksty-en.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="PathConfig.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

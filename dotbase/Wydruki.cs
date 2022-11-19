@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 using Narzedzia;
 using System.Data;
+using System.Globalization;
 
 namespace DotBase
 {
@@ -45,7 +46,7 @@ namespace DotBase
             protected String _Zapytanie;
             protected string _NrKarty;
             protected DocumentData m_documentData;
-            private Jezyk jezyk;
+            protected Jezyk jezyk;
 
             //****************************************************************************************
             public Wydruki(string nrKarty, Jezyk jezyk = Jezyk.PL) : this(jezyk)
@@ -315,6 +316,18 @@ namespace DotBase
                 streamWriter.Write(_SzablonPodstawowy.ToString());
                 streamWriter.Close();
                 return true;
+            }
+
+            public string formatujDate(DateTime data)
+            {
+                if (jezyk == Jezyk.EN)
+                {
+                    return data.ToString("dd MMMM yyyy", new CultureInfo("en-US"));
+                }
+                else
+                {
+                    return data.ToString("dd MMMM yyyy");
+                }
             }
         }
     }

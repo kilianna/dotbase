@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 namespace DotBase
 {
@@ -92,6 +93,5 @@ namespace DotBase
             }
             return true;
         }
-
     }
 }

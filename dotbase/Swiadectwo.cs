@@ -68,10 +68,10 @@ namespace DotBase
             //********************************************************************************************
             {
                 m_data.setValue(SwiadectwoData.DataType.NR_KARTY, nrKarty.ToString());
-                m_data.setValue(SwiadectwoData.DataType.DATA_WYDANIA, dataWydania.ToString("dd MMMM yyyy"));
+                m_data.setValue(SwiadectwoData.DataType.DATA_WYDANIA, formatujDate(dataWydania));
                 m_data.setValue(SwiadectwoData.DataType.ROK, dataWydania.Year.ToString());
-                m_data.setValue(SwiadectwoData.DataType.DATA_WYKONANIA, dataWykonania.ToString("dd MMMM yyyy"));
-                m_data.setValue(SwiadectwoData.DataType.DATA_PRZYJECIA, dataPrzyjecia.ToString("dd MMMM yyyy"));
+                m_data.setValue(SwiadectwoData.DataType.DATA_WYKONANIA, formatujDate(dataWykonania));
+                m_data.setValue(SwiadectwoData.DataType.DATA_PRZYJECIA, formatujDate(dataPrzyjecia));
                 m_data.setValue(SwiadectwoData.DataType.SPRAWDZIL, sprawdzil);
                 m_data.setValue(SwiadectwoData.DataType.POPRAWA, poprawa);
                 m_data.setValue(SwiadectwoData.DataType.UWAGA_MD, uwMD);
@@ -94,8 +94,8 @@ namespace DotBase
                 PobierzDaneTabeloweDawka();
 
                 _SzablonPodstawowy.Replace("<!c1>", ch.ToString())
-                                  .Replace("<!sondaTyp>", m_data.getValue(SwiadectwoData.DataType.SONDA_TYP))
-                                  .Replace("<!sondaNrFab>", m_data.getValue(SwiadectwoData.DataType.SONDA_NR_FABRYCZNY))
+                                  .Replace("<!sondaTyp>", TranslacjaForm.Tlumacz(m_data.getValue(SwiadectwoData.DataType.SONDA_TYP), jezyk))
+                                  .Replace("<!sondaNrFab>", TranslacjaForm.Tlumacz(m_data.getValue(SwiadectwoData.DataType.SONDA_NR_FABRYCZNY), jezyk))
                                   .Replace("<!c5>", m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA))
                                   .Replace("<!tabela>", _Tabela.ToString())
                                   .Replace("<!uwaga>", m_data.getValue(SwiadectwoData.DataType.UWAGA_D));
@@ -187,14 +187,14 @@ namespace DotBase
                 PobierzDaneTabelowe();
 
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c1>", ch.ToString());
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c2>", m_data.getValue(SwiadectwoData.DataType.WIELKOSC_FIZYCZNA));
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c3>", m_data.getValue(SwiadectwoData.DataType.SONDA_TYP));
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c4>", m_data.getValue(SwiadectwoData.DataType.SONDA_NR_FABRYCZNY));
+                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c2>", TranslacjaForm.Tlumacz(m_data.getValue(SwiadectwoData.DataType.WIELKOSC_FIZYCZNA), jezyk));
+                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c3>", TranslacjaForm.Tlumacz(m_data.getValue(SwiadectwoData.DataType.SONDA_TYP), jezyk));
+                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c4>", TranslacjaForm.Tlumacz(m_data.getValue(SwiadectwoData.DataType.SONDA_NR_FABRYCZNY), jezyk));
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c5>", m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA));
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c6>", m_data.getValue(SwiadectwoData.DataType.WIELKOSC_FIZYCZNA).Replace("moc", "mocy"));
+                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c6>", TranslacjaForm.Tlumacz(m_data.getValue(SwiadectwoData.DataType.WIELKOSC_FIZYCZNA).Replace("moc", "mocy"), jezyk));
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!uwaga>", m_data.getValue(SwiadectwoData.DataType.UWAGA_MD));
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!tabela>", _Tabela.ToString());
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!wielkosc_fizyczna>", m_data.getValue(SwiadectwoData.DataType.WIELKOSC_FIZYCZNA).Replace("moc", "mocy"));
+                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!wielkosc_fizyczna>", TranslacjaForm.Tlumacz(m_data.getValue(SwiadectwoData.DataType.WIELKOSC_FIZYCZNA).Replace("moc", "mocy"), jezyk));
 
                 if (m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA).Contains("cps") || m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA).Contains("cpm") ||
                     m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA).Contains("1/s") || m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA).Contains("1/min") ||
@@ -275,7 +275,7 @@ namespace DotBase
                     PobierzEmisjePowierzchniowa(idWzorcowan[i]);
 
                     _Tabela.Append(String.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td>",
-                              i + 1,m_data.getValue(SwiadectwoData.DataType.SONDA_TYP), m_data.getValue(SwiadectwoData.DataType.SONDA_NR_FABRYCZNY),
+                              i + 1,TranslacjaForm.Tlumacz(m_data.getValue(SwiadectwoData.DataType.SONDA_TYP), jezyk), TranslacjaForm.Tlumacz(m_data.getValue(SwiadectwoData.DataType.SONDA_NR_FABRYCZNY), jezyk),
                               m_data.getValue(SwiadectwoData.DataType.NAPIECIE_ZAS_SONDY), m_data.getValue(SwiadectwoData.DataType.ZRODLO_NAZWA).Replace("(słaby)", "").Replace("(silny)", "").Replace("(najsilniejszy)", ""),
                               m_data.getValue(SwiadectwoData.DataType.SKAZENIA_RODZAJ_PROMIENIOWANIA), m_data.getValue(SwiadectwoData.DataType.EMISJA_POW))
                               + String.Format("<td>{0}</td><td width=\"110\"><!wspol{1}> &plusmn; <!niep{1}></td></tr>",
@@ -424,8 +424,8 @@ namespace DotBase
                 PobierzDaneTabeloweSygnalizacja();
 
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c1>", ch.ToString());
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c2>", m_data.getValue(SwiadectwoData.DataType.SONDA_TYP));
-                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c3>", m_data.getValue(SwiadectwoData.DataType.SONDA_NR_FABRYCZNY));
+                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c2>", TranslacjaForm.Tlumacz(m_data.getValue(SwiadectwoData.DataType.SONDA_TYP), jezyk));
+                _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c3>", TranslacjaForm.Tlumacz(m_data.getValue(SwiadectwoData.DataType.SONDA_NR_FABRYCZNY), jezyk));
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c4>", m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA));
                 var jedn = m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA);
                 var parts = jedn.Split('/');
@@ -471,8 +471,8 @@ namespace DotBase
                 PobierzDaneTabeloweSygMocyDawki();
 
                 _SzablonPodstawowy.Replace("<!c1>", ch.ToString())
-                                  .Replace("<!c2>", m_data.getValue(SwiadectwoData.DataType.SONDA_TYP))
-                                  .Replace("<!c3>", m_data.getValue(SwiadectwoData.DataType.SONDA_NR_FABRYCZNY))
+                                  .Replace("<!c2>", TranslacjaForm.Tlumacz(m_data.getValue(SwiadectwoData.DataType.SONDA_TYP), jezyk))
+                                  .Replace("<!c3>", TranslacjaForm.Tlumacz(m_data.getValue(SwiadectwoData.DataType.SONDA_NR_FABRYCZNY), jezyk))
                                   .Replace("<!c4>", m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA))
                                   .Replace("<!tabela>", _Tabela.ToString())
                                   .Replace("<!uwaga>", m_data.getValue(SwiadectwoData.DataType.UWAGA_SMD));
@@ -732,7 +732,7 @@ namespace DotBase
                     m_data.setValue(SwiadectwoData.DataType.WILGOTNOSC_MIN, (temp - Constants.getInstance().UNCERTAINITY_HUMIDITY_VALUE).ToString("0.0"));
                     m_data.setValue(SwiadectwoData.DataType.WILGOTNOSC_MAX, (temp + Constants.getInstance().UNCERTAINITY_HUMIDITY_VALUE).ToString("0.0"));
 
-                    SwiadectwoTextsLoader stl = new SwiadectwoTextsLoader();
+                    SwiadectwoTextsLoader stl = new SwiadectwoTextsLoader(jezyk);
                     if (bDawka && bCez && bSkazenia)
                     {
                         m_data.setValue(SwiadectwoData.DataType.METODA_WZORCOWANIA, stl.GetText("metodaWzorcowania", true, true, true));
@@ -881,7 +881,7 @@ namespace DotBase
                 _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!dataPrzyjecia>", m_data.getValue(SwiadectwoData.DataType.DATA_PRZYJECIA));
                 _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c2>", mapEvidenceIdToDisplayableForm(m_data.getValue(SwiadectwoData.DataType.NR_KARTY)));
                 _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c3>", m_data.getValue(SwiadectwoData.DataType.ROK));
-                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c4>", m_data.getValue(SwiadectwoData.DataType.NAZWA));
+                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c4>", TranslacjaForm.Tlumacz(m_data.getValue(SwiadectwoData.DataType.NAZWA), jezyk));
                 _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c5>", m_data.getValue(SwiadectwoData.DataType.TYP));
                 _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c6>", m_data.getValue(SwiadectwoData.DataType.NR_FABRYCZNY));
                 _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c7>", m_data.getValue(SwiadectwoData.DataType.PRODUCENT));

@@ -72,10 +72,7 @@ namespace DotBase
         private void generujSwiadectwo(Jezyk jezykSwiadectwa)
         {
             string sciezka = _DocumentationPathsLoader.GetPath("SwiadectwoWynik", jezykSwiadectwa) + _NumerKarty + "SwiadectwoWynik";
-            if (jezykSwiadectwa == Jezyk.EN)
-            {
-                sciezka += "-EN";
-            }
+            sciezka += JezykTools.kocowka(jezykSwiadectwa);
             sciezka += ".html";
 
             DataTable table = _Baza.TworzTabeleDanych("SELECT Data_przyjecia " +

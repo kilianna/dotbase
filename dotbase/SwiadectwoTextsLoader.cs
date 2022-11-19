@@ -12,9 +12,9 @@ namespace DotBase
         private XDocument XMLFile = new XDocument();
         private String basePath = Directory.GetCurrentDirectory();
 
-        public SwiadectwoTextsLoader()
+        public SwiadectwoTextsLoader(Jezyk jezyk)
         {
-            XMLFile = XDocument.Load(basePath + @"\SwiadectwoWydrukTeksty.xml");
+            XMLFile = XDocument.Load(basePath + @"\SwiadectwoWydrukTeksty" + JezykTools.kocowka(jezyk) + ".xml");
         }
 
         public String GetText(String whatTake, bool dawka, bool mocDawki, bool skażenia)

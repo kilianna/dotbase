@@ -51,7 +51,6 @@
     Jednostki.Przelicznik, typ Single, domyślnie 1, precyzja 7, niewymagane Tak, pozycja 3, flagi X-X- -XXX, opis Przelicznik dla każdej jednostki z uGy/h
     Jednostki.SI, typ Boolean, domyślnie No, niewymagane Nie, pozycja 4, flagi X-X- -X-X
     Jednostki.Wielkosc_fizyczna, typ WChar, długość 50, niewymagane Tak, pozycja 5, flagi X-X- -XX-
-    Jednostki.Wielkosc_fizyczna_en, typ WChar, długość 50, niewymagane Tak, pozycja 6, flagi X-X- -XX-
 
 ---------------------------------------------------------------------
  Karta_przyjecia
@@ -130,6 +129,13 @@
     Protokoly_kalibracji_lawy.Nazwa, typ WChar, długość 50, niewymagane Tak, pozycja 1, flagi X-X- -XX-
     Protokoly_kalibracji_lawy.Data_kalibracji, typ Date, precyzja 0, niewymagane Tak, pozycja 2, flagi X-X- -XXX
     Protokoly_kalibracji_lawy.ID_protokolu, typ SmallInt, domyślnie 0, precyzja 5, niewymagane Tak, pozycja 3, flagi X-X- -XXX
+
+---------------------------------------------------------------------
+ Slownik
+---------------------------------------------------------------------
+
+    Slownik.PL, typ WChar, domyślnie "", długość 0, niewymagane Nie, pozycja 1, flagi X-X- XX--
+    Slownik.EN, typ WChar, domyślnie "", długość 0, niewymagane Nie, pozycja 2, flagi X-X- XX--
 
 ---------------------------------------------------------------------
  Sondy
