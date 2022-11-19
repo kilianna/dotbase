@@ -606,7 +606,12 @@ namespace DotBase
         private void wykresToolStripMenuItem_Click(object sender, EventArgs e)
         //---------------------------------------------------------------
         {
-            Wykres.WykresForm wykres = new Wykres.WykresForm(true, checkBox2.Checked, checkBox3.Checked);
+            Jezyk jezyk = Jezyk.PL;
+            if (sender == wykresENToolStripMenuItem)
+            {
+                jezyk = Jezyk.EN;
+            }
+            Wykres.WykresForm wykres = new Wykres.WykresForm(true, checkBox2.Checked, checkBox3.Checked, jezyk);
             wykres.CzyscDane();
 
             DataGridViewRow wiersz;

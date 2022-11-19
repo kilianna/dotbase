@@ -614,7 +614,12 @@ namespace DotBase
         // rysowanie wykresu
         private void wykresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Wykres.WykresForm wykres = new Wykres.WykresForm();
+            Jezyk jezyk = Jezyk.PL;
+            /*TODO: if (sender == wykresENToolStripMenuItem)
+            {
+                jezyk = Jezyk.EN;
+            }*/
+            Wykres.WykresForm wykres = new Wykres.WykresForm(false, false, false, jezyk);
             wykres.CzyscDane();
 
             DataGridViewRow wiersz;

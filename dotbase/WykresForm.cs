@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ZedGraph;
+using DotBase;
 
 namespace Wykres
 {
@@ -18,9 +19,48 @@ namespace Wykres
         LineItem    _DataLine;
         GraphPane   _ObszarRysowniczy;
         bool        _Poprawa;
+        Jezyk       jezyk;
+
+        private string tr(string pl)
+        {
+            if (jezyk == Jezyk.EN)
+            {
+                switch (pl)
+                {
+                    case "Wykres kalibracyjny dotyczący Świadectwa Wzorcowania nr ":
+                        return "Wykres kal... TRANSLATE ...owania nr ";
+                    case "Wzorcowanie w zakresie dawki":
+                        return "Wzorcow... TRANSLATE ...ki";
+                    case "1 mR/h = 8,74 \u00B5Gy/h ":
+                        return "1 mR/h = 8.74 \u00B5Gy/h ";
+                    case "1 nA/kg = 121,9 \u00B5Gy/h":
+                        return "1 nA/kg = 121.9 \u00B5Gy/h";
+                    case "Data zalecanej kalibracji: ":
+                        return null;
+                    case " r.":
+                        return "";
+                    case "Hp (0,07) ":
+                        return "Hp (0.07) ";
+                    case "Wartości wzorcowe ":
+                        return "Wartośc... TRANSLATE ...orcowe ";
+                    case "Wartości zmierzone ":
+                        return "Wart... TRANSLATE ...zone ";
+                    case "Zastosowano przelicznik: ":
+                        return "Zasto... TRANSLATE ...icznik: ";
+                    case "Sonda: ":
+                        return "SoTRa: ";
+                    case "zakres ":
+                        return "range ";
+                    default:
+                        MessageBox.Show("Nie ma tłumaczenie wyrażenia:\r\n" + pl, "Błąd krytyczny", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                };
+            }
+            return pl;
+        }
 
         //-------------------------------------------------------------------------
-        public WykresForm(bool mocDawki = false /* true == Dawka */, bool przedluzonaWaznosc = false, bool poprawa = false)
+        public WykresForm(bool mocDawki, bool przedluzonaWaznosc, bool poprawa, Jezyk jezyk)
         //-------------------------------------------------------------------------
         {
             _WykresMocyDawki = mocDawki;
@@ -28,6 +68,7 @@ namespace Wykres
             _DaneWejsciowe = new Zakres();
             _PrzedluzonaWaznosc = przedluzonaWaznosc;
             _Poprawa = poprawa;
+            this.jezyk = jezyk;
         }
 
         //-------------------------------------------------------------------------
@@ -49,36 +90,45 @@ namespace Wykres
         public bool Rysuj(string nrKarty, DateTime data, string jednostka, string sonda, int rownowaznik_dawki = -1)
         //-------------------------------------------------------------------------
         {
-            _ObszarRysowniczy = zedGraphControl1.GraphPane;
-
-            UstawieniaTytułu(nrKarty, data.Year.ToString());
-            UstawieniaDaty(data);
-            UstawieniaOsi(UstawienieJednostki(jednostka), rownowaznik_dawki);
-
-            if (SprawdzJednostke(jednostka) != "")
-                UstawieniaPrzelicznika(SprawdzJednostke(jednostka));
-
-            if (sonda != "" && sonda != "Detektor własny")
-                UstawieniaSondy(sonda);
-
-            foreach (Punkty zakres in _DaneWejsciowe.Zakresy)
+            try
             {
-                RysujPunktyZakresu(KonwertujPunkty(zakres));
+                Program.zmienJezyk(jezyk);
+
+                _ObszarRysowniczy = zedGraphControl1.GraphPane;
+
+                UstawieniaTytułu(nrKarty, data.Year.ToString());
+                UstawieniaDaty(data);
+                UstawieniaOsi(UstawienieJednostki(jednostka), rownowaznik_dawki);
+
+                if (SprawdzJednostke(jednostka) != "")
+                    UstawieniaPrzelicznika(SprawdzJednostke(jednostka));
+
+                if (sonda != "" && sonda != "Detektor własny") // TODO: check this?
+                    UstawieniaSondy(sonda);
+
+                foreach (Punkty zakres in _DaneWejsciowe.Zakresy)
+                {
+                    RysujPunktyZakresu(KonwertujPunkty(zakres));
+                }
+
+                Scale s = _ObszarRysowniczy.XAxis.Scale;
+
+                RysujNiepewnosci();
+
+                foreach (Punkty p in _DaneWejsciowe.Zakresy)
+                {
+                    RysujLinie(p);
+                }
+
+                _ObszarRysowniczy.XAxis.Scale.Max = s.Max;
+                _ObszarRysowniczy.XAxis.Scale.Min = s.Min;
+
+                zedGraphControl1.Invalidate();
             }
-
-            Scale s = _ObszarRysowniczy.XAxis.Scale;
-
-            RysujNiepewnosci();
-
-            foreach (Punkty p in _DaneWejsciowe.Zakresy)
+            finally
             {
-                RysujLinie(p);
+                Program.zmienJezyk(Jezyk.PL);
             }
-
-            _ObszarRysowniczy.XAxis.Scale.Max = s.Max;
-            _ObszarRysowniczy.XAxis.Scale.Min = s.Min;
-
-            zedGraphControl1.Invalidate();
             return true;
         }
 
@@ -189,7 +239,6 @@ namespace Wykres
             return punkty;
         }
 
-
         //-------------------------------------------------------------------------
         public void UstawieniaTytułu(String numer_karty, String Rok)
         //-------------------------------------------------------------------------
@@ -198,10 +247,10 @@ namespace Wykres
             _ObszarRysowniczy.TitleGap = 1.1f;
             _ObszarRysowniczy.Title.FontSpec.Size = 11;
             _ObszarRysowniczy.Title.FontSpec.IsBold = true;
-            _ObszarRysowniczy.Title.Text = "Wykres kalibracyjny dotyczący Świadectwa Wzorcowania nr " + numer_karty + (_Poprawa ? "P" : "") + "/" + Rok;
+            _ObszarRysowniczy.Title.Text = tr("Wykres kalibracyjny dotyczący Świadectwa Wzorcowania nr ") + numer_karty + (_Poprawa ? "P" : "") + (jezyk != Jezyk.PL ? "/" + jezyk.ToString() : "") + "/" + Rok;
             if (false == _WykresMocyDawki)
             {
-                _ObszarRysowniczy.Title.Text += "\nWzorcowanie w zakresie dawki";
+                _ObszarRysowniczy.Title.Text += "\n" + tr("Wzorcowanie w zakresie dawki");
             }
         }
 
@@ -210,9 +259,9 @@ namespace Wykres
         //-------------------------------------------------------------------------
         {
             if (jednostka.Contains('R'))
-                return "1 mR/h = 8,74 \u00B5Gy/h ";
+                return tr("1 mR/h = 8,74 \u00B5Gy/h ");
             else if (jednostka.Contains('A'))
-                return "1 nA/kg = 121,9 \u00B5Gy/h";
+                return tr("1 nA/kg = 121,9 \u00B5Gy/h");
             return "";
         }
 
@@ -228,11 +277,13 @@ namespace Wykres
                 wpisData = String.Format("{0:dd.MM.yyyy}", data.AddYears(1));
 
             TextObj myText;
-            
-            if(_WykresMocyDawki)
-                myText = new TextObj("Data zalecanej kalibracji: " + wpisData + " r.", 0.83, 0.085, CoordType.PaneFraction);
+            var tytul = tr("Data zalecanej kalibracji: ");
+            if (tytul == null)
+                myText = new TextObj("", 0.83, 0.085, CoordType.PaneFraction);
+            else if (_WykresMocyDawki)
+                myText = new TextObj(tytul + wpisData + tr(" r."), 0.83, 0.085, CoordType.PaneFraction);
             else
-                myText = new TextObj("Data zalecanej kalibracji: " + wpisData + " r.", 0.83, 0.12, CoordType.PaneFraction);
+                myText = new TextObj(tytul + wpisData + tr(" r."), 0.83, 0.12, CoordType.PaneFraction);
 
             myText.FontSpec.FontColor = Color.Black;
             myText.FontSpec.Family = "Arial";
@@ -311,7 +362,7 @@ namespace Wykres
                     }
                     else if (rownowaznik_dawki == 1)
                     {
-                        wielkoscFizyczna = "Hp (0,07) ";
+                        wielkoscFizyczna = tr("Hp (0,07) ");
                         //JestemIdiotycznaFunkcja();
                     }
                     else if (rownowaznik_dawki == 2)
@@ -332,14 +383,14 @@ namespace Wykres
                 jednostka.Contains("imp/min") || jednostka.Contains("imp/s") ||
                 jednostka.Contains("1/min") || jednostka.Contains("Bq/cm2"))
             {
-                _ObszarRysowniczy.XAxis.Title.Text = "Wartości wzorcowe \u00B5Gy/h";
+                _ObszarRysowniczy.XAxis.Title.Text = tr("Wartości wzorcowe ") + "\u00B5Gy/h";
             }
             else
             {
-                _ObszarRysowniczy.XAxis.Title.Text = "Wartości wzorcowe " + wielkoscFizyczna + jednostka;
+                _ObszarRysowniczy.XAxis.Title.Text = tr("Wartości wzorcowe ") + wielkoscFizyczna + jednostka;
             }
 
-            _ObszarRysowniczy.YAxis.Title.Text = "Wartości zmierzone " + jednostka;
+            _ObszarRysowniczy.YAxis.Title.Text = tr("Wartości zmierzone ") + jednostka;
 
             //ustawienia liczb
             _ObszarRysowniczy.XAxis.Scale.FontSpec.Size = 9;
@@ -414,7 +465,7 @@ namespace Wykres
         private void UstawieniaPrzelicznika(String przelicznik)
         //-------------------------------------------------------------------------
         {
-            TextObj myText = new TextObj("Zastosowano przelicznik: " + przelicznik, 0.26, 0.085, CoordType.PaneFraction);
+            TextObj myText = new TextObj(tr("Zastosowano przelicznik: ") + przelicznik, 0.26, 0.085, CoordType.PaneFraction);
             myText.FontSpec.FontColor = Color.Black;
             myText.FontSpec.Family = "Arial";
             myText.FontSpec.Size = 9;
@@ -430,7 +481,7 @@ namespace Wykres
         private void UstawieniaSondy(String sonda)
         //-------------------------------------------------------------------------
         {
-            TextObj myText = new TextObj("Sonda: " + sonda, 0.097, 0.96, CoordType.PaneFraction, AlignH.Left, AlignV.Center);
+            TextObj myText = new TextObj(tr("Sonda: ") + TranslacjaForm.Tlumacz(sonda, jezyk), 0.097, 0.96, CoordType.PaneFraction, AlignH.Left, AlignV.Center);
             myText.FontSpec.FontColor = Color.Black;
             myText.FontSpec.Family = "Arial";
             myText.FontSpec.Size = 9;
@@ -453,7 +504,7 @@ namespace Wykres
                 Punkty punkty = _DaneWejsciowe.Zakresy[i];
                 double x_srodek = (punkty.ZnajdzMaxX() + punkty.ZnajdzMinX()) / 2;
                 double y_max = punkty.ZnajdzMaxY() * 1.5;
-                podpis = new TextObj("zakres " + punkty.Zakres, x_srodek, y_max);
+                podpis = new TextObj(tr("zakres ") + punkty.Zakres, x_srodek, y_max);
                 podpis.FontSpec.FontColor = Color.Black;
                 podpis.FontSpec.Family = "Arial";
                 podpis.FontSpec.Size = 6;
