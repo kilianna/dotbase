@@ -615,10 +615,10 @@ namespace DotBase
         private void wykresToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Jezyk jezyk = Jezyk.PL;
-            /*TODO: if (sender == wykresENToolStripMenuItem)
+            if (sender == wykresENToolStripMenuItem)
             {
                 jezyk = Jezyk.EN;
-            }*/
+            }
             Wykres.WykresForm wykres = new Wykres.WykresForm(false, false, false, jezyk);
             wykres.CzyscDane();
 

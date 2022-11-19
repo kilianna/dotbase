@@ -28,9 +28,9 @@ namespace Wykres
                 switch (pl)
                 {
                     case "Wykres kalibracyjny dotyczący Świadectwa Wzorcowania nr ":
-                        return "Wykres kal... TRANSLATE ...owania nr ";
+                        return "Calibration plot for certificate: ";
                     case "Wzorcowanie w zakresie dawki":
-                        return "Wzorcow... TRANSLATE ...ki";
+                        return "Calibration in terms of dose";
                     case "1 mR/h = 8,74 \u00B5Gy/h ":
                         return "1 mR/h = 8.74 \u00B5Gy/h ";
                     case "1 nA/kg = 121,9 \u00B5Gy/h":
@@ -42,13 +42,13 @@ namespace Wykres
                     case "Hp (0,07) ":
                         return "Hp (0.07) ";
                     case "Wartości wzorcowe ":
-                        return "Wartośc... TRANSLATE ...orcowe ";
+                        return "Reference values ";
                     case "Wartości zmierzone ":
-                        return "Wart... TRANSLATE ...zone ";
+                        return "Measured values ";
                     case "Zastosowano przelicznik: ":
-                        return "Zasto... TRANSLATE ...icznik: ";
+                        return "Conversion factor used: ";
                     case "Sonda: ":
-                        return "SoTRa: ";
+                        return "Probe: ";
                     case "zakres ":
                         return "range ";
                     default:
@@ -103,8 +103,7 @@ namespace Wykres
                 if (SprawdzJednostke(jednostka) != "")
                     UstawieniaPrzelicznika(SprawdzJednostke(jednostka));
 
-                if (sonda != "" && sonda != "Detektor własny") // TODO: check this?
-                    UstawieniaSondy(sonda);
+                UstawieniaSondy(sonda);
 
                 foreach (Punkty zakres in _DaneWejsciowe.Zakresy)
                 {

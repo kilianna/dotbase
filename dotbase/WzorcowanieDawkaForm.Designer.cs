@@ -114,6 +114,7 @@
             this.wykresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.protokółToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zapiszToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wykresENToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -994,6 +995,7 @@
             // 
             this.wydrukiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.wykresToolStripMenuItem,
+            this.wykresENToolStripMenuItem,
             this.protokółToolStripMenuItem});
             this.wydrukiToolStripMenuItem.Name = "wydrukiToolStripMenuItem";
             this.wydrukiToolStripMenuItem.Size = new System.Drawing.Size(97, 24);
@@ -1002,14 +1004,14 @@
             // wykresToolStripMenuItem
             // 
             this.wykresToolStripMenuItem.Name = "wykresToolStripMenuItem";
-            this.wykresToolStripMenuItem.Size = new System.Drawing.Size(134, 24);
-            this.wykresToolStripMenuItem.Text = "Wykres";
+            this.wykresToolStripMenuItem.Size = new System.Drawing.Size(158, 24);
+            this.wykresToolStripMenuItem.Text = "Wykres (PL)";
             this.wykresToolStripMenuItem.Click += new System.EventHandler(this.wykresToolStripMenuItem_Click);
             // 
             // protokółToolStripMenuItem
             // 
             this.protokółToolStripMenuItem.Name = "protokółToolStripMenuItem";
-            this.protokółToolStripMenuItem.Size = new System.Drawing.Size(134, 24);
+            this.protokółToolStripMenuItem.Size = new System.Drawing.Size(158, 24);
             this.protokółToolStripMenuItem.Text = "Protokół";
             this.protokółToolStripMenuItem.Click += new System.EventHandler(this.protokółToolStripMenuItem_Click);
             // 
@@ -1019,6 +1021,13 @@
             this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
             this.zapiszToolStripMenuItem.Text = "Zapisz";
             this.zapiszToolStripMenuItem.Click += new System.EventHandler(this.zapiszToolStripMenuItem_Click);
+            // 
+            // wykresENToolStripMenuItem
+            // 
+            this.wykresENToolStripMenuItem.Name = "wykresENToolStripMenuItem";
+            this.wykresENToolStripMenuItem.Size = new System.Drawing.Size(158, 24);
+            this.wykresENToolStripMenuItem.Text = "Wykres (EN)";
+            this.wykresENToolStripMenuItem.Click += new System.EventHandler(this.wykresToolStripMenuItem_Click);
             // 
             // WzorcowanieDawkaForm
             // 
@@ -1153,6 +1162,7 @@
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.ToolStripMenuItem wykresENToolStripMenuItem;
 
     }
 }
