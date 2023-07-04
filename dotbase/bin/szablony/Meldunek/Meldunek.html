@@ -8,43 +8,36 @@
 	<body>
 		<div id="strona">
 			<div id="naglowek">
-				Kraków, dnia <!data><br>
-				Nr ewid. pracy: <b>N82002</b><br>
-				<b>Nr św. <!numer_swiadectwa></b><br>
-				<b>Data sprzedaży: <!data_sprzedazy></b>
+				Kraków, dnia <!data>
 			</div>
-			<div id="naglowek2">MELDUNEK<BR>O WYKONANIU PRACY<br><br></div>
-			<div id="naglowek3"><u>Dział Planowania Ekonomicznego w/m</u><br><br></div>
-			<div>Symbol pozycji planu i nazwa pracy: <b>Wzorcowanie aparatury dozymetrycznej:</b><br><br></div>
+			<div id="naglowek1">
+				<b>NLW</b><br>
+				<b>N82002</b><br><br>
+				
+			</div>
+			<div id="naglowek3">
+			Proforma &#65794; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Faktura &#9745; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Kod PKWiU: 71.20.19.0<br><br>
+			</div>
+			<div id="naglowek2"><p>Dział Finansowo-Księgowy</p><p>Instytutu Fizyki Jądrowej</p><p>im. Henryka Niewodniczańskiego</p><p>Polskiej Akademii Nauk</p><br><br></div>
+			<div><p>Dotyczy zlecenia numer/<s>umowy numer z dnia</s>: <!nrZleceniaKlienta></div>
+			<div><p>Dane podatnika i nabywcy towarów lub usług:</p>
+			<p>1. pełna nazwa: <!zleceniodawca></p>
+			<p>1. adres nabywcy: <!adres></p>
+			<p>NIP: <!nip></p>
+			<p><u>Dane odbiorcy: jeżeli inne niż podatnika i nabywcy (tj. inne niż podane powyżej)</u></p>
+			<p>1. nazwa odbiorcy: <!nazwaPlatnika></p>
+			<p>1. adres odbiorcy: <!adresPlatnika></p>
+			<p>Kwota netto/<s>brutto</s>: <!cena> zł</p>
+			<p>Termin płatności: 30 dni od daty wystawienia faktury</p>
+			<p>Treść faktura/<s>faktura proforma:</s></p>
 			<!lista>
-			<br><br><br>
-			<table>
-				<tr>
-					<td valign="top" width="40%">Zleceniodawca:</td>
-					<td class = "dane"><!zleceniodawca><br><!adres><br><br></td>
-				</tr>
-				<!platnikBegin>
-				<tr>
-					<td valign="top" width="40%">Płatnik:</td>
-					<td class = "dane"><!nazwaPlatnika><br><!adresPlatnika><br><br></td>
-				</tr>
-				<!platnikEnd>
-				<tr>
-					<td valign="top" width="40%"></td>
-					<td class = "dane"><span style = "font-weight: normal;">NIP <!nip></span><br><br></td>
-				</tr>
-				<tr>
-					<td  valign="top">Uwagi:</td>
-					<td class = "dane"><u>Koszt netto: <!cena> zł</u> <br> <span style = "font-size: 12pt; font-weight: normal;">Termin płatności 30 dni</span></td>
-				</tr>
-			</table>
-			<br><br><br>
-			<div id="numer" style="<!nrZleceniaKlienta>display<!nrZleceniaKlienta>: none;">Na fakturze proszę umieścić numer: <!nrZleceniaKlienta></div>
-			<br><br><br>
-			<div class = "kolumna3">Główny wykonawca:</div>
-			<div class = "kolumna4">Kierownik Zakładu:</div>
-			<div id="stopka">Załączniki: <br> 1. kopia zamówienia <span>F1/PS-03/15.06.2014</span></div>
+			<p>Usługa wykonana(towar dostarczony): <!data_sprzedazy>, Nr św. <!numer_swiadectwa></p></div>
+			Tłumaczenie (opis przedmiotu umowy/zlecenia w języku polskim): ............................................................. <br>
+			..........................................................................................................................................................................<br>
+			..........................................................................................................................................................................<br>
+			..........................................................................................................................................................................<br>
+			..........................................................................................................................................................................<br>
+			..........................................................................................................................................................................<br>
 		</div>
-
 	</body>
 </html>
