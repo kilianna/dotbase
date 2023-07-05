@@ -2,7 +2,87 @@
 
 	<head>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<link rel="stylesheet" href="style.css" type="text/css" />
+	<style type="text/css">
+	*{
+font-family: "Times New Roman";
+}
+
+#strona {
+position: absolute;
+width: 179.92mm;
+height: 266.98mm;
+padding: 15.01mm 15.04mm;
+}
+
+#naglowek
+{padding: 0;
+font-size: 12pt;
+font-weight: normal;
+text-align: right;
+width: 100.00%;
+float: left;
+line-height: 0.5cm;
+}
+
+#naglowek1
+{padding: 0;
+font-size: 12pt;
+font-weight: normal;
+text-align: left;
+width: 100.00%;
+float: left;
+line-height: 0.5cm;
+}
+
+#naglowek2
+{padding: 0;
+font-weight: normal;
+text-align: center;
+width: 100.00%;
+float: left;
+line-height: 0.5cm;
+}
+
+#naglowek3
+{padding: 0;
+font-weight: bold;
+text-align: left;
+width: 100.00%;
+float: left;
+line-height: 0.5cm;
+}
+
+#numer
+{
+padding: 0;
+font-size: 12pt;
+font-weight: normal;
+width: 100.00%;
+float: left;
+}
+
+.kolumna1
+{float:left;
+ width: 74.5%;
+ padding: 0;
+ font-size: 12pt;
+ font-weight: normal;
+}
+
+.kolumna2
+{float:right;
+ width: 25%;
+ padding: 0;
+ font-size: 12pt;
+ font-weight: normal;
+}
+
+.dane
+{
+font-size: 12pt;
+font-weight: normal;
+}
+	</style>
 	</head>
 
 	<body>
@@ -15,29 +95,57 @@
 				<b>N82002</b><br><br>
 				
 			</div>
+			
 			<div id="naglowek3">
 			Proforma &#65794; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Faktura &#9745; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Kod PKWiU: 71.20.19.0<br><br>
 			</div>
-			<div id="naglowek2"><p>Dział Finansowo-Księgowy</p><p>Instytutu Fizyki Jądrowej</p><p>im. Henryka Niewodniczańskiego</p><p>Polskiej Akademii Nauk</p><br><br></div>
-			<div><p>Dotyczy zlecenia numer/<s>umowy numer z dnia</s>: <!nrZleceniaKlienta></div>
-			<div><p>Dane podatnika i nabywcy towarów lub usług:</p>
-			<p>1. pełna nazwa: <!zleceniodawca></p>
-			<p>1. adres nabywcy: <!adres></p>
-			<p>NIP: <!nip></p>
-			<p><u>Dane odbiorcy: jeżeli inne niż podatnika i nabywcy (tj. inne niż podane powyżej)</u></p>
-			<p>1. nazwa odbiorcy: <!nazwaPlatnika></p>
-			<p>1. adres odbiorcy: <!adresPlatnika></p>
-			<p>Kwota netto/<s>brutto</s>: <!cena> zł</p>
-			<p>Termin płatności: 30 dni od daty wystawienia faktury</p>
-			<p>Treść faktura/<s>faktura proforma:</s></p>
+			
+			<div id="naglowek2">Dział Finansowo-Księgowy <br> Instytutu Fizyki Jądrowej<br>im. Henryka Niewodniczańskiego<br>Polskiej Akademii Nauk</div>
+			
+			
+			<table cellspacing="15">
+			<tr><td>Dotyczy zlecenia numer/<s>umowy numer z dnia</s>:</td><td><!nrZleceniaKlienta></td>
+			</tr>
+			</table>
+
+			<div>Dane podatnika i nabywcy towarów lub usług:</div>
+			
+			<table cellspacing="15">
+			<tr>
+				<td style="vertical-align:top">Pełna nazwa:</s>:</td><td><!nazwaPlatnika></td>
+			</tr>
+						<tr>
+				<td style="vertical-align:top">Adres nabywcy:</td><td><!adresPlatnika></td>
+			</tr>
+						<tr>
+				<td>NIP:</td><td><!nip></td>
+			</tr>
+			</table>
+			
+			<div><u>Dane odbiorcy: jeżeli inne niż podatnika i nabywcy (tj. inne niż podane powyżej)</u></div>
+			
+			<table cellspacing="15">
+			<tr>
+				<td style="vertical-align:top">Nazwa odbiorcy:</s>:</td><td><!zleceniodawca></td>
+			</tr>
+						<tr>
+				<td style="vertical-align:top">Adres odbiorcy:</td><td><!adres></td>
+			</tr>
+			</table>
+			
+			<div>
+			Kwota netto/<s>brutto</s>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <!cena> zł <br>
+			Termin płatności:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>30 dni od daty wystawienia faktury</b><br><br>
+			Treść faktura/<s>faktura proforma:</s></div>
 			<!lista>
-			<p>Usługa wykonana(towar dostarczony): <!data_sprzedazy>, Nr św. <!numer_swiadectwa></p></div>
-			Tłumaczenie (opis przedmiotu umowy/zlecenia w języku polskim): ............................................................. <br>
+			<div><br><br>Usługa wykonana(towar dostarczony): <!data_sprzedazy>, Nr św. <!numer_swiadectwa></div>
+			<div><br>Tłumaczenie (opis przedmiotu umowy/zlecenia w języku polskim): ............................................................. <br>
 			..........................................................................................................................................................................<br>
 			..........................................................................................................................................................................<br>
 			..........................................................................................................................................................................<br>
 			..........................................................................................................................................................................<br>
 			..........................................................................................................................................................................<br>
+			</div>
 		</div>
 	</body>
 </html>
