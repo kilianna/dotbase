@@ -959,17 +959,65 @@ namespace DotBase
             {
                 maxIdKarty = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0);
 
+                var prevDozymetrQuery = _BazaDanych
+                    .Karta_przyjecia
+                        .ID_dozymetru()
+                    .WHERE()
+                        .ID_karty(Int32.Parse(idKarty));
+
+                _BazaDanych
+                    .Karta_przyjecia
+                    .WHERE()
+                        .ID_dozymetru(prevDozymetrQuery)
+                        .CustomQuery<int>("id_karty < ?", Int32.Parse(idKarty))
+                    .GET()
+                        .CustomField<int>("MAX(id_karty)");
+                        
+
                 _Zapytanie = String.Format("SELECT id_wzorcowania FROM Wzorcowanie_zrodlami_powierzchniowymi WHERE id_karty = {0} AND id_zrodla = {1} AND id_sondy =", maxIdKarty, idZrodla)
                                + String.Format("(SELECT id_sondy FROM Sondy WHERE typ = '{0}' AND nr_fabryczny = '{1}' AND id_dozymetru =", typSondy, nrSondy)
                                + String.Format("(SELECT id_dozymetru FROM Dozymetry WHERE typ = '{0}' AND nr_fabryczny = '{1}'))", typDozymetru, nrDozymetru);
+
+                var dozymetrQuery = _BazaDanych
+                    .Dozymetry
+                        .ID_dozymetru()
+                    .WHERE()
+                        .Typ(typDozymetru)
+                        .Nr_fabryczny(nrDozymetru);
+
+                var sondaQuery = _BazaDanych
+                    .Sondy
+                        .ID_sondy()
+                    .WHERE()
+                        .Typ(typSondy)
+                        .Nr_fabryczny(nrSondy)
+                        .ID_dozymetru(dozymetrQuery);
+
+                idWzorcowania = _BazaDanych
+                    .Wzorcowanie_zrodlami_powierzchniowymi
+                    .WHERE()
+                        .ID_karty(maxIdKarty)
+                        .ID_zrodla(Int32.Parse(idZrodla))
+                        .ID_sondy(sondaQuery)
+                    .GET()
+                        .ID_wzorcowania();
                 idWzorcowania = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0);
 
                 _Zapytanie = String.Format("SELECT wspolczynnik, niepewnosc FROM Wzorcowanie_zrodlami_powierzchniowymi WHERE id_wzorcowania = {0}", idWzorcowania);
 
+                var tab = _BazaDanych
+                    .Wzorcowanie_zrodlami_powierzchniowymi
+                        .wspolczynnik()
+                        .Niepewnosc()
+                    .WHERE()
+                        .ID_wzorcowania(idWzorcowania)
+                    .GET();
+
                 _OdpowiedzBazy = _BazaDanych.TworzTabeleDanych(_Zapytanie);
 
-                textBox19.Text = _OdpowiedzBazy.Rows[0].Field<double>(0).ToString();
-                textBox20.Text = _OdpowiedzBazy.Rows[0].Field<double>(1).ToString();
+                textBox19.Text = tab.wspolczynnik();
+                textBox20.Text = tab.Niepewnosc();
+
             }
             catch (Exception)
             {

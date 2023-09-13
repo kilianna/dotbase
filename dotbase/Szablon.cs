@@ -111,7 +111,7 @@ namespace DotBase
                 return value.ToString();
             }
 
-            protected void AddField(string name)
+            public void AddField(string name)
             {
                 throw new NotImplementedException();
             }
@@ -158,6 +158,11 @@ namespace DotBase
                 logParameters += ",\r\n";
                 where = true;
                 firstEntry = true;
+            }
+
+            protected void _SELECT()
+            {
+                throw new NotImplementedException();
             }
 
             public bool EXECUTE(bool returnResult = false)

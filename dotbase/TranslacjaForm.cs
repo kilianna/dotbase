@@ -40,6 +40,11 @@ namespace DotBase
             }
             var _Baza = new BazaDanychWrapper();
             var begin = polski.Substring(0, Math.Min(2, polski.Length));
+            var tab = _Baza.Slownik
+                .SELECT()
+                .WHERE()
+                    .PL(polski.ToLower().Trim())
+                .GET();
             DataTable table = _Baza.TworzTabeleDanych("SELECT " + jezyk.ToString() + " FROM Slownik WHERE PL=?", polski.ToLower().Trim());
             if (table.Rows.Count < 1 || table.Rows[0].Field<string>(0).Trim() == "")
             {
