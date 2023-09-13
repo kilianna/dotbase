@@ -39,6 +39,20 @@ namespace DotBase
                 return this;
             }
         }
+        public class Szablon_Błędy_wklejania : Tabela
+        {
+            public Szablon_Błędy_wklejania(BazaDanychWrapper baza, string nazwa) : base(baza, nazwa) { }
+            public Szablon_Błędy_wklejania UPDATE() { _UPDATE(); return this; }
+            public Szablon_Błędy_wklejania INSERT() { _INSERT(); return this; }
+            public Szablon_Błędy_wklejania DELETE() { _DELETE(); return this; }
+            public Szablon_Błędy_wklejania WHERE() { _WHERE(); return this; }
+            public Szablon_Błędy_wklejania INFO(string text) { _INFO(text); return this; }
+            public Szablon_Błędy_wklejania Pole0(string value)
+            {
+                SetField("Pole0", value, OleDbType.WChar);
+                return this;
+            }
+        }
         public class Szablon_Budzetniepewnosci : Tabela
         {
             public Szablon_Budzetniepewnosci(BazaDanychWrapper baza, string nazwa) : base(baza, nazwa) { }
@@ -1185,6 +1199,7 @@ namespace DotBase
     partial class BazaDanychWrapper
     {
         public Szablon.Szablon_Atesty_zrodel Atesty_zrodel { get { return new Szablon.Szablon_Atesty_zrodel(this, "Atesty_zrodel"); } }
+        public Szablon.Szablon_Błędy_wklejania Błędy_wklejania { get { return new Szablon.Szablon_Błędy_wklejania(this, "Błędy wklejania"); } }
         public Szablon.Szablon_Budzetniepewnosci Budzetniepewnosci { get { return new Szablon.Szablon_Budzetniepewnosci(this, "Budzetniepewnosci"); } }
         public Szablon.Szablon_Cennik Cennik { get { return new Szablon.Szablon_Cennik(this, "Cennik"); } }
         public Szablon.Szablon_Dozymetry Dozymetry { get { return new Szablon.Szablon_Dozymetry(this, "Dozymetry"); } }

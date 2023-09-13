@@ -961,6 +961,7 @@ namespace DotBase
                 string tabela = row.Field<string>("TABLE_NAME");
                 string typTabeli = row.Field<string>("TABLE_TYPE");
                 if (tabela.StartsWith("~") || tabela.StartsWith("MSys") || typTabeli != "TABLE") continue;
+                string tabelaId = tabela.Replace(' ', '_');
                 szablon += String.Format(@"
         public class Szablon_{0} : Tabela
         {{
@@ -970,9 +971,9 @@ namespace DotBase
             public Szablon_{0} DELETE() {{ _DELETE(); return this; }}
             public Szablon_{0} WHERE() {{ _WHERE(); return this; }}
             public Szablon_{0} INFO(string text) {{ _INFO(text); return this; }}"
-            /*public Szablon_{0} SELECT() {{ _SELECT(); return this; }}" - jeżeli potrzeba SELECT */, tabela);
+            /*public Szablon_{0} SELECT() {{ _SELECT(); return this; }}" - jeżeli potrzeba SELECT */, tabelaId);
                 tabele += String.Format(@"
-        public Szablon.Szablon_{0} {0} {{ get {{ return new Szablon.Szablon_{0}(this, ""{0}""); }} }}", tabela);
+        public Szablon.Szablon_{0} {0} {{ get {{ return new Szablon.Szablon_{0}(this, ""{1}""); }} }}", tabelaId, tabela);
                 DataTable schemaTable = _Polaczenie.GetOleDbSchemaTable(System.Data.OleDb.OleDbSchemaGuid.Columns,new object[] { null, null, tabela, null });
                 foreach (DataRow col in schemaTable.Rows)
                 {
@@ -995,7 +996,7 @@ namespace DotBase
             {{
                 AddField(""{1}"");
                 return this;
-            }}"*/, tabela, colName, oleDbToNetTypeConverter(oleDbTypeNumber), oleDbType.ToString());
+            }}"*/, tabelaId, colName, oleDbToNetTypeConverter(oleDbTypeNumber), oleDbType.ToString());
                 }
                 szablon += @"
         }";

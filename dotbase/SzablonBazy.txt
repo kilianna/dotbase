@@ -10,6 +10,12 @@
     Atesty_zrodel.Niepewnosc, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 5, flagi X-X- -XXX
 
 ---------------------------------------------------------------------
+ Błędy wklejania
+---------------------------------------------------------------------
+
+    Błędy wklejania.Pole0, typ WChar, długość 0, niewymagane Tak, pozycja 1, flagi X-X- XXX-
+
+---------------------------------------------------------------------
  Budzetniepewnosci
 ---------------------------------------------------------------------
 
