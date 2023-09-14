@@ -646,7 +646,11 @@ namespace DotBase
 
             bool result;
 
-            if (dateTimePicker1.Value >= DateTime.Parse("2018-06-11"))
+            if (dateTimePicker1.Value >= DateTime.Parse("2023-09-15"))
+            {
+                result = _WzorcowanieMocDawki.LiczWspolczynnikINiepewnoscOd20230918(ref tabela, ref tabela2, comboBox3.Text, dateTimePicker1.Value, comboBox4.SelectedItem as string, out zakresPrzyrzadu, out wspolczynniki, out niepewnosc);
+            }
+            else if (dateTimePicker1.Value >= DateTime.Parse("2018-06-11"))
             {
                 result = _WzorcowanieMocDawki.LiczWspolczynnikINiepewnoscOd20180611(ref tabela, ref tabela2, comboBox3.Text, dateTimePicker1.Value, out zakresPrzyrzadu, out wspolczynniki, out niepewnosc);
             }

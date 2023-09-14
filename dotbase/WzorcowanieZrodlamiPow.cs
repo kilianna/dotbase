@@ -100,7 +100,7 @@ namespace DotBase
         }
 
         //---------------------------------------------------------------
-        public bool LiczWspolczynnikiOrazNiepewnosc(out double wspolczynnik_kalibracyjny, out double niepewnoscWspolczynnika, out int precyzja, ref DataGridView dataGridView1, DateTime data, double wspolczynnik_korekcyjny)
+        public bool LiczWspolczynnikiOrazNiepewnoscOld(out double wspolczynnik_kalibracyjny, out double niepewnoscWspolczynnika, out int precyzja, ref DataGridView dataGridView1, DateTime data, double wspolczynnik_korekcyjny)
         //---------------------------------------------------------------
         {
             // sprawdź czy źródło ok
@@ -184,6 +184,107 @@ namespace DotBase
             double ukw = _BazaDanych.TworzTabeleDanych("SELECT Wartosc FROM Stale WHERE Nazwa='ukw'").Rows[0].Field<double>(0);
 
             niepewnoscWspolczynnika = Math.Sqrt(Math.Pow(odchylenie_pomiar, 2.0) + Math.Pow(odchylenie_tlo, 2.0) + Math.Pow(niepewnosc, 2.0) + Math.Pow(ukw, 2.0) + Math.Pow(ukj, 2.0)) * 2.0 * wspolczynnik_kalibracyjny;
+            precyzja = 0;//Narzedzia.Precyzja.Ustaw(niepewnoscWspolczynnika);
+
+            return true;
+        }
+
+        //---------------------------------------------------------------
+        public bool LiczWspolczynnikiOrazNiepewnosc20230915(out double wspolczynnik_kalibracyjny, out double niepewnoscWspolczynnika, out int precyzja, ref DataGridView dataGridView1, DateTime data, double wspolczynnik_korekcyjny)
+        //---------------------------------------------------------------
+        {
+            // sprawdź czy źródło ok
+            wspolczynnik_kalibracyjny = 0;
+            niepewnoscWspolczynnika = 0;
+
+            List<double> wskazania = new List<double>();
+            List<double> tla = new List<double>();
+
+            //-------------Obliczenie średniej wskazań tła----------------
+            for (int i = 0; i < dataGridView1.Rows.Count - 1; ++i)
+            {
+                DataGridViewRow wiersz = dataGridView1.Rows[i];
+
+                try
+                {
+                    wskazania.Add(N.doubleParse(wiersz.Cells["Wskazanie"].Value.ToString()));
+                    tla.Add(N.doubleParse(wiersz.Cells["Tlo"].Value.ToString()));
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Część danych została prawdopodobnie źle wpisana.", "Uwaga");
+                }
+            }
+
+            double sredniaWskazan;
+            double sredniaTel;
+
+            if (wskazania.Count != 0)
+                sredniaWskazan = wskazania.Average();
+            else
+                sredniaWskazan = 0;
+
+            if (wskazania.Count != 0)
+                sredniaTel = tla.Average();
+            else
+                sredniaTel = 0;
+
+            //-----------------------------------------------------------
+
+            _Zapytanie = String.Format("SELECT czas_polowicznego_rozpadu_dni, Niepewnosc FROM Zrodla_powierzchniowe WHERE id_zrodla = {0}", IdZrodla);
+            double czas_polowicznego_rozpadu_dni = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<float>(0);
+            double niepewnosc_czas_pol_rozpadu = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<float>(1);
+
+            _Zapytanie = String.Format("SELECT emisja_powierzchniowa, niepewnosc, data_wzorcowania FROM Atesty_zrodel WHERE ", data.ToShortDateString())
+                       + String.Format("id_zrodla = {0} AND data_wzorcowania=(SELECT MAX(data_wzorcowania) FROM Atesty_zrodel WHERE id_zrodla = {0})", IdZrodla);
+
+            double emisja_powierzchniowa = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<double>(0);
+            double niepewnosc = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<double>(1);
+            double czas = N.doubleParse((data - _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<DateTime>(2)).Days.ToString());
+
+
+            //--------------------------------------OBLICZENIE WSPÓŁCZYNNIKA KALIBRACYJNEGO-------------------------------------------
+            // 365.25 - zamiana dni na lata
+            // poniższy wzór to
+            // współ_korekcyjny * emisja_powierzchniowa * exp(-różnica w dniach * ln2 / czas_połowicznego_rozpadu) / (srednia_pomiaru - srednia_tla)
+
+            wspolczynnik_kalibracyjny = wspolczynnik_korekcyjny * emisja_powierzchniowa * Math.Exp(-czas * Math.Log(2.0)
+                                        / czas_polowicznego_rozpadu_dni) / (sredniaWskazan - sredniaTel);
+
+            //---------------------------------------LICZENIE NIEPEWNOŚCI---------------------------------------------------------------
+            double odchylenie_czesc_pomiar = 0;
+
+            // liczenie odchylenia standardowego
+            for (int i = 0; i < wskazania.Count; ++i)
+            {
+                odchylenie_czesc_pomiar += Math.Pow((wskazania[i] - sredniaWskazan), 2.0);
+            }
+
+            double odchylenie_pomiar = (1.0 / Math.Sqrt(wskazania.Count * (wskazania.Count - 1.0)) * Math.Sqrt(odchylenie_czesc_pomiar)) / (sredniaWskazan - sredniaTel);
+
+            double odchylenie_czesc_tlo = 0;
+
+            for (int i = 0; i < tla.Count; ++i)
+            {
+                odchylenie_czesc_tlo += Math.Pow((tla[i] - sredniaTel), 2.0);
+            }
+
+            double odchylenie_tlo = 1.0 / Math.Sqrt(tla.Count * (tla.Count - 1.0)) * Math.Sqrt(odchylenie_czesc_tlo) / (sredniaWskazan - sredniaTel);
+
+            double ukj = _BazaDanych.TworzTabeleDanych("SELECT Wartosc FROM Stale WHERE Nazwa='ukj'").Rows[0].Field<double>(0);
+            double ukw = _BazaDanych.TworzTabeleDanych("SELECT Wartosc FROM Stale WHERE Nazwa='ukw'").Rows[0].Field<double>(0);
+
+            int[] szybkoRozpadajaceZrodla = { 7, 18, 8, 2 }; // Am-241, Sr-90/Y-90 (najsilniejszy), Sr-90/Y-90 (silny), Sr-90/Y-90 (słaby)
+
+            if (szybkoRozpadajaceZrodla.Contains(IdZrodla))
+            {
+                double niepewnosc_rozpadu = Math.Log(2) * czas / czas_polowicznego_rozpadu_dni * Math.Sqrt(1.0 / Math.Pow(czas, 2) + Math.Pow(niepewnosc_czas_pol_rozpadu / czas_polowicznego_rozpadu_dni, 2));
+                niepewnoscWspolczynnika = Math.Sqrt(Math.Pow(odchylenie_pomiar, 2.0) + Math.Pow(odchylenie_tlo, 2.0) + Math.Pow(niepewnosc, 2.0) + Math.Pow(ukw, 2.0) + Math.Pow(ukj, 2.0) + Math.Pow(niepewnosc_rozpadu, 2.0)) * 2.0 * wspolczynnik_kalibracyjny;
+            }
+            else
+            {
+                niepewnoscWspolczynnika = Math.Sqrt(Math.Pow(odchylenie_pomiar, 2.0) + Math.Pow(odchylenie_tlo, 2.0) + Math.Pow(niepewnosc, 2.0) + Math.Pow(ukw, 2.0) + Math.Pow(ukj, 2.0)) * 2.0 * wspolczynnik_kalibracyjny;
+            }
             precyzja = 0;//Narzedzia.Precyzja.Ustaw(niepewnoscWspolczynnika);
 
             return true;

@@ -319,3 +319,5 @@
     zrodla_powierzchniowe.Nazwa, typ WChar, długość 50, niewymagane Tak, pozycja 2, flagi X-X- -XX-, opis Typ źródła.
     zrodla_powierzchniowe.Numer, typ Integer, precyzja 10, niewymagane Tak, pozycja 3, flagi X-X- -XXX, opis Numer ewidencyjny źródła.
     zrodla_powierzchniowe.Czas_polowicznego_rozpadu, typ Single, precyzja 7, niewymagane Tak, pozycja 4, flagi X-X- -XXX, opis Czas połopwicznego rpzpadu w latach
+    zrodla_powierzchniowe.Czas_polowicznego_rozpadu_dni, typ Single, domyślnie 0, precyzja 7, niewymagane Tak, pozycja 5, flagi X-X- -XXX, opis Czas połopwicznego rpzpadu w dniach
+    zrodla_powierzchniowe.Niepewnosc, typ Single, domyślnie 0, precyzja 7, niewymagane Tak, pozycja 6, flagi X-X- -XXX, opis Niepewność czasu połowicznego rozpadu

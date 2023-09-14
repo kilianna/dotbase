@@ -1178,6 +1178,11 @@ namespace DotBase
                 SetField("Czas_polowicznego_rozpadu", value, OleDbType.Single);
                 return this;
             }
+            public Szablon_zrodla_powierzchniowe Czas_polowicznego_rozpadu_dni(float value)
+            {
+                SetField("Czas_polowicznego_rozpadu_dni", value, OleDbType.Single);
+                return this;
+            }
             public Szablon_zrodla_powierzchniowe Id_zrodla(int value)
             {
                 SetField("Id_zrodla", value, OleDbType.Integer);
@@ -1186,6 +1191,11 @@ namespace DotBase
             public Szablon_zrodla_powierzchniowe Nazwa(string value)
             {
                 SetField("Nazwa", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_zrodla_powierzchniowe Niepewnosc(float value)
+            {
+                SetField("Niepewnosc", value, OleDbType.Single);
                 return this;
             }
             public Szablon_zrodla_powierzchniowe Numer(int value)

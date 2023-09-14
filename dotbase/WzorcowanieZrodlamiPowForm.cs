@@ -614,7 +614,14 @@ namespace DotBase
             double niepewnosc;
             int precyzja;
 
-            _WzorcowanieZrodlamiPow.LiczWspolczynnikiOrazNiepewnosc(out wspolczynnik_kalibracyjny, out niepewnosc, out precyzja, ref dataGridView1, dateTimePicker1.Value, N.doubleParse(textBox10.Text));
+            if (dateTimePicker1.Value >= DateTime.Parse("2023-09-15"))
+            {
+                _WzorcowanieZrodlamiPow.LiczWspolczynnikiOrazNiepewnosc20230915(out wspolczynnik_kalibracyjny, out niepewnosc, out precyzja, ref dataGridView1, dateTimePicker1.Value, N.doubleParse(textBox10.Text));
+            }
+            else
+            {
+                _WzorcowanieZrodlamiPow.LiczWspolczynnikiOrazNiepewnoscOld(out wspolczynnik_kalibracyjny, out niepewnosc, out precyzja, ref dataGridView1, dateTimePicker1.Value, N.doubleParse(textBox10.Text));
+            }
 
             if (Double.IsInfinity(niepewnosc) || Double.IsNaN(niepewnosc))
                 textBox18.Text = "-1";

@@ -422,6 +422,175 @@ namespace WzorcowanieMocDawkiSpace
             return true;
         }
 
+        public bool LiczWspolczynnikINiepewnoscOd20230918(ref DataGridView tabela, ref DataGridView tabela2, string protokol, DateTime dataWzorcowania, string jednostka, out List<double> zakresyPrzyrzadu, out List<double> wspolczynniki, out List<double> niepewnoscWspolczynnika)
+        {
+            zakresyPrzyrzadu = new List<double>();
+            wspolczynniki = new List<double>();
+            niepewnoscWspolczynnika = new List<double>();
+
+            if (tabela.Rows == null || tabela.Rows.Count <= 1)
+                return false;
+
+            List<double> odleglosci = new List<double>();
+            List<int> zrodla = new List<int>();
+            List<double> wskazania = new List<double>();
+            List<double> wartosci = new List<double>();
+            List<double> zakresy = new List<double>();
+            List<double> niepewnosci = new List<double>();
+            List<double> niepewnosciZPomWzorcowych = new List<double>();
+            HashSet<double> zakresySet = new HashSet<double>();
+
+            for (int i = 0; i < tabela.Rows.Count - 1; ++i)
+            {
+                try
+                {
+                    DataGridViewRow wiersz = tabela.Rows[i];
+                    if (Boolean.Parse(wiersz.Cells[6].Value.ToString()))
+                    {
+                        odleglosci.Add(N.doubleParse(wiersz.Cells[0].Value.ToString()));
+                        zrodla.Add(Int32.Parse(wiersz.Cells[1].Value.ToString()));
+                        wskazania.Add(N.doubleParse(wiersz.Cells[2].Value.ToString()));
+                        wartosci.Add(N.doubleParse(wiersz.Cells[5].Value.ToString()));
+                        zakresy.Add(N.doubleParse(wiersz.Cells[4].Value.ToString()));
+                        niepewnosci.Add(N.doubleParse(wiersz.Cells[3].Value.ToString()));
+                        zakresySet.Add(N.doubleParse(wiersz.Cells[4].Value.ToString()));
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(String.Format("Dane w wierszu {0} są nieprawidłowe. Sprawdź poprawność wprowadzonych liczb.", i), "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+
+            zakresyPrzyrzadu = zakresySet.ToList();
+            zakresyPrzyrzadu.Sort();
+
+            _Zapytanie = String.Format("SELECT Data_kalibracji, id_protokolu FROM Protokoly_kalibracji_lawy WHERE data_kalibracji=#{0}#", protokol);
+            var tab = _BazaDanych.TworzTabeleDanych(_Zapytanie);
+            int idProtokolu = tab.Rows[0].Field<short>(1);
+            DateTime dataKalibracjiLawy = tab.Rows[0].Field<DateTime>(0);
+
+            double ut = -1.0;
+            double ukT12Cs = -1.0;
+            double T12Cs = -1.0;
+            double ukjed = -1.0;
+
+            foreach (DataRow wiersz in _BazaDanych.TworzTabeleDanych("SELECT Nazwa, Wartosc FROM Stale").Rows)
+            {
+                var nazwa = wiersz.Field<string>(0);
+                var wartosc = wiersz.Field<double>(1);
+                if (nazwa == "ut") ut = wartosc;
+                if (nazwa == "ukT1/2 Cs") ukT12Cs = wartosc;
+                if (nazwa == "T1/2 Cs") T12Cs = wartosc;
+                if (nazwa == "ukjed") ukjed = wartosc;
+            }
+
+            if (ut < 0 || ukT12Cs < 0 || T12Cs < 0 || ukjed < 0)
+            {
+                MessageBox.Show("Brakuje niezbędnych danych w tabeli 'Stale' w bazie danych", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            double roznicaDni = (dataWzorcowania - dataKalibracjiLawy).Days;
+
+            double ktWzgledne = roznicaDni * Math.Log(2) * Math.Sqrt(Math.Pow(ut / roznicaDni, 2) + Math.Pow(ukT12Cs / T12Cs, 2)) / T12Cs;
+            double ukjedWzgledne = jednostka.IndexOf("Sv") >= 0 ? ukjed : 0;
+
+            for (int punktIndex = 0; punktIndex < wskazania.Count; punktIndex++)
+            {
+                try
+                {
+                    _Zapytanie = String.Format("SELECT Niepewnosc, Odleglosc, ID_zrodla, ID_protokolu " +
+                        "FROM Pomiary_wzorcowe WHERE Odleglosc={0} AND ID_zrodla={1} AND ID_protokolu={2}", odleglosci[punktIndex], zrodla[punktIndex], idProtokolu);
+                    niepewnosciZPomWzorcowych.Add(_BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<double>(0));
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(String.Format("Nie można znaleźć danych w Pomiarach Wzorcowych dla wiersza {0}", punktIndex + 1), "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+
+            var liczbyPunktow = new int[zakresyPrzyrzadu.Count];
+            var wspKalPukntuTab = new double[wskazania.Count];
+
+            for (int zakresIndex = 0; zakresIndex < zakresyPrzyrzadu.Count; zakresIndex++)
+            {
+                double zakres = zakresyPrzyrzadu[zakresIndex];
+                double wspKal = 0.0;
+                int liczba = 0;
+                for (int punktIndex = 0; punktIndex < wskazania.Count; punktIndex++)
+                {
+                    if (zakresy[punktIndex] == zakres)
+                    {
+                        double wspKalPukntu = wartosci[punktIndex] / wskazania[punktIndex];
+                        wspKalPukntuTab[punktIndex] = wspKalPukntu;
+                        wspKal += wspKalPukntu;
+                        liczba++;
+                    }
+                }
+                wspKal /= liczba;
+                wspolczynniki.Add(wspKal);
+                liczbyPunktow[zakresIndex] = liczba;
+            }
+
+            for (int zakresIndex = 0; zakresIndex < zakresyPrzyrzadu.Count; zakresIndex++)
+            {
+                double zakres = zakresyPrzyrzadu[zakresIndex];
+                int liczbaPunktow = liczbyPunktow[zakresIndex];
+                double niepewnoscWzglednaPomiaruSrednia = 0.0;
+                for (int punktIndex = 0; punktIndex < wskazania.Count; punktIndex++)
+                {
+                    if (zakresy[punktIndex] == zakres)
+                    {
+                        double wzgednaNiepWzorPrzyrzadu = niepewnosci[punktIndex] / wskazania[punktIndex] / Math.Sqrt(3.0);
+                        double wzgednaNiepOdleglosci = 2.0 * 1.5 / Math.Sqrt(3.0) / 10 / odleglosci[punktIndex];
+                        double niepewnoscWzglednaPomiaru = Math.Sqrt(
+                            Math.Pow(niepewnosciZPomWzorcowych[punktIndex], 2)
+                            + Math.Pow(wzgednaNiepWzorPrzyrzadu, 2)
+                            + Math.Pow(ktWzgledne, 2)
+                            + Math.Pow(ukjedWzgledne, 2)
+                            + Math.Pow(wzgednaNiepOdleglosci, 2));
+                        niepewnoscWzglednaPomiaruSrednia += niepewnoscWzglednaPomiaru;
+                    }
+                }
+
+                niepewnoscWzglednaPomiaruSrednia /= (double)liczbyPunktow[zakresIndex];
+
+                if (liczbyPunktow[zakresIndex] > 4)
+                {
+                    double odchStd = 0.0;
+                    for (int punktIndex = 0; punktIndex < wskazania.Count; punktIndex++)
+                    {
+                        if (zakresy[punktIndex] == zakres)
+                        {
+                            odchStd += Math.Pow(wspKalPukntuTab[punktIndex] - wspolczynniki[zakresIndex], 2);
+                        }
+                    }
+                    odchStd = Math.Sqrt(odchStd / (double)(liczbyPunktow[zakresIndex] - 1));
+                    var wkPrim = odchStd / wspolczynniki[zakresIndex];
+                    niepewnoscWspolczynnika.Add(2.0 * Math.Sqrt(wkPrim * wkPrim + niepewnoscWzglednaPomiaruSrednia * niepewnoscWzglednaPomiaruSrednia) * wspolczynniki[zakresIndex]);
+                }
+                else
+                {
+                    double maxDeltaK = 0;
+                    for (int punktIndex = 0; punktIndex < wskazania.Count; punktIndex++)
+                    {
+                        if (zakresy[punktIndex] == zakres)
+                        {
+                            var deltaK = Math.Abs(wspKalPukntuTab[punktIndex] - wspolczynniki[zakresIndex]);
+                            maxDeltaK = Math.Max(maxDeltaK, deltaK);
+                        }
+                    }
+                    double wOdDeltaK = maxDeltaK / Math.Sqrt(3) / wspolczynniki[zakresIndex];
+                    niepewnoscWspolczynnika.Add(2.0 * Math.Sqrt(wOdDeltaK * wOdDeltaK + niepewnoscWzglednaPomiaruSrednia * niepewnoscWzglednaPomiaruSrednia) * wspolczynniki[zakresIndex]);
+                }
+            }
+
+            return true;
+        }
+
         //---------------------------------------------------------------
         public bool LiczWspolczynnikINiepewnoscOld(ref DataGridView tabela, ref DataGridView tabela2, string protokol, out List<double> zakresyPrzyrzadu, out List<double> wspolczynniki, out List<double> niepewnoscWspolczynnika)
         //---------------------------------------------------------------
@@ -1093,6 +1262,7 @@ namespace WzorcowanieMocDawkiSpace
         }
 
         #endregion
+
 
     }
 }
