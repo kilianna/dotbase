@@ -580,7 +580,7 @@ namespace DotBase
         // oblicz współczynniki
         private void button4_Click(object sender, EventArgs e)
         {
-            List<Narzedzia.Pair<double, double>> inputList = new List<Pair<double,double>>();
+            List<double[]> inputList = new List<double[]>();
 
             try
             {
@@ -591,7 +591,11 @@ namespace DotBase
                     if (row.Cells["WartoscWzorcowa"].Value != null && row.Cells["Wskazanie"].Value != null && row.Cells["Dolaczyc"].Value != null)
                     {
                         if ((bool)row.Cells["Dolaczyc"].Value == true)
-                            inputList.Add(new Narzedzia.Pair<double, double>(N.doubleParse(row.Cells["WartoscWzorcowa"].Value.ToString()), N.doubleParse(row.Cells["Wskazanie"].Value.ToString())));
+                            inputList.Add(new double[] { 
+                                N.doubleParse(row.Cells["WartoscWzorcowa"].Value.ToString()),
+                                N.doubleParse(row.Cells["Wskazanie"].Value.ToString()),
+                                N.doubleParse(row.Cells["Column2"].Value.ToString())
+                            });
                     }
                     else
                         return;
@@ -602,7 +606,17 @@ namespace DotBase
                 return;
             }
 
-            Narzedzia.Pair<double,double> wspolczynnik_niepewnosc = _WzorcowanieDawka.LiczWspolczynnikOrazNiepewnosc(inputList);
+            Narzedzia.Pair<double,double> wspolczynnik_niepewnosc;
+
+            if (dateTimePicker1.Value >= DateTime.Parse("2023-09-15"))
+            {
+                wspolczynnik_niepewnosc = _WzorcowanieDawka.LiczWspolczynnikOrazNiepewnosc20230915(inputList, N.doubleParse(textBox18.Text), comboBox3.Text, Int32.Parse(textBox17.Text), dateTimePicker1.Value);
+            }
+            else
+            {
+                wspolczynnik_niepewnosc = _WzorcowanieDawka.LiczWspolczynnikOrazNiepewnoscOld(inputList);
+            }
+            
             textBox11.Text = wspolczynnik_niepewnosc.First.ToString("0.000");
             textBox12.Text = wspolczynnik_niepewnosc.Second.ToString("0.000");
 

@@ -112,9 +112,9 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.wydrukiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wykresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wykresENToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.protokółToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zapiszToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.wykresENToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -509,9 +509,9 @@
             this.radioButton3.Location = new System.Drawing.Point(649, 252);
             this.radioButton3.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(254, 21);
+            this.radioButton3.Size = new System.Drawing.Size(280, 21);
             this.radioButton3.TabIndex = 23;
-            this.radioButton3.Text = "Przestrzenny równoważnik dawki H*";
+            this.radioButton3.Text = "Przestrzenny równoważnik dawki H*(10)";
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
             // radioButton2
@@ -1008,6 +1008,13 @@
             this.wykresToolStripMenuItem.Text = "Wykres (PL)";
             this.wykresToolStripMenuItem.Click += new System.EventHandler(this.wykresToolStripMenuItem_Click);
             // 
+            // wykresENToolStripMenuItem
+            // 
+            this.wykresENToolStripMenuItem.Name = "wykresENToolStripMenuItem";
+            this.wykresENToolStripMenuItem.Size = new System.Drawing.Size(158, 24);
+            this.wykresENToolStripMenuItem.Text = "Wykres (EN)";
+            this.wykresENToolStripMenuItem.Click += new System.EventHandler(this.wykresToolStripMenuItem_Click);
+            // 
             // protokółToolStripMenuItem
             // 
             this.protokółToolStripMenuItem.Name = "protokółToolStripMenuItem";
@@ -1021,13 +1028,6 @@
             this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
             this.zapiszToolStripMenuItem.Text = "Zapisz";
             this.zapiszToolStripMenuItem.Click += new System.EventHandler(this.zapiszToolStripMenuItem_Click);
-            // 
-            // wykresENToolStripMenuItem
-            // 
-            this.wykresENToolStripMenuItem.Name = "wykresENToolStripMenuItem";
-            this.wykresENToolStripMenuItem.Size = new System.Drawing.Size(158, 24);
-            this.wykresENToolStripMenuItem.Text = "Wykres (EN)";
-            this.wykresENToolStripMenuItem.Click += new System.EventHandler(this.wykresToolStripMenuItem_Click);
             // 
             // WzorcowanieDawkaForm
             // 

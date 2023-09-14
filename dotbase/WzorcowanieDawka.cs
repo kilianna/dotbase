@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using System.Windows.Forms;
 
 namespace DotBase
 {
@@ -98,7 +99,7 @@ namespace DotBase
         }
 
         //---------------------------------------------------------------
-        public Narzedzia.Pair<double,double> LiczWspolczynnikOrazNiepewnosc(List<Narzedzia.Pair<double, double>> inputList)
+        public Narzedzia.Pair<double, double> LiczWspolczynnikOrazNiepewnoscOld(List<double[]> inputList)
         //---------------------------------------------------------------
         {
             List<double> temporaryValues = new List<double>();
@@ -106,9 +107,9 @@ namespace DotBase
             if (inputList.Count == 0)
                 return new Narzedzia.Pair<double, double>(0, 0);
 
-            foreach (Narzedzia.Pair<double, double> dataPair in inputList)
+            foreach (double[] data in inputList)
             {
-                temporaryValues.Add(dataPair.First / dataPair.Second);
+                temporaryValues.Add(data[0] / data[1]);
             }
 
             double wspolczynnik = temporaryValues.Average();
@@ -122,6 +123,59 @@ namespace DotBase
         }
 
         //---------------------------------------------------------------
+        public Narzedzia.Pair<double, double> LiczWspolczynnikOrazNiepewnosc20230915(List<double[]> inputList, double odleglosc, string protokol, int id_zrodla, DateTime dataWzorcowania)
+        //---------------------------------------------------------------
+        {
+            List<double> temporaryValues = new List<double>();
+
+            if (inputList.Count == 0)
+                return new Narzedzia.Pair<double, double>(0, 0);
+
+            var stale = Constants.getInstance();
+
+            double w_kd = 2 * stale.DELTA_L_D / 2 / Math.Sqrt(3) / 10 / odleglosc;
+
+            _Zapytanie = String.Format("SELECT Data_kalibracji, id_protokolu FROM Protokoly_kalibracji_lawy WHERE data_kalibracji=#{0}#", protokol);
+            var tab = _BazaDanych.TworzTabeleDanych(_Zapytanie);
+            int idProtokolu = tab.Rows[0].Field<short>(1);
+            DateTime dataKalibracjiLawy = tab.Rows[0].Field<DateTime>(0);
+
+            tab = _BazaDanych.TworzTabeleDanych("SELECT Niepewnosc FROM Pomiary_wzorcowe WHERE Odleglosc=? AND ID_zrodla=? AND ID_protokolu=?", odleglosc, id_zrodla, idProtokolu);
+            double Pomiary_wzorcowe_Niepewnosc = tab.Rows[0].Field<double>(0);
+
+            double roznicaDni = (dataWzorcowania - dataKalibracjiLawy).Days;
+
+            double ktWzgledne = roznicaDni * Math.Log(2) * Math.Sqrt(Math.Pow(stale.ut / roznicaDni, 2) + Math.Pow(stale.ukT12Cs / stale.T12Cs, 2)) / stale.T12Cs;
+
+            double ut_d;
+
+            double w_k = 0;
+            double poprzedni_czas = 0;
+
+            foreach (double[] data in inputList)
+            {
+                temporaryValues.Add(data[0] / data[1]);
+                double czas = poprzedni_czas + data[2];
+                poprzedni_czas = czas;
+                double w_t = stale.UT_D / Math.Sqrt(3) / czas;
+                // =PIERWIASTEK(                   I17*I17         + $E$11*$E$11                              +    $I$8*$I$8             +     $I$9*$I$9     +  $I$10*$I$10)
+                double w_k_dla_punktu = Math.Sqrt(Math.Pow(w_t, 2) + Math.Pow(Pomiary_wzorcowe_Niepewnosc, 2) + Math.Pow(stale.UKJED, 2) + Math.Pow(w_kd, 2) + Math.Pow(ktWzgledne, 2));
+                w_k += w_k_dla_punktu;
+            }
+
+            w_k /= inputList.Count;
+
+            double wspolczynnik = temporaryValues.Average();
+            double odchylenieStandardowe = Math.Sqrt(temporaryValues.Average(v => Math.Pow(v - wspolczynnik, 2)));
+            odchylenieStandardowe /= Math.Sqrt(temporaryValues.Count - 1);
+            odchylenieStandardowe *= Math.Sqrt(temporaryValues.Count);
+            odchylenieStandardowe /= wspolczynnik;
+            double u_k = wspolczynnik * Math.Sqrt(odchylenieStandardowe * odchylenieStandardowe + Math.Pow(w_k, 2.0));
+            double U_k = u_k * 2.0;
+
+            return new Narzedzia.Pair<double, double>(wspolczynnik, U_k);
+        }
+        //---------------------------------------------------------------
         public List<double> LiczCzas(ref System.Windows.Forms.DataGridView tabela, string protokol, DateTime dataWzorcowania, string odleglosc, string id_zrodla, int rownowaznikDawki)
         //---------------------------------------------------------------
         {
@@ -130,9 +184,9 @@ namespace DotBase
             if (rownowaznikDawki == 0)
                 dzielnik = 1.21;
             else if (rownowaznikDawki == 1)
-                dzielnik = 1.12;
+                dzielnik = 1.14;
             else if (rownowaznikDawki == 2)
-                dzielnik = 1.20;
+                dzielnik = 1.21;
             else
                 dzielnik = 1.00;
 
