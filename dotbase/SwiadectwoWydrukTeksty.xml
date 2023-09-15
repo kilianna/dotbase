@@ -4,43 +4,43 @@
        W zależności od tego jaki był zakres wzorcowania (moc dawki, dawka, skażenia, lub ich kombinacja). -->
   <zakresWzorcowania dawka="true" mocDawki="true" skażenia="true">
     <metodaWzorcowania>
-      Procedura pomiarowa WZOR-1 (wyd. 6 z dn. 01.09.2022) oraz procedura pomiarowa WZOR-2 (wyd. 5 z dn. 01.09.2022)
+      Procedura pomiarowa WZOR-1 (wyd. 7 z dn. 18.09.2023) oraz procedura pomiarowa WZOR-2 (wyd. 6 z dn. 18.09.2023)
     </metodaWzorcowania>
   </zakresWzorcowania>
 
   <zakresWzorcowania dawka="true" mocDawki="false" skażenia="true">
     <metodaWzorcowania>
-      Procedura pomiarowa WZOR-1 (wyd. 6 z dn. 01.09.2022) oraz procedura pomiarowa WZOR-2 (wyd. 5 z dn. 01.09.2022)
+      Procedura pomiarowa WZOR-1 (wyd. 7 z dn. 18.09.2023) oraz procedura pomiarowa WZOR-2 (wyd. 6 z dn. 18.09.2023)
     </metodaWzorcowania>
   </zakresWzorcowania>
 
   <zakresWzorcowania dawka="true" mocDawki="true" skażenia="false">
     <metodaWzorcowania>
-      Procedura pomiarowa WZOR-1 (wyd. 6 z dn. 01.09.2022)
+      Procedura pomiarowa WZOR-1 (wyd. 7 z dn. 18.09.2023)
     </metodaWzorcowania>
   </zakresWzorcowania>
 
   <zakresWzorcowania dawka="true" mocDawki="false" skażenia="false">
     <metodaWzorcowania>
-      Procedura pomiarowa WZOR-1 (wyd. 6 z dn. 01.09.2022)
+      Procedura pomiarowa WZOR-1 (wyd. 7 z dn. 18.09.2023)
     </metodaWzorcowania>
   </zakresWzorcowania>
 
   <zakresWzorcowania dawka="false" mocDawki="true" skażenia="true">
     <metodaWzorcowania>
-      Procedura pomiarowa WZOR-1 (wyd. 6 z dn. 01.09.2022) oraz procedura pomiarowa WZOR-2 (wyd. 5 z dn. 01.09.2022)
+      Procedura pomiarowa WZOR-1 (wyd. 7 z dn. 18.09.2023) oraz procedura pomiarowa WZOR-2 (wyd. 6 z dn. 18.09.2023)
     </metodaWzorcowania>
   </zakresWzorcowania>
 
   <zakresWzorcowania dawka="false" mocDawki="true" skażenia="false">
     <metodaWzorcowania>
-      Procedura pomiarowa WZOR-1 (wyd. 6 z dn. 01.09.2022)
+      Procedura pomiarowa WZOR-1 (wyd. 7 z dn. 18.09.2023)
     </metodaWzorcowania>
   </zakresWzorcowania>
 
   <zakresWzorcowania dawka="false" mocDawki="false" skażenia="true">
     <metodaWzorcowania>
-      Procedura pomiarowa WZOR-2 (wyd. 5 z dn. 01.09.2022)
+      Procedura pomiarowa WZOR-2 (wyd. 6 z dn. 18.09.2023)
     </metodaWzorcowania>
   </zakresWzorcowania>
 

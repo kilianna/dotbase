@@ -4,43 +4,43 @@
        W zależności od tego jaki był zakres wzorcowania (moc dawki, dawka, skażenia, lub ich kombinacja). -->
   <zakresWzorcowania dawka="true" mocDawki="true" skażenia="true">
     <metodaWzorcowania>
-      Calibration procedure WZOR-1 (ed. 6 of 01.09.2022) and calibration procedure WZOR-2 (ed. 5 of 01.09.2022)
+      Calibration procedure WZOR-1 (ed. 7 of 01.09.2023) and calibration procedure WZOR-2 (ed. 6 of 18.09.2023)
     </metodaWzorcowania>
   </zakresWzorcowania>
 
   <zakresWzorcowania dawka="true" mocDawki="false" skażenia="true">
     <metodaWzorcowania>
-      Calibration procedure WZOR-1 (ed. 6 of 01.09.2022) and calibration procedure WZOR-2 (ed. 5 of 01.09.2022)
+      Calibration procedure WZOR-1 (ed. 7 of 01.09.2023) and calibration procedure WZOR-2 (ed. 6 of 18.09.2023)
     </metodaWzorcowania>
   </zakresWzorcowania>
 
   <zakresWzorcowania dawka="true" mocDawki="true" skażenia="false">
     <metodaWzorcowania>
-      Calibration procedure WZOR-1 (ed. 6 of 01.09.2022)
+      Calibration procedure WZOR-1 (ed. 7 of 01.09.2023)
     </metodaWzorcowania>
   </zakresWzorcowania>
 
   <zakresWzorcowania dawka="true" mocDawki="false" skażenia="false">
     <metodaWzorcowania>
-      Calibration procedure WZOR-1 (ed. 6 of 01.09.2022)
+      Calibration procedure WZOR-1 (ed. 7 of 01.09.2023)
     </metodaWzorcowania>
   </zakresWzorcowania>
 
   <zakresWzorcowania dawka="false" mocDawki="true" skażenia="true">
     <metodaWzorcowania>
-      Calibration procedure WZOR-1 (ed. 6 of 01.09.2022) and calibration procedure WZOR-2 (ed. 5 of 01.09.2022)
+      Calibration procedure WZOR-1 (ed. 7 of 01.09.2023) and calibration procedure WZOR-2 (ed. 6 of 18.09.2023)
     </metodaWzorcowania>
   </zakresWzorcowania>
 
   <zakresWzorcowania dawka="false" mocDawki="true" skażenia="false">
     <metodaWzorcowania>
-      Calibration procedure WZOR-1 (ed. 6 of 01.09.2022)
+      Calibration procedure WZOR-1 (ed. 7 of 01.09.2023)
     </metodaWzorcowania>
   </zakresWzorcowania>
 
   <zakresWzorcowania dawka="false" mocDawki="false" skażenia="true">
     <metodaWzorcowania>
-      Calibration procedure WZOR-2 (ed. 5 of 01.09.2022)
+      Calibration procedure WZOR-2 (ed. 6 of 18.09.2023)
     </metodaWzorcowania>
   </zakresWzorcowania>
 
