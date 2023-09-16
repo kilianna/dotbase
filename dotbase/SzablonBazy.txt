@@ -14,6 +14,7 @@
 ---------------------------------------------------------------------
 
     Błędy wklejania.Pole0, typ WChar, długość 0, niewymagane Tak, pozycja 1, flagi X-X- XXX-
+    Błędy wklejania.Pole1, typ WChar, długość 0, niewymagane Tak, pozycja 2, flagi X-X- XXX-
 
 ---------------------------------------------------------------------
  Budzetniepewnosci
@@ -190,6 +191,8 @@
     Sygnalizacja.odleglosc2, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 7, flagi X-X- -XXX
     Sygnalizacja.zrodlo1, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 8, flagi X-X- -XXX
     Sygnalizacja.zrodlo2, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 9, flagi X-X- -XXX
+    Sygnalizacja.Wspolczynnik, typ Double, domyślnie 0, precyzja 15, niewymagane Nie, pozycja 10, flagi X-X- -X-X
+    Sygnalizacja.Niepewnosc_Wspolczynnika, typ Double, domyślnie 0, precyzja 15, niewymagane Nie, pozycja 11, flagi X-X- -X-X
 
 ---------------------------------------------------------------------
  Sygnalizacja_dawka

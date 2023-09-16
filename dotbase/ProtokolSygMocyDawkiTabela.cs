@@ -27,9 +27,27 @@ namespace DotBase
                 m_templateToFill.Replace("<!jednostka>", jednostka);
 
                 String tabelaDoWpisania = "";
+                List<double> wspolczynnik = new List<double>();
+                List<double> niepewnosc_wspolczynnika = new List<double>();
 
-                IList<double> computedFactors = SygnalizacjaMocyDawkiUtils.computeFactors(m_dataModel.modelDanePodstawowe.nrKarty);
-                IList<double> computedUncertainity = SygnalizacjaMocyDawkiUtils.computeUncertainity(m_dataModel.modelDanePodstawowe.nrKarty);
+                IList<double> computedFactors;
+                IList<double> computedUncertainity;
+
+                if (N.proceduraOd20230915(m_dataModel.modelDanePodstawowe.data))
+                {
+                    for (int i = 0; i < tabela.Rows.Count - 1; ++i)
+                    {
+                        wspolczynnik.Add(N.doubleParse(tabela.Rows[i].Cells[7].Value.ToString()));
+                        niepewnosc_wspolczynnika.Add(N.doubleParse(tabela.Rows[i].Cells[8].Value.ToString()));
+                    }
+                    computedFactors = wspolczynnik;
+                    computedUncertainity = niepewnosc_wspolczynnika;
+                }
+                else
+                {
+                    computedFactors = SygnalizacjaMocyDawkiUtils.computeFactors(m_dataModel.modelDanePodstawowe.nrKarty);
+                    computedUncertainity = SygnalizacjaMocyDawkiUtils.computeUncertainity(m_dataModel.modelDanePodstawowe.nrKarty);
+                }
 
                 for (int i = 0; i < tabela.Rows.Count - 1; ++i)
                 {

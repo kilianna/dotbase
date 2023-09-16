@@ -651,16 +651,18 @@ namespace KlasyPomocniczeSygMocyDawki
             public double WartoscZmierzona { get; set; }
             public double Zrodlo1 { get; set; }
             public double Zrodlo2 { get; set; }
+            public double Wspolczynnik { get; set; }
+            public double NiepewnoscWspolczynnika { get; set; }
 
             //********************************************************************
             public DawkaWartoscWzorcowoPomiarowa()
             //********************************************************************
             {
-                Prog = Niepewnosc = Odleglosc1 = Odleglosc2 = Zrodlo1 = Zrodlo2 = 0.0;
+                Prog = Niepewnosc = Odleglosc1 = Odleglosc2 = Zrodlo1 = Zrodlo2 = Wspolczynnik = NiepewnoscWspolczynnika = 0.0;
             }
 
             //********************************************************************
-            public DawkaWartoscWzorcowoPomiarowa(double prog, double nipewnosc, double odl1, double odl2, double zr1, double zr2, double wartosc)
+            public DawkaWartoscWzorcowoPomiarowa(double prog, double nipewnosc, double odl1, double odl2, double zr1, double zr2, double wartosc, double wsp, double niep_wsp)
             //********************************************************************
             {
                 Prog = prog;
@@ -670,6 +672,8 @@ namespace KlasyPomocniczeSygMocyDawki
                 Zrodlo1 = zr1;
                 Zrodlo2 = zr2;
                 WartoscZmierzona = wartosc;
+                Wspolczynnik = wsp;
+                NiepewnoscWspolczynnika = niep_wsp;
             }
         }
 

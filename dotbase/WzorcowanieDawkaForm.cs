@@ -608,7 +608,7 @@ namespace DotBase
 
             Narzedzia.Pair<double,double> wspolczynnik_niepewnosc;
 
-            if (dateTimePicker1.Value >= DateTime.Parse("2023-09-15"))
+            if (N.proceduraOd20230915(dateTimePicker1.Value))
             {
                 wspolczynnik_niepewnosc = _WzorcowanieDawka.LiczWspolczynnikOrazNiepewnosc20230915(inputList, N.doubleParse(textBox18.Text), comboBox3.Text, Int32.Parse(textBox17.Text), dateTimePicker1.Value);
             }

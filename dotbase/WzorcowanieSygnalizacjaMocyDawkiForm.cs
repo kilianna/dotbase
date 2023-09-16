@@ -171,6 +171,7 @@ namespace DotBase
                     daneWejsciowe.m_Zrodlo1.Add( UInt16.Parse(dataGridView1.Rows[i].Cells[2].Value.ToString()));
                     daneWejsciowe.m_Odleglosc2.Add( N.doubleParse(dataGridView1.Rows[i].Cells[3].Value.ToString()));
                     daneWejsciowe.m_Zrodlo2.Add( UInt16.Parse(dataGridView1.Rows[i].Cells[4].Value.ToString()));
+                    daneWejsciowe.m_Prog.Add(N.doubleParse(dataGridView1.Rows[i].Cells[0].Value.ToString()));
                 }
                 catch (Exception)
                 {
@@ -178,15 +179,26 @@ namespace DotBase
                 }
             }
 
-            Narzedzia.Pair<List<double>, List<double>> daneWynikowe = _WzorcowanieSygMocyDawki.LiczWartoscOrazNiepewnosc(daneWejsciowe);
+            List<double>[] daneWynikowe;
+
+            if (N.proceduraOd20230915(dateTimePicker1.Value))
+            {
+                daneWynikowe = _WzorcowanieSygMocyDawki.LiczWartoscOrazNiepewnosc20230915(daneWejsciowe);
+            }
+            else
+            {
+                daneWynikowe = _WzorcowanieSygMocyDawki.LiczWartoscOrazNiepewnoscOld(daneWejsciowe);
+            }
 
             if (daneWynikowe == null)
                 return false;
 
-            for (UInt16 i = 0; i < daneWynikowe.First.Count; ++i)
+            for (UInt16 i = 0; i < daneWynikowe[0].Count; ++i)
             {
-                dataGridView1.Rows[i].Cells[5].Value = daneWynikowe.First[i].ToString("0.00");
-                dataGridView1.Rows[i].Cells[6].Value = daneWynikowe.Second[i].ToString("0.00");
+                dataGridView1.Rows[i].Cells[5].Value = daneWynikowe[0][i].ToString("0.00");
+                dataGridView1.Rows[i].Cells[6].Value = daneWynikowe[1][i].ToString("0.00");
+                dataGridView1.Rows[i].Cells[7].Value = daneWynikowe[2][i].ToString("0.00");
+                dataGridView1.Rows[i].Cells[8].Value = daneWynikowe[3][i].ToString("0.00");
             }
 
             return true;
@@ -446,7 +458,7 @@ namespace DotBase
         {
             foreach (KlasyPomocniczeSygMocyDawki.DawkaWartosciWzorcowoPomiarowe.DawkaWartoscWzorcowoPomiarowa dane in _WzorcowanieSygMocyDawki.Pomiary.Dane)
             {
-                dataGridView1.Rows.Add(dane.Prog, dane.Odleglosc1, dane.Zrodlo1, dane.Odleglosc2, dane.Zrodlo2, dane.WartoscZmierzona, dane.Niepewnosc);
+                dataGridView1.Rows.Add(dane.Prog, dane.Odleglosc1, dane.Zrodlo1, dane.Odleglosc2, dane.Zrodlo2, dane.WartoscZmierzona, dane.Niepewnosc, dane.Wspolczynnik, dane.NiepewnoscWspolczynnika);
             }
 
             WyswietlKonkretnaJednostke();
@@ -637,5 +649,6 @@ namespace DotBase
         {
             N.PotwierdzenieZapisz(this, ZapiszDane, false, true);
         }
+
     }
 }

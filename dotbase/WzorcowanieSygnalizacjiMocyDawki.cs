@@ -19,6 +19,7 @@ namespace DotBase
                 m_Zrodlo2 = new List<UInt16>();
                 m_Odleglosc1 = new List<double>();
                 m_Odleglosc2 = new List<double>();
+                m_Prog = new List<double>();
             }
             public DateTime m_Data;
             public String m_Protokol;
@@ -27,6 +28,7 @@ namespace DotBase
             public List<UInt16> m_Zrodlo2;
             public List<Double> m_Odleglosc1;
             public List<Double> m_Odleglosc2;
+            public List<double> m_Prog;
         };
 
         public KlasyPomocniczeCez.Protokol Protokol { get; private set; }
@@ -59,12 +61,13 @@ namespace DotBase
         }
 
         //---------------------------------------------------------------
-        public Narzedzia.Pair<List<double>, List<double>> LiczWartoscOrazNiepewnosc(DaneWzorcowoPomiarowe daneWejsciowe)
+        public List<double>[] LiczWartoscOrazNiepewnoscOld(DaneWzorcowoPomiarowe daneWejsciowe)
         //---------------------------------------------------------------
         {
             List<Double> wartosci = new List<double>();
             List<Double> niepewnosci = new List<double>();
-
+            List<Double> empty1 = new List<double>();
+            List<Double> empty2 = new List<double>();
 
             SortedDictionary<Double, Double>[] wzorcowe = new SortedDictionary<Double, Double>[] { new SortedDictionary<Double, Double>(), new SortedDictionary<Double, Double>(), new SortedDictionary<Double, Double>() };
 
@@ -82,8 +85,8 @@ namespace DotBase
 
             for (UInt16 i = 0; i < daneWejsciowe.m_Zrodlo1.Count; ++i)
             {
-                double temp1 = LiczWartoscOrazNiepewnoscDlaZrodla(wzorcowe[daneWejsciowe.m_Zrodlo1[i] - 1], daneWejsciowe.m_Odleglosc1[i]);
-                double temp2 = LiczWartoscOrazNiepewnoscDlaZrodla(wzorcowe[daneWejsciowe.m_Zrodlo2[i] - 1], daneWejsciowe.m_Odleglosc2[i]);
+                double temp1 = LiczWartoscOrazNiepewnoscDlaZrodlaOld(wzorcowe[daneWejsciowe.m_Zrodlo1[i] - 1], daneWejsciowe.m_Odleglosc1[i]);
+                double temp2 = LiczWartoscOrazNiepewnoscDlaZrodlaOld(wzorcowe[daneWejsciowe.m_Zrodlo2[i] - 1], daneWejsciowe.m_Odleglosc2[i]);
                 double roznicaPomiarowDni = (daneWejsciowe.m_Data - DateTime.Parse(daneWejsciowe.m_Protokol)).Days;
                 double korektaNaRozpad = Math.Exp(-Math.Log(2) / Constants.getInstance().CS_HALF_TIME_VALUE * roznicaPomiarowDni);
                 temp1 *= korektaNaRozpad;
@@ -117,11 +120,101 @@ namespace DotBase
 
                 wartosci.Add((temp1 + temp2) / 2);
                 niepewnosci.Add(Math.Abs((temp1 + temp2) / 2 - temp1));
+                empty1.Add(0);
+                empty2.Add(0);
             }
 
-            return new Narzedzia.Pair<List<double>, List<double>>(wartosci, niepewnosci);
+            return new List<double>[] { wartosci, niepewnosci, empty1, empty2 };
+        }
+
+        //---------------------------------------------------------------
+        public List<double>[] LiczWartoscOrazNiepewnosc20230915(DaneWzorcowoPomiarowe daneWejsciowe)
+        //---------------------------------------------------------------
+        {
+            List<Double> wartosci = new List<double>();
+            List<Double> niepewnosci = new List<double>();
+            List<Double> wspolczynniki = new List<double>();
+            List<Double> niepewnosci_wsp = new List<double>();
+            var stale = Constants.getInstance();
+
+            SortedDictionary<Double, Double>[] wzorcowe = new SortedDictionary<Double, Double>[] { new SortedDictionary<Double, Double>(), new SortedDictionary<Double, Double>(), new SortedDictionary<Double, Double>() };
+
+            _Zapytanie = String.Format("SELECT id_protokolu FROM Protokoly_kalibracji_lawy WHERE data_kalibracji=#{0}#", daneWejsciowe.m_Protokol);
+            short idProtokolu = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<short>(0);
+
+            for (int i = 1; i < 4; i++)
+            {
+                _Zapytanie = "SELECT odleglosc, Niepewnosc FROM pomiary_wzorcowe WHERE id_protokolu=" + idProtokolu + " AND id_zrodla=" + i;
+                foreach (DataRow wiersz in _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows)
+                {
+                    wzorcowe[i - 1].Add(wiersz.Field<double>(0), wiersz.Field<double>(1));
+                }
+            }
+
+            for (UInt16 i = 0; i < daneWejsciowe.m_Zrodlo1.Count; ++i)
+            {
+                double wartosc_wzorcowa_1, wartosc_wzorcowa_2;
+                double niepewnosc_wart_wzorcowej_1, niepewnosc_wart_wzorcowej_2;
+                LiczWartoscOrazNiepewnoscDlaZrodla20230915(daneWejsciowe.m_Zrodlo1[i], wzorcowe[daneWejsciowe.m_Zrodlo1[i] - 1], daneWejsciowe.m_Odleglosc1[i], out wartosc_wzorcowa_1, out niepewnosc_wart_wzorcowej_1);
+                LiczWartoscOrazNiepewnoscDlaZrodla20230915(daneWejsciowe.m_Zrodlo2[i], wzorcowe[daneWejsciowe.m_Zrodlo2[i] - 1], daneWejsciowe.m_Odleglosc2[i], out wartosc_wzorcowa_2, out niepewnosc_wart_wzorcowej_2);
+                double roznicaPomiarowDni = (daneWejsciowe.m_Data - DateTime.Parse(daneWejsciowe.m_Protokol)).Days;
+                double korektaNaRozpad = Math.Exp(-Math.Log(2) / Constants.getInstance().CS_HALF_TIME_VALUE * roznicaPomiarowDni);
+                wartosc_wzorcowa_1 *= korektaNaRozpad;
+                wartosc_wzorcowa_2 *= korektaNaRozpad;
+
+                switch (daneWejsciowe.m_Jednostka)
+                {
+                    case "mSv/h":
+                        wartosc_wzorcowa_1 *= 1.21;
+                        wartosc_wzorcowa_2 *= 1.21;
+                        break;
+                    case "uSv/h":
+                        wartosc_wzorcowa_1 *= 1210;
+                        wartosc_wzorcowa_2 *= 1210;
+                        break;
+                    case "uGy/h":
+                        wartosc_wzorcowa_1 *= 1000;
+                        wartosc_wzorcowa_2 *= 1000;
+                        break;
+                    case "nA/kg":
+                        wartosc_wzorcowa_1 *= 1000 / 121.9;
+                        wartosc_wzorcowa_2 *= 1000 / 121.9;
+                        break;
+                    case "mR/h":
+                        wartosc_wzorcowa_1 *= 1000 / 8.74;
+                        wartosc_wzorcowa_2 *= 1000 / 8.74;
+                        break;
+                    default:
+                        return null;
+                }
+
+                double wartosc_wzorcowa = (wartosc_wzorcowa_1 + wartosc_wzorcowa_2) / 2;
+                double niepewnosc = wartosc_wzorcowa * Math.Sqrt(Math.Pow(niepewnosc_wart_wzorcowej_1, 2) + Math.Pow(niepewnosc_wart_wzorcowej_2, 2));
+
+                double K1 = wartosc_wzorcowa_1 / daneWejsciowe.m_Prog[i];
+                double K2 = wartosc_wzorcowa_2 / daneWejsciowe.m_Prog[i];
+                double wspolczynnik = (K1 + K2) / 2;
+
+                double wd1 = 2 * stale.DELTA_L_MD / 2 / Math.Sqrt(3) / 10 / daneWejsciowe.m_Odleglosc1[i];
+                double wd2 = 2 * stale.DELTA_L_MD / 2 / Math.Sqrt(3) / 10 / daneWejsciowe.m_Odleglosc2[i];
+                double wkt = (Math.Log(2) * roznicaPomiarowDni / stale.T12Cs) * Math.Sqrt((stale.ut / roznicaPomiarowDni) * (stale.ut / roznicaPomiarowDni) + (stale.ukT12Cs / stale.T12Cs) * (stale.ukT12Cs / stale.T12Cs));
+                double wk1 = Math.Sqrt(Math.Pow(niepewnosc_wart_wzorcowej_1, 2) + Math.Pow(stale.UKJED, 2) + Math.Pow(wkt, 2) + Math.Pow(wd1, 2));
+                double wk2 = Math.Sqrt(Math.Pow(niepewnosc_wart_wzorcowej_2, 2) + Math.Pow(stale.UKJED, 2) + Math.Pow(wkt, 2) + Math.Pow(wd2, 2));
+                double wk = (wk1 + wk2) / 2;
+                double wkp = Math.Abs(wspolczynnik - K1) / Math.Sqrt(3) / wspolczynnik;
+                double uk = wspolczynnik * Math.Sqrt(wk * wk + wkp * wkp);
+                double niepewnosc_wspolczynnika = 2 * uk;
+
+                wartosci.Add(wartosc_wzorcowa);
+                niepewnosci.Add(niepewnosc);
+                wspolczynniki.Add(wspolczynnik);
+                niepewnosci_wsp.Add(niepewnosc_wspolczynnika);
+            }
+
+            return new List<double>[] { wartosci, niepewnosci, wspolczynniki, niepewnosci_wsp };
         }
         
+
 
         /*
         * The old way:
@@ -181,7 +274,7 @@ namespace DotBase
          */
 
 
-        private double LiczWartoscOrazNiepewnoscDlaZrodla(SortedDictionary<Double, Double> wzorcowe, double odleglosc)
+        private double LiczWartoscOrazNiepewnoscDlaZrodlaOld(SortedDictionary<Double, Double> wzorcowe, double odleglosc)
         {
             KeyValuePair<double, double> point1 = wzorcowe.Last(pair => pair.Key <= odleglosc);
 
@@ -194,36 +287,105 @@ namespace DotBase
             return (moc1 + moc2) / 2;
         }
 
+        private void LiczWartoscOrazNiepewnoscDlaZrodla20230915(int zrodlo, SortedDictionary<Double, Double> wzorcowe, double odleglosc, out double wartosc_wzorcowa, out double niepewnosc)
+        {
+            double d = 65.96;
+            double c = 0.00015;
+            double A3 = 961500;
+            double A2 = 14390;
+            double A1 = 154.5;
+            double mu = 0.000093415956075;
+            double interpolacja = 40;
+
+            switch (zrodlo)
+            {
+                case 1:
+                    wartosc_wzorcowa = A1 / Math.Pow(odleglosc - d, 2) / Math.Exp(mu * (odleglosc - d)) + c;
+                    break;
+                case 2:
+                    if (odleglosc < 600)
+                    {
+                        wartosc_wzorcowa = A2 / Math.Pow(odleglosc - d, 2) / Math.Exp(mu * (odleglosc - d)) + c;
+                    }
+                    else
+                    {
+                        wartosc_wzorcowa = A2 / Math.Pow(odleglosc - d, 2) / Math.Exp(mu * (odleglosc - d)) * Math.Pow(1 + interpolacja / (750 - odleglosc), 2) + c;
+                    }
+                    break;
+                case 3:
+                    if (odleglosc < 600)
+                    {
+                        wartosc_wzorcowa = A3 / Math.Pow(odleglosc - d, 2) / Math.Exp(mu * (odleglosc - d)) + c;
+                    }
+                    else
+                    {
+                        wartosc_wzorcowa = A3 / Math.Pow(odleglosc - d, 2) / Math.Exp(mu * (odleglosc - d)) * Math.Pow(1 + interpolacja / (750 - odleglosc), 2) + c;
+                    }
+                    break;
+                default:
+                    throw new ApplicationException("Nieznany nr źródła " + zrodlo);
+            }
+
+            var below = wzorcowe.First();
+            var above = wzorcowe.Last();
+
+            foreach (var item in wzorcowe)
+            {
+                if (item.Key > below.Key && item.Key < odleglosc) below = item;
+                if (item.Key < above.Key && item.Key >= odleglosc) above = item;
+            }
+
+            niepewnosc = ((above.Key - odleglosc) * below.Value + (odleglosc - below.Key) * above.Value) / (above.Key - below.Key);
+        }
+
         //---------------------------------------------------------------
         override public bool NadpiszDaneWzorcoweIPomiarowe()
         //---------------------------------------------------------------
         {
-            _Zapytanie = String.Format("DELETE FROM Sygnalizacja WHERE id_wzorcowania = {0}", _DaneOgolneDoZapisu.IdWzorcowania);
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
+            _BazaDanych.Sygnalizacja
+                .DELETE()
+                .WHERE()
+                    .ID_wzorcowania(Int32.Parse(_DaneOgolneDoZapisu.IdWzorcowania))
+                .INFO("Czyszczenie przed nadpisaniem danych wzorcowych i pomiarowych.")
+                .EXECUTE();
 
             if ("" != Pomiary.Uwagi)
             {
-                _Zapytanie = String.Format("INSERT INTO Sygnalizacja VALUES ({0}, 0.0, 0.0, 0.0, '{1}', 0.0, 0.0, 0.0, 0.0)",
-                                    _DaneOgolneDoZapisu.IdWzorcowania, Pomiary.Uwagi.Replace(@"\", @"\\"));
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
+                _BazaDanych.Sygnalizacja
+                    .INSERT()
+                        .ID_wzorcowania(Int32.Parse(_DaneOgolneDoZapisu.IdWzorcowania))
+                        .Prog(0)
+                        .Niepewnosc(0)
+                        .Wartosc_zmierzona(0)
+                        .Uwagi(Pomiary.Uwagi)
+                        .odleglosc1(0)
+                        .odleglosc2(0)
+                        .zrodlo1(0)
+                        .zrodlo2(0)
+                        .Wspolczynnik(0)
+                        .Niepewnosc_Wspolczynnika(0)
+                    .INFO("Nadpisywanie danych wzorcowych i pomiarowych z uwagami.")
+                    .EXECUTE();
             }
             else
             {
                 for (UInt16 i = 0; i < Pomiary.Dane.Count; ++i)
                 {
-                    _Zapytanie = String.Format("INSERT INTO Sygnalizacja VALUES ({0}, '{1}', '{2}', '{3}', '', '{4}', '{5}', '{6}', '{7}')",
-                                 _DaneOgolneDoZapisu.IdWzorcowania, Pomiary.Dane[i].Prog, Pomiary.Dane[i].Niepewnosc,
-                                 Pomiary.Dane[i].WartoscZmierzona, Pomiary.Dane[i].Odleglosc1, Pomiary.Dane[i].Odleglosc2,
-                                 Pomiary.Dane[i].Zrodlo1, Pomiary.Dane[i].Zrodlo2);
-
-                    _BazaDanych.WykonajPolecenie(_Zapytanie);
-            
-
-                    /*_Zapytanie = String.Format("UPDATE Sygnalizacja SET Prog='{0}', niepewnosc='{1}', ", Pomiary.Dane[i].Prog, Pomiary.Dane[i].Niepewnosc)
-                               + String.Format("Wartosc_zmierzona='{0}', Uwagi='', odleglosc1={1}, odleglosc2='{2}', ", Pomiary.Dane[i].WartoscZmierzona,
-                                 Pomiary.Dane[i].Odleglosc1, Pomiary.Dane[i].Odleglosc2)
-                               + String.Format("zrodlo1='{0}', zrodlo2={1} WHERE id_wzorcowania={2}",
-                                 Pomiary.Dane[i].Zrodlo1, Pomiary.Dane[i].Zrodlo2, _DaneOgolneDoZapisu.IdWzorcowania);*/
+                    _BazaDanych.Sygnalizacja
+                        .INSERT()
+                            .ID_wzorcowania(Int32.Parse(_DaneOgolneDoZapisu.IdWzorcowania))
+                            .Prog(Pomiary.Dane[i].Prog)
+                            .Niepewnosc(Pomiary.Dane[i].Niepewnosc)
+                            .Wartosc_zmierzona(Pomiary.Dane[i].WartoscZmierzona)
+                            .Uwagi("")
+                            .odleglosc1(Pomiary.Dane[i].Odleglosc1)
+                            .odleglosc2(Pomiary.Dane[i].Odleglosc2)
+                            .zrodlo1(Pomiary.Dane[i].Zrodlo1)
+                            .zrodlo2(Pomiary.Dane[i].Zrodlo2)
+                            .Wspolczynnik(Pomiary.Dane[i].Wspolczynnik)
+                            .Niepewnosc_Wspolczynnika(Pomiary.Dane[i].NiepewnoscWspolczynnika)
+                        .INFO("Nadpisywanie danych wzorcowych i pomiarowych bez uwag.")
+                        .EXECUTE();
                 }
 
                 try
@@ -313,7 +475,7 @@ namespace DotBase
         public bool PobierzDaneWzorcoweIPomiaroweFormaTabelowa()
         //---------------------------------------------------------------
         {
-            _Zapytanie = "SELECT prog, niepewnosc, wartosc_zmierzona, odleglosc1, odleglosc2, zrodlo1, zrodlo2 "
+            _Zapytanie = "SELECT prog, niepewnosc, wartosc_zmierzona, odleglosc1, odleglosc2, zrodlo1, zrodlo2, Wspolczynnik, Niepewnosc_Wspolczynnika "
                        + "FROM Sygnalizacja WHERE id_wzorcowania IN (SELECT id_wzorcowania FROM "
                        + String.Format("Wzorcowanie_cezem WHERE id_karty = {0} AND id_arkusza = {1})", IdKarty, IdArkusza);
 
@@ -333,7 +495,9 @@ namespace DotBase
                                         wiersz.Field<double>("odleglosc2"),
                                         wiersz.Field<double>("zrodlo1"),
                                         wiersz.Field<double>("zrodlo2"),
-                                        wiersz.Field<double>("wartosc_zmierzona")
+                                        wiersz.Field<double>("wartosc_zmierzona"),
+                                        wiersz.Field<double>("Wspolczynnik"),
+                                        wiersz.Field<double>("Niepewnosc_Wspolczynnika")
                                     )
                                );
             }
@@ -399,7 +563,9 @@ namespace DotBase
                                    tabela.Rows[i].Cells[3].Value != null &&
                                    tabela.Rows[i].Cells[4].Value != null &&
                                    tabela.Rows[i].Cells[5].Value != null &&
-                                   tabela.Rows[i].Cells[6].Value != null;
+                                   tabela.Rows[i].Cells[6].Value != null &&
+                                   tabela.Rows[i].Cells[7].Value != null &&
+                                   tabela.Rows[i].Cells[8].Value != null;
                                    ++i)
                 {
                     KlasyPomocniczeSygMocyDawki.DawkaWartosciWzorcowoPomiarowe.DawkaWartoscWzorcowoPomiarowa temp
@@ -460,6 +626,22 @@ namespace DotBase
                         temp.WartoscZmierzona = N.doubleParse(sTemp);
                     else
                         temp.WartoscZmierzona = 0.0;
+
+                    // Wspolczynnik
+                    sTemp = tabela.Rows[i].Cells["Wspolczynnik"].Value.ToString();
+
+                    if (sTemp != "")
+                        temp.Wspolczynnik = N.doubleParse(sTemp);
+                    else
+                        temp.Wspolczynnik = 0.0;
+
+                    // Niep. wspołczynnika
+                    sTemp = tabela.Rows[i].Cells["NiepWsp"].Value.ToString();
+
+                    if (sTemp != "")
+                        temp.NiepewnoscWspolczynnika = N.doubleParse(sTemp);
+                    else
+                        temp.NiepewnoscWspolczynnika = 0.0;
 
 
                     Pomiary.Dane.Add(temp);

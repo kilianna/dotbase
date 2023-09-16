@@ -10,6 +10,12 @@ namespace DotBase
     public static class N
     {
 
+        public static bool proceduraOd20230915(DateTime date)
+        {
+            //return true;
+            return date >= DateTime.Parse("2023-09-15");
+        }
+
         public static double doubleParse(string text)
         {
             double result;

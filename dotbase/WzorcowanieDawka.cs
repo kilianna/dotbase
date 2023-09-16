@@ -147,8 +147,6 @@ namespace DotBase
 
             double ktWzgledne = roznicaDni * Math.Log(2) * Math.Sqrt(Math.Pow(stale.ut / roznicaDni, 2) + Math.Pow(stale.ukT12Cs / stale.T12Cs, 2)) / stale.T12Cs;
 
-            double ut_d;
-
             double w_k = 0;
             double poprzedni_czas = 0;
 
@@ -158,7 +156,6 @@ namespace DotBase
                 double czas = poprzedni_czas + data[2];
                 poprzedni_czas = czas;
                 double w_t = stale.UT_D / Math.Sqrt(3) / czas;
-                // =PIERWIASTEK(                   I17*I17         + $E$11*$E$11                              +    $I$8*$I$8             +     $I$9*$I$9     +  $I$10*$I$10)
                 double w_k_dla_punktu = Math.Sqrt(Math.Pow(w_t, 2) + Math.Pow(Pomiary_wzorcowe_Niepewnosc, 2) + Math.Pow(stale.UKJED, 2) + Math.Pow(w_kd, 2) + Math.Pow(ktWzgledne, 2));
                 w_k += w_k_dla_punktu;
             }

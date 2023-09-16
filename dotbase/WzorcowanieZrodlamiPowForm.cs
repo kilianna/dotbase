@@ -614,7 +614,7 @@ namespace DotBase
             double niepewnosc;
             int precyzja;
 
-            if (dateTimePicker1.Value >= DateTime.Parse("2023-09-15"))
+            if (N.proceduraOd20230915(dateTimePicker1.Value))
             {
                 _WzorcowanieZrodlamiPow.LiczWspolczynnikiOrazNiepewnosc20230915(out wspolczynnik_kalibracyjny, out niepewnosc, out precyzja, ref dataGridView1, dateTimePicker1.Value, N.doubleParse(textBox10.Text));
             }

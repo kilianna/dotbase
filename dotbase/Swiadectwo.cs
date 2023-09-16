@@ -52,6 +52,7 @@ namespace DotBase
             StringBuilder _SzablonGlownyWzorcowania;
             StringBuilder _SzablonDrugiejStrony;
             SwiadectwoData m_data = new SwiadectwoData();
+            DateTime dataWykonania;
             private readonly string EVIDENCE_CORRECTION_MARKER = "P";
 
             enum staleZrodel { STRONT_SLABY = 2, WEGIEL_SLABY, AMERYK = 7, STRONT_SILNY, WEGIEL_SILNY, CHLOR, PLUTON = 17, STRONT_NAJSILNIEJSZY };
@@ -79,6 +80,7 @@ namespace DotBase
                 m_data.setValue(SwiadectwoData.DataType.UWAGA_S, uwS);
                 m_data.setValue(SwiadectwoData.DataType.UWAGA_SMD, uwSMD);
                 m_data.setValue(SwiadectwoData.DataType.UWAGA_SD, uwSD);
+                this.dataWykonania = dataWykonania;
             }
 
             //********************************************************************************************
@@ -466,7 +468,7 @@ namespace DotBase
                            + String.Format("id_wzorcowania = {0})", m_data.getValue(SwiadectwoData.DataType.ID_WZORCOWANIA));
                 PobierzJednostke();
 
-                _Zapytanie = String.Format("SELECT prog, wartosc_zmierzona, niepewnosc FROM Sygnalizacja WHERE id_wzorcowania = {0}",
+                _Zapytanie = String.Format("SELECT prog, wartosc_zmierzona, niepewnosc, Wspolczynnik, Niepewnosc_Wspolczynnika FROM Sygnalizacja WHERE id_wzorcowania = {0}",
                                           m_data.getValue(SwiadectwoData.DataType.ID_WZORCOWANIA));
                 PobierzDaneTabeloweSygMocyDawki();
 
@@ -586,16 +588,31 @@ namespace DotBase
                 List<double> prog = new List<double>();
                 List<double> wartosc_zmierzona = new List<double>();
                 List<double> niepewnosc = new List<double>();
+                List<double> wspolczynnik = new List<double>();
+                List<double> niepewnosc_wspolczynnika = new List<double>();
 
                 foreach (DataRow wiersz in _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows)
                 {
                     prog.Add(wiersz.Field<double>(0));
                     wartosc_zmierzona.Add(wiersz.Field<double>(1));
                     niepewnosc.Add(wiersz.Field<double>(2));
+                    wspolczynnik.Add(wiersz.Field<double>(3));
+                    niepewnosc_wspolczynnika.Add(wiersz.Field<double>(4));
                 }
 
-                IList<double> computedFactors = SygnalizacjaMocyDawkiUtils.computeFactors(m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
-                IList<double> computedUncertainity = SygnalizacjaMocyDawkiUtils.computeUncertainity(m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
+                IList<double> computedFactors;
+                IList<double> computedUncertainity;
+
+                if (N.proceduraOd20230915(dataWykonania))
+                {
+                    computedFactors = wspolczynnik;
+                    computedUncertainity = niepewnosc_wspolczynnika;
+                }
+                else
+                {
+                    computedFactors = SygnalizacjaMocyDawkiUtils.computeFactors(m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
+                    computedUncertainity = SygnalizacjaMocyDawkiUtils.computeUncertainity(m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
+                }
 
                 _Tabela = new StringBuilder();
 

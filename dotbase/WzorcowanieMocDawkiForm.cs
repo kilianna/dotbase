@@ -646,7 +646,7 @@ namespace DotBase
 
             bool result;
 
-            if (dateTimePicker1.Value >= DateTime.Parse("2023-09-15"))
+            if (N.proceduraOd20230915(dateTimePicker1.Value))
             {
                 result = _WzorcowanieMocDawki.LiczWspolczynnikINiepewnoscOd20230918(ref tabela, ref tabela2, comboBox3.Text, dateTimePicker1.Value, comboBox4.SelectedItem as string, out zakresPrzyrzadu, out wspolczynniki, out niepewnosc);
             }

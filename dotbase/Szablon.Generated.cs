@@ -52,6 +52,11 @@ namespace DotBase
                 SetField("Pole0", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Błędy_wklejania Pole1(string value)
+            {
+                SetField("Pole1", value, OleDbType.WChar);
+                return this;
+            }
         }
         public class Szablon_Budzetniepewnosci : Tabela
         {
@@ -641,6 +646,11 @@ namespace DotBase
                 SetField("Niepewnosc", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Sygnalizacja Niepewnosc_Wspolczynnika(double value)
+            {
+                SetField("Niepewnosc_Wspolczynnika", value, OleDbType.Double);
+                return this;
+            }
             public Szablon_Sygnalizacja odleglosc1(double value)
             {
                 SetField("odleglosc1", value, OleDbType.Double);
@@ -664,6 +674,11 @@ namespace DotBase
             public Szablon_Sygnalizacja Wartosc_zmierzona(double value)
             {
                 SetField("Wartosc_zmierzona", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_Sygnalizacja Wspolczynnik(double value)
+            {
+                SetField("Wspolczynnik", value, OleDbType.Double);
                 return this;
             }
             public Szablon_Sygnalizacja zrodlo1(double value)
