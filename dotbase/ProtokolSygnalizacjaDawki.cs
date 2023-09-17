@@ -128,17 +128,24 @@ namespace DotBase
 
                 StringBuilder tabelaDoWpisania = new StringBuilder();
 
-                IList<double> computedFactors = SygnalizacjaDawkiUtils.computeFactors(m_model.modelDanePodstawowe.nrKarty);
-                IList<double> computedUncertainity = SygnalizacjaDawkiUtils.computeUncertainity(m_model.modelDanePodstawowe.nrKarty);
+                IList<double> computedFactors = null;
+                IList<double> computedUncertainity = null;
+
+                if (!N.proceduraOd20230915(m_model.modelDanePodstawowe.data))
+                {
+                    computedFactors = SygnalizacjaDawkiUtils.computeFactors(m_model.modelDanePodstawowe.nrKarty);
+                    computedUncertainity = SygnalizacjaDawkiUtils.computeUncertainity(m_model.modelDanePodstawowe.nrKarty);
+                }
 
                 for (int i = 0; i < tabela.Rows.Count - 1; ++i)
                 {
                     tabelaDoWpisania.Append(
-                    String.Format("</tr><tr align=\"center\" valign=\"middle\"><td><span>{0}</span></td><td><span>{1}</span></td><td><span>{2} &plusmn; {3} </span></td></tr>",
+                    String.Format("</tr><tr align=\"center\" valign=\"middle\"><td><span>{0}</span></td><td><span>{1} &plusmn; {2}</span></td><td><span>{3} &plusmn; {4} </span></td></tr>",
                                   tabela.Rows[i].Cells[0].Value.ToString(),
                                   tabela.Rows[i].Cells[3].Value.ToString(),
-                                  computedFactors[i].ToString("0.00"),
-                                  computedUncertainity[i].ToString("0.00")));
+                                  tabela.Rows[i].Cells[4].Value.ToString(),
+                                  computedFactors != null ? computedFactors[i].ToString("0.00") : tabela.Rows[i].Cells[6].Value.ToString(),
+                                  computedFactors != null ? computedUncertainity[i].ToString("0.00") : tabela.Rows[i].Cells[7].Value.ToString()));
                 }
 
                 m_data.setValue(ProtokolSygnalizacjaDawkiData.DataType.TABELA, tabelaDoWpisania.ToString());

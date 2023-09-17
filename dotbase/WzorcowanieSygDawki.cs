@@ -36,7 +36,7 @@ namespace DotBase
         }
 
         //---------------------------------------------------------------
-        public List<double> LiczWartoscRzecyzwista(double odleglosc, int zrodlo, string protokol, string jednostka, List<double> czasZmierzony, DateTime dataWzorcowania)
+        public List<double>[] LiczWartoscRzecyzwistaOld(double odleglosc, int zrodlo, string protokol, string jednostka, List<double> czasZmierzony, DateTime dataWzorcowania)
         //---------------------------------------------------------------
         {
             _Zapytanie = String.Format("SELECT Data_kalibracji, id_protokolu FROM Protokoly_kalibracji_lawy WHERE data_kalibracji=#{0}#", protokol);
@@ -52,6 +52,7 @@ namespace DotBase
             double przelicznik = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<float>(0);
 
             List<double> listaWartRzeczywiste = new List<double>();
+            List<double> empty = new List<double>();
             double mocKermy;
 
             for (UInt16 i = 0; i < czasZmierzony.Count; ++i)
@@ -65,13 +66,87 @@ namespace DotBase
                 catch (Exception)
                 {
                     listaWartRzeczywiste.Add(0);
+                    empty.Add(0);
                     continue;
                 }
 
                 listaWartRzeczywiste.Add(czasZmierzony[i] * mocKermy / przelicznik * korektaRozpad / 3600);
+                empty.Add(0);
             }
 
-            return listaWartRzeczywiste;
+            return new List<double>[] { listaWartRzeczywiste, empty, empty, empty };
+        }
+        
+        //---------------------------------------------------------------
+        public List<double>[] LiczWartoscRzecyzwistaOd20230915(double odleglosc, int zrodlo, string protokol, string jednostka, List<double> czasZmierzony, List<double> progi, DateTime dataWzorcowania)
+        //---------------------------------------------------------------
+        {
+            _Zapytanie = String.Format("SELECT Data_kalibracji, id_protokolu FROM Protokoly_kalibracji_lawy WHERE data_kalibracji=#{0}#", protokol);
+            DateTime dataKalibracjiLawy = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<DateTime>(0);
+            int idProtokolu = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<short>(1);
+            var stale = Constants.getInstance();
+            
+            int roznicaDni = (dataWzorcowania - dataKalibracjiLawy).Days;
+
+            // 11050.0 - czas połowicznego rozpadu cezu w dniach
+            double korektaRozpad = Math.Exp(-Math.Log(2.0) * roznicaDni / stale.CS_HALF_TIME_VALUE);
+
+            _Zapytanie = String.Format("SELECT przelicznik FROM Jednostki WHERE jednostka='{0}'", jednostka);
+            double przelicznik = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<float>(0);
+
+            List<double> listaWartRzeczywiste = new List<double>();
+            List<double> niepewnosci = new List<double>();
+            List<double> wspolczynniki = new List<double>();
+            List<double> niepewnosci_wsp = new List<double>();
+            double mocKermy;
+            double niepewnoscWzorcowa;
+
+            for (UInt16 i = 0; i < czasZmierzony.Count; ++i)
+            {
+                try
+                {
+                    _Zapytanie = String.Format("SELECT moc_kermy, Niepewnosc FROM Pomiary_wzorcowe WHERE odleglosc={0} AND id_zrodla={1} AND id_protokolu={2}",
+                                 odleglosc.ToString().Replace(",", "."), zrodlo, idProtokolu);
+                    var row = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0];
+                    mocKermy = row.Field<double>(0);
+                    niepewnoscWzorcowa = row.Field<double>(1);
+                }
+                catch (Exception)
+                {
+                    listaWartRzeczywiste.Add(0);
+                    niepewnosci.Add(0);
+                    wspolczynniki.Add(0);
+                    niepewnosci_wsp.Add(0);
+                    continue;
+                }
+
+                double wkt = (Math.Log(2) * roznicaDni / stale.T12Cs) * Math.Sqrt((stale.ut / roznicaDni) * (stale.ut / roznicaDni) + (stale.ukT12Cs / stale.T12Cs) * (stale.ukT12Cs / stale.T12Cs));
+                double wkd = 2 * stale.DELTA_L_D / 2 / Math.Sqrt(3) / 10 / odleglosc;
+                double ut = stale.UT_SD / 2 / Math.Sqrt(3);
+                double wt = ut / czasZmierzony[i];
+
+                double wartRzeczywista = czasZmierzony[i] * mocKermy / przelicznik * korektaRozpad / 3600;
+
+                double ukjed = stale.UKJED;
+
+                if (jednostka.ToLower().IndexOf("sv") < 0)
+                {
+                    ukjed = 0;
+                }
+
+                double niepewnosc = wartRzeczywista * Math.Sqrt(Math.Pow(wkt, 2) + Math.Pow(wkd, 2) + Math.Pow(ukjed, 2) + Math.Pow(wt, 2) + Math.Pow(niepewnoscWzorcowa, 2));
+
+                double wspolczynnik = wartRzeczywista / progi[i];
+
+                double niepewnosc_wsp = wspolczynnik * 2 * Math.Sqrt(Math.Pow(wkt, 2) + Math.Pow(wkd, 2) + Math.Pow(ukjed, 2) + Math.Pow(wt, 2) + Math.Pow(niepewnoscWzorcowa, 2));
+
+                listaWartRzeczywiste.Add(wartRzeczywista);
+                niepewnosci.Add(niepewnosc);
+                wspolczynniki.Add(wspolczynnik);
+                niepewnosci_wsp.Add(niepewnosc_wsp);
+            }
+
+            return new List<double>[] { listaWartRzeczywiste, niepewnosci, wspolczynniki, niepewnosci_wsp };
         }
 
         //---------------------------------------------------------------
@@ -125,15 +200,16 @@ namespace DotBase
 
             for (int i = 0; i < Pomiary.Dane.Count; ++i)
             {
-                _Zapytanie = String.Format("INSERT INTO Sygnalizacja_dawka VALUES ({0}, '{1}', '{2}', '{3}', '{4}', {5}, '{6}')",
+                _Zapytanie = String.Format("INSERT INTO Sygnalizacja_dawka VALUES ({0}, '{1}', '{2}', '{3}', '{4}', {5}, '{6}', '{7}', '{8}', '{9}')",
                              _DaneOgolneDoZapisu.IdWzorcowania, Pomiary.Dane[i].Prog, Pomiary.Dane[i].WartRzeczywista,
-                             Pomiary.Dane[i].WartZmierzona, Pomiary.odleglosc, Pomiary.zrodlo, Pomiary.Dane[i].Tzmierzony);
+                             Pomiary.Dane[i].WartZmierzona, Pomiary.odleglosc, Pomiary.zrodlo, Pomiary.Dane[i].Tzmierzony,
+                             Pomiary.Dane[i].Niepewnosc, Pomiary.Dane[i].Wspolczynnik, Pomiary.Dane[i].Niepewnosc_wsp);
                 _BazaDanych.WykonajPolecenie(_Zapytanie);
             }
 
             if (Pomiary.Dane.Count == 0)
             {
-                _Zapytanie = String.Format("INSERT INTO Sygnalizacja_dawka VALUES ({0}, 0, 0, 0, '{1}', {2}, 0)",
+                _Zapytanie = String.Format("INSERT INTO Sygnalizacja_dawka VALUES ({0}, 0, 0, 0, '{1}', {2}, 0, 0, 0, 0)",
                              _DaneOgolneDoZapisu.IdWzorcowania, Pomiary.odleglosc, Pomiary.zrodlo);
                 _BazaDanych.WykonajPolecenie(_Zapytanie);
             }
@@ -225,7 +301,7 @@ namespace DotBase
         public bool PobierzDaneWzorcoweIPomiarowe()
         //---------------------------------------------------------------
         {
-            _Zapytanie = "SELECT prog, wartosc_wzorcowa, wartosc_zmierzona, czas_zmierzony FROM Sygnalizacja_dawka WHERE id_wzorcowania "
+            _Zapytanie = "SELECT prog, wartosc_wzorcowa, wartosc_zmierzona, czas_zmierzony, Niepewnosc, Wspolczynnik, Niepewnosc_wsp FROM Sygnalizacja_dawka WHERE id_wzorcowania "
                        + String.Format("IN (SELECT id_wzorcowania FROM Wzorcowanie_cezem WHERE id_karty = {0} AND id_arkusza = {1})",
                        IdKarty, IdArkusza);
 
@@ -243,7 +319,10 @@ namespace DotBase
                                         0.0,
                                         wiersz.Field<double>("czas_zmierzony"),
                                         wiersz.Field<double>("wartosc_wzorcowa"),
-                                        wiersz.Field<double>("wartosc_zmierzona")
+                                        wiersz.Field<double>("Niepewnosc"),
+                                        wiersz.Field<double>("wartosc_zmierzona"),
+                                        wiersz.Field<double>("Wspolczynnik"),
+                                        wiersz.Field<double>("Niepewnosc_wsp")
                                     )
                                );
             }
@@ -328,6 +407,30 @@ namespace DotBase
                     else
                         temp.Tzmierzony = 0.0;
 
+                    // Niepewnosc
+                    sTemp = tabela.Rows[i].Cells["Niepewnosc"].Value.ToString();
+
+                    if (sTemp != "")
+                        temp.Niepewnosc = N.doubleParse(sTemp);
+                    else
+                        temp.Niepewnosc = 0.0;
+
+                    // czas zmierzony
+                    sTemp = tabela.Rows[i].Cells["Wspolczynnik"].Value.ToString();
+
+                    if (sTemp != "")
+                        temp.Wspolczynnik = N.doubleParse(sTemp);
+                    else
+                        temp.Wspolczynnik = 0.0;
+
+                    // czas zmierzony
+                    sTemp = tabela.Rows[i].Cells["Niepewnosc_wsp"].Value.ToString();
+
+                    if (sTemp != "")
+                        temp.Niepewnosc_wsp = N.doubleParse(sTemp);
+                    else
+                        temp.Niepewnosc_wsp = 0.0;
+
                     Pomiary.Dane.Add(temp);
                 }
             }
@@ -364,15 +467,16 @@ namespace DotBase
         {
             for (int i = 0; i < Pomiary.Dane.Count; ++i)
             {
-                _Zapytanie = String.Format("INSERT INTO Sygnalizacja_dawka VALUES ({0}, '{1}', '{2}', '{3}', '{4}', {5}, '{6}')",
+                _Zapytanie = String.Format("INSERT INTO Sygnalizacja_dawka VALUES ({0}, '{1}', '{2}', '{3}', '{4}', {5}, '{6}', '{7}', '{8}', '{9}')",
                              _DaneOgolneDoZapisu.IdWzorcowania, Pomiary.Dane[i].Prog, Pomiary.Dane[i].WartRzeczywista,
-                             Pomiary.Dane[i].WartZmierzona, Pomiary.odleglosc, Pomiary.zrodlo, Pomiary.Dane[i].Tzmierzony);
+                             Pomiary.Dane[i].WartZmierzona, Pomiary.odleglosc, Pomiary.zrodlo, Pomiary.Dane[i].Tzmierzony,
+                             Pomiary.Dane[i].Niepewnosc, Pomiary.Dane[i].Wspolczynnik, Pomiary.Dane[i].Niepewnosc_wsp);
                 _BazaDanych.WykonajPolecenie(_Zapytanie);
             }
 
             if (Pomiary.Dane.Count == 0)
             {
-                _Zapytanie = String.Format("INSERT INTO Sygnalizacja_dawka VALUES ({0}, 0, 0, 0, '{1}', {2}, 0)",
+                _Zapytanie = String.Format("INSERT INTO Sygnalizacja_dawka VALUES ({0}, 0, 0, 0, '{1}', {2}, 0, 0, 0, 0)",
                              _DaneOgolneDoZapisu.IdWzorcowania, Pomiary.odleglosc, Pomiary.zrodlo);
                 _BazaDanych.WykonajPolecenie(_Zapytanie);
             }

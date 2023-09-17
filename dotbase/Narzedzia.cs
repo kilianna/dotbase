@@ -600,17 +600,20 @@ namespace KlasyPomocniczeSygDawki
             public double Twzorcowy     { get; set; }
             public double Tzmierzony    { get; set; }
             public double WartRzeczywista { get; set; }
+            public double Niepewnosc { get; set; }
             public double WartZmierzona { get; set; }
+            public double Wspolczynnik {get; set; }
+            public double Niepewnosc_wsp { get; set; }
 
             //********************************************************************
             public DawkaWartoscWzorcowoPomiarowa()
             //********************************************************************
             {
-                Prog = Twzorcowy = Tzmierzony = WartRzeczywista = WartRzeczywista = WartZmierzona = 0.0;
+                Prog = Twzorcowy = Tzmierzony = WartRzeczywista = WartRzeczywista = Niepewnosc = WartZmierzona = Wspolczynnik = Niepewnosc_wsp = 0.0;
             }
 
             //********************************************************************
-            public DawkaWartoscWzorcowoPomiarowa(double prog, double twzorcowy, double tzmierzony, double wartRzeczywista, double wartZmierzona)
+            public DawkaWartoscWzorcowoPomiarowa(double prog, double twzorcowy, double tzmierzony, double wartRzeczywista, double niepewnosc, double wartZmierzona, double wspolczynnik, double niepewnosc_wsp)
             //********************************************************************
             {
                 Prog = prog;
@@ -618,7 +621,10 @@ namespace KlasyPomocniczeSygDawki
                 Tzmierzony = tzmierzony;
                 WartRzeczywista = wartRzeczywista;
                 WartRzeczywista = wartRzeczywista;
+                Niepewnosc = niepewnosc;
                 WartZmierzona = wartZmierzona;
+                Wspolczynnik = wspolczynnik;
+                Niepewnosc_wsp = niepewnosc_wsp;
             }
         }
 

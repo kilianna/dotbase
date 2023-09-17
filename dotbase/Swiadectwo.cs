@@ -420,7 +420,7 @@ namespace DotBase
 
                 PobierzJednostke();
 
-                _Zapytanie = "SELECT prog, wartosc_wzorcowa, wartosc_zmierzona FROM Sygnalizacja_dawka WHERE "
+                _Zapytanie = "SELECT prog, wartosc_wzorcowa, wartosc_zmierzona, Niepewnosc, Wspolczynnik, Niepewnosc_wsp FROM Sygnalizacja_dawka WHERE "
                            + String.Format("id_wzorcowania = {0}", m_data.getValue(SwiadectwoData.DataType.ID_WZORCOWANIA));
 
                 PobierzDaneTabeloweSygnalizacja();
@@ -558,24 +558,42 @@ namespace DotBase
                 List<double> prog = new List<double>();
                 List<double> wartosc_wzorcowa = new List<double>();
                 List<double> wartosc_zmierzona = new List<double>();
+                List<double> niepewnosc = new List<double>();
+                List<double> wspolczynnik = new List<double>();
+                List<double> niepewnosc_wsp = new List<double>();
 
                 foreach (DataRow wiersz in _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows)
                 {
                     prog.Add(wiersz.Field<double>(0));
                     wartosc_wzorcowa.Add(wiersz.Field<double>(1));
                     wartosc_zmierzona.Add(wiersz.Field<double>(2));
+                    niepewnosc.Add(wiersz.Field<double>(3));
+                    wspolczynnik.Add(wiersz.Field<double>(4));
+                    niepewnosc_wsp.Add(wiersz.Field<double>(5));
                 }
 
-                IList<double> computedFactors = SygnalizacjaDawkiUtils.computeFactors(m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
-                IList<double> computedUncertainity = SygnalizacjaDawkiUtils.computeUncertainity(m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
+                IList<double> computedFactors;
+                IList<double> computedUncertainity;
+
+                if (N.proceduraOd20230915(DateTime.Parse(m_data.getValue(SwiadectwoData.DataType.DATA_WYKONANIA))))
+                {
+                    computedFactors = wspolczynnik;
+                    computedUncertainity = niepewnosc_wsp;
+                }
+                else
+                {
+                    computedFactors = SygnalizacjaDawkiUtils.computeFactors(m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
+                    computedUncertainity = SygnalizacjaDawkiUtils.computeUncertainity(m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
+                }
 
                 _Tabela = new StringBuilder();
 
                 for (int i = 0; i < prog.Count; ++i)
                 {
-                    _Tabela.AppendFormat("<tr><td>{0}</td><td>{1}</td><td>{2} &plusmn; {3} </td></tr>",
+                    _Tabela.AppendFormat("<tr><td>{0}</td><td>{1} &plusmn; {2} </td><td>{3} &plusmn; {4} </td></tr>",
                         prog[i].ToString("G"),
                         wartosc_wzorcowa[i].ToString("0.00"),
+                        niepewnosc[i].ToString("0.00"),
                         computedFactors[i].ToString("0.00"),
                         computedUncertainity[i].ToString("0.00"));
                 }

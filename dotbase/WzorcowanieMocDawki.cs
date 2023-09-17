@@ -495,7 +495,7 @@ namespace WzorcowanieMocDawkiSpace
             double roznicaDni = (dataWzorcowania - dataKalibracjiLawy).Days;
 
             double ktWzgledne = roznicaDni * Math.Log(2) * Math.Sqrt(Math.Pow(ut / roznicaDni, 2) + Math.Pow(ukT12Cs / T12Cs, 2)) / T12Cs;
-            double ukjedWzgledne = jednostka.IndexOf("Sv") >= 0 ? ukjed : 0;
+            double ukjedWzgledne = jednostka.ToLower().IndexOf("sv") >= 0 ? ukjed : 0;
 
             for (int punktIndex = 0; punktIndex < wskazania.Count; punktIndex++)
             {

@@ -98,7 +98,7 @@ namespace DotBase
                 String parametr = wiersz.Cells["Parametr"].Value.ToString();
                 String wartosc = SqlQueryUtils.normalize( wiersz.Cells["Wartosc"].Value.ToString() );
 
-                _Zapytanie = String.Format("INSERT INTO Stale VALUES('{0}', {1})", parametr, wartosc);
+                _Zapytanie = String.Format("INSERT INTO Stale VALUES('{0}', {1}, '')", parametr, wartosc);
 
                 _BazaDanych.WykonajPolecenie(_Zapytanie);
             }

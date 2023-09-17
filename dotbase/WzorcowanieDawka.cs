@@ -123,7 +123,7 @@ namespace DotBase
         }
 
         //---------------------------------------------------------------
-        public Narzedzia.Pair<double, double> LiczWspolczynnikOrazNiepewnosc20230915(List<double[]> inputList, double odleglosc, string protokol, int id_zrodla, DateTime dataWzorcowania)
+        public Narzedzia.Pair<double, double> LiczWspolczynnikOrazNiepewnosc20230915(List<double[]> inputList, double odleglosc, string protokol, int id_zrodla, DateTime dataWzorcowania, int rownowaznikDawki)
         //---------------------------------------------------------------
         {
             List<double> temporaryValues = new List<double>();
@@ -150,13 +150,20 @@ namespace DotBase
             double w_k = 0;
             double poprzedni_czas = 0;
 
+            double ukjed = stale.UKJED;
+
+            if (rownowaznikDawki < 0 || rownowaznikDawki > 2)
+            {
+                ukjed = 0;
+            }
+
             foreach (double[] data in inputList)
             {
                 temporaryValues.Add(data[0] / data[1]);
                 double czas = poprzedni_czas + data[2];
                 poprzedni_czas = czas;
                 double w_t = stale.UT_D / Math.Sqrt(3) / czas;
-                double w_k_dla_punktu = Math.Sqrt(Math.Pow(w_t, 2) + Math.Pow(Pomiary_wzorcowe_Niepewnosc, 2) + Math.Pow(stale.UKJED, 2) + Math.Pow(w_kd, 2) + Math.Pow(ktWzgledne, 2));
+                double w_k_dla_punktu = Math.Sqrt(Math.Pow(w_t, 2) + Math.Pow(Pomiary_wzorcowe_Niepewnosc, 2) + Math.Pow(ukjed, 2) + Math.Pow(w_kd, 2) + Math.Pow(ktWzgledne, 2));
                 w_k += w_k_dla_punktu;
             }
 

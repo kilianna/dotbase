@@ -205,6 +205,9 @@
     Sygnalizacja_dawka.Odleglosc, typ Double, precyzja 15, niewymagane Tak, pozycja 5, flagi X-X- -XXX
     Sygnalizacja_dawka.ID_zrodla, typ Integer, precyzja 10, niewymagane Tak, pozycja 6, flagi X-X- -XXX
     Sygnalizacja_dawka.Czas_zmierzony, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 7, flagi X-X- -XXX
+    Sygnalizacja_dawka.Niepewnosc, typ Double, domyślnie 0, precyzja 15, niewymagane Nie, pozycja 8, flagi X-X- -X-X
+    Sygnalizacja_dawka.Wspolczynnik, typ Double, domyślnie 0, precyzja 15, niewymagane Nie, pozycja 9, flagi X-X- -X-X
+    Sygnalizacja_dawka.Niepewnosc_wsp, typ Double, domyślnie 0, precyzja 15, niewymagane Nie, pozycja 10, flagi X-X- -X-X
 
 ---------------------------------------------------------------------
  Wyniki_dawka

@@ -1,7 +1,7 @@
 ﻿				<div class="wzornag"><!c1>) Calibration with Cs-137 gamma-rays in terms of ambient dose equivalent (threshold indicator)</div>
 				<div class="wzornag">List of instrument settings and the corresponding actual values ​​at which the warning signal is turned on.</div>
 				<table id="tabnag">
-					<tr><td>Type of probe:</td><td>built-in probe</td><td>Serial number of probe:</td><td>NA</td></tr>
+					<tr><td>Type of probe:</td><td><!c2></td><td>Serial number of probe:</td><td><!c3></td></tr>
 				</table>
 				<table id="tabwyn">
 					<tr><th>SET THRESHOLD</th><th style="width: 70mm">ACTUAL VALUES ON WHICH ARE SWITCHED <br> WARNING SIGNALS</th><th>CALIBRATION<BR>FACTOR</th></tr>

@@ -715,6 +715,16 @@ namespace DotBase
                 SetField("ID_zrodla", value, OleDbType.Integer);
                 return this;
             }
+            public Szablon_Sygnalizacja_dawka Niepewnosc(double value)
+            {
+                SetField("Niepewnosc", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_Sygnalizacja_dawka Niepewnosc_wsp(double value)
+            {
+                SetField("Niepewnosc_wsp", value, OleDbType.Double);
+                return this;
+            }
             public Szablon_Sygnalizacja_dawka Odleglosc(double value)
             {
                 SetField("Odleglosc", value, OleDbType.Double);
@@ -733,6 +743,11 @@ namespace DotBase
             public Szablon_Sygnalizacja_dawka Wartosc_zmierzona(double value)
             {
                 SetField("Wartosc_zmierzona", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_Sygnalizacja_dawka Wspolczynnik(double value)
+            {
+                SetField("Wspolczynnik", value, OleDbType.Double);
                 return this;
             }
         }

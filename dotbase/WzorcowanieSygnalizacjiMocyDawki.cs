@@ -195,11 +195,18 @@ namespace DotBase
                 double K2 = wartosc_wzorcowa_2 / daneWejsciowe.m_Prog[i];
                 double wspolczynnik = (K1 + K2) / 2;
 
+                double ukjed = stale.UKJED;
+
+                if (daneWejsciowe.m_Jednostka.ToLower().IndexOf("sv") < 0)
+                {
+                    ukjed = 0;
+                }
+
                 double wd1 = 2 * stale.DELTA_L_MD / 2 / Math.Sqrt(3) / 10 / daneWejsciowe.m_Odleglosc1[i];
                 double wd2 = 2 * stale.DELTA_L_MD / 2 / Math.Sqrt(3) / 10 / daneWejsciowe.m_Odleglosc2[i];
                 double wkt = (Math.Log(2) * roznicaPomiarowDni / stale.T12Cs) * Math.Sqrt((stale.ut / roznicaPomiarowDni) * (stale.ut / roznicaPomiarowDni) + (stale.ukT12Cs / stale.T12Cs) * (stale.ukT12Cs / stale.T12Cs));
-                double wk1 = Math.Sqrt(Math.Pow(niepewnosc_wart_wzorcowej_1, 2) + Math.Pow(stale.UKJED, 2) + Math.Pow(wkt, 2) + Math.Pow(wd1, 2));
-                double wk2 = Math.Sqrt(Math.Pow(niepewnosc_wart_wzorcowej_2, 2) + Math.Pow(stale.UKJED, 2) + Math.Pow(wkt, 2) + Math.Pow(wd2, 2));
+                double wk1 = Math.Sqrt(Math.Pow(niepewnosc_wart_wzorcowej_1, 2) + Math.Pow(ukjed, 2) + Math.Pow(wkt, 2) + Math.Pow(wd1, 2));
+                double wk2 = Math.Sqrt(Math.Pow(niepewnosc_wart_wzorcowej_2, 2) + Math.Pow(ukjed, 2) + Math.Pow(wkt, 2) + Math.Pow(wd2, 2));
                 double wk = (wk1 + wk2) / 2;
                 double wkp = Math.Abs(wspolczynnik - K1) / Math.Sqrt(3) / wspolczynnik;
                 double uk = wspolczynnik * Math.Sqrt(wk * wk + wkp * wkp);

@@ -166,12 +166,25 @@ namespace DotBase
 
             List<double> czas = TestujMozliwoscObliczeniaWartosciRzeczywistej();
 
-            if (progi != null)
+            if (progi != null && czas != null)
             {
-                List<double> wyniki = _WzorcowanieSygDawki.LiczWartoscRzecyzwista(N.doubleParse(textBox14.Text), Int32.Parse(textBox15.Text), comboBox3.Text, comboBox4.Text, czas, dateTimePicker1.Value);
+                List<double>[] wyniki;
+                if (N.proceduraOd20230915(dateTimePicker1.Value))
+                {
+                    wyniki = _WzorcowanieSygDawki.LiczWartoscRzecyzwistaOd20230915(N.doubleParse(textBox14.Text), Int32.Parse(textBox15.Text), comboBox3.Text, comboBox4.Text, czas, progi, dateTimePicker1.Value);
+                }
+                else
+                {
+                    wyniki = _WzorcowanieSygDawki.LiczWartoscRzecyzwistaOld(N.doubleParse(textBox14.Text), Int32.Parse(textBox15.Text), comboBox3.Text, comboBox4.Text, czas, dateTimePicker1.Value);
+                }
 
-                for (UInt16 i = 0; i < wyniki.Count; ++i)
-                    dataGridView1.Rows[i].Cells["wartRzeczywista"].Value = wyniki[i].ToString("0.00");
+                for (UInt16 i = 0; i < wyniki[0].Count; ++i)
+                {
+                    dataGridView1.Rows[i].Cells["wartRzeczywista"].Value = wyniki[0][i].ToString("0.00");
+                    dataGridView1.Rows[i].Cells["Niepewnosc"].Value = wyniki[1][i].ToString("0.00");
+                    dataGridView1.Rows[i].Cells["Wspolczynnik"].Value = wyniki[2][i].ToString("0.00");
+                    dataGridView1.Rows[i].Cells["Niepewnosc_wsp"].Value = wyniki[3][i].ToString("0.00");
+                }
                 
             }
         }
@@ -409,7 +422,7 @@ namespace DotBase
             {
                 foreach (KlasyPomocniczeSygDawki.DawkaWartosciWzorcowoPomiarowe.DawkaWartoscWzorcowoPomiarowa dane in _WzorcowanieSygDawki.Pomiary.Dane)
                 {
-                    dataGridView1.Rows.Add(dane.Prog, "", dane.Tzmierzony, dane.WartRzeczywista, dane.WartZmierzona);
+                    dataGridView1.Rows.Add(dane.Prog, "", dane.Tzmierzony, dane.WartRzeczywista, dane.Niepewnosc, dane.WartZmierzona, dane.Wspolczynnik, dane.Niepewnosc_wsp);
                 }
             }
 
