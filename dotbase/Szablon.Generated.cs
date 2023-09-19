@@ -52,11 +52,6 @@ namespace DotBase
                 SetField("Pole0", value, OleDbType.WChar);
                 return this;
             }
-            public Szablon_Błędy_wklejania Pole1(string value)
-            {
-                SetField("Pole1", value, OleDbType.WChar);
-                return this;
-            }
         }
         public class Szablon_Budzetniepewnosci : Tabela
         {

@@ -70,10 +70,6 @@
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.WartoscWzorcowa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Wskazanie = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dolaczyc = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.textBox19 = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
@@ -115,6 +111,10 @@
             this.wykresENToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.protokółToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zapiszToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.WartoscWzorcowa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Wskazanie = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dolaczyc = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -556,7 +556,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(141, 43);
             this.button5.TabIndex = 2;
-            this.button5.Text = "Licz";
+            this.button5.Text = "Oblicz";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -598,28 +598,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(596, 337);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // WartoscWzorcowa
-            // 
-            this.WartoscWzorcowa.HeaderText = "Wartość wzorcowa [mSv]";
-            this.WartoscWzorcowa.Name = "WartoscWzorcowa";
-            this.WartoscWzorcowa.Width = 200;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Czas [s]";
-            this.Column2.Name = "Column2";
-            // 
-            // Wskazanie
-            // 
-            this.Wskazanie.HeaderText = "Wskazanie [mSv]";
-            this.Wskazanie.Name = "Wskazanie";
-            this.Wskazanie.Width = 150;
-            // 
-            // Dolaczyc
-            // 
-            this.Dolaczyc.HeaderText = "Dołączyć";
-            this.Dolaczyc.Name = "Dolaczyc";
             // 
             // groupBox6
             // 
@@ -749,9 +727,9 @@
             this.checkBox1.Location = new System.Drawing.Point(180, 336);
             this.checkBox1.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(184, 21);
+            this.checkBox1.Size = new System.Drawing.Size(168, 21);
             this.checkBox1.TabIndex = 8;
-            this.checkBox1.Text = "Dołączyć do Świadectwa";
+            this.checkBox1.Text = "Dołącz do świadectwa";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // textBox16
@@ -1029,6 +1007,26 @@
             this.zapiszToolStripMenuItem.Text = "Zapisz";
             this.zapiszToolStripMenuItem.Click += new System.EventHandler(this.zapiszToolStripMenuItem_Click);
             // 
+            // WartoscWzorcowa
+            // 
+            this.WartoscWzorcowa.HeaderText = "Wartość wzorcowa [mSv]";
+            this.WartoscWzorcowa.Name = "WartoscWzorcowa";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Czas [s]";
+            this.Column2.Name = "Column2";
+            // 
+            // Wskazanie
+            // 
+            this.Wskazanie.HeaderText = "Wskazanie [mSv]";
+            this.Wskazanie.Name = "Wskazanie";
+            // 
+            // Dolaczyc
+            // 
+            this.Dolaczyc.HeaderText = "Dołącz";
+            this.Dolaczyc.Name = "Dolaczyc";
+            // 
             // WzorcowanieDawkaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1154,15 +1152,15 @@
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn WartoscWzorcowa;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Wskazanie;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Dolaczyc;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.ToolStripMenuItem wykresENToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn WartoscWzorcowa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Wskazanie;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Dolaczyc;
 
     }
 }

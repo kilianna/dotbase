@@ -71,6 +71,15 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.textBox13 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Prog = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Odl1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Zr1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Odl2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Zr2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Wartosc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Niepewnosc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Wspolczynnik = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NiepWsp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
@@ -90,15 +99,6 @@
             this.protokółToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zapiszToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.Prog = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Odl1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Zr1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Odl2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Zr2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Wartosc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Niepewnosc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Wspolczynnik = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NiepWsp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -114,7 +114,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(891, 47);
+            this.button3.Location = new System.Drawing.Point(1025, 47);
             this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(132, 52);
@@ -126,7 +126,7 @@
             // button2
             // 
             this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(783, 47);
+            this.button2.Location = new System.Drawing.Point(917, 47);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 52);
@@ -137,7 +137,7 @@
             // button1
             // 
             this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(675, 46);
+            this.button1.Location = new System.Drawing.Point(809, 46);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 53);
@@ -160,7 +160,7 @@
             this.dateTimePicker1.Location = new System.Drawing.Point(383, 58);
             this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(260, 22);
+            this.dateTimePicker1.Size = new System.Drawing.Size(317, 22);
             this.dateTimePicker1.TabIndex = 3;
             // 
             // textBox2
@@ -212,7 +212,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1035, 508);
+            this.tabControl1.Size = new System.Drawing.Size(1180, 508);
             this.tabControl1.TabIndex = 20;
             this.tabControl1.TabStop = false;
             // 
@@ -224,7 +224,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage1.Size = new System.Drawing.Size(1027, 479);
+            this.tabPage1.Size = new System.Drawing.Size(1172, 479);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Przyrząd";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -396,7 +396,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Size = new System.Drawing.Size(1027, 479);
+            this.tabPage2.Size = new System.Drawing.Size(1172, 479);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Warunki";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -540,23 +540,27 @@
             this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage3.Size = new System.Drawing.Size(1027, 479);
+            this.tabPage3.Size = new System.Drawing.Size(1172, 479);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Dane wzorcowe i pomiarowe";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // textBox13
             // 
+            this.textBox13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox13.Enabled = false;
             this.textBox13.Location = new System.Drawing.Point(15, 293);
             this.textBox13.Margin = new System.Windows.Forms.Padding(4);
             this.textBox13.Multiline = true;
             this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(988, 179);
+            this.textBox13.Size = new System.Drawing.Size(1144, 179);
             this.textBox13.TabIndex = 13;
             // 
             // dataGridView1
             // 
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Prog,
@@ -571,8 +575,62 @@
             this.dataGridView1.Location = new System.Drawing.Point(15, 74);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(999, 215);
+            this.dataGridView1.Size = new System.Drawing.Size(1144, 215);
             this.dataGridView1.TabIndex = 12;
+            // 
+            // Prog
+            // 
+            this.Prog.HeaderText = "Próg";
+            this.Prog.Name = "Prog";
+            this.Prog.Width = 90;
+            // 
+            // Odl1
+            // 
+            this.Odl1.HeaderText = "Odległość 1";
+            this.Odl1.Name = "Odl1";
+            this.Odl1.Width = 90;
+            // 
+            // Zr1
+            // 
+            this.Zr1.HeaderText = "Nr źródła 1";
+            this.Zr1.Name = "Zr1";
+            this.Zr1.Width = 90;
+            // 
+            // Odl2
+            // 
+            this.Odl2.HeaderText = "Odległość 2";
+            this.Odl2.Name = "Odl2";
+            this.Odl2.Width = 90;
+            // 
+            // Zr2
+            // 
+            this.Zr2.HeaderText = "Nr źródła 2";
+            this.Zr2.Name = "Zr2";
+            this.Zr2.Width = 90;
+            // 
+            // Wartosc
+            // 
+            this.Wartosc.HeaderText = "Wartość rzeczywista";
+            this.Wartosc.Name = "Wartosc";
+            this.Wartosc.Width = 90;
+            // 
+            // Niepewnosc
+            // 
+            this.Niepewnosc.HeaderText = "Niepewność wartości rzeczywistej";
+            this.Niepewnosc.Name = "Niepewnosc";
+            this.Niepewnosc.Width = 90;
+            // 
+            // Wspolczynnik
+            // 
+            this.Wspolczynnik.HeaderText = "Wspołczynnik";
+            this.Wspolczynnik.Name = "Wspolczynnik";
+            this.Wspolczynnik.Width = 90;
+            // 
+            // NiepWsp
+            // 
+            this.NiepWsp.HeaderText = "Niepewność współczynnika";
+            this.NiepWsp.Name = "NiepWsp";
+            this.NiepWsp.Width = 90;
             // 
             // groupBox4
             // 
@@ -587,26 +645,27 @@
             this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox4.Size = new System.Drawing.Size(1003, 59);
+            this.groupBox4.Size = new System.Drawing.Size(1138, 59);
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Wzorcowanie";
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(589, 22);
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button4.Location = new System.Drawing.Point(1002, 20);
             this.button4.Margin = new System.Windows.Forms.Padding(4);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(128, 26);
             this.button4.TabIndex = 9;
-            this.button4.Text = "Licz";
+            this.button4.Text = "Oblicz";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click_1);
             // 
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(896, 23);
+            this.radioButton2.Location = new System.Drawing.Point(898, 20);
             this.radioButton2.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(58, 21);
@@ -619,7 +678,7 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(785, 23);
+            this.radioButton1.Location = new System.Drawing.Point(787, 20);
             this.radioButton1.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(73, 21);
@@ -680,7 +739,7 @@
             this.tabPage4.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage4.Size = new System.Drawing.Size(1027, 479);
+            this.tabPage4.Size = new System.Drawing.Size(1172, 479);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Protokół";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -691,9 +750,9 @@
             this.checkBox1.Location = new System.Drawing.Point(89, 177);
             this.checkBox1.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(87, 21);
+            this.checkBox1.Size = new System.Drawing.Size(168, 21);
             this.checkBox1.TabIndex = 9;
-            this.checkBox1.Text = "Dołączyć";
+            this.checkBox1.Text = "Dołącz do świadectwa";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // textBox11
@@ -740,7 +799,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1035, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1180, 28);
             this.menuStrip1.TabIndex = 21;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -771,56 +830,11 @@
             this.toolTip1.AutomaticDelay = 0;
             this.toolTip1.ShowAlways = true;
             // 
-            // Prog
-            // 
-            this.Prog.HeaderText = "Próg";
-            this.Prog.Name = "Prog";
-            // 
-            // Odl1
-            // 
-            this.Odl1.HeaderText = "Odległość 1";
-            this.Odl1.Name = "Odl1";
-            // 
-            // Zr1
-            // 
-            this.Zr1.HeaderText = "Nr źródła 1";
-            this.Zr1.Name = "Zr1";
-            // 
-            // Odl2
-            // 
-            this.Odl2.HeaderText = "Odległość 2";
-            this.Odl2.Name = "Odl2";
-            // 
-            // Zr2
-            // 
-            this.Zr2.HeaderText = "Nr źródła 2";
-            this.Zr2.Name = "Zr2";
-            // 
-            // Wartosc
-            // 
-            this.Wartosc.HeaderText = "Wartość";
-            this.Wartosc.Name = "Wartosc";
-            // 
-            // Niepewnosc
-            // 
-            this.Niepewnosc.HeaderText = "Niepewność";
-            this.Niepewnosc.Name = "Niepewnosc";
-            // 
-            // Wspolczynnik
-            // 
-            this.Wspolczynnik.HeaderText = "Wspołczynnik";
-            this.Wspolczynnik.Name = "Wspolczynnik";
-            // 
-            // NiepWsp
-            // 
-            this.NiepWsp.HeaderText = "Niepewność wsp.";
-            this.NiepWsp.Name = "NiepWsp";
-            // 
             // WzorcowanieSygnalizacjaMocyDawkiForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1035, 615);
+            this.ClientSize = new System.Drawing.Size(1180, 615);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);

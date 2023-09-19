@@ -48,9 +48,10 @@
             this.Zrodlo1});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(478, 624);
+            this.dataGridView1.Size = new System.Drawing.Size(633, 951);
             this.dataGridView1.TabIndex = 0;
             // 
             // Odleglosc
@@ -79,10 +80,11 @@
             // 
             // DaneWzorcoweMocDawki
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(478, 624);
+            this.ClientSize = new System.Drawing.Size(633, 951);
             this.Controls.Add(this.dataGridView1);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "DaneWzorcoweMocDawki";
             this.Text = "Dane wzorcowe dla mocy dawki";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

@@ -69,6 +69,14 @@
             this.label10 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Prog = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tWzorcowy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tZmierzony = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.wartRzeczywista = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Niepewnosc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Wskazanie = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Wspolczynnik = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Niepewnosc_wsp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
@@ -89,14 +97,6 @@
             this.dokumenytToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.protokółToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zapiszToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Prog = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tWzorcowy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tZmierzony = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.wartRzeczywista = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Niepewnosc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Wskazanie = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Wspolczynnik = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Niepewnosc_wsp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -153,7 +153,7 @@
             this.dateTimePicker1.Location = new System.Drawing.Point(392, 37);
             this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(260, 22);
+            this.dateTimePicker1.Size = new System.Drawing.Size(320, 22);
             this.dateTimePicker1.TabIndex = 3;
             // 
             // label3
@@ -169,7 +169,7 @@
             // button1
             // 
             this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(684, 33);
+            this.button1.Location = new System.Drawing.Point(739, 33);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 44);
@@ -180,7 +180,7 @@
             // button2
             // 
             this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(792, 34);
+            this.button2.Location = new System.Drawing.Point(847, 34);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 43);
@@ -190,7 +190,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(900, 33);
+            this.button3.Location = new System.Drawing.Point(955, 33);
             this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(132, 44);
@@ -210,7 +210,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1124, 565);
+            this.tabControl1.Size = new System.Drawing.Size(1125, 565);
             this.tabControl1.TabIndex = 11;
             this.tabControl1.TabStop = false;
             // 
@@ -222,7 +222,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage1.Size = new System.Drawing.Size(1116, 536);
+            this.tabPage1.Size = new System.Drawing.Size(1117, 536);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Przyrząd";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -394,7 +394,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Size = new System.Drawing.Size(1116, 536);
+            this.tabPage2.Size = new System.Drawing.Size(1117, 536);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Warunki";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -538,13 +538,16 @@
             this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage3.Size = new System.Drawing.Size(1116, 536);
+            this.tabPage3.Size = new System.Drawing.Size(1117, 536);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Dane wzorcowe i pomiarowe";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Prog,
@@ -558,12 +561,62 @@
             this.dataGridView1.Location = new System.Drawing.Point(11, 87);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1088, 438);
+            this.dataGridView1.Size = new System.Drawing.Size(1089, 438);
             this.dataGridView1.TabIndex = 12;
             this.dataGridView1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.DodajWiersz);
             // 
+            // Prog
+            // 
+            this.Prog.HeaderText = "Próg";
+            this.Prog.Name = "Prog";
+            this.Prog.Width = 95;
+            // 
+            // tWzorcowy
+            // 
+            this.tWzorcowy.HeaderText = "Czas wzorcowy";
+            this.tWzorcowy.Name = "tWzorcowy";
+            this.tWzorcowy.Width = 95;
+            // 
+            // tZmierzony
+            // 
+            this.tZmierzony.HeaderText = "Czas zmierzony";
+            this.tZmierzony.Name = "tZmierzony";
+            this.tZmierzony.Width = 95;
+            // 
+            // wartRzeczywista
+            // 
+            this.wartRzeczywista.HeaderText = "Wartość rzeczywista";
+            this.wartRzeczywista.Name = "wartRzeczywista";
+            this.wartRzeczywista.Width = 95;
+            // 
+            // Niepewnosc
+            // 
+            this.Niepewnosc.HeaderText = "Niepewność";
+            this.Niepewnosc.Name = "Niepewnosc";
+            this.Niepewnosc.Width = 95;
+            // 
+            // Wskazanie
+            // 
+            this.Wskazanie.HeaderText = "Wskazanie";
+            this.Wskazanie.Name = "Wskazanie";
+            this.Wskazanie.Width = 95;
+            // 
+            // Wspolczynnik
+            // 
+            this.Wspolczynnik.HeaderText = "Współczynnik";
+            this.Wspolczynnik.Name = "Wspolczynnik";
+            this.Wspolczynnik.Width = 95;
+            // 
+            // Niepewnosc_wsp
+            // 
+            this.Niepewnosc_wsp.HeaderText = "Niepewność współczynnika";
+            this.Niepewnosc_wsp.Name = "Niepewnosc_wsp";
+            this.Niepewnosc_wsp.Width = 95;
+            // 
             // groupBox4
             // 
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.Controls.Add(this.button4);
             this.groupBox4.Controls.Add(this.comboBox4);
             this.groupBox4.Controls.Add(this.comboBox3);
@@ -577,19 +630,20 @@
             this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox4.Size = new System.Drawing.Size(1088, 70);
+            this.groupBox4.Size = new System.Drawing.Size(1089, 70);
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Wzorcowanie";
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(924, 30);
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button4.Location = new System.Drawing.Point(938, 30);
             this.button4.Margin = new System.Windows.Forms.Padding(4);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(156, 28);
+            this.button4.Size = new System.Drawing.Size(132, 28);
             this.button4.TabIndex = 11;
-            this.button4.Text = "Licz";
+            this.button4.Text = "Oblicz";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -680,7 +734,7 @@
             this.tabPage4.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage4.Size = new System.Drawing.Size(1116, 536);
+            this.tabPage4.Size = new System.Drawing.Size(1117, 536);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Protokół";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -691,9 +745,9 @@
             this.checkBox1.Location = new System.Drawing.Point(83, 158);
             this.checkBox1.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(87, 21);
+            this.checkBox1.Size = new System.Drawing.Size(168, 21);
             this.checkBox1.TabIndex = 9;
-            this.checkBox1.Text = "Dołączyć";
+            this.checkBox1.Text = "Dołącz do świadectwa";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // textBox11
@@ -740,7 +794,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1124, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1125, 28);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -766,56 +820,11 @@
             this.zapiszToolStripMenuItem.Text = "Zapisz";
             this.zapiszToolStripMenuItem.Click += new System.EventHandler(this.zapiszToolStripMenuItem_Click);
             // 
-            // Prog
-            // 
-            this.Prog.HeaderText = "Próg";
-            this.Prog.Name = "Prog";
-            this.Prog.Width = 120;
-            // 
-            // tWzorcowy
-            // 
-            this.tWzorcowy.HeaderText = "Czas wzorcowy";
-            this.tWzorcowy.Name = "tWzorcowy";
-            this.tWzorcowy.Width = 150;
-            // 
-            // tZmierzony
-            // 
-            this.tZmierzony.HeaderText = "Czas zmierzony";
-            this.tZmierzony.Name = "tZmierzony";
-            this.tZmierzony.Width = 150;
-            // 
-            // wartRzeczywista
-            // 
-            this.wartRzeczywista.HeaderText = "Wartość rzeczywista";
-            this.wartRzeczywista.Name = "wartRzeczywista";
-            this.wartRzeczywista.Width = 180;
-            // 
-            // Niepewnosc
-            // 
-            this.Niepewnosc.HeaderText = "Niepewność";
-            this.Niepewnosc.Name = "Niepewnosc";
-            // 
-            // Wskazanie
-            // 
-            this.Wskazanie.HeaderText = "Wskazanie";
-            this.Wskazanie.Name = "Wskazanie";
-            this.Wskazanie.Width = 180;
-            // 
-            // Wspolczynnik
-            // 
-            this.Wspolczynnik.HeaderText = "Współczynnik";
-            this.Wspolczynnik.Name = "Wspolczynnik";
-            // 
-            // Niepewnosc_wsp
-            // 
-            this.Niepewnosc_wsp.HeaderText = "Niepewność wsp.";
-            this.Niepewnosc_wsp.Name = "Niepewnosc_wsp";
-            // 
             // WzorcowanieSygnalizacjaDawkiForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1124, 641);
+            this.ClientSize = new System.Drawing.Size(1125, 641);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);

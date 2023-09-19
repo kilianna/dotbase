@@ -127,7 +127,7 @@
             // numericUpDown1
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(149, 36);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -140,7 +140,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(284, 32);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(117, 28);
             this.button1.TabIndex = 2;
@@ -151,7 +151,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(409, 32);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(116, 28);
             this.button2.TabIndex = 3;
@@ -162,7 +162,7 @@
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(533, 32);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(184, 28);
             this.button3.TabIndex = 4;
@@ -179,7 +179,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(0, 112);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(908, 514);
@@ -211,9 +211,9 @@
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage1.Size = new System.Drawing.Size(900, 485);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Dane zleceniodawcy";
@@ -223,7 +223,7 @@
             // 
             this.rabatBox.BackColor = System.Drawing.SystemColors.Window;
             this.rabatBox.Location = new System.Drawing.Point(173, 294);
-            this.rabatBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rabatBox.Margin = new System.Windows.Forms.Padding(4);
             this.rabatBox.Name = "rabatBox";
             this.rabatBox.Size = new System.Drawing.Size(132, 22);
             this.rabatBox.TabIndex = 27;
@@ -244,7 +244,7 @@
             this.jestIFJ.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.jestIFJ.AutoSize = true;
             this.jestIFJ.Location = new System.Drawing.Point(816, 36);
-            this.jestIFJ.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.jestIFJ.Margin = new System.Windows.Forms.Padding(4);
             this.jestIFJ.Name = "jestIFJ";
             this.jestIFJ.Size = new System.Drawing.Size(48, 21);
             this.jestIFJ.TabIndex = 25;
@@ -266,7 +266,7 @@
             this.emailTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.emailTextBox.Location = new System.Drawing.Point(173, 198);
-            this.emailTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.emailTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.Size = new System.Drawing.Size(420, 22);
             this.emailTextBox.TabIndex = 23;
@@ -277,7 +277,7 @@
             this.innyPlatnik.Checked = true;
             this.innyPlatnik.CheckState = System.Windows.Forms.CheckState.Checked;
             this.innyPlatnik.Location = new System.Drawing.Point(35, 320);
-            this.innyPlatnik.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.innyPlatnik.Margin = new System.Windows.Forms.Padding(4);
             this.innyPlatnik.Name = "innyPlatnik";
             this.innyPlatnik.Size = new System.Drawing.Size(101, 21);
             this.innyPlatnik.TabIndex = 22;
@@ -298,9 +298,9 @@
             this.grupaPlatnika.Controls.Add(this.label17);
             this.grupaPlatnika.Controls.Add(this.adresPlatnika);
             this.grupaPlatnika.Location = new System.Drawing.Point(16, 326);
-            this.grupaPlatnika.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grupaPlatnika.Margin = new System.Windows.Forms.Padding(4);
             this.grupaPlatnika.Name = "grupaPlatnika";
-            this.grupaPlatnika.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grupaPlatnika.Padding = new System.Windows.Forms.Padding(4);
             this.grupaPlatnika.Size = new System.Drawing.Size(848, 134);
             this.grupaPlatnika.TabIndex = 21;
             this.grupaPlatnika.TabStop = false;
@@ -310,7 +310,7 @@
             // 
             this.nazwaPlatnikaBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.nazwaPlatnikaBtn.Location = new System.Drawing.Point(805, 27);
-            this.nazwaPlatnikaBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nazwaPlatnikaBtn.Margin = new System.Windows.Forms.Padding(4);
             this.nazwaPlatnikaBtn.Name = "nazwaPlatnikaBtn";
             this.nazwaPlatnikaBtn.Size = new System.Drawing.Size(35, 28);
             this.nazwaPlatnikaBtn.TabIndex = 28;
@@ -323,7 +323,7 @@
             this.nazwaPlatnikaBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.nazwaPlatnikaBox.Location = new System.Drawing.Point(165, 28);
-            this.nazwaPlatnikaBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nazwaPlatnikaBox.Margin = new System.Windows.Forms.Padding(4);
             this.nazwaPlatnikaBox.Name = "nazwaPlatnikaBox";
             this.nazwaPlatnikaBox.Size = new System.Drawing.Size(639, 22);
             this.nazwaPlatnikaBox.TabIndex = 29;
@@ -337,7 +337,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.nazwaPlatnikaList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.nazwaPlatnikaList.Location = new System.Drawing.Point(165, 28);
-            this.nazwaPlatnikaList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nazwaPlatnikaList.Margin = new System.Windows.Forms.Padding(4);
             this.nazwaPlatnikaList.Name = "nazwaPlatnikaList";
             this.nazwaPlatnikaList.Size = new System.Drawing.Size(639, 24);
             this.nazwaPlatnikaList.TabIndex = 21;
@@ -346,7 +346,7 @@
             // nipPlatnika
             // 
             this.nipPlatnika.Location = new System.Drawing.Point(165, 96);
-            this.nipPlatnika.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nipPlatnika.Margin = new System.Windows.Forms.Padding(4);
             this.nipPlatnika.Name = "nipPlatnika";
             this.nipPlatnika.Size = new System.Drawing.Size(288, 22);
             this.nipPlatnika.TabIndex = 20;
@@ -386,7 +386,7 @@
             this.adresPlatnika.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.adresPlatnika.Location = new System.Drawing.Point(165, 64);
-            this.adresPlatnika.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.adresPlatnika.Margin = new System.Windows.Forms.Padding(4);
             this.adresPlatnika.Name = "adresPlatnika";
             this.adresPlatnika.Size = new System.Drawing.Size(673, 22);
             this.adresPlatnika.TabIndex = 18;
@@ -398,9 +398,9 @@
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Location = new System.Drawing.Point(629, 138);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(235, 127);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
@@ -409,7 +409,7 @@
             // button5
             // 
             this.button5.Location = new System.Drawing.Point(29, 74);
-            this.button5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button5.Margin = new System.Windows.Forms.Padding(4);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(176, 46);
             this.button5.TabIndex = 14;
@@ -420,7 +420,7 @@
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(29, 23);
-            this.button4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button4.Margin = new System.Windows.Forms.Padding(4);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(176, 46);
             this.button4.TabIndex = 13;
@@ -433,7 +433,7 @@
             this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox6.Location = new System.Drawing.Point(173, 262);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(4);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(420, 22);
             this.textBox6.TabIndex = 12;
@@ -453,7 +453,7 @@
             this.textBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox5.Location = new System.Drawing.Point(173, 230);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(4);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(420, 22);
             this.textBox5.TabIndex = 11;
@@ -473,7 +473,7 @@
             this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox4.Location = new System.Drawing.Point(173, 166);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(4);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(420, 22);
             this.textBox4.TabIndex = 10;
@@ -493,7 +493,7 @@
             this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox3.Location = new System.Drawing.Point(173, 134);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(420, 22);
             this.textBox3.TabIndex = 9;
@@ -513,7 +513,7 @@
             this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox2.Location = new System.Drawing.Point(173, 102);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(689, 22);
             this.textBox2.TabIndex = 8;
@@ -531,7 +531,7 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(173, 37);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(132, 22);
             this.textBox1.TabIndex = 6;
@@ -542,7 +542,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(173, 69);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(689, 24);
             this.comboBox1.TabIndex = 7;
@@ -585,9 +585,9 @@
             this.tabPage2.Controls.Add(this.dateTimePicker2);
             this.tabPage2.Controls.Add(this.dateTimePicker1);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage2.Size = new System.Drawing.Size(900, 485);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Dane zlecenia";
@@ -598,7 +598,7 @@
             this.nrZleceniaKlientaText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.nrZleceniaKlientaText.Location = new System.Drawing.Point(144, 325);
-            this.nrZleceniaKlientaText.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nrZleceniaKlientaText.Margin = new System.Windows.Forms.Padding(4);
             this.nrZleceniaKlientaText.Name = "nrZleceniaKlientaText";
             this.nrZleceniaKlientaText.Size = new System.Drawing.Size(713, 22);
             this.nrZleceniaKlientaText.TabIndex = 14;
@@ -616,7 +616,7 @@
             // textBox10
             // 
             this.textBox10.Location = new System.Drawing.Point(144, 357);
-            this.textBox10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox10.Margin = new System.Windows.Forms.Padding(4);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(265, 22);
             this.textBox10.TabIndex = 11;
@@ -635,7 +635,7 @@
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(496, 70);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(94, 21);
             this.checkBox1.TabIndex = 12;
@@ -647,7 +647,7 @@
             this.textBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox9.Location = new System.Drawing.Point(144, 158);
-            this.textBox9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox9.Margin = new System.Windows.Forms.Padding(4);
             this.textBox9.Multiline = true;
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(713, 159);
@@ -667,7 +667,7 @@
             // textBox8
             // 
             this.textBox8.Location = new System.Drawing.Point(144, 126);
-            this.textBox8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox8.Margin = new System.Windows.Forms.Padding(4);
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(265, 22);
             this.textBox8.TabIndex = 9;
@@ -675,7 +675,7 @@
             // textBox7
             // 
             this.textBox7.Location = new System.Drawing.Point(144, 86);
-            this.textBox7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox7.Margin = new System.Windows.Forms.Padding(4);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(265, 22);
             this.textBox7.TabIndex = 8;
@@ -723,7 +723,7 @@
             // dateTimePicker2
             // 
             this.dateTimePicker2.Location = new System.Drawing.Point(144, 54);
-            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(265, 22);
             this.dateTimePicker2.TabIndex = 7;
@@ -731,7 +731,7 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.Location = new System.Drawing.Point(144, 21);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(265, 22);
             this.dateTimePicker1.TabIndex = 6;
@@ -742,9 +742,9 @@
             // 
             this.tabPage3.Controls.Add(this.dataGridView1);
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage3.Size = new System.Drawing.Size(900, 485);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Lista przyrządów";
@@ -773,7 +773,7 @@
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(4, 4);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -817,7 +817,7 @@
             // numericUpDown2
             // 
             this.numericUpDown2.Location = new System.Drawing.Point(237, 74);
-            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             7000,
             0,
@@ -848,14 +848,14 @@
             this.Column1.HeaderText = "Numer karty";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
-            this.Column1.Width = 120;
+            this.Column1.Width = 90;
             // 
             // Column2
             // 
             this.Column2.HeaderText = "Typ przyrządu";
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
-            this.Column2.Width = 150;
+            this.Column2.Width = 170;
             // 
             // Column3
             // 
@@ -871,6 +871,7 @@
             this.Column4.ReadOnly = true;
             this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Column4.Width = 190;
             // 
             // Column5
             // 
@@ -884,7 +885,7 @@
             this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Column5.Text = "Przejdź";
             this.Column5.UseColumnTextForButtonValue = true;
-            this.Column5.Width = 150;
+            this.Column5.Width = 120;
             // 
             // ZlecenieForm
             // 
@@ -901,7 +902,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ZlecenieForm";
             this.Text = "Zlecenie";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
