@@ -643,37 +643,6 @@ namespace DotBase
             args.Cancel = !N.PotwierdzenieZapisz(this, ZapiszDane, true, false);
         }
 
-        //---------------------------------------------------------------
-        private void button2_Click(object sender, EventArgs e)
-        //---------------------------------------------------------------
-        {
-            string sciezka = _DocumentationPathsLoader.GetPath("ProtokolySkazeniaWynik", Jezyk.PL) + textBox1.Text + "WynikSkazenia.html";
-
-            Dokumenty.ProtokolZrodlaPowierzchnioweModel model = new Dokumenty.ProtokolZrodlaPowierzchnioweModel(
-                new DanePodstawoweModel(textBox1.Text, textBoxArkusz.Text, dateTimePicker1.Value),
-                new DanePrzyrzaduModel(textBox3.Text, textBox4.Text, textBox9.Text, comboBox2.Text, comboBox3.Text, textBox7.Text),
-                new DaneWarunkowModel(textBox14.Text, textBox15.Text, textBox16.Text, textBox13.Text),
-                new DaneWspolczynnikowModel(textBox21.Text, textBox22.Text));
-            
-            model.id_zdrodla = textBox2.Text;
-            model.jednostka = comboBox1.Text;
-            model.uwagi = textBox13.Text;
-            model.tabela = dataGridView1;
-            model.zakres = textBox8.Text;
-            model.podstawka = textBox12.Text;
-            model.odlegl_zr_sonda = textBox11.Text;
-            model.wsp_korekcyjny = textBox10.Text;
-            model.wspol_kalibracyjny = textBox17.Text;
-            model.niep_wspol_kalibracyjnego = textBox18.Text;
-            model.pop_wspol_kalibracyjny = textBox19.Text;
-
-            Dokumenty.ProtokolZrodlaPowierzchniowe dokument = new Dokumenty.ProtokolZrodlaPowierzchniowe(model);
-            if (false == dokument.generateDocument(sciezka))
-            {
-                MessageBox.Show("Nie podano wszystkich potrzebnych danych!", "Uwaga");
-            }
-        }
-
         private void PrzejdzDoKolejnegoPola(object sender, KeyPressEventArgs e)
         {
             // if enter
@@ -699,6 +668,35 @@ namespace DotBase
         private void zapiszToolStripMenuItem_Click(object sender, EventArgs e)
         {
             N.PotwierdzenieZapisz(this, ZapiszDane, false, true);
+        }
+
+        private void protokółToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string sciezka = _DocumentationPathsLoader.GetPath("ProtokolySkazeniaWynik", Jezyk.PL) + textBox1.Text + "WynikSkazenia.html";
+
+            Dokumenty.ProtokolZrodlaPowierzchnioweModel model = new Dokumenty.ProtokolZrodlaPowierzchnioweModel(
+                new DanePodstawoweModel(textBox1.Text, textBoxArkusz.Text, dateTimePicker1.Value),
+                new DanePrzyrzaduModel(textBox3.Text, textBox4.Text, textBox9.Text, comboBox2.Text, comboBox3.Text, textBox7.Text),
+                new DaneWarunkowModel(textBox14.Text, textBox15.Text, textBox16.Text, textBox13.Text),
+                new DaneWspolczynnikowModel(textBox21.Text, textBox22.Text));
+
+            model.id_zdrodla = textBox2.Text;
+            model.jednostka = comboBox1.Text;
+            model.uwagi = textBox13.Text;
+            model.tabela = dataGridView1;
+            model.zakres = textBox8.Text;
+            model.podstawka = textBox12.Text;
+            model.odlegl_zr_sonda = textBox11.Text;
+            model.wsp_korekcyjny = textBox10.Text;
+            model.wspol_kalibracyjny = textBox17.Text;
+            model.niep_wspol_kalibracyjnego = textBox18.Text;
+            model.pop_wspol_kalibracyjny = textBox19.Text;
+
+            Dokumenty.ProtokolZrodlaPowierzchniowe dokument = new Dokumenty.ProtokolZrodlaPowierzchniowe(model);
+            if (false == dokument.generateDocument(sciezka))
+            {
+                MessageBox.Show("Nie podano wszystkich potrzebnych danych!", "Uwaga");
+            }
         }
     }
 }

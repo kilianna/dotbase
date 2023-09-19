@@ -69,13 +69,16 @@
             this.textBox15 = new System.Windows.Forms.TextBox();
             this.textBox16 = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label19 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Wskazanie = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tlo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Min = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Max = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.textBox22 = new System.Windows.Forms.TextBox();
@@ -92,19 +95,17 @@
             this.label20 = new System.Windows.Forms.Label();
             this.textBox18 = new System.Windows.Forms.TextBox();
             this.textBox17 = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBoxArkusz = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.dokumentyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.protokółToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zapiszToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -573,7 +574,11 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label19);
             this.tabPage3.Controls.Add(this.dataGridView1);
+            this.tabPage3.Controls.Add(this.comboBox1);
+            this.tabPage3.Controls.Add(this.textBox2);
+            this.tabPage3.Controls.Add(this.label4);
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage3.Name = "tabPage3";
@@ -582,6 +587,16 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Pomiary";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(634, 110);
+            this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(77, 17);
+            this.label19.TabIndex = 4;
+            this.label19.Text = "Jednostka:";
             // 
             // dataGridView1
             // 
@@ -596,7 +611,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(12, 7);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(802, 433);
+            this.dataGridView1.Size = new System.Drawing.Size(614, 433);
             this.dataGridView1.TabIndex = 7;
             // 
             // Wskazanie
@@ -619,9 +634,37 @@
             this.Max.HeaderText = "Max";
             this.Max.Name = "Max";
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(634, 131);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(160, 24);
+            this.comboBox1.TabIndex = 8;
+            // 
+            // textBox2
+            // 
+            this.textBox2.BackColor = System.Drawing.Color.White;
+            this.textBox2.Location = new System.Drawing.Point(634, 52);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(89, 22);
+            this.textBox2.TabIndex = 4;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(631, 31);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 17);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Źródło";
+            // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.button2);
             this.tabPage4.Controls.Add(this.button1);
             this.tabPage4.Controls.Add(this.checkBox1);
             this.tabPage4.Controls.Add(this.textBox22);
@@ -638,17 +681,6 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Obliczone współczynniki";
             this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(533, 233);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(183, 49);
-            this.button2.TabIndex = 15;
-            this.button2.Text = "Podgląd protokołu";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -811,25 +843,6 @@
             this.textBox17.Size = new System.Drawing.Size(132, 22);
             this.textBox17.TabIndex = 7;
             // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(215, 95);
-            this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(77, 17);
-            this.label19.TabIndex = 4;
-            this.label19.Text = "Jednostka:";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(300, 90);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(160, 24);
-            this.comboBox1.TabIndex = 8;
-            // 
             // textBox1
             // 
             this.textBox1.BackColor = System.Drawing.Color.White;
@@ -878,26 +891,6 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Data";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 94);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(49, 17);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Źródło";
-            // 
-            // textBox2
-            // 
-            this.textBox2.BackColor = System.Drawing.Color.White;
-            this.textBox2.Location = new System.Drawing.Point(103, 90);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(89, 22);
-            this.textBox2.TabIndex = 4;
-            // 
             // textBoxArkusz
             // 
             this.textBoxArkusz.BackColor = System.Drawing.Color.White;
@@ -933,6 +926,7 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dokumentyToolStripMenuItem,
             this.zapiszToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -940,6 +934,21 @@
             this.menuStrip1.Size = new System.Drawing.Size(831, 28);
             this.menuStrip1.TabIndex = 8;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // dokumentyToolStripMenuItem
+            // 
+            this.dokumentyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.protokółToolStripMenuItem});
+            this.dokumentyToolStripMenuItem.Name = "dokumentyToolStripMenuItem";
+            this.dokumentyToolStripMenuItem.Size = new System.Drawing.Size(97, 24);
+            this.dokumentyToolStripMenuItem.Text = "Dokumenty";
+            // 
+            // protokółToolStripMenuItem
+            // 
+            this.protokółToolStripMenuItem.Name = "protokółToolStripMenuItem";
+            this.protokółToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.protokółToolStripMenuItem.Text = "Protokół";
+            this.protokółToolStripMenuItem.Click += new System.EventHandler(this.protokółToolStripMenuItem_Click);
             // 
             // zapiszToolStripMenuItem
             // 
@@ -953,13 +962,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(831, 607);
-            this.Controls.Add(this.label19);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.textBoxArkusz);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label2);
@@ -983,6 +988,7 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
@@ -1057,7 +1063,6 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox textBox18;
         private System.Windows.Forms.TextBox textBox17;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBoxArkusz;
         private System.Windows.Forms.Button button3;
@@ -1077,5 +1082,7 @@
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.ToolStripMenuItem dokumentyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem protokółToolStripMenuItem;
     }
 }
