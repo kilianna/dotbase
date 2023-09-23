@@ -59,7 +59,7 @@
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(366, 484);
+            this.dataGridView1.Size = new System.Drawing.Size(502, 484);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.UstawDaneTabelowe);
             // 
@@ -89,7 +89,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(190, 90);
+            this.button1.Location = new System.Drawing.Point(324, 90);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(165, 47);
@@ -100,7 +100,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(7, 90);
+            this.button2.Location = new System.Drawing.Point(13, 88);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(164, 47);
@@ -111,10 +111,10 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(8, 60);
+            this.dateTimePicker1.Location = new System.Drawing.Point(11, 58);
             this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(164, 22);
+            this.dateTimePicker1.Size = new System.Drawing.Size(278, 22);
             this.dateTimePicker1.TabIndex = 3;
             this.dateTimePicker1.CloseUp += new System.EventHandler(this.UstawDate);
             // 
@@ -131,7 +131,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(190, 58);
+            this.comboBox1.Location = new System.Drawing.Point(324, 58);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(165, 24);
@@ -141,7 +141,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(187, 37);
+            this.label2.Location = new System.Drawing.Point(321, 37);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(148, 17);
@@ -161,7 +161,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(366, 154);
+            this.groupBox1.Size = new System.Drawing.Size(502, 154);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             // 
@@ -169,7 +169,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(366, 639);
+            this.ClientSize = new System.Drawing.Size(502, 639);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.Margin = new System.Windows.Forms.Padding(4);
