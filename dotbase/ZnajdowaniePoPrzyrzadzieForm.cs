@@ -60,10 +60,10 @@ namespace DotBase
             }
         }
 
-        //---------------------------------------------------------
-        private void comboBox1_TextChanged(object sender, EventArgs e)
-        //---------------------------------------------------------
+        private void comboBox1_KeyUp(object sender, KeyEventArgs e)
         {
+            var old = comboBox1.SelectionStart;
+            var szukaj = comboBox1.Text.ToUpper();
             comboBox1.Items.Clear();
 
             if (comboBox1.Text == "")
@@ -72,16 +72,15 @@ namespace DotBase
                 return;
             }
 
-            var wynik = (from typ in _TypyPrzyrzadow where typ.Contains(comboBox1.Text) select typ).ToArray<string>();
+            var wynik1 = (from typ in _TypyPrzyrzadow where typ.ToUpper().IndexOf(szukaj) == 0 select typ).ToArray<string>();
+            var wynik2 = (from typ in _TypyPrzyrzadow where typ.ToUpper().IndexOf(szukaj) > 0 select typ).ToArray<string>();
 
             comboBox1.Items.Add(comboBox1.Text);
-            comboBox1.Items.AddRange(wynik.ToArray<string>());
-            comboBox1.SelectionStart = comboBox1.Text.Length;
+            comboBox1.Items.AddRange(wynik1.ToArray<string>());
+            comboBox1.Items.AddRange(wynik2.ToArray<string>());
+            comboBox1.SelectionStart = old;
+            comboBox1.SelectionLength = 0;
         }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        
     }
 }
