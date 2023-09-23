@@ -161,6 +161,7 @@ namespace DotBase
                 textBox6.Text = _WzorcowanieMocDawki.IdArkusza.ToString();
                 UstawDzisiejszaDate();
                 WyswietlDanePodstawowe();
+                comboBox3.SelectedItem = comboBox3.Items[comboBox3.Items.Count - 1];
                 return true;
             }
         }

@@ -145,6 +145,7 @@ namespace DotBase
                 textBox2.Text = _WzorcowanieSygMocyDawki.IdArkusza.ToString();
                 UstawDzisiejszaDate();
                 WyswietlDanePodstawowe();
+                comboBox3.SelectedItem = comboBox3.Items[comboBox3.Items.Count - 1];
                 return true;
             }
         }
