@@ -529,5 +529,37 @@ namespace DotBase
 
             okno.ShowDialog();
         }
+
+        private void sprawdzenieCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            var enabled = !sprawdzenieCheckBox.Checked;
+            checkBox1.Enabled = enabled;
+            checkBox2.Enabled = enabled;
+            checkBox3.Enabled = enabled;
+            checkBox4.Enabled = enabled;
+            checkBox5.Enabled = enabled;
+            checkBox6.Enabled = enabled;
+            checkBox7.Enabled = enabled;
+            checkBox8.Enabled = enabled;
+            checkBox9.Enabled = enabled;
+            checkBox10.Enabled = enabled;
+            checkBox11.Enabled = enabled;
+            checkBox13.Enabled = enabled;
+            if (!enabled)
+            {
+                checkBox1.Checked = false;
+                checkBox2.Checked = false;
+                checkBox3.Checked = false;
+                checkBox4.Checked = false;
+                checkBox5.Checked = false;
+                checkBox6.Checked = false;
+                checkBox7.Checked = false;
+                checkBox8.Checked = false;
+                checkBox9.Checked = false;
+                checkBox10.Checked = false;
+                checkBox11.Checked = false;
+                checkBox13.Checked = false;
+            }
+        }
     }
 }

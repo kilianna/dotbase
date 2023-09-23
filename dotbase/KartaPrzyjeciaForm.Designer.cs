@@ -252,6 +252,7 @@
             this.sprawdzenieCheckBox.TabIndex = 12;
             this.sprawdzenieCheckBox.Text = "Sprawdzenie";
             this.sprawdzenieCheckBox.UseVisualStyleBackColor = true;
+            this.sprawdzenieCheckBox.CheckedChanged += new System.EventHandler(this.sprawdzenieCheckBox_CheckedChanged);
             // 
             // checkBox13
             // 
