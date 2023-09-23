@@ -234,5 +234,11 @@ namespace DotBase
         {
             MessageBox.Show(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
         }
+
+        private void RejestrZlecenForm_Load(object sender, EventArgs e)
+        {
+            numericUpDown1.Value = DZISIAJ.Year;
+            numericUpDown2.Value = DZISIAJ.Month;
+        }
     }
 }
