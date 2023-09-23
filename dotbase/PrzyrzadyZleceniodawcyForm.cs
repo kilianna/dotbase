@@ -96,6 +96,9 @@ namespace DotBase
         void FiltrujNazwyZLeceniodawcow(object sender, EventArgs e)
         //-----------------------------------------------------------
         {
+            var szukaj = comboBox1.Text.ToUpper();
+            var oldStart = comboBox1.SelectionStart;
+
             comboBox1.Items.Clear();
 
             if (comboBox1.Text == "")
@@ -104,11 +107,14 @@ namespace DotBase
                 return;
             }
 
-            var wynik = (from nazwa in _nazwaZleceniodawcy where nazwa.Contains(comboBox1.Text) select nazwa).ToArray<string>();
+            var wynik1 = (from nazwa in _nazwaZleceniodawcy where nazwa.ToUpper().IndexOf(szukaj) == 0 select nazwa).ToArray<string>();
+            var wynik2 = (from nazwa in _nazwaZleceniodawcy where nazwa.ToUpper().IndexOf(szukaj) > 0 select nazwa).ToArray<string>();
 
             comboBox1.Items.Add(comboBox1.Text);
-            comboBox1.Items.AddRange(wynik.ToArray<string>());
-            comboBox1.SelectionStart = comboBox1.Text.Length;
+            comboBox1.Items.AddRange(wynik1.ToArray<string>());
+            comboBox1.Items.AddRange(wynik2.ToArray<string>());
+            comboBox1.SelectionStart = oldStart;
+            comboBox1.SelectionLength = 0;
         }
 
         //-----------------------------------------------------------
