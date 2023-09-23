@@ -17,6 +17,7 @@ namespace DotBase
         bool _TrybDodawaniaZleceniodawcy;
         bool _TrybEdycji;
         BazaDanychWrapper _BazaDanych = new BazaDanychWrapper();
+        string formaPrzyjeciaOld = "";
         
         //--------------------------------------------------------------------
         public ZlecenieForm()
@@ -206,6 +207,7 @@ namespace DotBase
         {
             textBox1.Text = textBox2.Text = textBox3.Text = textBox4.Text = textBox5.Text = rabatBox.Text =
             textBox6.Text = textBox7.Text = textBox8.Text = textBox10.Text = emailTextBox.Text = "";
+            formaPrzyjeciaOld = "";
             nrZleceniaKlientaText.Text = "";
             nazwaPlatnikaBox.Text = "";
             adresPlatnika.Text = "";
@@ -403,6 +405,7 @@ namespace DotBase
             dateTimePicker2.Value = dane.DataZwrotu;
             numericUpDown2.Value = dane.Nr_rejestru;
             textBox7.Text = dane.FormaPrzyjecia;
+            formaPrzyjeciaOld = dane.FormaPrzyjecia;
             textBox8.Text = dane.FormaZwrotu;
             textBox9.Text = dane.Uwagi;
             textBox10.Text = dane.OsobaPrzyjmujaca;
@@ -837,6 +840,15 @@ namespace DotBase
             Cursor = Cursors.Arrow;
             odswierzPodpowiedziPlatnika();
             nazwaPlatnikaList.DroppedDown = true;
+        }
+
+        private void textBox7_TextChanged(object sender, EventArgs e)
+        {
+            if (textBox8.Text == formaPrzyjeciaOld)
+            {
+                textBox8.Text = textBox7.Text;
+            }
+            formaPrzyjeciaOld = textBox7.Text;
         }
 
     }
