@@ -527,6 +527,8 @@
             this.textBox14.Name = "textBox14";
             this.textBox14.Size = new System.Drawing.Size(100, 22);
             this.textBox14.TabIndex = 7;
+            this.textBox14.Tag = "Cisnienie";
+            this.textBox14.TextChanged += new System.EventHandler(this.warunki_TextChanged);
             this.textBox14.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PrzejdzDoKolejnegoPola);
             this.textBox14.Leave += new System.EventHandler(this.textBox14_Leave);
             // 
@@ -558,6 +560,8 @@
             this.textBox15.Name = "textBox15";
             this.textBox15.Size = new System.Drawing.Size(100, 22);
             this.textBox15.TabIndex = 8;
+            this.textBox15.Tag = "Temperatura";
+            this.textBox15.TextChanged += new System.EventHandler(this.warunki_TextChanged);
             this.textBox15.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PrzejdzDoKolejnegoPola);
             this.textBox15.Leave += new System.EventHandler(this.textBox15_Leave);
             // 
@@ -569,6 +573,8 @@
             this.textBox16.Name = "textBox16";
             this.textBox16.Size = new System.Drawing.Size(100, 22);
             this.textBox16.TabIndex = 9;
+            this.textBox16.Tag = "Wilgotnosc";
+            this.textBox16.TextChanged += new System.EventHandler(this.warunki_TextChanged);
             this.textBox16.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PrzejdzDoKolejnegoPola);
             this.textBox16.Leave += new System.EventHandler(this.textBox16_Leave);
             // 
@@ -946,7 +952,7 @@
             // protokółToolStripMenuItem
             // 
             this.protokółToolStripMenuItem.Name = "protokółToolStripMenuItem";
-            this.protokółToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.protokółToolStripMenuItem.Size = new System.Drawing.Size(134, 24);
             this.protokółToolStripMenuItem.Text = "Protokół";
             this.protokółToolStripMenuItem.Click += new System.EventHandler(this.protokółToolStripMenuItem_Click);
             // 

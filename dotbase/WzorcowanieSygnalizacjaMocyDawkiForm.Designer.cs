@@ -458,6 +458,8 @@
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(100, 22);
             this.textBox7.TabIndex = 7;
+            this.textBox7.Tag = "Cisnienie";
+            this.textBox7.TextChanged += new System.EventHandler(this.warunki_TextChanged);
             this.textBox7.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PrzejdzDoKolejnegoPola);
             this.textBox7.Leave += new System.EventHandler(this.textBox7_Leave);
             // 
@@ -478,6 +480,8 @@
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(100, 22);
             this.textBox8.TabIndex = 8;
+            this.textBox8.Tag = "Temperatura";
+            this.textBox8.TextChanged += new System.EventHandler(this.warunki_TextChanged);
             this.textBox8.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PrzejdzDoKolejnegoPola);
             this.textBox8.Leave += new System.EventHandler(this.textBox8_Leave);
             // 
@@ -488,6 +492,8 @@
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(100, 22);
             this.textBox9.TabIndex = 9;
+            this.textBox9.Tag = "Wilgotnosc";
+            this.textBox9.TextChanged += new System.EventHandler(this.warunki_TextChanged);
             this.textBox9.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PrzejdzDoKolejnegoPola);
             this.textBox9.Leave += new System.EventHandler(this.textBox9_Leave);
             // 

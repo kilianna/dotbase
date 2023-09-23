@@ -640,5 +640,10 @@ namespace DotBase
         {
 
         }
+
+        private void warunki_TextChanged(object sender, EventArgs e)
+        {
+            N.SprawdzZakres(sender as TextBox);
+        }
     }
 }

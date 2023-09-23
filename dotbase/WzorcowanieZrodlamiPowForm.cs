@@ -698,5 +698,10 @@ namespace DotBase
                 MessageBox.Show("Nie podano wszystkich potrzebnych danych!", "Uwaga");
             }
         }
+
+        private void warunki_TextChanged(object sender, EventArgs e)
+        {
+            N.SprawdzZakres(sender as TextBox);
+        }
     }
 }

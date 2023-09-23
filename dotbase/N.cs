@@ -9,6 +9,12 @@ namespace DotBase
 {
     public static class N
     {
+        public enum Zakres
+        {
+            Cisnienie,
+            Temperatura,
+            Wilgotnosc,
+        };
 
         public static bool proceduraOd20230915(DateTime date)
         {
@@ -98,6 +104,45 @@ namespace DotBase
                 }
             }
             return true;
+        }
+
+        internal static void SprawdzZakres(TextBox textBox)
+        {
+            double min = Double.MinValue;
+            double max = Double.MaxValue;
+            if (textBox.Tag as string == "Cisnienie")
+            {
+                min = 900;
+                max = 1060;
+            }
+            else if (textBox.Tag as string == "Temperatura")
+            {
+                min = 15;
+                max = 30;
+            }
+            else if (textBox.Tag as string == "Wilgotnosc")
+            {
+                min = 10;
+                max = 80;
+            }
+            else
+            {
+                throw new ApplicationException("Błąd w polu 'Tag' tej kontrolki!");
+            }
+            bool ok = textBox.Text == "";
+            double value;
+            if (Double.TryParse(textBox.Text, out value))
+            {
+                ok = value >= min && value <= max;
+            }
+            if (ok)
+            {
+                textBox.BackColor = System.Drawing.SystemColors.Window;
+            }
+            else
+            {
+                textBox.BackColor = System.Drawing.Color.Orange;
+            }
         }
     }
 }

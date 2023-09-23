@@ -70,6 +70,10 @@
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.WartoscWzorcowa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Wskazanie = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dolaczyc = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.textBox19 = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
@@ -111,10 +115,6 @@
             this.wykresENToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.protokółToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zapiszToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.WartoscWzorcowa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Wskazanie = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dolaczyc = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -408,6 +408,8 @@
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(100, 22);
             this.textBox9.TabIndex = 2;
+            this.textBox9.Tag = "Wilgotnosc";
+            this.textBox9.TextChanged += new System.EventHandler(this.warunki_TextChanged);
             this.textBox9.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PrzejdzDoNastepnegoPola);
             this.textBox9.Leave += new System.EventHandler(this.textBox9_Leave);
             // 
@@ -418,6 +420,8 @@
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(100, 22);
             this.textBox8.TabIndex = 1;
+            this.textBox8.Tag = "Temperatura";
+            this.textBox8.TextChanged += new System.EventHandler(this.warunki_TextChanged);
             this.textBox8.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PrzejdzDoNastepnegoPola);
             this.textBox8.Leave += new System.EventHandler(this.textBox8_Leave);
             // 
@@ -428,6 +432,8 @@
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(100, 22);
             this.textBox7.TabIndex = 0;
+            this.textBox7.Tag = "Cisnienie";
+            this.textBox7.TextChanged += new System.EventHandler(this.warunki_TextChanged);
             this.textBox7.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PrzejdzDoNastepnegoPola);
             this.textBox7.Leave += new System.EventHandler(this.textBox7_Leave);
             // 
@@ -598,6 +604,26 @@
             this.dataGridView1.Size = new System.Drawing.Size(596, 337);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // WartoscWzorcowa
+            // 
+            this.WartoscWzorcowa.HeaderText = "Wartość wzorcowa [mSv]";
+            this.WartoscWzorcowa.Name = "WartoscWzorcowa";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Czas [s]";
+            this.Column2.Name = "Column2";
+            // 
+            // Wskazanie
+            // 
+            this.Wskazanie.HeaderText = "Wskazanie [mSv]";
+            this.Wskazanie.Name = "Wskazanie";
+            // 
+            // Dolaczyc
+            // 
+            this.Dolaczyc.HeaderText = "Dołącz";
+            this.Dolaczyc.Name = "Dolaczyc";
             // 
             // groupBox6
             // 
@@ -1006,26 +1032,6 @@
             this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
             this.zapiszToolStripMenuItem.Text = "Zapisz";
             this.zapiszToolStripMenuItem.Click += new System.EventHandler(this.zapiszToolStripMenuItem_Click);
-            // 
-            // WartoscWzorcowa
-            // 
-            this.WartoscWzorcowa.HeaderText = "Wartość wzorcowa [mSv]";
-            this.WartoscWzorcowa.Name = "WartoscWzorcowa";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Czas [s]";
-            this.Column2.Name = "Column2";
-            // 
-            // Wskazanie
-            // 
-            this.Wskazanie.HeaderText = "Wskazanie [mSv]";
-            this.Wskazanie.Name = "Wskazanie";
-            // 
-            // Dolaczyc
-            // 
-            this.Dolaczyc.HeaderText = "Dołącz";
-            this.Dolaczyc.Name = "Dolaczyc";
             // 
             // WzorcowanieDawkaForm
             // 
