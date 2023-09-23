@@ -67,6 +67,8 @@ namespace DotBase
             // Liczba wierszy wynikowych jest jednocześnie sumą wszystkich zepsutych
             textBox1.Text = _Dane.Rows.Count.ToString();
 
+            dataGridView1.Rows.Clear();
+
             foreach (DataRow row in _Dane.Rows)
             {
                 dataGridView1.Rows.Add(1);
