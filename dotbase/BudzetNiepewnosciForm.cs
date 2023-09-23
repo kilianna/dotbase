@@ -172,7 +172,7 @@ namespace DotBase
 
             for (int i = 0; i < MAX_WIERSZY; ++i)
             {
-                _Zapytanie = String.Format("INSERT INTO BudzetNiepewnosci VALUES ('{0}', '{1}')", wielkosci[i], wartosci[i]);
+                _Zapytanie = String.Format("INSERT INTO BudzetNiepewnosci VALUES ('{0}', '{1}', '')", wielkosci[i], wartosci[i]);
                 _BazaDanych.WykonajPolecenie(_Zapytanie);
             }
 
