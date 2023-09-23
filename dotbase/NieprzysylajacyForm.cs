@@ -52,12 +52,14 @@ namespace DotBase
                        + String.Format("ON Z1.id_zleceniodawcy=Z2.id_zleceniodawcy WHERE data_przyjecia BETWEEN #{0}# AND #{1}#) ",
                                        dateTimePicker1.Value.ToShortDateString(), dateTimePicker2.Value.ToShortDateString());
 
-            if (!_BazaDanych.TworzTabeleDanychWPamieci(_Zapytanie))
+
+            var Tabela = _BazaDanych.TworzTabeleDanych(_Zapytanie);
+            if (Tabela == null)
                 return;
 
             List<KeyValuePair<int, string>> z1 = new List<KeyValuePair<int, string>>();
 
-            foreach (DataRow row in _BazaDanych.Tabela.Rows)
+            foreach (DataRow row in Tabela.Rows)
             {
                 z1.Add(new KeyValuePair<int, string>(row.Field<int>(0), row.Field<string>(1)));
             }
@@ -67,9 +69,11 @@ namespace DotBase
                        + String.Format("ON Z1.id_zleceniodawcy=Z2.id_zleceniodawcy WHERE data_przyjecia BETWEEN #{0}# AND #{1}#)",
                                        dateTimePicker3.Value.ToShortDateString(), dateTimePicker4.Value.ToShortDateString());
 
-            if (_BazaDanych.TworzTabeleDanychWPamieci(_Zapytanie))
+            Tabela = _BazaDanych.TworzTabeleDanych(_Zapytanie);
+
+            if (Tabela != null)
             {
-                foreach (DataRow row in _BazaDanych.Tabela.Rows)
+                foreach (DataRow row in Tabela.Rows)
                 {
                     z1.Remove(new KeyValuePair<int, string>(row.Field<int>(0), row.Field<string>(1)));
                 }

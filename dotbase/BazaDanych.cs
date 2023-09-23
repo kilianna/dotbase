@@ -24,14 +24,10 @@ namespace DotBase
         private static string _ConnectionStringLog;
         private static OleDbConnection _PolaczenieLog = null;
 
-        public DataTable Tabela { get; private set; }
-
-
         //--------------------------------------------------------------------
         public BazaDanychWrapper()
         //--------------------------------------------------------------------
         {
-            Tabela = new DataTable();
         }
 
 
@@ -736,36 +732,6 @@ namespace DotBase
 
             return dane;
         }
-
-
-        //----------------------------------------------------------------------------------
-        public bool TworzTabeleDanychWPamieci(string zapytanie, params object[] list)
-        //----------------------------------------------------------------------------------
-        {
-            if (false == Polacz())
-                return false;
-
-            OleDbCommand polecenie = UtworzPolecenie(zapytanie, list);                      // Tworzymy polecenie dla bazy danych.
-            OleDbDataAdapter adapter = new OleDbDataAdapter(polecenie);                     // Wyniki zostaną przekonwertowane do obiektu DataSet przez adapter
-
-            Tabela.Clear();
-
-            try
-            {
-                adapter.Fill(Tabela);                                                     // wypełnienie obiektu danymi z zapytania
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-            finally
-            {
-                Rozlacz();
-            }
-
-            return true;
-        }
-
 
         public static bool Zakoncz(bool wymus)
         {

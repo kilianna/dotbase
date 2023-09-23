@@ -86,15 +86,16 @@ namespace DotBase
                                 + "id_wzorcowania FROM Wzorcowanie_cezem AS WC INNER JOIN Karta_przyjecia AS KP ON WC.id_karty = KP.id_karty WHERE "
                                 + String.Format("KP.id_karty = {0} AND Rodzaj_Wzorcowania = 'd')", daneCzesciowe[i].Item1);
 
-                    if (false == m_BazaDanych.TworzTabeleDanychWPamieci(m_Zapytanie))
+                    var Tabela = m_BazaDanych.TworzTabeleDanych(m_Zapytanie);
+                    if (Tabela == null)
                         break;
 
-                    if (m_BazaDanych.Tabela.Rows.Count != 1)
+                    if (Tabela.Rows.Count != 1)
                         continue;
 
-                    for (int k = 0; k < m_BazaDanych.Tabela.Rows.Count; ++k)
+                    for (int k = 0; k < Tabela.Rows.Count; ++k)
                     {
-                        DataRow odpowiedz = m_BazaDanych.Tabela.Rows[k];
+                        DataRow odpowiedz = Tabela.Rows[k];
                         dataGridView1.Rows.Add(odpowiedz.Field<double>(0), daneCzesciowe[i].Item1, daneCzesciowe[i].Item2, odpowiedz.Field<double>(1), odpowiedz.Field<double>(2));
                     }
                 }
@@ -107,12 +108,13 @@ namespace DotBase
                                 + "id_wzorcowania FROM Wzorcowanie_cezem AS WC INNER JOIN Karta_przyjecia AS KP ON WC.id_karty = KP.id_karty WHERE "
                                 + String.Format("KP.id_karty = {0} AND Rodzaj_Wzorcowania = 'md')", daneCzesciowe[i].Item1);
 
-                    if (false == m_BazaDanych.TworzTabeleDanychWPamieci(m_Zapytanie))
+                    var Tabela = m_BazaDanych.TworzTabeleDanych(m_Zapytanie);
+                    if (Tabela == null)
                         break;
 
-                    for (int k = 0; k < m_BazaDanych.Tabela.Rows.Count; ++k)
+                    for (int k = 0; k < Tabela.Rows.Count; ++k)
                     {
-                        DataRow odpowiedz = m_BazaDanych.Tabela.Rows[k];
+                        DataRow odpowiedz = Tabela.Rows[k];
                         dataGridView1.Rows.Add(odpowiedz.Field<double>(0), daneCzesciowe[i].Item1, daneCzesciowe[i].Item2, odpowiedz.Field<double>(1), odpowiedz.Field<double>(2));
                     }
                 }
@@ -158,15 +160,16 @@ namespace DotBase
                             + "id_wzorcowania FROM Wzorcowanie_zrodlami_powierzchniowymi AS WC INNER JOIN Karta_przyjecia AS KP ON WC.id_karty = KP.id_karty WHERE "
                             + String.Format("KP.id_karty = {0})", daneCzesciowe[i].Item1);
 
-                if (false == m_BazaDanych.TworzTabeleDanychWPamieci(m_Zapytanie))
+                var Tabela = m_BazaDanych.TworzTabeleDanych(m_Zapytanie);
+                if (Tabela == null)
                     break;
 
-                if (m_BazaDanych.Tabela.Rows.Count != 1)
+                if (Tabela.Rows.Count != 1)
                     continue;
 
-                for (int k = 0; k < m_BazaDanych.Tabela.Rows.Count; ++k)
+                for (int k = 0; k < Tabela.Rows.Count; ++k)
                 {
-                    DataRow odpowiedz = m_BazaDanych.Tabela.Rows[k];
+                    DataRow odpowiedz = Tabela.Rows[k];
                     dataGridView2.Rows.Add(odpowiedz.Field<int>(0), daneCzesciowe[i].Item1, daneCzesciowe[i].Item2, odpowiedz.Field<double>(1), odpowiedz.Field<double>(2));
                 }
             }
