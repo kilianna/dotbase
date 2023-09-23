@@ -90,7 +90,6 @@ namespace DotBase
         {
             if (trybDodawania)
             {
-                button1.Enabled = button3.Enabled = false;
                 numericUpDown1.Enabled = false;
                 textBox1.Enabled = false;
             }
@@ -323,7 +322,7 @@ namespace DotBase
         private void OdblokujPrzyciski()
         //--------------------------------------------------------------------
         {
-            button1.Enabled = button3.Enabled = true;
+            // button1.Enabled = button3.Enabled = true;
 
             tabControl1.Enabled = true;
         }
@@ -332,7 +331,7 @@ namespace DotBase
         private void ZablokujPrzyciski()
         //--------------------------------------------------------------------
         {
-            button1.Enabled = button3.Enabled = false;
+           // button1.Enabled = button3.Enabled = false;
 
             tabControl1.Enabled = false;
         }

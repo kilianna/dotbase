@@ -8,4 +8,5 @@
 		<tr><th style="font-size: 10pt"><!c4></th><th style="font-size: 10pt"><!c4></th></th><th style="font-size: 10pt">-</th></tr>
 		<!tabela>
 	</table>
+<div id="komentarz">Wybraną wartość progu należy pomnożyć przez odpowiednią wartość współczynnika poprawkowego. </div>
 <div class="uwaga"><!uwaga></div>

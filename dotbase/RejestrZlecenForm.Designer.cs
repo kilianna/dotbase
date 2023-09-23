@@ -54,17 +54,18 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(55, 16);
+            this.numericUpDown1.Location = new System.Drawing.Point(73, 20);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             3000,
             0,
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(60, 20);
+            this.numericUpDown1.Size = new System.Drawing.Size(80, 22);
             this.numericUpDown1.TabIndex = 1;
             this.numericUpDown1.Value = new decimal(new int[] {
-            2011,
+            2023,
             0,
             0,
             0});
@@ -72,9 +73,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 20);
+            this.label1.Location = new System.Drawing.Point(29, 25);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(27, 13);
+            this.label1.Size = new System.Drawing.Size(33, 17);
             this.label1.TabIndex = 1;
             this.label1.Text = "Rok";
             // 
@@ -99,10 +101,11 @@
             this.Column10,
             this.Column11,
             this.Column13});
-            this.dataGridView1.Location = new System.Drawing.Point(0, 51);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 63);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(1171, 518);
+            this.dataGridView1.Size = new System.Drawing.Size(1561, 638);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.PrzejdzDoZlecenia);
             // 
@@ -196,7 +199,8 @@
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(200, 16);
+            this.numericUpDown2.Location = new System.Drawing.Point(267, 20);
+            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             12,
             0,
@@ -208,7 +212,7 @@
             0,
             0});
             this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(60, 20);
+            this.numericUpDown2.Size = new System.Drawing.Size(80, 22);
             this.numericUpDown2.TabIndex = 2;
             this.numericUpDown2.Value = new decimal(new int[] {
             1,
@@ -220,33 +224,36 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(151, 20);
+            this.label2.Location = new System.Drawing.Point(201, 25);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(43, 13);
+            this.label2.Size = new System.Drawing.Size(55, 17);
             this.label2.TabIndex = 3;
             this.label2.Text = "Miesiąc";
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(410, 13);
+            this.progressBar1.Location = new System.Drawing.Point(547, 16);
+            this.progressBar1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(686, 23);
+            this.progressBar1.Size = new System.Drawing.Size(915, 28);
             this.progressBar1.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(287, 20);
+            this.label3.Location = new System.Drawing.Point(383, 25);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(108, 13);
+            this.label3.Size = new System.Drawing.Size(139, 17);
             this.label3.TabIndex = 5;
             this.label3.Text = "Wczytywanie danych";
             // 
             // RejestrZlecenForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1171, 569);
+            this.ClientSize = new System.Drawing.Size(1561, 700);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label2);
@@ -254,6 +261,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.numericUpDown1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "RejestrZlecenForm";
             this.Text = "Rejestr zleceń";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();

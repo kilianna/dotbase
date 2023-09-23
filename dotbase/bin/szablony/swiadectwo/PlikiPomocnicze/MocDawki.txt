@@ -7,7 +7,7 @@
 					<tr><th style="font-size: 10pt"><!c5></th><th style="font-size: 10pt"><!korekcja_jednostki></th></tr>
 					<!tabela>
 				</table>
-				<div id="komentarz">Zmierzoną wartość <!wielkosc_fizyczna> należy pomnożyć przez odpowiednią wartość współczynnika <br>
+<div id="komentarz">Zmierzoną wartość <!wielkosc_fizyczna> należy pomnożyć przez odpowiednią wartość współczynnika <br>
 				poprawkowego dla danego zakresu pomiarowego przyrządu.
 				</div>
 <div class="uwaga"><!uwaga></div>

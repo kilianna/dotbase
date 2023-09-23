@@ -54,10 +54,10 @@
             this.groupBox1.Controls.Add(this.dateTimePicker2);
             this.groupBox1.Controls.Add(this.dateTimePicker1);
             this.groupBox1.Location = new System.Drawing.Point(16, 15);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox1.Size = new System.Drawing.Size(627, 64);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(1054, 64);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Przysłano";
@@ -65,7 +65,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(319, 28);
+            this.label2.Location = new System.Drawing.Point(535, 28);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(26, 17);
@@ -84,18 +84,18 @@
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(355, 23);
-            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dateTimePicker2.Location = new System.Drawing.Point(571, 23);
+            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(232, 22);
+            this.dateTimePicker2.Size = new System.Drawing.Size(466, 22);
             this.dateTimePicker2.TabIndex = 1;
             // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.Location = new System.Drawing.Point(56, 23);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(232, 22);
+            this.dateTimePicker1.Size = new System.Drawing.Size(421, 22);
             this.dateTimePicker1.TabIndex = 0;
             // 
             // groupBox2
@@ -105,10 +105,10 @@
             this.groupBox2.Controls.Add(this.dateTimePicker3);
             this.groupBox2.Controls.Add(this.dateTimePicker4);
             this.groupBox2.Location = new System.Drawing.Point(16, 86);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox2.Size = new System.Drawing.Size(627, 64);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Size = new System.Drawing.Size(1054, 64);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Nie przysłano";
@@ -116,7 +116,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(319, 28);
+            this.label3.Location = new System.Drawing.Point(535, 28);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(26, 17);
@@ -136,17 +136,17 @@
             // dateTimePicker3
             // 
             this.dateTimePicker3.Location = new System.Drawing.Point(56, 23);
-            this.dateTimePicker3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dateTimePicker3.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.Size = new System.Drawing.Size(232, 22);
+            this.dateTimePicker3.Size = new System.Drawing.Size(421, 22);
             this.dateTimePicker3.TabIndex = 1;
             // 
             // dateTimePicker4
             // 
-            this.dateTimePicker4.Location = new System.Drawing.Point(355, 23);
-            this.dateTimePicker4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dateTimePicker4.Location = new System.Drawing.Point(571, 23);
+            this.dateTimePicker4.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePicker4.Name = "dateTimePicker4";
-            this.dateTimePicker4.Size = new System.Drawing.Size(232, 22);
+            this.dateTimePicker4.Size = new System.Drawing.Size(466, 22);
             this.dateTimePicker4.TabIndex = 0;
             // 
             // dataGridView1
@@ -158,19 +158,19 @@
             this.Column1,
             this.Column2});
             this.dataGridView1.Location = new System.Drawing.Point(0, 200);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(659, 261);
+            this.dataGridView1.Size = new System.Drawing.Size(1099, 261);
             this.dataGridView1.TabIndex = 5;
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(225, 158);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Location = new System.Drawing.Point(337, 158);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(199, 28);
+            this.button1.Size = new System.Drawing.Size(418, 28);
             this.button1.TabIndex = 6;
             this.button1.Text = "Szukaj";
             this.button1.UseVisualStyleBackColor = true;
@@ -186,18 +186,18 @@
             // 
             this.Column2.HeaderText = "Nazwa";
             this.Column2.Name = "Column2";
-            this.Column2.Width = 550;
+            this.Column2.Width = 650;
             // 
             // NieprzysylajacyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(659, 462);
+            this.ClientSize = new System.Drawing.Size(1099, 462);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "NieprzysylajacyForm";
             this.Text = "Nieaktywni zleceniodawcy";
             this.groupBox1.ResumeLayout(false);

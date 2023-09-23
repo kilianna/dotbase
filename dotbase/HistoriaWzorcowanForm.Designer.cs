@@ -73,7 +73,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(686, 356);
+            this.tabControl1.Size = new System.Drawing.Size(908, 356);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -84,7 +84,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage1.Size = new System.Drawing.Size(678, 327);
+            this.tabPage1.Size = new System.Drawing.Size(900, 327);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Promieniowanie gamma";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -99,7 +99,7 @@
             this.groupBox1.Controls.Add(this.comboBox2);
             this.groupBox1.Controls.Add(this.radioButton1);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(480, 4);
+            this.groupBox1.Location = new System.Drawing.Point(702, 4);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
@@ -195,7 +195,7 @@
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(468, 309);
+            this.dataGridView1.Size = new System.Drawing.Size(690, 309);
             this.dataGridView1.TabIndex = 6;
             // 
             // Zakres
@@ -238,7 +238,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Size = new System.Drawing.Size(678, 327);
+            this.tabPage2.Size = new System.Drawing.Size(998, 327);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Emisja powierzchniowa";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -251,7 +251,7 @@
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.comboBox4);
             this.groupBox2.Controls.Add(this.comboBox3);
-            this.groupBox2.Location = new System.Drawing.Point(480, 7);
+            this.groupBox2.Location = new System.Drawing.Point(800, 7);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
@@ -322,7 +322,7 @@
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.Size = new System.Drawing.Size(468, 303);
+            this.dataGridView2.Size = new System.Drawing.Size(788, 303);
             this.dataGridView2.TabIndex = 7;
             // 
             // dataGridViewTextBoxColumn1
@@ -336,7 +336,7 @@
             this.dataGridViewTextBoxColumn2.HeaderText = "Numer karty";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 60;
+            this.dataGridViewTextBoxColumn2.Width = 70;
             // 
             // dataGridViewTextBoxColumn3
             // 
@@ -361,7 +361,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(686, 356);
+            this.ClientSize = new System.Drawing.Size(908, 356);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "HistoriaWzorcowanForm";
@@ -401,12 +401,12 @@
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.ComboBox comboBox4;
         private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
     }
 }

@@ -43,7 +43,7 @@
             this.dateTimePicker1.Location = new System.Drawing.Point(107, 15);
             this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(265, 22);
+            this.dateTimePicker1.Size = new System.Drawing.Size(317, 22);
             this.dateTimePicker1.TabIndex = 0;
             this.dateTimePicker1.CloseUp += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
@@ -52,7 +52,7 @@
             this.dateTimePicker2.Location = new System.Drawing.Point(107, 69);
             this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(265, 22);
+            this.dateTimePicker2.Size = new System.Drawing.Size(317, 22);
             this.dateTimePicker2.TabIndex = 1;
             this.dateTimePicker2.CloseUp += new System.EventHandler(this.dateTimePicker2_ValueChanged);
             // 
@@ -89,7 +89,7 @@
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(387, 406);
+            this.dataGridView1.Size = new System.Drawing.Size(437, 406);
             this.dataGridView1.TabIndex = 4;
             // 
             // Typ
@@ -110,7 +110,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(387, 525);
+            this.ClientSize = new System.Drawing.Size(437, 525);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
