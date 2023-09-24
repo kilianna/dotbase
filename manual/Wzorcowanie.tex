@@ -373,13 +373,13 @@ W przypadku opcji \textbf{"Opis"} (rys. \ref{sygMocyDane2}) wykonujemy opis zach
 \subsection{Wzorcowanie w zakresie emisji powierzchniowej}
 \label{wzorcowanie_emisja}
 
-	W górnej części okna znajdują się wypełnione przez program pola \textbf{"Numer karty"}, \textbf{"Arkusz"} oraz \textbf{"Data"} oraz \textbf{"Źródło"}. 
+	W górnej części okna znajdują się wypełnione przez program pola \textbf{"Numer karty"}, \textbf{"Arkusz"} oraz \textbf{"Data"}. 
 	
 	\textbf{TIP:} Za datę wzorcowania program domyślnie przyjmuję datę dzisiejszą, dlatego warto wprowadzać wyniki w dniu pomiaru. Jeżeli wprowadzamy wyniki wzorcowania przeprowadzonego wcześniej, należy pamiętać o zmianie tej daty na tę odpowiadającą pomiarom.
 	
-	Z listy rozwijanej \textbf{"Jednostka"} należy wybrać jednostkę, w jakiej wyskalowany jest przyrząd.
-	
 	Po prawej stronie znajdują się przyciski \textbf{"Poprzedni arkusz"} i \textbf{"Następny arkusz"} umożliwiające poruszanie się pomiędzy poszczególnymi arkuszami, jeżeli w tym zakresie istnieje więcej niż jeden arkusz (np. wykonujemy pomiary różnymi sondami, lub przy różnych ustawieniach).
+	
+	W menu rozwijanym na górze okna znajdują się opcje umożliwiające podgląd i wydruk dokumentów (w tym przypadku protokołu kalibracyjnego w zakresie emisji powierzchniowej) - \textbf{"Dokumenty"} oraz przycisk \textbf{"Zapisz"}, który umożliwia zapisanie częściowych wyników (jeżeli minimalne wymagania są spełnione - wybrany został numer fabryczny sondy).
 	
 	\begin{figure}[htb]
 		\centering
@@ -413,7 +413,9 @@ W przypadku opcji \textbf{"Opis"} (rys. \ref{sygMocyDane2}) wykonujemy opis zach
 		\label{emisjaWarunki}
 	\end{figure}
 	
-	Kolejna zakładka to \textbf{"Dane wzorcowe i pomiarowe"}. Tutaj wprowadza się wyniki wzorcowania. Wyniki pomiarów tła należy wprowadzić w drugiej kolumnie tabeli. Wyniki pomiarów z użyciem źródła można albo wprowadzić w formie gotowych wyników w pierwszej kolumnie (\textbf{"Wskazanie"}), albo podać minimalną i maksymalną wartość wskazywaną przez przyrząd odpowiednio w kolumnach trzeciej i czwartej (kolumny \textbf{"Min"} i \textbf{"Max"}). W drugim przypadku program automatycznie wyliczy wskazanie (jako średnią arytmetyczną wartości maksymalnej i minimalnej) oraz wahanie (jako różnicę wyliczonego wskazania i wartości minimalnej).
+	Kolejna zakładka to \textbf{"Dane wzorcowe i pomiarowe"}. Tutaj wprowadza się wyniki wzorcowania. Po prawej stronie znajduje się informacja o numerze źródła (pole \textbf{Źródło}).	Z listy rozwijanej \textbf{"Jednostka"} należy wybrać jednostkę, w jakiej wyskalowany jest przyrząd.
+	
+	Wyniki pomiarów tła należy wprowadzić w drugiej kolumnie tabeli. Wyniki pomiarów z użyciem źródła można albo wprowadzić w formie gotowych wyników w pierwszej kolumnie (\textbf{"Wskazanie"}), albo podać minimalną i maksymalną wartość wskazywaną przez przyrząd odpowiednio w kolumnach trzeciej i czwartej (kolumny \textbf{"Min"} i \textbf{"Max"}). W drugim przypadku program automatycznie wyliczy wskazanie (jako średnią arytmetyczną wartości maksymalnej i minimalnej) oraz wahanie (jako różnicę wyliczonego wskazania i wartości minimalnej).
 	
 	\begin{figure}[htb]
 		\centering
@@ -422,20 +424,20 @@ W przypadku opcji \textbf{"Opis"} (rys. \ref{sygMocyDane2}) wykonujemy opis zach
 		\label{emisjaDane}
 	\end{figure}
 	
+	W zakładce \textbf{"Obliczone współczynniki"} (rys. \ref{emisjaWspolczynniki}) znajdują się pola \textbf{"Wykonał(a)"} i \textbf{"Sprawdził(a)"}, w których należy podać odpowiednio dane osoby, która wykonywała wzorcowanie i osoby, która będzie to zatwierdzać. 
+	
+	\textbf{TIP:} Program zapamiętuje ostatnio wpisane dane i automatycznie uzupełnia te pola tymi danymi. Należy więc zwrócić na to szczególną uwagę przy zmianie pracownika wykonującego wzorcowanie.
+	
+	Poniżej znajduje się pole wyboru \textbf{"Dołącz do świadectwa"} - domyślnie zaznaczone pole oznaczające, że wyniki z tego arkusza mają być zawarte w świadectwie wzorcowania.
+	
+	Przycisk \textbf{"Oblicz"} powoduje wyświetlenie wyników wzorcowania. Jeżeli przyrząd był już wzorcowany w zakresie dawki, to w polach po prawej stronie pojawią się współczynnik i niepewność z poprzedniego wzorcowania. 
+	
 	\begin{figure}[htb]
 		\centering
 		\includegraphics[width=\columnwidth]{obrazki/Wzorcowanie/emisja/wspolczynniki.png}
 		\caption{Okno wzorcowania w zakresie emisji powierzchniowej - zakładka obliczone współczynniki.}
 		\label{emisjaWspolczynniki}
 	\end{figure}
-	
-	W zakładce \textbf{"Obliczone współczynniki"} (rys. \ref{emisjaWspolczynniki}) znajdują się pola \textbf{"Wykonał(a)"} i \textbf{"Sprawdził(a)"}, w których należy podać odpowiednio dane osoby, która wykonywała wzorcowanie i osoby, która będzie to zatwierdzać. 
-	
-	\textbf{TIP:} Program zapamiętuje ostatnio wpisane dane i automatycznie uzupełnia te pola tymi danymi. Należy więc zwrócić na to szczególną uwagę przy zmianie pracownika wykonującego wzorcowanie.
-	
-	Poniżej znajduje się pole wyboru \textbf{"Dołączyć do świadectwa"} - domyślnie zaznaczone pole oznaczające, że wyniki z tego arkusza mają być zawarte w świadectwie wzorcowania.
-	
-	Przycisk \textbf{"Oblicz"} powoduje wyświetlenie wyników wzorcowania. Jeżeli przyrząd był już wzorcowany w zakresie dawki, to w polach po prawej stronie pojawią się współczynnik i niepewność z poprzedniego wzorcowania. 
 	
 	\textbf{TIP:} Warto zawsze porównać oba wyniki, aby wychwycić ewentualne rozbieżności i spróbować znaleźć ich źródło (czy to błąd we wzorcowaniu, czy np. jakieś uszkodzenie przyrządu). Współczynnik kalibracyjny nie powinien się różnić od jego poprzedniej wartości o więcej niż 20 procent.
 
