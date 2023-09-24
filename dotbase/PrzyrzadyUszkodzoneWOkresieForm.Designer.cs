@@ -31,7 +31,6 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Typ = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NrFabryczny = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,7 +52,7 @@
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(20, 128);
+            this.dateTimePicker2.Location = new System.Drawing.Point(20, 81);
             this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(323, 22);
@@ -66,19 +65,9 @@
             this.label1.Location = new System.Drawing.Point(16, 16);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 17);
+            this.label1.Size = new System.Drawing.Size(164, 17);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Szukaj od:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 95);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 17);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Szukaj do:";
+            this.label1.Text = "Szukaj pomiędzy datami:";
             // 
             // dataGridView1
             // 
@@ -93,13 +82,12 @@
             this.NrFabryczny,
             this.NrKarty,
             this.Uwagi});
-            this.dataGridView1.Location = new System.Drawing.Point(-1, 171);
+            this.dataGridView1.Location = new System.Drawing.Point(-1, 127);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(1038, 264);
+            this.dataGridView1.Size = new System.Drawing.Size(1038, 308);
             this.dataGridView1.TabIndex = 4;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // Typ
             // 
@@ -157,7 +145,6 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.dateTimePicker1);
@@ -175,7 +162,6 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox1;
