@@ -920,7 +920,7 @@ namespace DotBase
                 _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c5>", m_data.getValue(SwiadectwoData.DataType.TYP));
                 _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c6>", m_data.getValue(SwiadectwoData.DataType.NR_FABRYCZNY));
                 _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c7>", m_data.getValue(SwiadectwoData.DataType.PRODUCENT));
-                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c8>", m_data.getValue(SwiadectwoData.DataType.ROK_PRODUKCJI));
+                _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c8>", TranslacjaForm.Tlumacz(m_data.getValue(SwiadectwoData.DataType.ROK_PRODUKCJI), jezyk));
                 _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c9>", m_data.getValue(SwiadectwoData.DataType.ZLECENIODAWCA));
                 _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c10>", m_data.getValue(SwiadectwoData.DataType.ADRES));
                 _SzablonGlownyWzorcowania = _SzablonGlownyWzorcowania.Replace("<!c11>", m_data.getValue(SwiadectwoData.DataType.CISNIENIE_MIN));

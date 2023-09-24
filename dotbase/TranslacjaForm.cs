@@ -34,7 +34,8 @@ namespace DotBase
 
         public static string Tlumacz(string polski, Jezyk jezyk)
         {
-            if (jezyk == Jezyk.PL)
+            double tmp;
+            if (jezyk == Jezyk.PL || Double.TryParse(polski.Trim().Replace(',', '.'), out tmp))
             {
                 return polski;
             }
