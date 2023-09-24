@@ -38,7 +38,9 @@ Po prawej stronie znajdują się przyciski \textbf{"Poprzedni arkusz"} i \textbf
 
 Przycisk \textbf{"Dane wzorcowe"} wyświetla dane wzorcowe przeliczone na daną datę i~jednostkę.
 
-\textbf{TIP2:} Z przycisku \textbf{"Dane wzorcowe"} warto skorzystać np. w celu ustalenia, w~którym punkcie i przy jakim źródle rozpocząć wzorcowanie.
+\textbf{TIP:} Z przycisku \textbf{"Dane wzorcowe"} warto skorzystać np. w celu ustalenia, w~którym punkcie i przy jakim źródle rozpocząć wzorcowanie.
+
+W menu rozwijanym na górze okna znajdują się przyciski umożliwiające podgląd i~wydruk dokumentów (w tym przypadku protokołu kalibracyjnego mocy dawki oraz wykresu kalibracyjnego w zakresie mocy dawki) - \textbf{"Dokumenty"}. Obok jest przycisk \textbf{"Zapisz"}, który umożliwia zapisanie w bazie danych częściowo wprowadzonych wyników (jeżeli minimalne wymagania są spełnione - tzn. wybrany został typ i numer fabryczny sondy).
 
 \begin{figure}[htb]
 	\centering
@@ -47,8 +49,6 @@ Przycisk \textbf{"Dane wzorcowe"} wyświetla dane wzorcowe przeliczone na daną 
 	\label{mocPrzyrzad}
 \end{figure}
 
-W menu rozwijanym na górze okna znajdują się przyciski umożliwiające podgląd i~wydruk dokumentów (w tym przypadku protokołu kalibracyjnego mocy dawki oraz wykresu kalibracyjnego w zakresie mocy dawki) - \textbf{"Dokumenty"}. Obok jest przycisk \textbf{"Zapisz"}, który umożliwia zapisanie w bazie danych częściowo wprowadzonych wyników (jeżeli minimalne wymagania są spełnione - tzn. wybrany został typ i snumer fabryczny sondy).
-
 W zakładce \textbf{"Przyrząd"} (rys. \ref{mocPrzyrzad}) znajdują się wszystkie dane dotyczące wzorcowanego przyrządu. Pola \textbf{"Typ"} oraz \textbf{"Numer fabryczny"} sekcji \textbf{"Przyrząd"} wypełniają się automatycznie danymi wprowadzonymi wcześniej dla danej karty przyjęcia. Poniżej znajduje się pole \textbf{"Inne nastawy przyrządu"}, do którego należy wprowadzić wszelkie dodatkowe informacje o ustawieniach, które mogą mieć wpływ na działanie przyrządu (np. stała czasowa, czułość wejścia itp.). Domyślnie pole to przyjmuje wartość "nie dotyczy".
 	
 W sekcji \textbf{"Sonda"} należy wypełnić pole \textbf{"Typ"} oraz \textbf{"Numer fabryczny"} sondy. Jeżeli mamy możliwość ustawienia napięcia zasilania sondy, to należy je wpisać w pole \textbf{"Napięcie zasilania sondy"}, w przeciwnym wypadku w polu pozostanie wartość domyślna "nie dotyczy".
@@ -56,6 +56,9 @@ W sekcji \textbf{"Sonda"} należy wypełnić pole \textbf{"Typ"} oraz \textbf{"N
 \textbf{Ważne:} Należy zwrócić szczególną uwagę na wybór sondy w przypadku przyrządów, które posiadają więcej niż jedną sondę.
 
 W zakładce \textbf{"Warunki"} (rys. \ref{mocWarunki}) przechowywane są informacje o warunkach w~jakich odbywało się wzorcowanie. W poszczególnych polach należy podać warunki atmosferyczne sczytane z termohigrobarometru: ciśnienie w hektopaskalach (pole \textbf{"Ciśnienie"}), temperaturę w stopniach Celsjusza (pole \textbf{"Temperatura"}) oraz wilgotność w procentach (pole \textbf{"Wilgotność"}).
+
+\textbf{TIP:} Zgodnie z procedurą wzorcowanie można przeprowadzać jedynie jeżeli warunki atmosferyczne mieszczą się w następujących granicach: temperatura 15-30 \textcelsius, ciśnienie 900-1060 hPa,  wilgotność względna 10\%-85\%. Jeżeli podane przez użytkownika wartości nie mieszczą się w podanych przedziałach, to pole w którym nastąpiło wyjście poza zakres podświetlone zostanie na pomarańczowo.
+
 
 \begin{figure}[htb]
 	\centering
@@ -70,18 +73,18 @@ Pozostałe ważne dla wzorcowania informacje należy uzupełnić w polu \textbf{
 
 Poniżej znajduje się pole wyboru \textbf{"Przedłużona ważność wzorcowania"}, które należy zaznaczyć, jeżeli przyrząd posiada przedłużoną ważność wzorcowania. Standardowo ważność wzorcowania wynosi rok, jednak w przypadku przyrządów posiadających własne źródło kontrolne ważność ta może zostać przedłużona do dwóch lat.
 
-Kolejna zakładka to \textbf{"Dane wzorcowe i pomiarowe"} (rys. \ref{mocDane}). To tutaj wprowadza się wyniki wzorcowania. Najpierw należy wybrać używany protokół kalibracyjny ławy (lista rozwijana \textbf{"Protokół"}), jednostkę (lista rozwijana \textbf{"Jednostka"}) oraz przypisaną do niej wielkość fizyczną (lista rozwijana \textbf{"Wielkość fizyczna"}). Dzięki tym informacjom i podanej wcześniej dacie wzorcowania program może przygotować wspomniane wcześniej dane wzorcowe (dostępne po kliknięciu przycisku \textbf{"Dane wzorcowe"}).
-
-\textbf{TIP53:} Najnowszy protokół kalibracyjny ławy znajduje się na samym dole listy rozwijanej \textbf{"Protokół"}.
-
-\textbf{TIP4:} Po wybraniu jednostki na liście rozwijanej \textbf{"Wielkość fizyczna"} pozostaje jedynie wielkość fizyczna przypisana do tej jednostki. Można jednak dowolnie ją zmienić wpisując inną wielkość fizyczną ręcznie.
-
 \begin{figure}[htb]
 	\centering
 	\includegraphics[width=\columnwidth]{obrazki/Wzorcowanie/moc_dawki/dane.png}
 	\caption{Okno wzorcowania w zakresie mocy dawki - zakładka dane wzorcowe i pomiarowe.}
 	\label{mocDane}
 \end{figure}
+
+Kolejna zakładka to \textbf{"Dane wzorcowe i pomiarowe"} (rys. \ref{mocDane}). To tutaj wprowadza się wyniki wzorcowania. Najpierw należy wybrać używany protokół kalibracyjny ławy (lista rozwijana \textbf{"Protokół"}), jednostkę (lista rozwijana \textbf{"Jednostka"}) oraz przypisaną do niej wielkość fizyczną (lista rozwijana \textbf{"Wielkość fizyczna"}). Dzięki tym informacjom i podanej wcześniej dacie wzorcowania program może przygotować wspomniane wcześniej dane wzorcowe (dostępne po kliknięciu przycisku \textbf{"Dane wzorcowe"}).
+
+\textbf{TIP:} Najnowszy protokół kalibracyjny ławy znajduje się na samym dole listy rozwijanej \textbf{"Protokół"}.
+
+\textbf{TIP:} Po wybraniu jednostki na liście rozwijanej \textbf{"Wielkość fizyczna"} pozostaje jedynie wielkość fizyczna przypisana do tej jednostki. Można jednak dowolnie ją zmienić wpisując inną wielkość fizyczną ręcznie.
 
 Jako pierwszy wykonujemy pomiar tła. Otrzymaną wartość wpisujemy w polu \textbf{"Tło"}. Następnie szukamy punktu, w którym moc dawki jest jak najbardziej zbliżona do zakresu przyrządu (ale mniejsza od niego). Warto w tym celu posłużyć się danymi wzorcowymi. W tabeli wpisujemy odległość naświetlania (kolumna 1 - \textbf{"Odległość"}) oraz numer zastosowanego źródła (kolumna 2 - \textbf{"Źródło"}). Jako numer źródła wpisujemy: 1, 2 lub 3, gdzie 3 to źródło najsilniejsze, a 1 najsłabsze). W kolumnie piątej - \textbf{"Zakres"} podajemy zakres, dla którego wykonywany jest pomiar (w przypadku przyrządów z jednym zakresem, jest to cały czas ten sam zakres maksymalny).
 
@@ -93,7 +96,7 @@ Aby program podał w tabeli wartości wzorcowe (kolumna \textbf{"Wartość wzorc
 
 Jeśli nie ma jakichś szczególnych przesłanek, aby robić inaczej, to kolejne punkty ustalamy tak, aby były 3 punkty na każdy zakres pomiarowy (w przypadku przyrządów posiadających kilka krótszych zakresów pomiarowych), albo aby były co najmniej trzy punkty na dekadę (w przypadku przyrządów o długim zakresie).
 
-\textbf{TIP5:} W trakcie wzorcowania warto posłużyć się punktami użytymi podczas poprzedniego wzorcowania przyrządu (jeżeli istnieje). Z jednej strony bardzo przyspiesza to pracę, z drugiej łatwiej porównać potem oba wyniki i wykryć ewentualne różnice.
+\textbf{TIP:} W trakcie wzorcowania warto posłużyć się punktami użytymi podczas poprzedniego wzorcowania przyrządu (jeżeli istnieje). Z jednej strony bardzo przyspiesza to pracę, z drugiej łatwiej porównać potem oba wyniki i wykryć ewentualne różnice.
 
 Przycisk \textbf{"Dołączyć wszystko"} automatycznie zaznacza wszystkie pola wyboru w~kolumnie \textbf{"Dołączyć"}. Kolumna ta wskazuje programowi, które punkty ma brać pod uwagę przy wyliczaniu współczynnika kalibracyjnego oraz jego niepewności. Zdarzają się przyrządy, które w górnej części swojego zakresu ulegają nasyceniu i ich odpowiedź nie jest już proporcjonalna do wielkości pola promieniowania. Wtedy zakres takiego przyrządu należy ograniczyć do liniowej części odpowiedzi. Drugim przypadkiem, w którym warto rozważyć odłączenie danego punktu, są punkty w niskich polach promieniowania, których wahanie jest bardzo duże - niewspółmierne do wahań przyrządu w średnich i wysokich polach promieniowania.
 
@@ -106,13 +109,13 @@ Przycisk \textbf{"Dołączyć wszystko"} automatycznie zaznacza wszystkie pola w
 
 W zakładce \textbf{"Obliczone współczynniki"} (rys. \ref{mocWspolczynniki}) znajdują się pola \textbf{"Wykonał(a)"} i \textbf{"Sprawdził(a)"}, w których należy podać odpowiednio osobę, która wykonywała wzorcowanie i osobę, która będzie wykonanie tego wzorcowania sprawdzać. 
 
-\textbf{TIP6:} Program zapamiętuje ostatnio wpisane dane i automatycznie uzupełnia te pola \textbf{"Wykonał(a)"} i \textbf{"Sprawdził(a)"} tymi danymi. Należy więc zwrócić na to szczególną uwagę przy zmianie pracownika wykonującego/sprawdzającego wzorcowanie.
+\textbf{TIP:} Program zapamiętuje ostatnio wpisane dane i automatycznie uzupełnia te pola \textbf{"Wykonał(a)"} i \textbf{"Sprawdził(a)"} tymi danymi. Należy więc zwrócić na to szczególną uwagę przy zmianie pracownika wykonującego/sprawdzającego wzorcowanie.
 
 Poniżej znajdują się pola wyboru: \textbf{"Dołączyć do świadectwa"} - domyślnie zaznaczone pole oznaczające, że wyniki z tego arkusza mają być zawarte w Świadectwie Wzorcowania oraz \textbf{"Poprawa"} - pole wyboru, które należy zaznaczyć jeżeli arkusz jest wynikiem korekty wcześniejszego wzorcowania (w wydrukach dokumentów numer karty będzie posiadał dodatkową literę \textbf{"P"}).
 
 Przycisk \textbf{"Oblicz"} powoduje wyświetlenie w tabeli wyników wzorcowania dla każdego z zakresów przyrządu (kolumny \textbf{"Zakres"}, \textbf{"Współczynnik"} i~\textbf{"Niepewność"}). Jeżeli przyrząd był już wzorcowany w zakresie mocy dawki (i~w~danym zakresie pomiarowym przyrządu), to w dwóch ostatnich kolumnach tabeli (\textbf{"Poprzedni współczynnik"} i \textbf{"Poprzednia niepewność"}) pojawią się współczynnik i niepewność z poprzedniego wzorcowania. 
 
-\textbf{TIP7:} Warto zawsze porównać ze sobą oba wyniki wzorcowania, aby wychwycić ewentualne rozbieżności i spróbować znaleźć ich źródło (czy to błąd we wzorcowaniu, czy np. jakieś uszkodzenie przyrządu).
+\textbf{TIP:} Warto zawsze porównać ze sobą oba wyniki wzorcowania, aby wychwycić ewentualne rozbieżności i spróbować znaleźć ich źródło (czy to błąd we wzorcowaniu, czy np. jakieś uszkodzenie przyrządu).
 
 \textbf{Ważne:} Poza jednostkowymi wyjątkami (przyrządy typu RUST-2, RUST-3, RUM-1) dla większości typów przyrządów idealnym współczynnikiem jest współczynnik 1 z jak najmniejszą niepewnością. Co pokazuje, że wskazania przyrządu odpowiadają rzeczywistym wartościom pola promieniowania. Należy więc zwrócić szczególną uwagę na wyniki znacznie odbiegające od 1, lub z bardzo dużą niepewnością w stosunku do współczynnika. Takie wyniki mogą sugerować błąd we wzorcowaniu, lub wpisywaniu danych do programu, albo też niesprawność przyrządu. W ocenie poprawności wzorcowania pomaga także analiza wykresu kalibracyjnego.
 
@@ -129,7 +132,7 @@ Po prawej stronie znajdują się przyciski \textbf{"Poprzedni arkusz"} i \textbf
 
 Przycisk \textbf{"Dane wzorcowe"} wyświetla dane wzorcowe przeliczone na daną datę i~jednostkę.
 
-\textbf{TIP2:} Z przycisku \textbf{"Dane wzorcowe"} warto skorzystać np. w celu ustalenia, w~którym punkcie wykonywać naświetlanie przyrządu, jeżeli standardowo stosowana odległość 288,5 cm jest z jakichś przyczyn niedostępna.
+\textbf{TIP:} Z przycisku \textbf{"Dane wzorcowe"} warto skorzystać np. w celu ustalenia, w~którym punkcie wykonywać naświetlanie przyrządu, jeżeli standardowo stosowana odległość 288,5 cm jest z jakichś przyczyn niedostępna.
 
 \begin{figure}[htb]
 	\centering
@@ -155,20 +158,15 @@ W sekcji \textbf{"Sonda"} należy wypełnić pole \textbf{"Typ"} oraz \textbf{"N
 
 W zakładce \textbf{"Warunki"} (rys. \ref{dawkaWarunki}) przechowywane są informacje o warunkach w~jakich odbywało się wzorcowanie. W poszczególnych polach należy podać warunki atmosferyczne sczytane z termohigrobarometru: ciśnienie w hektopaskalach (pole \textbf{"Ciśnienie"}), temperaturę w stopniach Celsjusza (pole \textbf{"Temperatura"}) oraz wilgotność w procentach (pole \textbf{"Wilgotność"}).
 
+\textbf{TIP:} Zgodnie z procedurą wzorcowanie można przeprowadzać jedynie jeżeli warunki atmosferyczne mieszczą się w następujących granicach: temperatura 15-30 \textcelsius, ciśnienie 900-1060 hPa,  wilgotność względna 10\%-85\%. Jeżeli podane przez użytkownika wartości nie mieszczą się w podanych przedziałach, to pole w którym nastąpiło wyjście poza zakres podświetlone zostanie na pomarańczowo.
+
 Pozostałe ważne dla wzorcowania informacje należy uzupełnić w polu \textbf{"Uwagi"}. Jeżeli przyrząd był wcześniej wzorcowany w Laboratorium Wzorcowania, program automatycznie wpisuje tutaj informację o numerze poprzedniego świadectwa. W tym polu podaje się również takie informacje jak np. czy sygnalizacja przekroczenia zakresu uruchamia się prawidłowo. 
 
 \textbf{Ważne:} W przypadku przyrządów uszkodzonych, w polu \textbf{"Uwagi"} podaje się wszystkie informacje o rodzaju uszkodzenia (np. przyrząd się nie uruchamia, przyrząd nie reaguje na promieniowanie, przyrząd pokazuje to samo wskazanie bez względu na wielkość pola promieniowania, etc.). Jeżeli jest taka potrzeba, to przy zapisywaniu uwagi można stosować dowolne znaczniki języka HTML.
 
 Kolejna zakładka to \textbf{"Dane wzorcowe i pomiarowe"} (rys. \ref{dawkaDane}). Tutaj wprowadza się wyniki wzorcowania. Najpierw należy wybrać używany protokół kalibracyjny ławy (lista rozwijana \textbf{"Protokół"}), wybrane źródło (pole \textbf{"Źródło"}) i odległość, na której przyrząd będzie naświetlany (pole \textbf{"Odległość"}). Źródła określone są numerami 1, 2 i 3, gdzie 1 to źródło o najmniejszej mocy dawki, a 3 o największej.
 
-\textbf{TIP3:} Najnowszy protokół kalibracyjny ławy znajduje się na samym dole listy rozwijanej \textbf{"Protokół"}.
-
-\begin{figure}[htb]
-	\centering
-	\includegraphics[width=\columnwidth]{obrazki/Wzorcowanie/dawka/dane.png}
-	\caption{Okno wzorcowania w zakresie dawki - zakładka dane wzorcowe i pomiarowe.}
-	\label{dawkaDane}
-\end{figure}
+\textbf{TIP:} Najnowszy protokół kalibracyjny ławy znajduje się na samym dole listy rozwijanej \textbf{"Protokół"}.
 
 Dodatkowo w polu \textbf{"Zakres"} wpisujemy zakres w jakim wzorcujemy. 
 
@@ -179,6 +177,13 @@ Na dole, po prawej stronie okna mamy możliwość wyboru jednej z czterech wielk
 	\item indywidualnego równoważnika dawki $H^{*}$;
 	\item mocy kermy.
 \end{itemize}
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=\columnwidth]{obrazki/Wzorcowanie/dawka/dane.png}
+	\caption{Okno wzorcowania w zakresie dawki - zakładka dane wzorcowe i pomiarowe.}
+	\label{dawkaDane}
+\end{figure}
 
 W pierwszej kolumnie tabeli (\textbf{"Wartość wzorcowa [mSv]"}) wpisujemy kolejne dawki jakimi zamierzamy naświetlać wzorcowany dawkomierz. Standardowo stosowane są dawki: 0,1; 0,2; 0,4; 0,8; 1,6; 3,2 oraz 6,4 mSv. Następnie wciskając znajdujący się po prawej stronie przycisk \textbf{"Licz"} otrzymujemy w tabeli w kolumnie \textbf{"Czas [s]"} czasy jakie są wymagane, aby dokonać ekspozycji przyrządu zadaną w kolumnie pierwszej dawką na wybranej wcześniej odległości i przy użyciu podanego źródła.
 
@@ -199,13 +204,13 @@ Przycisk \textbf{"Dołącz wszystko"} automatycznie zaznacza wszystkie pola wybo
 
 W zakładce \textbf{"Obliczone współczynniki"} (rys. \ref{dawkaWspolczynniki}) znajdują się pola \textbf{"Wykonał(a)"} i \textbf{"Sprawdził(a)"}, w których należy podać odpowiednio osobę, która wykonywała wzorcowanie i osobę, która będzie wykonanie tego wzorcowania sprawdzać. 
 
-\textbf{TIP4:} Program zapamiętuje ostatnio wpisane dane i automatycznie uzupełnia te pola \textbf{"Wykonał(a)"} i \textbf{"Sprawdził(a)"} tymi danymi. Należy więc zwrócić na to szczególną uwagę przy zmianie pracownika wykonującego/sprawdzającego wzorcowanie.
+\textbf{TIP:} Program zapamiętuje ostatnio wpisane dane i automatycznie uzupełnia te pola \textbf{"Wykonał(a)"} i \textbf{"Sprawdził(a)"} tymi danymi. Należy więc zwrócić na to szczególną uwagę przy zmianie pracownika wykonującego/sprawdzającego wzorcowanie.
 
 Poniżej znajduje się pole wyboru \textbf{"Dołączyć do świadectwa"} - domyślnie zaznaczone pole oznaczające, że wyniki z tego arkusza mają być zawarte w świadectwie wzorcowania.
 
 Przycisk \textbf{"Oblicz"} powoduje wyświetlenie wyników wzorcowania w sekcji \textbf{"Wyniki wzorcowania"}, pola \textbf{"Współczynnik"} i~\textbf{"Niepewność"}). Jeżeli przyrząd był już wzorcowany w zakresie dawki, to w sekcji \textbf{"Wyniki poprzedniego wzorcowania"} w~polach \textbf{"Współczynnik"} i \textbf{"Niepewność"}) pojawią się odpowiednio współczynnik i~niepewność z poprzedniego wzorcowania. 
 
-\textbf{TIP5:} Warto zawsze porównać ze sobą oba wyniki wzorcowania, aby wychwycić ewentualne rozbieżności i spróbować znaleźć ich źródło (czy to błąd we wzorcowaniu, czy np. jakieś uszkodzenie przyrządu).
+\textbf{TIP:} Warto zawsze porównać ze sobą oba wyniki wzorcowania, aby wychwycić ewentualne rozbieżności i spróbować znaleźć ich źródło (czy to błąd we wzorcowaniu, czy np. jakieś uszkodzenie przyrządu).
 
 \textbf{Ważne:} Dla większości typów przyrządów idealnym współczynnikiem jest współczynnik 1 z jak najmniejszą niepewnością. Co pokazuje, że wskazania przyrządu odpowiadają rzeczywistym wartościom dawki jaką przyrząd był napromieniowany. Należy więc zwrócić szczególną uwagę na wyniki znacznie odbiegające od 1, lub z bardzo dużą niepewnością w stosunku do współczynnika. (Względne niepewności współczynnika kalibracyjnego w zakresie dawki są zazwyczaj rzędu kilku procent).s Takie wyniki mogą sugerować błąd we wzorcowaniu, lub wpisywaniu danych do programu, albo też niesprawność przyrządu. W ocenie poprawności wzorcowania pomaga także analiza wykresu kalibracyjnego.
 
@@ -213,13 +218,6 @@ Każdorazowo przy zamknięciu okna \textbf{"Wzorcowanie Dawki"} program zapyta o
 
 \subsection{Wzorcowanie w zakresie sygnalizacji mocy dawki}
 \label{wzorcowanie_syg_moc}
-		
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width=\columnwidth]{obrazki/Wzorcowanie/syg_mocy_dawki/przyrzad.png}
-		\caption{Okno wzorcowania w zakresie sygnalizacji mocy dawki - zakładka przyrząd.}
-		\label{sygMocyPrzyrzad}
-	\end{figure}
 
 	W górnej części okna znajdują się wypełnione przez program pola \textbf{"Numer karty"}, \textbf{"Arkusz"} oraz \textbf{"Data"}. 
 	
@@ -229,7 +227,22 @@ Każdorazowo przy zamknięciu okna \textbf{"Wzorcowanie Dawki"} program zapyta o
 	
 	Przycisk \textbf{"Dane wzorcowe"} wyświetla dane wzorcowe mocy dawki przeliczone na daną datę i jednostkę.
 	
-	\textbf{TIP2:} Z przycisku \textbf{"Dane wzorcowe"} warto skorzystać np. w celu ustalenia na jakiej odległości i przy użyciu którego ze źródeł warto rozpocząć wzorcowanie.
+	\textbf{TIP:} Z przycisku \textbf{"Dane wzorcowe"} warto skorzystać np. w celu ustalenia na jakiej odległości i przy użyciu którego ze źródeł warto rozpocząć wzorcowanie. 
+	
+	W menu rozwijanym na górze okna znajdują się opcje umożliwiające podgląd i wydruk dokumentów (w tym przypadku protokołu kalibracyjnego sygnalizacji mocy dawki) - \textbf{"Dokumenty"} oraz przycisk \textbf{"Zapisz"}, który umożliwia zapisanie częściowych wyników (jeżeli minimalne wymagania są spełnione - wybrany został numer fabryczny sondy).
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\columnwidth]{obrazki/Wzorcowanie/syg_mocy_dawki/przyrzad.png}
+		\caption{Okno wzorcowania w zakresie sygnalizacji mocy dawki - zakładka przyrząd.}
+		\label{sygMocyPrzyrzad}
+	\end{figure}
+	
+	W zakładce \textbf{"Przyrząd"} (rys. \ref{sygMocyPrzyrzad}) znajdują się wszystkie dane dotyczące wzorcowanego przyrządu. Pola \textbf{"Typ"} oraz \textbf{"Numer fabryczny"} sekcji \textbf{"Przyrząd"} wypełniają się automatycznie danymi wprowadzonymi dla danej karty przyjęcia. Poniżej znajduje się pole \textbf{"Inne nastawy przyrządu"}, do którego należy wprowadzić wszelkie dodatkowe informacje o ustawieniach które mogą mieć wpływ na działanie przyrządu. Domyślnie pole to przyjmuje wartość "nie dotyczy".
+	
+	W sekcji sonda należy wypełnić pole \textbf{"Typ"} oraz \textbf{"Numer fabryczny"} sondy. Jeżeli mamy możliwość ustawienia napięcia zasilania sondy, to należy je wpisać w pole \textbf{"Napięcie zasilania sondy"}, w przeciwnym wypadku pozostanie wartość domyślna "nie dotyczy".
+	
+	\textbf{TIP:} Należy zwrócić szczególną uwagę na wybór sondy w przypadku przyrządów, które posiadają więcej niż jedną sondę.
 	
 	\begin{figure}[htb]
 	\centering
@@ -238,41 +251,37 @@ Każdorazowo przy zamknięciu okna \textbf{"Wzorcowanie Dawki"} program zapyta o
 	\label{sygMocyWarunki}
 	\end{figure}
 	
-	W menu rozwijanym na górze okna znajdują się opcje umożliwiające podgląd i wydruk dokumentów (w tym przypadku protokołu kalibracyjnego sygnalizacji mocy dawki) - \textbf{"Dokumenty"} oraz przycisk \textbf{"Zapisz"}, który umożliwia zapisanie częściowych wyników (jeżeli minimalne wymagania są spełnione - wybrany został numer fabryczny sondy).
-	
-	W zakładce \textbf{"Przyrząd"} (rys. \ref{sygMocyPrzyrzad}) znajdują się wszystkie dane dotyczące wzorcowanego przyrządu. Pola \textbf{"Typ"} oraz \textbf{"Numer fabryczny"} sekcji \textbf{"Przyrząd"} wypełniają się automatycznie danymi wprowadzonymi dla danej karty przyjęcia. Poniżej znajduje się pole \textbf{"Inne nastawy przyrządu"}, do którego należy wprowadzić wszelkie dodatkowe informacje o ustawieniach które mogą mieć wpływ na działanie przyrządu. Domyślnie pole to przyjmuje wartość "nie dotyczy".
-	
-	W sekcji sonda należy wypełnić pole \textbf{"Typ"} oraz \textbf{"Numer fabryczny"} sondy. Jeżeli mamy możliwość ustawienia napięcia zasilania sondy, to należy je wpisać w pole \textbf{"Napięcie zasilania sondy"}, w przeciwnym wypadku pozostanie wartość domyślna "nie dotyczy".
-	
-	\textbf{TIP3:} Należy zwrócić szczególną uwagę na wybór sondy w przypadku przyrządów, które posiadają więcej niż jedną sondę.
-	
-	\begin{figure}[htb]
-	\centering
-	\includegraphics[width=\columnwidth]{obrazki/Wzorcowanie/syg_mocy_dawki/dane.png}
-	\caption{Okno wzorcowania w zakresie sygnalizacji mocy dawki - zakładka dane wzorcowe i pomiarowe.}
-	\label{sygMocyDane}
-	\end{figure}
-	
 	W zakładce \textbf{"Warunki"} (rys. \ref{sygMocyWarunki}) przechowywane są informacje o warunkach w jakich odbywało się wzorcowanie. W poszczególnych polach należy podać warunki atmosferyczne sczytane z termohigrobarometru: ciśnienie, temperaturę oraz wilgotność.
+	
+	\textbf{TIP:} Zgodnie z procedurą wzorcowanie można przeprowadzać jedynie jeżeli warunki atmosferyczne mieszczą się w następujących granicach: temperatura 15-30 \textcelsius, ciśnienie 900-1060 hPa,  wilgotność względna 10\%-85\%. Jeżeli podane przez użytkownika wartości nie mieszczą się w podanych przedziałach, to pole w którym nastąpiło wyjście poza zakres podświetlone zostanie na pomarańczowo.
 	
 	Pozostałe ważne dla wzorcowania informacje należy uzupełnić w polu \textbf{"Uwagi"}. Jeżeli przyrząd był wcześniej wzorcowany w laboratorium, program automatycznie wpisuje informację o numerze poprzedniego świadectwa. 
 	
-	\textbf{TIP4:} W przypadku przyrządów uszkodzonych, w polu \textbf{"Uwagi"} podaje się wszystkie informacje o rodzaju uszkodzenia (np. przyrząd się nie uruchamia, przyrząd nie reaguje na promieniowanie, przyrząd pokazuje to samo wskazanie bez względu na wielkość promieniowania, etc.).
+	\textbf{TIP:} W przypadku przyrządów uszkodzonych, w polu \textbf{"Uwagi"} podaje się wszystkie informacje o rodzaju uszkodzenia (np. przyrząd się nie uruchamia, przyrząd nie reaguje na promieniowanie, przyrząd pokazuje to samo wskazanie bez względu na wielkość promieniowania, etc.).
 
 	Kolejna zakładka to \textbf{"Dane wzorcowe i pomiarowe"} (rys. \ref{sygMocyDane}). Tutaj wprowadza się wyniki wzorcowania. Najpierw należy wybrać używany protokół kalibracyjny ławy (lista rozwijana \textbf{"Protokół"}) oraz jednostkę (lista rozwijana \textbf{"Jednostka"}).
 	
-	\textbf{TIP5:} Najnowszy protokół kalibracyjny ławy znajduje się na samym dole listy rozwijanej \textbf{"Protokół"}.
+	\textbf{TIP:} Najnowszy protokół kalibracyjny ławy znajduje się na samym dole listy rozwijanej \textbf{"Protokół"}.
 	
 	\begin{figure}[htb]
-	\centering
-	\includegraphics[width=\columnwidth]{obrazki/Wzorcowanie/syg_mocy_dawki/dane2.png}
-	\caption{Okno wzorcowania w zakresie sygnalizacji mocy dawki - zakładka dane wzorcowe i pomiarowe.}
-	\label{sygMocyDane2}
-\end{figure}
+		\centering
+		\includegraphics[width=\columnwidth]{obrazki/Wzorcowanie/syg_mocy_dawki/dane.png}
+		\caption{Okno wzorcowania w zakresie sygnalizacji mocy dawki - zakładka dane wzorcowe i pomiarowe.}
+		\label{sygMocyDane}
+	\end{figure}
+	
+
 
 	Po prawej stronie mamy do wyboru dwie opcje uzupełniania wyników: \textbf{"Tabela"} lub \textbf{"Opis"}. Wybieramy jedną w zależności od wzorcowanego typu przyrządu. 
 		
-	W pierwszej kolumnie tabeli podajemy ustawiony na przyrządzie próg sygnalizacji mocy dawki. Naświetlanie przyrządu rozpoczynamy od punktu i źródła, przy których moc dawki jest niższa niż ustawiony próg. (W tym celu warto skorzystać z przycisku \textbf{"Dane wzorcowe"}). Następnie powoli przesuwamy się w kierunku wzrastających mocy dawek. W kolumnie drugiej i trzeciej podajemy odpowiednio odległość i numer źródła, przy których uruchomiła się sygnalizacja ostrzegawcza przyrządu. Następnie przesuwamy przyrząd w kierunku malejących mocy dawek i obserwujemy, kiedy nastąpi wyłączenie sygnalizacji ostrzegawczej. W kolumnach cztery i pięć podajemy odległość i numer źródła, przy których to nastąpiło. Następnie wciskając znajdujący się po prawej stronie przycisk \textbf{"Licz"} otrzymujemy wyliczoną rzeczywistą wartość, przy której uruchamia się sygnalizacja ostrzegawcza wraz z niepewnością (dwie ostatnie kolumny tabeli).
+	W pierwszej kolumnie tabeli podajemy ustawiony na przyrządzie próg sygnalizacji mocy dawki. Naświetlanie przyrządu rozpoczynamy od punktu i źródła, przy których moc dawki jest niższa niż ustawiony próg. (W tym celu warto skorzystać z przycisku \textbf{"Dane wzorcowe"}). Następnie powoli przesuwamy się w kierunku wzrastających mocy dawek. W kolumnie drugiej (\textbf{"Odległość 1"}) i trzeciej (\textbf{"Nr źródła 1"}) podajemy odpowiednio odległość i numer źródła, przy których uruchomiła się sygnalizacja ostrzegawcza przyrządu. Następnie przesuwamy przyrząd w kierunku malejących mocy dawek i obserwujemy, kiedy nastąpi wyłączenie sygnalizacji ostrzegawczej. W kolumnach cztery (\textbf{"Odległość 2"}) i pięć (\textbf{"Nr źródła 2"}) podajemy odległość i numer źródła, przy których to nastąpiło. Następnie wciskając znajdujący się po prawej stronie przycisk \textbf{"Oblicz"} otrzymujemy w kolumnach od 6 do 9 odpowiednio wyliczoną rzeczywistą wartość, przy której uruchamia się sygnalizacja ostrzegawcza wraz z niepewnością oraz wyliczony na jej podstawie współczynnik kalibracyjny wraz z jego niepewnością.
+	
+		\begin{figure}[htb]
+		\centering
+		\includegraphics[width=\columnwidth]{obrazki/Wzorcowanie/syg_mocy_dawki/dane2.png}
+		\caption{Okno wzorcowania w zakresie sygnalizacji mocy dawki - zakładka dane wzorcowe i pomiarowe.}
+		\label{sygMocyDane2}
+	\end{figure}
 
 W przypadku opcji \textbf{"Opis"} (rys. \ref{sygMocyDane2}) wykonujemy opis zachowania przyrządu w polu promieniowania.
 	
@@ -285,9 +294,9 @@ W przypadku opcji \textbf{"Opis"} (rys. \ref{sygMocyDane2}) wykonujemy opis zach
 	
 	W zakładce \textbf{"Obliczone współczynniki"} (rys. \ref{sygMocyWspolczynniki}) znajdują się pola \textbf{"Wykonał(a)"} i \textbf{"Sprawdził(a)"}, w których należy podać odpowiednio dane osoby, która wykonywała wzorcowanie i osoby, która będzie to zatwierdzać. 
 	
-	\textbf{TIP7:} Program zapamiętuje ostatnio wpisane dane i automatycznie uzupełnia te pola tymi danymi. Należy więc zwrócić na to szczególną uwagę przy zmianie pracownika wykonującego wzorcowanie.
+	\textbf{TIP:} Program zapamiętuje ostatnio wpisane dane i automatycznie uzupełnia te pola tymi danymi. Należy więc zwrócić na to szczególną uwagę przy zmianie pracownika wykonującego wzorcowanie.
 	
-	Poniżej znajduje się pole wyboru \textbf{"Dołączyć"} - domyślnie zaznaczone pole oznaczające, że wyniki z tego arkusza mają być zawarte w świadectwie wzorcowania.
+	Poniżej znajduje się pole wyboru \textbf{"Dołącz do świadectwa"} - domyślnie zaznaczone pole oznaczające, że wyniki z tego arkusza mają być zawarte w świadectwie wzorcowania.
 
 \subsection{Wzorcowanie w zakresie sygnalizacji dawki}
 \label{wzorcowanie_syg_dawka}
@@ -307,10 +316,17 @@ W przypadku opcji \textbf{"Opis"} (rys. \ref{sygMocyDane2}) wykonujemy opis zach
 	
 	Przycisk \textbf{"Dane wzorcowe"} wyświetla dane wzorcowe mocy dawki przeliczone na daną datę i jednostkę.
 	
-	\textbf{TIP2:} Z przycisku \textbf{"Dane wzorcowe"} warto skorzystać np. w celu ustalenia, w którym punkcie wykonywać naświetlanie przyrządu, jeżeli standardowo stosowana odległość 288,5 cm jest z jakichś przyczyn niedostępna.
+	\textbf{TIP:} Z przycisku \textbf{"Dane wzorcowe"} warto skorzystać np. w celu ustalenia, w którym punkcie wykonywać naświetlanie przyrządu, jeżeli standardowo stosowana odległość 288,5 cm jest z jakichś przyczyn niedostępna.
 	
 	W menu rozwijanym na górze okna znajdują się opcje umożliwiające podgląd i wydruk dokumentów (w tym przypadku protokołu kalibracyjnego sygnalizacji dawki) - \textbf{"Dokumenty"} oraz przycisk \textbf{"Zapisz"}, który umożliwia zapisanie częściowych wyników (jeżeli minimalne wymagania są spełnione - wybrany został numer fabryczny sondy).
 	
+	W zakładce \textbf{"Przyrząd"} (rys. \ref{sygDawkiPrzyrzad}) znajdują się wszystkie dane dotyczące wzorcowanego przyrządu. Pola \textbf{"Typ"} oraz \textbf{"Numer fabryczny"} sekcji \textbf{"Przyrząd"} wypełniają się automatycznie danymi wprowadzonymi dla danej karty przyjęcia. Poniżej znajduje się pole \textbf{"Inne nastawy przyrządu"}, do którego należy wprowadzić wszelkie dodatkowe informacje o ustawieniach które mogą mieć wpływ na działanie przyrządu. Domyślnie pole to przyjmuje wartość "nie dotyczy".
+	
+	W sekcji sonda należy wypełnić pole \textbf{"Typ"} oraz \textbf{"Numer fabryczny"} sondy. Jeżeli mamy możliwość ustawienia napięcia zasilania sondy, to należy je wpisać w pole \textbf{"Napięcie zasilania sondy"}, w przeciwnym wypadku pozostanie wartość domyślna "nie dotyczy".
+	
+	\textbf{TIP:} Należy zwrócić szczególną uwagę na wybór sondy w przypadku przyrządów, które posiadają więcej niż jedną sondę.
+	
+		
 	\begin{figure}[htb]
 		\centering
 		\includegraphics[width=\columnwidth]{obrazki/Wzorcowanie/syg_dawki/warunki.png}
@@ -318,15 +334,19 @@ W przypadku opcji \textbf{"Opis"} (rys. \ref{sygMocyDane2}) wykonujemy opis zach
 		\label{sygDawkiWarunki}
 	\end{figure}
 	
-	W zakładce \textbf{"Przyrząd"} (rys. \ref{sygDawkiPrzyrzad}) znajdują się wszystkie dane dotyczące wzorcowanego przyrządu. Pola \textbf{"Typ"} oraz \textbf{"Numer fabryczny"} sekcji \textbf{"Przyrząd"} wypełniają się automatycznie danymi wprowadzonymi dla danej karty przyjęcia. Poniżej znajduje się pole \textbf{"Inne nastawy przyrządu"}, do którego należy wprowadzić wszelkie dodatkowe informacje o ustawieniach które mogą mieć wpływ na działanie przyrządu. Domyślnie pole to przyjmuje wartość "nie dotyczy".
-	
-	W sekcji sonda należy wypełnić pole \textbf{"Typ"} oraz \textbf{"Numer fabryczny"} sondy. Jeżeli mamy możliwość ustawienia napięcia zasilania sondy, to należy je wpisać w pole \textbf{"Napięcie zasilania sondy"}, w przeciwnym wypadku pozostanie wartość domyślna "nie dotyczy".
-	
-	\textbf{TIP3:} Należy zwrócić szczególną uwagę na wybór sondy w przypadku przyrządów, które posiadają więcej niż jedną sondę.
-	
 	W zakładce \textbf{"Warunki"} (rys. \ref{sygDawkiWarunki}) przechowywane są informacje o warunkach w jakich odbywało się wzorcowanie. W poszczególnych polach należy podać warunki atmosferyczne sczytane z termohigrobarometru: ciśnienie, temperaturę oraz wilgotność.
 
+\textbf{TIP:} Zgodnie z procedurą wzorcowanie można przeprowadzać jedynie jeżeli warunki atmosferyczne mieszczą się w następujących granicach: temperatura 15-30 \textcelsius, ciśnienie 900-1060 hPa,  wilgotność względna 10\%-85\%. Jeżeli podane przez użytkownika wartości nie mieszczą się w podanych przedziałach, to pole w którym nastąpiło wyjście poza zakres podświetlone zostanie na pomarańczowo.
+
 	Pozostałe ważne dla wzorcowania informacje należy uzupełnić w polu \textbf{"Uwagi"}. Jeżeli przyrząd był wcześniej wzorcowany w laboratorium, program automatycznie wpisuje informację o numerze poprzedniego świadectwa. 
+	
+	\textbf{TIP:} W przypadku przyrządów uszkodzonych, w polu \textbf{"Uwagi"} podaje się wszystkie informacje o rodzaju uszkodzenia (np. przyrząd się nie uruchamia, przyrząd nie reaguje na promieniowanie, przyrząd pokazuje to samo wskazanie bez względu na wielkość promieniowania, etc.).
+	
+	Kolejna zakładka to \textbf{"Dane wzorcowe i pomiarowe"} (rys. \ref{dawkaDane}). Tutaj wprowadza się wyniki wzorcowania. Najpierw należy wybrać używany protokół kalibracyjny ławy (lista rozwijana \textbf{"Protokół"}), wybrane źródło (pole \textbf{"Źródło"}) i odległość, na której przyrząd będzie naświetlany (pole \textbf{"Odległość"}). Źródła określone są numerami 1, 2 i 3, gdzie 1 to źródło o najmniejszej mocy dawki, a 3 o największej.
+	
+	\textbf{TIP:} Najnowszy protokół kalibracyjny ławy znajduje się na samym dole listy rozwijanej \textbf{"Protokół"}.
+	
+	Następnie z listy rozwijanej \textbf{"Jednostka"} należy wybrać jednostkę mocy dawki odpowiadającą jednostce dawki, w jakiej wyskalowany jest przyrząd. Np. jeżeli jednostka przyrządu na mSv, to z listy rozwianej należy wybrać mSv/h.
 	
 	\begin{figure}[htb]
 		\centering
@@ -335,13 +355,9 @@ W przypadku opcji \textbf{"Opis"} (rys. \ref{sygMocyDane2}) wykonujemy opis zach
 		\label{sygDawkiDane}
 	\end{figure}
 	
-	\textbf{TIP4:} W przypadku przyrządów uszkodzonych, w polu \textbf{"Uwagi"} podaje się wszystkie informacje o rodzaju uszkodzenia (np. przyrząd się nie uruchamia, przyrząd nie reaguje na promieniowanie, przyrząd pokazuje to samo wskazanie bez względu na wielkość promieniowania, etc.).
+	W pierwszej kolumnie tabeli podajemy ustawiony na przyrządzie próg sygnalizacji dawki. Naciskając przycisk \textbf{"Oblicz"} otrzymujemy w drugiej kolumnie (\textbf{"Czas wzorcowy"}) informację o czasie wzorcowym w jakim przyrząd (danym źródłem, na danej odległości) będzie naświetlony zadaną dawką. Ułatwia to kalibrację, gdyż wzorcujący wie, kiedy powinien się spodziewać uruchomienia sygnalizacji przyrządu. Następnie należy włączyć naświetlanie i zmierzyć stoperem czas po jakim uruchomiona zostanie sygnalizacja ostrzegawcza. Zmierzony czas notujemy w kolumnie trzeciej (\textbf{"Czas zmierzony"}). Naciskając powtórnie ten sam przycisk \textbf{"Oblicz"} otrzymujemy w kolumnie czwartej (\textbf{"Wartość rzeczywista"}) rzeczywistą wartość, przy której włączona zostaje sygnalizacja ostrzegawcza, a w kolumnie piątej (\textbf{"Niepewność"}) jej niepewność. W kolejnej kolumnie tabeli należy zanotować wskazanie przyrządu. Dwie ostatnie kolumny (\textbf{"Współczynnik"} i \textbf{"Niepewność współczynnika"}) służą do wyświetlenia obliczonych na podstawie podanych danych odpowiednio współczynnika kalibracyjnego oraz jego niepewności.
 	
-	Kolejna zakładka to \textbf{"Dane wzorcowe i pomiarowe"} (rys. \ref{dawkaDane}). Tutaj wprowadza się wyniki wzorcowania. Najpierw należy wybrać używany protokół kalibracyjny ławy (lista rozwijana \textbf{"Protokół"}), wybrane źródło (pole \textbf{"Źródło"}) i odległość, na której przyrząd będzie naświetlany (pole \textbf{"Odległość"}). Źródła określone są numerami 1, 2 i 3, gdzie 1 to źródło o najmniejszej mocy dawki, a 3 o największej.
-	
-	\textbf{TIP5:} Najnowszy protokół kalibracyjny ławy znajduje się na samym dole listy rozwijanej \textbf{"Protokół"}.
-	
-	Następnie z listy rozwijanej \textbf{"Jednostka"} należy wybrać jednostkę mocy dawki odpowiadającą jednostce dawki, w jakiej wyskalowany jest przyrząd. Np. jeżeli jednostka przyrządu na mSv, to z listy rozwianej należy wybrać mSv/h.
+	W zakładce \textbf{"Obliczone współczynniki"} (rys. \ref{sygDawkiWspolczynniki}) znajdują się pola \textbf{"Wykonał(a)"} i \textbf{"Sprawdził(a)"}, w których należy podać odpowiednio dane osoby, która wykonywała wzorcowanie i osoby, która będzie to zatwierdzać. 
 	
 	\begin{figure}[htb]
 		\centering
@@ -350,13 +366,9 @@ W przypadku opcji \textbf{"Opis"} (rys. \ref{sygMocyDane2}) wykonujemy opis zach
 		\label{sygDawkiWspolczynniki}
 	\end{figure}
 	
-	W pierwszej kolumnie tabeli podajemy ustawiony na przyrządzie próg sygnalizacji dawki. Naciskając przycisk \textbf{"Licz"} otrzymujemy w drugiej kolumnie (\textbf{"Czas wzorcowy"}) informację o czasie wzorcowym w jakim przyrząd (danym źródłem, na danej odległości) będzie naświetlony zadaną dawką. Ułatwia to kalibrację, gdyż wzorcujący wie, kiedy powinien się spodziewać uruchomienia sygnalizacji przyrządu. Następnie należy włączyć naświetlanie i zmierzyć stoperem czas po jakim uruchomiona zostanie sygnalizacja ostrzegawcza. Zmierzony czas notujemy w kolumnie trzeciej (\textbf{"Czas zmierzony"}). Naciskając powtórnie ten sam przycisk \textbf{"Licz"} otrzymujemy w kolumnie czwartej rzeczywistą wartość, przy której włączona zostaje sygnalizacja ostrzegawcza. W ostatniej kolumnie tabeli należy zanotować wskazanie przyrządu.
+	\textbf{TIP:} Program zapamiętuje ostatnio wpisane dane i automatycznie uzupełnia te pola tymi danymi. Należy więc zwrócić na to szczególną uwagę przy zmianie pracownika wykonującego wzorcowanie.
 	
-	W zakładce \textbf{"Obliczone współczynniki"} (rys. \ref{sygDawkiWspolczynniki}) znajdują się pola \textbf{"Wykonał(a)"} i \textbf{"Sprawdził(a)"}, w których należy podać odpowiednio dane osoby, która wykonywała wzorcowanie i osoby, która będzie to zatwierdzać. 
-	
-	\textbf{TIP7:} Program zapamiętuje ostatnio wpisane dane i automatycznie uzupełnia te pola tymi danymi. Należy więc zwrócić na to szczególną uwagę przy zmianie pracownika wykonującego wzorcowanie.
-	
-	Poniżej znajduje się pole wyboru \textbf{"Dołączyć"} - domyślnie zaznaczone pole oznaczające, że wyniki z tego arkusza mają być zawarte w świadectwie wzorcowania.
+	Poniżej znajduje się pole wyboru \textbf{"Dołącz do świadectwa"} - domyślnie zaznaczone pole oznaczające, że wyniki z tego arkusza mają być zawarte w świadectwie wzorcowania.
 
 \subsection{Wzorcowanie w zakresie emisji powierzchniowej}
 \label{wzorcowanie_emisja}
@@ -382,15 +394,17 @@ W przypadku opcji \textbf{"Opis"} (rys. \ref{sygMocyDane2}) wykonujemy opis zach
 	
 	Przycisk \textbf{"Znajdź dostępne typy sond"} wyszukuje w bazie danych wszystkie sondy przypisane do przyrządu.
 	
-	\textbf{TIP3:} Należy zwrócić szczególną uwagę na wybór sondy w przypadku przyrządów, które posiadają więcej niż jedną sondę.
+	\textbf{TIP:} Należy zwrócić szczególną uwagę na wybór sondy w przypadku przyrządów, które posiadają więcej niż jedną sondę.
 	
 	W zakładce \textbf{"Warunki"} (rys. \ref{emisjaWarunki}) przechowywane są informacje o warunkach w jakich odbywało się wzorcowanie. W poszczególnych polach należy podać warunki atmosferyczne sczytane z termohigrobarometru: ciśnienie, temperaturę oraz wilgotność.
 	
-	W części \textbf{"Inne"} podajemy informcje o zastosowanej podstawce (pole \textbf{"Podstawka"}), odległości sondy od źródła promieniowania (pole \textbf{"Odległość źródło - sonda"}) oraz o współczynniku korekcyjnym związanym z zastosowaną podstawką (pole \textbf{"Współczynnik korekcyjny"}). W przypadku braku podstawki współczynnik ten przyjmuje wartość 1.
+	\textbf{TIP:} Zgodnie z procedurą wzorcowanie można przeprowadzać jedynie jeżeli warunki atmosferyczne mieszczą się w następujących granicach: temperatura 15-30 \textcelsius, ciśnienie 900-1060 hPa,  wilgotność względna 10\%-85\%. Jeżeli podane przez użytkownika wartości nie mieszczą się w podanych przedziałach, to pole w którym nastąpiło wyjście poza zakres podświetlone zostanie na pomarańczowo.
+	
+	W części \textbf{"Inne"} podajemy informacje o zastosowanej podstawce (pole \textbf{"Podstawka"}), odległości sondy od źródła promieniowania (pole \textbf{"Odległość źródło - sonda"}) oraz o współczynniku korekcyjnym związanym z zastosowaną podstawką (pole \textbf{"Współczynnik korekcyjny"}). W przypadku braku podstawki współczynnik ten przyjmuje wartość 1.
 	
 	Pozostałe ważne dla wzorcowania informacje należy uzupełnić w polu \textbf{"Uwagi"}. Jeżeli przyrząd był wcześniej wzorcowany w laboratorium, program automatycznie wpisuje informację o numerze poprzedniego świadectwa.  
 	
-	\textbf{TIP4:} W przypadku przyrządów uszkodzonych, w polu \textbf{"Uwagi"} podaje się wszystkie informacje o rodzaju uszkodzenia (np. przyrząd się nie uruchamia, przyrząd nie reaguje na promieniowanie, przyrząd pokazuje to samo wskazanie bez względu na wielkość promieniowania, etc.).
+	\textbf{TIP:} W przypadku przyrządów uszkodzonych, w polu \textbf{"Uwagi"} podaje się wszystkie informacje o rodzaju uszkodzenia (np. przyrząd się nie uruchamia, przyrząd nie reaguje na promieniowanie, przyrząd pokazuje to samo wskazanie bez względu na wielkość promieniowania, etc.).
 	
 	\begin{figure}[htb]
 		\centering
@@ -417,13 +431,13 @@ W przypadku opcji \textbf{"Opis"} (rys. \ref{sygMocyDane2}) wykonujemy opis zach
 	
 	W zakładce \textbf{"Obliczone współczynniki"} (rys. \ref{emisjaWspolczynniki}) znajdują się pola \textbf{"Wykonał(a)"} i \textbf{"Sprawdził(a)"}, w których należy podać odpowiednio dane osoby, która wykonywała wzorcowanie i osoby, która będzie to zatwierdzać. 
 	
-	\textbf{TIP5:} Program zapamiętuje ostatnio wpisane dane i automatycznie uzupełnia te pola tymi danymi. Należy więc zwrócić na to szczególną uwagę przy zmianie pracownika wykonującego wzorcowanie.
+	\textbf{TIP:} Program zapamiętuje ostatnio wpisane dane i automatycznie uzupełnia te pola tymi danymi. Należy więc zwrócić na to szczególną uwagę przy zmianie pracownika wykonującego wzorcowanie.
 	
 	Poniżej znajduje się pole wyboru \textbf{"Dołączyć do świadectwa"} - domyślnie zaznaczone pole oznaczające, że wyniki z tego arkusza mają być zawarte w świadectwie wzorcowania.
 	
 	Przycisk \textbf{"Oblicz"} powoduje wyświetlenie wyników wzorcowania. Jeżeli przyrząd był już wzorcowany w zakresie dawki, to w polach po prawej stronie pojawią się współczynnik i niepewność z poprzedniego wzorcowania. 
 	
-	\textbf{TIP6:} Warto zawsze porównać oba wyniki, aby wychwycić ewentualne rozbieżności i spróbować znaleźć ich źródło (czy to błąd we wzorcowaniu, czy np. jakieś uszkodzenie przyrządu). Współczynnik kalibracyjny nie powinien się różnić od jego poprzedniej wartości o więcej niż 20 procent.
+	\textbf{TIP:} Warto zawsze porównać oba wyniki, aby wychwycić ewentualne rozbieżności i spróbować znaleźć ich źródło (czy to błąd we wzorcowaniu, czy np. jakieś uszkodzenie przyrządu). Współczynnik kalibracyjny nie powinien się różnić od jego poprzedniej wartości o więcej niż 20 procent.
 
 \subsection{Świadectwo i pismo przewodnie}
 \label{swiadectwo_pismo}
@@ -460,7 +474,7 @@ W przypadku opcji \textbf{"Opis"} (rys. \ref{sygMocyDane2}) wykonujemy opis zach
 		\item\textit{alt + m} - wstawia znacznik \textbf{\&mu;} oznaczający  $\mu$;
 		\item\textit{alt + t} - wstawia znacznik \textbf{\&nbsp;} oznaczający twardą spację;
 		\item\textit{alt + b} - wstawia \textbf{$<$b$>$$<$/b$>$} - tekst umieszczony w środku będzie pogrubiony (można najpierw użyć skrótu, w którym umieści się tekst, lub zaznaczyć wybrany fragment i wtedy użyć kombinacji klawiszy)
-		\item\textit{alt + p} - wstawia \textbf{<br>} oznaczające przejście do kolejnej linii
+		\item\textit{alt + p} - wstawia \textbf{$<$br$>$} oznaczające przejście do kolejnej linii
 		\item\textit{alt + d} - wstawia \textbf{$<$sub$>$$<$/sub$>$} - tekst umieszczony w środku będzie potraktowany jako indeks dolny (można najpierw użyć skrótu, w którym umieści się tekst, lub zaznaczyć wybrany fragment i wtedy użyć kombinacji klawiszy)
 		\item\textit{alt + g} - wstawia \textbf{$<$sup$>$$<$/sup$>$} - tekst umieszczony w środku będzie potraktowany jako indeks górny (można najpierw użyć skrótu, w którym umieści się tekst, lub zaznaczyć wybrany fragment i wtedy użyć kombinacji klawiszy)
 	\end{itemize}
@@ -469,4 +483,19 @@ W przypadku opcji \textbf{"Opis"} (rys. \ref{sygMocyDane2}) wykonujemy opis zach
 
 	W górnym menu okna znajduje się przycisk \textbf{"Zapisz"}, który umożliwia zapisanie wprowadzonych zmian.
 	
-	Przyciski \textbf{"Świadectwo Wzorcowania"} i \textbf{"Pismo przewodnie"} generują odpowiednio świadectwo wzorcowania i pismo przewodnie.
+	Przyciski \textbf{"Świadectwo Wzorcowania (PL)"}, \textbf{Świadectwo Wzorcowania (EN)} i \textbf{"Pismo przewodnie"} generują odpowiednio świadectwo wzorcowania w języku polskim, angielskim i pismo przewodnie.
+	
+	Jeżeli w celu utworzenie świadectwa wzorcowania w języku angielskim program będzie potrzebował tłumaczenia dodatkowych słów, to otwarte zostanie okno \textbf{"Tłumaczenie słowa"} (rys. \ref{tlumaczenie}).
+	Program zapyta, co ma zrobić z nieznanym mu słowem podanym w pierwszym polu. Można wybrać opcję \textbf{"Nie tłumacz"}, wtedy na świadectwie słowo to pozostanie niezmienione lub opcję \textbf{"Przetłumacz na:"} i podać w polu obok żądane tłumaczenie. 
+	
+	\textbf{TIP:} Jeżeli jest to często powtarzające się słowo lub sformułowanie  np. \textit{radiometr, dawkomierz, nie dotyczy} można zaznaczając pole wyboru \textbf{"Zapamiętaj mój wybór"} na stałe dopisać je do słownika programu.
+
+		
+	\begin{figure}[htb]
+		\centering
+		\includegraphics[width=\columnwidth]{obrazki/Wzorcowanie/tlumaczenie.png}
+		\caption{Dodawanie brakujących słów do słownika.}
+		\label{tlumaczenie}
+	\end{figure}
+
+	\textbf{TIP:} Należy pamiętać, że wszelkie uwagi w polach \textbf{"Uwaga - moc dawki"}, \textbf{"Uwaga - dawka"}, \textbf{"Uwaga - sygnalizacja mocy dawki"}, \textbf{"Uwaga - sygnalizacja dawki"}, \textbf{"Uwaga - emisja powierzchniowa"} powinny zostać napisane w języku docelowym, gdyż nie podlegają one tłumaczeniu, a są bezpośrednio wstawiane do świadectwa wzorcowania.
