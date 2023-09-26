@@ -182,7 +182,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(908, 514);
+            this.tabControl1.Size = new System.Drawing.Size(1080, 514);
             this.tabControl1.TabIndex = 5;
             this.tabControl1.TabStop = false;
             // 
@@ -214,7 +214,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage1.Size = new System.Drawing.Size(900, 485);
+            this.tabPage1.Size = new System.Drawing.Size(1072, 485);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Dane zleceniodawcy";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -243,7 +243,7 @@
             // 
             this.jestIFJ.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.jestIFJ.AutoSize = true;
-            this.jestIFJ.Location = new System.Drawing.Point(816, 36);
+            this.jestIFJ.Location = new System.Drawing.Point(988, 36);
             this.jestIFJ.Margin = new System.Windows.Forms.Padding(4);
             this.jestIFJ.Name = "jestIFJ";
             this.jestIFJ.Size = new System.Drawing.Size(48, 21);
@@ -268,7 +268,7 @@
             this.emailTextBox.Location = new System.Drawing.Point(173, 198);
             this.emailTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.emailTextBox.Name = "emailTextBox";
-            this.emailTextBox.Size = new System.Drawing.Size(420, 22);
+            this.emailTextBox.Size = new System.Drawing.Size(592, 22);
             this.emailTextBox.TabIndex = 23;
             // 
             // innyPlatnik
@@ -301,7 +301,7 @@
             this.grupaPlatnika.Margin = new System.Windows.Forms.Padding(4);
             this.grupaPlatnika.Name = "grupaPlatnika";
             this.grupaPlatnika.Padding = new System.Windows.Forms.Padding(4);
-            this.grupaPlatnika.Size = new System.Drawing.Size(848, 134);
+            this.grupaPlatnika.Size = new System.Drawing.Size(1020, 134);
             this.grupaPlatnika.TabIndex = 21;
             this.grupaPlatnika.TabStop = false;
             this.grupaPlatnika.Text = "                                  ";
@@ -309,7 +309,7 @@
             // nazwaPlatnikaBtn
             // 
             this.nazwaPlatnikaBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nazwaPlatnikaBtn.Location = new System.Drawing.Point(805, 27);
+            this.nazwaPlatnikaBtn.Location = new System.Drawing.Point(977, 27);
             this.nazwaPlatnikaBtn.Margin = new System.Windows.Forms.Padding(4);
             this.nazwaPlatnikaBtn.Name = "nazwaPlatnikaBtn";
             this.nazwaPlatnikaBtn.Size = new System.Drawing.Size(35, 28);
@@ -325,7 +325,7 @@
             this.nazwaPlatnikaBox.Location = new System.Drawing.Point(165, 28);
             this.nazwaPlatnikaBox.Margin = new System.Windows.Forms.Padding(4);
             this.nazwaPlatnikaBox.Name = "nazwaPlatnikaBox";
-            this.nazwaPlatnikaBox.Size = new System.Drawing.Size(639, 22);
+            this.nazwaPlatnikaBox.Size = new System.Drawing.Size(811, 22);
             this.nazwaPlatnikaBox.TabIndex = 29;
             this.nazwaPlatnikaBox.TextChanged += new System.EventHandler(this.nazwaPlatnikaBox_TextChanged);
             this.nazwaPlatnikaBox.Enter += new System.EventHandler(this.nazwaPlatnikaBox_Enter);
@@ -339,7 +339,7 @@
             this.nazwaPlatnikaList.Location = new System.Drawing.Point(165, 28);
             this.nazwaPlatnikaList.Margin = new System.Windows.Forms.Padding(4);
             this.nazwaPlatnikaList.Name = "nazwaPlatnikaList";
-            this.nazwaPlatnikaList.Size = new System.Drawing.Size(639, 24);
+            this.nazwaPlatnikaList.Size = new System.Drawing.Size(811, 24);
             this.nazwaPlatnikaList.TabIndex = 21;
             this.nazwaPlatnikaList.SelectedIndexChanged += new System.EventHandler(this.nazwaPlatnikaList_SelectedIndexChanged);
             // 
@@ -388,7 +388,7 @@
             this.adresPlatnika.Location = new System.Drawing.Point(165, 64);
             this.adresPlatnika.Margin = new System.Windows.Forms.Padding(4);
             this.adresPlatnika.Name = "adresPlatnika";
-            this.adresPlatnika.Size = new System.Drawing.Size(673, 22);
+            this.adresPlatnika.Size = new System.Drawing.Size(845, 22);
             this.adresPlatnika.TabIndex = 18;
             // 
             // groupBox1
@@ -397,7 +397,7 @@
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.button4);
-            this.groupBox1.Location = new System.Drawing.Point(629, 138);
+            this.groupBox1.Location = new System.Drawing.Point(801, 138);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
@@ -435,7 +435,7 @@
             this.textBox6.Location = new System.Drawing.Point(173, 262);
             this.textBox6.Margin = new System.Windows.Forms.Padding(4);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(420, 22);
+            this.textBox6.Size = new System.Drawing.Size(592, 22);
             this.textBox6.TabIndex = 12;
             // 
             // label8
@@ -455,7 +455,7 @@
             this.textBox5.Location = new System.Drawing.Point(173, 230);
             this.textBox5.Margin = new System.Windows.Forms.Padding(4);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(420, 22);
+            this.textBox5.Size = new System.Drawing.Size(592, 22);
             this.textBox5.TabIndex = 11;
             // 
             // label7
@@ -475,7 +475,7 @@
             this.textBox4.Location = new System.Drawing.Point(173, 166);
             this.textBox4.Margin = new System.Windows.Forms.Padding(4);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(420, 22);
+            this.textBox4.Size = new System.Drawing.Size(592, 22);
             this.textBox4.TabIndex = 10;
             // 
             // label6
@@ -495,7 +495,7 @@
             this.textBox3.Location = new System.Drawing.Point(173, 134);
             this.textBox3.Margin = new System.Windows.Forms.Padding(4);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(420, 22);
+            this.textBox3.Size = new System.Drawing.Size(592, 22);
             this.textBox3.TabIndex = 9;
             // 
             // label5
@@ -515,7 +515,7 @@
             this.textBox2.Location = new System.Drawing.Point(173, 102);
             this.textBox2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(689, 22);
+            this.textBox2.Size = new System.Drawing.Size(861, 22);
             this.textBox2.TabIndex = 8;
             // 
             // label4
@@ -544,7 +544,7 @@
             this.comboBox1.Location = new System.Drawing.Point(173, 69);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(689, 24);
+            this.comboBox1.Size = new System.Drawing.Size(861, 24);
             this.comboBox1.TabIndex = 7;
             // 
             // label3
@@ -588,7 +588,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Size = new System.Drawing.Size(900, 485);
+            this.tabPage2.Size = new System.Drawing.Size(1087, 485);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Dane zlecenia";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -600,7 +600,7 @@
             this.nrZleceniaKlientaText.Location = new System.Drawing.Point(144, 325);
             this.nrZleceniaKlientaText.Margin = new System.Windows.Forms.Padding(4);
             this.nrZleceniaKlientaText.Name = "nrZleceniaKlientaText";
-            this.nrZleceniaKlientaText.Size = new System.Drawing.Size(713, 22);
+            this.nrZleceniaKlientaText.Size = new System.Drawing.Size(900, 22);
             this.nrZleceniaKlientaText.TabIndex = 14;
             // 
             // label20
@@ -650,7 +650,7 @@
             this.textBox9.Margin = new System.Windows.Forms.Padding(4);
             this.textBox9.Multiline = true;
             this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(713, 159);
+            this.textBox9.Size = new System.Drawing.Size(900, 159);
             this.textBox9.TabIndex = 10;
             this.textBox9.Text = "Brak";
             // 
@@ -746,7 +746,7 @@
             this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage3.Size = new System.Drawing.Size(900, 485);
+            this.tabPage3.Size = new System.Drawing.Size(1072, 485);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Lista przyrządów";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -785,7 +785,7 @@
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridView1.Size = new System.Drawing.Size(892, 477);
+            this.dataGridView1.Size = new System.Drawing.Size(1064, 477);
             this.dataGridView1.TabIndex = 6;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
@@ -840,7 +840,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(908, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1080, 28);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -892,7 +892,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(908, 626);
+            this.ClientSize = new System.Drawing.Size(1080, 626);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.numericUpDown2);
             this.Controls.Add(this.tabControl1);

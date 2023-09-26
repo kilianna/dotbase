@@ -49,6 +49,7 @@ namespace DotBase
         //-------------------------------------------------------------
         {
             button2.Enabled = false;
+            button3.Enabled = false;
             button6.Enabled = false;
             numericUpDownRok.Value = System.DateTime.Now.Year;
         }
