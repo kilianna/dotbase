@@ -260,7 +260,7 @@ namespace DotBase
 
             if (0 < nrPoprzedniejKalibracji)
             {
-                textBox10.Text = "Numer poprzedniego świadectwa " + nrPoprzedniejKalibracji + "/" + _WzorcowanieDawka.PobierzRok(nrPoprzedniejKalibracji);
+                textBox10.Text = "Numer poprzedniego świadectwa " + nrPoprzedniejKalibracji + "/" + _WzorcowanieDawka.PobierzRok(nrPoprzedniejKalibracji) + ".";
             }
         }
 

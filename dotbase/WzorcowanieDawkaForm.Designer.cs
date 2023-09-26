@@ -340,6 +340,7 @@
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(733, 228);
             this.textBox10.TabIndex = 3;
+            this.textBox10.Text = "brak";
             // 
             // label13
             // 

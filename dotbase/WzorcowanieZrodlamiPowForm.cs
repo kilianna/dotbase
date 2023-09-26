@@ -397,7 +397,7 @@ namespace DotBase
             if (0 < nrPoprzedniejKalibracji)
             {
                 textBox13.Clear();
-                textBox13.Text = "Numer poprzedniego świadectwa: " + nrPoprzedniejKalibracji + "/" + _WzorcowanieZrodlamiPow.PobierzRok(nrPoprzedniejKalibracji);
+                textBox13.Text = "Numer poprzedniego świadectwa: " + nrPoprzedniejKalibracji + "/" + _WzorcowanieZrodlamiPow.PobierzRok(nrPoprzedniejKalibracji) + ".";
             }
 
             return true;

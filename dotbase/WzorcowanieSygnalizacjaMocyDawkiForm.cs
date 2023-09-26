@@ -309,7 +309,7 @@ namespace DotBase
 
             if (0 < nrPoprzedniejKalibracji)
             {
-                textBox5.Text = "Numer poprzedniego świadectwa " + nrPoprzedniejKalibracji + "/" + _WzorcowanieSygMocyDawki.PobierzRok(nrPoprzedniejKalibracji);
+                textBox5.Text = "Numer poprzedniego świadectwa " + nrPoprzedniejKalibracji + "/" + _WzorcowanieSygMocyDawki.PobierzRok(nrPoprzedniejKalibracji) + ".";
             }
         }
 

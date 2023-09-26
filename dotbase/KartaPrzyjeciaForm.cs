@@ -191,7 +191,7 @@ namespace DotBase
 
             int nrPoprzedniegoWzorcowania = _KartaPrzyjecia.ZnajdzNrPoprzedniejKalibracji(comboBox1.Text, comboBox2.Text);
             if (nrPoprzedniegoWzorcowania != 0)
-                textBox3.Text = "Numer poprzedniego świadectwa: " + nrPoprzedniegoWzorcowania.ToString() + "/" + _KartaPrzyjecia.PobierzRok(nrPoprzedniegoWzorcowania);
+                textBox3.Text = "Numer poprzedniego świadectwa: " + nrPoprzedniegoWzorcowania.ToString() + "/" + _KartaPrzyjecia.PobierzRok(nrPoprzedniegoWzorcowania) + ".";
         }
 
         //-------------------------------------------------------------
@@ -211,7 +211,7 @@ namespace DotBase
 
             int nrPoprzedniegoWzorcowania = _KartaPrzyjecia.ZnajdzNrPoprzedniejKalibracji(comboBox1.Text, comboBox2.Text);
             if (nrPoprzedniegoWzorcowania != 0)
-                textBox3.Text = "Numer poprzedniego świadectwa: " + nrPoprzedniegoWzorcowania.ToString() + "/" + _KartaPrzyjecia.PobierzRok(nrPoprzedniegoWzorcowania);
+                textBox3.Text = "Numer poprzedniego świadectwa: " + nrPoprzedniegoWzorcowania.ToString() + "/" + _KartaPrzyjecia.PobierzRok(nrPoprzedniegoWzorcowania) + ".";
         }
 
         //---------------------------------------------------------

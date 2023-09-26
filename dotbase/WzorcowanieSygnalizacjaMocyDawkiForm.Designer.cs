@@ -535,6 +535,7 @@
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(797, 278);
             this.textBox10.TabIndex = 10;
+            this.textBox10.Text = "brak";
             this.textBox10.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PrzejdzDoKolejnegoPola);
             // 
             // tabPage3
