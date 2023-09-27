@@ -316,7 +316,7 @@ namespace DotBase
                     }
                     else
                     {
-                        wartosc_wzorcowa = A2 / Math.Pow(odleglosc - d, 2) / Math.Exp(mu * (odleglosc - d)) * Math.Pow(1 + interpolacja / (750 - odleglosc), 2) + c;
+                        wartosc_wzorcowa = A2 / Math.Pow(odleglosc - d, 2) / Math.Exp(mu * (odleglosc - d)) * (1 + interpolacja / Math.Pow(750 - odleglosc, 2)) + c;
                     }
                     break;
                 case 3:
@@ -326,7 +326,7 @@ namespace DotBase
                     }
                     else
                     {
-                        wartosc_wzorcowa = A3 / Math.Pow(odleglosc - d, 2) / Math.Exp(mu * (odleglosc - d)) * Math.Pow(1 + interpolacja / (750 - odleglosc), 2) + c;
+                        wartosc_wzorcowa = A3 / Math.Pow(odleglosc - d, 2) / Math.Exp(mu * (odleglosc - d)) * (1 + interpolacja / Math.Pow(750 - odleglosc, 2)) + c;
                     }
                     break;
                 default:
