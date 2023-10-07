@@ -72,3 +72,8 @@ export class Zleceniodawca extends DatabaseRow {
 export class KartaPrzyjecia {
 
 };
+
+
+enum RowState {
+    
+};
