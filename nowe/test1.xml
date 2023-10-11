@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<document xmlns:x="http://example.com/x"
+  xmlns:bold="http://example.com/bold"
+  xmlns:size="http://example.com/size"
+  xmlns:position="http://example.com/position"
+  xmlns:space="http://example.com/space"
+  xmlns:tabStops="http://example.com/tabStops"
+  xmlns:border="http://example.com/border"
+  xmlns:new="http://example.com/new"
+  xmlns:default="http://example.com/default"
+  xmlns:Header="http://example.com/Header"
+  xmlns:Footer="http://example.com/Footer"
+  xmlns:titlePage="http://example.com/titlePage"
+  xmlns:children="http://example.com/children"
+>
+
+  <ParagraphStyle id="Normal" name="Normalny">
+    <run font="Arial" />
+  </ParagraphStyle>
+
+  <ParagraphStyle id="ND" name="Nagłówki dokumentu" basedOn="Normal">
+    <paragraph alignment="center" />
+  </ParagraphStyle>
+
+  <ParagraphStyle id="Stopka" name="Paragraf stopki" basedOn="Normal">
+    <paragraph alignment="center">
+      <spacing after="6mm" />
+      <border>
+        <top size:pt8="0.25mm" space:pt="4mm" style="single" />
+      </border>
+    </paragraph>
+  </ParagraphStyle>
+
+  <ParagraphStyle id="tab" name="Paragraf w tabeli" basedOn="Normal">
+    <paragraph>
+      <spacing after="1mm" before="1mm" />
+    </paragraph>
+  </ParagraphStyle>
+
+  <ParagraphStyle id="Heading1" name="Nagłówek 1" basedOn="Normal">
+    <paragraph alignment="center" />
+    <run size="22pt" bold:bool="true" />
+  </ParagraphStyle>
+
+  <Alias id="TabStopsND">
+    <_ position:dxa="1cm" type="left" />
+    <_ position:dxa="10.5cm" type="center" />
+    <_ position:dxa="17cm" type="right" />
+  </Alias>
+
+  <Alias id="border">
+    <bottom size:pt8="0.25mm" space:pt="5mm" style="single" />
+  </Alias>
+
+  <Section>
+    <properties titlePage:bool="true">
+      <page>
+        <size orientation="portrait" width="210mm" height="297mm" />
+        <margin top="1.5cm" right="1.5cm" bottom="1.5cm" left="1.5cm" />
+        <borders>
+          <pageBorders display="allPages" offsetFrom="page" />
+          <pageBorderTop style="single" size:pt8="0.52mm" space:pt="1cm" />
+          <pageBorderBottom style="single" size:pt8="0.52mm" space:pt="1cm" />
+          <pageBorderLeft style="single" size:pt8="0.52mm" space:pt="1cm" />
+          <pageBorderRight style="single" size:pt8="0.52mm" space:pt="1cm" />
+        </borders>
+      </page>
+    </properties>
+    <headers>
+      <first>
+        <Header:new>
+          <children:FileChildren>
+            <p style="ND">
+              <b>Laboratorium Wzorcowania Przyrządów Dozymetrycznych</b>
+            </p>
+            <p style="ND">Instytut Fizyki Jądrowej im. Henryka Niewodniczańskiego</p>
+            <p style="ND">Polskiej Akademii Nauk</p>
+            <p style="ND">ul. Radzikowskiego 152, PL 31-342 Kraków</p>
+            <p style="ND">tel. 012/6628486, faks 012/6628066, e-mail: wzorcowanie@ifj.edu.pl</p>
+            <p style="ND">
+              <img src="PCA.png" width="2cm" height="3.36cm"
+                horizontalOffset="-2cm" horizontalRelative="rightMargin"
+                verticalOffset="1.5cm" verticalRelative="page" />
+              <img src="ilac-MRA.png" width="2cm" height="2cm"
+                horizontalOffset="-2cm" horizontalRelative="rightMargin"
+                verticalOffset="5.17cm" verticalRelative="page" />
+              <img src="ifj.png" width="2.5cm" height="2.2713cm"
+                horizontalOffset="0cm" horizontalRelative="margin"
+                verticalOffset="2.5cm" verticalRelative="page" />
+            </p>
+            <p style="ND">Laboratorium wzorcujące akredytowane przez</p>
+            <p style="ND">Polskie Centrum Akredytacji, sygnatariusza porozumień EA MLA i ILAC MRA</p>
+            <p style="ND">dotyczących wzajemnego uznawania świadectw wzorcowania.</p>
+            <p style="ND">Nr akredytacji AP 029.</p>
+            <p style="ND"></p>
+            <p style="ND"></p>
+
+            <h1>ŚWIADECTWO WZORCOWANIA</h1>
+
+            <p></p>
+
+            <p tabStops:alias="TabStopsND" border:alias="border">&#9;Data wydania: &nbsp; 18 września 2023 &#9;Nr świadectwa: &nbsp; <b>19000/2023</b>&#9;Strona &nbsp; <CurrentPageNumber />/<TotalPages /></p>
+          </children:FileChildren>
+        </Header:new>
+      </first>
+      <default>
+        <Header:new>
+          <children:FileChildren>
+            <p style="ND">ŚWIADECTWO WZORCOWANIA wydane przez LABORATORIUM AKREDYTOWANE Nr AP 029</p>
+            <p></p>
+            <p tabStops:alias="TabStopsND" border:alias="border">&#9;Data wydania: &nbsp; 18 września 2023 &#9;Nr świadectwa: &nbsp; 19000/2023&#9;Strona &nbsp; <CurrentPageNumber />/<TotalPages /></p>
+          </children:FileChildren>
+        </Header:new>
+      </default>
+    </headers>
+    <footers>
+      <first>
+        <Footer:new>
+          <children:FileChildren>
+            <p style="Stopka">Niniejsze świadectwo bez zgody Laboratorium nie może być powielane inaczej niż w całości.</p>
+          </children:FileChildren>
+        </Footer:new>
+      </first>
+    </footers>
+  </Section>
+
+  <p></p>
+
+  <Alias id="bezRamki">
+    <borders>
+      <bottom style="nil" />
+      <end style="nil" />
+      <left style="nil" />
+      <right style="nil" />
+      <start style="nil" />
+      <top style="nil" />
+    </borders>
+  </Alias>
+
+  <Alias id="bezRamki2">
+    <borders>
+      <bottom style="nil" />
+      <end style="nil" />
+      <left style="nil" />
+      <right style="nil" />
+      <start style="nil" />
+      <top style="nil" />
+    </borders>
+    <margins marginUnitType="dxa" top:dxa="0mm" bottom:dxa="0mm" left:dxa="1cm" right:dxa="0mm" />
+  </Alias>
+
+  <table layout="fixed" columnWidths="4cm, 14cm">
+    <tr>
+      <td _="bezRamki">
+        <p style="tab">
+          <b>OBIEKT WZORCOWANIA</b>
+        </p>
+      </td>
+      <td _="bezRamki2">
+        <table layout="fixed" columnWidths="3.5cm, 10cm">
+          <tr>
+            <td _="bezRamki">
+              <p style="tab">
+                <b>Nazwa</b>
+              </p>
+            </td>
+            <td _="bezRamki2">
+              <p style="tab">radiometr</p>
+            </td>
+          </tr>
+          <tr>
+            <td _="bezRamki">
+              <p style="tab">
+                <b>Typ</b>
+              </p>
+            </td>
+            <td _="bezRamki2">
+              <p style="tab">PM1610B-01</p>
+            </td>
+          </tr>
+          <tr>
+            <td _="bezRamki">
+              <p style="tab">
+                <b>Numer fabryczny</b>
+              </p>
+            </td>
+            <td _="bezRamki2">
+              <p style="tab">171720</p>
+            </td>
+          </tr>
+          <tr>
+            <td _="bezRamki">
+              <p style="tab">
+                <b>Producent</b>
+              </p>
+            </td>
+            <td _="bezRamki2">
+              <p style="tab">POLIMASTER</p>
+            </td>
+          </tr>
+          <tr>
+            <td _="bezRamki">
+              <p style="tab">
+                <b>Rok produkcji</b>
+              </p>
+            </td>
+            <td _="bezRamki2">
+              <p style="tab">nie podano</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td _="bezRamki">
+        <p style="tab">
+          <b>ZGŁASZAJĄCY</b>
+        </p>
+      </td>
+      <td _="bezRamki2">
+        <p style="tab">Zakład Fizyki Radiacyjnej i Dozymetrii Instytut Fizyki Jądrowej PAN</p>
+      </td>
+    </tr>
+    <tr>
+      <td _="bezRamki">
+        <p style="tab">
+          <b>METODA WZORCOWANIA</b>
+        </p>
+      </td>
+      <td _="bezRamki2">
+        <p style="tab">Procedura pomiarowa WZOR-1 (wyd. 7 z dn. 15.09.2023)</p>
+      </td>
+    </tr>
+    <tr>
+      <td _="bezRamki">
+        <p style="tab">
+          <b>UZUPEŁNIENIA, ODSTĘPSTWA, OGRANICZENIA METODY</b>
+        </p>
+      </td>
+      <td _="bezRamki2">
+        <p style="tab">Nie wystąpiły</p>
+      </td>
+    </tr>
+    <tr>
+      <td _="bezRamki">
+        <p style="tab">
+          <b>MIEJSCE WYKONANIA DZIAŁALNOŚCI LABORATORYJNEJ</b>
+        </p>
+      </td>
+      <td _="bezRamki2">
+        <p style="tab">W siedzibie laboratorium</p>
+      </td>
+    </tr>
+    <tr>
+      <td _="bezRamki">
+        <p style="tab">
+          <b>WARUNKI ŚRODOWISKOWE</b>
+        </p>
+      </td>
+      <td _="bezRamki2">
+        <table layout="fixed" columnWidths="3.5cm, 10cm">
+          <tr>
+            <td _="bezRamki">
+              <p style="tab">
+                <b>Ciśnienie</b>
+              </p>
+            </td>
+            <td _="bezRamki2">
+              <p style="tab">( 984,5 - 987,5 ) hPa</p>
+            </td>
+          </tr>
+          <tr>
+            <td _="bezRamki">
+              <p style="tab">
+                <b>Temperatura</b>
+              </p>
+            </td>
+            <td _="bezRamki2">
+              <p style="tab">( 20,5 - 21,5 ) °C</p>
+            </td>
+          </tr>
+          <tr>
+            <td _="bezRamki">
+              <p style="tab">
+                <b>Wilgotność</b>
+              </p>
+            </td>
+            <td _="bezRamki2">
+              <p style="tab">( 51,0 - 55,0 ) %</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td _="bezRamki">
+        <p style="tab">
+          <b>DATA PRZYJĘCIA DO WZORCOWANIA</b>
+        </p>
+      </td>
+      <td _="bezRamki2">
+        <p style="tab">17 września 2023</p>
+      </td>
+    </tr>
+    <tr>
+      <td _="bezRamki">
+        <p style="tab">
+          <b>DATA WYKONANIA WZORCOWANIA</b>
+        </p>
+      </td>
+      <td _="bezRamki2">
+        <p style="tab">18 września 2023</p>
+      </td>
+    </tr>
+    <tr>
+      <td _="bezRamki">
+        <p style="tab">
+          <b>SPÓJNOŚĆ POMIAROWA</b>
+        </p>
+      </td>
+      <td _="bezRamki2">
+        <p style="tab">Świadectwo jest wydane w ramach porozumienia EA MLA w zakresie wzorcowania i potwierdza spójność wyników pomiarów z jednostkami miar Międzynarodowego Układu Jednostek Miar (SI).</p>
+      </td>
+    </tr>
+    <tr>
+      <td _="bezRamki">
+        <p style="tab">
+          <b>WYNIKI WZORCOWANIA</b>
+        </p>
+      </td>
+      <td _="bezRamki2">
+        <p style="tab">Podano na stronie 2 niniejszego świadectwa wraz z wartościami niepewności pomiaru. Wyniki dotyczą wyłącznie obiektów poddanych wzorcowaniu.</p>
+      </td>
+    </tr>
+    <tr>
+      <td _="bezRamki">
+        <p style="tab">
+          <b>NIEPEWNOŚĆ WYNIKU POMIARU</b>
+        </p>
+      </td>
+      <td _="bezRamki2">
+        <p style="tab">Niepewność wyniku pomiaru została określona zgodnie z dokumentem EA-4/02 M:2022. Podane wartości niepewności stanowią niepewności rozszerzone przy prawdopodobieństwie rozszerzenia ok. 95% i współczynniku rozszerzenia k = 2.</p>
+      </td>
+    </tr>
+  </table>
+
+  <p>
+    <PageBreak />
+  </p>
+  <p></p>
+
+  <table layout="fixed" columnWidths="4cm, 14cm">
+    <tr>
+      <td _="bezRamki">
+        <p style="tab">
+          <b>WYNIKI WZORCOWANIA</b>
+        </p>
+      </td>
+      <td _="bezRamki2">
+        <p style="tab">Wyniki przeprowadzonego wzorcowania przedstawiono poniżej:</p>
+      </td>
+    </tr>
+  </table>
+
+  <p></p>
+  <p>a) Wzorcowanie źródłem gamma: Cs-137; moc przestrzennego równoważnika dawki (sygnalizator progowy)</p>
+  <p></p>
+  <p>Zestawienie nastawień przyrządu i odpowiadających im rzeczywistych wartości, przy których włączona zostaje sygnalizacja ostrzegawcza.</p>
+  <p></p>
+  
+  <p tabStops:alias="TabStopsND">&#9;&#9;&#9;Autoryzował(a):</p>
+  <p tabStops:alias="TabStopsND">&#9;&#9;&#9;P. Bilski</p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p alignment="center">
+    <b>KONIEC</b>
+  </p>
+</document>
