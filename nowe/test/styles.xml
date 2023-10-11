@@ -1,0 +1,33 @@
+<ParagraphStyle id="Normal" name="Normalny">
+  <run font="Arial" />
+</ParagraphStyle>
+
+<ParagraphStyle id="ND" name="Nagłówki dokumentu" basedOn="Normal">
+  <paragraph alignment="center" />
+</ParagraphStyle>
+
+<ParagraphStyle id="Stopka" name="Paragraf stopki" basedOn="Normal">
+  <paragraph alignment="center">
+    <spacing after="6mm" />
+    <border>
+      <top size:pt8="0.25mm" space:pt="4mm" style="single" />
+    </border>
+  </paragraph>
+</ParagraphStyle>
+
+<ParagraphStyle id="tab" name="Paragraf w tabeli" basedOn="Normal">
+  <paragraph>
+    <spacing after="1mm" before="1mm" />
+  </paragraph>
+</ParagraphStyle>
+
+<ParagraphStyle id="Heading1" name="Nagłówek 1" basedOn="Normal">
+  <paragraph alignment="center" />
+  <run size="22pt" bold:bool="true" />
+</ParagraphStyle>
+
+<Alias id="TabStopsND">
+  <_ position:dxa="1cm" type="left" />
+  <_ position:dxa="10.5cm" type="center" />
+  <_ position:dxa="17cm" type="right" />
+</Alias>

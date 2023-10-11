@@ -14,7 +14,7 @@
     "typescript": "^5.2.2"
   },
   "scripts": {
-    "prebuild": "npx esbuild test_xml.ts --platform=node --format=cjs --bundle --sourcemap --target=node18 --outfile=dist/test_xml.js",
-    "build": "npx pkg -t node18-win-x64 --public -o dist/xml2docx.exe dist/test_xml.js"
+    "prebuild": "npx esbuild src/xml2docx.ts --platform=node --format=cjs --bundle --sourcemap --target=node18 --outfile=dist/xml2docx.js && node scripts/postprocess.js",
+    "build": "npx pkg -C Brotli -t node18-win-x64 --public -o dist/xml2docx.exe dist/xml2docx.js"
   }
 }

@@ -2,16 +2,11 @@
 import * as fs from 'node:fs';
 import * as path from "node:path";
 import * as util from 'node:util';
-import * as convert from 'xml-js';
+import * as xmlJs from 'xml-js';
 import * as docx from "docx";
+import { error } from './xml2docx';
 
-let fileDir = '.';
-
-let sections: docx.ISectionOptions[] = [];
-let currentSection: docx.ISectionOptions;
-let paragraphStyles: docx.IParagraphStyleOptions[] = [];
-let characterStyles: docx.ICharacterStyleOptions[] = [];
-let aliases: { [id: string]: any } = {};
+type docxFileChild = docx.Paragraph | docx.Table | docx.TableOfContents;
 
 interface Element {
     type: 'element';
@@ -36,19 +31,16 @@ interface Instruction {
     instruction: string;
 }
 
-type docxFileChild = docx.Paragraph | docx.Table | docx.TableOfContents;
-
 type Node = Element | Text | CData | Instruction;
 
-let xml = convert.xml2js(fs.readFileSync('test1.xml', 'utf-8'), { ignoreComment: true });
 
-//console.log(util.inspect(xml, false, null, true));
+let fileDir: string;
+let sections: docx.ISectionOptions[];
+let currentSection: docx.ISectionOptions;
+let paragraphStyles: docx.IParagraphStyleOptions[];
+let characterStyles: docx.ICharacterStyleOptions[];
+let aliases: { [id: string]: any };
 
-if (!xml.elements || xml.elements.length != 1 || (xml.elements[0] as Node).type !== 'element' || (xml.elements[0] as Element).name !== 'document') {
-    throw new Error('Invalid top level structure of the document. Required one top level <document> element.');
-}
-
-let document = xml.elements[0] as Element;
 
 function extractName(nameWithFilter: string) {
     let arr = nameWithFilter.split(':');
@@ -59,6 +51,7 @@ function extractName(nameWithFilter: string) {
     }
 }
 
+
 function extractFilter(nameWithFilter: string) {
     let arr = nameWithFilter.split(':');
     if (arr.length != 2) {
@@ -67,6 +60,7 @@ function extractFilter(nameWithFilter: string) {
         return arr[1];
     }
 }
+
 
 function convertSize(value: string | number | string[] | number[], nonZero: boolean = false, fraction: boolean = false, targetUnitsPerPt: number = 1): any {
     if (typeof (value) == 'string') {
@@ -170,12 +164,12 @@ function attributesToOptions(element: Element) {
     let obj: { [key: string]: any } = {};
     for (let [key, value] of Object.entries({ ...(element.attributes || {}) })) {
         if (key == '_') {
-            ref = {...ref, ...aliases[value] };
+            ref = { ...ref, ...aliases[value] };
         } else {
             obj[extractName(key)] = filter(key, value);
         }
     }
-    return {...ref, ...obj};
+    return { ...ref, ...obj };
 }
 
 function elementToOptions(element: Element): any {
@@ -272,9 +266,9 @@ function processParagraphChild(node: Node, target: docx.ParagraphChild[], state:
     } else if (node.name == 'img') {
         addImage(node, target);
     } else if (node.name == 'TotalPages') {
-        target.push(new docx.TextRun({ ...state, children:[docx.PageNumber.TOTAL_PAGES] }));
+        target.push(new docx.TextRun({ ...state, children: [docx.PageNumber.TOTAL_PAGES] }));
     } else if (node.name == 'CurrentPageNumber') {
-        target.push(new docx.TextRun({ ...state, children:[docx.PageNumber.CURRENT] }));
+        target.push(new docx.TextRun({ ...state, children: [docx.PageNumber.CURRENT] }));
     } else if (node.type == 'element') {
         let name = extractName(node.name);
         let obj = new ((docx as any)[name])(elementToOptions(node));
@@ -391,18 +385,6 @@ function processTopLevel(document: Element) {
     }
 }
 
-processTopLevel(document);
-
-//console.log(util.inspect(paragraphStyles, false, null, true));
-//console.log(util.inspect(characterStyles, false, null, true));
-//console.log(util.inspect(sections, false, null, true));
-
-const doc = new docx.Document({ sections, styles: { paragraphStyles, characterStyles } });
-
-docx.Packer.toBuffer(doc).then((buffer) => {
-    fs.writeFileSync("doc.docx", buffer);
-});
-
 function removeUndefinedProperties(value: any) {
     let result = false;
     if (typeof value != 'object') {
@@ -486,5 +468,40 @@ function addImage(node: Element, target: docx.ParagraphChild[]) {
     removeUndefinedProperties(options);
 
     target.push(new docx.ImageRun(options));
+}
+
+
+export async function convert(inputFile: string, xmlText: string) {
+    fileDir = path.dirname(inputFile);
+    sections = [];
+    currentSection = (null as unknown as docx.ISectionOptions);
+    paragraphStyles = [];
+    characterStyles = [];
+    aliases = {};
+
+    error.push('Cannot parse XML file.');
+    let xml = xmlJs.xml2js(xmlText, {
+        ignoreComment: true
+    });
+    error.pop();
+
+    if (!xml.elements || xml.elements.length != 1 || (xml.elements[0] as Node).type !== 'element' || (xml.elements[0] as Element).name !== 'document') {
+        throw new Error('Invalid top level structure of the document. Required one top level <document> element.');
+    }
+
+    error.push('Cannot process XML.');
+    let document = xml.elements[0] as Element;
+    processTopLevel(document);
+    error.pop();
+
+    error.push('Cannot create document from generated data.');
+    const doc = new docx.Document({ sections, styles: { paragraphStyles, characterStyles } });
+    error.pop();
+
+    error.push('Cannot pack to docx format.');
+    let result = await docx.Packer.toBuffer(doc);
+    error.pop();
+
+    return result;
 }
 
