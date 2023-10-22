@@ -137,6 +137,7 @@ const filters: { [key: string]: (value: any) => any } = {
         } else if (value in aliases) {
             return JSON.parse(JSON.stringify(aliases[value]));
         } else {
+            console.error(aliases);
             throw new Error(`Undefined alias "${value}"`);
         }
     },
@@ -247,6 +248,18 @@ function elementToOptions(element: Element): any {
     // TODO: More error checking
 }
 
+const directTextTags = {
+    'b': 'bold',
+    'i': 'italics',
+    'u': 'underline',
+    's': 'strike',
+    'sub': 'subScript',
+    'super': 'superScript',
+    'allCaps': 'allCaps',
+    'doubleStrike': 'doubleStrike',
+    'emboss': 'emboss',
+};
+
 
 function processParagraphChild(node: Node, target: docx.ParagraphChild[], state: docx.IRunOptions) {
     if (node.type == 'instruction') {
@@ -255,20 +268,16 @@ function processParagraphChild(node: Node, target: docx.ParagraphChild[], state:
         target.push(new docx.TextRun({ ...state, text: node.text }));
     } else if (node.type == 'cdata') {
         target.push(new docx.TextRun({ ...state, text: node.cdata }));
-    } else if (node.name == 'b') {
-        processParagraphChildren(node, target, { ...state, bold: true });
-    } else if (node.name == 'i') {
-        processParagraphChildren(node, target, { ...state, italics: true });
-    } else if (node.name == 'sub') {
-        processParagraphChildren(node, target, { ...state, subScript: true });
-    } else if (node.name == 'super') {
-        processParagraphChildren(node, target, { ...state, superScript: true });
     } else if (node.name == 'img') {
         addImage(node, target);
     } else if (node.name == 'TotalPages') {
         target.push(new docx.TextRun({ ...state, children: [docx.PageNumber.TOTAL_PAGES] }));
     } else if (node.name == 'CurrentPageNumber') {
         target.push(new docx.TextRun({ ...state, children: [docx.PageNumber.CURRENT] }));
+    } else if (node.name in directTextTags) {
+        let addition: { [key: string]: any } = {};
+        addition[directTextTags[node.name]] = true;
+        processParagraphChildren(node, target, { ...state, ...addition });
     } else if (node.type == 'element') {
         let name = extractName(node.name);
         let obj = new ((docx as any)[name])(elementToOptions(node));

@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<document>
 
-<document xmlns:x="http://example.com/x"
-  xmlns:bold="http://example.com/bold"
-  xmlns:size="http://example.com/size"
-  xmlns:position="http://example.com/position"
-  xmlns:space="http://example.com/space"
-  xmlns:tabStops="http://example.com/tabStops"
-  xmlns:border="http://example.com/border"
-  xmlns:new="http://example.com/new"
-  xmlns:default="http://example.com/default"
-  xmlns:Header="http://example.com/Header"
-  xmlns:Footer="http://example.com/Footer"
-  xmlns:titlePage="http://example.com/titlePage"
-  xmlns:children="http://example.com/children"
->
-
-<%= utils.include('styles.xml') %>
+  <%= utils.include('styles.xml') %>
 
   <Alias id="border">
     <bottom size:pt8="0.25mm" space:pt="5mm" style="single" />
