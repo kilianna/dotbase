@@ -70,10 +70,6 @@
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.WartoscWzorcowa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Wskazanie = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dolaczyc = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.textBox19 = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
@@ -115,6 +111,10 @@
             this.wykresENToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.protokółToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zapiszToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.WartoscWzorcowa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Wskazanie = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dolaczyc = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -501,7 +501,7 @@
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(649, 282);
+            this.radioButton4.Location = new System.Drawing.Point(634, 282);
             this.radioButton4.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(97, 21);
@@ -513,7 +513,7 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(649, 252);
+            this.radioButton3.Location = new System.Drawing.Point(634, 252);
             this.radioButton3.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(280, 21);
@@ -524,7 +524,7 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(649, 224);
+            this.radioButton2.Location = new System.Drawing.Point(634, 224);
             this.radioButton2.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(301, 21);
@@ -536,7 +536,7 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(649, 195);
+            this.radioButton1.Location = new System.Drawing.Point(634, 195);
             this.radioButton1.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(289, 21);
@@ -604,27 +604,6 @@
             this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.Size = new System.Drawing.Size(596, 337);
             this.dataGridView1.TabIndex = 1;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // WartoscWzorcowa
-            // 
-            this.WartoscWzorcowa.HeaderText = "Wartość wzorcowa [mSv]";
-            this.WartoscWzorcowa.Name = "WartoscWzorcowa";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Czas [s]";
-            this.Column2.Name = "Column2";
-            // 
-            // Wskazanie
-            // 
-            this.Wskazanie.HeaderText = "Wskazanie [mSv]";
-            this.Wskazanie.Name = "Wskazanie";
-            // 
-            // Dolaczyc
-            // 
-            this.Dolaczyc.HeaderText = "Dołącz";
-            this.Dolaczyc.Name = "Dolaczyc";
             // 
             // groupBox6
             // 
@@ -1033,6 +1012,26 @@
             this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
             this.zapiszToolStripMenuItem.Text = "Zapisz";
             this.zapiszToolStripMenuItem.Click += new System.EventHandler(this.zapiszToolStripMenuItem_Click);
+            // 
+            // WartoscWzorcowa
+            // 
+            this.WartoscWzorcowa.HeaderText = "Wartość wzorcowa";
+            this.WartoscWzorcowa.Name = "WartoscWzorcowa";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Czas [s]";
+            this.Column2.Name = "Column2";
+            // 
+            // Wskazanie
+            // 
+            this.Wskazanie.HeaderText = "Wskazanie";
+            this.Wskazanie.Name = "Wskazanie";
+            // 
+            // Dolaczyc
+            // 
+            this.Dolaczyc.HeaderText = "Dołącz";
+            this.Dolaczyc.Name = "Dolaczyc";
             // 
             // WzorcowanieDawkaForm
             // 

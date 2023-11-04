@@ -727,11 +727,6 @@ namespace DotBase
             N.PotwierdzenieZapisz(this, ZapiszDane, false, true);
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void warunki_TextChanged(object sender, EventArgs e)
         {
             N.SprawdzZakres(sender as TextBox);
