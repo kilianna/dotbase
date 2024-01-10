@@ -256,6 +256,11 @@ namespace DotBase
                 SetField("Rok", value, OleDbType.Integer);
                 return this;
             }
+            public Szablon_Karta_przyjecia Rok_pisma(int value)
+            {
+                SetField("Rok_pisma", value, OleDbType.Integer);
+                return this;
+            }
             public Szablon_Karta_przyjecia Sprawdzenie(bool value)
             {
                 SetField("Sprawdzenie", value, OleDbType.Boolean);

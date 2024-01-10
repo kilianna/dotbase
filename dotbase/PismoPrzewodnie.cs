@@ -17,7 +17,7 @@ namespace DotBase
             {
                 public enum DataType
                 {
-					NR_KARTY, DATA_WYSTAWIENIA, DATA_WYKONANIA, DATA_MESIAC_SLOWNIE, DATA_PLUS_ROK, POPRAWA, ROK, UWAGA, NR_PISMA, INFO_SONDY, TYP, NR_FABRYCZNY,
+                    NR_KARTY, DATA_WYSTAWIENIA, DATA_WYKONANIA, DATA_MESIAC_SLOWNIE, DATA_PLUS_ROK, POPRAWA, ROK, UWAGA, NR_PISMA, ROK_PISMA, INFO_SONDY, TYP, NR_FABRYCZNY,
                     ZLECENIODAWCA, ADRES, INFO_WYKRES, INFO_WYKRES_KALIB
                 };
 
@@ -39,7 +39,8 @@ namespace DotBase
             StringBuilder m_templateToFill = DocumentsTemplatesFactory.getInstance().create(DocumentsTemplatesFactory.TemplateType.SCIEZKA_PISMO_PRZEWODNIE);
 
             //****************************************************************************************
-			public PismoPrzewodnie(int nrKarty, DateTime dataWystawienia, DateTime dataWykonania, string uwaga, string nrPisma, bool przedluzonaWaznosc, bool poprawa) : base(Jezyk.PL)
+            public PismoPrzewodnie(int nrKarty, DateTime dataWystawienia, DateTime dataWykonania, string uwaga, string nrPisma, string rokPisma, bool przedluzonaWaznosc, bool poprawa)
+                : base(Jezyk.PL)
             //****************************************************************************************
             {
                 _NrKarty = nrKarty.ToString();
@@ -56,7 +57,8 @@ namespace DotBase
                 m_data.setValue(PismoPrzewodnieData.DataType.ROK, dataWykonania.Year.ToString());
                 m_data.setValue(PismoPrzewodnieData.DataType.UWAGA, uwaga);
                 m_data.setValue(PismoPrzewodnieData.DataType.NR_PISMA, nrPisma);
-				m_data.setValue(PismoPrzewodnieData.DataType.POPRAWA, poprawa.ToString());
+                m_data.setValue(PismoPrzewodnieData.DataType.ROK_PISMA, rokPisma);
+                m_data.setValue(PismoPrzewodnieData.DataType.POPRAWA, poprawa.ToString());
             }
 
             #region Document generation
@@ -68,7 +70,8 @@ namespace DotBase
                         .Replace("<!data_slownie>", m_data.getValue(PismoPrzewodnieData.DataType.DATA_MESIAC_SLOWNIE))
                         .Replace("<!c2>", m_documentData.getValue(DocumentData.DataType.ZLECENIDOAWCA).Replace(";", "<br>"))
                         .Replace("<!c3>", m_documentData.getValue(DocumentData.DataType.ADRES).Replace(";", "<br>"))
-						.Replace("<!c4>", mapEvidenceIdToDisplayableForm(m_data.getValue(PismoPrzewodnieData.DataType.NR_PISMA)))
+                        .Replace("<!c4>", mapEvidenceIdToDisplayableForm(m_data.getValue(PismoPrzewodnieData.DataType.NR_PISMA)))
+                        .Replace("<!c4rok>", m_data.getValue(PismoPrzewodnieData.DataType.ROK_PISMA))
                         .Replace("<!c5>", m_data.getValue(PismoPrzewodnieData.DataType.ROK))
                         .Replace("<!c6>", m_data.getValue(PismoPrzewodnieData.DataType.TYP))
                         .Replace("<!c7>", m_data.getValue(PismoPrzewodnieData.DataType.NR_FABRYCZNY))

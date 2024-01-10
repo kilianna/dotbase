@@ -12,35 +12,39 @@ namespace DotBase
     public partial class MenuPismaSwiadectwaForm : Form
     {
         int _NumerKarty;
-        uint _NrPisma;
         BazaDanychWrapper _Baza;
         DocumentationPathsLoader _DocumentationPathsLoader;
 
         public MenuPismaSwiadectwaForm(int numerKarty)
         {
+            int nrPisma;
+            int rokPisma;
             InitializeComponent();
             _NumerKarty = numerKarty;
             _Baza = new BazaDanychWrapper();
             _DocumentationPathsLoader = new DocumentationPathsLoader();
+            var rokWystawienia = dataWystawienia.Value.Year;
 
             try
             {
-                _NrPisma = (uint)_Baza.TworzTabeleDanych(String.Format("SELECT nr_pisma FROM Karta_przyjecia WHERE id_karty = {0}", _NumerKarty)).Rows[0].Field<int>(0);
-                if( 0 == _NrPisma )
-                    _NrPisma = (uint)_Baza.TworzTabeleDanych("SELECT MAX(nr_pisma) FROM Karta_przyjecia WHERE rok=Year(Date())").Rows[0].Field<int>(0) + 1;
+                var row = _Baza.TworzTabeleDanych(String.Format("SELECT nr_pisma, Rok_pisma FROM Karta_przyjecia WHERE id_karty = {0}", _NumerKarty)).Rows[0];
+                nrPisma = row.Field<int>(0);
+                rokPisma = row.Field<int>(1);
+                if (nrPisma == 0 || rokPisma == 0)
+                {
+                    generujNowyNumer();
+                }
+                else
+                {
+                    nrPismaNumer.Text = nrPisma.ToString();
+                    nrPismaRok.Text = rokPisma.ToString();
+                }
             }
-            catch (Exception)
+            catch
             {
-                try
-                {
-                    _NrPisma = (uint)_Baza.TworzTabeleDanych("SELECT MAX(nr_pisma) FROM Karta_przyjecia WHERE rok=Year(Date())").Rows[0].Field<int>(0) + 1;
-                }
-                catch (Exception)
-                {
-                    _NrPisma = 1;
-                }
+                generujNowyNumer();
             }
-            
+
             try
             {
                 DataTable table = _Baza.TworzTabeleDanych("SELECT Data_wystawienia, Data_wykonania, Autoryzowal, Uwaga, Waznosc_dwa_lata, Poprawa, UwagaMD, UwagaD, UwagaS, UwagaSMD, UwagaSD " +
@@ -50,7 +54,7 @@ namespace DotBase
                 textBox4.Text = table.Rows[0].Field<String>("Autoryzowal");
                 textBox1.Text = table.Rows[0].Field<String>("Uwaga");
                 checkBox1.Checked = table.Rows[0].Field<Boolean>("Waznosc_dwa_lata");
-                checkBox2.Checked = table.Rows[0].Field<Boolean>("Poprawa");
+                poprawa.Checked = table.Rows[0].Field<Boolean>("Poprawa");
                 dataWykonania.Value = table.Rows[0].Field<DateTime>("Data_wykonania");
                 uwMD.Text = table.Rows[0].Field<String>("UwagaMD");
                 uwD.Text = table.Rows[0].Field<String>("UwagaD");
@@ -59,9 +63,9 @@ namespace DotBase
                 uwSD.Text = table.Rows[0].Field<String>("UwagaSD");
             }
             catch (Exception)
-            {}
+            { }
 
-                textBox2.Text = _NrPisma.ToString();
+            oswierzCzescStalaNrPisma();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -89,7 +93,7 @@ namespace DotBase
                                                                            dataWykonania.Value,
                                                                            table.Rows[0].Field<DateTime>("Data_przyjecia"),
                                                                            textBox4.Text,
-                                                                           checkBox2.Checked.ToString(),
+                                                                           poprawa.Checked.ToString(),
                                                                            uwMD.Text,
                                                                            uwD.Text,
                                                                            uwS.Text,
@@ -113,23 +117,30 @@ namespace DotBase
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (false == uint.TryParse(textBox2.Text, out _NrPisma))
+            int nrPisma, rokPisma;
+            if (false == int.TryParse(nrPismaNumer.Text, out nrPisma))
             {
                 MessageBox.Show("Nie podano numeru pisma! Lub numer pisma nie jest liczbą naturalną!", "Błąd!");
+                return;
+            }
+            if (false == int.TryParse(nrPismaRok.Text, out rokPisma))
+            {
+                MessageBox.Show("Nie podano roku dla numeru pisma! Lub numer pisma nie jest liczbą naturalną!", "Błąd!");
                 return;
             }
 
             _Baza.Karta_przyjecia
                 .UPDATE()
-                    .Nr_pisma((int)_NrPisma)
+                    .Nr_pisma((int)nrPisma)
+                    .Rok_pisma((int)rokPisma)
                 .WHERE()
                     .ID_karty(_NumerKarty)
-                .INFO("Zmieniono nr pisma w karcie przyjęcia")
+                .INFO("Zmieniono nr i rok pisma w karcie przyjęcia")
                 .EXECUTE();
 
-            string sciezka = _DocumentationPathsLoader.GetPath("PismoPrzewodnieWynik", Jezyk.PL) + _NrPisma + "PismoPrzewodnieWynik" + _NumerKarty + ".html";
+            string sciezka = _DocumentationPathsLoader.GetPath("PismoPrzewodnieWynik", Jezyk.PL) + nrPisma + "PismoPrzewodnieWynik" + _NumerKarty + ".html";
 
-			Dokumenty.PismoPrzewodnie pismo = new Dokumenty.PismoPrzewodnie(_NumerKarty, dataWystawienia.Value, dataWykonania.Value, textBox1.Text, textBox2.Text, checkBox1.Checked, checkBox2.Checked);
+			Dokumenty.PismoPrzewodnie pismo = new Dokumenty.PismoPrzewodnie(_NumerKarty, dataWystawienia.Value, dataWykonania.Value, textBox1.Text, nrPismaNumer.Text, nrPismaRok.Text, checkBox1.Checked, poprawa.Checked);
             if (!pismo.generateDocument(sciezka))
             {
                 MessageBox.Show("Nie można stowrzyć dokumentu z powodu braku danych lub ich błędnych wartości.", "Uwaga");
@@ -205,7 +216,8 @@ namespace DotBase
 
         private bool ZapiszDane()
         {
-            if (textBox4.Text == "" || false == UInt32.TryParse(textBox2.Text, out _NrPisma))
+            int nrPisma, rokPisma;
+            if (textBox4.Text == "" || false == Int32.TryParse(nrPismaNumer.Text, out nrPisma) || false == Int32.TryParse(nrPismaNumer.Text, out rokPisma))
             {
                 return false;
             }
@@ -220,7 +232,7 @@ namespace DotBase
                         .Autoryzowal(textBox4.Text)
                         .Uwaga(textBox1.Text)
                         .Waznosc_dwa_lata(checkBox1.Checked)
-                        .Poprawa(checkBox2.Checked)
+                        .Poprawa(poprawa.Checked)
                         .UwagaMD(uwMD.Text)
                         .UwagaD(uwD.Text)
                         .UwagaS(uwS.Text)
@@ -238,7 +250,7 @@ namespace DotBase
                         .Autoryzowal(textBox4.Text)
                         .Uwaga(textBox1.Text)
                         .Waznosc_dwa_lata(checkBox1.Checked)
-                        .Poprawa(checkBox2.Checked)
+                        .Poprawa(poprawa.Checked)
                         .UwagaMD(uwMD.Text)
                         .UwagaD(uwD.Text)
                         .UwagaS(uwS.Text)
@@ -260,6 +272,52 @@ namespace DotBase
         private void swiadectEnBtn_Click(object sender, EventArgs e)
         {
             generujSwiadectwo(Jezyk.EN);
+        }
+
+        private void poprawa_CheckedChanged(object sender, EventArgs e)
+        {
+            oswierzCzescStalaNrPisma();
+        }
+
+        private void oswierzCzescStalaNrPisma()
+        {
+            nrPismaStalaCzesc.Text = poprawa.Checked ? "P/W/LWPD/" : "/W/LWPD/";
+        }
+
+        private void nrPismaPrzycisk_Click(object sender, EventArgs e)
+        {
+            if (nrPismaRok.Text.Trim() == dataWystawienia.Value.Year.ToString())
+            {
+                MessageBox.Show(this, "Rok z daty wystawienia się nie zmienił. Nie ma potrzeby podownego generowania numeru dla tego roku", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                generujNowyNumer();
+            }
+        }
+
+        private void generujNowyNumer()
+        {
+            int nrPisma, rokPisma;
+            rokPisma = dataWystawienia.Value.Year;
+            try
+            {
+                nrPisma = _Baza.TworzTabeleDanych("SELECT nr_pisma FROM Karta_przyjecia WHERE Rok_pisma=? AND ID_karty=?", rokPisma, _NumerKarty).Rows[0].Field<int>(0);
+            }
+            catch
+            {
+                try
+                {
+                    nrPisma = _Baza.TworzTabeleDanych("SELECT MAX(nr_pisma) FROM Karta_przyjecia WHERE Rok_pisma=?", rokPisma).Rows[0].Field<int>(0) + 1;
+                }
+                catch
+                {
+                    nrPisma = 1;
+                }
+            }
+            nrPismaNumer.Text = nrPisma.ToString();
+            nrPismaRok.Text = rokPisma.ToString();
+            oswierzCzescStalaNrPisma();
         }
         
     }

@@ -62,7 +62,7 @@
  Karta_przyjecia
 ---------------------------------------------------------------------
 
-    Karta_przyjecia.ID_karty, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 1, flagi X-X- -XXX
+    Karta_przyjecia.ID_karty, typ Integer, domyślnie 0, precyzja 10, niewymagane Nie, pozycja 1, flagi X-X- -X-X
     Karta_przyjecia.ID_dozymetru, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 2, flagi X-X- -XXX
     Karta_przyjecia.Akcesoria, typ WChar, długość 250, niewymagane Tak, pozycja 3, flagi X-X- -XX-
     Karta_przyjecia.Test_na_skazenia, typ WChar, długość 50, niewymagane Tak, pozycja 4, flagi X-X- -XX-
@@ -86,6 +86,7 @@
     Karta_przyjecia.Cena, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 22, flagi X-X- -XXX
     Karta_przyjecia.Nr_pisma, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 23, flagi X-X- -XXX
     Karta_przyjecia.Stront_najsilniejszy, typ Boolean, niewymagane Nie, pozycja 24, flagi X-X- -X-X
+    Karta_przyjecia.Rok_pisma, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 25, flagi X-X- -XXX
 
 ---------------------------------------------------------------------
  Pomiary_cez
