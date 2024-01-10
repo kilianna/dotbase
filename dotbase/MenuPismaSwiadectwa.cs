@@ -76,7 +76,7 @@ namespace DotBase
         private void generujSwiadectwo(Jezyk jezykSwiadectwa)
         {
             Program.zmienJezyk(jezykSwiadectwa);
-            string sciezka = _DocumentationPathsLoader.GetPath("SwiadectwoWynik", jezykSwiadectwa) + _NumerKarty + "SwiadectwoWynik";
+            string sciezka = _DocumentationPathsLoader.GetPath("SwiadectwoWynik", jezykSwiadectwa) + _NumerKarty + poprawaSuffix() + "SwiadectwoWynik";
             sciezka += JezykTools.kocowka(jezykSwiadectwa);
             sciezka += ".html";
 
@@ -138,13 +138,18 @@ namespace DotBase
                 .INFO("Zmieniono nr i rok pisma w karcie przyjęcia")
                 .EXECUTE();
 
-            string sciezka = _DocumentationPathsLoader.GetPath("PismoPrzewodnieWynik", Jezyk.PL) + nrPisma + "PismoPrzewodnieWynik" + _NumerKarty + ".html";
+            string sciezka = _DocumentationPathsLoader.GetPath("PismoPrzewodnieWynik", Jezyk.PL) + nrPisma + poprawaSuffix() + "PismoPrzewodnieWynik" + _NumerKarty + ".html";
 
 			Dokumenty.PismoPrzewodnie pismo = new Dokumenty.PismoPrzewodnie(_NumerKarty, dataWystawienia.Value, dataWykonania.Value, textBox1.Text, nrPismaNumer.Text, nrPismaRok.Text, checkBox1.Checked, poprawa.Checked);
             if (!pismo.generateDocument(sciezka))
             {
                 MessageBox.Show("Nie można stowrzyć dokumentu z powodu braku danych lub ich błędnych wartości.", "Uwaga");
             }
+        }
+
+        private string poprawaSuffix()
+        {
+            return poprawa.Checked ? "P" : "";
         }
 
         private void WstawZnakSpecjalny(object sender, KeyEventArgs e)
@@ -281,7 +286,7 @@ namespace DotBase
 
         private void oswierzCzescStalaNrPisma()
         {
-            nrPismaStalaCzesc.Text = poprawa.Checked ? "P/W/LWPD/" : "/W/LWPD/";
+            nrPismaStalaCzesc.Text = poprawaSuffix() + "/W/LWPD/";
         }
 
         private void nrPismaPrzycisk_Click(object sender, EventArgs e)
