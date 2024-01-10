@@ -522,7 +522,7 @@ namespace DotBase
             {
                 maxIdKarty = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0);
 
-                _Zapytanie = String.Format("SELECT id_wzorcowania FROM Wzorcowanie_cezem WHERE id_karty = {0} AND id_sondy =", maxIdKarty)
+                _Zapytanie = String.Format("SELECT id_wzorcowania FROM Wzorcowanie_cezem WHERE Rodzaj_wzorcowania='d' AND id_karty = {0} AND id_sondy =", maxIdKarty)
                            + String.Format("(SELECT id_sondy FROM Sondy WHERE typ = '{0}' AND nr_fabryczny = '{1}' AND id_dozymetru =", Sondy.Lista[0].Typ, Sondy.Lista[0].NrFabryczny)
                            + String.Format("(SELECT id_dozymetru FROM Dozymetry WHERE typ = '{0}' AND nr_fabryczny = '{1}'))", Przyrzad.TypDozymetru, Przyrzad.NrFabrycznyDozymetru);
                 idWzorcowania = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0);
