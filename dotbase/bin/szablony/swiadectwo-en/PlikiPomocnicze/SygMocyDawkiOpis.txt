@@ -1,3 +1,0 @@
-﻿<div class="wzornag"><!c1>) Calibration with Cs-137 gamma-rays in terms of ambient dose equivalent (threshold indicator)</div>
-<div class="opis"><!opis></div>
-<div class="uwaga"><!uwaga></div>
