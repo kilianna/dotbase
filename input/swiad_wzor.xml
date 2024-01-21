@@ -67,7 +67,7 @@
         <tr><td><b>Numer fabryczny</b></td><td><% nr_fab %></td></tr>
         <tr><td><b>Producent</b></td><td><% producent %></td></tr>
         <tr><td><b>Rok produkcji</b></td><td><% rok %></td></tr>
-        <tr><td>ZGŁASZAJĄCY</td><td colspan= "2"><% zleceniodawca %><br/><% adres %></td></tr>
+        <tr><td>ZGŁASZAJĄCY</td><td colspan= "2"><p><% zleceniodawca %></p><p><% adres %></p></td></tr>
         <tr><td>METODA WZORCOWANIA</td><td colspan= "2"><% metoda %></td></tr>
         <tr><td>MIEJSCE WYKONANIA DZIAŁALNOŚCI LABORATORYJNEJ</td><td colspan= "2">W siedzibie laboratorium</td></tr>
         <tr><td rowspan="3"><b>WARUNKI ŚRODOWISKOWE</b></td><td><b>Ciśnienie</b></td><td><% cisnienie %> hPa</td></tr>
@@ -83,6 +83,5 @@ wyłącznie obiektów poddanych wzorcowaniu.</td></tr>
 wartości niepewności stanowią niepewności rozszerzone przy prawdopodobieństwie rozszerzenia ok.
 95% i&nbsp;współczynniku rozszerzenia <i>k</i> = 2.</td></tr>
     </table>
-
 
 </document>

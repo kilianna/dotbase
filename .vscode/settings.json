@@ -1,0 +1,13 @@
+{
+    "triggerTaskOnSave.tasks": {
+        "Build this file": [
+            "input/*.xml",
+        ],
+    },
+    "triggerTaskOnSave.resultIndicator": "statusBar.background",
+    "triggerTaskOnSave.failureColour": "#ff000040",
+    "triggerTaskOnSave.successColour": "#00ff0040",
+    "triggerTaskOnSave.showStatusBarToggle": true,
+    "triggerTaskOnSave.restart": true,
+    "workbench.colorCustomizations": {},
+}
