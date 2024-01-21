@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <p-style id="Normal" name="Normal">
+        <font face="Arial" size="10pt"/>
+    </p-style>
+
+    <section
+        border="single black 0.5mm 5mm, single black 0.5mm 5mm, single black 0.5mm 2.5mm"
+        width="21cm" height="29.7cm"
+        margin="2cm" headerMargin="2cm" footerMargin="1.75cm" />
+
+    <header page="first">
+        <p align="center" preserve="y">
+            <img src="ifj.png" width="2.2cm" height="2cm" horizontal="margin left"
+            vertical="top-margin 3.24cm"
+            /><img src="pca.png" width="1.77cm" height="3cm" horizontal="margin right"
+            vertical="page 2cm"
+            /><img src="ilac-mra.png" width="1.77cm" height="1.77cm" horizontal="margin right"
+            vertical="page 5.4cm"
+            /><b>Laboratorium Wzorcowania Przyrządów Dozymetrycznych</b><br/>
+            Instytut Fizyki Jądrowej im. Henryka Niewodniczańskiego<br/>
+            Polskiej Akademii Nauk<br/>
+            ul. Radzikowskiego 152, PL 31-342 Kraków<br/>
+            tel. 012/6628486, faks 012/6628066, e-mail: wzorcowanie@ifj.edu.pl<br/>
+            <br/>
+            Laboratorium wzorcujące akredytowane przez<br/>
+            Polskie Centrum Akredytacji, sygnatariusza porozumień EA MLA i ILAC MRA<br/>
+            dotyczących wzajemnego uznawania świadectw wzorcowania.<br/>
+            Nr akredytacji AP 029.<br/>
+        </p>
+        <p>
+            <font size="22pt" bold="y">ŚWIADECTWO WZORCOWANIA</font>
+        </p>
+        <p tabs="1cm, 10cm center, 16cm right" border="none, none, single black 0.3mm">
+            <br/>
+            <tab/>Data wydania:&nbsp; 10 stycznia 2024
+            <tab/>Nr świadectwa:&nbsp; <b>18995/2024S</b>
+            <tab/>Strona&nbsp; <page-number/>/<total-pages/><br/>
+        </p>
+    </header>
+
+    <footer page="first">
+        <p align="center" border="single black 0.3mm 2mm, none, none">
+            Niniejsze świadectwo bez zgody Laboratorium nie może być powielane inaczej niż w całości.
+        </p>
+    </footer>
+    
+    <header>
+        <p align="center">ŚWIADECTWO WZORCOWANIA wydane przez LABORATORIUM AKREDYTOWANE Nr AP 029<br/></p>
+        <p tabs="1cm, 10cm center, 16cm right" border="none, none, single black 0.3mm">
+            <tab/>Data wydania:&nbsp; 10 stycznia 2024
+            <tab/>Nr świadectwa:&nbsp; <b>18995/2024S</b>
+            <tab/>Strona&nbsp; <page-number/>/<total-pages/><br/>
+        </p>
+    </header>
+
+    <footer>
+        <p><font size="1mm">&nbsp;</font></p>
+    </footer>
+
+    <table border="none" inside-border="none, none">
+        <tc width="4.5cm" font-bold="y" td-margin="0.9mm 3mm 0.9mm 0mm"/>
+        <tc width="3.5cm" td-margin="0.9mm 0mm 0.9mm 0mm"/>
+        <tc width="9cm" td-margin="0.9mm 0mm 0.9mm 3mm"/>
+        <tr><td rowspan="5">OBIEKT WZORCOWANIA</td><td><b>Nazwa</b></td><td><% nazwa %></td></tr>
+        <tr><td><b>Typ</b></td><td><% typ %></td></tr>
+        <tr><td><b>Numer fabryczny</b></td><td><% nr_fab %></td></tr>
+        <tr><td><b>Producent</b></td><td><% producent %></td></tr>
+        <tr><td><b>Rok produkcji</b></td><td><% rok %></td></tr>
+        <tr><td>ZGŁASZAJĄCY</td><td colspan= "2"><% zleceniodawca %><br/><% adres %></td></tr>
+        <tr><td>METODA WZORCOWANIA</td><td colspan= "2"><% metoda %></td></tr>
+        <tr><td>MIEJSCE WYKONANIA DZIAŁALNOŚCI LABORATORYJNEJ</td><td colspan= "2">W siedzibie laboratorium</td></tr>
+        <tr><td rowspan="3"><b>WARUNKI ŚRODOWISKOWE</b></td><td><b>Ciśnienie</b></td><td><% cisnienie %> hPa</td></tr>
+        <tr><td><b>Temperatura</b></td><td><% temperatura %> <sup>o</sup>C</td></tr>
+        <tr><td><b>Wilgotność</b></td><td><% wilgotnosc %> %</td></tr>
+        <tr><td>DATA PRZYJĘCIA DO WZORCOWANIA</td><td colspan= "2"><% data_przyjecia %></td></tr>
+        <tr><td>DATA WYKONANIA WZORCOWANIA</td><td colspan= "2"><% data_wykonania %></td></tr>
+        <tr><td>SPÓJNOŚĆ POMIAROWA</td><td colspan= "2" p-align="justify">Świadectwo jest wydane w ramach porozumienia EA MLA w zakresie wzorcowania i potwierdza
+spójność wyników pomiarów z jednostkami miar Międzynarodowego Układu Jednostek Miar (SI).</td></tr>
+        <tr><td>WYNIKI WZORCOWANIA</td><td colspan= "2" p-align="justify">Podano na stronie 2 niniejszego świadectwa wraz z wartościami niepewności pomiaru. Wyniki dotyczą
+wyłącznie obiektów poddanych wzorcowaniu.</td></tr>
+        <tr><td>DATA WYKONANIA DO WZORCOWANIA</td><td colspan= "2" p-align="justify">Niepewność wyniku pomiaru została określona zgodnie z dokumentem EA‑4/02&nbsp;M:2022. Podane
+wartości niepewności stanowią niepewności rozszerzone przy prawdopodobieństwie rozszerzenia ok.
+95% i&nbsp;współczynniku rozszerzenia <i>k</i> = 2.</td></tr>
+    </table>
+
+
+</document>
