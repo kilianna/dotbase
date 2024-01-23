@@ -7,7 +7,7 @@
     <section
         border="single black 0.5mm 5mm, single black 0.5mm 5mm, single black 0.5mm 2.5mm"
         width="21cm" height="29.7cm"
-        margin="2cm" headerMargin="2cm" footerMargin="1.75cm" />
+        margin="1cm 0.7cm 1cm 1cm" headerMargin="1cm" footerMargin="1cm" />
 
     <header page="first">
         <p align="center" preserve="y">
@@ -54,14 +54,15 @@
         </p>
     </header>
 
-    <footer>
+    <footer> 
         <p><font size="1mm">&nbsp;</font></p>
     </footer>
 
+    <p> </p>
     <table border="none" inside-border="none, none">
-        <tc width="4.5cm" font-bold="y" td-margin="0.9mm 3mm 0.9mm 0mm"/>
-        <tc width="3.5cm" td-margin="0.9mm 0mm 0.9mm 0mm"/>
-        <tc width="9cm" td-margin="0.9mm 0mm 0.9mm 3mm"/>
+        <tc width="4cm" font-size="9pt" font-bold="y" td-margin="3mm 5mm 0.9mm 0mm"/>
+        <tc width="2.5cm" font-size="9pt" td-margin="1mm 0mm 0.9mm 0mm"/>
+        <tc width="12cm" font-size="9pt" td-margin="1mm 0mm 0.9mm 0mm"/>
         <tr><td rowspan="5">OBIEKT WZORCOWANIA</td><td><b>Nazwa</b></td><td><% nazwa %></td></tr>
         <tr><td><b>Typ</b></td><td><% typ %></td></tr>
         <tr><td><b>Numer fabryczny</b></td><td><% nr_fab %></td></tr>
@@ -69,6 +70,7 @@
         <tr><td><b>Rok produkcji</b></td><td><% rok %></td></tr>
         <tr><td>ZGŁASZAJĄCY</td><td colspan= "2"><p><% zleceniodawca %></p><p><% adres %></p></td></tr>
         <tr><td>METODA WZORCOWANIA</td><td colspan= "2"><% metoda %></td></tr>
+        <tr><td>UZUPEŁNIENIA, ODSTĘPSTWA, OGRANICZENIA METODY</td><td colspan= "2">Nie wystąpiły</td></tr>
         <tr><td>MIEJSCE WYKONANIA DZIAŁALNOŚCI LABORATORYJNEJ</td><td colspan= "2">W siedzibie laboratorium</td></tr>
         <tr><td rowspan="3"><b>WARUNKI ŚRODOWISKOWE</b></td><td><b>Ciśnienie</b></td><td><% cisnienie %> hPa</td></tr>
         <tr><td><b>Temperatura</b></td><td><% temperatura %> <sup>o</sup>C</td></tr>
@@ -79,9 +81,34 @@
 spójność wyników pomiarów z jednostkami miar Międzynarodowego Układu Jednostek Miar (SI).</td></tr>
         <tr><td>WYNIKI WZORCOWANIA</td><td colspan= "2" p-align="justify">Podano na stronie 2 niniejszego świadectwa wraz z wartościami niepewności pomiaru. Wyniki dotyczą
 wyłącznie obiektów poddanych wzorcowaniu.</td></tr>
-        <tr><td>DATA WYKONANIA DO WZORCOWANIA</td><td colspan= "2" p-align="justify">Niepewność wyniku pomiaru została określona zgodnie z dokumentem EA‑4/02&nbsp;M:2022. Podane
-wartości niepewności stanowią niepewności rozszerzone przy prawdopodobieństwie rozszerzenia ok.
-95% i&nbsp;współczynniku rozszerzenia <i>k</i> = 2.</td></tr>
+        <tr><td>NIEPEWNOŚĆ WYNIKU POMIARU</td><td colspan= "2" p-align="justify">Niepewność wyniku pomiaru została określona zgodnie z dokumentem EA‑4/02&nbsp;M:2022. Podane
+wartości niepewności stanowią niepewności rozszerzone przy prawdopodobieństwie rozszerzenia ok.&nbsp;95% i&nbsp;współczynniku rozszerzenia <i>k</i> = 2.</td></tr>
     </table>
+
+<p>
+    <!-- Create PageBreak class object directly into paragraph. -->
+    <PageBreak/> 
+</p>
+
+<p></p>
+
+<table border="none" inside-border="none, none">
+        <tc width="4cm" font-size="9pt" font-bold="y" td-margin="3mm 5mm 0.9mm 0mm"/>
+        <tc width="12.5cm" font-size="9pt" td-margin="1mm 0mm 0.9mm 0mm"/>
+        <tr><td>WYNIKI WZORCOWANIA</td><td>Wyniki przeprowadzonego wzorcowania przedstawiono poniżej:</td></tr>
+</table>
+
+<p></p>
+
+<p>a) Wzorcowanie źródłem gamma: Cs-137; moc przestrzennego równoważnika dawki </p>
+
+<p><br/><br/><br/></p>
+
+<p tabs="16cm right" border="none">
+            <tab/>Autoryzował(a):<br/>
+            <tab/><% autoryzowal %>
+</p>
+
+<p align="center"><br/><br/><br/><b>KONIEC</b></p>
 
 </document>
