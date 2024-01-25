@@ -1,0 +1,27 @@
+{
+    "nr_arkusza": "1c",
+    "nr_karty": "18093/2022",
+    "data": "2022-11-14",
+    "cisnienie": "994,0",
+    "temperatura": "22,5",
+    "wilgotnosc": "19,1",
+    "metoda": "Procedura pomiarowa WZOR-1 (wyd. 6 z dn. 01.09.2022)",
+    "zleceniodawca": "TRITON NDT Ltd.",
+    "id_zleceniodawcy": "868",
+    "nr_w_rejestrze": "23/2024",
+    "wielkosc_fizyczna": "moc przestrzennego równoważnika dawki",
+    "inne_nastawy": "nie dotyczy",
+    "typ": "Terra MKS-05",
+    "sonda": "detektor własny",
+    "nr_fab_przyrzadu": "0907344",
+    "nr_fab_sondy": "nie dotyczy",
+    "id_przyrzadu": "2696",
+    "id_sondy": "3140",
+    "tlo": "0",
+    "napiecie_zasilania_sondy": "nie dotyczy",
+    "uwagi": "Numer poprzedniego świadectwa: 18654/2022.",
+    "osoba_wykonujaca_pomiary": "A. Kilian",
+    "jednostka": "pA/kg"
+
+
+}

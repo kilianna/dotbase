@@ -1,52 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
     <p-style id="Normal" name="Normal">
-        <font face="Arial" size="10pt"/>
+        <font face="Times New Roman" size="12pt"/>
     </p-style>
 
     <section
         width="21cm" height="29.7cm"
-        margin="1cm 0.7cm 1cm 1cm" headerMargin="1.5cm" footerMargin="1.5cm" />
+        margin="2.5cm 2.5cm 2.5cm 2.5cm" headerMargin="1.5cm" footerMargin="1.5cm" />
 
     <header page="first">
         <p align="center" preserve="y">
-            <img src="ifj.png" width="2.2cm" height="2cm" horizontal="margin left"
+            <img src="ifj.png" width="2.5cm" height="2.27cm" horizontal="margin left"
             vertical="top-margin 3.24cm"/>
         </p>
-        <p>
-            <font size="18pt" bold="y">INSTYTUT FIZYKI JĄDROWEJ</font>
+        <p tabs="10cm center">
+            <tab/><font face="Arial Black" size="21pt" bold="y">INSTYTUT FIZYKI JĄDROWEJ<br/></font>
         </p>
-        <p>
-            <font size="12pt"><br/>im. Henryka Niewodniczańskiego <br/>Polskiej Akademii Nauk<br/></font>
+        <p tabs="10cm center">
+            <tab/><font face="Arial Black" size="11pt" bold="y">im. Henryka Niewodniczańskiego</font>
         </p>
-        <p>
-            <font size="14pt" bold="y">Laboratorium Wzorcowania Przyrządów Dozymetrycznych<br/></font>
+        <p tabs="10cm center">
+            <tab/><font face="Arial Black" size="11pt" bold="y">Polskiej Akademii Nauk<br/></font>
         </p>
-        <p tabs="1cm, 10cm center, 16cm right" border="single black 0.3mm, none, single black 0.3mm">
-            <br/>
-            <tab/>ul. Radzikowskiego 152, 31-342 Kraków<br/><u>http://wzorcowanie.ifj.edu.pl</u>
+        <p tabs="10cm center">
+            <tab/><font size="12pt" bold="y">Laboratorium Wzorcowania Przyrządów Dozymetrycznych<br/></font>
+        </p>
+        <p font-size="9pt" font-bold="y" tabs="8.5cm center, 16cm right" border="single black 0.3mm 3mm, none, single black 0.3mm 3mm">
+            ul. Radzikowskiego 152, 31-342 Kraków
             <tab/>Tel.Faks: (+48 12) 662 84 86
             <tab/>e-mail: <u>wzorcowanie@ifj.edu.pl</u>
+            <br/><u>http://wzorcowanie.ifj.edu.pl</u>
         </p>
     </header>
 
 <p align="right"><br/><br/><br/>Kraków, <% data %></p>
-<p align="left"><% zleceniodawca %><br/><% adres %></p>
-<p align="right"><b><% nr_pisma %>/W/LWPD/<% rok %></b></p>
+<p align="left"><% zleceniodawca %><br/><% adres1 %><br/><% adres2 %></p>
+<p font-size="14pt" align="right"><b><% nr_pisma %>/W/LWPD/<% rok %></b></p>
 
-<p>
-    Szanowni Państwo,<br/>
-    uprzejmie informuję, że przyrząd typu <% typ %> nr fab. <% nr_fab %><%sondy%>
-    został wykalibrowany dnia <% data_wzorcowania %> w Laboratorium Wzorcowania Przyrządów Dozymetrycznych Instytutu Fizyki Jądrowej im. Henryka Niewodniczańskiego PAN w Krakowie
-    i otrzymał świadectwo wzorcowania nr <% nr_karty %>/<% rok %><br/>
+<p align="justify">
+    <br/><br/>Szanowni Państwo,
+    <br/>uprzejmie informuję, że przyrząd typu <% typ %> nr fab. <% nr_fab %><%sondy%>
+    został wykalibrowany dnia <% data_wzorcowania %> w&nbsp;Laboratorium Wzorcowania Przyrządów Dozymetrycznych Instytutu Fizyki Jądrowej im.&nbsp;Henryka Niewodniczańskiego PAN w Krakowie
+    i otrzymał świadectwo wzorcowania nr <% nr_karty %>/<% rok %>.<br/>
 </p>
 
-<p><% wzorcowanie_cezem %></p>
+<p align="justify"><% wzorcowanie_cezem %></p>
 <p><br/><br/>Zapraszamy do dalszego korzystania z naszych usług.</p>
 
     <footer page="first">
         <p>
             Załączniki:
+            <br/><% zalacznik_1 %>
+            <br/><% zalacznik_2 %>
         </p>
     </footer>
     

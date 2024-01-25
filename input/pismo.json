@@ -1,7 +1,8 @@
 {
     "data": "17.01.2024",
     "zleceniodawca": "Wojskowy Szpital Kliniczy z Polikliniką",
-    "adres": "ul. R. Weigla 5 <br/> 50-981 Wrocław",
+    "adres1": "ul. R. Weigla 5",
+    "adres2": "50-981 Wrocław",
     "nr_pisma": "125",
     "rok": "2024",
     "typ": "",
@@ -9,5 +10,7 @@
     "sondy": "",
     "data_wzorcowania": "17.01.2024",
     "nr_karty": "19347/2024",
-    "wzorcowanie_cezem": "Informuję także, że zgodnie z rozporządzeniem Rady Ministrów z dnia 23 grudnia 2002 r. w sprawie wymagań dotyczących sprzętu dozymetrycznego (Dziennik Ustaw Nr 239, poz. 2032, z dnia 31 grudnia 2002 r.) termin następnej kalibracji w/w przyrządu upływa z dniem 17 stycznia 2025 r."
+    "wzorcowanie_cezem": "Informuję także, że zgodnie z rozporządzeniem Rady Ministrów z dnia 23 grudnia 2002 r. w sprawie wymagań dotyczących sprzętu dozymetrycznego (Dziennik Ustaw Nr 239, poz. 2032, z dnia 31 grudnia 2002 r.) termin następnej kalibracji w/w przyrządu upływa z dniem 17 stycznia 2025 r.",
+    "zalacznik_1" : "1. Świadectwo Wzorcowania",
+    "zalacznik_2" : "2. Wykres kalibracyjny"
 }
