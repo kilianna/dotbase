@@ -9,7 +9,7 @@
         margin="2cm 1.7cm 2cm 2cm " headerMargin="1.5cm" footerMargin="1.5cm" />
 
     <header page="first">
-<p align="center" font-bold="y" font-size="16pt"><i>Wzorcowanie źródłem Cs-137 - Dawka</i><br/></p>
+<p align="center" font-bold="y" font-size="16pt"><i>Wzorcowanie źródłem Cs-137 - Sygnalizator progowy dawki</i><br/></p>
     </header>
 
 <p tabs="5cm left, 11.5cm left">
@@ -77,15 +77,11 @@
 
     <table width="100%" td-valign="center" p-align="center">
         <tr font-bold="y" >
-            <td>Lp.</td>
-            <td>Wartość wzorcowa<br/>[<% jednostka %>]</td>
-            <td>Wskazania przyrządu<br/>[<% jednostka %>]</td>
+            <td> Wartość wzorcowa<br/>[<% jednostka %>]</td>
+            <td> Rzeczywiste wartości, przy których włączona <br/>zostaje sygnalizacja ostrzegawcza<br/>[<% jednostka %>]</td>
+            <td> Wartość współczynnika <br/> poprawkowego</td>
         </tr>
     </table>
-
-<p align="center">
-<b><br/>Współczynnik</b> <% wspolczynnik %> +/- <% niepewnosc %>
-</p>
 
 <p>
 <b><br/>Uwagi:</b> <% uwagi %>
@@ -102,7 +98,7 @@
 
     <footer page="first">
         <p tabs="16cm right">
-        F2/DAWKA/11.06.2018
+        F5/WZOR-1/11.06.2018
         <tab/>Baza danych Dotbase - autor Anna Kilian
         </p>
     </footer>

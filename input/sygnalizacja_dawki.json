@@ -20,9 +20,9 @@
     "jednostka": "mSv",
     "odleglosc": "288,5",
     "zrodlo": "3",
-    "wspolczynnik": "1,04",
-    "niepewnosc": "0,05",
     "napiecie_zasilania_sondy": "nie dotyczy",
     "inne_nastawy": "nie dotyczy",
     "wielkosc_fizyczna": "indywidualny równoważnik dawki Hp(10)"
+
+
 }
