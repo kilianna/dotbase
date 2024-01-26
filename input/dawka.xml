@@ -9,7 +9,7 @@
         margin="2cm 1.7cm 2cm 2cm " headerMargin="1.5cm" footerMargin="1.5cm" />
 
     <header page="first">
-<p align="center" font-bold="y" font-size="16pt"><i>Wzorcowanie źródłem Cs-137 - Moc dawki</i><br/></p>
+<p align="center" font-bold="y" font-size="16pt"><i>Wzorcowanie źródłem Cs-137 - Dawka</i><br/></p>
     </header>
 
 <p tabs="5cm left, 11.5cm left">
@@ -51,37 +51,29 @@
 <tab/><b>ID</b> <% id_przyrzadu %>
 </p>
 
-<p tabs="7cm left, 15cm left">
+<p tabs="7cm left, 15cm left" border="none, none, single black 0.2mm 1.5mm">
 <b>Sonda</b> <% sonda %>
 <tab/><b>Numer fabryczny sondy</b> <% nr_fab_sondy %>
 <tab/><b>ID</b> <% id_sondy %>
 </p>
 
-<p>
-<b>Napięcie zasilania sondy</b> <% napiecie_zasilania_sondy %> <b>[V]</b>
-</p>
-
-<p border="none, none, single black 0.2mm 1.5mm">
-<b>Inne nastawy przyrządu</b> <% inne_nastawy %>
-</p>
-
 <p tabs="13cm left">
-<b>Wielkość fizyczna</b> <% wielkosc_fizyczna %>
-<tab/><b>Tło</b> <% tlo %> <b>[<% jednostka %>]</b>
+<b>Odległość</b> <% odleglosc %> <b>[cm]</b>
+<tab/><b>Źródło</b> <% zrodlo %>
 </p>
 <p></p>
 
     <table width="100%" td-valign="center" p-align="center">
         <tr font-bold="y" >
             <td>Lp.</td>
-            <td>Odległość</td>
-            <td>Źródło</td>
-            <td>Wartość<br/>wzorcowa<br/>[<% jednostka %>]</td>
-            <td>Wartość<br/>zmierzona<br/>[<% jednostka %>]</td>
-            <td>Wahanie<br/>wskazania<br/>+/-</td>
-            <td>Zakres<br/>pomiarowy</td>
+            <td>Wartość wzorcowa<br/>[<% jednostka %>]</td>
+            <td>Wskazania przyrządu<br/>[<% jednostka %>]</td>
         </tr>
     </table>
+
+<p align="center">
+<b><br/>Współczynnik</b> <% wspolczynnik %> +/- <% niepewnosc %>
+</p>
 
 <p>
 <b><br/>Uwagi:</b> <% uwagi %>
@@ -98,7 +90,7 @@
 
     <footer page="first">
         <p tabs="16cm right">
-        F1/WZOR-1/11.06.2018
+        F2/DAWKA/11.06.2018
         <tab/>Baza danych Dotbase - autor Anna Kilian
         </p>
     </footer>
