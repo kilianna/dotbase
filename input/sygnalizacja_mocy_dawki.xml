@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <p-style id="Normal" name="Normal">
+        <font face="Times New Roman" size="11pt"/>
+    </p-style>
+
+    <section
+        width="21cm" height="29.7cm"
+        margin="2cm 1.7cm 2cm 2cm " headerMargin="1.5cm" footerMargin="1.5cm" />
+
+    <header page="first">
+<p align="center" font-bold="y" font-size="16pt"><i>Wzorcowanie źródłem Cs-137 - Sygnalizator progowy mocy dawki</i><br/></p>
+    </header>
+
+<p tabs="5cm left, 11.5cm left">
+<b>Arkusz pomiarowy nr</b> <% nr_arkusza %>
+<tab/><b>dla karty przyjęcia nr</b> <% nr_karty %>
+<tab/><b>Data</b> <% data %>
+</p>
+
+<p tabs="5cm left, 11.5cm left">
+<b>Ciśnienie</b> <% cisnienie %> <b>[hPa]</b>
+<tab/><b>Temperatura</b> <% temperatura %> <b>[<sup>o</sup>C]</b>
+<tab/><b>Wilgotność względna</b> <% wilgotnosc %> <b>[%]</b>
+</p>
+
+<p>
+<b>Stanowisko</b> Hala kalibracyjna stanowisko WZOR-1
+</p>
+
+<p border="none, none, single black 0.2mm 1.5mm">
+<b>Metoda wzorcowania</b> <% metoda %>
+</p>
+
+<p>
+<b>Zleceniodawca</b> <% zleceniodawca %>
+</p>
+
+<p tabs="8cm left" border="none, none, single black 0.2mm 1.5mm">
+<b>ID zleceniodawcy</b> <% id_zleceniodawcy %>
+<tab/><b>Numer w rejestrze zleceń</b> <% nr_w_rejestrze %>
+</p>
+
+<p>
+<b>Dane przyrządu</b>
+</p>
+
+<p tabs="7cm left, 15cm left">
+<b>Typ</b> <% typ %>
+<tab/><b>Numer fabryczny przyrządu</b> <% nr_fab_przyrzadu %>
+<tab/><b>ID</b> <% id_przyrzadu %>
+</p>
+
+<p tabs="7cm left, 15cm left">
+<b>Sonda</b> <% sonda %>
+<tab/><b>Numer fabryczny sondy</b> <% nr_fab_sondy %>
+<tab/><b>ID</b> <% id_sondy %>
+</p>
+
+<p>
+<b>Napięcie zasilania sondy</b> <% napiecie_zasilania_sondy %> <b>[V]</b>
+</p>
+
+<p border="none, none, single black 0.2mm 1.5mm">
+<b>Inne nastawy przyrządu</b> <% inne_nastawy %>
+</p>
+
+<p>
+<b>Wielkość fizyczna</b> <% wielkosc_fizyczna %><br/>
+</p>
+
+    <table width="100%" td-valign="center" p-align="center">
+        <tr font-bold="y" >
+            <td> Ustawiony próg<br/>[<% jednostka %>]</td>
+            <td> Rzeczywiste wartości, przy których włączona <br/>zostaje sygnalizacja ostrzegawcza<br/>[<% jednostka %>]</td>
+            <td> Wartość współczynnika <br/> poprawkowego</td>
+        </tr>
+    </table>
+
+<p>
+<b><br/>Uwagi:</b> <% uwagi %>
+</p>
+
+<p>
+<b><br/>Osoba wykonująca pomiary</b> <% osoba_wykonujaca_pomiary %> <b> ......................</b>
+</p>
+
+<p>
+<b><br/>Sprawdził ......................</b>
+</p>
+
+
+    <footer page="first">
+        <p tabs="16cm right">
+        F4/WZOR-1/11.06.2018
+        <tab/>Baza danych Dotbase - autor Anna Kilian
+        </p>
+    </footer>
+    
+    
+
+</document>
