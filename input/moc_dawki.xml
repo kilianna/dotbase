@@ -6,19 +6,19 @@
 
     <section
         width="21cm" height="29.7cm"
-        margin="2cm 2.5cm 1.7cm 1.7cm" headerMargin="1.5cm" footerMargin="1.5cm" />
+        margin="2cm 1.7cm 2cm 2cm " headerMargin="1.5cm" footerMargin="1.5cm" />
 
     <header page="first">
 <p align="center" font-bold="y" font-size="16pt"><i>Wzorcowanie źródłem Cs-137 - Moc dawki</i><br/></p>
     </header>
 
-<p tabs="5cm left, 10cm left">
+<p tabs="5cm left, 11.5cm left">
 <b>Arkusz pomiarowy nr</b> <% nr_arkusza %>
 <tab/><b>dla karty przyjęcia nr</b> <% nr_karty %>
 <tab/><b>Data</b> <% data %>
 </p>
 
-<p tabs="5cm left, 10cm left">
+<p tabs="5cm left, 11.5cm left">
 <b>Ciśnienie</b> <% cisnienie %> <b>[hPa]</b>
 <tab/><b>Temperatura</b> <% temperatura %> <b>[<sup>o</sup>C]</b>
 <tab/><b>Wilgotność względna</b> <% wilgotnosc %> <b>[%]</b>
@@ -45,7 +45,7 @@
 <b>Dane przyrządu</b>
 </p>
 
-<p tabs="8cm left" border="none, none, single black 0.2mm 1.5mm">
+<p tabs="8cm left">
 <b>Typ</b> <% typ %>
 <tab/><b>Numer fabryczny przyrządu</b> <% nr_fab_przyrzadu %>
 </p>
@@ -72,29 +72,30 @@
 <p border="none, none, single black 0.2mm 1.5mm">
 <b>Inne nastawy przyrządu</b> <% inne_nastawy %>
 </p>
+<p></p>
 
-    <table width="100%" >
-        <tr multiline="y" font-bold="y">
+    <table width="100%" td-valign="center" p-align="center">
+        <tr font-bold="y" >
             <td>Lp.</td>
             <td>Odległość</td>
             <td>Źródło</td>
-            <td>Wartość<br/>wzorcowa [<% jednostka %>]</td>
-            <td>Wartość zmierzona [<% jednostka %>]</td>
-            <td>Wahanie wskazania<br/>+/-</td>
-            <td>Zakres pomiarowy</td>
+            <td>Wartość<br/>wzorcowa<br/>[<% jednostka %>]</td>
+            <td>Wartość<br/>zmierzona<br/>[<% jednostka %>]</td>
+            <td>Wahanie<br/>wskazania<br/>+/-</td>
+            <td>Zakres<br/>pomiarowy</td>
         </tr>
     </table>
 
 <p>
-<b>Uwagi</b> <% uwagi %>
+<b><br/>Uwagi:</b> <% uwagi %>
 </p>
 
 <p>
-<b>Osoba wykonująca pomiary</b> <% osoba_wykonujaca_pomiary %> <b> ......................</b>
+<b><br/>Osoba wykonująca pomiary</b> <% osoba_wykonujaca_pomiary %> <b> ......................</b>
 </p>
 
 <p>
-<b>Sprawdził ......................</b>
+<b><br/>Sprawdził ......................</b>
 </p>
 
 
