@@ -9,7 +9,5 @@
     "triggerTaskOnSave.successColour": "#00ff0040",
     "triggerTaskOnSave.showStatusBarToggle": true,
     "triggerTaskOnSave.restart": true,
-    "workbench.colorCustomizations": {
-        "statusBar.background": "#00ff0040"
-    },
+    "workbench.colorCustomizations": {},
 }
