@@ -68,7 +68,7 @@
 <p tabs="6cm left, 11cm left" spacing="2mm 0mm">
 <b>Źródło</b> <% zrodlo %>
 <tab/><b>Nr źródła</b> <% nr_zrodla %>
-<tab/><b>Aktualna emisja pow.</b> <% id_przyrzadu %> <b>[cm<sup>-2</sup>s<sup>-1</sup>]</b>
+<tab/><b>Aktualna emisja pow.</b> <% aktualna_emisja %> <b>[cm<sup>-2</sup>s<sup>-1</sup>]</b>
 </p>
 
 <p tabs="6cm left, 11cm left" spacing="0cm 4mm">
@@ -77,7 +77,9 @@
 <tab/><b>odległość sonda-źródło</b> <% odleglosc_sonda_zrodlo %> <b>[mm]</b>
 </p>
 
-    <table width="50%" td-valign="center" p-align="center">
+    <table align="center" td-valign="center" p-align="center">
+        <tc width="5cm"/>
+        <tc width="5cm"/>
         <tr font-bold="y" >
             <td>Wskazanie przyrządu<br/>[<% jednostka %>]</td>
             <td>Tło<br/>[<% jednostka %>]</td>
