@@ -2,6 +2,7 @@
 /dotbase/bin/Debug/
 /dotbase/bin/Release/
 /dotbase/bin/wyniki/**/*.html
+/dotbase/bin/wyniki/**/*.docx
 *.user
 *.suo
 /*.pdf
