@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <p-style id="Normal" name="Normal">
+        <font face="Times New Roman" size="12pt"/>
+    </p-style>
+
+    <section
+        width="21cm" height="29.7cm"
+        margin="2.5cm 2.5cm 2.5cm 2.5cm" headerMargin="1.5cm" footerMargin="1.5cm" />
+
+    <header page="first">
+    <p align="right">Kraków, dnia <% data %></p>
+    <p align="right">Nr ewid. pracy: <b>N82002</b></p>
+    <p align="right">Nr świad. <b><% nr_swiadectw %></b></p>
+    <p align="right"><b>Data sprzedaży: <% data_sprzedazy %></b></p>
+
+    <p></p>
+
+    <p align="center">MELDUNEK<br/>O WYKONANIU PRACY</p>
+    <p></p>
+    <p align="center"><u>Dział planowania ekonomicznego w/m</u></p>
+    <p></p>
+    </header>
+
+<p>
+Symbol pozycji planu i nazwa pracy: <b>wzorcowanie aparatury dozymetrycznej:</b><br/></p>
+
+<p tabs="16cm right">
+<b><% lista_radiometrow %> 
+<tab/><% lista_cen %></b>
+</p>
+
+
+<p></p>
+<p tabs="5cm left">
+<b>Zleceniodawca:</b>
+<tab/> <b><% zleceniodawca %></b>
+</p>
+<p tabs="5cm left">
+<tab/> <b><% adres1 %></b>
+</p>
+<p tabs="5cm left">
+<tab/> <b><% adres2 %><br/></b>
+</p>
+<p tabs="5cm left">
+<tab/> NIP <% nip %><br/>
+</p>
+<p tabs="5cm left">
+<b>Uwagi:</b>
+<tab/> <u><b>Koszt netto:<% koszt %> zł</b></u>
+</p>
+<p tabs="5cm left">
+<tab/> Termin płatności: 30 dni
+</p>
+
+<p><br/>Na fakturze proszę umieścić numer: <% nr_na_fakturze %></p>
+<p></p><p></p>
+
+<p tabs="8cm left">
+Główny wykonawca:
+<tab/>Kierownik zakładu:
+</p>
+
+
+    <footer page="first" >
+        <p tabs="18cm right">
+            Załączniki:
+            <br/>1. Kopia zamówienia
+            <tab/> F1/PS-03/15.06.2014
+        </p>
+    </footer>
+    
+    
+
+</document>
