@@ -12,48 +12,48 @@
 <p align="center" font-bold="y" font-size="16pt"><i>Wzorcowanie źródłem Cs-137 - Dawka</i><br/></p>
     </header>
 
-<p tabs="5cm left, 11.5cm left">
-<b>Arkusz pomiarowy nr</b> <% nr_arkusza %>
-<tab/><b>dla karty przyjęcia nr</b> <% nr_karty %>
-<tab/><b>Data</b> <% data %>
-</p>
-
-<p tabs="5cm left, 11.5cm left">
-<b>Ciśnienie</b> <% cisnienie %> <b>[hPa]</b>
-<tab/><b>Temperatura</b> <% temperatura %> <b>[<sup>o</sup>C]</b>
-<tab/><b>Wilgotność względna</b> <% wilgotnosc %> <b>[%]</b>
+<p tabs="6cm left, 11cm left" spacing="0cm 2mm">
+<b>Data</b> <% data %>
+<tab/><b>Arkusz pomiarowy</b> <% nr_arkusza %>
+<tab/><b>Karta przyjęcia</b> <% nr_karty %>
 </p>
 
 <p>
 <b>Stanowisko</b> Hala kalibracyjna stanowisko WZOR-1
 </p>
 
-<p border="none, none, single black 0.2mm 1.5mm">
+<p>
 <b>Metoda wzorcowania</b> <% metoda %>
 </p>
 
-<p>
+<p tabs="6cm left, 11cm left" border="none, none, single black 0.2mm 2mm">
+<b>Ciśnienie</b> <% cisnienie %> <b>[hPa]</b>
+<tab/><b>Temperatura</b> <% temperatura %> <b>[<sup>o</sup>C]</b>
+<tab/><b>Wilgotność</b> <% wilgotnosc %> <b>[%]</b>
+</p>
+
+<p spacing="2mm 0mm">
 <b>Zleceniodawca</b> <% zleceniodawca %>
 </p>
 
-<p tabs="8cm left" border="none, none, single black 0.2mm 1.5mm">
+<p tabs="8cm left" border="none, none, single black 0.2mm 2mm">
 <b>ID zleceniodawcy</b> <% id_zleceniodawcy %>
 <tab/><b>Numer w rejestrze zleceń</b> <% nr_w_rejestrze %>
 </p>
 
-<p>
+<p spacing="2mm 2mm">
 <b>Dane przyrządu</b>
 </p>
 
-<p tabs="7cm left, 15cm left">
+<p tabs="8cm left, 15cm left">
 <b>Typ</b> <% typ %>
-<tab/><b>Numer fabryczny przyrządu</b> <% nr_fab_przyrzadu %>
+<tab/><b>Nr fab. przyrządu</b> <% nr_fab_przyrzadu %>
 <tab/><b>ID</b> <% id_przyrzadu %>
 </p>
 
-<p tabs="7cm left, 15cm left">
+<p tabs="8cm left, 15cm left" spacing="0cm 2mm">
 <b>Sonda</b> <% sonda %>
-<tab/><b>Numer fabryczny sondy</b> <% nr_fab_sondy %>
+<tab/><b>Nr fab. sondy</b> <% nr_fab_sondy %>
 <tab/><b>ID</b> <% id_sondy %>
 </p>
 
@@ -61,21 +61,23 @@
 <b>Napięcie zasilania sondy</b> <% napiecie_zasilania_sondy %> <b>[V]</b>
 </p>
 
-<p border="none, none, single black 0.2mm 1.5mm">
+<p border="none, none, single black 0.2mm 2mm">
 <b>Inne nastawy przyrządu</b> <% inne_nastawy %>
 </p>
 
-<p>
+<p spacing="2mm 0mm">
 <b>Wielkość fizyczna</b> <% wielkosc_fizyczna %>
 </p>
 
-<p tabs="13cm left">
+<p tabs="13cm left" spacing="0mm 4mm">
 <b>Odległość</b> <% odleglosc %> <b>[cm]</b>
 <tab/><b>Źródło</b> <% zrodlo %>
 </p>
-<p></p>
 
-    <table width="100%" td-valign="center" p-align="center">
+    <table align="center" td-valign="center" p-align="center">
+        <tc width="1.2cm"/>
+        <tc width="5cm"/>
+        <tc width="5cm"/>
         <tr font-bold="y" >
             <td>Lp.</td>
             <td>Wartość wzorcowa<br/>[<% jednostka %>]</td>
@@ -87,22 +89,22 @@
 <b><br/>Współczynnik</b> <% wspolczynnik %> +/- <% niepewnosc %>
 </p>
 
-<p>
-<b><br/>Uwagi:</b> <% uwagi %>
+<p spacing="3mm 0mm">
+<b>Uwagi:</b> <% uwagi %>
 </p>
 
-<p>
-<b><br/>Osoba wykonująca pomiary</b> <% osoba_wykonujaca_pomiary %> <b> ......................</b>
+<p spacing="10mm 0mm" align="right">
+<b>Osoba wykonująca pomiary</b> <% osoba_wykonujaca_pomiary %> <b> .....................................................</b>
 </p>
 
-<p>
-<b><br/>Sprawdził ......................</b>
+<p spacing="10mm 0mm" align="right">
+<b>Sprawdził(a) ......................................................</b>
 </p>
 
 
     <footer page="first">
-        <p tabs="16cm right">
-        F2/DAWKA/11.06.2018
+        <p tabs="18cm right">
+        F2/WZOR-1/11.06.2018
         <tab/>Baza danych Dotbase - autor Anna Kilian
         </p>
     </footer>
