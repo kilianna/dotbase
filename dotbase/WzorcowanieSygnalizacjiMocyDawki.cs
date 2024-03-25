@@ -699,36 +699,59 @@ namespace DotBase
         {
             if ("" != Pomiary.Uwagi)
             {
-                _Zapytanie = String.Format("INSERT INTO Sygnalizacja VALUES ({0}, 0.0, 0.0, 0.0, '{1}', 0.0, 0.0, 0.0, 0.0)",
-                                    _DaneOgolneDoZapisu.IdWzorcowania, Pomiary.Uwagi);
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
+                _BazaDanych.Sygnalizacja
+                    .INSERT()
+                        .ID_wzorcowania(Int32.Parse(_DaneOgolneDoZapisu.IdWzorcowania))
+                        .Prog(0.0)
+                        .Niepewnosc(0.0)
+                        .Wartosc_zmierzona(0.0)
+                        .Uwagi(Pomiary.Uwagi)
+                        .odleglosc1(0.0)
+                        .odleglosc2(0.0)
+                        .zrodlo1(0.0)
+                        .zrodlo2(0.0)
+                        .Wspolczynnik(0.0)
+                        .Niepewnosc_Wspolczynnika(0.0)
+                    .INFO("Dodanie pustych wyników, gdy uwagi nie są puste.")
+                    .EXECUTE();
             }
             else
             {
                 for (int i = 0; i < Pomiary.Dane.Count; ++i)
                 {
-                    _Zapytanie = String.Format("INSERT INTO Sygnalizacja VALUES ({0}, '{1}', '{2}', '{3}', '', '{4}', '{5}', '{6}', '{7}')",
-                                 _DaneOgolneDoZapisu.IdWzorcowania, Pomiary.Dane[i].Prog, Pomiary.Dane[i].Niepewnosc,
-                                 Pomiary.Dane[i].WartoscZmierzona, Pomiary.Dane[i].Odleglosc1, Pomiary.Dane[i].Odleglosc2,
-                                 Pomiary.Dane[i].Zrodlo1, Pomiary.Dane[i].Zrodlo2);
-                    _BazaDanych.WykonajPolecenie(_Zapytanie);
+                    _BazaDanych.Sygnalizacja
+                        .INSERT()
+                            .ID_wzorcowania(Int32.Parse(_DaneOgolneDoZapisu.IdWzorcowania))
+                            .Prog(Pomiary.Dane[i].Prog)
+                            .Niepewnosc(Pomiary.Dane[i].Niepewnosc)
+                            .Wartosc_zmierzona(Pomiary.Dane[i].WartoscZmierzona)
+                            .Uwagi("")
+                            .odleglosc1(Pomiary.Dane[i].Odleglosc1)
+                            .odleglosc2(Pomiary.Dane[i].Odleglosc2)
+                            .zrodlo1(Pomiary.Dane[i].Zrodlo1)
+                            .zrodlo2(Pomiary.Dane[i].Zrodlo2)
+                            .Wspolczynnik(Pomiary.Dane[i].Wspolczynnik)
+                            .Niepewnosc_Wspolczynnika(Pomiary.Dane[i].NiepewnoscWspolczynnika)
+                        .INFO("Dodanie wyników.")
+                        .EXECUTE();
                 }
 
-                try
-                {
-                    _Zapytanie = String.Format("SELECT id_protokolu FROM Protokoly_kalibracji_lawy WHERE data_kalibracji=#{0}#", Pomiary.Protokol);
-                    short idProtokolu = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<short>(0);
+                _Zapytanie = String.Format("SELECT id_protokolu FROM Protokoly_kalibracji_lawy WHERE data_kalibracji=#{0}#", Pomiary.Protokol);
+                short idProtokolu = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<short>(0);
 
-                    _Zapytanie = String.Format("SELECT id_jednostki FROM Jednostki WHERE jednostka='{0}'", Pomiary.Jednostka);
-                    int idJednostki = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0);
+                _Zapytanie = String.Format("SELECT id_jednostki FROM Jednostki WHERE jednostka='{0}'", Pomiary.Jednostka);
+                int idJednostki = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0);
 
-                    _Zapytanie = String.Format("UPDATE Wzorcowanie_cezem SET id_protokolu = {0}, id_jednostki = {1}, tlo = 0.0, wielkosc_fizyczna = 'nie dotyczy'  WHERE id_wzorcowania = {2}",
-                                               idProtokolu, idJednostki, _DaneOgolneDoZapisu.IdWzorcowania);
-                    _BazaDanych.WykonajPolecenie(_Zapytanie);
-                }
-                catch (Exception)
-                {
-                }
+                _BazaDanych.wzorcowanie_cezem
+                    .UPDATE()
+                        .ID_protokolu(idProtokolu)
+                        .ID_jednostki(idJednostki)
+                        .Tlo("0.0")
+                        .Wielkosc_fizyczna("nie dotyczy")
+                    .WHERE()
+                        .ID_wzorcowania(Int32.Parse(_DaneOgolneDoZapisu.IdWzorcowania))
+                    .INFO("Aktualizacja wzorcowania cezem podczas dodawania wyników.")
+                    .EXECUTE();
             }
 
             return true;
