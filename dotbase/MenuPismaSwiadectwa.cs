@@ -76,17 +76,11 @@ namespace DotBase
 
         private void generujSwiadectwo(Jezyk jezykSwiadectwa)
         {
-            DataTable table = _Baza.TworzTabeleDanych("SELECT Data_przyjecia " +
-                "FROM Zlecenia INNER JOIN Karta_przyjecia " +
-                "ON Zlecenia.ID_zlecenia = Karta_przyjecia.ID_zlecenia " +
-                "WHERE Karta_przyjecia.ID_karty=?", _NumerKarty);
-
             var szablon = new swiad_wzor();
             szablon.jezyk = jezykSwiadectwa;
             szablon.nr_karty = _NumerKarty;
             szablon.data_wydania = dataWystawienia.Value;
             szablon.data_wykonania = dataWykonania.Value;
-            szablon.data_przyjecia = table.Rows[0].Field<DateTime>("Data_przyjecia");
             szablon.sprawdzil = textBox4.Text;
             szablon.poprawa = poprawa.Checked;
             szablon.uwMD = uwMD.Text;
@@ -95,6 +89,11 @@ namespace DotBase
             szablon.uwSMD = uwSMD.Text;
             szablon.uwSD = uwSD.Text;
             szablon.Generate(this);
+
+            DataTable table = _Baza.TworzTabeleDanych("SELECT Data_przyjecia " +
+                "FROM Zlecenia INNER JOIN Karta_przyjecia " +
+                "ON Zlecenia.ID_zlecenia = Karta_przyjecia.ID_zlecenia " +
+                "WHERE Karta_przyjecia.ID_karty=?", _NumerKarty);
 
             Program.zmienJezyk(jezykSwiadectwa);
             string sciezka = _DocumentationPathsLoader.GetPath("SwiadectwoWynik", jezykSwiadectwa) + _NumerKarty + poprawaSuffix() + "SwiadectwoWynik";

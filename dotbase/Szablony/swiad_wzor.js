@@ -1,16 +1,7 @@
 ﻿
 // ------------------------------------ STAŁE ------------------------------------
 
-const metody = {
-	wzor1: 'Procedura pomiarowa WZOR-1 (wyd. 7 z dn. 15.09.2023)',
-	wzor2: 'Procedura pomiarowa WZOR-2 (wyd. 6 z dn. 15.09.2023)',
-	wzor1wzor2: 'Procedura pomiarowa WZOR-1 (wyd. 7 z dn. 15.09.2023) oraz procedura pomiarowa WZOR-2 (wyd. 6 z dn. 15.09.2023)',
-};
-
-const spojnosciPomiarowe = {
-    gum: 'Świadectwo jest wydane w ramach porozumienia EA MLA w zakresie wzorcowania i potwierdza spójność wyników pomiarów z wzorcami utrzymanymi w GUM.',
-    si: 'Świadectwo jest wydane w ramach porozumienia EA MLA w zakresie wzorcowania i potwierdza spójność wyników pomiarów z jednostkami miar Międzynarodowego Układu Jednostek Miar (SI).',
-};
+/* TODO:
 
 // ------------------------------------ METODA ------------------------------------
 
@@ -39,11 +30,6 @@ for (let wiersz of [...tabelaMD, ...tabelaD, ...tabelaSM, ...tabelaSD, ...tabela
 
 // ------------------------------ Nr świadectwa ------------------------------
 
-nr_swiadectwa =  nr_karty + '/' + data_wydania.rok;
-if (poprawa) {
-    nr_swiadectwa += 'P';
-}
-
 // ------------------------------ Spojnosci Pomiarowe ------------------------------
 
 spojnoscPomiarowa =
@@ -52,7 +38,6 @@ spojnoscPomiarowa =
     : spojnosciPomiarowe.si;
 
 
-/* TODO:
 
                 var skazeniaIlosc = szablon.tabelaS.Count;
                 var nieSkazeniaIlosc = szablon.tabelaMD.Count + szablon.tabelaD.Count + szablon.tabelaSM.Count + szablon.tabelaSD.Count;
