@@ -16,6 +16,7 @@ namespace DotBase
             UPDATE,
             INSERT,
             DELETE,
+            SELECT,
         }
 
         private struct ValueWithOleDbType
@@ -113,7 +114,19 @@ namespace DotBase
 
             protected void AddField(string name)
             {
-                throw new NotImplementedException();
+                if (!where && typPolecenia == TypPolecenia.SELECT)
+                {
+                    if (!firstEntry)
+                    {
+                        query += ", ";
+                    }
+                    firstEntry = false;
+                    query += name;
+                }
+                else
+                {
+                    throw new ApplicationException("Nieprawidłowa składnia polecenia!");
+                }
             }
 
             protected void SetFieldSubquery(string name, Tabela subquery)
@@ -149,10 +162,31 @@ namespace DotBase
                 query = "DELETE FROM " + nazwa;
             }
 
+            protected void _SELECT()
+            {
+                if (typPolecenia != TypPolecenia.NONE)
+                    throw new ApplicationException("Nieprawidłowa składnia polecenia!");
+                typPolecenia = TypPolecenia.SELECT;
+                query = "SELECT ";
+            }
+
             protected void _WHERE()
             {
-                if (typPolecenia == TypPolecenia.NONE || typPolecenia == TypPolecenia.INSERT || where)
+                if (typPolecenia == TypPolecenia.INSERT || where)
                     throw new ApplicationException("Nieprawidłowa składnia polecenia!");
+
+                if (typPolecenia == TypPolecenia.NONE)
+                {
+                    typPolecenia = TypPolecenia.SELECT;
+                    query = "SELECT ";
+                }
+
+                if (typPolecenia == TypPolecenia.SELECT)
+                {
+                    if (firstEntry)
+                        query += "*";
+                    query += " FROM " + nazwa;
+                }
                 query += " WHERE ";
                 selectQuery += " AND ";
                 logParameters += ",\r\n";
@@ -165,6 +199,12 @@ namespace DotBase
                 OleDbCommand cmd;
                 CloseQuery();
                 bool skipLog = false;
+
+                if (typPolecenia == TypPolecenia.SELECT)
+                {
+                    throw new ApplicationException("Nieprawidłowa składnia polecenia!");
+                }
+
                 if (typPolecenia == TypPolecenia.UPDATE)
                 {
                     try
@@ -234,6 +274,23 @@ namespace DotBase
                 return true;
             }
 
+            protected DataTable _GET()
+            {
+                DataTable dane = new DataTable();
+                var cmd = baza.UtworzProstePolecenie(query);
+                try
+                {
+                    addParameters(cmd);
+                    OleDbDataAdapter adapter = new OleDbDataAdapter(cmd);
+                    adapter.Fill(dane);
+                }
+                finally
+                {
+                    BazaDanychWrapper.Rozlacz();
+                }
+                return dane;
+            }
+
             private void addParameters(OleDbCommand cmd)
             {
                 for (int i = 0; i < parameters.Count; i++)
@@ -275,5 +332,27 @@ namespace DotBase
             public long LastId { get { if (!lastIdValid) throw new ApplicationException("Last row ID is invalid!"); return lastId; } }
         }
 
+        public class Wiersz
+        {
+            public static Dictionary<string, int> GetColsDict(DataRow row)
+            {
+                return GetColsDict(row.Table.Columns);
+            }
+
+            public static Dictionary<string, int> GetColsDict(DataTable table)
+            {
+                return GetColsDict(table.Columns);
+            }
+
+            public static Dictionary<string, int> GetColsDict(DataColumnCollection dataColumnCollection)
+            {
+                var result = new Dictionary<string, int>(dataColumnCollection.Count);
+                for (var i = 0; i < dataColumnCollection.Count; i++) {
+                    var col = dataColumnCollection[i];
+                    result[col.ColumnName] = i;
+                }
+                return result;
+            }
+        }
     }
 }
