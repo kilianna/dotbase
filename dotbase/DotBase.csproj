@@ -555,6 +555,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SzablonBazy.txt" />
+    <Content Include="Szablony\swiad_wzor-en.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Szablony\ifj.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -569,6 +573,7 @@
     </Content>
     <Content Include="Szablony\swiad_wzor.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Szablony\wspolne.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

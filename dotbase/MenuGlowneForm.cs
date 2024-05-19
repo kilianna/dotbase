@@ -112,7 +112,7 @@ namespace DotBase
         private void button6_Click(object sender, EventArgs e)
         {
             var dat = new Szablony.swiad_wzor();
-            dat.nr_karty = "______";
+            dat.nr_karty = 99999999;
             dat.jezyk = Jezyk.EN;
             dat.Generate(this);
         }
