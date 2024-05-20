@@ -37,6 +37,8 @@ namespace DotBase.Szablony
     {
         public Constants stale;
         public Jezyk jezyk;
+        public Szablon.Row_Slownik[] slownik;
+        protected BazaDanychWrapper baza = new BazaDanychWrapper();
 
         protected abstract string FileName { get; }
 
@@ -52,6 +54,7 @@ namespace DotBase.Szablony
 
         public void Generate(IWin32Window owner)
         {
+            slownik = baza.Slownik.GET();
             bool valid = PreProcess(owner);
             if (valid)
             {
