@@ -33,6 +33,11 @@ namespace DotBase.Szablony
         }
     }
 
+    class ProcessingException : ApplicationException
+    {
+        public ProcessingException(string message) : base(message) { }
+    }
+
     abstract class DocxData
     {
         public Constants stale;
@@ -54,19 +59,27 @@ namespace DotBase.Szablony
 
         public void Generate(IWin32Window owner)
         {
-            slownik = baza.Slownik.GET();
-            bool valid = PreProcess(owner);
-            if (valid)
+            try
             {
-                Type thisType = this.GetType();
-                var win = new DocxWindow();
-                var outputFile = Path.Combine(N.getProgramDir(), FileName);
-                var templateFile = String.Format(@"{0}\Szablony\{1}{2}.xml", N.getProgramDir(), thisType.Name, JezykTools.kocowka(jezyk));
-                if (!File.Exists(templateFile)) {
-                    templateFile = String.Format(@"{0}\Szablony\{1}.xml", N.getProgramDir(), thisType.Name);
+                slownik = baza.Slownik.GET();
+                bool valid = PreProcess(owner);
+                if (valid)
+                {
+                    Type thisType = this.GetType();
+                    var win = new DocxWindow();
+                    var outputFile = Path.Combine(N.getProgramDir(), FileName);
+                    var templateFile = String.Format(@"{0}\Szablony\{1}{2}.xml", N.getProgramDir(), thisType.Name, JezykTools.kocowka(jezyk));
+                    if (!File.Exists(templateFile))
+                    {
+                        templateFile = String.Format(@"{0}\Szablony\{1}.xml", N.getProgramDir(), thisType.Name);
+                    }
+                    win.generate(owner, templateFile, this, outputFile);
+                    win.Dispose();
                 }
-                win.generate(owner, templateFile, this, outputFile);
-                win.Dispose();
+            }
+            catch (ProcessingException ex)
+            {
+                MessageBox.Show(owner, ex.Message, "Błąd przetwarzania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -81,6 +94,12 @@ namespace DotBase.Szablony
             {
                 return new string('x', count);
             }
+        }
+
+        protected static double Wymagany(double? x, string message)
+        {
+            if (x == null) throw new ProcessingException(message);
+            return x ?? default(double);
         }
     }
 }
