@@ -9,7 +9,7 @@ namespace DotBase
 {
     class WzorcowanieDawka : WzorcowanieCez
     {
-        public enum ROWNOWAZNIKI_DAWKI { Indywidualny_HP07, Indywidualny_HP10, Przestrzenny};
+        public enum ROWNOWAZNIKI_DAWKI { Indywidualny_HP07, Indywidualny_HP10, Przestrzenny, Kerma };
 
         public KlasyPomocniczeDawka.DawkaWartosciWzorcowoPomiarowe Pomiary { get; protected set; }
         public KlasyPomocniczeDawka.DawkaWspolczynniki Wspolczynniki { get; protected set; }
