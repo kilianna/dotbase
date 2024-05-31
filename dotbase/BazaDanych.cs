@@ -14,6 +14,16 @@ using System.Collections.Specialized;
 
 namespace DotBase
 {
+    class Order {
+        public string keyword;
+        public Order(string keyword)
+        {
+            this.keyword = keyword;
+        }
+        public static Order ASC = new Order("");
+        public static Order DESC = new Order(" DESC");
+    }
+
     partial class BazaDanychWrapper
     {
         private static string _ConnectionString;
@@ -982,6 +992,7 @@ namespace DotBase
                         public Szablon_{0} WHERE() {{ _WHERE(); return this; }}
                         public Szablon_{0} INFO(string text) {{ _INFO(text); return this; }}
                         public Szablon_{0} SELECT() {{ _SELECT(); return this; }}
+                        public Szablon_{0} ORDER_BY() {{ _ORDER_BY(); return this; }}
                         public Row_{0}[] GET(int min = 0, int max = 999999999, bool allowException = false) {{ return Row_{0}._GET(_GET(min, max, allowException)); }}
                         public Row_{0} GET_ONE() {{ return Row_{0}._GET(_GET(1, 1))[0]; }}
                         public Row_{0} GET_OPTIONAL() {{ var r = Row_{0}._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }}");
@@ -1007,6 +1018,11 @@ namespace DotBase
                         public Szablon_{0} {1}({2} value)
                         {{
                             SetField(""{1}"", value, OleDbType.{3});
+                            return this;
+                        }}
+                        public Szablon_{0} {1}(Order order)
+                        {{
+                            SetOrder(""{1}"", order);
                             return this;
                         }}
                         public Szablon_{0} {1}()
