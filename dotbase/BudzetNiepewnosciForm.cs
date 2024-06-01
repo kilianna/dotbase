@@ -44,7 +44,7 @@ namespace DotBase
         private void button2_Click(object sender, EventArgs e)
         //----------------------------------------------------------
         {
-            if (DialogResult.Yes == MessageBox.Show("Czy na pewno wyjść? Jeśli wprowadziłeś zmiany bez zatwierdzenia nie zostaną zapamiętane.", "Kończenie pracy", MessageBoxButtons.YesNo))
+            if (DialogResult.Yes == MyMessageBox.Show("Czy na pewno wyjść? Jeśli wprowadziłeś zmiany bez zatwierdzenia nie zostaną zapamiętane.", "Kończenie pracy", MessageBoxButtons.YesNo))
                 Dispose();
         }
 
@@ -121,7 +121,7 @@ namespace DotBase
                  "" == (wielkosci[5] = textBox6.Text) ||
                  "" == (wielkosci[6] = textBox7.Text) )
             {
-                MessageBox.Show("Nie podano wszystkich wielkości! Zapis niemożliwy.");
+                MyMessageBox.Show("Nie podano wszystkich wielkości! Zapis niemożliwy.");
                 return false;
             }
 
@@ -137,7 +137,7 @@ namespace DotBase
             }
             catch(Exception)
             {
-                MessageBox.Show("Podane wartości są nieodpowiednie! Zapis niemożliwy.");
+                MyMessageBox.Show("Podane wartości są nieodpowiednie! Zapis niemożliwy.");
                 return false;
             }
 

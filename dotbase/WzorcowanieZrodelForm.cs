@@ -165,7 +165,7 @@ namespace DotBase
         {
             if (false == SprawdzPoprawnoscDanych())
             {
-                MessageBox.Show("Cześć danych jest niepoprawnych. Akcja nie zostanie podjęta.");
+                MyMessageBox.Show("Cześć danych jest niepoprawnych. Akcja nie zostanie podjęta.");
                 return;
             }
 

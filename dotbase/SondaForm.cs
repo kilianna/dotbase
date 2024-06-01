@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using DotBase;
 
 namespace PrzestrzenSody
 {
@@ -78,13 +79,13 @@ namespace PrzestrzenSody
                     }
                     else
                     {
-                        MessageBox.Show("", "Uwaga");
+                        MyMessageBox.Show("", "Uwaga");
                         return;
                     }
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Błędne dane.", "Uwaga");
+                    MyMessageBox.Show("Błędne dane.", "Uwaga");
                     return;
                 }
             }
@@ -106,7 +107,7 @@ namespace PrzestrzenSody
         {
             if (false == SprawdzPoprawnoscDanych())
             {
-                MessageBox.Show("Dane są niepoprawne.");
+                MyMessageBox.Show("Dane są niepoprawne.");
                 return;
             }
 
@@ -142,7 +143,7 @@ namespace PrzestrzenSody
             }
             else
             {
-                MessageBox.Show("Nie istnieje przyrząd o mniejszym numerze.");
+                MyMessageBox.Show("Nie istnieje przyrząd o mniejszym numerze.");
             }
         }
 
@@ -168,7 +169,7 @@ namespace PrzestrzenSody
             }
             else
             {
-                MessageBox.Show("Nie istnieje przyrząd o większym numerze.");
+                MyMessageBox.Show("Nie istnieje przyrząd o większym numerze.");
             }
         }
 

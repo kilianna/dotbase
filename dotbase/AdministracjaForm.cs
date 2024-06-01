@@ -99,14 +99,14 @@ namespace DotBase
             {
                 if (index >= 0 && index != listaView.SelectedCells[i].RowIndex)
                 {
-                    MessageBox.Show(this, "Tylko jeden użytkownik na raz moży być usunięty!", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MyMessageBox.Show(this, "Tylko jeden użytkownik na raz moży być usunięty!", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 index = listaView.SelectedCells[i].RowIndex;
             }
             if (index < 0 || index >= uzytkownicy.Length) return;
             if (uzytkownicy[index].nazwa.ToLower().Trim() == LogowanieForm.Instancja.Wybrany.nazwa.ToLower().Trim()) return;
-            if (MessageBox.Show(this, "Czy usunąć użytkownika: " + uzytkownicy[index].nazwa + "?", "Usuń", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+            if (MyMessageBox.Show(this, "Czy usunąć użytkownika: " + uzytkownicy[index].nazwa + "?", "Usuń", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
                 listaView.Rows.RemoveAt(index);
                 uzytkownicy = uzytkownicy.Take(index).Concat(uzytkownicy.Skip(index + 1)).ToArray();
@@ -120,7 +120,7 @@ namespace DotBase
             {
                 if (unique.Contains(usr.nazwa))
                 {
-                    MessageBox.Show(this, "Tabela zawieraz zduplikowane nazwy użytkowników!", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MyMessageBox.Show(this, "Tabela zawieraz zduplikowane nazwy użytkowników!", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 unique.Add(usr.nazwa);
@@ -129,7 +129,7 @@ namespace DotBase
             {
                 if (!BazaDanychWrapper.ZmienHaslo(LogowanieForm.Instancja.PlikBazy, hasloBazy, stareHasloBazy))
                 {
-                    if (MessageBox.Show(this, "Nie udało się zmienić hasła w pliku bazy!\r\nCzy zmienić je tylko w pliku użytkowników?", "Błąd", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == System.Windows.Forms.DialogResult.No)
+                    if (MyMessageBox.Show(this, "Nie udało się zmienić hasła w pliku bazy!\r\nCzy zmienić je tylko w pliku użytkowników?", "Błąd", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == System.Windows.Forms.DialogResult.No)
                     {
                         this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
                         return;

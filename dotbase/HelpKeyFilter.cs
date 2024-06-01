@@ -42,7 +42,7 @@ namespace DotBase
             }
             else
             {
-                MessageBox.Show("Plik PDF z instrukcją nie został znaleziony.\r\n" +
+                MyMessageBox.Show("Plik PDF z instrukcją nie został znaleziony.\r\n" +
                     "Sprawdź, czy plik \"Instrukcja.pdf\" istnieje i znajduje się w katalogu programu lub " +
                     "w jednym z katalogów nadrzędnych.", "Nie można znaleźć pliku pomocy", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

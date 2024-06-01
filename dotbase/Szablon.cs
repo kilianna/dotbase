@@ -303,11 +303,15 @@ namespace DotBase
                 if (typPolecenia == TypPolecenia.NONE)
                 {
                     typPolecenia = TypPolecenia.SELECT;
-                    query = "SELECT * FROM " + nazwa;
+                    query = "SELECT *";
                 }
                 else if (typPolecenia != TypPolecenia.SELECT)
                 {
                     throw new ApplicationException("Nieprawidłowa składnia polecenia!");
+                }
+                if (!where)
+                {
+                    query += " FROM " + nazwa;
                 }
                 if (orderBy != null && orderBy.Length > 0)
                 {
@@ -330,7 +334,7 @@ namespace DotBase
                                 "{1}{2}\r\n" +
                                 "Miejsce wystąpienia:\r\n" +
                                 "{3}", ex.Message, query, logParameters, ex.StackTrace);
-                        MessageBox.Show(message, "Niespodziewany wyjątek", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MyMessageBox.Show(message, "Niespodziewany wyjątek", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     throw;
                 }
@@ -347,7 +351,7 @@ namespace DotBase
                         String.Format("W wyniku kwerendy spodziewano się od {0} do {1} rekordów, otrzymano {2}.\r\n" +
                             "Kwerenda SQL:\r\n" +
                             "{3}{3}", min, max, dane.Rows.Count, query, logParameters);
-                    MessageBox.Show(message, "Niespodziewany wynik kwerendy", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MyMessageBox.Show(message, "Niespodziewany wynik kwerendy", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     throw new ApplicationException("Unexpected SELECT result row count.");
                 }
                 return dane;

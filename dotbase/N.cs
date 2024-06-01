@@ -9,6 +9,14 @@ using System.IO;
 
 namespace DotBase
 {
+    public static class DebugOptions
+    {
+        public static bool docx = false;
+        public static bool dontSave = false;
+        public static bool nieOtwieraj = false;
+        public static bool messageBox = false;
+    };
+
     public static class N
     {
         public enum Zakres
@@ -85,9 +93,10 @@ namespace DotBase
 
         public static bool PotwierdzenieZapisz(Form form, ZapiszDaneFunc func, bool canContinue, bool force)
         {
+            if (DebugOptions.dontSave) return true;
             if (!force)
             {
-                if (MessageBox.Show(form, "Czy zapisać dane?", "Potwierdzenie", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                if (MyMessageBox.Show(form, "Czy zapisać dane?", "Potwierdzenie", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 {
                     return true;
                 }
@@ -97,11 +106,11 @@ namespace DotBase
             {
                 if (canContinue)
                 {
-                    return MessageBox.Show(form, "Czy na pewno chcesz kontunuować?\r\nDane nie zostaną zapisane z uwagi na błędy wśród wpisanych dnaych.", "Uwaga", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes;
+                    return MyMessageBox.Show(form, "Czy na pewno chcesz kontunuować?\r\nDane nie zostaną zapisane z uwagi na błędy wśród wpisanych dnaych.", "Uwaga", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes;
                 }
                 else
                 {
-                    MessageBox.Show(form, "Nie można kontunuować.\r\nDane nie zostaną zapisane z uwagi na błędy wśród wpisanych dnaych.", "Uwaga", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MyMessageBox.Show(form, "Nie można kontunuować.\r\nDane nie zostaną zapisane z uwagi na błędy wśród wpisanych dnaych.", "Uwaga", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }

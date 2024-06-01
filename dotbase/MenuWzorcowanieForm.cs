@@ -137,7 +137,7 @@ namespace DotBase
 
                 if (false == _Wzorcowanie.ZnajdzKartePoNumerze((int)numericUpDown1.Value))
                 {
-                    MessageBox.Show("Karta o danym numerze nie istnieje lub połączenie z bazą zostało zerwane.");
+                    MyMessageBox.Show("Karta o danym numerze nie istnieje lub połączenie z bazą zostało zerwane.");
                     return;
                 }
 
@@ -152,7 +152,7 @@ namespace DotBase
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Nie można wyświetlić danych dla tego numeru.");
+                    MyMessageBox.Show("Nie można wyświetlić danych dla tego numeru.");
                     _TrybInterakcjiZUzytkownikiem = true;
                     return;
                 }
@@ -373,7 +373,7 @@ namespace DotBase
                 AktywujPrzyciskiOdpowiednichWzorcowan();
             }
             else
-                MessageBox.Show("Nie istnieje poprzednia karta.");
+                MyMessageBox.Show("Nie istnieje poprzednia karta.");
         }
 
         //-------------------------------------------------------------------
@@ -389,7 +389,7 @@ namespace DotBase
                 AktywujPrzyciskiOdpowiednichWzorcowan(); 
             }
             else
-                MessageBox.Show("Nie istnieje następna karta.");
+                MyMessageBox.Show("Nie istnieje następna karta.");
         }
 
         //-------------------------------------------------------------------

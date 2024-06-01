@@ -53,6 +53,14 @@ namespace DotBase.Szablony
             if (outputFileDir == "") outputFileDir = ".";
             outputFileWithoutExt = Path.GetFileNameWithoutExtension(outputFile);
             tempFile = Path.GetTempPath() + Guid.NewGuid().ToString() + ".docx";
+            if (DebugOptions.docx)
+            {
+                tempFile = outputFileDir + "\\" + outputFileWithoutExt + ".tmp.docx";
+                if (!Directory.Exists(outputFileDir))
+                {
+                    Directory.CreateDirectory(outputFileDir);
+                }
+            }
             log(String.Format("Szablon: {0}\nPlik tymczasowy: {1}\nWyjście: {2}\nGenerowanie...", templateFile, tempFile, outputFile));
             gen.generate(templateFile, data, tempFile);
             ShowDialog(owner);
@@ -119,7 +127,7 @@ namespace DotBase.Szablony
             if (theSame)
             {
                 Close();
-                MessageBox.Show(owner, "Wygenerowany dokument jest identyczny z wcześniej zapisanym.\r\n\r\n" +
+                MyMessageBox.Show(owner, "Wygenerowany dokument jest identyczny z wcześniej zapisanym.\r\n\r\n" +
                     "Nie wprowadzono żadnych zmian.", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
@@ -172,7 +180,7 @@ namespace DotBase.Szablony
                 {
                     log(ex.ToString());
                     copySuccess = false;
-                    var result2 = MessageBox.Show(
+                    var result2 = MyMessageBox.Show(
                         this,
                         String.Format("Nie można zapisać pliku \"{0}\".\r\nSprawdź, czy nie masz go " +
                             "otwartego w programie Word.", Path.GetFileName(file)),
@@ -192,6 +200,7 @@ namespace DotBase.Szablony
         private void readyFile(string file)
         {
             Close();
+            if (DebugOptions.nieOtwieraj) return;
             var proc = new Process();
             proc.StartInfo.FileName = file;
             proc.StartInfo.UseShellExecute = true;

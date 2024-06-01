@@ -85,7 +85,7 @@ namespace DotBase
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, "Nie można połączyć się z bazą danych.\r\nSprawdź, czy z bazą jest skojażony poprawny plik użytkowników.\r\n"+ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MyMessageBox.Show(this, "Nie można połączyć się z bazą danych.\r\nSprawdź, czy z bazą jest skojażony poprawny plik użytkowników.\r\n"+ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -270,7 +270,7 @@ namespace DotBase
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, "Błąd zapisu pliku użytkowników!\r\n" + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MyMessageBox.Show(this, "Błąd zapisu pliku użytkowników!\r\n" + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

@@ -29,7 +29,7 @@ namespace DotBase
 
             if (false == okno.Inicjalizuj())
             {
-                MessageBox.Show("Brak odpowiednich danych w bazie do wyświetlenia.");
+                MyMessageBox.Show("Brak odpowiednich danych w bazie do wyświetlenia.");
             }
 
             okno.ShowDialog();
@@ -44,7 +44,7 @@ namespace DotBase
             
             if (false == okno.Inicjalizuj())
             {
-                MessageBox.Show("Brak odpowiednich danych w bazie do wyświetlenia.");
+                MyMessageBox.Show("Brak odpowiednich danych w bazie do wyświetlenia.");
             }
 
             okno.ShowDialog();
@@ -59,7 +59,7 @@ namespace DotBase
             
             if (false == okno.Inicjalizuj())
             {
-                MessageBox.Show("Brak odpowiednich danych w bazie do wyświetlenia.");
+                MyMessageBox.Show("Brak odpowiednich danych w bazie do wyświetlenia.");
             }
 
             okno.ShowDialog();
@@ -74,7 +74,7 @@ namespace DotBase
 
             if (false == okno.Inicjalizuj())
             {
-                MessageBox.Show("Brak odpowiednich danych w bazie do wyświetlenia.");
+                MyMessageBox.Show("Brak odpowiednich danych w bazie do wyświetlenia.");
             }
 
             okno.ShowDialog();
@@ -106,7 +106,7 @@ namespace DotBase
                 {
                     if (!BazaDanychWrapper.Eksportuj(LogowanieForm.Instancja.PlikBazy, LogowanieForm.Instancja.hasloBazy, eksportujDlg.FileName, form.Haslo, new BazaDanychWrapper.TransformujBazeDelegate(UsunDanePersonalne)))
                     {
-                        MessageBox.Show(this, "Nie udało się wyeskportować bazy danych.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MyMessageBox.Show(this, "Nie udało się wyeskportować bazy danych.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
