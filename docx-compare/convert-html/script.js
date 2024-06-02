@@ -1,6 +1,7 @@
 
 
 function main() {
+    let time = Date.now();
     let output = {};
     let i = 0;
     let body = document.body;
@@ -13,7 +14,7 @@ function main() {
         console.log(`${++i} of ${Object.keys(input).length}: ${key}, length: ${m[1].length} => ${t.length}`);
     }
     let o = JSON.stringify(output, undefined, 2);
-    console.log(`Total ${o.length}`);
+    console.log(`Total ${o.length}, ms per item: ${(Date.now() - time) / Object.keys(input).length}`);
     body.innerHTML = `<textarea style="width: 100%; height: 700px"></textarea>`;
     body.querySelector('textarea').value = o;
 }

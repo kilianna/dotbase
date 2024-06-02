@@ -9,7 +9,7 @@ namespace DotBase.Test
 {
     internal class TestBase : IDisposable
     {
-        private const int SHORT_DELAY = 100;
+        private const int SHORT_DELAY = 20;
         private const int LONG_DELAY = 3000;
 
         struct QueueItem
