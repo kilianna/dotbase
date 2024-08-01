@@ -138,9 +138,9 @@ namespace DotBase
             var C13 = transport;
 
             double subtotal_moc_dawki = (L14 + (C5 - 1) * L18) * NUM(C5 != 0);
-            double subtotal_skazenia = JEŻELI(C5 > 0, D5 * L19, (L16 + (D5 - 1) * L19) * NUM(D5 != 0));
-            double subtotal_sygnalizator = JEŻELI(SUMA(C5, D5) > 0, E5 * L21, (L17 + (E5 - 1) * L21) * NUM(E5 != 0));
-            double subtotal_dawka = JEŻELI(SUMA(C5, D5, E5) > 0, F5 * L20, (L15 + (F5 - 1) * L20) * NUM(F5 != 0));
+            double subtotal_skazenia = JEŻELI(C5 + F5 + E5 > 0, D5 * L19, (L16 + (D5 - 1) * L19) * NUM(D5 != 0));
+            double subtotal_sygnalizator = JEŻELI(SUMA(C5, F5) > 0, E5 * L21, (L17 + (E5 - 1) * L21) * NUM(E5 != 0));
+            double subtotal_dawka = JEŻELI(C5 > 0, F5 * L20, (L15 + (F5 - 1) * L20) * NUM(F5 != 0));
 
             double dopl_rozszerzone_wzorcowanie = JEŻELI(D10, L22, 0);
             double dopl_sprawdzenie = JEŻELI(E10, L28, 0);
