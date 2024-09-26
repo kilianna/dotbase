@@ -402,6 +402,13 @@ for (i = 0; i < wyniki.length; i++) {
     <tr>
       <td><% tekst(row.prog, 5) %></td>
       <%! digits = calcDigits(2, row.wartosc_wzorcowa, 2, row.niepewnosc) %>
+          <!-- TODO: Czy wartości i niepewności nie trzeba specyjalnie zaokrąglać, np.
+          rzeczywiste wartości: 10.05 ± 0.549
+          dają rzczywisty zakres: 9.501 ± 10.599
+          zaokrąglone wartości: 10.1 ± 0.5
+          zaokrąglony zakres: 9.6 ± 10.6
+          więc 10.6 jest ok, ale 9.6 jest nieprawidłowe, bo patrząc na rzeczywisty zakres może wyjść np. 9.52, a to jest mniej niż 9.6!
+          -->
       <td><% fixed(row.wartosc_wzorcowa, digits) %> ± <% fixed(row.niepewnosc, digits) %></td>
       <%! digits = calcDigits(2, row.wspolczynnik, 2, row.niepewnosc_wspolczynnika) %>
       <td><% fixed(row.wspolczynnik, digits) %> ± <% fixed(row.niepewnosc_wspolczynnika, digits) %></td>
