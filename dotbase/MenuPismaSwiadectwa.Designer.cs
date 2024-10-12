@@ -79,7 +79,7 @@
             nrPismaPrzycisk.Name = "nrPismaPrzycisk";
             nrPismaPrzycisk.Size = new System.Drawing.Size(161, 42);
             nrPismaPrzycisk.TabIndex = 25;
-            nrPismaPrzycisk.Text = "Generuj numer dla bierzącej daty";
+            nrPismaPrzycisk.Text = "Generuj numer dla bieżącej daty";
             nrPismaPrzycisk.UseVisualStyleBackColor = true;
             nrPismaPrzycisk.Click += new System.EventHandler(this.nrPismaPrzycisk_Click);
             // 
