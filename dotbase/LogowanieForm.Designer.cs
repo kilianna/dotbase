@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Button zakonczBtn;
             System.Windows.Forms.Label label4;
             System.Windows.Forms.Label label5;
@@ -37,7 +36,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogowanieForm));
             this.zalogujBtn = new System.Windows.Forms.Button();
             this.bazaFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.timerDoRozlaczania = new System.Windows.Forms.Timer(this.components);
             this.hasloTextBox = new System.Windows.Forms.TextBox();
             this.infoLabel = new System.Windows.Forms.Label();
             this.bazaTextBox = new System.Windows.Forms.TextBox();
@@ -121,11 +119,6 @@
             // 
             this.bazaFileDialog.Filter = "(*.accdb)|*.accdb";
             this.bazaFileDialog.Tag = "";
-            // 
-            // timerDoRozlaczania
-            // 
-            this.timerDoRozlaczania.Interval = 350;
-            this.timerDoRozlaczania.Tick += new System.EventHandler(this.timerDoRozlaczania_Tick);
             // 
             // hasloTextBox
             // 
@@ -243,7 +236,6 @@
         #endregion
 
         private System.Windows.Forms.OpenFileDialog bazaFileDialog;
-        private System.Windows.Forms.Timer timerDoRozlaczania;
         private System.Windows.Forms.TextBox uzytkownikTextBox;
         private System.Windows.Forms.TextBox hasloTextBox;
         private System.Windows.Forms.TextBox bazaTextBox;

@@ -127,14 +127,7 @@ namespace DotBase
             }
             if (LogowanieForm.Instancja.hasloBazy != hasloBazy)
             {
-                if (!BazaDanychWrapper.ZmienHaslo(LogowanieForm.Instancja.PlikBazy, hasloBazy, stareHasloBazy))
-                {
-                    if (MessageBox.Show(this, "Nie udało się zmienić hasła w pliku bazy!\r\nCzy zmienić je tylko w pliku użytkowników?", "Błąd", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == System.Windows.Forms.DialogResult.No)
-                    {
-                        this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-                        return;
-                    }
-                }
+                BazaDanychWrapper.ZmienHaslo(LogowanieForm.Instancja.PlikBazy, hasloBazy, stareHasloBazy);
             }
             LogowanieForm.Instancja.hasloBazy = hasloBazy;
             LogowanieForm.Instancja.uzytkownicy = uzytkownicy;
@@ -144,6 +137,17 @@ namespace DotBase
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show(this, "Zmiana hasła wpływa na całą bazę danych.\r\n\r\n" +
+                "Zanim to zrobisz upewnij się, że:\r\n"+
+                "1. Utworzyłeś kopię zapasową bazy danych.\r\n"+
+                "2. Otworzyłeś bazę danych z lokalnego dysku (nie dysku sieciowego).\r\n" +
+                "3. Żaden inny program nie kożysta z tego pliku bazy danych.\r\n\r\n" +
+                "Czy checesz zmienić teraz hasło?",
+                "Informacja", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
+            {
+                return;
+            }
+
             var form = new HasloForm();
             form.zmienWlasne("BAZA DANYCH", "");
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)

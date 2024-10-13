@@ -48,15 +48,16 @@ namespace DotBase
         }
 
         //---------------------------------------------------------------
-        public bool NadpiszDane()
+        public void NadpiszDane()
         //---------------------------------------------------------------
         {
-            return (NadpiszDaneOgolne() &&
+            var ok = (NadpiszDaneOgolne() &&
                     NadpiszDanePrzyrzadu() &&
                     NadpiszDaneWarunkow() &&
                     NadpiszDaneObliczonychWspolczynnikow() &&
                     NadpiszDaneWzorcoweIPomiarowe()
                    );
+            if (!ok) BazaDanychWrapper.failure();
         }
 
         //---------------------------------------------------------------

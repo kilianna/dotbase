@@ -4,11 +4,14 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Data.OleDb;
 using System.Threading;
+using DotBase.Logging;
 
 namespace DotBase
 {
     static class Program
     {
+        static Logger log = Log.create();
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -21,10 +24,48 @@ namespace DotBase
                 System.Console.Out.Write(N.Wersja(args[0] == "--version").TrimStart('!'));
                 return;
             }
+            Application.Idle += new EventHandler(Application_Idle);
+            Application.ApplicationExit += new EventHandler(Application_ApplicationExit);
+            Application.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.AddMessageFilter(new HelpKeyFilter());
             Application.Run(new LogowanieForm());
+            Cleanup();
+        }
+
+        static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
+        {
+            log("Unhandled exception");
+            var ex = e.Exception;
+            EmergencyExit(ex.Message + "\r\n\r\n" + ex.ToString());
+        }
+
+        static void EmergencyExit(string failureDescription)
+        {
+            log("Emergency exit with: {0}", failureDescription);
+            BazaDanychWrapper.failure();
+            BazaDanychWrapper.Zakoncz();
+            if (failureDescription != null)
+            {
+                (new ExceptionForm(failureDescription)).ShowDialog();
+            }
+            Environment.Exit(99);
+        }
+
+        static void Cleanup()
+        {
+            BazaDanychWrapper.Zakoncz();
+        }
+
+        static void Application_ApplicationExit(object sender, EventArgs e)
+        {
+            Cleanup();
+        }
+
+        static void Application_Idle(object sender, EventArgs e)
+        {
+            BazaDanychWrapper.onApplicationIdle();
         }
 
         public static void zmienJezyk(Jezyk jezyk)

@@ -51,7 +51,7 @@ namespace DotBase
                 if (c >= 'a' && c <= 'z') litery = true;
                 if (c >= 'A' && c <= 'Z') litery = true;
             }
-            return litery && cyfry && haslo.Length >= 8;
+            return litery && cyfry && haslo.Length >= 1;
         }
 
         public void zmienUzytkownika(string nazwa)

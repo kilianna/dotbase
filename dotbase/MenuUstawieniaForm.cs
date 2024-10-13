@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using DotBase.Baza;
+using System.Data.OleDb;
 
 namespace DotBase
 {
@@ -112,9 +114,10 @@ namespace DotBase
             }
         }
 
-        private void UsunDanePersonalne(BazaDanychWrapper baza)
+        private void UsunDanePersonalne(ConnectionManager manager)
         {
-            baza.WykonajPolecenie("UPDATE Zleceniodawca SET Osoba_kontaktowa='Xxxx Yyyy', Telefon='000 000 000', Faks='000 000 000', email='xxxx.yyyy@zzzz.ww'");
+            var polecenie = manager.command("UPDATE Zleceniodawca SET Osoba_kontaktowa='Xxxx Yyyy', Telefon='000 000 000', Faks='000 000 000', email='xxxx.yyyy@zzzz.ww'");
+            polecenie.ExecuteNonQuery();
         }
 
     }

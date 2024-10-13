@@ -65,6 +65,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Baza\AccessLocker.cs" />
+    <Compile Include="Baza\AccessLockerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Baza\AccessLockerForm.Designer.cs">
+      <DependentUpon>AccessLockerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdministracjaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +79,14 @@
       <DependentUpon>AdministracjaForm.cs</DependentUpon>
     </Compile>
     <Compile Include="BazaDanych.cs" />
+    <Compile Include="Baza\ConnectionManager.cs" />
+    <Compile Include="Baza\DatabaseConnection.cs" />
+    <Compile Include="Baza\FailureWaitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Baza\FailureWaitForm.Designer.cs">
+      <DependentUpon>FailureWaitForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="BudzetNiepewnosciForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +101,13 @@
       <DependentUpon>CennikForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="ExceptionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExceptionForm.Designer.cs">
+      <DependentUpon>ExceptionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logging\Logging.cs" />
     <Compile Include="TranslacjaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,7 +121,7 @@
       <DependentUpon>HasloForm.cs</DependentUpon>
     </Compile>
     <Compile Include="HelpKeyFilter.cs" />
-    <Compile Include="Log.cs" />
+    <Compile Include="Logging\DatabaseLog.cs" />
     <Compile Include="MeldunekModel.cs" />
     <Compile Include="Multimap.cs" />
     <Compile Include="N.cs" />
@@ -164,7 +186,6 @@
     <Compile Include="KartaPrzyjeciaForm.Designer.cs">
       <DependentUpon>KartaPrzyjeciaForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Logowanie.cs" />
     <Compile Include="LogowanieForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -340,6 +361,7 @@
     <Compile Include="WzorcowanieZrodlamiPowForm.Designer.cs">
       <DependentUpon>WzorcowanieZrodlamiPowForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Logging\EncryptedLogger.cs" />
     <Compile Include="Zlecenie.cs" />
     <Compile Include="ZlecenieForm.cs">
       <SubType>Form</SubType>
@@ -353,8 +375,14 @@
     <Compile Include="ZnajdowaniePoPrzyrzadzieForm.Designer.cs">
       <DependentUpon>ZnajdowaniePoPrzyrzadzieForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Baza\AccessLockerForm.resx">
+      <DependentUpon>AccessLockerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdministracjaForm.resx">
       <DependentUpon>AdministracjaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Baza\FailureWaitForm.resx">
+      <DependentUpon>FailureWaitForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BudzetNiepewnosciForm.resx">
       <DependentUpon>BudzetNiepewnosciForm.cs</DependentUpon>
@@ -365,6 +393,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DaneWzorcoweMocDawki.resx">
       <DependentUpon>DaneWzorcoweMocDawki.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExceptionForm.resx">
+      <DependentUpon>ExceptionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TranslacjaForm.resx">
       <DependentUpon>TranslacjaForm.cs</DependentUpon>

@@ -11,18 +11,15 @@ using System.IO.Compression;
 using System.Text.RegularExpressions;
 using System.Dynamic;
 using System.Collections.Specialized;
+using DotBase.Baza;
+using DotBase.Logging;
+
 
 namespace DotBase
 {
     partial class BazaDanychWrapper
     {
-        private static string _ConnectionString;
-        private static OleDbConnection _Polaczenie = null;
-        private static DateTime _OstatniaAktywnosc = DateTime.Now;
-
-        private static string _SciezkaLog;
-        private static string _ConnectionStringLog;
-        private static OleDbConnection _PolaczenieLog = null;
+        private static ConnectionManager manager;
 
         //--------------------------------------------------------------------
         public BazaDanychWrapper()
@@ -30,14 +27,26 @@ namespace DotBase
         {
         }
 
+        public static void onApplicationIdle()
+        {
+            if (manager != null)
+            {
+                manager.idle();
+            }
+        }
+
+        public static void failure()
+        {
+            if (manager != null)
+            {
+                manager.failure();
+            }
+        }
 
         //----------------------------------------------------------------------------------
         public bool WykonajPolecenie(string zapytanie, params object[] list)
         //----------------------------------------------------------------------------------
         {
-            if (false == Polacz())
-                return false;
-
             OleDbCommand polecenie = UtworzPolecenie(zapytanie, list);              // Tworzymy polecenie dla bazy danych.
 
             try
@@ -48,83 +57,11 @@ namespace DotBase
             {
                 return false;
             }
-            finally
-            {
-                Rozlacz();
-            }
 
             return true;
         }
-
-        //----------------------------------------------------------------------------------
-        public static bool Polacz()
-        //----------------------------------------------------------------------------------
-        {
-            _OstatniaAktywnosc = DateTime.Now;
-
-            if (_Polaczenie != null && _Polaczenie.State == ConnectionState.Open)
-            {
-                Debug.WriteLine("Already connected");
-                return true;
-            }
-
-            if (null == _ConnectionString)
-                return false;
-
-            try
-            {
-                Debug.WriteLine("Connecting...");
-                _Polaczenie = new OleDbConnection(_ConnectionString);
-                _Polaczenie.Open();
-                _PolaczenieLog = new OleDbConnection(_ConnectionStringLog);
-                _PolaczenieLog.Open();
-                Debug.WriteLine("Connected");
-            }
-            catch(Exception ex)
-            {
-                Debug.WriteLine("Exception: " + ex.ToString());
-                LastException = ex;
-                return false;
-            }
-
-            return true;
-        }
-
-        //----------------------------------------------------------------------------------
-        public static void Rozlacz()
-        //----------------------------------------------------------------------------------
-        {
-            _OstatniaAktywnosc = DateTime.Now;
-            LogowanieForm.AktywujLicznikRozlaczania();
-            Debug.WriteLine("Release");
-        }
-
-        //----------------------------------------------------------------------------------
-        public void TworzConnectionString(string SciezkaDoBazy, string HasloDoBazy)
-        //----------------------------------------------------------------------------------
-        {
-            BazaDanychWrapper._ConnectionString = String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}';Jet OLEDB:Database Password={1};", SciezkaDoBazy, HasloDoBazy);
-            _SciezkaLog = SciezkaDoLogu(SciezkaDoBazy);
-            if (!File.Exists(_SciezkaLog))
-            {
-                try
-                {
-                    UtworzPustyLog(_SciezkaLog, HasloDoBazy);
-                }
-                catch (Exception)
-                {
-                    try
-                    {
-                        File.Delete(_SciezkaLog);
-                    }
-                    catch (Exception) { }
-                    throw;
-                }
-            }
-            BazaDanychWrapper._ConnectionStringLog = String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}';Jet OLEDB:Database Password={1};", _SciezkaLog, HasloDoBazy);
-        }
-
-        private void UtworzPustyLog(string logPath, string HasloDoBazy)
+        
+        private static void UtworzPustyLog(string logPath, string HasloDoBazy)
         {
             byte[] gz = Properties.Resources.logTemplate;
             byte[] buffer = new byte[65536];
@@ -138,14 +75,16 @@ namespace DotBase
             } while (true);
             stream.Close();
             output.Close();
-            OleDbConnection connection = new OleDbConnection(String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}';Mode=Share Exclusive", logPath));
-            connection.Open();
+            OleDbConnection connection = DatabaseConnection.directConnection(logPath, null);
             OleDbCommand polecenie = new OleDbCommand("ALTER DATABASE PASSWORD `" + HasloDoBazy + "` ``", connection);
             polecenie.ExecuteNonQuery();
+            polecenie.Dispose();
             connection.Close();
+            connection.Dispose();
+            DatabaseConnection.ForceCommandsCleanup();
         }
 
-        private string SciezkaDoLogu(string sciezkaDoBazy)
+        private static string SciezkaDoLogu(string sciezkaDoBazy)
         {
             int pos = sciezkaDoBazy.LastIndexOf('.');
             string date = DateTime.Now.ToString("yyyy-MM");
@@ -157,9 +96,6 @@ namespace DotBase
         public DataSet TworzZbiorDanych(string zapytanie, params object[] list)
         //----------------------------------------------------------------------------------
         {
-            if (false == Polacz())
-                return null;
-
             OleDbCommand polecenie = UtworzPolecenie(zapytanie, list);                      // Tworzymy polecenie dla bazy danych.
             OleDbDataAdapter adapter = new OleDbDataAdapter(polecenie);                     // Wyniki zostaną przekonwertowane do obiektu DataSet przez adapter
 
@@ -172,10 +108,6 @@ namespace DotBase
             catch (Exception)
             {
                 return null;
-            }
-            finally
-            {
-                Rozlacz();
             }
 
             return dane;
@@ -566,30 +498,26 @@ namespace DotBase
             typeof(byte[]),
         };
 
-        public static Exception LastException { get; set; }
-
 #endregion
 
         public OleDbCommand UtworzProstePolecenie(string zapytanie)
         {
-            if (!Polacz())
-                throw new ApplicationException("Cannot connect to database");
-            return new OleDbCommand(zapytanie, _Polaczenie);
+            return manager.command(zapytanie);
         }
 
         private OleDbCommand UtworzPolecenie(string zapytanie, object[] list)
         {
-            OleDbCommand polecenie = new OleDbCommand(zapytanie, _Polaczenie);
+            OleDbCommand polecenie = manager.command(zapytanie);
             OleDbCommand selectPolecenie = null;
-            Log.Wpis wpis = null;
+            DatabaseLog.Wpis wpis = null;
             bool dodajDoLogu = true;
             StringBuilder sb = null;
 
             for (int i = 0; i < list.Length; i++)
             {
-                if (list[i] is Log.Wpis)
+                if (list[i] is DatabaseLog.Wpis)
                 {
-                    wpis = (Log.Wpis)list[i];
+                    wpis = (DatabaseLog.Wpis)list[i];
                     continue;
                 }
             }
@@ -619,11 +547,11 @@ namespace DotBase
                     }
                     try
                     {
-                        selectPolecenie = new OleDbCommand(select, _Polaczenie);
+                        selectPolecenie = manager.command(select);
                     }
                     catch (Exception ex)
                     {
-                        Log.log(this, "Błąd tworzenia polecenia SELECT sprawdzającego zmiany w poleceniu UPDATE: " + ex.Message, select);
+                        DatabaseLog.log(this, "Błąd tworzenia polecenia SELECT sprawdzającego zmiany w poleceniu UPDATE: " + ex.Message, select);
                     }
                 }
                 
@@ -638,7 +566,7 @@ namespace DotBase
             for (int i = 0; i < list.Length; i++)
             {
                 var p = list[i];
-                if (p is Log.Wpis) continue;
+                if (p is DatabaseLog.Wpis) continue;
                 Type pType = p.GetType();
                 OleDbType type = OleDbType.Empty;
                 for (int k = 0; k < oleDbTypes.Length; k++)
@@ -693,13 +621,13 @@ namespace DotBase
                 }
                 catch (Exception ex)
                 {
-                    Log.log(this, "Błąd wykonywania polecenia SELECT sprawdzającego zmiany w poleceniu UPDATE: " + ex.Message, selectPolecenie.CommandText);
+                    DatabaseLog.log(this, "Błąd wykonywania polecenia SELECT sprawdzającego zmiany w poleceniu UPDATE: " + ex.Message, selectPolecenie.CommandText);
                 }
             }
 
             if (dodajDoLogu)
             {
-                Log.log(this, (wpis != null && wpis.wiadomosc != null) ? wpis.wiadomosc : "", sb.ToString());
+                DatabaseLog.log(this, (wpis != null && wpis.wiadomosc != null) ? wpis.wiadomosc : "", sb.ToString());
             }
 
             return polecenie;
@@ -709,9 +637,6 @@ namespace DotBase
         public DataTable TworzTabeleDanych(string zapytanie, params object[] list)
         //----------------------------------------------------------------------------------
         {
-            if (false == Polacz())
-                return null;
-
             OleDbCommand polecenie = UtworzPolecenie(zapytanie, list);                      // Tworzymy polecenie dla bazy danych.
             OleDbDataAdapter adapter = new OleDbDataAdapter(polecenie);                     // Wyniki zostaną przekonwertowane do obiektu DataSet przez adapter
 
@@ -725,94 +650,47 @@ namespace DotBase
             {
                 return null;
             }
-            finally
-            {
-                Rozlacz();
-            }
 
             return dane;
         }
 
-        public static bool Zakoncz(bool wymus)
+        internal static void ZmienHaslo(string SciezkaDoBazy, string noweHaslo, string stareHaslo)
         {
-            if (_Polaczenie == null || _Polaczenie.State != ConnectionState.Open)
+            Zakoncz();
+            var logFile = SciezkaDoLogu(SciezkaDoBazy);
+            var tempManager = new ConnectionManager(SciezkaDoBazy, logFile, stareHaslo);
+            var polecenie = tempManager.command("ALTER DATABASE PASSWORD [" + noweHaslo + "] [" + stareHaslo + "]");
+            polecenie.ExecuteNonQuery();
+            if (File.Exists(logFile))
             {
-                Debug.WriteLine("Already closed");
-                return true;
+                polecenie = tempManager.commandLog("ALTER DATABASE PASSWORD [" + noweHaslo + "] [" + stareHaslo + "]");
+                if (polecenie != null)
+                    polecenie.ExecuteNonQuery();
+                tempManager.close();
             }
-
-            if (!wymus && DateTime.Now < (_OstatniaAktywnosc + new TimeSpan(0, 0, 0, 0, 1000)))
-            {
-                Debug.WriteLine("Not ready to close");
-                return false;
-            }
-
-            Debug.WriteLine("Closing...");
-            try
-            {
-                _Polaczenie.Close();
-            }
-            catch (Exception) { }
-            _Polaczenie = null;
-            try
-            {
-                _PolaczenieLog.Close();
-            }
-            catch (Exception) { }
-            _PolaczenieLog = null;
-            Debug.WriteLine("Closed");
-            return true;
         }
 
-        internal static bool ZmienHaslo(string SciezkaDoBazy, string noweHaslo, string stareHaslo)
-        {
-            try
-            {
-                Zakoncz(true);
-
-                _Polaczenie = new OleDbConnection(String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}';Jet OLEDB:Database Password={1};Mode=Share Exclusive", SciezkaDoBazy, stareHaslo));
-                _Polaczenie.Open();
-                var baza = new BazaDanychWrapper();
-                OleDbCommand polecenie = baza.UtworzPolecenie("ALTER DATABASE PASSWORD [" + noweHaslo + "] [" + stareHaslo + "]", new object[0]);
-                polecenie.ExecuteNonQuery();
-
-                _PolaczenieLog = new OleDbConnection(String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}';Jet OLEDB:Database Password={1};Mode=Share Exclusive", _SciezkaLog, stareHaslo));
-                _PolaczenieLog.Open();
-                polecenie = new OleDbCommand("ALTER DATABASE PASSWORD [" + noweHaslo + "] [" + stareHaslo + "]", _PolaczenieLog);
-                polecenie.ExecuteNonQuery();
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-            finally
-            {
-                Zakoncz(true);
-            }
-
-            return true;
-        }
-
-        public delegate void TransformujBazeDelegate(BazaDanychWrapper baza);
+        public delegate void TransformujBazeDelegate(ConnectionManager manager);
 
         public static bool Eksportuj(string staraSciezka, string stareHaslo, string nowaSciezka, string noweHaslo, TransformujBazeDelegate transformacja)
         {
             bool usunGdyNiepowodzenie = false;
             try
             {
-                Zakoncz(true);
+                if (manager != null)
+                {
+                    manager.close();
+                }
                 File.Copy(staraSciezka, nowaSciezka, true);
                 usunGdyNiepowodzenie = true;
-                _Polaczenie = new OleDbConnection(String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}';Jet OLEDB:Database Password={1};Mode=Share Exclusive", nowaSciezka, stareHaslo));
-                _Polaczenie.Open();
-                var baza = new BazaDanychWrapper();
-                OleDbCommand polecenie = baza.UtworzPolecenie("ALTER DATABASE PASSWORD [" + noweHaslo + "] [" + stareHaslo + "]", new object[0]);
+                var tempManager = new ConnectionManager(nowaSciezka, null, stareHaslo);
+                var polecenie = tempManager.command("ALTER DATABASE PASSWORD [" + noweHaslo + "] [" + stareHaslo + "]");
                 polecenie.ExecuteNonQuery();
                 if (transformacja != null)
                 {
-                    transformacja(baza);
+                    transformacja(tempManager);
                 }
-                Zakoncz(true);
+                tempManager.close();
             }
             catch (Exception)
             {
@@ -826,10 +704,6 @@ namespace DotBase
                 }
                 return false;
             }
-            finally
-            {
-                Zakoncz(true);
-            }
 
             return true;
         }
@@ -838,6 +712,11 @@ namespace DotBase
 
         public void log(DateTime now, string user, string wiadomosc, string zapytanie, string stackTrace, string dodatkowe)
         {
+            if (manager.connectionLog == null)
+            {
+                Debug.WriteLine("Cannot open log database connection. Dropping logs.");
+                return;
+            }
             OleDbCommand polecenie;
             int programId = 0;
             if (stackTraceCache.ContainsKey(stackTrace))
@@ -846,15 +725,15 @@ namespace DotBase
             }
             else
             {
-                polecenie = new OleDbCommand("SELECT Id FROM Program WHERE StackTrace=?", _PolaczenieLog);
+                polecenie = manager.commandLog("SELECT Id FROM Program WHERE StackTrace=?");
                 addParameter(polecenie, stackTrace);
                 object id = polecenie.ExecuteScalar();
                 if (id == null)
                 {
-                    polecenie = new OleDbCommand("INSERT INTO Program (StackTrace) VALUES (?)", _PolaczenieLog);
+                    polecenie = manager.commandLog("INSERT INTO Program (StackTrace) VALUES (?)");
                     addParameter(polecenie, stackTrace);
                     polecenie.ExecuteNonQuery();
-                    polecenie = new OleDbCommand("SELECT @@Identity", _PolaczenieLog);
+                    polecenie = manager.commandLog("SELECT @@Identity");
                     id = polecenie.ExecuteScalar();
                 }
                 if (id == null)
@@ -864,14 +743,17 @@ namespace DotBase
                 programId = Int32.Parse(id.ToString());
                 stackTraceCache[stackTrace] = programId;
             }
-            polecenie = new OleDbCommand("INSERT INTO Historia (Czas, Kto, Opis, Zapytanie, Dodatkowe, Program) VALUES (?,?,?,?,?,?)", _PolaczenieLog);
-            addParameter(polecenie, now);
-            addParameter(polecenie, user);
-            addParameter(polecenie, wiadomosc);
-            addParameter(polecenie, zapytanie);
-            addParameter(polecenie, dodatkowe);
-            addParameter(polecenie, programId);
-            polecenie.ExecuteNonQuery();
+            polecenie = manager.commandLog("INSERT INTO Historia (Czas, Kto, Opis, Zapytanie, Dodatkowe, Program) VALUES (?,?,?,?,?,?)");
+            if (polecenie != null)
+            {
+                addParameter(polecenie, now);
+                addParameter(polecenie, user);
+                addParameter(polecenie, wiadomosc);
+                addParameter(polecenie, zapytanie);
+                addParameter(polecenie, dodatkowe);
+                addParameter(polecenie, programId);
+                polecenie.ExecuteNonQuery();
+            }
         }
 
         private void addParameter(OleDbCommand polecenie, object p)
@@ -911,7 +793,7 @@ namespace DotBase
 
 #if DEBUG
 
-        internal void TworzSzablon()
+        static internal void TworzSzablon()
         {
             string tabele = "";
             string szablon = @"using System;
@@ -921,7 +803,7 @@ namespace DotBase
 {
     partial class Szablon
     {";
-            DataTable table = _Polaczenie.GetSchema("tables");
+            DataTable table = manager.connection.GetSchema("tables");
             foreach (DataRow row in table.Rows)
             {
                 string tabela = row.Field<string>("TABLE_NAME");
@@ -940,7 +822,7 @@ namespace DotBase
             /*public Szablon_{0} SELECT() {{ _SELECT(); return this; }}" - jeżeli potrzeba SELECT */, tabelaId);
                 tabele += String.Format(@"
         public Szablon.Szablon_{0} {0} {{ get {{ return new Szablon.Szablon_{0}(this, ""{1}""); }} }}", tabelaId, tabela);
-                DataTable schemaTable = _Polaczenie.GetOleDbSchemaTable(System.Data.OleDb.OleDbSchemaGuid.Columns,new object[] { null, null, tabela, null });
+                DataTable schemaTable = manager.connection.GetOleDbSchemaTable(System.Data.OleDb.OleDbSchemaGuid.Columns, new object[] { null, null, tabela, null });
                 foreach (DataRow col in schemaTable.Rows)
                 {
                     int oleDbTypeNumber = col.Field<int>(11);
@@ -998,7 +880,7 @@ namespace DotBase
                 sb.AppendLine("---------------------------------------------------------------------");
                 sb.AppendLine(String.Format(" {0}", tabela));
                 sb.AppendLine("---------------------------------------------------------------------");
-                DataTable schemaTable = _Polaczenie.GetOleDbSchemaTable(System.Data.OleDb.OleDbSchemaGuid.Columns,new object[] { null, null, tabela, null });
+                DataTable schemaTable = manager.connection.GetOleDbSchemaTable(System.Data.OleDb.OleDbSchemaGuid.Columns, new object[] { null, null, tabela, null });
                 List<string> strRows = new List<string>();
                 foreach (DataRow row2 in schemaTable.Rows)
                 {
@@ -1049,7 +931,7 @@ namespace DotBase
 
         }
 
-        private string flagiSzablonu(long p)
+        static private string flagiSzablonu(long p)
         {
             string result = "";
             do
@@ -1061,7 +943,7 @@ namespace DotBase
             return result.Substring(1);
         }
 
-        private void prostePoleSzablonu(DataRow row2, StringBuilder sb, string format, string name)
+        static private void prostePoleSzablonu(DataRow row2, StringBuilder sb, string format, string name)
         {
             var value = row2.Field<object>(name);
             var fmt = ", " + format + " {0}";
@@ -1081,7 +963,7 @@ namespace DotBase
 
 #endif
 
-        private string oleDbToNetTypeConverter(int oleDbTypeNumber)
+        static private string oleDbToNetTypeConverter(int oleDbTypeNumber)
         {
             switch (oleDbTypeNumber)
             {
@@ -1134,6 +1016,45 @@ namespace DotBase
         internal string LikeEscape(string text)
         {
             return text.Replace("[", "[[]").Replace("%", "[%]").Replace("_", "[_]");
+        }
+
+        public static void Zakoncz()
+        {
+            if (manager != null)
+            {
+                manager.close();
+                manager = null;
+            }
+        }
+
+        private static void SprawdzBaze(string sciezka, string hasloBazy, string tab1, string tab2)
+        {
+            var db = DatabaseConnection.directConnection(sciezka, hasloBazy);
+            DataTable table = db.GetSchema("tables");
+            int hits = 0;
+            foreach (DataRow row in table.Rows)
+            {
+                string tabela = row.Field<string>("TABLE_NAME");
+                if (tabela.ToLower() == tab1) hits++;
+                if (tabela.ToLower() == tab2) hits++;
+            }
+            if (hits != 2) throw new ApplicationException("Otwarto nieprawidłową bazę danych.");
+        }
+
+        internal static void Polacz(string sciezka, string hasloBazy)
+        {
+            Zakoncz();
+            SprawdzBaze(sciezka, hasloBazy, "dozymetry", "jednostki");
+            var sciezkaLog = SciezkaDoLogu(sciezka);
+            try
+            {
+                SprawdzBaze(sciezkaLog, hasloBazy, "program", "historia");
+            }
+            catch
+            {
+                UtworzPustyLog(sciezkaLog, hasloBazy);
+            }
+            manager = new ConnectionManager(sciezka, sciezkaLog, hasloBazy);
         }
     }
 }

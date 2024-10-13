@@ -6,9 +6,9 @@ using System.Text.RegularExpressions;
 using System.Diagnostics;
 using System.Security.Cryptography;
 
-namespace DotBase
+namespace DotBase.Logging
 {
-    class Log
+    class DatabaseLog
     {
 
         public class Wpis

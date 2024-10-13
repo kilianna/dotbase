@@ -17,8 +17,6 @@ namespace DotBase
 {
     public partial class LogowanieForm : Form
     {
-
-        private BazaDanychWrapper _BazaDanych;
         public static LogowanieForm Instancja { set; get; }
 
         private string[] info = new string[] { "", "", "" };
@@ -64,24 +62,9 @@ namespace DotBase
 
             hasloTextBox.Text = "";
 
-            _BazaDanych = new BazaDanychWrapper();
-            _BazaDanych.TworzConnectionString(Path.GetFullPath(bazaTextBox.Text), hasloBazy);
-
             try
             {
-                BazaDanychWrapper.LastException = null;
-                DataTable dane = _BazaDanych.TworzTabeleDanych("SELECT haslo FROM Hasla");
-                if (dane == null)
-                {
-                    if (BazaDanychWrapper.LastException != null)
-                    {
-                        throw BazaDanychWrapper.LastException;
-                    }
-                    else
-                    {
-                        throw new Exception("Nie można wykonać zapytania SQL.");
-                    }
-                }
+                BazaDanychWrapper.Polacz(Path.GetFullPath(bazaTextBox.Text), hasloBazy);
             }
             catch (Exception ex)
             {
@@ -90,13 +73,14 @@ namespace DotBase
             }
 
 #if DEBUG
-            _BazaDanych.TworzSzablon();
+            BazaDanychWrapper.TworzSzablon();
 #endif
 
             MenuGlowneForm Menu = new MenuGlowneForm();
             Hide();
             var result = Menu.ShowDialog();
             Show();
+            BazaDanychWrapper.Zakoncz();
             Focus();
             BringToFront();
             Focus();
@@ -114,26 +98,9 @@ namespace DotBase
             Close();
         }
         
-        private void timerDoRozlaczania_Tick(object sender, EventArgs e)
-        {
-            if (BazaDanychWrapper.Zakoncz(false))
-            {
-                timerDoRozlaczania.Stop();
-            }
-        }
-
         private void MenuGlowneForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            BazaDanychWrapper.Zakoncz(true);
-        }
-
-
-        public static void AktywujLicznikRozlaczania()
-        {
-            if (Instancja != null)
-            {
-                Instancja.timerDoRozlaczania.Start();
-            }
+            BazaDanychWrapper.Zakoncz();
         }
 
         private void wybierzBtn_Click(object sender, EventArgs e)

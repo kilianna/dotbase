@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data.OleDb;
 using System.Data;
+using DotBase.Logging;
 
 namespace DotBase
 {
@@ -176,7 +177,7 @@ namespace DotBase
                     }
                     catch (Exception ex)
                     {
-                        Log.log(baza, "Błąd wykonywania polecenia SELECT sprawdzającego zmiany w poleceniu UPDATE: " + ex.Message, selectQuery, logParameters);
+                        DatabaseLog.log(baza, "Błąd wykonywania polecenia SELECT sprawdzającego zmiany w poleceniu UPDATE: " + ex.Message, selectQuery, logParameters);
                     }
                 }
 
@@ -210,17 +211,17 @@ namespace DotBase
                     {
                         if (typPolecenia == TypPolecenia.INSERT)
                         {
-                            Log.log(baza, logInfo, query, String.Format("{0},\r\n[AFFECTED ROWS]={1},\r\n[LAST ID]={2}", logParameters, affectedRows, lastIdValid ? lastId.ToString() : "[invalid]"));
+                            DatabaseLog.log(baza, logInfo, query, String.Format("{0},\r\n[AFFECTED ROWS]={1},\r\n[LAST ID]={2}", logParameters, affectedRows, lastIdValid ? lastId.ToString() : "[invalid]"));
                         }
                         else
                         {
-                            Log.log(baza, logInfo, query, String.Format("{0},\r\n[AFFECTED ROWS]={1}", logParameters, affectedRows));
+                            DatabaseLog.log(baza, logInfo, query, String.Format("{0},\r\n[AFFECTED ROWS]={1}", logParameters, affectedRows));
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    Log.log(baza, "Błąd wykonywania polecenia: " + ex.Message, query, logParameters);
+                    DatabaseLog.log(baza, "Błąd wykonywania polecenia: " + ex.Message, query, logParameters);
                     if (returnResult)
                     {
                         return false;
