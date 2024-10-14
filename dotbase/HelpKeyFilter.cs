@@ -4,16 +4,40 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using DotBase.Logging;
 
 namespace DotBase
 {
     class HelpKeyFilter : IMessageFilter
     {
+        Logger log = Log.create();
         const int WM_KEYUP = 0x0101;
         const int VK_F1 = 0x70;
 
+        const int WM_LBUTTONDOWN = 0x0201;
+        const int WM_LBUTTONUP = 0x0202;
+
         public bool PreFilterMessage(ref Message m)
         {
+            if (m.Msg == WM_LBUTTONUP || m.Msg == WM_LBUTTONDOWN)
+            {
+                var c = Control.FromChildHandle(m.HWnd);
+                if (c == null)
+                {
+                    log("msg 0x{0:X16}, msg 0x{1:X8}, LParam 0x{2:X8}, WParam 0x{3:X8}", m.HWnd.ToInt64(), m.Msg, m.LParam.ToInt64(), m.WParam.ToInt64());
+                }
+                else
+                {
+                    var path = "";
+                    var form = c;
+                    while (form != null && !(form is Form))
+                    {
+                        path += ">" + form.Name;
+                        form = form.Parent;
+                    }
+                    log("msg 0x{0:X16}, msg 0x{1:X8}, LParam 0x{2:X8}, WParam 0x{3:X8}, {4}, {5}", m.HWnd.ToInt64(), m.Msg, m.LParam.ToInt64(), m.WParam.ToInt64(), form == null ? "unknown form" : form.Name, path);
+                }
+            }
             if (m.Msg == WM_KEYUP && m.WParam.ToInt32() == VK_F1)
             {
                 StartManual();
