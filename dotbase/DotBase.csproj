@@ -108,6 +108,8 @@
       <DependentUpon>ExceptionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Logging\Logging.cs" />
+    <Compile Include="Login\User.cs" />
+    <Compile Include="Login\Users.cs" />
     <Compile Include="TranslacjaForm.cs">
       <SubType>Form</SubType>
     </Compile>

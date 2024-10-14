@@ -4,11 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using System.Security.Cryptography;
 
 namespace DotBase
 {
     public static class N
     {
+        public static Aes aes = Aes.Create();
+        public static RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+
         public enum Zakres
         {
             Cisnienie,
@@ -143,6 +147,15 @@ namespace DotBase
             {
                 textBox.BackColor = System.Drawing.Color.Orange;
             }
+        }
+
+
+        public static bool compareBytes(byte[] buffer, int offset, byte[] expected)
+        {
+            if (offset + expected.Length > buffer.Length || offset < 0) return false;
+            var tmp = new byte[expected.Length];
+            Array.Copy(buffer, offset, tmp, 0, tmp.Length);
+            return expected.SequenceEqual(tmp);
         }
     }
 }

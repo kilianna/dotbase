@@ -17,10 +17,10 @@ namespace DotBase
         {
             InitializeComponent();
             uzytkownikLabel.Text = "Użytkownik:";
-            nazwaTextBox.Text = LogowanieForm.Instancja.Wybrany.nazwa;
+            nazwaTextBox.Text = LogowanieForm.Instancja.Wybrany.Name;
             nazwaTextBox.Visible = true;
             hasloAktTextBox.Enabled = true;
-            aktHaslo = LogowanieForm.Instancja.Wybrany.haslo;
+            aktHaslo = LogowanieForm.Instancja.Wybrany.Password;
         }
 
         private void hasloTextBox_TextChanged(object sender, EventArgs e)

@@ -6,69 +6,68 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using DotBase.Login;
 
 namespace DotBase
 {
     public partial class AdministracjaForm : Form
     {
-        public AdministracjaForm()
+        public UsersManager Users { get; private set; }
+
+        public AdministracjaForm(UsersManager users)
         {
+            Users = users.Clone();
             InitializeComponent();
         }
 
-        LogowanieForm.Uzytkownik[] uzytkownicy = new LogowanieForm.Uzytkownik[0];
-        string hasloBazy = "";
-        private string stareHasloBazy = "";
-
         private void AdministracjaForm_Load(object sender, EventArgs e)
         {
-            uzytkownicy = new LogowanieForm.Uzytkownik[LogowanieForm.Instancja.uzytkownicy.Length];
-            LogowanieForm.Instancja.uzytkownicy.CopyTo(uzytkownicy, 0);
-            foreach (var usr in uzytkownicy)
+            foreach (var user in Users.Users)
             {
-                int i = listaView.Rows.Add(usr.nazwa.ToLower().Trim(), "Zmień hasło", usr.admin);
-                listaView.Rows[i].Cells[2].ReadOnly = (usr.nazwa == LogowanieForm.Instancja.Wybrany.nazwa);
+                int i = listaView.Rows.Add(user.Name, "Zmień hasło", user.IsAdmin);
+                listaView.Rows[i].Cells[2].ReadOnly = (user.Name == LogowanieForm.Instancja.Wybrany.Name);
                 var r = listaView.Rows[i];
             }
-            hasloBazy = LogowanieForm.Instancja.hasloBazy;
         }
 
         private void listaView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= uzytkownicy.Length || e.RowIndex < 0) return;
+            if (e.RowIndex >= Users.Users.Length || e.RowIndex < 0) return;
             if (e.ColumnIndex == 1)
             {
                 var form = new HasloForm();
                 form.zmienUzytkownika(listaView.Rows[e.RowIndex].Cells[0].Value.ToString());
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
-                    uzytkownicy[e.RowIndex].haslo = form.Haslo;
+                    Users.ChangeUserPassword(Users.Users[e.RowIndex].Name, form.Haslo);
                 }
             }
         }
 
         private void listaView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex > uzytkownicy.Length || e.RowIndex < 0) return;
+            if (e.RowIndex > Users.Users.Length || e.RowIndex < 0) return;
 
-            if (e.RowIndex == uzytkownicy.Length)
+            if (e.RowIndex == Users.Users.Length)
             {
-                LogowanieForm.Uzytkownik[] nowi = new LogowanieForm.Uzytkownik[uzytkownicy.Length + 1];
-                uzytkownicy.CopyTo(nowi, 0);
-                nowi[uzytkownicy.Length].nazwa = listaView.Rows[uzytkownicy.Length].Cells[0].Value != null ? listaView.Rows[uzytkownicy.Length].Cells[0].Value.ToString().Trim().ToLower() : "";
-                nowi[uzytkownicy.Length].haslo = losujHaslo();
-                nowi[uzytkownicy.Length].admin = listaView.Rows[uzytkownicy.Length].Cells[2].Value != null ? (bool)listaView.Rows[uzytkownicy.Length].Cells[2].Value : false;
+                var nowy = new User();
+                nowy.Name = listaView.Rows[e.RowIndex].Cells[0].Value != null ? listaView.Rows[e.RowIndex].Cells[0].Value.ToString().Trim().ToLower() : "";
+                nowy.ChangeUserPassword(losujHaslo(), Users.DatabasePassword);
+                nowy.IsAdmin = listaView.Rows[e.RowIndex].Cells[2].Value != null ? (bool)listaView.Rows[e.RowIndex].Cells[2].Value : false;
                 listaView.Rows[e.RowIndex].Cells[1].Value = "Zmień hasło";
-                uzytkownicy = nowi;
+                var tmp = new User[Users.Users.Length + 1];
+                Users.Users.CopyTo(tmp, 0);
+                tmp[Users.Users.Length] = nowy;
+                Users.Users = tmp;
             }
 
             if (e.ColumnIndex == 2)
             {
-                uzytkownicy[e.RowIndex].admin = (bool)listaView.Rows[e.RowIndex].Cells[2].Value;
+                Users.Users[e.RowIndex].IsAdmin = (bool)listaView.Rows[e.RowIndex].Cells[2].Value;
             }
             else if (e.ColumnIndex == 0)
             {
-                uzytkownicy[e.RowIndex].nazwa = listaView.Rows[e.RowIndex].Cells[0].Value.ToString().Trim().ToLower();
+                Users.Users[e.RowIndex].Name = listaView.Rows[e.RowIndex].Cells[0].Value.ToString().Trim().ToLower();
             }
         }
 
@@ -83,12 +82,11 @@ namespace DotBase
 
         private string losujHaslo()
         {
-            var rnd = new Random();
+            var arr = new byte[32];
+            N.rng.GetBytes(arr);
             string str = "";
             for (var i = 0; i < 32; i++)
-            {
-                str += (char)rnd.Next((int)'a', (int)'z');
-            }
+                str += 'a' + (char)(arr[i] % 26);
             return str;
         }
 
@@ -104,34 +102,27 @@ namespace DotBase
                 }
                 index = listaView.SelectedCells[i].RowIndex;
             }
-            if (index < 0 || index >= uzytkownicy.Length) return;
-            if (uzytkownicy[index].nazwa.ToLower().Trim() == LogowanieForm.Instancja.Wybrany.nazwa.ToLower().Trim()) return;
-            if (MessageBox.Show(this, "Czy usunąć użytkownika: " + uzytkownicy[index].nazwa + "?", "Usuń", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+            if (index < 0 || index >= Users.Users.Length) return;
+            if (Users.Users[index].Name == LogowanieForm.Instancja.Wybrany.Name) return;
+            if (MessageBox.Show(this, "Czy usunąć użytkownika: " + Users.Users[index].Name + "?", "Usuń", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
                 listaView.Rows.RemoveAt(index);
-                uzytkownicy = uzytkownicy.Take(index).Concat(uzytkownicy.Skip(index + 1)).ToArray();
+                Users.Users = Users.Users.Take(index).Concat(Users.Users.Skip(index + 1)).ToArray();
             }
         }
 
         private void okBtn_Click(object sender, EventArgs e)
         {
             HashSet<string> unique = new HashSet<string>();
-            foreach (var usr in uzytkownicy)
+            foreach (var usr in Users.Users)
             {
-                if (unique.Contains(usr.nazwa))
+                if (unique.Contains(usr.Name))
                 {
                     MessageBox.Show(this, "Tabela zawieraz zduplikowane nazwy użytkowników!", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                unique.Add(usr.nazwa);
+                unique.Add(usr.Name);
             }
-            if (LogowanieForm.Instancja.hasloBazy != hasloBazy)
-            {
-                BazaDanychWrapper.ZmienHaslo(LogowanieForm.Instancja.PlikBazy, hasloBazy, stareHasloBazy);
-            }
-            LogowanieForm.Instancja.hasloBazy = hasloBazy;
-            LogowanieForm.Instancja.uzytkownicy = uzytkownicy;
-            LogowanieForm.Instancja.zapiszUzytkownikow();
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 
@@ -152,8 +143,7 @@ namespace DotBase
             form.zmienWlasne("BAZA DANYCH", "");
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
-                hasloBazy = form.Haslo;
-                stareHasloBazy = form.AktHaslo;
+                Users.DatabasePassword = form.Haslo;
             }
         }
 

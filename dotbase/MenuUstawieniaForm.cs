@@ -94,7 +94,7 @@ namespace DotBase
             var form = new HasloForm();
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
-                LogowanieForm.Instancja.zmienHaslo(form.Nazwa, form.Haslo);
+                LogowanieForm.Instancja.Users.ChangeUserPassword(form.Nazwa, form.Haslo);
             }
         }
 
@@ -106,7 +106,7 @@ namespace DotBase
                 form.zmienWlasne("NOWA BAZA DANYCH", null);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
-                    if (!BazaDanychWrapper.Eksportuj(LogowanieForm.Instancja.PlikBazy, LogowanieForm.Instancja.hasloBazy, eksportujDlg.FileName, form.Haslo, new BazaDanychWrapper.TransformujBazeDelegate(UsunDanePersonalne)))
+                    if (!BazaDanychWrapper.Eksportuj(LogowanieForm.Instancja.PlikBazy, LogowanieForm.Instancja.Users.DatabasePassword, eksportujDlg.FileName, form.Haslo, new BazaDanychWrapper.TransformujBazeDelegate(UsunDanePersonalne)))
                     {
                         MessageBox.Show(this, "Nie udało się wyeskportować bazy danych.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }

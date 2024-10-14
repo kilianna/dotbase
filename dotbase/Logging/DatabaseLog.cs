@@ -35,8 +35,8 @@ namespace DotBase.Logging
             // TODO: Try catch, żeby log nigdy nie kończył się wyjątkiem
             DateTime now = DateTime.Now;
             string user = LogowanieForm.Instancja == null ? "#niezalogowany" :
-                LogowanieForm.Instancja.Wybrany.nazwa == null ? "#niezalogowany" :
-                LogowanieForm.Instancja.Wybrany.nazwa;
+                LogowanieForm.Instancja.Wybrany.Name == null ? "#niezalogowany" :
+                LogowanieForm.Instancja.Wybrany.Name;
             string stackTrace = "\r\n" + Environment.StackTrace;
             stackTrace = Regex.Replace(stackTrace, "\n[^\n]+ (System|Microsoft|DotBase\\.Log)\\.[^\n]+", "");
             Debug.WriteLine(String.Format("### {0} {1}: {2}\r\n QUERY: {3}\r\n STACK: {4}", now, user, wiadomosc, zapytanie, stackTrace).Replace("\n", "\n###"));

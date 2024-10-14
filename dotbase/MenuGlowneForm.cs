@@ -6,11 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using DotBase.Logging;
 
 namespace DotBase
 {
     public partial class MenuGlowneForm : Form
     {
+        Logger log = Log.create();
         private MenuWyszukiwanieForm _MenuWyszukiwanie;
         private MenuBiuroForm        _MenuBiuro;
         private MenuWzorcowanieForm      _Wzorcowanie;
@@ -103,10 +105,28 @@ namespace DotBase
 
         private void MenuGlowneForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            log("---------------------------- closing");
             if (DialogResult != System.Windows.Forms.DialogResult.Retry)
             {
                 DialogResult = System.Windows.Forms.DialogResult.OK;
             }
+        }
+
+        private void MenuGlowneForm_Shown(object sender, EventArgs e)
+        {
+            log("---------------------------- shown");
+        }
+
+        private void MenuGlowneForm_Load(object sender, EventArgs e)
+        {
+
+            log("---------------------------- Load");
+        }
+
+        private void MenuGlowneForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+            log("---------------------------- Closed");
         }
 
     }

@@ -301,7 +301,7 @@ namespace DotBase.Logging
             }
 
             // Invalid verification bytes - wrong password
-            if (decryptedBytesLength >= 16 && !compareBytes(decryptedBytes, 0, verificationBytes))
+            if (decryptedBytesLength >= 16 && !N.compareBytes(decryptedBytes, 0, verificationBytes))
             {
                 throw new InvalidPasswordException("Invalid password");
             }
@@ -311,7 +311,7 @@ namespace DotBase.Logging
             if (decryptedBytesLength > 64)
             {
                 byte[] actualFooter = new byte[16];
-                if (compareBytes(decryptedBytes, decryptedBytesLength - 16, footerBytes))
+                if (N.compareBytes(decryptedBytes, decryptedBytesLength - 16, footerBytes))
                 {
                     endCut = 48;
                 }
@@ -352,7 +352,7 @@ namespace DotBase.Logging
                     sha.TransformFinalBlock(new byte[0], 0, 0);
                 }
 
-                if (endCut > 0 && !compareBytes(decryptedBytes, decryptedBytesLength - 48, sha.Hash))
+                if (endCut > 0 && !N.compareBytes(decryptedBytes, decryptedBytesLength - 48, sha.Hash))
                 {
                     if (pendingException == null) pendingException = new IOException("Wrong hash");
                     messages += "\r\n\r\nLog file hash verification failed.\r\n";
@@ -371,13 +371,6 @@ namespace DotBase.Logging
             }
         }
 
-        private static bool compareBytes(byte[] buffer, int offset, byte[] expected)
-        {
-            if (offset + expected.Length > buffer.Length || offset < 0) return false;
-            var tmp = new byte[expected.Length];
-            Array.Copy(buffer, offset, tmp, 0, tmp.Length);
-            return expected.SequenceEqual(tmp);
-        }
     }
 
     public class InvalidPasswordException : CryptographicException
