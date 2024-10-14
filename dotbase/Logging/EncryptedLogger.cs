@@ -185,6 +185,9 @@ namespace DotBase.Logging
             aes.IV = iv;
             aes.Mode = CipherMode.CBC;
             aes.Padding = PaddingMode.PKCS7;
+#           if DEBUG
+            using (var outputDebug = new FileStream(filePath + ".txt", FileMode.CreateNew, FileAccess.Write))
+#           endif
             using (var output = new FileStream(filePath, FileMode.CreateNew, FileAccess.Write))
             {
                 output.Write(signatureBytes, 0, signatureBytes.Length);
@@ -213,6 +216,9 @@ namespace DotBase.Logging
                                 }
                                 var data = Encoding.UTF8.GetBytes(inputLog);
                                 sha.TransformBlock(data, 0, data.Length, null, 0);
+#                               if DEBUG
+                                outputDebug.Write(data, 0, data.Length);
+#                               endif
                                 ds.Write(data, 0, data.Length);
                                 readBytes += data.Length;
                                 var writtenBytes = output.Position;

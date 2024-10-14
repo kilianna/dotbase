@@ -47,9 +47,7 @@ namespace DotBase
                 log("Abort");
                 this.DialogResult = System.Windows.Forms.DialogResult.Abort;
                 this.Close();
-                Environment.Exit(1);
-                Application.Exit();
-                throw new ApplicationException("Aborted");
+                Program.EmergencyExit(null);
             }
         }
 

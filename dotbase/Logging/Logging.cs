@@ -118,7 +118,9 @@ namespace DotBase.Logging
 
         public static void log(string format, params object[] args)
         {
-            Debug.WriteLine(format, args);
+            string text = String.Format(format + "\r\n", args);
+            Debug.Write(text);
+            EncryptedLogger.Push(text);
         }
     }
 }

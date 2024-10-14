@@ -12,6 +12,7 @@ using System.Globalization;
 using System.Threading;
 using System.IO;
 using System.Security.Cryptography;
+using DotBase.Logging;
 
 namespace DotBase
 {
@@ -61,6 +62,10 @@ namespace DotBase
             }
 
             hasloTextBox.Text = "";
+
+            EncryptedLogger.SetLocation(
+                Path.Combine(Path.GetDirectoryName(Path.GetFullPath(bazaTextBox.Text)), "log"),
+                hasloBazy);
 
             try
             {

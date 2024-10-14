@@ -12,9 +12,6 @@ namespace DotBase
     {
         static Logger log = Log.create();
 
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main(string[] args)
         {
@@ -24,6 +21,8 @@ namespace DotBase
                 System.Console.Out.Write(N.Wersja(args[0] == "--version").TrimStart('!'));
                 return;
             }
+            log("Start programu");
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
             Application.Idle += new EventHandler(Application_Idle);
             Application.ApplicationExit += new EventHandler(Application_ApplicationExit);
             Application.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
@@ -31,7 +30,14 @@ namespace DotBase
             Application.SetCompatibleTextRenderingDefault(false);
             Application.AddMessageFilter(new HelpKeyFilter());
             Application.Run(new LogowanieForm());
+            log("Normalne wyjście z aplikacji");
             Cleanup();
+        }
+
+        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            EncryptedLogger.Push("Non-UI thread unhandled exception: " + e.ExceptionObject.ToString() + "\r\n");
+            EncryptedLogger.Stop();
         }
 
         static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
@@ -41,7 +47,7 @@ namespace DotBase
             EmergencyExit(ex.Message + "\r\n\r\n" + ex.ToString());
         }
 
-        static void EmergencyExit(string failureDescription)
+        public static void EmergencyExit(string failureDescription)
         {
             log("Emergency exit with: {0}", failureDescription);
             BazaDanychWrapper.failure();
@@ -50,16 +56,20 @@ namespace DotBase
             {
                 (new ExceptionForm(failureDescription)).ShowDialog();
             }
+            Cleanup();
             Environment.Exit(99);
         }
 
         static void Cleanup()
         {
+            log("Cleanup");
             BazaDanychWrapper.Zakoncz();
+            EncryptedLogger.Stop();
         }
 
         static void Application_ApplicationExit(object sender, EventArgs e)
         {
+            log("Wyjście z aplikacji - event");
             Cleanup();
         }
 
