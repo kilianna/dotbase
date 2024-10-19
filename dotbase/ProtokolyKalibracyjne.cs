@@ -53,23 +53,44 @@ namespace DotBase
                 MessageBox.Show("Nazwa protokołu nie może zostać automatycznie wyznaczona! Używam " + nazwa + ".");
             }
 
-            _Zapytanie = String.Format("DELETE FROM Protokoly_Kalibracji_Lawy WHERE id_protokolu = {0}", idProtokolu);
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
+            /*_Zapytanie = String.Format("DELETE FROM Protokoly_Kalibracji_Lawy WHERE id_protokolu = {0}", idProtokolu);
+            _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+            _BazaDanych.Protokoly_kalibracji_lawy
+                .DELETE()
+                .WHERE().ID_protokolu((short)idProtokolu)
+                .EXECUTE();
 
 
-            _Zapytanie = "INSERT INTO Protokoly_Kalibracji_Lawy (ID_protokolu, Data_kalibracji, Nazwa) VALUES (?, ?, ?)";
-            _BazaDanych.WykonajPolecenie(_Zapytanie, idProtokolu, data, nazwa);
+            /*_Zapytanie = "INSERT INTO Protokoly_Kalibracji_Lawy (ID_protokolu, Data_kalibracji, Nazwa) VALUES (?, ?, ?)";
+            _BazaDanych.WykonajPolecenie(_Zapytanie, idProtokolu, data, nazwa);*/
+            _BazaDanych.Protokoly_kalibracji_lawy
+                .INSERT()
+                    .ID_protokolu((short)idProtokolu)
+                    .Data_kalibracji(data)
+                    .Nazwa(nazwa)
+                .EXECUTE();
 
+            /*_Zapytanie = String.Format("DELETE FROM Pomiary_wzorcowe WHERE id_protokolu = {0}", idProtokolu);
+            _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+            _BazaDanych.Pomiary_wzorcowe
+                .DELETE()
+                .WHERE().ID_protokolu((short)idProtokolu)
+                .EXECUTE();
 
-            _Zapytanie = String.Format("DELETE FROM Pomiary_wzorcowe WHERE id_protokolu = {0}", idProtokolu);
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
-                
             for(int i = 0; i < id.Count; ++i)
             {
-                _Zapytanie = String.Format("INSERT INTO Pomiary_Wzorcowe VALUES ('{0}','{1}','{2}','{3}','{4}')", odleglosc[i], id[i], mocKermy[i].ToString(), idProtokolu, niepewnosc[i].ToString());
-             
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
+                /*_Zapytanie = String.Format("INSERT INTO Pomiary_Wzorcowe VALUES ('{0}','{1}','{2}','{3}','{4}')", odleglosc[i], id[i], mocKermy[i].ToString(), idProtokolu, niepewnosc[i].ToString());
+                _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+                _BazaDanych.Pomiary_wzorcowe
+                    .INSERT()
+                        .Odleglosc(odleglosc[i])
+                        .ID_zrodla((short)id[i])
+                        .Moc_kermy(mocKermy[i])
+                        .ID_protokolu((short)idProtokolu)
+                        .Niepewnosc(niepewnosc[i])
+                    .EXECUTE();
             }
+
 
             return true;
         }

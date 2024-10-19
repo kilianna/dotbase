@@ -66,10 +66,10 @@ namespace DotBase
         {
             _BazaDanych.wzorcowanie_cezem
                 .UPDATE()
-                    .Data_wzorcowania(DateTime.Parse(_DaneOgolneDoZapisu.Data))
+                    .Data_wzorcowania(_DaneOgolneDoZapisu.Data)
                 .WHERE()
-                    .ID_wzorcowania(int.Parse(_DaneOgolneDoZapisu.IdWzorcowania))
-                    .ID_arkusza(short.Parse(_DaneOgolneDoZapisu.IdArkusza))
+                    .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                    .ID_arkusza((short)_DaneOgolneDoZapisu.IdArkusza)
                 .INFO("Zmiana danych ogólnych wzorcowania cezem")
                 .EXECUTE();
 
@@ -188,19 +188,19 @@ namespace DotBase
         {
             _DaneOgolneDoZapisu = new KlasyPomocniczeCez.DaneOgolne();
 
-            _DaneOgolneDoZapisu.IdKarty   = idKarty;
-            _DaneOgolneDoZapisu.IdArkusza = idArkusza;
-            _DaneOgolneDoZapisu.Data      = data.ToShortDateString();
+            _DaneOgolneDoZapisu.IdKarty   = Int32.Parse(idKarty);
+            _DaneOgolneDoZapisu.IdArkusza = Int32.Parse(idArkusza);
+            _DaneOgolneDoZapisu.Data      = data;
 
             try
             {
                 if (TrybNadpisywania)
                 {
-                    _DaneOgolneDoZapisu.IdWzorcowania = ZnajdzIdWzorcowania(idArkusza, idKarty).ToString();
+                    _DaneOgolneDoZapisu.IdWzorcowania = ZnajdzIdWzorcowania(idArkusza, idKarty);
                 }
                 else
                 {
-                    _DaneOgolneDoZapisu.IdWzorcowania = (ZnajdzMaksymalneIdWzorcowania() + 1).ToString();
+                    _DaneOgolneDoZapisu.IdWzorcowania = (ZnajdzMaksymalneIdWzorcowania() + 1);
                 }
             }
             catch (Exception)
@@ -423,11 +423,19 @@ namespace DotBase
         protected bool ZapiszDaneOgolne()
         //---------------------------------------------------------------
         {
-            _Zapytanie = "INSERT INTO Wzorcowanie_cezem (Id_karty, Id_arkusza, Data_wzorcowania, rodzaj_wzorcowania, Id_wzorcowania) "
+            /*_Zapytanie = "INSERT INTO Wzorcowanie_cezem (Id_karty, Id_arkusza, Data_wzorcowania, rodzaj_wzorcowania, Id_wzorcowania) "
                        + String.Format("VALUES ({0}, {1}, #{2}#, '{3}', {4})", _DaneOgolneDoZapisu.IdKarty, _DaneOgolneDoZapisu.IdArkusza, 
                        _DaneOgolneDoZapisu.Data, _RodzajWzorcowania ,_DaneOgolneDoZapisu.IdWzorcowania);
+            _BazaDanych.WykonajPolecenie(_Zapytanie);*/
 
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
+            _BazaDanych.wzorcowanie_cezem
+                .INSERT()
+                    .ID_karty(_DaneOgolneDoZapisu.IdKarty)
+                    .ID_arkusza((short)_DaneOgolneDoZapisu.IdArkusza)
+                    .Data_wzorcowania(_DaneOgolneDoZapisu.Data)
+                    .Rodzaj_wzorcowania(_RodzajWzorcowania)
+                    .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                .EXECUTE();
 
             return true;
         }
@@ -447,8 +455,8 @@ namespace DotBase
                     .Napiecie_zasilania_sondy(_PrzyrzadDoZapisu.NapiecieZasilaniaSondy)
                     .Inne_nastawy(_PrzyrzadDoZapisu.InneNastawy)
                 .WHERE()
-                    .ID_wzorcowania(int.Parse(_DaneOgolneDoZapisu.IdWzorcowania))
-                    .ID_arkusza(short.Parse(_DaneOgolneDoZapisu.IdArkusza))
+                    .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                    .ID_arkusza((short)_DaneOgolneDoZapisu.IdArkusza)
                 .INFO("Zapis danych przyrządu")
                 .EXECUTE();
 
@@ -466,8 +474,8 @@ namespace DotBase
                     .wilgotnosc(_WarunkiDoZapisu.Wilgotnosc)
                     .Uwagi(_WarunkiDoZapisu.Uwagi)
                 .WHERE()
-                    .ID_wzorcowania(int.Parse(_DaneOgolneDoZapisu.IdWzorcowania))
-                    .ID_arkusza(short.Parse(_DaneOgolneDoZapisu.IdArkusza))
+                    .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                    .ID_arkusza((short)_DaneOgolneDoZapisu.IdArkusza)
                 .INFO("Zapisanie warunków wzorcowania cezem")
                 .EXECUTE();
 

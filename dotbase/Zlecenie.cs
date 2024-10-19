@@ -191,18 +191,26 @@ namespace DotBase
             public void UsunKarty(int idZlecenia)
             //--------------------------------------------------------------------
             {
-                _Zapytanie = String.Format("DELETE * FROM Karta_przyjecia WHERE id_zlecenia = {0}", idZlecenia);
-
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
+                /*_Zapytanie = String.Format("DELETE * FROM Karta_przyjecia WHERE id_zlecenia = {0}", idZlecenia);
+                _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+                _BazaDanych.Karta_przyjecia
+                    .DELETE()
+                    .WHERE().ID_zlecenia(idZlecenia)
+                    .INFO("Usunięcie kart przyjęcia")
+                    .EXECUTE();
             }
 
             //--------------------------------------------------------------------
             public void UsunZlecenie(int idZlecenia)
             //--------------------------------------------------------------------
             {
-                _Zapytanie = String.Format("DELETE * FROM Zlecenia WHERE id_zlecenia = {0}", idZlecenia);
-
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
+                /*_Zapytanie = String.Format("DELETE * FROM Zlecenia WHERE id_zlecenia = {0}", idZlecenia);
+                _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+                _BazaDanych.Zlecenia
+                    .DELETE()
+                    .WHERE().ID_zlecenia(idZlecenia)
+                    .INFO("Usunięcie zlecenia")
+                    .EXECUTE();
             }
 
             //--------------------------------------------------------------------
@@ -364,7 +372,6 @@ namespace DotBase
                 // jako, że id_zlecenia mogło zostać zmienione (np. przejście do innego zlecenia przez użytkownika)
                 // Id zlecenia bierzemy nie wprost z okna, ale z odczytanych wcześniej danych z bazy
                 // Dlatego też poniżej widnieje _DaneZlecenia.Id
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
                 _BazaDanych.Zlecenia
                     .UPDATE()
                         .Data_przyjecia(daneDoZapisu.DataPrzyjecia)

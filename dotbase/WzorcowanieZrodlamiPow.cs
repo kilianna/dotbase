@@ -774,17 +774,27 @@ namespace DotBase
         public void NadpiszDaneOgolne()
         //---------------------------------------------------------------
         {
-            _Zapytanie = String.Format("UPDATE Wzorcowanie_zrodlami_powierzchniowymi SET Data_wzorcowania=#{0}# WHERE Id_wzorcowania = {1}",
+            /*_Zapytanie = String.Format("UPDATE Wzorcowanie_zrodlami_powierzchniowymi SET Data_wzorcowania=#{0}# WHERE Id_wzorcowania = {1}",
                                        _DaneOgolneDoZapisu.Data, _DaneOgolneDoZapisu.IdWzorcowania);
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
+            _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+            _BazaDanych.Wzorcowanie_zrodlami_powierzchniowymi
+                .UPDATE()
+                    .Data_wzorcowania(_DaneOgolneDoZapisu.Data)
+                .WHERE()
+                    .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                .EXECUTE();
         }
 
         //---------------------------------------------------------------
         public void NadpiszDaneWzorcoweIPomiarowe()
         //---------------------------------------------------------------
         {
-            _Zapytanie = String.Format("DELETE FROM Pomiary_powierzchniowe WHERE id_wzorcowania = {0}", _DaneOgolneDoZapisu.IdWzorcowania);
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
+            /*_Zapytanie = String.Format("DELETE FROM Pomiary_powierzchniowe WHERE id_wzorcowania = {0}", _DaneOgolneDoZapisu.IdWzorcowania);
+            _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+            _BazaDanych.Pomiary_powierzchniowe
+                .DELETE()
+                .WHERE().ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                .EXECUTE();
 
             ZapiszWartosciWzorcowoPomiarowe();
         }
@@ -820,9 +830,9 @@ namespace DotBase
         {
             _DaneOgolneDoZapisu = new SkazeniaDaneOgolne();
 
-            _DaneOgolneDoZapisu.IdKarty = idKarty;
-            _DaneOgolneDoZapisu.IdArkusza = idArkusza;
-            _DaneOgolneDoZapisu.Data = data.ToShortDateString();
+            _DaneOgolneDoZapisu.IdKarty = N.intParse(idKarty);
+            _DaneOgolneDoZapisu.IdArkusza = N.intParse(idArkusza);
+            _DaneOgolneDoZapisu.Data = data;
 
             try
             {
@@ -833,12 +843,12 @@ namespace DotBase
                 {
                     _Zapytanie = "SELECT id_wzorcowania FROM Wzorcowanie_zrodlami_powierzchniowymi WHERE "
                                + String.Format("id_karty={0} AND Id_arkusza={1} AND id_zrodla = {2}", idKarty, idArkusza, _DaneOgolneDoZapisu.IdZrodla);
-                    _DaneOgolneDoZapisu.IdWzorcowania = ZnajdzIdWzorcowania(idArkusza, idKarty, zrodlo).ToString();
+                    _DaneOgolneDoZapisu.IdWzorcowania = ZnajdzIdWzorcowania(idArkusza, idKarty, zrodlo);
                 }
                 else
                 {
                     _Zapytanie = "SELECT MAX(Id_wzorcowania) FROM Wzorcowanie_zrodlami_powierzchniowymi";
-                    _DaneOgolneDoZapisu.IdWzorcowania = ZnajdzMaksymalneIdWzorcowania().ToString();
+                    _DaneOgolneDoZapisu.IdWzorcowania = ZnajdzMaksymalneIdWzorcowania();
 
                 }
             }
@@ -964,10 +974,17 @@ namespace DotBase
         public void ZapiszDaneOgolne()
         //---------------------------------------------------------------
         {
-            _Zapytanie = "INSERT INTO Wzorcowanie_zrodlami_powierzchniowymi (Id_karty, Id_arkusza, Id_zrodla, Data_wzorcowania, Id_wzorcowania) "
+            /*_Zapytanie = "INSERT INTO Wzorcowanie_zrodlami_powierzchniowymi (Id_karty, Id_arkusza, Id_zrodla, Data_wzorcowania, Id_wzorcowania) "
                        + String.Format("VALUES ({0},{1},{2},#{3}#,{4})", _DaneOgolneDoZapisu.IdKarty, _DaneOgolneDoZapisu.IdArkusza, _DaneOgolneDoZapisu.IdZrodla, _DaneOgolneDoZapisu.Data, _DaneOgolneDoZapisu.IdWzorcowania);
-
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
+            _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+            _BazaDanych.Wzorcowanie_zrodlami_powierzchniowymi
+                .INSERT()
+                    .ID_karty(_DaneOgolneDoZapisu.IdKarty)
+                    .ID_arkusza(_DaneOgolneDoZapisu.IdArkusza)
+                    .ID_zrodla(_DaneOgolneDoZapisu.IdZrodla)
+                    .Data_wzorcowania(_DaneOgolneDoZapisu.Data)
+                    .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                .EXECUTE();
         }
 
         //---------------------------------------------------------------
@@ -978,24 +995,42 @@ namespace DotBase
                        + String.Format("Id_karty = {0}) AND typ = '{1}' AND nr_fabryczny = '{2}'", _DaneOgolneDoZapisu.IdKarty, _PrzyrzadDoZapisu.Sondy.Lista[0].Typ, _PrzyrzadDoZapisu.Sondy.Lista[0].NrFabryczny);
             int idSondy = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0);
 
-            _Zapytanie = String.Format("UPDATE Wzorcowanie_zrodlami_powierzchniowymi SET Id_sondy={0}, Napiecie_zasilania_sondy='{1}', ",
+            /*_Zapytanie = String.Format("UPDATE Wzorcowanie_zrodlami_powierzchniowymi SET Id_sondy={0}, Napiecie_zasilania_sondy='{1}', ",
                                       idSondy, _PrzyrzadDoZapisu.NapiecieZasilaniaSondy)
                        + String.Format("Zakres='{0}', Inne_nastawy='{1}' WHERE Id_wzorcowania={2}",
                                       _PrzyrzadDoZapisu.Zakres, _PrzyrzadDoZapisu.InneNastawy, _DaneOgolneDoZapisu.IdWzorcowania);
-
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
+            _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+            _BazaDanych.Wzorcowanie_zrodlami_powierzchniowymi
+                .UPDATE()
+                    .ID_sondy(idSondy)
+                    .Napiecie_zasilania_sondy(_PrzyrzadDoZapisu.NapiecieZasilaniaSondy)
+                    .Zakres(_PrzyrzadDoZapisu.Zakres)
+                    .Inne_nastawy(_PrzyrzadDoZapisu.InneNastawy)
+                .WHERE()
+                    .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                .EXECUTE();
         }
 
         //---------------------------------------------------------------
         public void ZapiszDaneWarunkow()
         //---------------------------------------------------------------
         {
-            _Zapytanie = String.Format("UPDATE Wzorcowanie_zrodlami_powierzchniowymi SET Cisnienie='{0}',Temperatura='{1}', Wilgotnosc='{2}', ",
+            /*_Zapytanie = String.Format("UPDATE Wzorcowanie_zrodlami_powierzchniowymi SET Cisnienie='{0}',Temperatura='{1}', Wilgotnosc='{2}', ",
                                        _WarunkiDoZapisu.Cisnienie, _WarunkiDoZapisu.Temperatura, _WarunkiDoZapisu.Wilgotnosc)
                        + String.Format("Podstawka='{0}',Odleglosc_Zrodlo_Sonda='{1}', Mnoznik_korekcyjny='{2}' WHERE Id_wzorcowania={3}",
                                        _WarunkiDoZapisu.Podstawka, _WarunkiDoZapisu.OdlegloscZrodloSonda, _WarunkiDoZapisu.WspolczynnikKorekcyjny, _DaneOgolneDoZapisu.IdWzorcowania);
-
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
+            _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+            _BazaDanych.Wzorcowanie_zrodlami_powierzchniowymi
+                .UPDATE()
+                    .Cisnienie(_WarunkiDoZapisu.Cisnienie)
+                    .Temperatura(_WarunkiDoZapisu.Temperatura)
+                    .Wilgotnosc(_WarunkiDoZapisu.Wilgotnosc)
+                    .Podstawka(_WarunkiDoZapisu.Podstawka)
+                    .Odleglosc_zrodlo_sonda(_WarunkiDoZapisu.OdlegloscZrodloSonda)
+                    .Mnoznik_korekcyjny(_WarunkiDoZapisu.WspolczynnikKorekcyjny)
+                .WHERE()
+                    .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                .EXECUTE();
         }
 
         //---------------------------------------------------------------
@@ -1004,28 +1039,50 @@ namespace DotBase
         {
             for (int i = 0; i < _WartosciWzorcowoPomiaroweDoZapisu.Dane.Count; ++i)
             {
-                _Zapytanie = "INSERT INTO Pomiary_powierzchniowe (Id_wzorcowania, Pomiar, Tlo) VALUES "
+                /*_Zapytanie = "INSERT INTO Pomiary_powierzchniowe (Id_wzorcowania, Pomiar, Tlo) VALUES "
                            + String.Format("({0}, '{1}', '{2}')", _DaneOgolneDoZapisu.IdWzorcowania, _WartosciWzorcowoPomiaroweDoZapisu.Dane[i].Wskazanie, _WartosciWzorcowoPomiaroweDoZapisu.Dane[i].Tlo);
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
+                _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+                _BazaDanych.Pomiary_powierzchniowe
+                    .INSERT()
+                        .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                        .Pomiar(_WartosciWzorcowoPomiaroweDoZapisu.Dane[i].Wskazanie)
+                        .Tlo(_WartosciWzorcowoPomiaroweDoZapisu.Dane[i].Tlo)
+                    .EXECUTE();
             }
 
 
             _Zapytanie = String.Format("SELECT id_jednostki FROM Jednostki WHERE jednostka='{0}'", _WartosciWzorcowoPomiaroweDoZapisu.jednostka);
             int idJednostki = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0);
 
-            _Zapytanie = String.Format("UPDATE Wzorcowanie_zrodlami_powierzchniowymi SET uwagi='{0}', id_jednostki={1} WHERE id_wzorcowania={2}",
+            /*_Zapytanie = String.Format("UPDATE Wzorcowanie_zrodlami_powierzchniowymi SET uwagi='{0}', id_jednostki={1} WHERE id_wzorcowania={2}",
                                       _WartosciWzorcowoPomiaroweDoZapisu.uwagi, idJednostki, _DaneOgolneDoZapisu.IdWzorcowania);
-
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
+            _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+            _BazaDanych.Wzorcowanie_zrodlami_powierzchniowymi
+                .UPDATE()
+                    .Uwagi(_WartosciWzorcowoPomiaroweDoZapisu.uwagi)
+                    .ID_jednostki(idJednostki)
+                .WHERE()
+                    .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                .EXECUTE();
         }
 
         //---------------------------------------------------------------
         public void ZapiszDaneObliczonychWspolczynnikow()
         //---------------------------------------------------------------
         {
-            _Zapytanie = String.Format("UPDATE Wzorcowanie_zrodlami_powierzchniowymi SET Wspolczynnik='{0}', Niepewnosc='{1}', ", _WspolczynnikiDoZapisu.WspolczynnikKalibracyjny, _WspolczynnikiDoZapisu.Niepewnosc)
+            /*_Zapytanie = String.Format("UPDATE Wzorcowanie_zrodlami_powierzchniowymi SET Wspolczynnik='{0}', Niepewnosc='{1}', ", _WspolczynnikiDoZapisu.WspolczynnikKalibracyjny, _WspolczynnikiDoZapisu.Niepewnosc)
                        + String.Format("Osoba_wzorcujaca='{0}', Osoba_sprawdzajaca='{1}', Dolacz={2} WHERE Id_wzorcowania={3}", _WspolczynnikiDoZapisu.Wzorcujacy, _WspolczynnikiDoZapisu.Sprawdzajacy, _WspolczynnikiDoZapisu.Dolaczyc, _DaneOgolneDoZapisu.IdWzorcowania);
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
+            _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+            _BazaDanych.Wzorcowanie_zrodlami_powierzchniowymi
+                .UPDATE()
+                    .wspolczynnik(_WspolczynnikiDoZapisu.WspolczynnikKalibracyjny)
+                    .Niepewnosc(_WspolczynnikiDoZapisu.Niepewnosc)
+                    .Osoba_wzorcujaca(_WspolczynnikiDoZapisu.Wzorcujacy)
+                    .Osoba_sprawdzajaca(_WspolczynnikiDoZapisu.Sprawdzajacy)
+                    .Dolacz(_WspolczynnikiDoZapisu.Dolaczyc)
+                .WHERE()
+                    .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                .EXECUTE();
         }
         #endregion
 

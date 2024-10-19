@@ -352,7 +352,7 @@ namespace DotBase
             _BazaDanych.Sygnalizacja
                 .DELETE()
                 .WHERE()
-                    .ID_wzorcowania(Int32.Parse(_DaneOgolneDoZapisu.IdWzorcowania))
+                    .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
                 .INFO("Czyszczenie przed nadpisaniem danych wzorcowych i pomiarowych.")
                 .EXECUTE();
 
@@ -360,7 +360,7 @@ namespace DotBase
             {
                 _BazaDanych.Sygnalizacja
                     .INSERT()
-                        .ID_wzorcowania(Int32.Parse(_DaneOgolneDoZapisu.IdWzorcowania))
+                        .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
                         .Prog(0)
                         .Niepewnosc(0)
                         .Wartosc_zmierzona(0)
@@ -380,7 +380,7 @@ namespace DotBase
                 {
                     _BazaDanych.Sygnalizacja
                         .INSERT()
-                            .ID_wzorcowania(Int32.Parse(_DaneOgolneDoZapisu.IdWzorcowania))
+                            .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
                             .Prog(Pomiary.Dane[i].Prog)
                             .Niepewnosc(Pomiary.Dane[i].Niepewnosc)
                             .Wartosc_zmierzona(Pomiary.Dane[i].WartoscZmierzona)
@@ -403,12 +403,22 @@ namespace DotBase
                     _Zapytanie = String.Format("SELECT id_jednostki FROM Jednostki WHERE jednostka='{0}'", Pomiary.Jednostka);
                     int idJednostki = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0);
 
-                    _Zapytanie = String.Format("UPDATE Wzorcowanie_cezem SET id_protokolu = {0}, id_jednostki = {1}, tlo = 0.0, wielkosc_fizyczna = 'nie dotyczy'  WHERE id_wzorcowania = {2}",
+                    /*_Zapytanie = String.Format("UPDATE Wzorcowanie_cezem SET id_protokolu = {0}, id_jednostki = {1}, tlo = 0.0, wielkosc_fizyczna = 'nie dotyczy'  WHERE id_wzorcowania = {2}",
                                                idProtokolu, idJednostki, _DaneOgolneDoZapisu.IdWzorcowania);
-                    _BazaDanych.WykonajPolecenie(_Zapytanie);
+                    _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+                    _BazaDanych.wzorcowanie_cezem
+                        .UPDATE()
+                            .ID_protokolu(idProtokolu)
+                            .ID_jednostki(idJednostki)
+                            .Tlo("0.0")
+                            .Wielkosc_fizyczna("nie dotyczy")
+                        .WHERE()
+                            .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                        .EXECUTE();
                 }
                 catch (Exception)
                 {
+                    // TODO: Dlaczego wyjątek wyciszony?
                 }
             }
             return true;
@@ -701,7 +711,7 @@ namespace DotBase
             {
                 _BazaDanych.Sygnalizacja
                     .INSERT()
-                        .ID_wzorcowania(Int32.Parse(_DaneOgolneDoZapisu.IdWzorcowania))
+                        .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
                         .Prog(0.0)
                         .Niepewnosc(0.0)
                         .Wartosc_zmierzona(0.0)
@@ -721,7 +731,7 @@ namespace DotBase
                 {
                     _BazaDanych.Sygnalizacja
                         .INSERT()
-                            .ID_wzorcowania(Int32.Parse(_DaneOgolneDoZapisu.IdWzorcowania))
+                            .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
                             .Prog(Pomiary.Dane[i].Prog)
                             .Niepewnosc(Pomiary.Dane[i].Niepewnosc)
                             .Wartosc_zmierzona(Pomiary.Dane[i].WartoscZmierzona)
@@ -749,7 +759,7 @@ namespace DotBase
                         .Tlo("0.0")
                         .Wielkosc_fizyczna("nie dotyczy")
                     .WHERE()
-                        .ID_wzorcowania(Int32.Parse(_DaneOgolneDoZapisu.IdWzorcowania))
+                        .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
                     .INFO("Aktualizacja wzorcowania cezem podczas dodawania wyników.")
                     .EXECUTE();
             }
@@ -762,10 +772,17 @@ namespace DotBase
         override public bool ZapiszDaneObliczonychWspolczynnikow()
         //---------------------------------------------------------------
         {
-            _Zapytanie = String.Format("UPDATE Wzorcowanie_cezem SET osoba_wzorcujaca='{0}', osoba_sprawdzajaca='{1}', Dolacz={2} WHERE id_wzorcowania={3}",
+            /*_Zapytanie = String.Format("UPDATE Wzorcowanie_cezem SET osoba_wzorcujaca='{0}', osoba_sprawdzajaca='{1}', Dolacz={2} WHERE id_wzorcowania={3}",
                                        Protokol.Wzorcujacy, Protokol.Sprawdzajacy, Protokol.Dolacz, _DaneOgolneDoZapisu.IdWzorcowania);
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
-
+            _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+            _BazaDanych.wzorcowanie_cezem
+                .UPDATE()
+                    .Osoba_wzorcujaca(Protokol.Wzorcujacy)
+                    .Osoba_sprawdzajaca(Protokol.Sprawdzajacy)
+                    .Dolacz(Protokol.Dolacz)
+                .WHERE()
+                    .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                .EXECUTE();
             return true;
         }
 

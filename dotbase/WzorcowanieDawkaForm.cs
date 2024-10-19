@@ -385,8 +385,8 @@ namespace DotBase
             WyswietlKonkretnaJednostke();
             WyswietlKonkretnyProtokol();
 
-            textBox17.Text = _WzorcowanieDawka.Pomiary.zrodlo;
-            textBox18.Text = _WzorcowanieDawka.Pomiary.odleglosc;
+            textBox17.Text = _WzorcowanieDawka.Pomiary.zrodlo.ToString();
+            textBox18.Text = _WzorcowanieDawka.Pomiary.odleglosc.ToString();
         }
 
         //---------------------------------------------------------------

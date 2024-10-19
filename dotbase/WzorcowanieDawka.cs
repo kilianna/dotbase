@@ -45,14 +45,19 @@ namespace DotBase
         override public bool NadpiszDaneWzorcoweIPomiarowe()
         //---------------------------------------------------------------
         {
-            _Zapytanie = String.Format("DELETE FROM Pomiary_dawka WHERE id_wzorcowania = {0}", _DaneOgolneDoZapisu.IdWzorcowania);
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
+            /*_Zapytanie = String.Format("DELETE FROM Pomiary_dawka WHERE id_wzorcowania = {0}", _DaneOgolneDoZapisu.IdWzorcowania);
+            _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+            _BazaDanych.Pomiary_dawka
+                .DELETE()
+                .WHERE().ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                .INFO("Czyszczenie danych wzorcowych i pomiarowych przed ponownym zapisem.")
+                .EXECUTE();
 
             for (int i = 0; i < Pomiary.Dane.Count; ++i)
             {
                 _BazaDanych.Pomiary_dawka
                     .INSERT()
-                        .ID_wzorcowania(int.Parse(_DaneOgolneDoZapisu.IdWzorcowania))
+                        .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
                         .Czas(Pomiary.Dane[i].Czas)
                         .Wskazanie(Pomiary.Dane[i].Wskazanie)
                         .Dolaczyc(Pomiary.Dane[i].Dolaczyc)
@@ -77,16 +82,16 @@ namespace DotBase
                     .INFO("Nadpisanie danych wzorcowania i pomiarowych")
                     .EXECUTE();
 
-                _Zapytanie = String.Format("UPDATE Wyniki_dawka SET id_zrodla = {0}, odleglosc = '{1}' WHERE id_wzorcowania = {2}",
+                /*_Zapytanie = String.Format("UPDATE Wyniki_dawka SET id_zrodla = {0}, odleglosc = '{1}' WHERE id_wzorcowania = {2}",
                     Pomiary.zrodlo, Pomiary.odleglosc, _DaneOgolneDoZapisu.IdWzorcowania);
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
+                _BazaDanych.WykonajPolecenie(_Zapytanie);*/
 
                 _BazaDanych.Wyniki_dawka
                     .UPDATE()
-                        .ID_zrodla(int.Parse(Pomiary.zrodlo))
-                        .Odleglosc(N.doubleParse(Pomiary.odleglosc))
+                        .ID_zrodla(Pomiary.zrodlo)
+                        .Odleglosc(Pomiary.odleglosc)
                     .WHERE()
-                        .ID_wzorcowania(int.Parse(_DaneOgolneDoZapisu.IdWzorcowania))
+                        .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
                     .INFO("Nadpisanie danych wzorcowania i pomiarowych")
                     .EXECUTE();
             }
@@ -242,14 +247,33 @@ namespace DotBase
         override public bool NadpiszDaneObliczonychWspolczynnikow()
         //---------------------------------------------------------------
         {
-            _Zapytanie = String.Format("UPDATE Wzorcowanie_cezem SET osoba_wzorcujaca='{0}', osoba_sprawdzajaca='{1}', Dolacz={2} WHERE id_wzorcowania={3}",
+            /*_Zapytanie = String.Format("UPDATE Wzorcowanie_cezem SET osoba_wzorcujaca='{0}', osoba_sprawdzajaca='{1}', Dolacz={2} WHERE id_wzorcowania={3}",
                                        Wspolczynniki.Wzorcujacy, Wspolczynniki.Sprawdzajacy, Wspolczynniki.Dolacz, _DaneOgolneDoZapisu.IdWzorcowania);
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
+            _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+            _BazaDanych.wzorcowanie_cezem
+                .UPDATE()
+                    .Osoba_wzorcujaca(Wspolczynniki.Wzorcujacy)
+                    .Osoba_sprawdzajaca(Wspolczynniki.Sprawdzajacy)
+                    .Dolacz(Wspolczynniki.Dolacz)
+                .WHERE()
+                    .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                .EXECUTE();
 
-            _Zapytanie = String.Format("UPDATE Wyniki_dawka SET id_zrodla={0}, odleglosc='{1}', wspolczynnik='{2}', ", Pomiary.zrodlo, Wspolczynniki.Odleglosc, Wspolczynniki.Wspolczynnik)
+            /*_Zapytanie = String.Format("UPDATE Wyniki_dawka SET id_zrodla={0}, odleglosc='{1}', wspolczynnik='{2}', ", Pomiary.zrodlo, Wspolczynniki.Odleglosc, Wspolczynniki.Wspolczynnik)
                        + String.Format("niepewnosc='{0}', zakres='{1}', wielkosc_fizyczna='{2}' WHERE id_wzorcowania={3}", Wspolczynniki.Niepewnosc, Wspolczynniki.Zakres, Wspolczynniki.RownowaznikDawki, _DaneOgolneDoZapisu.IdWzorcowania);
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
-
+            _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+            _BazaDanych.Wyniki_dawka
+                .UPDATE()
+                    .ID_zrodla(Pomiary.zrodlo)
+                    .Odleglosc(Wspolczynniki.Odleglosc)
+                    .Wspolczynnik(Wspolczynniki.Wspolczynnik)
+                    .Niepewnosc(Wspolczynniki.Niepewnosc)
+                    .Zakres(Wspolczynniki.Zakres)
+                    .Wielkosc_fizyczna(Wspolczynniki.RownowaznikDawki)
+                .WHERE()
+                    .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                .EXECUTE();
+ 
             return true;
         }
 
@@ -348,13 +372,13 @@ namespace DotBase
 
             try
             {
-                Pomiary.odleglosc = _OdpowiedzBazy.Rows[0].Field<double>(0).ToString();
-                Pomiary.zrodlo = _OdpowiedzBazy.Rows[0].Field<int>(1).ToString();
+                Pomiary.odleglosc = _OdpowiedzBazy.Rows[0].Field<double>(0);
+                Pomiary.zrodlo = _OdpowiedzBazy.Rows[0].Field<int>(1);
             }
             catch(Exception)
             {
-                Pomiary.odleglosc = "0";
-                Pomiary.zrodlo = "0";
+                Pomiary.odleglosc = 0;
+                Pomiary.zrodlo = 0;
             }
 
             return true;
@@ -370,8 +394,8 @@ namespace DotBase
 
             Pomiary.jednostka = "mSv";
             Pomiary.protokol  = protokol;
-            Pomiary.odleglosc = odleglosc;
-            Pomiary.zrodlo    = zrodlo;
+            Pomiary.odleglosc = N.doubleParse(odleglosc);
+            Pomiary.zrodlo    = N.intParse(zrodlo);
 
             try
             {
@@ -463,10 +487,18 @@ namespace DotBase
         {
             for (int i = 0; i < Pomiary.Dane.Count; ++i)
             {
-                _Zapytanie = String.Format("INSERT INTO Pomiary_dawka VALUES ({0}, '{1}', '{2}', {3}, '{4}')",
+                /*_Zapytanie = String.Format("INSERT INTO Pomiary_dawka VALUES ({0}, '{1}', '{2}', {3}, '{4}')",
                              _DaneOgolneDoZapisu.IdWzorcowania, Pomiary.Dane[i].Czas, Pomiary.Dane[i].Wskazanie,
                              Pomiary.Dane[i].Dolaczyc, Pomiary.Dane[i].WartoscWzorcowa);
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
+                _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+                _BazaDanych.Pomiary_dawka
+                    .INSERT()
+                        .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                        .Czas(Pomiary.Dane[i].Czas)
+                        .Wskazanie(Pomiary.Dane[i].Wskazanie)
+                        .Dolaczyc(Pomiary.Dane[i].Dolaczyc)
+                        .Wartosc_wzorcowa(Pomiary.Dane[i].WartoscWzorcowa)
+                    .EXECUTE();
             }
 
             try
@@ -474,12 +506,22 @@ namespace DotBase
                 _Zapytanie = String.Format("SELECT id_protokolu FROM Protokoly_kalibracji_lawy WHERE data_kalibracji=#{0}#", Pomiary.protokol);
                 short idProtokolu = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<short>(0);
 
-                _Zapytanie = String.Format("UPDATE Wzorcowanie_cezem SET id_protokolu = {0}, id_jednostki = 0, tlo = 0.0, wielkosc_fizyczna = 'nie dotyczy'  WHERE id_wzorcowania = {1}",
+                /*_Zapytanie = String.Format("UPDATE Wzorcowanie_cezem SET id_protokolu = {0}, id_jednostki = 0, tlo = 0.0, wielkosc_fizyczna = 'nie dotyczy'  WHERE id_wzorcowania = {1}",
                                            idProtokolu, _DaneOgolneDoZapisu.IdWzorcowania);
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
+                _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+                _BazaDanych.wzorcowanie_cezem
+                   .UPDATE()
+                        .ID_protokolu(idProtokolu)
+                        .ID_jednostki(0)
+                        .Tlo("0.0")
+                        .Wielkosc_fizyczna("nie dotyczy")
+                    .WHERE()
+                        .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                    .EXECUTE();
             }
             catch (Exception)
             {
+                // TODO: Dlaczego wyjątek wyciszony?
             }
 
             return true;
@@ -489,11 +531,19 @@ namespace DotBase
         override public bool ZapiszDaneObliczonychWspolczynnikow()
         //---------------------------------------------------------------
         {
-            _Zapytanie = String.Format("UPDATE Wzorcowanie_cezem SET osoba_wzorcujaca='{0}', osoba_sprawdzajaca='{1}', Dolacz={2} WHERE id_wzorcowania={3}",
+            /*_Zapytanie = String.Format("UPDATE Wzorcowanie_cezem SET osoba_wzorcujaca='{0}', osoba_sprawdzajaca='{1}', Dolacz={2} WHERE id_wzorcowania={3}",
                                        Wspolczynniki.Wzorcujacy, Wspolczynniki.Sprawdzajacy, Wspolczynniki.Dolacz, _DaneOgolneDoZapisu.IdWzorcowania);
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
+            _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+            _BazaDanych.wzorcowanie_cezem
+                .UPDATE()
+                    .Osoba_wzorcujaca(Wspolczynniki.Wzorcujacy)
+                    .Osoba_sprawdzajaca(Wspolczynniki.Sprawdzajacy)
+                    .Dolacz(Wspolczynniki.Dolacz)
+                .WHERE()
+                    .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                .EXECUTE();
 
-            _Zapytanie = "INSERT INTO Wyniki_dawka (id_wzorcowania, id_zrodla, odleglosc, wspolczynnik, niepewnosc, zakres, wielkosc_fizyczna) VALUES "
+            /*_Zapytanie = "INSERT INTO Wyniki_dawka (id_wzorcowania, id_zrodla, odleglosc, wspolczynnik, niepewnosc, zakres, wielkosc_fizyczna) VALUES "
                        + String.Format("({0}, {1}, '{2}', '{3}', '{4}', '{5}', {6})", 
                          _DaneOgolneDoZapisu.IdWzorcowania,
                          Pomiary.zrodlo,
@@ -502,9 +552,17 @@ namespace DotBase
                          Wspolczynniki.Niepewnosc,
                          Wspolczynniki.Zakres,
                          Wspolczynniki.RownowaznikDawki);
-
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
-
+            _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+            _BazaDanych.Wyniki_dawka
+                .INSERT()
+                    .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                    .ID_zrodla(Pomiary.zrodlo)
+                    .Odleglosc(Wspolczynniki.Odleglosc)
+                    .Wspolczynnik(Wspolczynniki.Wspolczynnik)
+                    .Niepewnosc(Wspolczynniki.Niepewnosc)
+                    .Zakres(Wspolczynniki.Zakres)
+                    .Wielkosc_fizyczna(Wspolczynniki.RownowaznikDawki)
+                .EXECUTE();
             return true;
         }
 

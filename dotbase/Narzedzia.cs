@@ -151,10 +151,10 @@ namespace Narzedzia
     public class DaneOgolneDoZapisu
     //----------------------------------------
     {
-        public string IdKarty { get; set; }
-        public string IdWzorcowania { get; set; }
-        public string IdArkusza { get; set; }
-        public string Data { get; set; }
+        public int IdKarty { get; set; }
+        public int IdWzorcowania { get; set; }
+        public int IdArkusza { get; set; }
+        public DateTime Data { get; set; }
     }
 
     //----------------------------------------
@@ -422,8 +422,8 @@ namespace KlasyPomocniczeDawka
 
         public string jednostka { get; set; }
         public string protokol  { get; set; }
-        public string odleglosc { get; set; }
-        public string zrodlo    { get; set; }
+        public double odleglosc { get; set; }
+        public int zrodlo    { get; set; }
 
         //********************************************************************
         public DawkaWartosciWzorcowoPomiarowe()
@@ -632,8 +632,8 @@ namespace KlasyPomocniczeSygDawki
 
         public string jednostka { get; set; }
         public string protokol { get; set; }
-        public string odleglosc { get; set; }
-        public string zrodlo { get; set; }
+        public double odleglosc { get; set; }
+        public int zrodlo { get; set; }
 
         //********************************************************************
         public DawkaWartosciWzorcowoPomiarowe()

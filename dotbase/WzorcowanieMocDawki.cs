@@ -60,13 +60,13 @@ namespace WzorcowanieMocDawkiSpace
             _Zapytanie = String.Format("SELECT Data_kalibracji, id_protokolu FROM Protokoly_kalibracji_lawy WHERE data_kalibracji=#{0}#", protokol);
             DateTime dataKalibracjiLawy = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<DateTime>(0);
             int idProtokolu = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<short>(1);
-            
+
             _Zapytanie = String.Format("SELECT przelicznik FROM Jednostki WHERE jednostka='{0}'", jednostka);
             double przelicznik = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<float>(0);
 
             int roznicaDni = (dataWzorcowania - dataKalibracjiLawy).Days;
 
-	        // 11050.0 - czas połowicznego rozpadu cezu w dniach
+            // 11050.0 - czas połowicznego rozpadu cezu w dniach
             Constants cons = Constants.getInstance();
             double korektaRozpad = Math.Exp(-Math.Log(2.0) * roznicaDni / cons.CS_HALF_TIME_VALUE);
 
@@ -74,7 +74,7 @@ namespace WzorcowanieMocDawkiSpace
 
             double mocKermy;
 
-            for(int i = 0; i < tabela.RowCount - 1 ; ++i)
+            for (int i = 0; i < tabela.RowCount - 1; ++i)
             {
                 try
                 {
@@ -168,7 +168,7 @@ namespace WzorcowanieMocDawkiSpace
             {
                 try
                 {
-                    _Zapytanie = String.Format("SELECT Niepewnosc, Odleglosc, ID_zrodla, ID_protokolu "+
+                    _Zapytanie = String.Format("SELECT Niepewnosc, Odleglosc, ID_zrodla, ID_protokolu " +
                         "FROM Pomiary_wzorcowe WHERE Odleglosc={0} AND ID_zrodla={1} AND ID_protokolu={2}", odleglosci[punktIndex], zrodla[punktIndex], idProtokolu);
                     niepewnosciZPomWzorcowych.Add(_BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<double>(0));
                 }
@@ -663,7 +663,7 @@ namespace WzorcowanieMocDawkiSpace
             double zakres_temp;
             int licznik, licznik2;
             licznik2 = 0;
-            
+
 
             // posortowanie zakresów
             zakresyPrzyrzadu.Sort();
@@ -695,14 +695,14 @@ namespace WzorcowanieMocDawkiSpace
                     suma /= licznik;
                     wspolczynniki.Add(suma);
 
-/*                    tabela2.Rows.Add();
-                    string s = zakresyPrzyrzadu[i].ToString("G");
-                    tabela2.Rows[licznik2].Cells[0].Value = s;
+                    /*                    tabela2.Rows.Add();
+                                        string s = zakresyPrzyrzadu[i].ToString("G");
+                                        tabela2.Rows[licznik2].Cells[0].Value = s;
 
-                    
 
-                    string ss = String.Format("{0}", suma);
-                    tabela2.Rows[licznik2].Cells[1].Value = ss;*/
+
+                                        string ss = String.Format("{0}", suma);
+                                        tabela2.Rows[licznik2].Cells[1].Value = ss;*/
 
                     ++licznik2;
                 }
@@ -751,7 +751,7 @@ namespace WzorcowanieMocDawkiSpace
                 //int precyzja = Narzedzia.Precyzja.Ustaw(suma);
                 //zapytanie.Printf(wxT("%.*f"), Narzedzia.Precyzja(suma), suma3);
 
-                suma3 = 2.0 * Math.Sqrt(suma3 * suma3 + suma4/wspolczynniki[i] * suma4/wspolczynniki[i] + suma2 * suma2) * wspolczynniki[i];
+                suma3 = 2.0 * Math.Sqrt(suma3 * suma3 + suma4 / wspolczynniki[i] * suma4 / wspolczynniki[i] + suma2 * suma2) * wspolczynniki[i];
 
                 niepewnoscWspolczynnika.Add(suma3);
 
@@ -1003,11 +1003,11 @@ namespace WzorcowanieMocDawkiSpace
                         temp.Wahanie = N.doubleParse(sTemp);
                     else
                         temp.Wahanie = 0.0;
-                    
+
                     // zakres 
                     temp.Zakres = tabela.Rows[i].Cells[4].Value.ToString();
 
-                    if ( "true" == tabela.Rows[i].Cells[6].Value.ToString().ToLower())
+                    if ("true" == tabela.Rows[i].Cells[6].Value.ToString().ToLower())
                         temp.Dolaczyc = true;
                     else
                         temp.Dolaczyc = false;
@@ -1038,22 +1038,22 @@ namespace WzorcowanieMocDawkiSpace
                 {
                     MocDawkiWspolczynniki.Wspolczynnik temp = new MocDawkiWspolczynniki.Wspolczynnik();
 
-                    if ( tabela.Rows[i].Cells[0].Value.ToString() != "" )
+                    if (tabela.Rows[i].Cells[0].Value.ToString() != "")
                         temp.Zakres = N.doubleParse(tabela.Rows[i].Cells[0].Value.ToString());
                     else
                         temp.Zakres = 0.0;
 
-                    if ( tabela.Rows[i].Cells[1].Value.ToString() != "" )
+                    if (tabela.Rows[i].Cells[1].Value.ToString() != "")
                         temp.Wartosc = N.doubleParse(tabela.Rows[i].Cells[1].Value.ToString());
                     else
                         temp.Wartosc = 0.0;
 
-                    if ( tabela.Rows[i].Cells[2].Value.ToString() != "" )
+                    if (tabela.Rows[i].Cells[2].Value.ToString() != "")
                         temp.Niepewnosc = N.doubleParse(tabela.Rows[i].Cells[2].Value.ToString());
                     else
                         temp.Niepewnosc = 0.0;
 
-                    _WspolczynnikiDoZapisu.Dane.Add(temp);   
+                    _WspolczynnikiDoZapisu.Dane.Add(temp);
                 }
 
             }
@@ -1096,7 +1096,7 @@ namespace WzorcowanieMocDawkiSpace
 
             return true;
         }
-        
+
         #endregion
 
         #region Nadpisywanie Danych
@@ -1105,17 +1105,30 @@ namespace WzorcowanieMocDawkiSpace
         override public bool NadpiszDaneWzorcoweIPomiarowe()
         //---------------------------------------------------------------
         {
-            _Zapytanie = String.Format("DELETE FROM Pomiary_cez WHERE id_wzorcowania = {0}", _DaneOgolneDoZapisu.IdWzorcowania);
-	        _BazaDanych.WykonajPolecenie(_Zapytanie);
+            /*_Zapytanie = String.Format("DELETE FROM Pomiary_cez WHERE id_wzorcowania = {0}", _DaneOgolneDoZapisu.IdWzorcowania);
+	        _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+            _BazaDanych.Pomiary_cez
+                .DELETE()
+                .WHERE().ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                .EXECUTE();
 
             for (int i = 0; i < _WartosciWzorcowoPomiaroweDoZapisu.Dane.Count; ++i)
             {
-                _Zapytanie = String.Format("INSERT INTO Pomiary_cez VALUES ({0}, '{1}', '{2}', '{3}', '{4}', '{5}', {6})",
+                /*_Zapytanie = String.Format("INSERT INTO Pomiary_cez VALUES ({0}, '{1}', '{2}', '{3}', '{4}', '{5}', {6})",
                              _DaneOgolneDoZapisu.IdWzorcowania, _WartosciWzorcowoPomiaroweDoZapisu.Dane[i].Odleglosc, _WartosciWzorcowoPomiaroweDoZapisu.Dane[i].IdZrodla,
                              _WartosciWzorcowoPomiaroweDoZapisu.Dane[i].Wskazanie, _WartosciWzorcowoPomiaroweDoZapisu.Dane[i].Wahanie, 
                              _WartosciWzorcowoPomiaroweDoZapisu.Dane[i].Zakres, _WartosciWzorcowoPomiaroweDoZapisu.Dane[i].Dolaczyc );
-
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
+                _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+                _BazaDanych.Pomiary_cez
+                    .INSERT()
+                        .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                        .Odleglosc(_WartosciWzorcowoPomiaroweDoZapisu.Dane[i].Odleglosc)
+                        .ID_zrodla(_WartosciWzorcowoPomiaroweDoZapisu.Dane[i].IdZrodla)
+                        .Wskazanie(_WartosciWzorcowoPomiaroweDoZapisu.Dane[i].Wskazanie)
+                        .Wahanie(_WartosciWzorcowoPomiaroweDoZapisu.Dane[i].Wahanie)
+                        .Zakres(_WartosciWzorcowoPomiaroweDoZapisu.Dane[i].Zakres)
+                        .Dolaczyc(_WartosciWzorcowoPomiaroweDoZapisu.Dane[i].Dolaczyc)
+                    .EXECUTE();
             }
 
             try
@@ -1126,9 +1139,18 @@ namespace WzorcowanieMocDawkiSpace
                 _Zapytanie = String.Format("SELECT id_jednostki FROM Jednostki WHERE jednostka='{0}'", _WartosciWzorcowoPomiaroweDoZapisu.jednostka);
                 int idJednostki = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0);
 
-                _Zapytanie = String.Format("UPDATE Wzorcowanie_cezem SET id_protokolu = {0}, id_jednostki = {1}, tlo = '{2}', wielkosc_fizyczna='{3}' WHERE id_wzorcowania = {4}",
+                /*_Zapytanie = String.Format("UPDATE Wzorcowanie_cezem SET id_protokolu = {0}, id_jednostki = {1}, tlo = '{2}', wielkosc_fizyczna='{3}' WHERE id_wzorcowania = {4}",
                                            idProtokolu, idJednostki, _WartosciWzorcowoPomiaroweDoZapisu.tlo, _WartosciWzorcowoPomiaroweDoZapisu.WielkoscFizyczna, IdWzorcowania);
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
+                _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+                _BazaDanych.wzorcowanie_cezem
+                    .UPDATE()
+                        .ID_protokolu(idProtokolu)
+                        .ID_jednostki(idJednostki)
+                        .Tlo(_WartosciWzorcowoPomiaroweDoZapisu.tlo)
+                        .Wielkosc_fizyczna(_WartosciWzorcowoPomiaroweDoZapisu.WielkoscFizyczna)
+                    .WHERE()
+                        .ID_wzorcowania(IdWzorcowania)
+                    .EXECUTE();
             }
             catch (Exception)
             {
@@ -1142,19 +1164,38 @@ namespace WzorcowanieMocDawkiSpace
         override public bool NadpiszDaneObliczonychWspolczynnikow()
         //---------------------------------------------------------------
         {
-            _Zapytanie = String.Format("DELETE FROM Wyniki_moc_dawki WHERE id_wzorcowania={0}", _DaneOgolneDoZapisu.IdWzorcowania);
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
+            /*_Zapytanie = String.Format("DELETE FROM Wyniki_moc_dawki WHERE id_wzorcowania={0}", _DaneOgolneDoZapisu.IdWzorcowania);
+            _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+            _BazaDanych.wyniki_moc_dawki
+                .DELETE()
+                .WHERE().ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                .EXECUTE();
 
-            _Zapytanie = String.Format("UPDATE Wzorcowanie_cezem SET osoba_wzorcujaca='{0}', osoba_sprawdzajaca='{1}', Dolacz={2} WHERE id_wzorcowania={3}",
+            /*_Zapytanie = String.Format("UPDATE Wzorcowanie_cezem SET osoba_wzorcujaca='{0}', osoba_sprawdzajaca='{1}', Dolacz={2} WHERE id_wzorcowania={3}",
                                        _WspolczynnikiDoZapisu.Wzorcujacy, _WspolczynnikiDoZapisu.Sprawdzajacy, _WspolczynnikiDoZapisu.Dolacz, _DaneOgolneDoZapisu.IdWzorcowania);
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
+            _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+            _BazaDanych.wzorcowanie_cezem
+                .UPDATE()
+                    .Osoba_wzorcujaca(_WspolczynnikiDoZapisu.Wzorcujacy)
+                    .Osoba_sprawdzajaca(_WspolczynnikiDoZapisu.Sprawdzajacy)
+                    .Dolacz(_WspolczynnikiDoZapisu.Dolacz)
+                .WHERE()
+                    .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                .EXECUTE();
 
             for (int i = 0; i < _WspolczynnikiDoZapisu.Dane.Count; ++i)
             {
-                _Zapytanie = "INSERT INTO Wyniki_moc_dawki (Wspolczynnik, Niepewnosc, Zakres, id_wzorcowania) VALUES "
+                /*_Zapytanie = "INSERT INTO Wyniki_moc_dawki (Wspolczynnik, Niepewnosc, Zakres, id_wzorcowania) VALUES "
                            + String.Format("('{0}', '{1}', '{2}', {3})", _WspolczynnikiDoZapisu.Dane[i].Wartosc, _WspolczynnikiDoZapisu.Dane[i].Niepewnosc,
                                                                    _WspolczynnikiDoZapisu.Dane[i].Zakres, _DaneOgolneDoZapisu.IdWzorcowania);
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
+                _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+                _BazaDanych.wyniki_moc_dawki
+                    .INSERT()
+                        .Wspolczynnik(_WspolczynnikiDoZapisu.Dane[i].Wartosc)
+                        .Niepewnosc(_WspolczynnikiDoZapisu.Dane[i].Niepewnosc)
+                        .ZAKRES(_WspolczynnikiDoZapisu.Dane[i].Zakres)
+                        .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                    .EXECUTE();
             }
 
             return true;
@@ -1168,12 +1209,22 @@ namespace WzorcowanieMocDawkiSpace
         override public bool ZapiszDaneWzorcoweIPomiarowe()
         //---------------------------------------------------------------
         {
-            for (int i = 0; i < _WartosciWzorcowoPomiaroweDoZapisu.Dane.Count ; ++i)
+            for (int i = 0; i < _WartosciWzorcowoPomiaroweDoZapisu.Dane.Count; ++i)
             {
-                _Zapytanie = String.Format("INSERT INTO Pomiary_cez VALUES ({0}, '{1}', '{2}', '{3}', '{4}', '{5}', {6})",
+                /*_Zapytanie = String.Format("INSERT INTO Pomiary_cez VALUES ({0}, '{1}', '{2}', '{3}', '{4}', '{5}', {6})",
                              _DaneOgolneDoZapisu.IdWzorcowania, _WartosciWzorcowoPomiaroweDoZapisu.Dane[i].Odleglosc, _WartosciWzorcowoPomiaroweDoZapisu.Dane[i].IdZrodla, _WartosciWzorcowoPomiaroweDoZapisu.Dane[i].Wskazanie,
                              _WartosciWzorcowoPomiaroweDoZapisu.Dane[i].Wahanie, _WartosciWzorcowoPomiaroweDoZapisu.Dane[i].Zakres, _WartosciWzorcowoPomiaroweDoZapisu.Dane[i].Dolaczyc);
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
+                _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+                _BazaDanych.Pomiary_cez
+                    .INSERT()
+                        .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                        .Odleglosc(_WartosciWzorcowoPomiaroweDoZapisu.Dane[i].Odleglosc)
+                        .ID_zrodla(_WartosciWzorcowoPomiaroweDoZapisu.Dane[i].IdZrodla)
+                        .Wskazanie(_WartosciWzorcowoPomiaroweDoZapisu.Dane[i].Wskazanie)
+                        .Wahanie(_WartosciWzorcowoPomiaroweDoZapisu.Dane[i].Wahanie)
+                        .Zakres(_WartosciWzorcowoPomiaroweDoZapisu.Dane[i].Zakres)
+                        .Dolaczyc(_WartosciWzorcowoPomiaroweDoZapisu.Dane[i].Dolaczyc)
+                    .EXECUTE();
             }
 
             try
@@ -1184,12 +1235,22 @@ namespace WzorcowanieMocDawkiSpace
                 _Zapytanie = String.Format("SELECT id_jednostki FROM Jednostki WHERE jednostka='{0}'", _WartosciWzorcowoPomiaroweDoZapisu.jednostka);
                 int idJednostki = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0);
 
-                _Zapytanie = String.Format("UPDATE Wzorcowanie_cezem SET id_protokolu = {0}, id_jednostki = {1}, tlo = '{2}', wielkosc_fizyczna = '{3}'  WHERE id_wzorcowania = {4}",
+                /*_Zapytanie = String.Format("UPDATE Wzorcowanie_cezem SET id_protokolu = {0}, id_jednostki = {1}, tlo = '{2}', wielkosc_fizyczna = '{3}'  WHERE id_wzorcowania = {4}",
                                            idProtokolu, idJednostki, _WartosciWzorcowoPomiaroweDoZapisu.tlo, _WartosciWzorcowoPomiaroweDoZapisu.WielkoscFizyczna, _DaneOgolneDoZapisu.IdWzorcowania);
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
+                _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+                _BazaDanych.wzorcowanie_cezem
+                    .UPDATE()
+                        .ID_protokolu(idProtokolu)
+                        .ID_jednostki(idJednostki)
+                        .Tlo(_WartosciWzorcowoPomiaroweDoZapisu.tlo)
+                        .Wielkosc_fizyczna(_WartosciWzorcowoPomiaroweDoZapisu.WielkoscFizyczna)
+                    .WHERE()
+                        .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                    .EXECUTE();
             }
             catch (Exception)
             {
+                // TODO: Dlaczego wyciszony wyjątek?
             }
 
             return true;
@@ -1201,16 +1262,31 @@ namespace WzorcowanieMocDawkiSpace
             /*_Zapytanie = "SELECT MAX(Id_wzorcowania) FROM Wzorcowanie_cezem";
             int idWzorcowania = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0);*/
 
-            _Zapytanie = String.Format("UPDATE Wzorcowanie_cezem SET osoba_wzorcujaca='{0}', osoba_sprawdzajaca='{1}', Dolacz={2} WHERE id_wzorcowania={3}",
+            /*_Zapytanie = String.Format("UPDATE Wzorcowanie_cezem SET osoba_wzorcujaca='{0}', osoba_sprawdzajaca='{1}', Dolacz={2} WHERE id_wzorcowania={3}",
                                        _WspolczynnikiDoZapisu.Wzorcujacy, _WspolczynnikiDoZapisu.Sprawdzajacy, _WspolczynnikiDoZapisu.Dolacz, _DaneOgolneDoZapisu.IdWzorcowania);
-            _BazaDanych.WykonajPolecenie(_Zapytanie);
+            _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+            _BazaDanych.wzorcowanie_cezem
+                .UPDATE()
+                    .Osoba_wzorcujaca(_WspolczynnikiDoZapisu.Wzorcujacy)
+                    .Osoba_sprawdzajaca(_WspolczynnikiDoZapisu.Sprawdzajacy)
+                    .Dolacz(_WspolczynnikiDoZapisu.Dolacz)
+                .WHERE()
+                    .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                .EXECUTE();
 
-            for (int i = 0; i < _WspolczynnikiDoZapisu.Dane.Count ; ++i)
+            for (int i = 0; i < _WspolczynnikiDoZapisu.Dane.Count; ++i)
             {
-                _Zapytanie = "INSERT INTO Wyniki_moc_dawki (Wspolczynnik, Niepewnosc, Zakres, id_wzorcowania) VALUES "
-                           + String.Format("('{0}', '{1}', '{2}', {3})", _WspolczynnikiDoZapisu.Dane[i].Wartosc , _WspolczynnikiDoZapisu.Dane[i].Niepewnosc,
+                /*_Zapytanie = "INSERT INTO Wyniki_moc_dawki (Wspolczynnik, Niepewnosc, Zakres, id_wzorcowania) VALUES "
+                           + String.Format("('{0}', '{1}', '{2}', {3})", _WspolczynnikiDoZapisu.Dane[i].Wartosc, _WspolczynnikiDoZapisu.Dane[i].Niepewnosc,
                                                                          _WspolczynnikiDoZapisu.Dane[i].Zakres, _DaneOgolneDoZapisu.IdWzorcowania);
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
+                _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+                _BazaDanych.wyniki_moc_dawki
+                   .INSERT()
+                        .Wspolczynnik(_WspolczynnikiDoZapisu.Dane[i].Wartosc)
+                        .Niepewnosc(_WspolczynnikiDoZapisu.Dane[i].Niepewnosc)
+                        .ZAKRES(_WspolczynnikiDoZapisu.Dane[i].Zakres)
+                        .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
+                    .EXECUTE();
             }
 
             return true;
@@ -1245,7 +1321,7 @@ namespace WzorcowanieMocDawkiSpace
                     wspolczynnik = wiersz.Field<double>(1).ToString();
                     niepewnosc = wiersz.Field<double>(2).ToString();
 
-                    foreach(DataGridViewRow wierszTabeli in tabela.Rows)
+                    foreach (DataGridViewRow wierszTabeli in tabela.Rows)
                     {
                         if (zakres == wierszTabeli.Cells[0].Value.ToString())
                         {

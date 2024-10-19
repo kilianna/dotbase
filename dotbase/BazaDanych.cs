@@ -44,24 +44,6 @@ namespace DotBase
             }
         }
 
-        //----------------------------------------------------------------------------------
-        public bool WykonajPolecenie(string zapytanie, params object[] list)
-        //----------------------------------------------------------------------------------
-        {
-            OleDbCommand polecenie = UtworzPolecenie(zapytanie, list);              // Tworzymy polecenie dla bazy danych.
-
-            try
-            {
-                polecenie.ExecuteNonQuery();
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-
-            return true;
-        }
-        
         private static void UtworzPustyLog(string logPath, string HasloDoBazy)
         {
             byte[] gz = Properties.Resources.logTemplate;
@@ -91,27 +73,6 @@ namespace DotBase
             string date = DateTime.Now.ToString("yyyy-MM");
             if (pos < 0) return sciezkaDoBazy + "." + date + ".log.accdb";
             return sciezkaDoBazy.Substring(0, pos) + "." + date + ".log" + sciezkaDoBazy.Substring(pos);
-        }
-        
-        //----------------------------------------------------------------------------------
-        public DataSet TworzZbiorDanych(string zapytanie, params object[] list)
-        //----------------------------------------------------------------------------------
-        {
-            OleDbCommand polecenie = UtworzPolecenie(zapytanie, list);                      // Tworzymy polecenie dla bazy danych.
-            OleDbDataAdapter adapter = new OleDbDataAdapter(polecenie);                     // Wyniki zostaną przekonwertowane do obiektu DataSet przez adapter
-
-            DataSet dane = new DataSet();
-
-            try
-            {
-                adapter.Fill(dane);                                                         // wypełnienie obiektu danymi z zapytania
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-
-            return dane;
         }
 
 #region Tablice
@@ -506,65 +467,14 @@ namespace DotBase
             return manager.command(zapytanie);
         }
 
+        /// <summary> Only SELECT query </summary>
         private OleDbCommand UtworzPolecenie(string zapytanie, object[] list)
         {
             OleDbCommand polecenie = manager.command(zapytanie);
-            OleDbCommand selectPolecenie = null;
-            DatabaseLog.Wpis wpis = null;
-            bool dodajDoLogu = true;
-            StringBuilder sb = null;
-
-            for (int i = 0; i < list.Length; i++)
-            {
-                if (list[i] is DatabaseLog.Wpis)
-                {
-                    wpis = (DatabaseLog.Wpis)list[i];
-                    continue;
-                }
-            }
-
-            if (wpis != null) dodajDoLogu = wpis.dodaj;
-
-            if (dodajDoLogu)
-            {
-                if (zapytanie.Trim().ToLower().StartsWith("select "))
-                {
-                    dodajDoLogu = false;
-                }
-                else if (zapytanie.Trim().ToLower().StartsWith("update "))
-                {
-                    string select;
-                    if (wpis != null && wpis.zapytanieSelect != null && wpis.zapytanieSelect != "")
-                    {
-                        select = wpis.zapytanieSelect;
-                    }
-                    else
-                    {
-                        select = Regex.Replace(zapytanie, "UPDATE", "SELECT COUNT(*) FROM", RegexOptions.IgnoreCase);
-                        select = Regex.Replace(select, "WHERE", ") AND (", RegexOptions.IgnoreCase);
-                        select = Regex.Replace(select, ", ", ") AND (", RegexOptions.IgnoreCase);
-                        select = Regex.Replace(select, "SET", "WHERE (", RegexOptions.IgnoreCase);
-                        select = select + ")";
-                    }
-                    try
-                    {
-                        selectPolecenie = manager.command(select);
-                    }
-                    catch (Exception ex)
-                    {
-                        DatabaseLog.log(false, this, "Błąd tworzenia polecenia SELECT sprawdzającego zmiany w poleceniu UPDATE: " + ex.Message, select);
-                    }
-                }
-                
-            }
-
-            sb = new StringBuilder(zapytanie.Length + 24 * list.Length);
-            sb.Append(zapytanie);
 
             for (int i = 0; i < list.Length; i++)
             {
                 var p = list[i];
-                if (p is DatabaseLog.Wpis) continue;
                 Type pType = p.GetType();
                 OleDbType type = OleDbType.Empty;
                 for (int k = 0; k < oleDbTypes.Length; k++)
@@ -582,53 +492,27 @@ namespace DotBase
                     throw new ApplicationException(text);
                 }
                 OleDbParameter param = null;
-                OleDbParameter selectParam = null;
                 if (p is string)
                 {
                     param = polecenie.Parameters.Add("a" + i, type, ((string)p).Length);
-                    if (selectPolecenie != null) selectParam = selectPolecenie.Parameters.Add("a" + i, type, ((string)p).Length);
-                    sb.AppendFormat(" ||| \"{0}\"", (string)p);
                 }
                 else if (p is byte[])
                 {
                     param = polecenie.Parameters.Add("a" + i, type, ((byte[])p).Length);
-                    if (selectPolecenie != null) selectParam = selectPolecenie.Parameters.Add("a" + i, type, ((byte[])p).Length);
-                    sb.AppendFormat(" ||| [{0}]", BitConverter.ToString((byte[])p));
                 }
                 else
                 {
                     param = polecenie.Parameters.Add("a" + i, type);
-                    if (selectPolecenie != null) selectParam = selectPolecenie.Parameters.Add("a" + i, type);
-                    sb.AppendFormat(" ||| {0} ({1})", p.ToString(), pType.Name);
                 }
                 param.Value = p;
                 param.Direction = ParameterDirection.Input;
-                if (selectPolecenie != null)
-                {
-                    selectParam.Value = p;
-                    selectParam.Direction = ParameterDirection.Input;
-                }
             }
-
-            if (dodajDoLogu && selectPolecenie != null)
-            {
-                try
-                {
-                    object n = selectPolecenie.ExecuteScalar();
-                    dodajDoLogu = (Int64.Parse(n.ToString()) == 0L);
-                }
-                catch (Exception ex)
-                {
-                    DatabaseLog.log(false, this, "Błąd wykonywania polecenia SELECT sprawdzającego zmiany w poleceniu UPDATE: " + ex.Message, selectPolecenie.CommandText);
-                }
-            }
-
-            DatabaseLog.log(!dodajDoLogu, this, (wpis != null && wpis.wiadomosc != null) ? wpis.wiadomosc : "", sb.ToString());
 
             return polecenie;
         }
 
         //----------------------------------------------------------------------------------
+        /// <summary> Only SELECT query </summary>
         public DataTable TworzTabeleDanych(string zapytanie, params object[] list)
         //----------------------------------------------------------------------------------
         {
@@ -1003,11 +887,6 @@ namespace DotBase
                 case 205: return "byte[]";
             }
             throw (new Exception("DataType Not Supported"));
-        }
-
-        internal DataTable TworzTabeleDanych(Szablon.Szablon_Sondy zapytanie1)
-        {
-            throw new NotImplementedException();
         }
 
         internal string LikeEscape(string text)

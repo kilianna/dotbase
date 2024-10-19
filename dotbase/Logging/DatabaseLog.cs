@@ -12,25 +12,6 @@ namespace DotBase.Logging
     {
         static Logger logger = Log.create();
 
-        public class Wpis
-        {
-            public bool dodaj;
-            public string wiadomosc;
-            public string zapytanieSelect;
-
-            public Wpis()
-            {
-                dodaj = false;
-            }
-
-            public Wpis(string w, string sel = null)
-            {
-                dodaj = true;
-                wiadomosc = w;
-                zapytanieSelect = sel;
-            }
-        }
-
         public static void log(bool skipDbLog, BazaDanychWrapper bazaDanych, string wiadomosc, string zapytanie, string parametry = "")
         {
             try

@@ -224,7 +224,7 @@ namespace DotBase
             {
                 int idDozymetru = ZnajdzIdDozymetru(dane.Przyrzad.Typ, dane.Przyrzad.NrFabryczny);
 
-                _Zapytanie = "INSERT INTO Karta_przyjecia (id_karty, id_zlecenia, rok, ameryk, chlor, dawka, moc_dawki, "
+                /*_Zapytanie = "INSERT INTO Karta_przyjecia (id_karty, id_zlecenia, rok, ameryk, chlor, dawka, moc_dawki, "
 	                       + "pluton, stront_slaby, stront_silny, syg_dawki, syg_mocy_dawki, wegiel_slaby, wegiel_silny, stront_najsilniejszy, "
                            + "akcesoria, uwagi, uszkodzony, Sprawdzenie, id_dozymetru, test_na_skazenia, wykonano) VALUES "
                            + String.Format("({0},{1},'{2}',{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},'{15}','{16}',{17},{18},{19},'brak skażeń',{20})",
@@ -236,8 +236,34 @@ namespace DotBase
                            dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.WEGIEL_SLABY],dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.WEGIEL_SILNY],
                            dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.STRONT_NAJSILNIEJSZY], dane.DaneDodatkowe.Akcesoria,
                            dane.DaneDodatkowe.Uwagi, dane.DaneDodatkowe.Uszkodzony, dane.DaneDodatkowe.Sprawdzenie, idDozymetru, dane.Wykonano);
+                _BazaDanych.WykonajPolecenie(_Zapytanie);*/
 
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
+                _BazaDanych.Karta_przyjecia
+                    .INSERT()
+                        .ID_karty(dane.IdKarty)
+                        .ID_zlecenia(dane.NrZlecenia)
+                        .Rok(dane.rok)
+                        .Ameryk(dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.AMERYK])
+                        .Chlor(dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.CHLOR])
+                        .Dawka(dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.DAWKA])
+                        .Moc_dawki(dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.MOC_DAWKI])
+                        .Pluton(dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.PLUTON])
+                        .Stront_slaby(dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.STRONT_SLABY])
+                        .Stront_silny(dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.STRONT_SILNY])
+                        .Syg_dawki(dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.SYGNALIZACJA_DAWKI])
+                        .Syg_mocy_dawki(dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.SYGNALIZACJA_MOCY_DAWKI])
+                        .Wegiel_slaby(dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.WEGIEL_SLABY])
+                        .Wegiel_silny(dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.WEGIEL_SILNY])
+                        .Stront_najsilniejszy(dane.Wymagania.dane[(int)WymaganiaKalibracji.Stale.STRONT_NAJSILNIEJSZY])
+                        .Akcesoria(dane.DaneDodatkowe.Akcesoria)
+                        .Uwagi(dane.DaneDodatkowe.Uwagi)
+                        .Uszkodzony(dane.DaneDodatkowe.Uszkodzony)
+                        .Sprawdzenie(dane.DaneDodatkowe.Sprawdzenie)
+                        .ID_dozymetru(idDozymetru)
+                        .Test_na_skazenia("brak skażeń")
+                        .Wykonano(dane.Wykonano)
+                    .INFO("Dodanie karty przyjęcia")
+                    .EXECUTE();
             }
 
             //------------------------------------------------------------------

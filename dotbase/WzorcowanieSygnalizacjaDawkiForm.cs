@@ -430,8 +430,8 @@ namespace DotBase
             WyswietlKonkretnaJednostke();
             WyswietlKonkretnyProtokol();
 
-            textBox14.Text = _WzorcowanieSygDawki.Pomiary.odleglosc;
-            textBox15.Text = _WzorcowanieSygDawki.Pomiary.zrodlo;
+            textBox14.Text = _WzorcowanieSygDawki.Pomiary.odleglosc.ToString();
+            textBox15.Text = _WzorcowanieSygDawki.Pomiary.zrodlo.ToString();
         }
 
         //---------------------------------------------------------------

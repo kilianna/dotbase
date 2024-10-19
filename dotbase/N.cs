@@ -26,6 +26,18 @@ namespace DotBase
             return date >= DateTime.Parse("2023-09-15");
         }
 
+        public static int intParse(string text)
+        {
+            text = text.Trim().Replace(" ", "");
+            return int.Parse(text);
+        }
+
+        public static bool intTryParse(string text, out int result)
+        {
+            text = text.Trim().Replace(" ", "");
+            return int.TryParse(text, out result);
+        }
+
         public static double doubleParse(string text)
         {
             double result;

@@ -36,7 +36,7 @@ namespace DotBase
         {
             if (false == TestujMozliwoscZapisu())
                 return;
-            
+
             ZapiszDane();
         }
 
@@ -113,13 +113,13 @@ namespace DotBase
         private bool TestujMozliwoscZapisu()
         //----------------------------------------------------------
         {
-            if ( "" == (wielkosci[0] = textBox1.Text) ||
+            if ("" == (wielkosci[0] = textBox1.Text) ||
                  "" == (wielkosci[1] = textBox2.Text) ||
                  "" == (wielkosci[2] = textBox3.Text) ||
                  "" == (wielkosci[3] = textBox4.Text) ||
                  "" == (wielkosci[4] = textBox5.Text) ||
                  "" == (wielkosci[5] = textBox6.Text) ||
-                 "" == (wielkosci[6] = textBox7.Text) )
+                 "" == (wielkosci[6] = textBox7.Text))
             {
                 MessageBox.Show("Nie podano wszystkich wielkości! Zapis niemożliwy.");
                 return false;
@@ -135,7 +135,7 @@ namespace DotBase
                 wartosci[5] = N.doubleParse(textBox13.Text);
                 wartosci[6] = N.doubleParse(textBox14.Text);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 MessageBox.Show("Podane wartości są nieodpowiednie! Zapis niemożliwy.");
                 return false;
@@ -168,12 +168,23 @@ namespace DotBase
         private void ZapiszDane()
         //----------------------------------------------------------
         {
-            _BazaDanych.WykonajPolecenie("DELETE FROM BudzetNiepewnosci");
+            /*_BazaDanych.WykonajPolecenie("DELETE FROM BudzetNiepewnosci");*/
+            _BazaDanych.Budzetniepewnosci
+                .DELETE()
+                .INFO("Usunięcie wszystkich rekordów z BudzetNiepewnosci przed ponownym zapisaniem.")
+                .EXECUTE();
 
             for (int i = 0; i < MAX_WIERSZY; ++i)
             {
-                _Zapytanie = String.Format("INSERT INTO BudzetNiepewnosci VALUES ('{0}', '{1}', '')", wielkosci[i], wartosci[i]);
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
+                /*_Zapytanie = String.Format("INSERT INTO BudzetNiepewnosci VALUES ('{0}', '{1}', '')", wielkosci[i], wartosci[i]);
+                _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+                _BazaDanych.Budzetniepewnosci
+                    .INSERT()
+                        .Wielkosc(wielkosci[i])
+                        .wartosc(wartosci[i])
+                        .Uwagi("")
+                    .INFO("Ponowne dodanie do BudzetNiepewnosci.")
+                    .EXECUTE();
             }
 
             LiczNiepewnosc();

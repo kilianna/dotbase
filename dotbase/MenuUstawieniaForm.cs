@@ -116,6 +116,7 @@ namespace DotBase
 
         private void UsunDanePersonalne(ConnectionManager manager)
         {
+            // TODO: Sprawdź, czy potrzeba jeszcze coś usunąć
             var polecenie = manager.command("UPDATE Zleceniodawca SET Osoba_kontaktowa='Xxxx Yyyy', Telefon='000 000 000', Faks='000 000 000', email='xxxx.yyyy@zzzz.ww'");
             polecenie.ExecuteNonQuery();
         }

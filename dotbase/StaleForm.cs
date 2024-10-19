@@ -12,7 +12,6 @@ namespace DotBase
     public partial class StaleForm : Form
     {
         BazaDanychWrapper _BazaDanych;
-        string _Zapytanie;
 
         //---------------------------------------------------------
         public StaleForm()
@@ -91,19 +90,28 @@ namespace DotBase
         private void ZapiszDane()
         //----------------------------------------------------------
         {
-            _BazaDanych.WykonajPolecenie("DELETE FROM Stale");
+            /*_BazaDanych.WykonajPolecenie("DELETE FROM Stale");*/
+            _BazaDanych.Stale
+                .DELETE()
+                .INFO("Usuń wszystkie stałe przed ponownym zapisaniem.")
+                .EXECUTE();
 
             foreach (DataGridViewRow wiersz in dataGridView1.Rows)
             {
+                // TODO: Sprawdzić, czy po zmianie stałych nie trzeba przeładować jakiś globalnych danych
                 String parametr = wiersz.Cells["Parametr"].Value.ToString();
-                String wartosc = SqlQueryUtils.normalize( wiersz.Cells["Wartosc"].Value.ToString() );
+                var wartosc = N.doubleParse(wiersz.Cells["Wartosc"].Value.ToString());
 
-                _Zapytanie = String.Format("INSERT INTO Stale VALUES('{0}', {1}, '')", parametr, wartosc);
-
-                _BazaDanych.WykonajPolecenie(_Zapytanie);
+                /*_Zapytanie = String.Format("INSERT INTO Stale VALUES('{0}', {1}, '')", parametr, wartosc);
+                _BazaDanych.WykonajPolecenie(_Zapytanie);*/
+                _BazaDanych.Stale
+                    .INSERT()
+                        .Nazwa(parametr)
+                        .Wartosc(wartosc)
+                        .Uwagi("")
+                    .INFO("Zapis stałych.")
+                    .EXECUTE();
             }
-
-
         }
     }
 }
