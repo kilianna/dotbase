@@ -74,7 +74,7 @@ namespace DotBase
                     if (!firstEntry)
                     {
                         query += ", ";
-                        selectQuery += " AND ";
+                        selectQuery += " OR ";
                         logParameters += ",\r\n";
                     }
                     firstEntry = false;
@@ -129,7 +129,7 @@ namespace DotBase
                     throw new ApplicationException("Nieprawidłowa składnia polecenia!");
                 typPolecenia = TypPolecenia.UPDATE;
                 query = "UPDATE " + nazwa + " SET ";
-                selectQuery = "SELECT COUNT(*) FROM " + nazwa + " WHERE ";
+                selectQuery = "SELECT COUNT(*) FROM " + nazwa + " WHERE (";
                 firstEntry = true;
             }
 
@@ -155,7 +155,7 @@ namespace DotBase
                 if (typPolecenia == TypPolecenia.NONE || typPolecenia == TypPolecenia.INSERT || where)
                     throw new ApplicationException("Nieprawidłowa składnia polecenia!");
                 query += " WHERE ";
-                selectQuery += " AND ";
+                selectQuery += ") AND (";
                 logParameters += ",\r\n";
                 where = true;
                 firstEntry = true;
@@ -165,19 +165,21 @@ namespace DotBase
             {
                 OleDbCommand cmd;
                 CloseQuery();
-                bool skipLog = false;
+                bool skipDbLog = false;
+                int updatedRows = -1;
                 if (typPolecenia == TypPolecenia.UPDATE)
                 {
                     try
                     {
+                        selectQuery += ")";
                         cmd = baza.UtworzProstePolecenie(selectQuery);
                         addParameters(cmd);
-                        int count = (int)cmd.ExecuteScalar();
-                        skipLog = (count == 0);
+                        updatedRows = (int)cmd.ExecuteScalar();
+                        skipDbLog = (updatedRows == 0);
                     }
                     catch (Exception ex)
                     {
-                        DatabaseLog.log(baza, "Błąd wykonywania polecenia SELECT sprawdzającego zmiany w poleceniu UPDATE: " + ex.Message, selectQuery, logParameters);
+                        DatabaseLog.log(false, baza, "Błąd wykonywania polecenia SELECT sprawdzającego zmiany w poleceniu UPDATE: " + ex.Message, selectQuery, logParameters);
                     }
                 }
 
@@ -204,24 +206,19 @@ namespace DotBase
 
                     if (typPolecenia == TypPolecenia.DELETE)
                     {
-                        skipLog = (affectedRows == 0);
+                        skipDbLog = (affectedRows == 0);
                     }
 
-                    if (!skipLog)
-                    {
-                        if (typPolecenia == TypPolecenia.INSERT)
-                        {
-                            DatabaseLog.log(baza, logInfo, query, String.Format("{0},\r\n[AFFECTED ROWS]={1},\r\n[LAST ID]={2}", logParameters, affectedRows, lastIdValid ? lastId.ToString() : "[invalid]"));
-                        }
-                        else
-                        {
-                            DatabaseLog.log(baza, logInfo, query, String.Format("{0},\r\n[AFFECTED ROWS]={1}", logParameters, affectedRows));
-                        }
-                    }
+                    logParameters += String.Format(",\r\n[AFFECTED ROWS]={0}", affectedRows);
+                    if (typPolecenia == TypPolecenia.INSERT)
+                        logParameters += String.Format(",\r\n[LAST ID]={0}", lastIdValid);
+                    if (updatedRows >= 0)
+                        logParameters += String.Format(",\r\n[CHANGED ROWS]={0}", updatedRows);
+                    DatabaseLog.log(skipDbLog, baza, logInfo, query, logParameters);
                 }
                 catch (Exception ex)
                 {
-                    DatabaseLog.log(baza, "Błąd wykonywania polecenia: " + ex.Message, query, logParameters);
+                    DatabaseLog.log(false, baza, "Błąd wykonywania polecenia: " + ex.Message, query, logParameters);
                     if (returnResult)
                     {
                         return false;

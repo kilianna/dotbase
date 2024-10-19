@@ -552,17 +552,14 @@ namespace DotBase
                     }
                     catch (Exception ex)
                     {
-                        DatabaseLog.log(this, "Błąd tworzenia polecenia SELECT sprawdzającego zmiany w poleceniu UPDATE: " + ex.Message, select);
+                        DatabaseLog.log(false, this, "Błąd tworzenia polecenia SELECT sprawdzającego zmiany w poleceniu UPDATE: " + ex.Message, select);
                     }
                 }
                 
             }
 
-            if (dodajDoLogu)
-            {
-                sb = new StringBuilder(zapytanie.Length + 24 * list.Length);
-                sb.Append(zapytanie);
-            }
+            sb = new StringBuilder(zapytanie.Length + 24 * list.Length);
+            sb.Append(zapytanie);
 
             for (int i = 0; i < list.Length; i++)
             {
@@ -590,19 +587,19 @@ namespace DotBase
                 {
                     param = polecenie.Parameters.Add("a" + i, type, ((string)p).Length);
                     if (selectPolecenie != null) selectParam = selectPolecenie.Parameters.Add("a" + i, type, ((string)p).Length);
-                    if (dodajDoLogu) sb.AppendFormat(" ||| \"{0}\"", (string)p);
+                    sb.AppendFormat(" ||| \"{0}\"", (string)p);
                 }
                 else if (p is byte[])
                 {
                     param = polecenie.Parameters.Add("a" + i, type, ((byte[])p).Length);
                     if (selectPolecenie != null) selectParam = selectPolecenie.Parameters.Add("a" + i, type, ((byte[])p).Length);
-                    if (dodajDoLogu) sb.AppendFormat(" ||| [{0}]", BitConverter.ToString((byte[])p));
+                    sb.AppendFormat(" ||| [{0}]", BitConverter.ToString((byte[])p));
                 }
                 else
                 {
                     param = polecenie.Parameters.Add("a" + i, type);
                     if (selectPolecenie != null) selectParam = selectPolecenie.Parameters.Add("a" + i, type);
-                    if (dodajDoLogu) sb.AppendFormat(" ||| {0} ({1})", p.ToString(), pType.Name);
+                    sb.AppendFormat(" ||| {0} ({1})", p.ToString(), pType.Name);
                 }
                 param.Value = p;
                 param.Direction = ParameterDirection.Input;
@@ -622,14 +619,11 @@ namespace DotBase
                 }
                 catch (Exception ex)
                 {
-                    DatabaseLog.log(this, "Błąd wykonywania polecenia SELECT sprawdzającego zmiany w poleceniu UPDATE: " + ex.Message, selectPolecenie.CommandText);
+                    DatabaseLog.log(false, this, "Błąd wykonywania polecenia SELECT sprawdzającego zmiany w poleceniu UPDATE: " + ex.Message, selectPolecenie.CommandText);
                 }
             }
 
-            if (dodajDoLogu)
-            {
-                DatabaseLog.log(this, (wpis != null && wpis.wiadomosc != null) ? wpis.wiadomosc : "", sb.ToString());
-            }
+            DatabaseLog.log(!dodajDoLogu, this, (wpis != null && wpis.wiadomosc != null) ? wpis.wiadomosc : "", sb.ToString());
 
             return polecenie;
         }

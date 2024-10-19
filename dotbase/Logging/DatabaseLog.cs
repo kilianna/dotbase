@@ -31,7 +31,7 @@ namespace DotBase.Logging
             }
         }
 
-        public static void log(BazaDanychWrapper bazaDanych, string wiadomosc, string zapytanie, string parametry = "")
+        public static void log(bool skipDbLog, BazaDanychWrapper bazaDanych, string wiadomosc, string zapytanie, string parametry = "")
         {
             try
             {
@@ -43,8 +43,12 @@ namespace DotBase.Logging
                 }
                 string stackTrace = "\r\n" + Environment.StackTrace;
                 stackTrace = Regex.Replace(stackTrace, "\n[^\n]+ (System|Microsoft|DotBase\\.Log)\\.[^\n]+", "");
-                Debug.WriteLine(String.Format("### {0} {1}: {2}\r\n QUERY: {3}\r\n STACK: {4}", now, user, wiadomosc, zapytanie, stackTrace).Replace("\n", "\n###"));
-                bazaDanych.log(now, user, wiadomosc, zapytanie, stackTrace.Trim(), parametry.Trim());
+                logger("Zapytanie od {0}: {1}\r\n   QUERY: {2}\r\n   {3}", user, wiadomosc, zapytanie,
+                    parametry.Trim(',', ' ', '\t', '\r', '\n').Replace("\n", "\n   "));
+                if (!skipDbLog)
+                {
+                    bazaDanych.log(now, user, wiadomosc, zapytanie, stackTrace.Trim(), parametry.Trim());
+                }
             }
             catch (Exception ex)
             {
