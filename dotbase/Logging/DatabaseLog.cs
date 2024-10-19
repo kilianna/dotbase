@@ -10,6 +10,7 @@ namespace DotBase.Logging
 {
     class DatabaseLog
     {
+        static Logger logger = Log.create();
 
         public class Wpis
         {
@@ -32,15 +33,23 @@ namespace DotBase.Logging
 
         public static void log(BazaDanychWrapper bazaDanych, string wiadomosc, string zapytanie, string parametry = "")
         {
-            // TODO: Try catch, żeby log nigdy nie kończył się wyjątkiem
-            DateTime now = DateTime.Now;
-            string user = LogowanieForm.Instancja == null ? "#niezalogowany" :
-                LogowanieForm.Instancja.Wybrany.Name == null ? "#niezalogowany" :
-                LogowanieForm.Instancja.Wybrany.Name;
-            string stackTrace = "\r\n" + Environment.StackTrace;
-            stackTrace = Regex.Replace(stackTrace, "\n[^\n]+ (System|Microsoft|DotBase\\.Log)\\.[^\n]+", "");
-            Debug.WriteLine(String.Format("### {0} {1}: {2}\r\n QUERY: {3}\r\n STACK: {4}", now, user, wiadomosc, zapytanie, stackTrace).Replace("\n", "\n###"));
-            bazaDanych.log(now, user, wiadomosc, zapytanie, stackTrace.Trim(), parametry.Trim());
+            try
+            {
+                DateTime now = DateTime.Now;
+                string user = "#niezalogowany";
+                if (LogowanieForm.Instancja != null && LogowanieForm.Instancja.Users.CurrentUser != null)
+                {
+                    user = LogowanieForm.Instancja.Users.CurrentUser.Name ?? user;
+                }
+                string stackTrace = "\r\n" + Environment.StackTrace;
+                stackTrace = Regex.Replace(stackTrace, "\n[^\n]+ (System|Microsoft|DotBase\\.Log)\\.[^\n]+", "");
+                Debug.WriteLine(String.Format("### {0} {1}: {2}\r\n QUERY: {3}\r\n STACK: {4}", now, user, wiadomosc, zapytanie, stackTrace).Replace("\n", "\n###"));
+                bazaDanych.log(now, user, wiadomosc, zapytanie, stackTrace.Trim(), parametry.Trim());
+            }
+            catch (Exception ex)
+            {
+                logger("Unhandled exception while inserting database log entry: {0}", ex.Message);
+            }
         }
 
     }

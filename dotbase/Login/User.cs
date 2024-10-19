@@ -22,39 +22,41 @@ namespace DotBase.Login
      * VarBytes:
      *     size: int32
      *     data: byte[size]
-     */
-    public class User
+    */
+    public class UserInfo
+    {
+        public string Name = null;
+        public string Password = null;
+        public bool IsAdmin = false;
+    }
+
+    internal class User
     {
         private const uint IS_ADMIN_FLAG = 1;
         private const int RSA_KEY_SIZE = 3072;
-        private const int RFC_2898_ITERATIONS = 100000;
+        private const int RFC_2898_ITERATIONS = 10000;
 
         private static byte[] VerificationPattern = new byte[] {
             225, 19, 149, 216, 123, 212, 76, 226,
             146, 149, 132, 14, 212, 46, 112, 102,
         };
 
-        public string Name = "";
-        public string Password = "";
-        private uint Flags;
+        public UserInfo info = new UserInfo();
+
         private byte[] Salt;
         private byte[] IV;
         private byte[] UserEncrypted;
         private string PublicKeyXml = "";
-        private byte[] DatabasePasswordEcrypted;
-
-        public bool IsAdmin
-        {
-            get { return (Flags & IS_ADMIN_FLAG) != 0; }
-            set { Flags &= ~IS_ADMIN_FLAG; if (value) Flags |= IS_ADMIN_FLAG; }
-        }
+        private byte[] DatabasePasswordEncrypted;
 
         /// <summary>Verify user login</summary>
         /// <param name="password">User password</param>
         /// <returns>Database password on success, "" for wrong password</returns>
         public string LogIn(string password)
         {
-            if (Salt == null || IV == null || UserEncrypted == null || DatabasePasswordEcrypted == null)
+            info.Password = "";
+
+            if (Salt == null || IV == null || UserEncrypted == null || DatabasePasswordEncrypted == null)
                 return "";
             // Make key from password
             byte[] key;
@@ -82,8 +84,8 @@ namespace DotBase.Login
                     // Decrypt database password
                     var privateKeyXml = br.ReadString();
                     rsa.FromXmlString(privateKeyXml);
-                    var databasePassword = Encoding.UTF8.GetString(rsa.Decrypt(DatabasePasswordEcrypted, false));
-                    Password = password;
+                    var databasePassword = Encoding.UTF8.GetString(rsa.Decrypt(DatabasePasswordEncrypted, false));
+                    info.Password = password;
                     return databasePassword;
                 }
             }
@@ -94,7 +96,7 @@ namespace DotBase.Login
             }
         }
 
-        public void ChangeUserPassword(string newPassword, string databasePassowrd)
+        public void ChangeUserPassword(string newPassword, string databasePassword)
         {
             Salt = new byte[16];
             N.rng.GetBytes(Salt);
@@ -115,8 +117,8 @@ namespace DotBase.Login
                 }
                 UserEncrypted = ms.ToArray();
                 PublicKeyXml = rsa.ToXmlString(false);
-                DatabasePasswordEcrypted = rsa.Encrypt(Encoding.UTF8.GetBytes(databasePassowrd), false);
-                Password = newPassword;
+                DatabasePasswordEncrypted = rsa.Encrypt(Encoding.UTF8.GetBytes(databasePassword), false);
+                info.Password = newPassword;
             }
         }
 
@@ -130,30 +132,30 @@ namespace DotBase.Login
             using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(RSA_KEY_SIZE))
             {
                 rsa.FromXmlString(PublicKeyXml);
-                DatabasePasswordEcrypted = rsa.Encrypt(Encoding.UTF8.GetBytes(newDatabasePassword), false);
+                DatabasePasswordEncrypted = rsa.Encrypt(Encoding.UTF8.GetBytes(newDatabasePassword), false);
             }
         }
 
         public void Write(BinaryWriter output)
         {
-            output.Write(Name);
-            output.Write(Flags);
+            output.Write(info.Name);
+            output.Write(info.IsAdmin ? IS_ADMIN_FLAG : 0);
             output.Write(Salt);
             output.Write(IV);
             WriteVarBytes(output, UserEncrypted);
             output.Write(PublicKeyXml);
-            WriteVarBytes(output, DatabasePasswordEcrypted);
+            WriteVarBytes(output, DatabasePasswordEncrypted);
         }
 
         public void Read(BinaryReader input)
         {
-            Name = input.ReadString();
-            Flags = input.ReadUInt32();
+            info.Name = input.ReadString();
+            info.IsAdmin = (input.ReadUInt32() & IS_ADMIN_FLAG) != 0;
             Salt = input.ReadBytes(16);
             IV = input.ReadBytes(16);
             UserEncrypted = ReadVarBytes(input);
             PublicKeyXml = input.ReadString();
-            DatabasePasswordEcrypted = ReadVarBytes(input);
+            DatabasePasswordEncrypted = ReadVarBytes(input);
         }
 
         private byte[] ReadVarBytes(BinaryReader input)
@@ -171,8 +173,9 @@ namespace DotBase.Login
         public User Clone()
         {
             var clone = new User();
-            clone.Name = Name;
-            clone.Flags = Flags;
+            clone.info.Name = info.Name;
+            clone.info.IsAdmin = info.IsAdmin;
+            clone.info.Password = info.Password; 
             clone.Salt = new byte[16];
             Salt.CopyTo(clone.Salt, 0);
             clone.IV = new byte[16];
@@ -180,8 +183,8 @@ namespace DotBase.Login
             clone.UserEncrypted = new byte[UserEncrypted.Length];
             UserEncrypted.CopyTo(clone.UserEncrypted, 0);
             clone.PublicKeyXml = PublicKeyXml;
-            clone.DatabasePasswordEcrypted = new byte[DatabasePasswordEcrypted.Length];
-            DatabasePasswordEcrypted.CopyTo(clone.DatabasePasswordEcrypted, 0);
+            clone.DatabasePasswordEncrypted = new byte[DatabasePasswordEncrypted.Length];
+            DatabasePasswordEncrypted.CopyTo(clone.DatabasePasswordEncrypted, 0);
             return clone;
         }
     }

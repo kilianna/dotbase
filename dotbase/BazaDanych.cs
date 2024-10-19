@@ -19,6 +19,7 @@ namespace DotBase
 {
     partial class BazaDanychWrapper
     {
+        private static Logger log2 = Log.create();
         private static ConnectionManager manager;
 
         //--------------------------------------------------------------------
@@ -692,8 +693,10 @@ namespace DotBase
                 }
                 tempManager.close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                // TODO: Naprawić eksportowanie bazy danych
+                log2("Nie udało się wyeksportować bazy danych: {0}", ex.ToString());
                 if (usunGdyNiepowodzenie)
                 {
                     try

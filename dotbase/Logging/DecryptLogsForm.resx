@@ -117,50 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="zakonczBtn.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="label1.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
-  <metadata name="label4.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="label2.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
-  <metadata name="label5.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="label3.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
-  <metadata name="label6.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <metadata name="wybierzBtn.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <metadata name="bazaFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="folderBrowserDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="adminMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>304, 17</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcVENvmxIA/VuTAnedlgcq7Wh
-        eSYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHpbIXtyUQ/kaUUA/2ZB
-        AP98XB/AAAAAAAAAAAAAAAAApaV4EaWScGmhjG5toIxqcYeAWCBoVStCZEscY2ZPJGSIb0QeeVwkhWlE
-        AP9rRgD/akgH3XFVHAkAAAAAAAAAAIlkJSlnQQH6ZUAA/2I7AP+Ve0lNiW01sWdBAP9oQgD/gmYzeHRV
-        H3trRwL/bksH72pJB9txVRwJAAAAAAAAAACPaiwpbUgD+mpGAP9nQgD/lXtGTYdsNbFnQgD/aUQA/4Jl
-        M359Zz85fF8lnnldIah7YS1+gFUrBgAAAAAAAAAAj3AyKWxIAvpqRgD/akYA/3VVGbpyUQ/kakYA/2pF
-        AP94WB+zgWY0hGpFAP9oQwD/c1IS2ritjxkAAAAA1b+VDHpbIpVoRAD/aUQA/2hDAP96Wxy0dVMV3GlF
-        AP9oQwD/gWIqrndVHchoRAD/a0cB/2ZBAP9+Xiei0bmLC4dnLLR2Vxi8dlcavHxdKaF1VRe5nIhaPods
-        OLNnQQD/Z0IA/45zQnyYfU9+ZkEA/2hCAP95Vxfchms2koZoMaZ7XSS6ootjLIBkKqVuTAnqb08P06iZ
-        dTKHbDW2Z0EA/2dCAP+HajaEAAAAAH1kMV5wViN2ooheHpmZZgWGajWaqJV2KXVWG7JqRQD/akYA/2ZA
-        AP+HazOuhWgwtmdCAP9oQwD/g2cxhgAAAACSbUkHg2xGIYBpOE56YCl1moJfKwAAAACWgE1QZ0EA/2pF
-        AP9nQgD/d1UU1XZUEt5pRQD/akYA/3NVFsF6Xyp5emAtfYdpM2iFcEIygIBABAAAAAAAAAAA/4CAAoZr
-        N49sSgTvdVMVx6+ZfCOEZi67Z0IA/2hDAP+CZSqvAAAAAAAAAAAAAAAAjHNAKH90XRYAAAAAAAAAAAAA
-        AAD//wABiXZODYCAQAQAAAAAjG46nWZAAP9rRwD/bEgE/mtKCdhtSwjTbUsL6m1KCe6Se1A2AAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAALqxkxpxUxi1bEgE7mtIBOxwTw3gd1gbtHxiL217aEIbAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAA==
-</value>
-  </data>
 </root>

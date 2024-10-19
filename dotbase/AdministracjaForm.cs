@@ -13,61 +13,70 @@ namespace DotBase
     public partial class AdministracjaForm : Form
     {
         public UsersManager Users { get; private set; }
+        public UserInfo[] list;
 
         public AdministracjaForm(UsersManager users)
         {
             Users = users.Clone();
+            list = users.GetUsers();
             InitializeComponent();
         }
 
         private void AdministracjaForm_Load(object sender, EventArgs e)
         {
-            foreach (var user in Users.Users)
+            zaladujTabele();
+        }
+
+        private void zaladujTabele()
+        {
+            listaView.Rows.Clear();
+            list = Users.GetUsers();
+            foreach (var user in list)
             {
                 int i = listaView.Rows.Add(user.Name, "Zmień hasło", user.IsAdmin);
-                listaView.Rows[i].Cells[2].ReadOnly = (user.Name == LogowanieForm.Instancja.Wybrany.Name);
-                var r = listaView.Rows[i];
+                var row = listaView.Rows[i];
+                row.Cells[2].ReadOnly = (Users.CurrentUser == user);
+                row.Tag = user;
             }
         }
 
         private void listaView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= Users.Users.Length || e.RowIndex < 0) return;
+            if (e.RowIndex >= list.Length || e.RowIndex < 0) return;
             if (e.ColumnIndex == 1)
             {
                 var form = new HasloForm();
-                form.zmienUzytkownika(listaView.Rows[e.RowIndex].Cells[0].Value.ToString());
+                var row = listaView.Rows[e.RowIndex];
+                var user = row.Tag as UserInfo;
+                form.zmienUzytkownika(user.Name);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
-                    Users.ChangeUserPassword(Users.Users[e.RowIndex].Name, form.Haslo);
+                    Users.ChangeUserPassword(user.Name, form.Haslo);
                 }
             }
         }
 
         private void listaView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex > Users.Users.Length || e.RowIndex < 0) return;
+            if (e.RowIndex > list.Length || e.RowIndex < 0) return;
 
-            if (e.RowIndex == Users.Users.Length)
+            var row = listaView.Rows[e.RowIndex];
+
+            if (e.RowIndex == list.Length)
             {
-                var nowy = new User();
-                nowy.Name = listaView.Rows[e.RowIndex].Cells[0].Value != null ? listaView.Rows[e.RowIndex].Cells[0].Value.ToString().Trim().ToLower() : "";
-                nowy.ChangeUserPassword(losujHaslo(), Users.DatabasePassword);
-                nowy.IsAdmin = listaView.Rows[e.RowIndex].Cells[2].Value != null ? (bool)listaView.Rows[e.RowIndex].Cells[2].Value : false;
-                listaView.Rows[e.RowIndex].Cells[1].Value = "Zmień hasło";
-                var tmp = new User[Users.Users.Length + 1];
-                Users.Users.CopyTo(tmp, 0);
-                tmp[Users.Users.Length] = nowy;
-                Users.Users = tmp;
+                var nowy = Users.NewUser((string)row.Cells[0].Value ?? "", losujHaslo(), (bool)(row.Cells[2].Value ?? false));
+                row.Tag = nowy;
+                list = Users.GetUsers();
+                row.Cells[1].Value = "Zmień hasło";
             }
 
             if (e.ColumnIndex == 2)
             {
-                Users.Users[e.RowIndex].IsAdmin = (bool)listaView.Rows[e.RowIndex].Cells[2].Value;
+                (row.Tag as UserInfo).IsAdmin = (bool)(row.Cells[2].Value ?? false);
             }
             else if (e.ColumnIndex == 0)
             {
-                Users.Users[e.RowIndex].Name = listaView.Rows[e.RowIndex].Cells[0].Value.ToString().Trim().ToLower();
+                (row.Tag as UserInfo).Name = ((string)row.Cells[0].Value ?? "").Trim().ToLower();
             }
         }
 
@@ -86,7 +95,7 @@ namespace DotBase
             N.rng.GetBytes(arr);
             string str = "";
             for (var i = 0; i < 32; i++)
-                str += 'a' + (char)(arr[i] % 26);
+                str += (char)('a' + (arr[i] % 26));
             return str;
         }
 
@@ -102,23 +111,28 @@ namespace DotBase
                 }
                 index = listaView.SelectedCells[i].RowIndex;
             }
-            if (index < 0 || index >= Users.Users.Length) return;
-            if (Users.Users[index].Name == LogowanieForm.Instancja.Wybrany.Name) return;
-            if (MessageBox.Show(this, "Czy usunąć użytkownika: " + Users.Users[index].Name + "?", "Usuń", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+            if (index < 0 || index >= list.Length) return;
+            if (list[index] == Users.CurrentUser) return;
+            if (MessageBox.Show(this, "Czy usunąć użytkownika: " + list[index].Name + "?", "Usuń", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
-                listaView.Rows.RemoveAt(index);
-                Users.Users = Users.Users.Take(index).Concat(Users.Users.Skip(index + 1)).ToArray();
+                Users.RemoveUser(list[index]);
+                zaladujTabele();
             }
         }
 
         private void okBtn_Click(object sender, EventArgs e)
         {
             HashSet<string> unique = new HashSet<string>();
-            foreach (var usr in Users.Users)
+            foreach (var usr in list)
             {
                 if (unique.Contains(usr.Name))
                 {
-                    MessageBox.Show(this, "Tabela zawieraz zduplikowane nazwy użytkowników!", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, "Tabela zawiera zdublowane nazwy użytkowników!", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else if (usr.Name == "")
+                {
+                    MessageBox.Show(this, "Tabela zawiera puste nazwy użytkowników!", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 unique.Add(usr.Name);
@@ -128,22 +142,11 @@ namespace DotBase
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(this, "Zmiana hasła wpływa na całą bazę danych.\r\n\r\n" +
-                "Zanim to zrobisz upewnij się, że:\r\n"+
-                "1. Utworzyłeś kopię zapasową bazy danych.\r\n"+
-                "2. Otworzyłeś bazę danych z lokalnego dysku (nie dysku sieciowego).\r\n" +
-                "3. Żaden inny program nie kożysta z tego pliku bazy danych.\r\n\r\n" +
-                "Czy checesz zmienić teraz hasło?",
-                "Informacja", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.No)
-            {
-                return;
-            }
-
             var form = new HasloForm();
-            form.zmienWlasne("BAZA DANYCH", "");
+            form.zmienInne("BAZA DANYCH");
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
-                Users.DatabasePassword = form.Haslo;
+                Users.ChangeDatabasePassword(form.Haslo);
             }
         }
 

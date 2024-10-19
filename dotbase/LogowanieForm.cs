@@ -23,9 +23,10 @@ namespace DotBase
 
         public static LogowanieForm Instancja { private set; get; }
         public UsersManager Users { get; private set; }
-        public User Wybrany { get; private set; }
 
         private string[] info = new string[] { "", "", "" };
+        private string komunikatBazy = null;
+        private string komunikatUzytkownika = null;
 
         //----------------------------------------------------------------------------------
         public LogowanieForm()
@@ -33,7 +34,6 @@ namespace DotBase
         {
             Instancja = this;
             Users = new UsersManager();
-            Wybrany = new User();
             InitializeComponent();
             string wersja = N.Wersja();
             if (wersja.StartsWith("!"))
@@ -56,24 +56,27 @@ namespace DotBase
 
         private void LogIn()
         {
-            if (!spawdzUzytkownika())
+            log("LogIn");
+
+            if (!sprawdzUzytkownika())
             {
+                log("Wrong user");
                 return;
             }
 
             hasloTextBox.Text = "";
 
-            EncryptedLogger.SetLocation(
-                Path.Combine(Path.GetDirectoryName(Path.GetFullPath(bazaTextBox.Text)), "log"),
-                Users.DatabasePassword);
+            EncryptedLogger.SetPassword(Users.DatabasePassword);
 
             try
             {
+                log("Connecting to {0}", Path.GetFullPath(bazaTextBox.Text));
                 BazaDanychWrapper.Polacz(Path.GetFullPath(bazaTextBox.Text), Users.DatabasePassword);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, "Nie można połączyć się z bazą danych.\r\nSprawdź, czy z bazą jest skojażony poprawny plik użytkowników.\r\n" + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                log("Connection failed: {0}", ex.ToString());
+                MessageBox.Show(this, "Nie można połączyć się z bazą danych.\r\nSprawdź, czy z bazą jest skojarzony poprawny plik użytkowników.\r\n" + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -100,11 +103,13 @@ namespace DotBase
 
         private void button2_Click(object sender, EventArgs e)
         {
+            log("Close button");
             Close();
         }
-        
+
         private void MenuGlowneForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            log("Closing");
             BazaDanychWrapper.Zakoncz();
         }
 
@@ -127,7 +132,12 @@ namespace DotBase
             try
             {
                 var usersPath = Path.ChangeExtension(bazaTextBox.Text, ".usr");
-                Users.Read(usersPath);
+                log("Reading users from '{0}'", usersPath);
+                bool newVersion = Users.Read(usersPath);
+                if (!newVersion) {
+                    log("Old users file in '{0}'. Overriding with new version.", usersPath);
+                    Users.Write(usersPath);
+                }
             }
             catch (Exception ex)
             {
@@ -140,103 +150,73 @@ namespace DotBase
             }
         }
 
-        public void zapiszUzytkownikow()
-        {
-            try
-            {
-                var usersPath = Path.ChangeExtension(bazaTextBox.Text, ".usr");
-                Users.Write(usersPath);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(this, "Błąd zapisu pliku użytkowników!\r\n" + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private void spawdzBaze()
         {
             uzytkownikTextBox.BackColor = SystemColors.Window;
             hasloTextBox.BackColor = SystemColors.Window;
             zalogujBtn.Enabled = false;
             administracjaBtn.Visible = false;
-            Wybrany = new User();
 
             try
             {
                 var path = bazaTextBox.Text;
+                log("Checking database at {0}", path);
                 if (!File.Exists(path)) throw new Exception("Nie można znaleźć podanego pliku bazy danych!");
                 var usersPath = Path.ChangeExtension(path, ".usr");
                 if (!File.Exists(usersPath)) throw new Exception("Do podanego pliku bazy danych nie ma dołączonego pliku użytkowników!");
                 czytajUzytkownikow();
                 bazaTextBox.BackColor = SystemColors.Window;
-                odswierzInfo(0, "");
+                komunikatBazy = null;
+                sprawdzUzytkownika();
             }
             catch (Exception ex)
             {
+                log("Checking database failed {0}", ex.ToString());
                 bazaTextBox.BackColor = Color.MistyRose;
-                odswierzInfo(0, ex.Message);
-                return;
+                komunikatBazy = ex.Message;
             }
-
-            spawdzUzytkownika();
+            odswiezInfo();
         }
 
 
-        private bool spawdzUzytkownika()
+        private bool sprawdzUzytkownika()
         {
             hasloTextBox.BackColor = SystemColors.Window;
             zalogujBtn.Enabled = false;
             administracjaBtn.Visible = false;
-            Wybrany = new User();
 
             try
             {
+                log("Checking user '{0}'", uzytkownikTextBox.Text);
                 if (uzytkownikTextBox.Text == "") throw new Exception("Podaj nazwę użytkownika!");
-                var user = Users.GetUser(uzytkownikTextBox.Text.ToLower().Trim());
-                if (user == null) throw new Exception("Nie ma takiego użytkownika!");
-                Wybrany = user;
-                uzytkownikTextBox.BackColor = SystemColors.Window;
-                odswierzInfo(1, "");
-            }
-            catch (Exception ex)
-            {
-                uzytkownikTextBox.BackColor = Color.MistyRose;
-                odswierzInfo(1, ex.Message);
-                return false;
-            }
-
-            try
-            {
                 if (hasloTextBox.Text == "") throw new Exception("Podaj hasło użytkownika!");
-                var tempDatabasePassword = Users.LogIn(Wybrany.Name, hasloTextBox.Text);
-                if (tempDatabasePassword == null || tempDatabasePassword == "") throw new Exception("Nieprawidłowe hasło!");
+                Users.LogIn(uzytkownikTextBox.Text.Trim().ToLower(), hasloTextBox.Text);
                 hasloTextBox.BackColor = SystemColors.Window;
-                odswierzInfo(2, "");
+                zalogujBtn.Enabled = true;
+                administracjaBtn.Visible = Users.CurrentUser.IsAdmin;
+                komunikatUzytkownika = null;
+                odswiezInfo();
+                return true;
             }
             catch (Exception ex)
             {
+                log("Checking user failed {0}", ex.ToString());
                 hasloTextBox.BackColor = Color.MistyRose;
-                odswierzInfo(2, ex.Message);
+                if (ex is UsersManager.WrongPassword) {
+                    komunikatUzytkownika = "Nieprawidłowe hasło";
+                } else if (ex is UsersManager.NotFound) {
+                    komunikatUzytkownika = "Nieprawidłowa nazwa użytkownika";
+                } else {
+                    komunikatUzytkownika = ex.Message;
+                }
+                odswiezInfo();
                 return false;
             }
-
-            zalogujBtn.Enabled = true;
-            administracjaBtn.Visible = Wybrany.IsAdmin;
-            return true;
         }
 
-        private void odswierzInfo(int index, string text)
+        private void odswiezInfo()
         {
-            info[index] = text;
-            for (int i = 0; i < info.Length; i++)
-            {
-                if (info[i].Length > 0)
-                {
-                    infoLabel.Text = info[i];
-                    return;
-                }
-            }
-            infoLabel.Text = "";
+            infoLabel.Text = komunikatBazy ?? komunikatUzytkownika ?? "";
         }
 
         private void bazaTextBox_TextChanged(object sender, EventArgs e)
@@ -246,42 +226,35 @@ namespace DotBase
 
         private void uzytkownikTextBox_TextChanged(object sender, EventArgs e)
         {
-            spawdzUzytkownika();
+            sprawdzUzytkownika();
         }
 
         private void hasloTextBox_TextChanged(object sender, EventArgs e)
         {
-            spawdzUzytkownika();
+            sprawdzUzytkownika();
         }
 
         private void LogowanieForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            log("Saving settings");
             Properties.Settings.Default.Save();
+        }
+
+        private bool edycjaOstrzezenie(string pytanie) {
+            var res = MessageBox.Show(this, 
+                String.Format(
+                    "Zmiana ustawień użytkowników jest krytyczną czynnością, którą należy przeprowadzać w odpowiedni sposób.\r\n\r\n" +
+                    "Zanim to zrobisz upewnij się, że:\r\n" +
+                    "1. Utworzyłeś kopię zapasową bazy danych wraz z plikiem użytkowników (z rozszerzeniem '.usr').\r\n" +
+                    "2. Otworzyłeś bazę danych na aktualnym komputerze - nie na dysku sieciowym innego komputera.\r\n" +
+                    "3. Żaden inny program nie korzysta z tego pliku bazy danych.\r\n\r\n{0}", pytanie),
+                    "Informacja", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            return res == System.Windows.Forms.DialogResult.Yes;
         }
 
         private void administracjaBtn_Click(object sender, EventArgs e)
         {
-            if (spawdzUzytkownika())
-            {
-                var form = new AdministracjaForm(Users);
-                hasloTextBox.Text = "";
-                Hide();
-                var res = form.ShowDialog(this);
-                Show();
-                Focus();
-                BringToFront();
-                Focus();
-                hasloTextBox.Focus();
-                if (res == System.Windows.Forms.DialogResult.OK)
-                {
-                    if (Users.DatabasePassword != form.Users.DatabasePassword)
-                    {
-                        BazaDanychWrapper.ZmienHaslo(LogowanieForm.Instancja.PlikBazy, form.Users.DatabasePassword, Users.DatabasePassword);
-                    }
-                    LogowanieForm.Instancja.Users = Users;
-                    LogowanieForm.Instancja.zapiszUzytkownikow();
-                }
-            }
+            adminMenu.Show(administracjaBtn, 0, administracjaBtn.Height);
         }
 
         public string PlikBazy
@@ -295,8 +268,66 @@ namespace DotBase
         private void LogowanieForm_Shown(object sender, EventArgs e)
         {
 #if DEBUG
+            hasloTextBox.Text = "123";
             LogIn();
 #endif
+        }
+
+        private void adminMenuItem_Click(object sender, EventArgs e)
+        {
+            if (sprawdzUzytkownika())
+            {
+                if (!edycjaOstrzezenie("Czy chcesz kontynuować?")) return;
+
+                log("Administrator form shown");
+                var form = new AdministracjaForm(Users);
+                hasloTextBox.Text = "";
+                Hide();
+                var res = form.ShowDialog(this);
+                Show();
+                Focus();
+                BringToFront();
+                Focus();
+                hasloTextBox.Focus();
+                if (res == System.Windows.Forms.DialogResult.OK)
+                {
+                    if (!edycjaOstrzezenie("Czy chcesz teraz zapisać wszystkie zmiany?")) return;
+                    log("Administrator form accepted");
+                    if (Users.DatabasePassword != form.Users.DatabasePassword)
+                    {
+                        log("Changing database password");
+                        BazaDanychWrapper.ZmienHaslo(PlikBazy, form.Users.DatabasePassword, Users.DatabasePassword);
+                        EncryptedLogger.SetPassword(Users.DatabasePassword);
+                    }
+                    LogowanieForm.Instancja.Users = form.Users;
+                    try
+                    {
+                        var usersPath = Path.ChangeExtension(bazaTextBox.Text, ".usr");
+                        var usersPathNew = Path.ChangeExtension(bazaTextBox.Text, ".new.usr");
+                        var usersPathBackup = Path.ChangeExtension(bazaTextBox.Text, ".backup.usr");
+                        log("Writing users to '{0}'", usersPathNew);
+                        Users.Write(usersPathNew);
+                        log("Deleting '{0}'", usersPathBackup);
+                        File.Delete(usersPathBackup);
+                        log("Moving from '{0}' to '{1}'", usersPath, usersPathBackup);
+                        File.Move(usersPath, usersPathBackup);
+                        log("Moving from '{0}' to '{1}'", usersPathNew, usersPath);
+                        File.Move(usersPathNew, usersPath);
+                    }
+                    catch (Exception ex)
+                    {
+                        log("Writing users exception: {0}", ex.ToString());
+                        Program.EmergencyExit("Błąd zapisu pliku użytkowników!\r\n" + ex.Message);
+                    }
+                }
+            }
+        }
+
+        private void podlądLogówDiagnostycznychToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Users.DatabasePassword == null) return;
+            var f = new DecryptLogsForm(Users.DatabasePassword);
+            f.ShowDialog(this);
         }
     }
 }

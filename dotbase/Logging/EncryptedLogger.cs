@@ -13,15 +13,15 @@ namespace DotBase.Logging
 {
     static class EncryptedLogger
     {
+        const int DIAGNOSTICS_OUTPUT_DAYS = 7;
         const int UNCOMPRESSED_SIZE = 4 * 1024 * 1024;
         const int COMPRESSED_SIZE = 1024 * 1024;
+        const string MAGIC_LOG_FLUSH_FILE = "\r\n<<< Flushing log file >>>\r\n";
         class ControlMessage
         {
-            public string directory;
             public string password;
-            public ControlMessage(string d, string p)
+            public ControlMessage(string p)
             {
-                directory = d;
                 password = p;
             }
         }
@@ -34,8 +34,9 @@ namespace DotBase.Logging
         static byte[] signatureBytes = Encoding.UTF8.GetBytes("LogEncoded.AES128.CBC.PBKDF2\x00\x01\x02\x03");
         static byte[] verificationBytes = Encoding.UTF8.GetBytes("LogEncodedVerify");
         static byte[] footerBytes = Encoding.UTF8.GetBytes("LogEncodedEnding");
+        private static string currentFilePath = "";
 
-        public static void SetLocation(string directory, string password)
+        public static void SetPassword(string password)
         {
             lock (lk)
             {
@@ -45,8 +46,32 @@ namespace DotBase.Logging
                     thread = new Thread(run);
                     thread.Start();
                 }
-                controlMessages.Enqueue(new ControlMessage(directory, password));
+                controlMessages.Enqueue(new ControlMessage(password));
                 Monitor.PulseAll(lk);
+            }
+        }
+
+        private static string getDirectory()
+        {
+            string directory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            return Path.Combine(directory, @"..\Diagnostics");
+        }
+
+        public static void Flush()
+        {
+            string oldPath;
+            lock (lk)
+            {
+                oldPath = currentFilePath;
+            }
+            Push(MAGIC_LOG_FLUSH_FILE);
+            while (true)
+            {
+                lock (lk)
+                {
+                    if (currentFilePath != oldPath || !thread.IsAlive) return;
+                }
+                Thread.Sleep(100);
             }
         }
 
@@ -98,7 +123,6 @@ namespace DotBase.Logging
 
         static void run()
         {
-            string directory = null;
             string password = null;
             int retryCount = 0;
 
@@ -109,7 +133,7 @@ namespace DotBase.Logging
                     lock (lk)
                     {
                         // Wait for initial control message, skip waiting if directory is already known
-                        while (directory == null && controlMessages.Count == 0)
+                        while (password == null && controlMessages.Count == 0)
                         {
                             Monitor.Wait(lk);
                         }
@@ -117,14 +141,13 @@ namespace DotBase.Logging
                         while (controlMessages.Count > 0)
                         {
                             var msg = controlMessages.Dequeue();
-                            directory = msg.directory;
                             password = msg.password;
                         }
                     }
                     // Go to output writing
                     do
                     {
-                        var ret = writeOutput(directory, password, ref retryCount);
+                        var ret = writeOutput(password, ref retryCount);
                         if (ret == ReturnType.Exit) return;
                         if (ret == ReturnType.Control) break;
                         // ReturnType.Repeat otherwise
@@ -164,7 +187,7 @@ namespace DotBase.Logging
             }
         }
 
-        private static ReturnType writeOutput(string directory, string password, ref int retryCount)
+        private static ReturnType writeOutput(string password, ref int retryCount)
         {
             var now = DateTime.Now;
             var month = String.Format("{0:yyyy-MM}", now);
@@ -173,8 +196,12 @@ namespace DotBase.Logging
             var iv = new byte[16];
             rng.GetBytes(iv);
             var fileName = String.Format("{0:yyyy-MM-dd HH_mm_ss.fff}.{1}.enclog", now, (int)salt[0] + 256 * (int)iv[0]);
-            var subdir = Path.Combine(directory, month);
+            var subdir = Path.Combine(getDirectory(), month);
             var filePath = Path.Combine(subdir, fileName);
+            lock (lk)
+            {
+                currentFilePath = filePath;
+            }
             var readBytes = 0;
             Directory.CreateDirectory(subdir);
             byte[] key;
@@ -226,7 +253,7 @@ namespace DotBase.Logging
                                 {
                                     retryCount = 0;
                                 }
-                                if (writtenBytes > COMPRESSED_SIZE || readBytes > UNCOMPRESSED_SIZE)
+                                if (writtenBytes > COMPRESSED_SIZE || readBytes > UNCOMPRESSED_SIZE || inputLog == MAGIC_LOG_FLUSH_FILE)
                                 {
                                     return ReturnType.Repeat;
                                 }
@@ -245,11 +272,6 @@ namespace DotBase.Logging
                     }
                 }
             }
-        }
-
-        public static void decodeDirectory(string inputFile, string outputFile, string password)
-        {
-            // TODO: decode directory
         }
 
         public static void decodeFile(string inputFile, string outputFile, string password)
@@ -306,7 +328,7 @@ namespace DotBase.Logging
                 throw new InvalidPasswordException("Invalid password");
             }
 
-            // Get information from footer, assume truncantenated file if something is wrong
+            // Get information from footer, assume truncated file if something is wrong
             int endCut = 0;
             if (decryptedBytesLength > 64)
             {
@@ -319,8 +341,8 @@ namespace DotBase.Logging
 
             if (endCut == 0)
             {
-                if (pendingException == null) pendingException = new IOException("Truncatenated file");
-                messages += "\r\n\r\nInvalid log file footer - file truncatenated.\r\n";
+                if (pendingException == null) pendingException = new IOException("Truncated file");
+                messages += "\r\n\r\nInvalid log file footer - file truncated.\r\n";
             }
 
             int chunkSize = endCut > 0 ? 65536 : 16;
@@ -371,6 +393,32 @@ namespace DotBase.Logging
             }
         }
 
+        public static void CopyTo(string outputPath)
+        {
+            var subdirName = String.Format("Diagnostics-{0:yyyy-MM-dd HH_mm_ss}", DateTime.Now);
+            outputPath = Path.Combine(outputPath, subdirName);
+            Directory.CreateDirectory(outputPath);
+            var startTime = DateTime.Now.AddDays(-DIAGNOSTICS_OUTPUT_DAYS);
+            var inputPath = getDirectory();
+            foreach (var subdir in Directory.GetDirectories(inputPath))
+            {
+                foreach (var file in Directory.GetFiles(Path.Combine(inputPath, subdir), "*.enclog"))
+                {
+                    // yyyy-MM-dd HH_mm_ss.fff.xxxxx.enclog
+                    var parts = Path.GetFileNameWithoutExtension(file).Split('.');
+                    if (parts.Length < 2) continue;
+                    var timeStr = parts[0] + "." + parts[1];
+                    DateTime date;
+                    if (!DateTime.TryParseExact(timeStr, "yyyy-MM-dd HH_mm_ss.fff", null, System.Globalization.DateTimeStyles.None, out date)) continue;
+                    if (date < startTime) continue;
+                    try {
+                        File.Copy(file, Path.Combine(outputPath, Path.GetFileName(file)));
+                    } catch (Exception ex) {
+                        File.WriteAllText(Path.Combine(outputPath, Path.GetFileName(file)), String.Format("Copy error: {0}", ex.ToString()));
+                    }
+                }
+            }
+        }
     }
 
     public class InvalidPasswordException : CryptographicException

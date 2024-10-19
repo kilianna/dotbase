@@ -101,7 +101,6 @@ mkdir %~dp0\dist
 xcopy %~dp0\dotbase\bin\Release %~dp0\dist\Release\ /E /Q /R /Y
 xcopy %~dp0\dotbase\bin\szablony %~dp0\dist\szablony\ /E /Q /R /Y
 xcopy %~dp0\dotbase\bin\wyniki %~dp0\dist\wyniki\ /E /Q /R /Y
-del /q %~dp0\dist\Release\*.pdb
 del /s /q %~dp0\dist\wyniki\*.html
 %~dp0\dist\Release\DotBase --version > %~dp0\dist\FN-VERSION.txt
 %~dp0\dist\Release\DotBase --pretty-version > %~dp0\dist\VERSION.txt

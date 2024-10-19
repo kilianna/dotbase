@@ -103,7 +103,7 @@ namespace DotBase
             if (eksportujDlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 var form = new HasloForm();
-                form.zmienWlasne("NOWA BAZA DANYCH", null);
+                form.zmienInne("NOWA BAZA DANYCH");
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     if (!BazaDanychWrapper.Eksportuj(LogowanieForm.Instancja.PlikBazy, LogowanieForm.Instancja.Users.DatabasePassword, eksportujDlg.FileName, form.Haslo, new BazaDanychWrapper.TransformujBazeDelegate(UsunDanePersonalne)))

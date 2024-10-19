@@ -9,15 +9,22 @@ namespace DotBase.Login
 {
     public class UsersManager
     {
+        public class NotFound : Exception { }
+        public class WrongPassword : Exception { }
+        public class NotLoggedIn : Exception { }
+
         private static byte[] FileMagic = new byte[16] { 192, 244, 255, 93, 36, 47, 11, 127, 232, 107, 105, 4, 92, 144, 109, 91 };
         private static byte[] ObfuscationKey = new byte[16] { 134, 42, 156, 192, 244, 11, 93, 192, 167, 238, 250, 46, 132, 38, 87, 16 };
 
-        public User[] Users = new User[0];
-        public string DatabasePassword;
+        private User[] Users = new User[0];
 
-        public void Read(string file)
+        public UserInfo CurrentUser { get; private set; }
+        public string DatabasePassword { get; private set; }
+
+        public bool Read(string file)
         {
             Users = new User[0];
+            CurrentUser = null;
             DatabasePassword = null;
             using (var fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
@@ -27,7 +34,7 @@ namespace DotBase.Login
                 {
                     fs.Seek(0, SeekOrigin.Begin);
                     OldRead(fs);
-                    return;
+                    return false;
                 }
                 var iv = new byte[16];
                 Array.Copy(fileHeader, 16, iv, 0, 16);
@@ -45,6 +52,7 @@ namespace DotBase.Login
                     Users = fileUsers;
                 }
             }
+            return true;
         }
 
         public void Write(string file)
@@ -72,49 +80,84 @@ namespace DotBase.Login
             var clone = new UsersManager();
             clone.Users = new User[Users.Length];
             for (int i = 0; i < Users.Length; i++)
+            {
                 clone.Users[i] = Users[i].Clone();
+                if (CurrentUser == Users[i].info)
+                    clone.CurrentUser = clone.Users[i].info;
+            }
             clone.DatabasePassword = DatabasePassword;
             return clone;
         }
 
-        public User GetUser(string name)
+        private User GetUser(string name)
         {
             foreach (var user in Users)
-            {
-                if (user.Name == name) return user;
-            }
+                if (user.info.Name == name) return user;
             return null;
         }
 
         /// <returns>Database password on success, "" for wrong password, null for wrong user name</returns>
         public string LogIn(string name, string password)
         {
-            var user = GetUser(name);
-            if (user == null) return null;
-            var res = user.LogIn(password);
+            CurrentUser = null;
             DatabasePassword = null;
-            if (res != null && res != "")
-                DatabasePassword = res;
+            var user = GetUser(name);
+            if (user == null) throw new NotFound();
+            var res = user.LogIn(password);
+            if (res == null) throw new WrongPassword();
+            CurrentUser = user.info;
+            DatabasePassword = res;
             return res;
         }
 
         public void ChangeUserPassword(string name, string newPassword)
         {
             var user = GetUser(name);
-            if (user == null) throw new ApplicationException(String.Format("User '{0}' does not exists.", name));
-            if (DatabasePassword == null) throw new ApplicationException("You need to login before changing the password.");
+            if (user == null) throw new NotFound();
+            if (DatabasePassword == null) throw new NotLoggedIn();
             user.ChangeUserPassword(newPassword, DatabasePassword);
         }
 
         public void ChangeDatabasePassword(string databasePassword)
         {
             foreach (var user in Users)
-            {
                 user.ChangeDatabasePassword(databasePassword);
-            }
-            DatabasePassword = databasePassword;
+            if (DatabasePassword != null)
+                DatabasePassword = databasePassword;
         }
 
+        public UserInfo[] GetUsers()
+        {
+            var res = new UserInfo[Users.Length];
+            for (int i = 0; i < res.Length; i++)
+                res[i] = Users[i].info;
+            return res;
+        }
+
+        public UserInfo NewUser(string name, string password, bool isAdmin)
+        {
+            if (DatabasePassword == null) throw new NotLoggedIn();
+            var user = new User();
+            user.info.Name = name;
+            user.info.Password = password;
+            user.info.IsAdmin = isAdmin;
+            user.ChangeUserPassword(password, DatabasePassword);
+            var list = new List<User>(Users);
+            list.Add(user);
+            Users = list.ToArray();
+            return user.info;
+        }
+
+        internal void RemoveUser(UserInfo userInfo)
+        {
+            for (int i = 0; i < Users.Length; i++) {
+                var user = Users[i];
+                if (user.info == userInfo) {
+                    Users = Users.Take(i).Concat(Users.Skip(i + 1)).ToArray();
+                    return;
+                }
+            }
+        }
         private void OldRead(FileStream fs)
         {
             using (var sr = new StreamReader(fs))
@@ -122,9 +165,9 @@ namespace DotBase.Login
             using (var br = new BinaryReader(ms))
             {
                 int magic = br.ReadInt32();
-                if (magic != 0x1F72D1C) throw new IOException("Nieprawidlowy plik użytkowników");
+                if (magic != 0x1F72D1C) throw new IOException("Nieprawidłowy plik użytkowników");
                 int liczba = br.ReadInt32();
-                if (liczba > 1000) throw new IOException("Nieprawidlowy plik użytkowników");
+                if (liczba > 1000) throw new IOException("Nieprawidłowy plik użytkowników");
                 var list = new List<Tuple<string, string, bool>>();
                 for (int i = 0; i < liczba; i++)
                 {
@@ -138,9 +181,9 @@ namespace DotBase.Login
                 for (int i = 0; i < liczba; i++)
                 {
                     fileUsers[i] = new User();
-                    fileUsers[i].Name = list[i].Item1;
+                    fileUsers[i].info.Name = list[i].Item1;
                     fileUsers[i].ChangeUserPassword(list[i].Item2, hasloBazy);
-                    fileUsers[i].IsAdmin = list[i].Item3;
+                    fileUsers[i].info.IsAdmin = list[i].Item3;
                 }
                 Users = fileUsers;
             }
@@ -154,5 +197,6 @@ namespace DotBase.Login
             var dec = N.aes.CreateDecryptor(ObfuscationKey, iv);
             return dec.TransformFinalBlock(all, iv.Length, all.Length - iv.Length);
         }
+
     }
 }

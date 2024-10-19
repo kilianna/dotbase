@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Button zakonczBtn;
             System.Windows.Forms.Label label4;
             System.Windows.Forms.Label label5;
@@ -42,11 +43,15 @@
             this.uzytkownikTextBox = new System.Windows.Forms.TextBox();
             this.administracjaBtn = new System.Windows.Forms.Button();
             this.wersjaLabel = new System.Windows.Forms.TextBox();
+            this.adminMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.użytkownicyIHasłoBazyDanychToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.podlądLogówDiagnostycznychToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             zakonczBtn = new System.Windows.Forms.Button();
             label4 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
             label6 = new System.Windows.Forms.Label();
             wybierzBtn = new System.Windows.Forms.Button();
+            this.adminMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // zakonczBtn
@@ -198,6 +203,28 @@
             this.wersjaLabel.Text = "Wersja programu: ";
             this.wersjaLabel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // adminMenu
+            // 
+            this.adminMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.użytkownicyIHasłoBazyDanychToolStripMenuItem,
+            this.podlądLogówDiagnostycznychToolStripMenuItem});
+            this.adminMenu.Name = "contextMenuStrip1";
+            this.adminMenu.Size = new System.Drawing.Size(294, 74);
+            // 
+            // użytkownicyIHasłoBazyDanychToolStripMenuItem
+            // 
+            this.użytkownicyIHasłoBazyDanychToolStripMenuItem.Name = "użytkownicyIHasłoBazyDanychToolStripMenuItem";
+            this.użytkownicyIHasłoBazyDanychToolStripMenuItem.Size = new System.Drawing.Size(293, 24);
+            this.użytkownicyIHasłoBazyDanychToolStripMenuItem.Text = "Użytkownicy i hasło bazy danych";
+            this.użytkownicyIHasłoBazyDanychToolStripMenuItem.Click += new System.EventHandler(this.adminMenuItem_Click);
+            // 
+            // podlądLogówDiagnostycznychToolStripMenuItem
+            // 
+            this.podlądLogówDiagnostycznychToolStripMenuItem.Name = "podlądLogówDiagnostycznychToolStripMenuItem";
+            this.podlądLogówDiagnostycznychToolStripMenuItem.Size = new System.Drawing.Size(293, 24);
+            this.podlądLogówDiagnostycznychToolStripMenuItem.Text = "Podląd logów diagnostycznych";
+            this.podlądLogówDiagnostycznychToolStripMenuItem.Click += new System.EventHandler(this.podlądLogówDiagnostycznychToolStripMenuItem_Click);
+            // 
             // LogowanieForm
             // 
             this.AcceptButton = this.zalogujBtn;
@@ -228,6 +255,7 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LogowanieForm_FormClosed);
             this.Load += new System.EventHandler(this.LogowanieForm_Load);
             this.Shown += new System.EventHandler(this.LogowanieForm_Shown);
+            this.adminMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -243,6 +271,9 @@
         private System.Windows.Forms.Button zalogujBtn;
         private System.Windows.Forms.Button administracjaBtn;
         private System.Windows.Forms.TextBox wersjaLabel;
+        private System.Windows.Forms.ContextMenuStrip adminMenu;
+        private System.Windows.Forms.ToolStripMenuItem użytkownicyIHasłoBazyDanychToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem podlądLogówDiagnostycznychToolStripMenuItem;
     }
 }
 

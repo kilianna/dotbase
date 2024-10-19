@@ -107,6 +107,12 @@
     <Compile Include="ExceptionForm.Designer.cs">
       <DependentUpon>ExceptionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Logging\DecryptLogsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logging\DecryptLogsForm.Designer.cs">
+      <DependentUpon>DecryptLogsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Logging\Logging.cs" />
     <Compile Include="Login\User.cs" />
     <Compile Include="Login\Users.cs" />
@@ -122,7 +128,7 @@
     <Compile Include="HasloForm.Designer.cs">
       <DependentUpon>HasloForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="HelpKeyFilter.cs" />
+    <Compile Include="GlobalKeyFilter.cs" />
     <Compile Include="Logging\DatabaseLog.cs" />
     <Compile Include="MeldunekModel.cs" />
     <Compile Include="Multimap.cs" />
@@ -398,6 +404,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ExceptionForm.resx">
       <DependentUpon>ExceptionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logging\DecryptLogsForm.resx">
+      <DependentUpon>DecryptLogsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TranslacjaForm.resx">
       <DependentUpon>TranslacjaForm.cs</DependentUpon>

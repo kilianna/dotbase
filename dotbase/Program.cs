@@ -21,14 +21,14 @@ namespace DotBase
                 System.Console.Out.Write(N.Wersja(args[0] == "--version").TrimStart('!'));
                 return;
             }
-            log("Start programu");
+            log("Start programu, wersja {0}", N.Wersja());
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
             Application.Idle += new EventHandler(Application_Idle);
             Application.ApplicationExit += new EventHandler(Application_ApplicationExit);
             Application.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.AddMessageFilter(new HelpKeyFilter());
+            Application.AddMessageFilter(new GlobalKeyFilter());
             Application.Run(new LogowanieForm());
             log("Normalne wyjście z aplikacji");
             Cleanup();
@@ -49,7 +49,7 @@ namespace DotBase
 
         public static void EmergencyExit(string failureDescription)
         {
-            log("Emergency exit with: {0}", failureDescription);
+            log("Emergency exit with: {0}", failureDescription ?? "Unknown failure");
             BazaDanychWrapper.failure();
             BazaDanychWrapper.Zakoncz();
             if (failureDescription != null)
