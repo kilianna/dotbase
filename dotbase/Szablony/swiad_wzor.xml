@@ -216,9 +216,18 @@ if (poprawa) {
 
   <p></p>
 
-<%! for (let i = 0; i < wyniki.length; i++) {
+<%!
+let wynikiS = [];
+let i;
+
+for (i = 0; i < wyniki.length; i++) {
   let wyn = wyniki[i];
-  let wzorcowanie = wyn.wzorcowanie_zrodlami_powierzchniowymi || wyn.wzorcowanie_cezem;
+  let wzorcowanie = wyn.wzorcowanie_cezem;
+
+  if (wyn.wzorcowanie_zrodlami_powierzchniowymi) {
+    wynikiS.push(wyn);
+    continue;
+  }
 
   function pokazSonde() {
     %><p tabs="1cm, 9cm"><tab/>Typ sondy:&nbsp;
@@ -258,7 +267,7 @@ if (poprawa) {
     <%! for (let row of wyn.tabela) { %>
     <tr>
       <td><% tekst(row.zakres, 5) %></td>
-      <%! digits = calcDigits(3, row.wspolczynnik, 2, row.niepewnosc) %>
+      <%! digits = calcDigits(2, row.wspolczynnik, 2, row.niepewnosc) %>
       <td><% fixed(row.wspolczynnik, digits) %> ± <% fixed(row.niepewnosc, digits) %></td>
     </tr>
     <%! } %>
@@ -302,7 +311,7 @@ if (poprawa) {
     <%! for (let row of wyn.tabela) { %>
     <tr>
       <td><% tekst(row.zakres, 5) %></td>
-      <%! digits = calcDigits(3, row.wspolczynnik, 2, row.niepewnosc) %>
+      <%! digits = calcDigits(2, row.wspolczynnik, 2, row.niepewnosc) %>
       <td><% fixed(row.wspolczynnik, digits) %> ± <% fixed(row.niepewnosc, digits) %></td>
     </tr>
     <%! } %>
@@ -346,9 +355,9 @@ if (poprawa) {
     <%! for (let row of wyn.tabela) { %>
     <tr>
       <td><% tekst(row.prog, 5) %></td>
-      <%! digits = calcDigits(3, row.wartosc_zmierzona, 2, row.niepewnosc) %>
+      <%! digits = calcDigits(2, row.wartosc_zmierzona, 2, row.niepewnosc) %>
       <td><% fixed(row.wartosc_zmierzona, digits) %> ± <% fixed(row.niepewnosc, digits) %></td>
-      <%! digits = calcDigits(3, row.wspolczynnik, 2, row.niepewnosc_wspolczynnika) %>
+      <%! digits = calcDigits(2, row.wspolczynnik, 2, row.niepewnosc_wspolczynnika) %>
       <td><% fixed(row.wspolczynnik, digits) %> ± <% fixed(row.niepewnosc_wspolczynnika, digits) %></td>
     </tr>
     <%! } %>
@@ -392,9 +401,9 @@ if (poprawa) {
     <%! for (let row of wyn.tabela) { %>
     <tr>
       <td><% tekst(row.prog, 5) %></td>
-      <%! digits = calcDigits(3, row.wartosc_wzorcowa, 2, row.niepewnosc) %>
+      <%! digits = calcDigits(2, row.wartosc_wzorcowa, 2, row.niepewnosc) %>
       <td><% fixed(row.wartosc_wzorcowa, digits) %> ± <% fixed(row.niepewnosc, digits) %></td>
-      <%! digits = calcDigits(3, row.wspolczynnik, 2, row.niepewnosc_wspolczynnika) %>
+      <%! digits = calcDigits(2, row.wspolczynnik, 2, row.niepewnosc_wspolczynnika) %>
       <td><% fixed(row.wspolczynnik, digits) %> ± <% fixed(row.niepewnosc_wspolczynnika, digits) %></td>
     </tr>
     <%! } %>
@@ -409,7 +418,11 @@ if (poprawa) {
   <p></p>
   <%! } %>
 
-<%! } else  { %>
+<%! } %>
+
+<%! } %>
+
+<%! if (wynikiS.length) { %>
 
   <%! /* ------------------------------- Skazenia ---------------------------- */ %>
 
@@ -446,6 +459,25 @@ if (poprawa) {
       <td>1/(cm<sup>2</sup>⋅s)</td>
       <td>1/(cm<sup>2</sup>)</td>
     </tr>
+    <%!
+      let lp = 0;
+      for (let wyn of wynikiS) {
+        lp++;
+        let wzorcowanie = wyn.wzorcowanie_zrodlami_powierzchniowymi;
+      %>
+      <tr>
+        <td><% lp %></td>
+        <td><% wyn.sonda ? wyn.sonda.Typ : 'nie dotyczy' %></td>
+        <td><% wyn.sonda ? wyn.sonda.Nr_fabryczny : 'nie dotyczy' %></td>
+        <td><% wzorcowanie.Napiecie_zasilania_sondy %></td>
+        <td><% wyn.zrodlo?.Nazwa?.replace(/\(.*\)/, '').trim() || blad('Nie ma źródla') %> </td>
+        <td><% wyn.zrodlo?.Nazwa?.toLowerCase() === 'am-241' || wyn.zrodlo?.Nazwa?.toLowerCase() === 'Pu-239' ? 'α' : 'β' %></td>
+        <td><% fixed(wyn.emisja_pow, 2) %></td>
+        <td><% wyn.jednostka.Jednostka %></td>
+        <%! digits = calcDigits(2, wzorcowanie.wspolczynnik, 2, wzorcowanie.Niepewnosc) %>
+        <td><% fixed(wzorcowanie.wspolczynnik, digits) %> ± <% fixed(wzorcowanie.Niepewnosc, digits) %></td>
+      </tr>
+    <%! } %>
   </table>
 
   <p></p>
@@ -454,23 +486,6 @@ if (poprawa) {
     przyrządu (wyrażone w jednostkach podanych w tabeli) przez współczynnik kalibracyjny
   </p>
   <p></p>
-
-  <%! /*
-<div class="wzornag"><!c1>) </div>
-<table id="wynikiska">
-	<tr><th rowspan="3">Lp.</th><th colspan="3">Sonda</th><th colspan="3">Źródło</th><th rowspan="3">Jednostka przyrządu</th><th rowspan="2">Współczynnik kalibracyjny<br>na jednostkę przyrządu (*)</th></tr>
-	<tr><td rowspan="2">Typ</td><td rowspan="2">Nr fabryczny</td><td>U<sub>z</sub></td><td rowspan="2">Izotop</td><td rowspan="2">Rodzaj promieniowania</td><td>Powierzchniowa emisja promieniowania</td></tr>
-	<tr><td>V</td><td>1/(cm<sup>2</sup>&sdot;s)</td><td>1/(cm<sup>2</sup>)</td></tr>				
-	<!tabela>	
-	</table>
-<div id="komentarzska"><p style="margin: 0; padding: 0;">(*) liczbę cząstek emitowanych przez powierzchnię 1 cm<sup>2</sup> w ciągu 1 sekundy oblicza się mnożąc wskazania</p>
-<p style="text-indent: 4mm; margin: 0; padding: 0;">przyrządu (wyrażone w jednostkach podanych w tabeli) przez współczynnik kalibracyjny</p>
-</div>
-<div class="uwaga"><!uwaga></div>
-
-  */%>
-
-<%! } %>
 
 <%! } %>
 
