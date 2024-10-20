@@ -49,12 +49,12 @@ namespace DotBase
                     EncryptedLogger.Flush();
                     try {
                         EncryptedLogger.CopyTo(path);
-                        MessageBox.Show(
+                        MyMessageBox.Show(
                             String.Format("Pliki skopiowane do {0}", path),
                             "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     } catch (Exception ex) {
                         log("Saving diagnostics error: {0}", ex.ToString());
-                        MessageBox.Show(
+                        MyMessageBox.Show(
                             String.Format("Błąd kopiowania plików: {0}\r\n\r\nSkopiuj pliki ręczenie.", ex.Message),
                             "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -83,7 +83,7 @@ namespace DotBase
             }
             else
             {
-                MessageBox.Show("Plik PDF z instrukcją nie został znaleziony.\r\n" +
+                MyMessageBox.Show("Plik PDF z instrukcją nie został znaleziony.\r\n" +
                     "Sprawdź, czy plik \"Instrukcja.pdf\" istnieje i znajduje się w katalogu programu lub " +
                     "w jednym z katalogów nadrzędnych.", "Nie można znaleźć pliku pomocy", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
