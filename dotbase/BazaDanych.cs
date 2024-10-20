@@ -554,6 +554,7 @@ namespace DotBase
         public static bool Eksportuj(string staraSciezka, string stareHaslo, string nowaSciezka, string noweHaslo, TransformujBazeDelegate transformacja)
         {
             bool usunGdyNiepowodzenie = false;
+            ConnectionManager tempManager = null;
             try
             {
                 if (manager != null)
@@ -562,17 +563,26 @@ namespace DotBase
                 }
                 File.Copy(staraSciezka, nowaSciezka, true);
                 usunGdyNiepowodzenie = true;
-                var tempManager = new ConnectionManager(nowaSciezka, null, stareHaslo);
+                tempManager = new ConnectionManager(nowaSciezka, null, stareHaslo);
                 var polecenie = tempManager.command("ALTER DATABASE PASSWORD [" + noweHaslo + "] [" + stareHaslo + "]");
                 polecenie.ExecuteNonQuery();
+                polecenie.Dispose();
+                tempManager.close();
+                tempManager = null;
+                tempManager = new ConnectionManager(nowaSciezka, null, noweHaslo);
                 if (transformacja != null)
                 {
                     transformacja(tempManager);
                 }
                 tempManager.close();
+                tempManager = null;
             }
             catch (Exception ex)
             {
+                if (tempManager != null)
+                {
+                    tempManager.close();
+                }
                 // TODO: Naprawić eksportowanie bazy danych
                 log2("Nie udało się wyeksportować bazy danych: {0}", ex.ToString());
                 if (usunGdyNiepowodzenie)
