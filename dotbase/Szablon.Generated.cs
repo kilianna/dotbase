@@ -19,7 +19,7 @@ namespace DotBase
             public Row_Atesty_zrodel[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Atesty_zrodel._GET(_GET(min, max, allowException)); }
             public Row_Atesty_zrodel GET_ONE() { return Row_Atesty_zrodel._GET(_GET(1, 1))[0]; }
             public Row_Atesty_zrodel GET_OPTIONAL() { var r = Row_Atesty_zrodel._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
-            public Szablon_Atesty_zrodel Data_wzorcowania(DateTime value)
+            public Szablon_Atesty_zrodel Data_wzorcowania(DateTime? value)
             {
                 SetField("Data_wzorcowania", value, OleDbType.Date);
                 return this;
@@ -29,7 +29,7 @@ namespace DotBase
                 AddField("Data_wzorcowania");
                 return this;
             }
-            public Szablon_Atesty_zrodel Emisja_powierzchniowa(double value)
+            public Szablon_Atesty_zrodel Emisja_powierzchniowa(double? value)
             {
                 SetField("Emisja_powierzchniowa", value, OleDbType.Double);
                 return this;
@@ -39,7 +39,7 @@ namespace DotBase
                 AddField("Emisja_powierzchniowa");
                 return this;
             }
-            public Szablon_Atesty_zrodel ID_atestu(short value)
+            public Szablon_Atesty_zrodel ID_atestu(short? value)
             {
                 SetField("ID_atestu", value, OleDbType.SmallInt);
                 return this;
@@ -49,7 +49,7 @@ namespace DotBase
                 AddField("ID_atestu");
                 return this;
             }
-            public Szablon_Atesty_zrodel ID_zrodla(short value)
+            public Szablon_Atesty_zrodel ID_zrodla(short? value)
             {
                 SetField("ID_zrodla", value, OleDbType.SmallInt);
                 return this;
@@ -59,7 +59,7 @@ namespace DotBase
                 AddField("ID_zrodla");
                 return this;
             }
-            public Szablon_Atesty_zrodel Niepewnosc(double value)
+            public Szablon_Atesty_zrodel Niepewnosc(double? value)
             {
                 SetField("Niepewnosc", value, OleDbType.Double);
                 return this;
@@ -72,11 +72,11 @@ namespace DotBase
         }
         public class Row_Atesty_zrodel : Wiersz
         {
-            public DateTime Data_wzorcowania;
-            public double Emisja_powierzchniowa;
-            public short ID_atestu;
-            public short ID_zrodla;
-            public double Niepewnosc;
+            public DateTime? Data_wzorcowania;
+            public double? Emisja_powierzchniowa;
+            public short? ID_atestu;
+            public short? ID_zrodla;
+            public double? Niepewnosc;
             public Row_Atesty_zrodel(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -88,15 +88,15 @@ namespace DotBase
             private void _init(DataRow row, Dictionary<string, int> cols)
             {
                 if (cols.ContainsKey("Data_wzorcowania"))
-                    Data_wzorcowania = row.Field<DateTime>(cols["Data_wzorcowania"]);
+                    Data_wzorcowania = row.Field<DateTime?>(cols["Data_wzorcowania"]);
                 if (cols.ContainsKey("Emisja_powierzchniowa"))
-                    Emisja_powierzchniowa = row.Field<double>(cols["Emisja_powierzchniowa"]);
+                    Emisja_powierzchniowa = row.Field<double?>(cols["Emisja_powierzchniowa"]);
                 if (cols.ContainsKey("ID_atestu"))
-                    ID_atestu = row.Field<short>(cols["ID_atestu"]);
+                    ID_atestu = row.Field<short?>(cols["ID_atestu"]);
                 if (cols.ContainsKey("ID_zrodla"))
-                    ID_zrodla = row.Field<short>(cols["ID_zrodla"]);
+                    ID_zrodla = row.Field<short?>(cols["ID_zrodla"]);
                 if (cols.ContainsKey("Niepewnosc"))
-                    Niepewnosc = row.Field<double>(cols["Niepewnosc"]);
+                    Niepewnosc = row.Field<double?>(cols["Niepewnosc"]);
             }
             internal static Row_Atesty_zrodel[] _GET(DataTable dane)
             {
@@ -179,7 +179,7 @@ namespace DotBase
                 AddField("Uwagi");
                 return this;
             }
-            public Szablon_Budzetniepewnosci wartosc(double value)
+            public Szablon_Budzetniepewnosci wartosc(double? value)
             {
                 SetField("wartosc", value, OleDbType.Double);
                 return this;
@@ -203,7 +203,7 @@ namespace DotBase
         public class Row_Budzetniepewnosci : Wiersz
         {
             public string Uwagi;
-            public double wartosc;
+            public double? wartosc;
             public string Wielkosc;
             public Row_Budzetniepewnosci(DataRow row)
             {
@@ -218,7 +218,7 @@ namespace DotBase
                 if (cols.ContainsKey("Uwagi"))
                     Uwagi = row.Field<string>(cols["Uwagi"]);
                 if (cols.ContainsKey("wartosc"))
-                    wartosc = row.Field<double>(cols["wartosc"]);
+                    wartosc = row.Field<double?>(cols["wartosc"]);
                 if (cols.ContainsKey("Wielkosc"))
                     Wielkosc = row.Field<string>(cols["Wielkosc"]);
             }
@@ -244,7 +244,7 @@ namespace DotBase
             public Row_Cennik[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Cennik._GET(_GET(min, max, allowException)); }
             public Row_Cennik GET_ONE() { return Row_Cennik._GET(_GET(1, 1))[0]; }
             public Row_Cennik GET_OPTIONAL() { var r = Row_Cennik._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
-            public Szablon_Cennik Cena(double value)
+            public Szablon_Cennik Cena(double? value)
             {
                 SetField("Cena", value, OleDbType.Double);
                 return this;
@@ -267,7 +267,7 @@ namespace DotBase
         }
         public class Row_Cennik : Wiersz
         {
-            public double Cena;
+            public double? Cena;
             public string Usluga;
             public Row_Cennik(DataRow row)
             {
@@ -280,7 +280,7 @@ namespace DotBase
             private void _init(DataRow row, Dictionary<string, int> cols)
             {
                 if (cols.ContainsKey("Cena"))
-                    Cena = row.Field<double>(cols["Cena"]);
+                    Cena = row.Field<double?>(cols["Cena"]);
                 if (cols.ContainsKey("Usluga"))
                     Usluga = row.Field<string>(cols["Usluga"]);
             }
@@ -502,7 +502,7 @@ namespace DotBase
                 AddField("Jednostka");
                 return this;
             }
-            public Szablon_Jednostki Przelicznik(float value)
+            public Szablon_Jednostki Przelicznik(float? value)
             {
                 SetField("Przelicznik", value, OleDbType.Single);
                 return this;
@@ -537,7 +537,7 @@ namespace DotBase
         {
             public int ID_jednostki;
             public string Jednostka;
-            public float Przelicznik;
+            public float? Przelicznik;
             public bool SI;
             public string Wielkosc_fizyczna;
             public Row_Jednostki(DataRow row)
@@ -555,7 +555,7 @@ namespace DotBase
                 if (cols.ContainsKey("Jednostka"))
                     Jednostka = row.Field<string>(cols["Jednostka"]);
                 if (cols.ContainsKey("Przelicznik"))
-                    Przelicznik = row.Field<float>(cols["Przelicznik"]);
+                    Przelicznik = row.Field<float?>(cols["Przelicznik"]);
                 if (cols.ContainsKey("SI"))
                     SI = row.Field<bool>(cols["SI"]);
                 if (cols.ContainsKey("Wielkosc_fizyczna"))
@@ -603,7 +603,7 @@ namespace DotBase
                 AddField("Ameryk");
                 return this;
             }
-            public Szablon_Karta_przyjecia Cena(double value)
+            public Szablon_Karta_przyjecia Cena(double? value)
             {
                 SetField("Cena", value, OleDbType.Double);
                 return this;
@@ -653,7 +653,7 @@ namespace DotBase
                 AddField("ID_karty");
                 return this;
             }
-            public Szablon_Karta_przyjecia ID_zlecenia(int value)
+            public Szablon_Karta_przyjecia ID_zlecenia(int? value)
             {
                 SetField("ID_zlecenia", value, OleDbType.Integer);
                 return this;
@@ -673,7 +673,7 @@ namespace DotBase
                 AddField("Moc_dawki");
                 return this;
             }
-            public Szablon_Karta_przyjecia Nr_pisma(int value)
+            public Szablon_Karta_przyjecia Nr_pisma(int? value)
             {
                 SetField("Nr_pisma", value, OleDbType.Integer);
                 return this;
@@ -693,7 +693,7 @@ namespace DotBase
                 AddField("Pluton");
                 return this;
             }
-            public Szablon_Karta_przyjecia Rok(int value)
+            public Szablon_Karta_przyjecia Rok(int? value)
             {
                 SetField("Rok", value, OleDbType.Integer);
                 return this;
@@ -703,7 +703,7 @@ namespace DotBase
                 AddField("Rok");
                 return this;
             }
-            public Szablon_Karta_przyjecia Rok_pisma(int value)
+            public Szablon_Karta_przyjecia Rok_pisma(int? value)
             {
                 SetField("Rok_pisma", value, OleDbType.Integer);
                 return this;
@@ -838,17 +838,17 @@ namespace DotBase
         {
             public string Akcesoria;
             public bool Ameryk;
-            public double Cena;
+            public double? Cena;
             public bool Chlor;
             public bool Dawka;
             public int ID_dozymetru;
             public int ID_karty;
-            public int ID_zlecenia;
+            public int? ID_zlecenia;
             public bool Moc_dawki;
-            public int Nr_pisma;
+            public int? Nr_pisma;
             public bool Pluton;
-            public int Rok;
-            public int Rok_pisma;
+            public int? Rok;
+            public int? Rok_pisma;
             public bool Sprawdzenie;
             public bool Stront_najsilniejszy;
             public bool Stront_silny;
@@ -876,7 +876,7 @@ namespace DotBase
                 if (cols.ContainsKey("Ameryk"))
                     Ameryk = row.Field<bool>(cols["Ameryk"]);
                 if (cols.ContainsKey("Cena"))
-                    Cena = row.Field<double>(cols["Cena"]);
+                    Cena = row.Field<double?>(cols["Cena"]);
                 if (cols.ContainsKey("Chlor"))
                     Chlor = row.Field<bool>(cols["Chlor"]);
                 if (cols.ContainsKey("Dawka"))
@@ -886,17 +886,17 @@ namespace DotBase
                 if (cols.ContainsKey("ID_karty"))
                     ID_karty = row.Field<int>(cols["ID_karty"]);
                 if (cols.ContainsKey("ID_zlecenia"))
-                    ID_zlecenia = row.Field<int>(cols["ID_zlecenia"]);
+                    ID_zlecenia = row.Field<int?>(cols["ID_zlecenia"]);
                 if (cols.ContainsKey("Moc_dawki"))
                     Moc_dawki = row.Field<bool>(cols["Moc_dawki"]);
                 if (cols.ContainsKey("Nr_pisma"))
-                    Nr_pisma = row.Field<int>(cols["Nr_pisma"]);
+                    Nr_pisma = row.Field<int?>(cols["Nr_pisma"]);
                 if (cols.ContainsKey("Pluton"))
                     Pluton = row.Field<bool>(cols["Pluton"]);
                 if (cols.ContainsKey("Rok"))
-                    Rok = row.Field<int>(cols["Rok"]);
+                    Rok = row.Field<int?>(cols["Rok"]);
                 if (cols.ContainsKey("Rok_pisma"))
-                    Rok_pisma = row.Field<int>(cols["Rok_pisma"]);
+                    Rok_pisma = row.Field<int?>(cols["Rok_pisma"]);
                 if (cols.ContainsKey("Sprawdzenie"))
                     Sprawdzenie = row.Field<bool>(cols["Sprawdzenie"]);
                 if (cols.ContainsKey("Stront_najsilniejszy"))
@@ -954,7 +954,7 @@ namespace DotBase
                 AddField("Dolaczyc");
                 return this;
             }
-            public Szablon_Pomiary_cez ID_wzorcowania(int value)
+            public Szablon_Pomiary_cez ID_wzorcowania(int? value)
             {
                 SetField("ID_wzorcowania", value, OleDbType.Integer);
                 return this;
@@ -964,7 +964,7 @@ namespace DotBase
                 AddField("ID_wzorcowania");
                 return this;
             }
-            public Szablon_Pomiary_cez ID_zrodla(short value)
+            public Szablon_Pomiary_cez ID_zrodla(short? value)
             {
                 SetField("ID_zrodla", value, OleDbType.SmallInt);
                 return this;
@@ -974,7 +974,7 @@ namespace DotBase
                 AddField("ID_zrodla");
                 return this;
             }
-            public Szablon_Pomiary_cez Odleglosc(double value)
+            public Szablon_Pomiary_cez Odleglosc(double? value)
             {
                 SetField("Odleglosc", value, OleDbType.Double);
                 return this;
@@ -984,7 +984,7 @@ namespace DotBase
                 AddField("Odleglosc");
                 return this;
             }
-            public Szablon_Pomiary_cez Wahanie(double value)
+            public Szablon_Pomiary_cez Wahanie(double? value)
             {
                 SetField("Wahanie", value, OleDbType.Double);
                 return this;
@@ -994,7 +994,7 @@ namespace DotBase
                 AddField("Wahanie");
                 return this;
             }
-            public Szablon_Pomiary_cez Wskazanie(double value)
+            public Szablon_Pomiary_cez Wskazanie(double? value)
             {
                 SetField("Wskazanie", value, OleDbType.Double);
                 return this;
@@ -1018,11 +1018,11 @@ namespace DotBase
         public class Row_Pomiary_cez : Wiersz
         {
             public bool Dolaczyc;
-            public int ID_wzorcowania;
-            public short ID_zrodla;
-            public double Odleglosc;
-            public double Wahanie;
-            public double Wskazanie;
+            public int? ID_wzorcowania;
+            public short? ID_zrodla;
+            public double? Odleglosc;
+            public double? Wahanie;
+            public double? Wskazanie;
             public string Zakres;
             public Row_Pomiary_cez(DataRow row)
             {
@@ -1037,15 +1037,15 @@ namespace DotBase
                 if (cols.ContainsKey("Dolaczyc"))
                     Dolaczyc = row.Field<bool>(cols["Dolaczyc"]);
                 if (cols.ContainsKey("ID_wzorcowania"))
-                    ID_wzorcowania = row.Field<int>(cols["ID_wzorcowania"]);
+                    ID_wzorcowania = row.Field<int?>(cols["ID_wzorcowania"]);
                 if (cols.ContainsKey("ID_zrodla"))
-                    ID_zrodla = row.Field<short>(cols["ID_zrodla"]);
+                    ID_zrodla = row.Field<short?>(cols["ID_zrodla"]);
                 if (cols.ContainsKey("Odleglosc"))
-                    Odleglosc = row.Field<double>(cols["Odleglosc"]);
+                    Odleglosc = row.Field<double?>(cols["Odleglosc"]);
                 if (cols.ContainsKey("Wahanie"))
-                    Wahanie = row.Field<double>(cols["Wahanie"]);
+                    Wahanie = row.Field<double?>(cols["Wahanie"]);
                 if (cols.ContainsKey("Wskazanie"))
-                    Wskazanie = row.Field<double>(cols["Wskazanie"]);
+                    Wskazanie = row.Field<double?>(cols["Wskazanie"]);
                 if (cols.ContainsKey("Zakres"))
                     Zakres = row.Field<string>(cols["Zakres"]);
             }
@@ -1071,7 +1071,7 @@ namespace DotBase
             public Row_Pomiary_dawka[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Pomiary_dawka._GET(_GET(min, max, allowException)); }
             public Row_Pomiary_dawka GET_ONE() { return Row_Pomiary_dawka._GET(_GET(1, 1))[0]; }
             public Row_Pomiary_dawka GET_OPTIONAL() { var r = Row_Pomiary_dawka._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
-            public Szablon_Pomiary_dawka Czas(double value)
+            public Szablon_Pomiary_dawka Czas(double? value)
             {
                 SetField("Czas", value, OleDbType.Double);
                 return this;
@@ -1091,7 +1091,7 @@ namespace DotBase
                 AddField("Dolaczyc");
                 return this;
             }
-            public Szablon_Pomiary_dawka ID_wzorcowania(int value)
+            public Szablon_Pomiary_dawka ID_wzorcowania(int? value)
             {
                 SetField("ID_wzorcowania", value, OleDbType.Integer);
                 return this;
@@ -1101,7 +1101,7 @@ namespace DotBase
                 AddField("ID_wzorcowania");
                 return this;
             }
-            public Szablon_Pomiary_dawka Wartosc_wzorcowa(double value)
+            public Szablon_Pomiary_dawka Wartosc_wzorcowa(double? value)
             {
                 SetField("Wartosc_wzorcowa", value, OleDbType.Double);
                 return this;
@@ -1111,7 +1111,7 @@ namespace DotBase
                 AddField("Wartosc_wzorcowa");
                 return this;
             }
-            public Szablon_Pomiary_dawka Wskazanie(double value)
+            public Szablon_Pomiary_dawka Wskazanie(double? value)
             {
                 SetField("Wskazanie", value, OleDbType.Double);
                 return this;
@@ -1124,11 +1124,11 @@ namespace DotBase
         }
         public class Row_Pomiary_dawka : Wiersz
         {
-            public double Czas;
+            public double? Czas;
             public bool Dolaczyc;
-            public int ID_wzorcowania;
-            public double Wartosc_wzorcowa;
-            public double Wskazanie;
+            public int? ID_wzorcowania;
+            public double? Wartosc_wzorcowa;
+            public double? Wskazanie;
             public Row_Pomiary_dawka(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -1140,15 +1140,15 @@ namespace DotBase
             private void _init(DataRow row, Dictionary<string, int> cols)
             {
                 if (cols.ContainsKey("Czas"))
-                    Czas = row.Field<double>(cols["Czas"]);
+                    Czas = row.Field<double?>(cols["Czas"]);
                 if (cols.ContainsKey("Dolaczyc"))
                     Dolaczyc = row.Field<bool>(cols["Dolaczyc"]);
                 if (cols.ContainsKey("ID_wzorcowania"))
-                    ID_wzorcowania = row.Field<int>(cols["ID_wzorcowania"]);
+                    ID_wzorcowania = row.Field<int?>(cols["ID_wzorcowania"]);
                 if (cols.ContainsKey("Wartosc_wzorcowa"))
-                    Wartosc_wzorcowa = row.Field<double>(cols["Wartosc_wzorcowa"]);
+                    Wartosc_wzorcowa = row.Field<double?>(cols["Wartosc_wzorcowa"]);
                 if (cols.ContainsKey("Wskazanie"))
-                    Wskazanie = row.Field<double>(cols["Wskazanie"]);
+                    Wskazanie = row.Field<double?>(cols["Wskazanie"]);
             }
             internal static Row_Pomiary_dawka[] _GET(DataTable dane)
             {
@@ -1182,7 +1182,7 @@ namespace DotBase
                 AddField("ID_pomiaru");
                 return this;
             }
-            public Szablon_Pomiary_powierzchniowe ID_wzorcowania(int value)
+            public Szablon_Pomiary_powierzchniowe ID_wzorcowania(int? value)
             {
                 SetField("ID_wzorcowania", value, OleDbType.Integer);
                 return this;
@@ -1192,7 +1192,7 @@ namespace DotBase
                 AddField("ID_wzorcowania");
                 return this;
             }
-            public Szablon_Pomiary_powierzchniowe Pomiar(double value)
+            public Szablon_Pomiary_powierzchniowe Pomiar(double? value)
             {
                 SetField("Pomiar", value, OleDbType.Double);
                 return this;
@@ -1202,7 +1202,7 @@ namespace DotBase
                 AddField("Pomiar");
                 return this;
             }
-            public Szablon_Pomiary_powierzchniowe Tlo(double value)
+            public Szablon_Pomiary_powierzchniowe Tlo(double? value)
             {
                 SetField("Tlo", value, OleDbType.Double);
                 return this;
@@ -1216,9 +1216,9 @@ namespace DotBase
         public class Row_Pomiary_powierzchniowe : Wiersz
         {
             public int ID_pomiaru;
-            public int ID_wzorcowania;
-            public double Pomiar;
-            public double Tlo;
+            public int? ID_wzorcowania;
+            public double? Pomiar;
+            public double? Tlo;
             public Row_Pomiary_powierzchniowe(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -1232,11 +1232,11 @@ namespace DotBase
                 if (cols.ContainsKey("ID_pomiaru"))
                     ID_pomiaru = row.Field<int>(cols["ID_pomiaru"]);
                 if (cols.ContainsKey("ID_wzorcowania"))
-                    ID_wzorcowania = row.Field<int>(cols["ID_wzorcowania"]);
+                    ID_wzorcowania = row.Field<int?>(cols["ID_wzorcowania"]);
                 if (cols.ContainsKey("Pomiar"))
-                    Pomiar = row.Field<double>(cols["Pomiar"]);
+                    Pomiar = row.Field<double?>(cols["Pomiar"]);
                 if (cols.ContainsKey("Tlo"))
-                    Tlo = row.Field<double>(cols["Tlo"]);
+                    Tlo = row.Field<double?>(cols["Tlo"]);
             }
             internal static Row_Pomiary_powierzchniowe[] _GET(DataTable dane)
             {
@@ -1260,7 +1260,7 @@ namespace DotBase
             public Row_Pomiary_wzorcowe[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Pomiary_wzorcowe._GET(_GET(min, max, allowException)); }
             public Row_Pomiary_wzorcowe GET_ONE() { return Row_Pomiary_wzorcowe._GET(_GET(1, 1))[0]; }
             public Row_Pomiary_wzorcowe GET_OPTIONAL() { var r = Row_Pomiary_wzorcowe._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
-            public Szablon_Pomiary_wzorcowe ID_protokolu(short value)
+            public Szablon_Pomiary_wzorcowe ID_protokolu(short? value)
             {
                 SetField("ID_protokolu", value, OleDbType.SmallInt);
                 return this;
@@ -1270,7 +1270,7 @@ namespace DotBase
                 AddField("ID_protokolu");
                 return this;
             }
-            public Szablon_Pomiary_wzorcowe ID_zrodla(short value)
+            public Szablon_Pomiary_wzorcowe ID_zrodla(short? value)
             {
                 SetField("ID_zrodla", value, OleDbType.SmallInt);
                 return this;
@@ -1280,7 +1280,7 @@ namespace DotBase
                 AddField("ID_zrodla");
                 return this;
             }
-            public Szablon_Pomiary_wzorcowe Moc_kermy(double value)
+            public Szablon_Pomiary_wzorcowe Moc_kermy(double? value)
             {
                 SetField("Moc_kermy", value, OleDbType.Double);
                 return this;
@@ -1290,7 +1290,7 @@ namespace DotBase
                 AddField("Moc_kermy");
                 return this;
             }
-            public Szablon_Pomiary_wzorcowe Niepewnosc(double value)
+            public Szablon_Pomiary_wzorcowe Niepewnosc(double? value)
             {
                 SetField("Niepewnosc", value, OleDbType.Double);
                 return this;
@@ -1300,7 +1300,7 @@ namespace DotBase
                 AddField("Niepewnosc");
                 return this;
             }
-            public Szablon_Pomiary_wzorcowe Odleglosc(double value)
+            public Szablon_Pomiary_wzorcowe Odleglosc(double? value)
             {
                 SetField("Odleglosc", value, OleDbType.Double);
                 return this;
@@ -1313,11 +1313,11 @@ namespace DotBase
         }
         public class Row_Pomiary_wzorcowe : Wiersz
         {
-            public short ID_protokolu;
-            public short ID_zrodla;
-            public double Moc_kermy;
-            public double Niepewnosc;
-            public double Odleglosc;
+            public short? ID_protokolu;
+            public short? ID_zrodla;
+            public double? Moc_kermy;
+            public double? Niepewnosc;
+            public double? Odleglosc;
             public Row_Pomiary_wzorcowe(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -1329,15 +1329,15 @@ namespace DotBase
             private void _init(DataRow row, Dictionary<string, int> cols)
             {
                 if (cols.ContainsKey("ID_protokolu"))
-                    ID_protokolu = row.Field<short>(cols["ID_protokolu"]);
+                    ID_protokolu = row.Field<short?>(cols["ID_protokolu"]);
                 if (cols.ContainsKey("ID_zrodla"))
-                    ID_zrodla = row.Field<short>(cols["ID_zrodla"]);
+                    ID_zrodla = row.Field<short?>(cols["ID_zrodla"]);
                 if (cols.ContainsKey("Moc_kermy"))
-                    Moc_kermy = row.Field<double>(cols["Moc_kermy"]);
+                    Moc_kermy = row.Field<double?>(cols["Moc_kermy"]);
                 if (cols.ContainsKey("Niepewnosc"))
-                    Niepewnosc = row.Field<double>(cols["Niepewnosc"]);
+                    Niepewnosc = row.Field<double?>(cols["Niepewnosc"]);
                 if (cols.ContainsKey("Odleglosc"))
-                    Odleglosc = row.Field<double>(cols["Odleglosc"]);
+                    Odleglosc = row.Field<double?>(cols["Odleglosc"]);
             }
             internal static Row_Pomiary_wzorcowe[] _GET(DataTable dane)
             {
@@ -1361,7 +1361,7 @@ namespace DotBase
             public Row_Protokoly_kalibracji_lawy[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Protokoly_kalibracji_lawy._GET(_GET(min, max, allowException)); }
             public Row_Protokoly_kalibracji_lawy GET_ONE() { return Row_Protokoly_kalibracji_lawy._GET(_GET(1, 1))[0]; }
             public Row_Protokoly_kalibracji_lawy GET_OPTIONAL() { var r = Row_Protokoly_kalibracji_lawy._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
-            public Szablon_Protokoly_kalibracji_lawy Data_kalibracji(DateTime value)
+            public Szablon_Protokoly_kalibracji_lawy Data_kalibracji(DateTime? value)
             {
                 SetField("Data_kalibracji", value, OleDbType.Date);
                 return this;
@@ -1371,7 +1371,7 @@ namespace DotBase
                 AddField("Data_kalibracji");
                 return this;
             }
-            public Szablon_Protokoly_kalibracji_lawy ID_protokolu(short value)
+            public Szablon_Protokoly_kalibracji_lawy ID_protokolu(short? value)
             {
                 SetField("ID_protokolu", value, OleDbType.SmallInt);
                 return this;
@@ -1394,8 +1394,8 @@ namespace DotBase
         }
         public class Row_Protokoly_kalibracji_lawy : Wiersz
         {
-            public DateTime Data_kalibracji;
-            public short ID_protokolu;
+            public DateTime? Data_kalibracji;
+            public short? ID_protokolu;
             public string Nazwa;
             public Row_Protokoly_kalibracji_lawy(DataRow row)
             {
@@ -1408,9 +1408,9 @@ namespace DotBase
             private void _init(DataRow row, Dictionary<string, int> cols)
             {
                 if (cols.ContainsKey("Data_kalibracji"))
-                    Data_kalibracji = row.Field<DateTime>(cols["Data_kalibracji"]);
+                    Data_kalibracji = row.Field<DateTime?>(cols["Data_kalibracji"]);
                 if (cols.ContainsKey("ID_protokolu"))
-                    ID_protokolu = row.Field<short>(cols["ID_protokolu"]);
+                    ID_protokolu = row.Field<short?>(cols["ID_protokolu"]);
                 if (cols.ContainsKey("Nazwa"))
                     Nazwa = row.Field<string>(cols["Nazwa"]);
             }
@@ -1498,7 +1498,7 @@ namespace DotBase
             public Row_Sondy[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Sondy._GET(_GET(min, max, allowException)); }
             public Row_Sondy GET_ONE() { return Row_Sondy._GET(_GET(1, 1))[0]; }
             public Row_Sondy GET_OPTIONAL() { var r = Row_Sondy._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
-            public Szablon_Sondy ID_dozymetru(int value)
+            public Szablon_Sondy ID_dozymetru(int? value)
             {
                 SetField("ID_dozymetru", value, OleDbType.Integer);
                 return this;
@@ -1541,7 +1541,7 @@ namespace DotBase
         }
         public class Row_Sondy : Wiersz
         {
-            public int ID_dozymetru;
+            public int? ID_dozymetru;
             public int ID_sondy;
             public string Nr_fabryczny;
             public string Typ;
@@ -1556,7 +1556,7 @@ namespace DotBase
             private void _init(DataRow row, Dictionary<string, int> cols)
             {
                 if (cols.ContainsKey("ID_dozymetru"))
-                    ID_dozymetru = row.Field<int>(cols["ID_dozymetru"]);
+                    ID_dozymetru = row.Field<int?>(cols["ID_dozymetru"]);
                 if (cols.ContainsKey("ID_sondy"))
                     ID_sondy = row.Field<int>(cols["ID_sondy"]);
                 if (cols.ContainsKey("Nr_fabryczny"))
@@ -1606,7 +1606,7 @@ namespace DotBase
                 AddField("Uwagi");
                 return this;
             }
-            public Szablon_Stale Wartosc(double value)
+            public Szablon_Stale Wartosc(double? value)
             {
                 SetField("Wartosc", value, OleDbType.Double);
                 return this;
@@ -1621,7 +1621,7 @@ namespace DotBase
         {
             public string Nazwa;
             public string Uwagi;
-            public double Wartosc;
+            public double? Wartosc;
             public Row_Stale(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -1637,7 +1637,7 @@ namespace DotBase
                 if (cols.ContainsKey("Uwagi"))
                     Uwagi = row.Field<string>(cols["Uwagi"]);
                 if (cols.ContainsKey("Wartosc"))
-                    Wartosc = row.Field<double>(cols["Wartosc"]);
+                    Wartosc = row.Field<double?>(cols["Wartosc"]);
             }
             internal static Row_Stale[] _GET(DataTable dane)
             {
@@ -1671,7 +1671,7 @@ namespace DotBase
                 AddField("Autoryzowal");
                 return this;
             }
-            public Szablon_Swiadectwo Data_wykonania(DateTime value)
+            public Szablon_Swiadectwo Data_wykonania(DateTime? value)
             {
                 SetField("Data_wykonania", value, OleDbType.Date);
                 return this;
@@ -1681,7 +1681,7 @@ namespace DotBase
                 AddField("Data_wykonania");
                 return this;
             }
-            public Szablon_Swiadectwo Data_wystawienia(DateTime value)
+            public Szablon_Swiadectwo Data_wystawienia(DateTime? value)
             {
                 SetField("Data_wystawienia", value, OleDbType.Date);
                 return this;
@@ -1785,8 +1785,8 @@ namespace DotBase
         public class Row_Swiadectwo : Wiersz
         {
             public string Autoryzowal;
-            public DateTime Data_wykonania;
-            public DateTime Data_wystawienia;
+            public DateTime? Data_wykonania;
+            public DateTime? Data_wystawienia;
             public int Id_karty;
             public bool Poprawa;
             public string Uwaga;
@@ -1809,9 +1809,9 @@ namespace DotBase
                 if (cols.ContainsKey("Autoryzowal"))
                     Autoryzowal = row.Field<string>(cols["Autoryzowal"]);
                 if (cols.ContainsKey("Data_wykonania"))
-                    Data_wykonania = row.Field<DateTime>(cols["Data_wykonania"]);
+                    Data_wykonania = row.Field<DateTime?>(cols["Data_wykonania"]);
                 if (cols.ContainsKey("Data_wystawienia"))
-                    Data_wystawienia = row.Field<DateTime>(cols["Data_wystawienia"]);
+                    Data_wystawienia = row.Field<DateTime?>(cols["Data_wystawienia"]);
                 if (cols.ContainsKey("Id_karty"))
                     Id_karty = row.Field<int>(cols["Id_karty"]);
                 if (cols.ContainsKey("Poprawa"))
@@ -1853,7 +1853,7 @@ namespace DotBase
             public Row_Sygnalizacja[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Sygnalizacja._GET(_GET(min, max, allowException)); }
             public Row_Sygnalizacja GET_ONE() { return Row_Sygnalizacja._GET(_GET(1, 1))[0]; }
             public Row_Sygnalizacja GET_OPTIONAL() { var r = Row_Sygnalizacja._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
-            public Szablon_Sygnalizacja ID_wzorcowania(int value)
+            public Szablon_Sygnalizacja ID_wzorcowania(int? value)
             {
                 SetField("ID_wzorcowania", value, OleDbType.Integer);
                 return this;
@@ -1863,7 +1863,7 @@ namespace DotBase
                 AddField("ID_wzorcowania");
                 return this;
             }
-            public Szablon_Sygnalizacja Niepewnosc(double value)
+            public Szablon_Sygnalizacja Niepewnosc(double? value)
             {
                 SetField("Niepewnosc", value, OleDbType.Double);
                 return this;
@@ -1883,7 +1883,7 @@ namespace DotBase
                 AddField("Niepewnosc_Wspolczynnika");
                 return this;
             }
-            public Szablon_Sygnalizacja odleglosc1(double value)
+            public Szablon_Sygnalizacja odleglosc1(double? value)
             {
                 SetField("odleglosc1", value, OleDbType.Double);
                 return this;
@@ -1893,7 +1893,7 @@ namespace DotBase
                 AddField("odleglosc1");
                 return this;
             }
-            public Szablon_Sygnalizacja odleglosc2(double value)
+            public Szablon_Sygnalizacja odleglosc2(double? value)
             {
                 SetField("odleglosc2", value, OleDbType.Double);
                 return this;
@@ -1903,7 +1903,7 @@ namespace DotBase
                 AddField("odleglosc2");
                 return this;
             }
-            public Szablon_Sygnalizacja Prog(double value)
+            public Szablon_Sygnalizacja Prog(double? value)
             {
                 SetField("Prog", value, OleDbType.Double);
                 return this;
@@ -1923,7 +1923,7 @@ namespace DotBase
                 AddField("Uwagi");
                 return this;
             }
-            public Szablon_Sygnalizacja Wartosc_zmierzona(double value)
+            public Szablon_Sygnalizacja Wartosc_zmierzona(double? value)
             {
                 SetField("Wartosc_zmierzona", value, OleDbType.Double);
                 return this;
@@ -1943,7 +1943,7 @@ namespace DotBase
                 AddField("Wspolczynnik");
                 return this;
             }
-            public Szablon_Sygnalizacja zrodlo1(double value)
+            public Szablon_Sygnalizacja zrodlo1(double? value)
             {
                 SetField("zrodlo1", value, OleDbType.Double);
                 return this;
@@ -1953,7 +1953,7 @@ namespace DotBase
                 AddField("zrodlo1");
                 return this;
             }
-            public Szablon_Sygnalizacja zrodlo2(double value)
+            public Szablon_Sygnalizacja zrodlo2(double? value)
             {
                 SetField("zrodlo2", value, OleDbType.Double);
                 return this;
@@ -1966,17 +1966,17 @@ namespace DotBase
         }
         public class Row_Sygnalizacja : Wiersz
         {
-            public int ID_wzorcowania;
-            public double Niepewnosc;
+            public int? ID_wzorcowania;
+            public double? Niepewnosc;
             public double Niepewnosc_Wspolczynnika;
-            public double odleglosc1;
-            public double odleglosc2;
-            public double Prog;
+            public double? odleglosc1;
+            public double? odleglosc2;
+            public double? Prog;
             public string Uwagi;
-            public double Wartosc_zmierzona;
+            public double? Wartosc_zmierzona;
             public double Wspolczynnik;
-            public double zrodlo1;
-            public double zrodlo2;
+            public double? zrodlo1;
+            public double? zrodlo2;
             public Row_Sygnalizacja(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -1988,27 +1988,27 @@ namespace DotBase
             private void _init(DataRow row, Dictionary<string, int> cols)
             {
                 if (cols.ContainsKey("ID_wzorcowania"))
-                    ID_wzorcowania = row.Field<int>(cols["ID_wzorcowania"]);
+                    ID_wzorcowania = row.Field<int?>(cols["ID_wzorcowania"]);
                 if (cols.ContainsKey("Niepewnosc"))
-                    Niepewnosc = row.Field<double>(cols["Niepewnosc"]);
+                    Niepewnosc = row.Field<double?>(cols["Niepewnosc"]);
                 if (cols.ContainsKey("Niepewnosc_Wspolczynnika"))
                     Niepewnosc_Wspolczynnika = row.Field<double>(cols["Niepewnosc_Wspolczynnika"]);
                 if (cols.ContainsKey("odleglosc1"))
-                    odleglosc1 = row.Field<double>(cols["odleglosc1"]);
+                    odleglosc1 = row.Field<double?>(cols["odleglosc1"]);
                 if (cols.ContainsKey("odleglosc2"))
-                    odleglosc2 = row.Field<double>(cols["odleglosc2"]);
+                    odleglosc2 = row.Field<double?>(cols["odleglosc2"]);
                 if (cols.ContainsKey("Prog"))
-                    Prog = row.Field<double>(cols["Prog"]);
+                    Prog = row.Field<double?>(cols["Prog"]);
                 if (cols.ContainsKey("Uwagi"))
                     Uwagi = row.Field<string>(cols["Uwagi"]);
                 if (cols.ContainsKey("Wartosc_zmierzona"))
-                    Wartosc_zmierzona = row.Field<double>(cols["Wartosc_zmierzona"]);
+                    Wartosc_zmierzona = row.Field<double?>(cols["Wartosc_zmierzona"]);
                 if (cols.ContainsKey("Wspolczynnik"))
                     Wspolczynnik = row.Field<double>(cols["Wspolczynnik"]);
                 if (cols.ContainsKey("zrodlo1"))
-                    zrodlo1 = row.Field<double>(cols["zrodlo1"]);
+                    zrodlo1 = row.Field<double?>(cols["zrodlo1"]);
                 if (cols.ContainsKey("zrodlo2"))
-                    zrodlo2 = row.Field<double>(cols["zrodlo2"]);
+                    zrodlo2 = row.Field<double?>(cols["zrodlo2"]);
             }
             internal static Row_Sygnalizacja[] _GET(DataTable dane)
             {
@@ -2032,7 +2032,7 @@ namespace DotBase
             public Row_Sygnalizacja_dawka[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Sygnalizacja_dawka._GET(_GET(min, max, allowException)); }
             public Row_Sygnalizacja_dawka GET_ONE() { return Row_Sygnalizacja_dawka._GET(_GET(1, 1))[0]; }
             public Row_Sygnalizacja_dawka GET_OPTIONAL() { var r = Row_Sygnalizacja_dawka._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
-            public Szablon_Sygnalizacja_dawka Czas_zmierzony(double value)
+            public Szablon_Sygnalizacja_dawka Czas_zmierzony(double? value)
             {
                 SetField("Czas_zmierzony", value, OleDbType.Double);
                 return this;
@@ -2042,7 +2042,7 @@ namespace DotBase
                 AddField("Czas_zmierzony");
                 return this;
             }
-            public Szablon_Sygnalizacja_dawka ID_wzorcowania(int value)
+            public Szablon_Sygnalizacja_dawka ID_wzorcowania(int? value)
             {
                 SetField("ID_wzorcowania", value, OleDbType.Integer);
                 return this;
@@ -2052,7 +2052,7 @@ namespace DotBase
                 AddField("ID_wzorcowania");
                 return this;
             }
-            public Szablon_Sygnalizacja_dawka ID_zrodla(int value)
+            public Szablon_Sygnalizacja_dawka ID_zrodla(int? value)
             {
                 SetField("ID_zrodla", value, OleDbType.Integer);
                 return this;
@@ -2082,7 +2082,7 @@ namespace DotBase
                 AddField("Niepewnosc_wsp");
                 return this;
             }
-            public Szablon_Sygnalizacja_dawka Odleglosc(double value)
+            public Szablon_Sygnalizacja_dawka Odleglosc(double? value)
             {
                 SetField("Odleglosc", value, OleDbType.Double);
                 return this;
@@ -2092,7 +2092,7 @@ namespace DotBase
                 AddField("Odleglosc");
                 return this;
             }
-            public Szablon_Sygnalizacja_dawka Prog(double value)
+            public Szablon_Sygnalizacja_dawka Prog(double? value)
             {
                 SetField("Prog", value, OleDbType.Double);
                 return this;
@@ -2102,7 +2102,7 @@ namespace DotBase
                 AddField("Prog");
                 return this;
             }
-            public Szablon_Sygnalizacja_dawka Wartosc_wzorcowa(double value)
+            public Szablon_Sygnalizacja_dawka Wartosc_wzorcowa(double? value)
             {
                 SetField("Wartosc_wzorcowa", value, OleDbType.Double);
                 return this;
@@ -2112,7 +2112,7 @@ namespace DotBase
                 AddField("Wartosc_wzorcowa");
                 return this;
             }
-            public Szablon_Sygnalizacja_dawka Wartosc_zmierzona(double value)
+            public Szablon_Sygnalizacja_dawka Wartosc_zmierzona(double? value)
             {
                 SetField("Wartosc_zmierzona", value, OleDbType.Double);
                 return this;
@@ -2135,15 +2135,15 @@ namespace DotBase
         }
         public class Row_Sygnalizacja_dawka : Wiersz
         {
-            public double Czas_zmierzony;
-            public int ID_wzorcowania;
-            public int ID_zrodla;
+            public double? Czas_zmierzony;
+            public int? ID_wzorcowania;
+            public int? ID_zrodla;
             public double Niepewnosc;
             public double Niepewnosc_wsp;
-            public double Odleglosc;
-            public double Prog;
-            public double Wartosc_wzorcowa;
-            public double Wartosc_zmierzona;
+            public double? Odleglosc;
+            public double? Prog;
+            public double? Wartosc_wzorcowa;
+            public double? Wartosc_zmierzona;
             public double Wspolczynnik;
             public Row_Sygnalizacja_dawka(DataRow row)
             {
@@ -2156,23 +2156,23 @@ namespace DotBase
             private void _init(DataRow row, Dictionary<string, int> cols)
             {
                 if (cols.ContainsKey("Czas_zmierzony"))
-                    Czas_zmierzony = row.Field<double>(cols["Czas_zmierzony"]);
+                    Czas_zmierzony = row.Field<double?>(cols["Czas_zmierzony"]);
                 if (cols.ContainsKey("ID_wzorcowania"))
-                    ID_wzorcowania = row.Field<int>(cols["ID_wzorcowania"]);
+                    ID_wzorcowania = row.Field<int?>(cols["ID_wzorcowania"]);
                 if (cols.ContainsKey("ID_zrodla"))
-                    ID_zrodla = row.Field<int>(cols["ID_zrodla"]);
+                    ID_zrodla = row.Field<int?>(cols["ID_zrodla"]);
                 if (cols.ContainsKey("Niepewnosc"))
                     Niepewnosc = row.Field<double>(cols["Niepewnosc"]);
                 if (cols.ContainsKey("Niepewnosc_wsp"))
                     Niepewnosc_wsp = row.Field<double>(cols["Niepewnosc_wsp"]);
                 if (cols.ContainsKey("Odleglosc"))
-                    Odleglosc = row.Field<double>(cols["Odleglosc"]);
+                    Odleglosc = row.Field<double?>(cols["Odleglosc"]);
                 if (cols.ContainsKey("Prog"))
-                    Prog = row.Field<double>(cols["Prog"]);
+                    Prog = row.Field<double?>(cols["Prog"]);
                 if (cols.ContainsKey("Wartosc_wzorcowa"))
-                    Wartosc_wzorcowa = row.Field<double>(cols["Wartosc_wzorcowa"]);
+                    Wartosc_wzorcowa = row.Field<double?>(cols["Wartosc_wzorcowa"]);
                 if (cols.ContainsKey("Wartosc_zmierzona"))
-                    Wartosc_zmierzona = row.Field<double>(cols["Wartosc_zmierzona"]);
+                    Wartosc_zmierzona = row.Field<double?>(cols["Wartosc_zmierzona"]);
                 if (cols.ContainsKey("Wspolczynnik"))
                     Wspolczynnik = row.Field<double>(cols["Wspolczynnik"]);
             }
@@ -2198,7 +2198,7 @@ namespace DotBase
             public Row_Wyniki_dawka[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Wyniki_dawka._GET(_GET(min, max, allowException)); }
             public Row_Wyniki_dawka GET_ONE() { return Row_Wyniki_dawka._GET(_GET(1, 1))[0]; }
             public Row_Wyniki_dawka GET_OPTIONAL() { var r = Row_Wyniki_dawka._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
-            public Szablon_Wyniki_dawka ID_wzorcowania(int value)
+            public Szablon_Wyniki_dawka ID_wzorcowania(int? value)
             {
                 SetField("ID_wzorcowania", value, OleDbType.Integer);
                 return this;
@@ -2208,7 +2208,7 @@ namespace DotBase
                 AddField("ID_wzorcowania");
                 return this;
             }
-            public Szablon_Wyniki_dawka ID_zrodla(int value)
+            public Szablon_Wyniki_dawka ID_zrodla(int? value)
             {
                 SetField("ID_zrodla", value, OleDbType.Integer);
                 return this;
@@ -2218,7 +2218,7 @@ namespace DotBase
                 AddField("ID_zrodla");
                 return this;
             }
-            public Szablon_Wyniki_dawka Niepewnosc(double value)
+            public Szablon_Wyniki_dawka Niepewnosc(double? value)
             {
                 SetField("Niepewnosc", value, OleDbType.Double);
                 return this;
@@ -2228,7 +2228,7 @@ namespace DotBase
                 AddField("Niepewnosc");
                 return this;
             }
-            public Szablon_Wyniki_dawka Odleglosc(double value)
+            public Szablon_Wyniki_dawka Odleglosc(double? value)
             {
                 SetField("Odleglosc", value, OleDbType.Double);
                 return this;
@@ -2238,7 +2238,7 @@ namespace DotBase
                 AddField("Odleglosc");
                 return this;
             }
-            public Szablon_Wyniki_dawka Wielkosc_fizyczna(int value)
+            public Szablon_Wyniki_dawka Wielkosc_fizyczna(int? value)
             {
                 SetField("Wielkosc_fizyczna", value, OleDbType.Integer);
                 return this;
@@ -2248,7 +2248,7 @@ namespace DotBase
                 AddField("Wielkosc_fizyczna");
                 return this;
             }
-            public Szablon_Wyniki_dawka Wspolczynnik(double value)
+            public Szablon_Wyniki_dawka Wspolczynnik(double? value)
             {
                 SetField("Wspolczynnik", value, OleDbType.Double);
                 return this;
@@ -2258,7 +2258,7 @@ namespace DotBase
                 AddField("Wspolczynnik");
                 return this;
             }
-            public Szablon_Wyniki_dawka Zakres(double value)
+            public Szablon_Wyniki_dawka Zakres(double? value)
             {
                 SetField("Zakres", value, OleDbType.Double);
                 return this;
@@ -2271,13 +2271,13 @@ namespace DotBase
         }
         public class Row_Wyniki_dawka : Wiersz
         {
-            public int ID_wzorcowania;
-            public int ID_zrodla;
-            public double Niepewnosc;
-            public double Odleglosc;
-            public int Wielkosc_fizyczna;
-            public double Wspolczynnik;
-            public double Zakres;
+            public int? ID_wzorcowania;
+            public int? ID_zrodla;
+            public double? Niepewnosc;
+            public double? Odleglosc;
+            public int? Wielkosc_fizyczna;
+            public double? Wspolczynnik;
+            public double? Zakres;
             public Row_Wyniki_dawka(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -2289,19 +2289,19 @@ namespace DotBase
             private void _init(DataRow row, Dictionary<string, int> cols)
             {
                 if (cols.ContainsKey("ID_wzorcowania"))
-                    ID_wzorcowania = row.Field<int>(cols["ID_wzorcowania"]);
+                    ID_wzorcowania = row.Field<int?>(cols["ID_wzorcowania"]);
                 if (cols.ContainsKey("ID_zrodla"))
-                    ID_zrodla = row.Field<int>(cols["ID_zrodla"]);
+                    ID_zrodla = row.Field<int?>(cols["ID_zrodla"]);
                 if (cols.ContainsKey("Niepewnosc"))
-                    Niepewnosc = row.Field<double>(cols["Niepewnosc"]);
+                    Niepewnosc = row.Field<double?>(cols["Niepewnosc"]);
                 if (cols.ContainsKey("Odleglosc"))
-                    Odleglosc = row.Field<double>(cols["Odleglosc"]);
+                    Odleglosc = row.Field<double?>(cols["Odleglosc"]);
                 if (cols.ContainsKey("Wielkosc_fizyczna"))
-                    Wielkosc_fizyczna = row.Field<int>(cols["Wielkosc_fizyczna"]);
+                    Wielkosc_fizyczna = row.Field<int?>(cols["Wielkosc_fizyczna"]);
                 if (cols.ContainsKey("Wspolczynnik"))
-                    Wspolczynnik = row.Field<double>(cols["Wspolczynnik"]);
+                    Wspolczynnik = row.Field<double?>(cols["Wspolczynnik"]);
                 if (cols.ContainsKey("Zakres"))
-                    Zakres = row.Field<double>(cols["Zakres"]);
+                    Zakres = row.Field<double?>(cols["Zakres"]);
             }
             internal static Row_Wyniki_dawka[] _GET(DataTable dane)
             {
@@ -2325,7 +2325,7 @@ namespace DotBase
             public Row_wyniki_moc_dawki[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_wyniki_moc_dawki._GET(_GET(min, max, allowException)); }
             public Row_wyniki_moc_dawki GET_ONE() { return Row_wyniki_moc_dawki._GET(_GET(1, 1))[0]; }
             public Row_wyniki_moc_dawki GET_OPTIONAL() { var r = Row_wyniki_moc_dawki._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
-            public Szablon_wyniki_moc_dawki ID_wzorcowania(int value)
+            public Szablon_wyniki_moc_dawki ID_wzorcowania(int? value)
             {
                 SetField("ID_wzorcowania", value, OleDbType.Integer);
                 return this;
@@ -2335,7 +2335,7 @@ namespace DotBase
                 AddField("ID_wzorcowania");
                 return this;
             }
-            public Szablon_wyniki_moc_dawki Niepewnosc(double value)
+            public Szablon_wyniki_moc_dawki Niepewnosc(double? value)
             {
                 SetField("Niepewnosc", value, OleDbType.Double);
                 return this;
@@ -2345,7 +2345,7 @@ namespace DotBase
                 AddField("Niepewnosc");
                 return this;
             }
-            public Szablon_wyniki_moc_dawki Wspolczynnik(double value)
+            public Szablon_wyniki_moc_dawki Wspolczynnik(double? value)
             {
                 SetField("Wspolczynnik", value, OleDbType.Double);
                 return this;
@@ -2355,7 +2355,7 @@ namespace DotBase
                 AddField("Wspolczynnik");
                 return this;
             }
-            public Szablon_wyniki_moc_dawki ZAKRES(double value)
+            public Szablon_wyniki_moc_dawki ZAKRES(double? value)
             {
                 SetField("ZAKRES", value, OleDbType.Double);
                 return this;
@@ -2368,10 +2368,10 @@ namespace DotBase
         }
         public class Row_wyniki_moc_dawki : Wiersz
         {
-            public int ID_wzorcowania;
-            public double Niepewnosc;
-            public double Wspolczynnik;
-            public double ZAKRES;
+            public int? ID_wzorcowania;
+            public double? Niepewnosc;
+            public double? Wspolczynnik;
+            public double? ZAKRES;
             public Row_wyniki_moc_dawki(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -2383,13 +2383,13 @@ namespace DotBase
             private void _init(DataRow row, Dictionary<string, int> cols)
             {
                 if (cols.ContainsKey("ID_wzorcowania"))
-                    ID_wzorcowania = row.Field<int>(cols["ID_wzorcowania"]);
+                    ID_wzorcowania = row.Field<int?>(cols["ID_wzorcowania"]);
                 if (cols.ContainsKey("Niepewnosc"))
-                    Niepewnosc = row.Field<double>(cols["Niepewnosc"]);
+                    Niepewnosc = row.Field<double?>(cols["Niepewnosc"]);
                 if (cols.ContainsKey("Wspolczynnik"))
-                    Wspolczynnik = row.Field<double>(cols["Wspolczynnik"]);
+                    Wspolczynnik = row.Field<double?>(cols["Wspolczynnik"]);
                 if (cols.ContainsKey("ZAKRES"))
-                    ZAKRES = row.Field<double>(cols["ZAKRES"]);
+                    ZAKRES = row.Field<double?>(cols["ZAKRES"]);
             }
             internal static Row_wyniki_moc_dawki[] _GET(DataTable dane)
             {
@@ -2413,7 +2413,7 @@ namespace DotBase
             public Row_wzorcowanie_cezem[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_wzorcowanie_cezem._GET(_GET(min, max, allowException)); }
             public Row_wzorcowanie_cezem GET_ONE() { return Row_wzorcowanie_cezem._GET(_GET(1, 1))[0]; }
             public Row_wzorcowanie_cezem GET_OPTIONAL() { var r = Row_wzorcowanie_cezem._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
-            public Szablon_wzorcowanie_cezem Cisnienie(double value)
+            public Szablon_wzorcowanie_cezem Cisnienie(double? value)
             {
                 SetField("Cisnienie", value, OleDbType.Double);
                 return this;
@@ -2423,7 +2423,7 @@ namespace DotBase
                 AddField("Cisnienie");
                 return this;
             }
-            public Szablon_wzorcowanie_cezem Data_wzorcowania(DateTime value)
+            public Szablon_wzorcowanie_cezem Data_wzorcowania(DateTime? value)
             {
                 SetField("Data_wzorcowania", value, OleDbType.Date);
                 return this;
@@ -2443,7 +2443,7 @@ namespace DotBase
                 AddField("Dolacz");
                 return this;
             }
-            public Szablon_wzorcowanie_cezem ID_arkusza(short value)
+            public Szablon_wzorcowanie_cezem ID_arkusza(short? value)
             {
                 SetField("ID_arkusza", value, OleDbType.SmallInt);
                 return this;
@@ -2463,7 +2463,7 @@ namespace DotBase
                 AddField("ID_jednostki");
                 return this;
             }
-            public Szablon_wzorcowanie_cezem ID_karty(int value)
+            public Szablon_wzorcowanie_cezem ID_karty(int? value)
             {
                 SetField("ID_karty", value, OleDbType.Integer);
                 return this;
@@ -2473,7 +2473,7 @@ namespace DotBase
                 AddField("ID_karty");
                 return this;
             }
-            public Szablon_wzorcowanie_cezem ID_protokolu(short value)
+            public Szablon_wzorcowanie_cezem ID_protokolu(short? value)
             {
                 SetField("ID_protokolu", value, OleDbType.SmallInt);
                 return this;
@@ -2483,7 +2483,7 @@ namespace DotBase
                 AddField("ID_protokolu");
                 return this;
             }
-            public Szablon_wzorcowanie_cezem ID_sondy(int value)
+            public Szablon_wzorcowanie_cezem ID_sondy(int? value)
             {
                 SetField("ID_sondy", value, OleDbType.Integer);
                 return this;
@@ -2553,7 +2553,7 @@ namespace DotBase
                 AddField("Rodzaj_wzorcowania");
                 return this;
             }
-            public Szablon_wzorcowanie_cezem Temperatura(double value)
+            public Szablon_wzorcowanie_cezem Temperatura(double? value)
             {
                 SetField("Temperatura", value, OleDbType.Double);
                 return this;
@@ -2593,7 +2593,7 @@ namespace DotBase
                 AddField("Wielkosc_fizyczna");
                 return this;
             }
-            public Szablon_wzorcowanie_cezem wilgotnosc(double value)
+            public Szablon_wzorcowanie_cezem wilgotnosc(double? value)
             {
                 SetField("wilgotnosc", value, OleDbType.Double);
                 return this;
@@ -2606,25 +2606,25 @@ namespace DotBase
         }
         public class Row_wzorcowanie_cezem : Wiersz
         {
-            public double Cisnienie;
-            public DateTime Data_wzorcowania;
+            public double? Cisnienie;
+            public DateTime? Data_wzorcowania;
             public bool Dolacz;
-            public short ID_arkusza;
+            public short? ID_arkusza;
             public int ID_jednostki;
-            public int ID_karty;
-            public short ID_protokolu;
-            public int ID_sondy;
+            public int? ID_karty;
+            public short? ID_protokolu;
+            public int? ID_sondy;
             public int ID_wzorcowania;
             public string Inne_nastawy;
             public string Napiecie_zasilania_sondy;
             public string Osoba_sprawdzajaca;
             public string Osoba_wzorcujaca;
             public string Rodzaj_wzorcowania;
-            public double Temperatura;
+            public double? Temperatura;
             public string Tlo;
             public string Uwagi;
             public string Wielkosc_fizyczna;
-            public double wilgotnosc;
+            public double? wilgotnosc;
             public Row_wzorcowanie_cezem(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -2636,21 +2636,21 @@ namespace DotBase
             private void _init(DataRow row, Dictionary<string, int> cols)
             {
                 if (cols.ContainsKey("Cisnienie"))
-                    Cisnienie = row.Field<double>(cols["Cisnienie"]);
+                    Cisnienie = row.Field<double?>(cols["Cisnienie"]);
                 if (cols.ContainsKey("Data_wzorcowania"))
-                    Data_wzorcowania = row.Field<DateTime>(cols["Data_wzorcowania"]);
+                    Data_wzorcowania = row.Field<DateTime?>(cols["Data_wzorcowania"]);
                 if (cols.ContainsKey("Dolacz"))
                     Dolacz = row.Field<bool>(cols["Dolacz"]);
                 if (cols.ContainsKey("ID_arkusza"))
-                    ID_arkusza = row.Field<short>(cols["ID_arkusza"]);
+                    ID_arkusza = row.Field<short?>(cols["ID_arkusza"]);
                 if (cols.ContainsKey("ID_jednostki"))
                     ID_jednostki = row.Field<int>(cols["ID_jednostki"]);
                 if (cols.ContainsKey("ID_karty"))
-                    ID_karty = row.Field<int>(cols["ID_karty"]);
+                    ID_karty = row.Field<int?>(cols["ID_karty"]);
                 if (cols.ContainsKey("ID_protokolu"))
-                    ID_protokolu = row.Field<short>(cols["ID_protokolu"]);
+                    ID_protokolu = row.Field<short?>(cols["ID_protokolu"]);
                 if (cols.ContainsKey("ID_sondy"))
-                    ID_sondy = row.Field<int>(cols["ID_sondy"]);
+                    ID_sondy = row.Field<int?>(cols["ID_sondy"]);
                 if (cols.ContainsKey("ID_wzorcowania"))
                     ID_wzorcowania = row.Field<int>(cols["ID_wzorcowania"]);
                 if (cols.ContainsKey("Inne_nastawy"))
@@ -2664,7 +2664,7 @@ namespace DotBase
                 if (cols.ContainsKey("Rodzaj_wzorcowania"))
                     Rodzaj_wzorcowania = row.Field<string>(cols["Rodzaj_wzorcowania"]);
                 if (cols.ContainsKey("Temperatura"))
-                    Temperatura = row.Field<double>(cols["Temperatura"]);
+                    Temperatura = row.Field<double?>(cols["Temperatura"]);
                 if (cols.ContainsKey("Tlo"))
                     Tlo = row.Field<string>(cols["Tlo"]);
                 if (cols.ContainsKey("Uwagi"))
@@ -2672,7 +2672,7 @@ namespace DotBase
                 if (cols.ContainsKey("Wielkosc_fizyczna"))
                     Wielkosc_fizyczna = row.Field<string>(cols["Wielkosc_fizyczna"]);
                 if (cols.ContainsKey("wilgotnosc"))
-                    wilgotnosc = row.Field<double>(cols["wilgotnosc"]);
+                    wilgotnosc = row.Field<double?>(cols["wilgotnosc"]);
             }
             internal static Row_wzorcowanie_cezem[] _GET(DataTable dane)
             {
@@ -2696,7 +2696,7 @@ namespace DotBase
             public Row_Wzorcowanie_zrodlami_powierzchniowymi[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Wzorcowanie_zrodlami_powierzchniowymi._GET(_GET(min, max, allowException)); }
             public Row_Wzorcowanie_zrodlami_powierzchniowymi GET_ONE() { return Row_Wzorcowanie_zrodlami_powierzchniowymi._GET(_GET(1, 1))[0]; }
             public Row_Wzorcowanie_zrodlami_powierzchniowymi GET_OPTIONAL() { var r = Row_Wzorcowanie_zrodlami_powierzchniowymi._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
-            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Cisnienie(double value)
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Cisnienie(double? value)
             {
                 SetField("Cisnienie", value, OleDbType.Double);
                 return this;
@@ -2706,7 +2706,7 @@ namespace DotBase
                 AddField("Cisnienie");
                 return this;
             }
-            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Data_wzorcowania(DateTime value)
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Data_wzorcowania(DateTime? value)
             {
                 SetField("Data_wzorcowania", value, OleDbType.Date);
                 return this;
@@ -2726,7 +2726,7 @@ namespace DotBase
                 AddField("Dolacz");
                 return this;
             }
-            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ID_arkusza(int value)
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ID_arkusza(int? value)
             {
                 SetField("ID_arkusza", value, OleDbType.Integer);
                 return this;
@@ -2736,7 +2736,7 @@ namespace DotBase
                 AddField("ID_arkusza");
                 return this;
             }
-            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ID_jednostki(int value)
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ID_jednostki(int? value)
             {
                 SetField("ID_jednostki", value, OleDbType.Integer);
                 return this;
@@ -2746,7 +2746,7 @@ namespace DotBase
                 AddField("ID_jednostki");
                 return this;
             }
-            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ID_karty(int value)
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ID_karty(int? value)
             {
                 SetField("ID_karty", value, OleDbType.Integer);
                 return this;
@@ -2756,7 +2756,7 @@ namespace DotBase
                 AddField("ID_karty");
                 return this;
             }
-            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ID_sondy(int value)
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ID_sondy(int? value)
             {
                 SetField("ID_sondy", value, OleDbType.Integer);
                 return this;
@@ -2776,7 +2776,7 @@ namespace DotBase
                 AddField("ID_wzorcowania");
                 return this;
             }
-            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ID_zrodla(int value)
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ID_zrodla(int? value)
             {
                 SetField("ID_zrodla", value, OleDbType.Integer);
                 return this;
@@ -2796,7 +2796,7 @@ namespace DotBase
                 AddField("Inne_nastawy");
                 return this;
             }
-            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Mnoznik_korekcyjny(double value)
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Mnoznik_korekcyjny(double? value)
             {
                 SetField("Mnoznik_korekcyjny", value, OleDbType.Double);
                 return this;
@@ -2816,7 +2816,7 @@ namespace DotBase
                 AddField("Napiecie_zasilania_sondy");
                 return this;
             }
-            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Niepewnosc(double value)
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Niepewnosc(double? value)
             {
                 SetField("Niepewnosc", value, OleDbType.Double);
                 return this;
@@ -2826,7 +2826,7 @@ namespace DotBase
                 AddField("Niepewnosc");
                 return this;
             }
-            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Odleglosc_zrodlo_sonda(double value)
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Odleglosc_zrodlo_sonda(double? value)
             {
                 SetField("Odleglosc_zrodlo_sonda", value, OleDbType.Double);
                 return this;
@@ -2866,7 +2866,7 @@ namespace DotBase
                 AddField("Podstawka");
                 return this;
             }
-            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Temperatura(double value)
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Temperatura(double? value)
             {
                 SetField("Temperatura", value, OleDbType.Double);
                 return this;
@@ -2876,7 +2876,7 @@ namespace DotBase
                 AddField("Temperatura");
                 return this;
             }
-            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Tlo(double value)
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Tlo(double? value)
             {
                 SetField("Tlo", value, OleDbType.Double);
                 return this;
@@ -2896,7 +2896,7 @@ namespace DotBase
                 AddField("Uwagi");
                 return this;
             }
-            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Wilgotnosc(double value)
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Wilgotnosc(double? value)
             {
                 SetField("Wilgotnosc", value, OleDbType.Double);
                 return this;
@@ -2906,7 +2906,7 @@ namespace DotBase
                 AddField("Wilgotnosc");
                 return this;
             }
-            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi wspolczynnik(double value)
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi wspolczynnik(double? value)
             {
                 SetField("wspolczynnik", value, OleDbType.Double);
                 return this;
@@ -2929,28 +2929,28 @@ namespace DotBase
         }
         public class Row_Wzorcowanie_zrodlami_powierzchniowymi : Wiersz
         {
-            public double Cisnienie;
-            public DateTime Data_wzorcowania;
+            public double? Cisnienie;
+            public DateTime? Data_wzorcowania;
             public bool Dolacz;
-            public int ID_arkusza;
-            public int ID_jednostki;
-            public int ID_karty;
-            public int ID_sondy;
+            public int? ID_arkusza;
+            public int? ID_jednostki;
+            public int? ID_karty;
+            public int? ID_sondy;
             public int ID_wzorcowania;
-            public int ID_zrodla;
+            public int? ID_zrodla;
             public string Inne_nastawy;
-            public double Mnoznik_korekcyjny;
+            public double? Mnoznik_korekcyjny;
             public string Napiecie_zasilania_sondy;
-            public double Niepewnosc;
-            public double Odleglosc_zrodlo_sonda;
+            public double? Niepewnosc;
+            public double? Odleglosc_zrodlo_sonda;
             public string Osoba_sprawdzajaca;
             public string Osoba_wzorcujaca;
             public string Podstawka;
-            public double Temperatura;
-            public double Tlo;
+            public double? Temperatura;
+            public double? Tlo;
             public string Uwagi;
-            public double Wilgotnosc;
-            public double wspolczynnik;
+            public double? Wilgotnosc;
+            public double? wspolczynnik;
             public string Zakres;
             public Row_Wzorcowanie_zrodlami_powierzchniowymi(DataRow row)
             {
@@ -2963,33 +2963,33 @@ namespace DotBase
             private void _init(DataRow row, Dictionary<string, int> cols)
             {
                 if (cols.ContainsKey("Cisnienie"))
-                    Cisnienie = row.Field<double>(cols["Cisnienie"]);
+                    Cisnienie = row.Field<double?>(cols["Cisnienie"]);
                 if (cols.ContainsKey("Data_wzorcowania"))
-                    Data_wzorcowania = row.Field<DateTime>(cols["Data_wzorcowania"]);
+                    Data_wzorcowania = row.Field<DateTime?>(cols["Data_wzorcowania"]);
                 if (cols.ContainsKey("Dolacz"))
                     Dolacz = row.Field<bool>(cols["Dolacz"]);
                 if (cols.ContainsKey("ID_arkusza"))
-                    ID_arkusza = row.Field<int>(cols["ID_arkusza"]);
+                    ID_arkusza = row.Field<int?>(cols["ID_arkusza"]);
                 if (cols.ContainsKey("ID_jednostki"))
-                    ID_jednostki = row.Field<int>(cols["ID_jednostki"]);
+                    ID_jednostki = row.Field<int?>(cols["ID_jednostki"]);
                 if (cols.ContainsKey("ID_karty"))
-                    ID_karty = row.Field<int>(cols["ID_karty"]);
+                    ID_karty = row.Field<int?>(cols["ID_karty"]);
                 if (cols.ContainsKey("ID_sondy"))
-                    ID_sondy = row.Field<int>(cols["ID_sondy"]);
+                    ID_sondy = row.Field<int?>(cols["ID_sondy"]);
                 if (cols.ContainsKey("ID_wzorcowania"))
                     ID_wzorcowania = row.Field<int>(cols["ID_wzorcowania"]);
                 if (cols.ContainsKey("ID_zrodla"))
-                    ID_zrodla = row.Field<int>(cols["ID_zrodla"]);
+                    ID_zrodla = row.Field<int?>(cols["ID_zrodla"]);
                 if (cols.ContainsKey("Inne_nastawy"))
                     Inne_nastawy = row.Field<string>(cols["Inne_nastawy"]);
                 if (cols.ContainsKey("Mnoznik_korekcyjny"))
-                    Mnoznik_korekcyjny = row.Field<double>(cols["Mnoznik_korekcyjny"]);
+                    Mnoznik_korekcyjny = row.Field<double?>(cols["Mnoznik_korekcyjny"]);
                 if (cols.ContainsKey("Napiecie_zasilania_sondy"))
                     Napiecie_zasilania_sondy = row.Field<string>(cols["Napiecie_zasilania_sondy"]);
                 if (cols.ContainsKey("Niepewnosc"))
-                    Niepewnosc = row.Field<double>(cols["Niepewnosc"]);
+                    Niepewnosc = row.Field<double?>(cols["Niepewnosc"]);
                 if (cols.ContainsKey("Odleglosc_zrodlo_sonda"))
-                    Odleglosc_zrodlo_sonda = row.Field<double>(cols["Odleglosc_zrodlo_sonda"]);
+                    Odleglosc_zrodlo_sonda = row.Field<double?>(cols["Odleglosc_zrodlo_sonda"]);
                 if (cols.ContainsKey("Osoba_sprawdzajaca"))
                     Osoba_sprawdzajaca = row.Field<string>(cols["Osoba_sprawdzajaca"]);
                 if (cols.ContainsKey("Osoba_wzorcujaca"))
@@ -2997,15 +2997,15 @@ namespace DotBase
                 if (cols.ContainsKey("Podstawka"))
                     Podstawka = row.Field<string>(cols["Podstawka"]);
                 if (cols.ContainsKey("Temperatura"))
-                    Temperatura = row.Field<double>(cols["Temperatura"]);
+                    Temperatura = row.Field<double?>(cols["Temperatura"]);
                 if (cols.ContainsKey("Tlo"))
-                    Tlo = row.Field<double>(cols["Tlo"]);
+                    Tlo = row.Field<double?>(cols["Tlo"]);
                 if (cols.ContainsKey("Uwagi"))
                     Uwagi = row.Field<string>(cols["Uwagi"]);
                 if (cols.ContainsKey("Wilgotnosc"))
-                    Wilgotnosc = row.Field<double>(cols["Wilgotnosc"]);
+                    Wilgotnosc = row.Field<double?>(cols["Wilgotnosc"]);
                 if (cols.ContainsKey("wspolczynnik"))
-                    wspolczynnik = row.Field<double>(cols["wspolczynnik"]);
+                    wspolczynnik = row.Field<double?>(cols["wspolczynnik"]);
                 if (cols.ContainsKey("Zakres"))
                     Zakres = row.Field<string>(cols["Zakres"]);
             }
@@ -3041,7 +3041,7 @@ namespace DotBase
                 AddField("Adres_platnika");
                 return this;
             }
-            public Szablon_Zlecenia Data_przyjecia(DateTime value)
+            public Szablon_Zlecenia Data_przyjecia(DateTime? value)
             {
                 SetField("Data_przyjecia", value, OleDbType.Date);
                 return this;
@@ -3051,7 +3051,7 @@ namespace DotBase
                 AddField("Data_przyjecia");
                 return this;
             }
-            public Szablon_Zlecenia Data_zwrotu(DateTime value)
+            public Szablon_Zlecenia Data_zwrotu(DateTime? value)
             {
                 SetField("Data_zwrotu", value, OleDbType.Date);
                 return this;
@@ -3091,7 +3091,7 @@ namespace DotBase
                 AddField("Forma_zwrotu");
                 return this;
             }
-            public Szablon_Zlecenia ID_zlecenia(int value)
+            public Szablon_Zlecenia ID_zlecenia(int? value)
             {
                 SetField("ID_zlecenia", value, OleDbType.Integer);
                 return this;
@@ -3141,7 +3141,7 @@ namespace DotBase
                 AddField("Nr_zlecenia_klienta");
                 return this;
             }
-            public Szablon_Zlecenia Nr_zlecenia_rejestr(int value)
+            public Szablon_Zlecenia Nr_zlecenia_rejestr(int? value)
             {
                 SetField("Nr_zlecenia_rejestr", value, OleDbType.Integer);
                 return this;
@@ -3175,17 +3175,17 @@ namespace DotBase
         public class Row_Zlecenia : Wiersz
         {
             public string Adres_platnika;
-            public DateTime Data_przyjecia;
-            public DateTime Data_zwrotu;
+            public DateTime? Data_przyjecia;
+            public DateTime? Data_zwrotu;
             public bool Ekspres;
             public string Forma_przyjecia;
             public string Forma_zwrotu;
-            public int ID_zlecenia;
+            public int? ID_zlecenia;
             public int ID_zleceniodawcy;
             public string Nazwa_platnika;
             public string NIP_platnika;
             public string Nr_zlecenia_klienta;
-            public int Nr_zlecenia_rejestr;
+            public int? Nr_zlecenia_rejestr;
             public string Osoba_przyjmujaca;
             public string Uwagi;
             public Row_Zlecenia(DataRow row)
@@ -3201,9 +3201,9 @@ namespace DotBase
                 if (cols.ContainsKey("Adres_platnika"))
                     Adres_platnika = row.Field<string>(cols["Adres_platnika"]);
                 if (cols.ContainsKey("Data_przyjecia"))
-                    Data_przyjecia = row.Field<DateTime>(cols["Data_przyjecia"]);
+                    Data_przyjecia = row.Field<DateTime?>(cols["Data_przyjecia"]);
                 if (cols.ContainsKey("Data_zwrotu"))
-                    Data_zwrotu = row.Field<DateTime>(cols["Data_zwrotu"]);
+                    Data_zwrotu = row.Field<DateTime?>(cols["Data_zwrotu"]);
                 if (cols.ContainsKey("Ekspres"))
                     Ekspres = row.Field<bool>(cols["Ekspres"]);
                 if (cols.ContainsKey("Forma_przyjecia"))
@@ -3211,7 +3211,7 @@ namespace DotBase
                 if (cols.ContainsKey("Forma_zwrotu"))
                     Forma_zwrotu = row.Field<string>(cols["Forma_zwrotu"]);
                 if (cols.ContainsKey("ID_zlecenia"))
-                    ID_zlecenia = row.Field<int>(cols["ID_zlecenia"]);
+                    ID_zlecenia = row.Field<int?>(cols["ID_zlecenia"]);
                 if (cols.ContainsKey("ID_zleceniodawcy"))
                     ID_zleceniodawcy = row.Field<int>(cols["ID_zleceniodawcy"]);
                 if (cols.ContainsKey("Nazwa_platnika"))
@@ -3221,7 +3221,7 @@ namespace DotBase
                 if (cols.ContainsKey("Nr_zlecenia_klienta"))
                     Nr_zlecenia_klienta = row.Field<string>(cols["Nr_zlecenia_klienta"]);
                 if (cols.ContainsKey("Nr_zlecenia_rejestr"))
-                    Nr_zlecenia_rejestr = row.Field<int>(cols["Nr_zlecenia_rejestr"]);
+                    Nr_zlecenia_rejestr = row.Field<int?>(cols["Nr_zlecenia_rejestr"]);
                 if (cols.ContainsKey("Osoba_przyjmujaca"))
                     Osoba_przyjmujaca = row.Field<string>(cols["Osoba_przyjmujaca"]);
                 if (cols.ContainsKey("Uwagi"))
@@ -3428,7 +3428,7 @@ namespace DotBase
             public Row_zrodla_powierzchniowe[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_zrodla_powierzchniowe._GET(_GET(min, max, allowException)); }
             public Row_zrodla_powierzchniowe GET_ONE() { return Row_zrodla_powierzchniowe._GET(_GET(1, 1))[0]; }
             public Row_zrodla_powierzchniowe GET_OPTIONAL() { var r = Row_zrodla_powierzchniowe._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
-            public Szablon_zrodla_powierzchniowe Czas_polowicznego_rozpadu(float value)
+            public Szablon_zrodla_powierzchniowe Czas_polowicznego_rozpadu(float? value)
             {
                 SetField("Czas_polowicznego_rozpadu", value, OleDbType.Single);
                 return this;
@@ -3438,7 +3438,7 @@ namespace DotBase
                 AddField("Czas_polowicznego_rozpadu");
                 return this;
             }
-            public Szablon_zrodla_powierzchniowe Czas_polowicznego_rozpadu_dni(float value)
+            public Szablon_zrodla_powierzchniowe Czas_polowicznego_rozpadu_dni(float? value)
             {
                 SetField("Czas_polowicznego_rozpadu_dni", value, OleDbType.Single);
                 return this;
@@ -3468,7 +3468,7 @@ namespace DotBase
                 AddField("Nazwa");
                 return this;
             }
-            public Szablon_zrodla_powierzchniowe Niepewnosc(float value)
+            public Szablon_zrodla_powierzchniowe Niepewnosc(float? value)
             {
                 SetField("Niepewnosc", value, OleDbType.Single);
                 return this;
@@ -3478,7 +3478,7 @@ namespace DotBase
                 AddField("Niepewnosc");
                 return this;
             }
-            public Szablon_zrodla_powierzchniowe Numer(int value)
+            public Szablon_zrodla_powierzchniowe Numer(int? value)
             {
                 SetField("Numer", value, OleDbType.Integer);
                 return this;
@@ -3491,12 +3491,12 @@ namespace DotBase
         }
         public class Row_zrodla_powierzchniowe : Wiersz
         {
-            public float Czas_polowicznego_rozpadu;
-            public float Czas_polowicznego_rozpadu_dni;
+            public float? Czas_polowicznego_rozpadu;
+            public float? Czas_polowicznego_rozpadu_dni;
             public int Id_zrodla;
             public string Nazwa;
-            public float Niepewnosc;
-            public int Numer;
+            public float? Niepewnosc;
+            public int? Numer;
             public Row_zrodla_powierzchniowe(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -3508,17 +3508,17 @@ namespace DotBase
             private void _init(DataRow row, Dictionary<string, int> cols)
             {
                 if (cols.ContainsKey("Czas_polowicznego_rozpadu"))
-                    Czas_polowicznego_rozpadu = row.Field<float>(cols["Czas_polowicznego_rozpadu"]);
+                    Czas_polowicznego_rozpadu = row.Field<float?>(cols["Czas_polowicznego_rozpadu"]);
                 if (cols.ContainsKey("Czas_polowicznego_rozpadu_dni"))
-                    Czas_polowicznego_rozpadu_dni = row.Field<float>(cols["Czas_polowicznego_rozpadu_dni"]);
+                    Czas_polowicznego_rozpadu_dni = row.Field<float?>(cols["Czas_polowicznego_rozpadu_dni"]);
                 if (cols.ContainsKey("Id_zrodla"))
                     Id_zrodla = row.Field<int>(cols["Id_zrodla"]);
                 if (cols.ContainsKey("Nazwa"))
                     Nazwa = row.Field<string>(cols["Nazwa"]);
                 if (cols.ContainsKey("Niepewnosc"))
-                    Niepewnosc = row.Field<float>(cols["Niepewnosc"]);
+                    Niepewnosc = row.Field<float?>(cols["Niepewnosc"]);
                 if (cols.ContainsKey("Numer"))
-                    Numer = row.Field<int>(cols["Numer"]);
+                    Numer = row.Field<int?>(cols["Numer"]);
             }
             internal static Row_zrodla_powierzchniowe[] _GET(DataTable dane)
             {
