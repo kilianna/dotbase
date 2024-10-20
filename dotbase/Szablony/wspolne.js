@@ -48,3 +48,23 @@ function tekst(x, y) {
 function multiline(x) {
     return x.trim().split(/\r?\n/).map(v => escape(v)).join('<br/>');
 }
+
+function litera(x) {
+    const alfabet =
+        jezyk == 'PL' ? 'abcdefghijklmnoprstuwyz'
+        : 'abcdefghijklmnopqrstuvwxyz'
+    if (x < alfabet.length) {
+        return alfabet[x];
+    } else {
+        return alfabet[Math.floor(x / alfabet.length) - 1] + alfabet[x % alfabet.length];
+    }
+}
+
+function mikro(x) {
+    return x.replace(/u/g, 'μ');
+}
+
+function blad(x) {
+    console.log(`ERROR: ${x}`);
+    return `⚠ ⚠ 𝐄𝐑𝐑𝐎𝐑: ${x} ⚠ ⚠`;
+}
