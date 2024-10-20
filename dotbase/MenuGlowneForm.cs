@@ -112,30 +112,5 @@ namespace DotBase
             }
         }
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-            var dat = new Szablony.swiad_wzor();
-            dat.nr_karty = 99999999;
-            dat.jezyk = Jezyk.EN;
-            dat.Generate(this);
-        }
-
-        private void MenuGlowneForm_Shown(object sender, EventArgs e)
-        {
-            log("---------------------------- shown");
-        }
-
-        private void MenuGlowneForm_Load(object sender, EventArgs e)
-        {
-
-            log("---------------------------- Load");
-        }
-
-        private void MenuGlowneForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-
-            log("---------------------------- Closed");
-        }
-
     }
 }
