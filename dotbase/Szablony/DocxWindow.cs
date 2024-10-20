@@ -44,14 +44,14 @@ namespace DotBase.Szablony
             infoLabel.ForeColor = Color.Red;
         }
 
-        public void generate(IWin32Window owner, string templateName, object data, string outputFile)
+        public void generate(IWin32Window owner, string templateFile, object data, string outputFile)
         {
             this.owner = owner;
             this.outputFile = outputFile;
+            this.templateFile = templateFile;
             outputFileDir = Path.GetDirectoryName(outputFile);
             if (outputFileDir == "") outputFileDir = ".";
             outputFileWithoutExt = Path.GetFileNameWithoutExtension(outputFile);
-            templateFile = String.Format(@"{0}\Szablony\{1}.xml", N.getProgramDir(), templateName);
             tempFile = Path.GetTempPath() + Guid.NewGuid().ToString() + ".docx";
             log(String.Format("Szablon: {0}\nPlik tymczasowy: {1}\nWyjście: {2}\nGenerowanie...", templateFile, tempFile, outputFile));
             gen.generate(templateFile, data, tempFile);

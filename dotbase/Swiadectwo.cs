@@ -50,7 +50,7 @@ namespace DotBase
 
         class Swiadectwo : Wydruki
         {
-            Szablony.swiad_wzor szablon = new Szablony.swiad_wzor();
+            //Szablony.swiad_wzor szablon = new Szablony.swiad_wzor();
 
             StringBuilder _Tabela;
             StringBuilder _SzablonGlownyWzorcowania;
@@ -72,7 +72,7 @@ namespace DotBase
             public Swiadectwo(int nrKarty, DateTime dataWydania, DateTime dataWykonania, DateTime dataPrzyjecia, String sprawdzil, bool poprawa, string uwMD, string uwD, string uwS, string uwSMD, string uwSD, Jezyk jezykSwiadectwa) : base(jezykSwiadectwa)
             //********************************************************************************************
             {
-                szablon.nr_karty = nrKarty.ToString();
+                /*szablon.nr_karty = nrKarty.ToString();
                 szablon.data_wydania = dataWydania;
                 szablon.data_wykonania = dataWykonania;
                 szablon.data_przyjecia = dataPrzyjecia;
@@ -83,7 +83,7 @@ namespace DotBase
                 szablon.uwS = uwS;
                 szablon.uwSMD = uwSMD;
                 szablon.uwSD = uwSD;
-                szablon.jezyk = jezykSwiadectwa;
+                szablon.jezyk = jezykSwiadectwa;*/
                 m_data.setValue(SwiadectwoData.DataType.NR_KARTY, nrKarty.ToString());
                 m_data.setValue(SwiadectwoData.DataType.DATA_WYDANIA, formatujDate(dataWydania));
                 m_data.setValue(SwiadectwoData.DataType.ROK, dataWydania.Year.ToString());
@@ -1058,11 +1058,12 @@ namespace DotBase
                 {
                     return null;
                 }
-                return szablon;
+                return null;
             }
 
             public void pobierzDaneSzablonu2()
             {
+                /*
                 // ------------------------------ Dane Przyrządu ------------------------------
 
                 szablon.przyrzad = _BazaDanych.TworzTabeleDanych(
@@ -1108,7 +1109,7 @@ namespace DotBase
                 catch
                 {
                     szablon.jednostki = null;
-                }
+                }*/
 
 
             }
