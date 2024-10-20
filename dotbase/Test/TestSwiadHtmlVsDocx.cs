@@ -17,6 +17,7 @@ namespace DotBase.Test
 
         public void run()
         {
+            DebugOptions.stopTest = false;
             karty = baza.Karta_przyjecia
                 .SELECT().ID_karty()
                 .ORDER_BY().ID_karty(Order.DESC)
@@ -28,7 +29,12 @@ namespace DotBase.Test
             DebugOptions.messageBox = true;
             var menuForm = getForm<MenuGlowneForm>();
             press(field<Button>(menuForm, "button2"));
-            var lines = File.ReadAllLines(N.getProgramDir() + @"\..\wyniki\Swiadectwo\done.txt");
+            string[] lines = new string[0];
+            try
+            {
+                lines = File.ReadAllLines(N.getProgramDir() + @"\..\wyniki\Swiadectwo\done.txt");
+            }
+            catch { }
             foreach (var line in lines)
             {
                 int x;
@@ -123,7 +129,8 @@ namespace DotBase.Test
                                     doneIds.Add(karta.ID_karty);
                                     File.WriteAllText(N.getProgramDir() + @"\..\wyniki\Swiadectwo\done.txt", string.Join("\n", doneIds.ToArray()));
                                     index++;
-                                    wait(run2);
+                                    if (!DebugOptions.stopTest)
+                                        wait(run2);
                                 });
                             });
                         });

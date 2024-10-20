@@ -15,6 +15,7 @@ namespace DotBase
         const int WM_KEYUP = 0x0101;
         const int VK_F1 = 0x70;
         const int VK_F5 = 0x74;
+        const int VK_F12 = 0x7B;
 
         public bool PreFilterMessage(ref Message m)
         {
@@ -28,6 +29,9 @@ namespace DotBase
                         break;
                     case VK_F5:
                         DiagnosticsOutput();
+                        break;
+                    case VK_F12:
+                        DebugOptions.stopTest = true;
                         break;
                 }
             }

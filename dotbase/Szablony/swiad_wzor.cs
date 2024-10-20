@@ -190,7 +190,7 @@ namespace DotBase.Szablony
                     .SELECT().SI()
                     .WHERE().ID_jednostki(tabelaMD[0].ID_jednostki)
                     .GET_OPTIONAL();
-                if (jednostka != null && jednostka.SI)
+                if (jednostka != null && !jednostka.SI)
                     spojnoscPomiarowa = SpojnoscPomiarowa.gum;
             }
 

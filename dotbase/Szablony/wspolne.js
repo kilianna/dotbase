@@ -60,7 +60,13 @@ function tekst(x, y) {
 }
 
 function multiline(x) {
-    return x.trim().split(/\r?\n/).map(v => escape(v)).join('<br/>');
+    return x
+        .trim()
+        .replace(/&mu;/g, 'μ')
+        .replace(/&nbsp;/g, '\xA0')
+        .split(/\r?\n/)
+        .map(v => escape(v))
+        .join('<br/>');
 }
 
 function litera(x) {
