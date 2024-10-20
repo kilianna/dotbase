@@ -1,5 +1,5 @@
 {
-  "nr_karty": 19000,
+  "nr_karty": 18999,
   "data_wydania": {
     "tekst": {
       "EN": "18 September 2023",
@@ -9,9 +9,9 @@
     "miesiac": 9,
     "dzien": 18,
     "godzina": 20,
-    "minuta": 41,
-    "sekunda": 15,
-    "milisekunda": 152
+    "minuta": 43,
+    "sekunda": 48,
+    "milisekunda": 631
   },
   "data_wykonania": {
     "tekst": {
@@ -22,9 +22,9 @@
     "miesiac": 9,
     "dzien": 18,
     "godzina": 20,
-    "minuta": 41,
-    "sekunda": 15,
-    "milisekunda": 121
+    "minuta": 43,
+    "sekunda": 48,
+    "milisekunda": 615
   },
   "sprawdzil": "P. Bilski",
   "poprawa": false,
@@ -36,31 +36,31 @@
   "metoda": "wzor1",
   "spojnoscPomiarowa": "si",
   "warunkiMin": {
-    "cisnienie": 986,
-    "wilgotnosc": 53,
-    "temperatura": 21
+    "cisnienie": 545,
+    "wilgotnosc": 5,
+    "temperatura": 5
   },
   "warunkiMax": {
-    "cisnienie": 987.9,
-    "wilgotnosc": 58,
-    "temperatura": 21.1
+    "cisnienie": 977,
+    "wilgotnosc": 66.6,
+    "temperatura": 20.5
   },
   "przyrzad": {
-    "ID_dozymetru": 3659,
+    "ID_dozymetru": 4238,
     "Nazwa": "radiometr",
-    "Nr_fabryczny": "171720",
-    "Producent": "POLIMASTER",
+    "Nr_fabryczny": "01A0FDEB",
+    "Producent": "Mirion",
     "Rok_produkcji": "nie podano",
-    "Typ": "PM1610B-01"
+    "Typ": "DMC 3000 PRD"
   },
   "kartaPrzyjecia": {
     "Akcesoria": "",
     "Ameryk": false,
     "Cena": 0,
     "Chlor": false,
-    "Dawka": false,
-    "ID_dozymetru": 3659,
-    "ID_karty": 19000,
+    "Dawka": true,
+    "ID_dozymetru": 4238,
+    "ID_karty": 18999,
     "ID_zlecenia": 13264,
     "Moc_dawki": false,
     "Nr_pisma": 1,
@@ -71,11 +71,11 @@
     "Stront_najsilniejszy": false,
     "Stront_silny": false,
     "Stront_slaby": false,
-    "Syg_dawki": true,
+    "Syg_dawki": false,
     "Syg_mocy_dawki": true,
     "Test_na_skazenia": "brak skażeń",
     "Uszkodzony": false,
-    "Uwagi": "Numer poprzedniego świadectwa: 18831/2023",
+    "Uwagi": "Numer poprzedniego świadectwa: 18943/2023",
     "Wegiel_silny": false,
     "Wegiel_slaby": false,
     "Wykonano": false
@@ -136,7 +136,7 @@
   "wyniki": [
     {
       "wzorcowanie_cezem": {
-        "Cisnienie": 986,
+        "Cisnienie": 977,
         "Data_wzorcowania": {
           "tekst": {
             "EN": "18 September 2023",
@@ -152,71 +152,54 @@
         },
         "Dolacz": true,
         "ID_arkusza": 1,
-        "ID_jednostki": 15,
-        "ID_karty": 19000,
+        "ID_jednostki": 0,
+        "ID_karty": 18999,
         "ID_protokolu": 24,
-        "ID_sondy": 4230,
-        "ID_wzorcowania": 19716,
-        "Inne_nastawy": "Numer poprzedniego świadectwa 18831/2023",
+        "ID_sondy": 4877,
+        "ID_wzorcowania": 19715,
+        "Inne_nastawy": "nie dotyczy",
         "Napiecie_zasilania_sondy": "nie dotyczy",
         "Osoba_sprawdzajaca": "J. Drop",
         "Osoba_wzorcujaca": "A.Kilian",
-        "Rodzaj_wzorcowania": "sm",
-        "Temperatura": 21,
-        "Tlo": "0",
-        "Uwagi": "Brak",
+        "Rodzaj_wzorcowania": "d",
+        "Temperatura": 20.5,
+        "Tlo": "0.0",
+        "Uwagi": "Numer poprzedniego świadectwa 18943/2023",
         "Wielkosc_fizyczna": "nie dotyczy",
-        "wilgotnosc": 53
+        "wilgotnosc": 66.6
       },
       "wzorcowanie_zrodlami_powierzchniowymi": null,
       "sonda": {
-        "ID_dozymetru": 3659,
-        "ID_sondy": 4230,
+        "ID_dozymetru": 4238,
+        "ID_sondy": 4877,
         "Nr_fabryczny": "nie dotyczy",
         "Typ": "detektor własny"
       },
-      "jenostka": {
-        "ID_jednostki": 15,
-        "Jednostka": "uSv/h",
-        "Przelicznik": 0.826,
-        "SI": true,
-        "Wielkosc_fizyczna": "moc przestrzennego równoważnika dawki"
-      },
+      "jednostka": null,
       "tabela": [
         {
-          "prog": 10,
-          "wartosc_zmierzona": 10.41,
-          "niepewnosc": 0.16,
-          "wspolczynnik": 1.04,
-          "niepewnosc_wspolczynnika": 0.1
-        },
-        {
-          "prog": 100,
-          "wartosc_zmierzona": 95.38,
-          "niepewnosc": 1.88,
-          "wspolczynnik": 0.95,
-          "niepewnosc_wspolczynnika": 0.1
-        },
-        {
-          "prog": 200,
-          "wartosc_zmierzona": 198.98,
-          "niepewnosc": 5.11,
-          "wspolczynnik": 0.99,
-          "niepewnosc_wspolczynnika": 0.09
+          "prog": 0,
+          "wartosc_zmierzona": 0,
+          "wartosc_wzorcowa": 0,
+          "niepewnosc": 0.101,
+          "wspolczynnik": 0.951,
+          "niepewnosc_wspolczynnika": 0,
+          "zakres": 1000,
+          "wielkosc_fizyczna": 3
         }
       ]
     },
     {
       "wzorcowanie_cezem": {
-        "Cisnienie": 987.9,
+        "Cisnienie": 545,
         "Data_wzorcowania": {
           "tekst": {
-            "EN": "18 September 2023",
-            "PL": "18 września 2023"
+            "EN": "25 March 2024",
+            "PL": "25 marca 2024"
           },
-          "rok": 2023,
-          "miesiac": 9,
-          "dzien": 18,
+          "rok": 2024,
+          "miesiac": 3,
+          "dzien": 25,
           "godzina": 0,
           "minuta": 0,
           "sekunda": 0,
@@ -225,29 +208,29 @@
         "Dolacz": true,
         "ID_arkusza": 2,
         "ID_jednostki": 15,
-        "ID_karty": 19000,
+        "ID_karty": 18999,
         "ID_protokolu": 24,
-        "ID_sondy": 4230,
-        "ID_wzorcowania": 19717,
-        "Inne_nastawy": "nie dotyczy",
+        "ID_sondy": 4877,
+        "ID_wzorcowania": 19721,
+        "Inne_nastawy": "Numer poprzedniego świadectwa 18943/2023.",
         "Napiecie_zasilania_sondy": "nie dotyczy",
-        "Osoba_sprawdzajaca": "J. Drop",
-        "Osoba_wzorcujaca": "A.Kilian",
-        "Rodzaj_wzorcowania": "sd",
-        "Temperatura": 21.1,
+        "Osoba_sprawdzajaca": "5",
+        "Osoba_wzorcujaca": "45",
+        "Rodzaj_wzorcowania": "sm",
+        "Temperatura": 5,
         "Tlo": "0",
-        "Uwagi": "Numer poprzedniego świadectwa 18831/2023",
+        "Uwagi": "Brak",
         "Wielkosc_fizyczna": "nie dotyczy",
-        "wilgotnosc": 58
+        "wilgotnosc": 5
       },
       "wzorcowanie_zrodlami_powierzchniowymi": null,
       "sonda": {
-        "ID_dozymetru": 3659,
-        "ID_sondy": 4230,
+        "ID_dozymetru": 4238,
+        "ID_sondy": 4877,
         "Nr_fabryczny": "nie dotyczy",
         "Typ": "detektor własny"
       },
-      "jenostka": {
+      "jednostka": {
         "ID_jednostki": 15,
         "Jednostka": "uSv/h",
         "Przelicznik": 0.826,

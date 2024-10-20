@@ -101,5 +101,11 @@ namespace DotBase.Szablony
             if (x == null) throw new ProcessingException(message);
             return x ?? default(double);
         }
+
+        protected static int Wymagany(int? x, string message)
+        {
+            if (x == null) throw new ProcessingException(message);
+            return x ?? default(int);
+        }
     }
 }

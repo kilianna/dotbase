@@ -43,9 +43,12 @@ namespace DotBase.Szablony
         {
             public double prog;
             public double wartosc_zmierzona;
+            public double wartosc_wzorcowa;
             public double niepewnosc;
             public double wspolczynnik;
             public double niepewnosc_wspolczynnika;
+            public double zakres;
+            public int wielkosc_fizyczna;
         }
 
         public class Wyniki
@@ -53,7 +56,7 @@ namespace DotBase.Szablony
             public Szablon.Row_wzorcowanie_cezem wzorcowanie_cezem;
             public Szablon.Row_Wzorcowanie_zrodlami_powierzchniowymi wzorcowanie_zrodlami_powierzchniowymi;
             public Szablon.Row_Sondy sonda;
-            public Szablon.Row_Jednostki jenostka;
+            public Szablon.Row_Jednostki jednostka;
             public List<Wynik> tabela = new List<Wynik>();
         }
 
@@ -212,45 +215,112 @@ namespace DotBase.Szablony
                 .WHERE().ID_sondy(row.ID_sondy ?? -1)
                 .GET_OPTIONAL();
 
-            wyn.jenostka = baza.Jednostki
+            wyn.jednostka = baza.Jednostki
                 .WHERE().ID_jednostki(row.ID_jednostki)
                 .GET_OPTIONAL();
 
-            if (row.Rodzaj_wzorcowania == "sm")
+            if (row.Rodzaj_wzorcowania == "d")
             {
-                IList<double> computedFactors = null;
-                IList<double> computedUncertainity = null;
-
-                if (!N.proceduraOd20230915(data_wykonania))
-                {
-                    computedFactors = SygnalizacjaMocyDawkiUtils.computeFactors(nr_karty.ToString());
-                    computedUncertainity = SygnalizacjaMocyDawkiUtils.computeUncertainity(nr_karty.ToString());
-                }
-
-                var tab = baza.Sygnalizacja
-                    .WHERE().ID_wzorcowania(row.ID_wzorcowania)
-                    .GET();
-                for (int i = 0; i < tab.Length; i++)
-                {
-                    var tabRow = tab[i];
-                    var w = new Wynik();
-                    w.prog = Wymagany(tabRow.Prog, "Prog jest NULL");
-                    w.wartosc_zmierzona = Wymagany(tabRow.Wartosc_zmierzona, "Wartosc_zmierzona jest NULL");
-                    w.niepewnosc = Wymagany(tabRow.Niepewnosc, "Niepewnosc jest NULL");
-                    if (computedFactors == null)
-                    {
-                        w.wspolczynnik = tabRow.Wspolczynnik;
-                        w.niepewnosc_wspolczynnika = tabRow.Niepewnosc_Wspolczynnika;
-                    }
-                    else
-                    {
-                        w.wspolczynnik = computedFactors[i];
-                        w.niepewnosc_wspolczynnika = computedUncertainity[i];
-                    }
-                    wyn.tabela.Add(w);
-                }
+                DodajTabeleD(row, wyn);
             }
+            else if (row.Rodzaj_wzorcowania == "sm")
+            {
+                DodajTabeleSM(row, wyn);
+            }
+            else if (row.Rodzaj_wzorcowania == "sd")
+            {
+                DodajTabeleSD(row, wyn);
+            }
+
             wyniki.Add(wyn);
+        }
+
+        private void DodajTabeleD(Szablon.Row_wzorcowanie_cezem row, Wyniki wyn)
+        {
+            var tab = baza.Wyniki_dawka
+                .WHERE().ID_wzorcowania(row.ID_wzorcowania)
+                .GET();
+            for (int i = 0; i < tab.Length; i++)
+            {
+                var tabRow = tab[i];
+                var w = new Wynik();
+                w.zakres = Wymagany(tabRow.Zakres, "Zakres w tabeli 'Dawka' jest wymagany");
+                w.wspolczynnik = Wymagany(tabRow.Wspolczynnik, "Wspolczynnik w tabeli 'Dawka' jest wymagany");
+                w.niepewnosc = Wymagany(tabRow.Niepewnosc, "Niepewnosc w tabeli 'Dawka' jest wymagana");
+                w.wielkosc_fizyczna = Wymagany(tabRow.Wielkosc_fizyczna, "Wielkosc_fizyczna w tabeli 'Dawka' jest wymagana");
+                wyn.tabela.Add(w);
+            }
+        }
+
+        private void DodajTabeleSM(Szablon.Row_wzorcowanie_cezem row, Wyniki wyn)
+        {
+            IList<double> computedFactors = null;
+            IList<double> computedUncertainity = null;
+
+            if (!N.proceduraOd20230915(data_wykonania))
+            {
+                computedFactors = SygnalizacjaMocyDawkiUtils.computeFactors(nr_karty.ToString());
+                computedUncertainity = SygnalizacjaMocyDawkiUtils.computeUncertainity(nr_karty.ToString());
+            }
+
+            var tab = baza.Sygnalizacja
+                .WHERE().ID_wzorcowania(row.ID_wzorcowania)
+                .GET();
+            for (int i = 0; i < tab.Length; i++)
+            {
+                var tabRow = tab[i];
+                var w = new Wynik();
+                w.prog = Wymagany(tabRow.Prog, "Prog jest NULL");
+                w.wartosc_zmierzona = Wymagany(tabRow.Wartosc_zmierzona, "Wartosc_zmierzona jest NULL");
+                w.niepewnosc = Wymagany(tabRow.Niepewnosc, "Niepewnosc jest NULL");
+                if (computedFactors == null)
+                {
+                    w.wspolczynnik = tabRow.Wspolczynnik;
+                    w.niepewnosc_wspolczynnika = tabRow.Niepewnosc_Wspolczynnika;
+                }
+                else
+                {
+                    w.wspolczynnik = computedFactors[i];
+                    w.niepewnosc_wspolczynnika = computedUncertainity[i];
+                }
+                wyn.tabela.Add(w);
+            }
+        }
+
+        private void DodajTabeleSD(Szablon.Row_wzorcowanie_cezem row, Wyniki wyn)
+        {
+            IList<double> computedFactors = null;
+            IList<double> computedUncertainity = null;
+
+            if (!N.proceduraOd20230915(data_wykonania))
+            {
+                computedFactors = SygnalizacjaDawkiUtils.computeFactors(nr_karty.ToString());
+                computedUncertainity = SygnalizacjaDawkiUtils.computeUncertainity(nr_karty.ToString());
+            }
+
+            var tab = baza.Sygnalizacja_dawka
+                .WHERE().ID_wzorcowania(row.ID_wzorcowania)
+                .GET();
+            for (int i = 0; i < tab.Length; i++)
+            {
+                var tabRow = tab[i];
+                var w = new Wynik();
+                w.prog = Wymagany(tabRow.Prog, "Prog jest NULL");
+                w.wartosc_wzorcowa = Wymagany(tabRow.Wartosc_wzorcowa, "Wartosc_wzorcowa jest NULL");
+                w.wartosc_zmierzona = Wymagany(tabRow.Wartosc_zmierzona, "Wartosc_zmierzona jest NULL");
+                w.niepewnosc = tabRow.Niepewnosc;
+                if (computedFactors == null)
+                {
+                    w.wspolczynnik = tabRow.Wspolczynnik;
+                    w.niepewnosc_wspolczynnika = tabRow.Niepewnosc_wsp;
+                }
+                else
+                {
+                    w.wspolczynnik = computedFactors[i];
+                    w.niepewnosc_wspolczynnika = computedUncertainity[i];
+                }
+                wyn.tabela.Add(w);
+            }
         }
     }
 }
