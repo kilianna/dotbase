@@ -63,13 +63,13 @@ namespace DotBase
                 bool istnieje = _Przyrzad.SprawdzCzyPrzyrzadIsnieje(Int32.Parse(textBox6.Text));
                 if(istnieje==false)
                 {
-                    MessageBox.Show(String.Format("Przyrząd o danym numerze: {0} - nie istnieje. Nie można więc dodać do niego sondy", textBox6.Text));
+                    MyMessageBox.Show(String.Format("Przyrząd o danym numerze: {0} - nie istnieje. Nie można więc dodać do niego sondy", textBox6.Text));
                     return;
                 }
             }
             catch (Exception)
             {
-                MessageBox.Show(String.Format("Przyrząd o danym numerze: {0} - nie istnieje. Nie można więc dodać do niego sondy", textBox6.Text));
+                MyMessageBox.Show(String.Format("Przyrząd o danym numerze: {0} - nie istnieje. Nie można więc dodać do niego sondy", textBox6.Text));
                 return;
             }
 
@@ -88,7 +88,7 @@ namespace DotBase
         {
             if (false == _Przyrzad.SprawdzCzyPrzyrzadNieIsnieje(textBox1.Text, textBox2.Text))
             {
-                MessageBox.Show("Podany przyrząd istnieje już w bazie.", "Uwaga");
+                MyMessageBox.Show("Podany przyrząd istnieje już w bazie.", "Uwaga");
                 return false;
             }
 
@@ -143,7 +143,7 @@ namespace DotBase
          /*   if (button1.Enabled != false || false == SprawdzMozliwoscZapisu(textBox1.Text, textBox2.Text))
             {
                 if( false == _bPrzyrzadIstnieje )
-                    MessageBox.Show("Proces dodawania nie został ukończony pomyślnie.", "Informacja");
+                    MyMessageBox.Show("Proces dodawania nie został ukończony pomyślnie.", "Informacja");
 
                 return;
             }
@@ -176,7 +176,7 @@ namespace DotBase
             }
             else
             {
-                MessageBox.Show("Nie istnieje przyrząd o mniejszym numerze.");
+                MyMessageBox.Show("Nie istnieje przyrząd o mniejszym numerze.");
             }
         }
 
@@ -202,7 +202,7 @@ namespace DotBase
             }
             else
             {
-                MessageBox.Show("Nie istnieje przyrząd o większym numerze.");
+                MyMessageBox.Show("Nie istnieje przyrząd o większym numerze.");
             }
         }
 
@@ -225,7 +225,7 @@ namespace DotBase
                     _TrybDodawania = false;
                 }
                 else
-                    MessageBox.Show("Przyrząd nie został dodany. Błędne dane lub część danych nie została podanych.", "Uwaga");
+                    MyMessageBox.Show("Przyrząd nie został dodany. Błędne dane lub część danych nie została podanych.", "Uwaga");
             }
             else
             {
@@ -251,7 +251,7 @@ namespace DotBase
             if (SprawdzPoprawnoscDanych())
                 _Przyrzad.NapiszDane(textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text);
             else
-                MessageBox.Show("Dane są niepoprawne", "Uwaga");
+                MyMessageBox.Show("Dane są niepoprawne", "Uwaga");
         }
 
         //*************************************************

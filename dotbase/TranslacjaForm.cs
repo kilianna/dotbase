@@ -89,7 +89,7 @@ namespace DotBase
             }
             if (zapamietajCheck.Checked)
             {
-                if (MessageBox.Show(this, message, "Tłumaczenie", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.No)
+                if (MyMessageBox.Show(this, message, "Tłumaczenie", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.No)
                 {
                     return;
                 }

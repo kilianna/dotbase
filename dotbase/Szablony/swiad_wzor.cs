@@ -149,6 +149,11 @@ namespace DotBase.Szablony
 
             var ogolemIlosc = tabelaMD.Length + tabelaD.Length + tabelaSM.Length + tabelaSD.Length + tabelaS.Length;
 
+            if (ogolemIlosc == 0)
+            {
+                throw new ProcessingException("Nie istnieją dane z których można by sporządzić świadectwo.");
+            }
+
             warunkiMin = new Warunki(999999);
             warunkiMax = new Warunki(-999999);
 

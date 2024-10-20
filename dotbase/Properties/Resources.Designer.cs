@@ -61,12 +61,39 @@ namespace DotBase.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 234234234234 2019-02-22
-        ///.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap error {
+            get {
+                object obj = ResourceManager.GetObject("error", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5cb15df57767a8e01b5be62113886f755a1a4ec9 2024-05-31 11:00:11 +0200 
+        /// dotbase/AdministracjaForm.cs                    |   8 +-
+        /// dotbase/BazaDanych.cs                           |   4 +-
+        /// dotbase/BudzetNiepewnosciForm.cs                |   6 +-
+        /// dotbase/DotBase.csproj                          |  20 ++
+        /// dotbase/HelpKeyFilter.cs                        |   2 +-
+        /// dotbase/KartaPrzyjeciaForm.cs                   |  12 +-
+        /// dotbase/LogowanieForm.cs                        |   4 +-
+        /// dotbase/MenuBiuroForm.cs             [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string GitVersion {
             get {
                 return ResourceManager.GetString("GitVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap info {
+            get {
+                object obj = ResourceManager.GetObject("info", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -77,6 +104,26 @@ namespace DotBase.Properties {
             get {
                 object obj = ResourceManager.GetObject("logTemplate", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap question {
+            get {
+                object obj = ResourceManager.GetObject("question", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap warning {
+            get {
+                object obj = ResourceManager.GetObject("warning", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

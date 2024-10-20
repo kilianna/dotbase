@@ -498,7 +498,7 @@ namespace DotBase
                 if (type == OleDbType.Empty)
                 {
                     string text = "Nieznany typ: " + pType.ToString();
-                    MessageBox.Show(text);
+                    MyMessageBox.Show(text);
                     throw new ApplicationException(text);
                 }
                 OleDbParameter param = null;
@@ -672,7 +672,7 @@ namespace DotBase
             if (type == OleDbType.Empty)
             {
                 string text = "Nieznany typ: " + pType.ToString();
-                MessageBox.Show(text);
+                MyMessageBox.Show(text);
                 throw new ApplicationException(text);
             }
             OleDbParameter param = null;
