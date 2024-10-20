@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data.OleDb;
 using System.Data;
+using System.Windows.Forms;
 using DotBase.Logging;
 
 namespace DotBase
@@ -272,7 +273,7 @@ namespace DotBase
                 return true;
             }
 
-            protected DataTable _GET()
+            protected DataTable _GET(int min = 0, int max = 999999999, bool allowException = false)
             {
                 DataTable dane = new DataTable();
                 var cmd = baza.UtworzProstePolecenie(query);
@@ -282,9 +283,34 @@ namespace DotBase
                     OleDbDataAdapter adapter = new OleDbDataAdapter(cmd);
                     adapter.Fill(dane);
                 }
+                catch (Exception ex)
+                {
+                    if (!allowException)
+                    {
+                        string message = String.Format("W wyniku działa kwerendy otrzymano niespodziewany wyjątek: {0}\r\n" +
+                                "Kwerenda SQL:\r\n" +
+                                "{1}{2}\r\n" +
+                                "Miejsce wystąpienia:\r\n" +
+                                "{3}", ex.Message, query, logParameters, ex.StackTrace);
+                        MessageBox.Show(message, "Niespodziewany wyjątek", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    throw;
+                }
                 finally
                 {
                     BazaDanychWrapper.Rozlacz();
+                }
+                if (dane.Rows.Count < min || dane.Rows.Count > max)
+                {
+                    string message = (min == max) ?
+                        String.Format("W wyniku kwerendy spodziewano się dokładnie {0} rekordów, otrzymano {1}.\r\n" +
+                            "Kwerenda SQL:\r\n" +
+                            "{2}{3}", min, dane.Rows.Count, query, logParameters) :
+                        String.Format("W wyniku kwerendy spodziewano się od {0} do {1} rekordów, otrzymano {2}.\r\n" +
+                            "Kwerenda SQL:\r\n" +
+                            "{3}{3}", min, max, dane.Rows.Count, query, logParameters);
+                    MessageBox.Show(message, "Niespodziewany wynik kwerendy", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    throw new ApplicationException("Unexpected SELECT result row count.");
                 }
                 return dane;
             }
