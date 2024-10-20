@@ -275,6 +275,15 @@ namespace DotBase
 
             protected DataTable _GET(int min = 0, int max = 999999999, bool allowException = false)
             {
+                if (typPolecenia == TypPolecenia.NONE)
+                {
+                    typPolecenia = TypPolecenia.SELECT;
+                    query = "SELECT * FROM " + nazwa;
+                }
+                else if (typPolecenia != TypPolecenia.SELECT)
+                {
+                    throw new ApplicationException("Nieprawidłowa składnia polecenia!");
+                }
                 DataTable dane = new DataTable();
                 var cmd = baza.UtworzProstePolecenie(query);
                 try
