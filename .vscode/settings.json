@@ -1,4 +1,7 @@
 {
+    "files.associations": {
+        "**/dotbase/Szablony/**/*.xml": "xml2docx"
+      },
     "dotnet.preferCSharpExtension": true,
     "cSpell.words": [
         "Decryptor",
