@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.IO;
+using DotBase.Szablony;
 
 namespace DotBase
 {
@@ -48,6 +49,8 @@ namespace DotBase
 
         class Swiadectwo : Wydruki
         {
+            Szablony.swiad_wzor szablon = new Szablony.swiad_wzor();
+
             StringBuilder _Tabela;
             StringBuilder _SzablonGlownyWzorcowania;
             StringBuilder _SzablonDrugiejStrony;
@@ -57,7 +60,7 @@ namespace DotBase
 
             enum staleZrodel { STRONT_SLABY = 2, WEGIEL_SLABY, AMERYK = 7, STRONT_SILNY, WEGIEL_SILNY, CHLOR, PLUTON = 17, STRONT_NAJSILNIEJSZY };
 
-            enum szablon { DAWKA, MOC_DAWKI, SKAZENIA, SYG_DAWKI, SYG_MOCY_DAWKI };
+            //enum szablon { DAWKA, MOC_DAWKI, SKAZENIA, SYG_DAWKI, SYG_MOCY_DAWKI };
 
 
             override protected bool fillDocument() { return true; }
@@ -68,6 +71,19 @@ namespace DotBase
             public Swiadectwo(int nrKarty, DateTime dataWydania, DateTime dataWykonania, DateTime dataPrzyjecia, String sprawdzil, string poprawa, string uwMD, string uwD, string uwS, string uwSMD, string uwSD, Jezyk jezykSwiadectwa) : base(jezykSwiadectwa)
             //********************************************************************************************
             {
+                szablon.nr_karty = nrKarty.ToString();
+                szablon.data_wydania = formatujDate(dataWydania);
+                szablon.rok = dataWydania.Year.ToString();
+                szablon.data_wykonania = formatujDate(dataWykonania);
+                szablon.data_przyjecia = formatujDate(dataPrzyjecia);
+                szablon.sprawdzil = sprawdzil;
+                szablon.poprawa = poprawa.ToLower() == "true"; // TODO: ma być bool
+                szablon.uwMD = uwMD;
+                szablon.uwD = uwD;
+                szablon.uwS = uwS;
+                szablon.uwSMD = uwSMD;
+                szablon.uwSD = uwSD;
+                szablon.jezyk = jezykSwiadectwa;
                 m_data.setValue(SwiadectwoData.DataType.NR_KARTY, nrKarty.ToString());
                 m_data.setValue(SwiadectwoData.DataType.DATA_WYDANIA, formatujDate(dataWydania));
                 m_data.setValue(SwiadectwoData.DataType.ROK, dataWydania.Year.ToString());
@@ -1030,6 +1046,115 @@ namespace DotBase
                 _Zapytanie = String.Format("SELECT COUNT(*) FROM Wzorcowanie_cezem WHERE id_karty = {0} AND rodzaj_wzorcowania = 'sm' AND Dolacz=true",
                                            m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
                 m_data.setValue(SwiadectwoData.DataType.WZ_SYG_MOCY_DAWKI_ILE, _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0).ToString());
+            }
+
+            public Szablony.DocxData pobierzDaneSzablonu()
+            {
+                try
+                {
+                    pobierzDaneSzablonu2();
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+                return szablon;
+            }
+
+            public void pobierzDaneSzablonu2()
+            {
+                // ------------------------------ Dane Przyrządu ------------------------------
+
+                DataRow wiersz = _BazaDanych.TworzTabeleDanych(
+                    "SELECT nazwa, typ, nr_fabryczny, producent, rok_produkcji FROM Dozymetry "+
+                    "WHERE id_dozymetru=(SELECT id_dozymetru FROM Karta_przyjecia WHERE id_karty = ?)",
+                    szablon.nr_karty).Rows[0];
+
+                szablon.nazwa = wiersz.Field<string>(0);
+                szablon.typ = wiersz.Field<string>(1);
+                szablon.nr_fab = wiersz.Field<string>(2);
+                szablon.producent = wiersz.Field<string>(3);
+                szablon.rok_produkcji = wiersz.Field<string>(4);
+
+                // ------------------------------ Dane Zleceniodawcy ------------------------------
+
+                wiersz = _BazaDanych.TworzTabeleDanych(
+                    "SELECT Zleceniodawca, adres FROM Zleceniodawca WHERE id_zleceniodawcy = " +
+                    "(SELECT id_zleceniodawcy FROM Zlecenia WHERE id_zlecenia = " +
+                    "(SELECT id_zlecenia FROM Karta_przyjecia WHERE id_karty = ?))",
+                    szablon.nr_karty).Rows[0];
+
+                szablon.zleceniodawca = wiersz.Field<string>(0);
+                szablon.adres =wiersz.Field<string>(1);
+
+                // ------------------------------ Dane Wzorcowania Cezem ------------------------------
+
+                var tabelaMD = _BazaDanych.TworzTabeleDanych(
+                    "SELECT Cisnienie, Temperatura, Wilgotnosc FROM wzorcowanie_cezem WHERE id_karty = ? AND rodzaj_wzorcowania='md' AND dolacz=true",
+                    szablon.nr_karty).Rows;
+                var tabelaD = _BazaDanych.TworzTabeleDanych(
+                    "SELECT Cisnienie, Temperatura, Wilgotnosc FROM wzorcowanie_cezem WHERE id_karty = ? AND rodzaj_wzorcowania='d' AND dolacz=true",
+                    szablon.nr_karty).Rows;
+                var tabelaSM = _BazaDanych.TworzTabeleDanych(
+                    "SELECT Cisnienie, Temperatura, Wilgotnosc FROM wzorcowanie_cezem WHERE id_karty = ? AND rodzaj_wzorcowania='sm' AND dolacz=true",
+                    szablon.nr_karty).Rows;
+                var tabelaSD = _BazaDanych.TworzTabeleDanych(
+                    "SELECT Cisnienie, Temperatura, Wilgotnosc FROM wzorcowanie_cezem WHERE id_karty = ? AND rodzaj_wzorcowania='sd' AND dolacz=true",
+                    szablon.nr_karty).Rows;
+                var tabelaS = _BazaDanych.TworzTabeleDanych(
+                    "SELECT Cisnienie, Temperatura, Wilgotnosc FROM wzorcowanie_zrodlami_powierzchniowymi where id_karty = ? AND dolacz=true",
+                    szablon.nr_karty).Rows;
+
+                // ------------------------------ Metoda ------------------------------
+
+                var skazeniaIlosc = tabelaS.Count;
+                var nieSkazeniaIlosc = tabelaMD.Count + tabelaD.Count + tabelaSM.Count + tabelaSD.Count;
+
+                szablon.metoda = // TODO: Może to można przenieść do szablonu?
+                    skazeniaIlosc > 0 && nieSkazeniaIlosc > 0 ? swiad_wzor.Metoda.Wzor1Wzor2 :
+                    skazeniaIlosc > 0 ? swiad_wzor.Metoda.Wzor2 :
+                    swiad_wzor.Metoda.Wzor1;
+
+                // ------------------------------ SI ------------------------------
+
+                if (tabelaMD.Count > 0)
+                {
+                    var odpowiedzJednostki = _BazaDanych.TworzTabeleDanych(
+                        "SELECT SI FROM Jednostki WHERE ID_jednostki=" +
+                        "(SELECT TOP 1 ID_jednostki FROM wzorcowanie_cezem WHERE ID_karty=? AND rodzaj_wzorcowania='md')",
+                        szablon.nr_karty).Rows[0];
+                    szablon.si = odpowiedzJednostki.Field<bool>(0);
+                }
+                else
+                {
+                    szablon.si = true;
+                }
+
+                // ------------------------------ Warunki: temp., ciśn., wilgo. ------------------------------
+
+                var pierwszyWiersz =
+                    tabelaMD.Count > 0 ? tabelaMD[0] :
+                    tabelaD.Count > 0 ? tabelaD[0] :
+                    tabelaSM.Count > 0 ? tabelaSM[0] :
+                    tabelaSD.Count > 0 ? tabelaSD[0] :
+                    tabelaS.Count > 0 ? tabelaS[0] :
+                    null;
+
+                if (pierwszyWiersz == null)
+                {
+                    throw new ApplicationException("Brak wierszy");
+                }
+
+                var value = pierwszyWiersz.Field<double>(0);
+                szablon.cisnienie_min = value - Constants.getInstance().UNCERTAINITY_PRESSURE_VALUE;
+                szablon.cisnienie_max = value + Constants.getInstance().UNCERTAINITY_PRESSURE_VALUE;
+                value = pierwszyWiersz.Field<double>(1);
+                szablon.temperatura_min = value - Constants.getInstance().UNCERTAINITY_TEMPERATURE_VALUE;
+                szablon.temperatura_max = value + Constants.getInstance().UNCERTAINITY_TEMPERATURE_VALUE;
+                value = pierwszyWiersz.Field<double>(2);
+                szablon.wilgotnosc_min = value - Constants.getInstance().UNCERTAINITY_HUMIDITY_VALUE;
+                szablon.wilgotnosc_max = value + Constants.getInstance().UNCERTAINITY_HUMIDITY_VALUE;
+
             }
         }
     }

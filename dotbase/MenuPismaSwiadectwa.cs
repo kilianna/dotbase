@@ -87,7 +87,7 @@ namespace DotBase
 
             try
             {
-
+                
                 Dokumenty.Swiadectwo swiadectwo = new Dokumenty.Swiadectwo(_NumerKarty,
                                                                            dataWystawienia.Value,
                                                                            dataWykonania.Value,
@@ -100,6 +100,16 @@ namespace DotBase
                                                                            uwSMD.Text,
                                                                            uwSD.Text,
                                                                            jezykSwiadectwa);
+                var dane = swiadectwo.pobierzDaneSzablonu();
+                if (dane != null)
+                {
+                    dane.Generate(this);
+                }
+                else
+                {
+                    MessageBox.Show("Nie istnieją dane z których można by sporządzić świadectwo.", "Uwaga!");
+                }
+
                 if (swiadectwo.UtworzDokument(sciezka))
                 {
                     System.Diagnostics.Process.Start(sciezka);
