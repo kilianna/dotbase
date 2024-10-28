@@ -39,6 +39,8 @@ namespace Wykres
                         return null;
                     case " r.":
                         return "";
+                    case "Hₚ (0,07) ":
+                        return "Hₚ (0.07) ";
                     case "Hp (0,07) ":
                         return "Hp (0.07) ";
                     case "Wartości wzorcowe ":
@@ -87,7 +89,7 @@ namespace Wykres
 
 
         //-------------------------------------------------------------------------
-        public bool Rysuj(string nrKarty, DateTime data, string jednostka, string sonda, int rownowaznik_dawki = -1)
+        public bool Rysuj(string nrKarty, DateTime data, string jednostka, string sonda, string wielkoscFizycznaZOkna, int rownowaznik_dawki = -1)
         //-------------------------------------------------------------------------
         {
             try
@@ -98,7 +100,7 @@ namespace Wykres
 
                 UstawieniaTytułu(nrKarty, data.Year.ToString());
                 UstawieniaDaty(data);
-                UstawieniaOsi(UstawienieJednostki(jednostka), rownowaznik_dawki);
+                UstawieniaOsi(UstawienieJednostki(jednostka), rownowaznik_dawki, wielkoscFizycznaZOkna);
 
                 if (SprawdzJednostke(jednostka) != "")
                     UstawieniaPrzelicznika(SprawdzJednostke(jednostka));
@@ -304,7 +306,7 @@ namespace Wykres
         }
 
         //-------------------------------------------------------------------------
-        private void UstawieniaOsi(String jednostka, int rownowaznik_dawki)
+        private void UstawieniaOsi(String jednostka, int rownowaznik_dawki, string wielkoscFizycznaZOkna)
         //-------------------------------------------------------------------------
         {
             String wielkoscFizyczna = "";
@@ -351,7 +353,20 @@ namespace Wykres
             if (jednostka.Contains("Sv"))
             {
                 if (_WykresMocyDawki)
-                    wielkoscFizyczna = "\u1E22* ";
+                {
+                    if (wielkoscFizycznaZOkna != null && (
+                        wielkoscFizycznaZOkna.IndexOf("Hp(10)") >= 0 ||
+                        wielkoscFizycznaZOkna.IndexOf("Hₚ(10)") >= 0 ||
+                        wielkoscFizycznaZOkna.IndexOf("Hp (10)") >= 0 ||
+                        wielkoscFizycznaZOkna.IndexOf("Hₚ (10)") >= 0))
+                    {
+                        wielkoscFizyczna = "\u1E22ₚ (10) ";
+                    }
+                    else
+                    {
+                        wielkoscFizyczna = "\u1E22* ";
+                    }
+                }
                 else
                 {
                     if (rownowaznik_dawki == 0)

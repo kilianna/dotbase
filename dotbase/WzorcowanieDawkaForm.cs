@@ -650,9 +650,9 @@ namespace DotBase
 
             wykres.Show();
             if (getRownowaznikDawki() == 3)
-                wykres.Rysuj(textBox1.Text, dateTimePicker1.Value, "mGy", comboBox1.Text, getRownowaznikDawki());
+                wykres.Rysuj(textBox1.Text, dateTimePicker1.Value, "mGy", comboBox1.Text, null, getRownowaznikDawki());
             else
-                wykres.Rysuj(textBox1.Text, dateTimePicker1.Value, "mSv", comboBox1.Text, getRownowaznikDawki());
+                wykres.Rysuj(textBox1.Text, dateTimePicker1.Value, "mSv", comboBox1.Text, null, getRownowaznikDawki());
         }
 
         // tworzenie protokołu

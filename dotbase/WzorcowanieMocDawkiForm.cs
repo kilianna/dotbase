@@ -569,6 +569,7 @@ namespace DotBase
                 {
                     comboBox5.Items.Add( row.Field<string>(0) );
                 }
+                comboBox5.Items.Add("moc indywidualnego równoważnika dawki Hₚ(10)");
             }
         }
 
@@ -632,7 +633,7 @@ namespace DotBase
             }
 
             wykres.Show();
-            wykres.Rysuj(textBox1.Text, dateTimePicker1.Value, comboBox4.Text, comboBox1.Text);
+            wykres.Rysuj(textBox1.Text, dateTimePicker1.Value, comboBox4.Text, comboBox1.Text, comboBox5.Text);
         }
 
         //-------------------------------------------------------------------

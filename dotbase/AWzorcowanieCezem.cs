@@ -260,9 +260,9 @@ namespace DotBase
 
             try
             {
-                foreach (DataRow row in _BazaDanych.TworzTabeleDanych("SELECT id_jednostki, jednostka FROM Jednostki").Rows)
+                foreach (DataRow row in _BazaDanych.TworzTabeleDanych("SELECT MIN(id_jednostki) as id, jednostka FROM Jednostki GROUP BY jednostka ORDER BY MIN(id_jednostki)").Rows)
                 {
-                    Jednostki.Dodaj(row.Field<int>("id_jednostki"), row.Field<string>("jednostka"));
+                    Jednostki.Dodaj(row.Field<int>("id"), row.Field<string>("jednostka"));
                 }
             }
             catch (Exception)
