@@ -2,6 +2,21 @@
 				<table id="tabnag">
 					<tr><td>Typ sondy:</td><td><!c3></td><td>Numer fabryczny sondy:</td><td><!c4></td></tr>
 				</table>
+				<!tabpunkt_begin>
+				<table id="tabpunkt">
+					<tr>
+						<th rowspan="2" style="width: 10mm">Lp.</th>
+						<th style="width: 40mm">WARTOŚĆ WZORCOWA</th>
+						<th style="width: 40mm">WARTOŚĆ ZMIERZONA</th>
+					</tr>
+					<tr>
+						<th style="font-size: 10pt"><!c5></th>
+						<th style="font-size: 10pt"><!c5></th>
+					</tr>
+					<!tabpunkt>
+				</table>
+				<div style="height: 7mm;"></div>
+				<!tabpunkt_end>
 				<table id="tabwyn">
 					<tr><th>ZAKRES POMIAROWY<BR>PRZYRZĄDU</th><th>WARTOŚĆ <BR> WSPÓŁCZYNNIKA <BR> POPRAWKOWEGO</th></tr>
 					<tr><th style="font-size: 10pt"><!c5></th><th style="font-size: 10pt"><!korekcja_jednostki></th></tr>

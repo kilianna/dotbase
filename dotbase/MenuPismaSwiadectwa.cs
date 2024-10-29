@@ -100,7 +100,7 @@ namespace DotBase
                                                                            uwSMD.Text,
                                                                            uwSD.Text,
                                                                            jezykSwiadectwa);
-                if (swiadectwo.UtworzDokument(sciezka))
+                if (swiadectwo.UtworzDokument(sciezka, dolaczTabPunktyBox.Checked))
                 {
                     System.Diagnostics.Process.Start(sciezka);
                 }
@@ -140,7 +140,7 @@ namespace DotBase
 
             string sciezka = _DocumentationPathsLoader.GetPath("PismoPrzewodnieWynik", Jezyk.PL) + nrPisma + poprawaSuffix() + "PismoPrzewodnieWynik" + _NumerKarty + ".html";
 
-			Dokumenty.PismoPrzewodnie pismo = new Dokumenty.PismoPrzewodnie(_NumerKarty, dataWystawienia.Value, dataWykonania.Value, textBox1.Text, nrPismaNumer.Text, nrPismaRok.Text, checkBox1.Checked, poprawa.Checked);
+			Dokumenty.PismoPrzewodnie pismo = new Dokumenty.PismoPrzewodnie(_NumerKarty, dataWystawienia.Value, dataWykonania.Value, textBox1.Text, nrPismaNumer.Text, nrPismaRok.Text, checkBox1.Checked, poprawa.Checked, odlaczWykresBox.Checked);
             if (!pismo.generateDocument(sciezka))
             {
                 MessageBox.Show("Nie można stowrzyć dokumentu z powodu braku danych lub ich błędnych wartości.", "Uwaga");

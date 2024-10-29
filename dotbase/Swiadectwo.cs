@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.IO;
+using WzorcowanieMocDawkiSpace;
 
 namespace DotBase
 {
@@ -104,7 +105,7 @@ namespace DotBase
             }
 
             //********************************************************************************************
-            private bool PobierzDaneDrugaStrona()
+            private bool PobierzDaneDrugaStrona(bool dolaczTabelePunkty)
             //********************************************************************************************
             {
                 Char ch = 'a';
@@ -114,7 +115,7 @@ namespace DotBase
                 {
                     for (int i = int.Parse(m_data.getValue(SwiadectwoData.DataType.WZ_MOC_DAWKI_ILE)); i > 0; --i)
                     {
-                        PobierzDaneMocDawki(i, ch);
+                        PobierzDaneMocDawki(i, ch, dolaczTabelePunkty);
                         _SzablonDrugiejStrony.Append(_SzablonPodstawowy);
                         ++ch;
                     }
@@ -155,9 +156,11 @@ namespace DotBase
             }
 
             //********************************************************************************************
-            private void PobierzDaneMocDawki(int ile, Char ch)
+            private void PobierzDaneMocDawki(int ile, Char ch, bool dolaczTabelePunkty)
             //********************************************************************************************
             {
+                string tabpunkt = null;
+
                 if (ile <= 0 || false == WczytajSzablon(Narzedzia.StaleWzorcowan.stale.PLIK_POMOCNICZY_MOC_DAWKI))
                     return;
 
@@ -166,11 +169,11 @@ namespace DotBase
 
                 PobierzIdWzorcowania(ile - 1, "md");
 
-                _Zapytanie = "SELECT wielkosc_fizyczna FROM Wzorcowanie_cezem AS WC WHERE id_wzorcowania IN (SELECT id_wzorcowania FROM "
+                _Zapytanie = "SELECT wielkosc_fizyczna, ID_protokolu, Data_wzorcowania FROM Wzorcowanie_cezem AS WC WHERE id_wzorcowania IN (SELECT id_wzorcowania FROM "
                            + String.Format("Wzorcowanie_cezem WHERE id_karty = {0} AND rodzaj_wzorcowania='md' AND dolacz=true) ORDER BY WC.id_wzorcowania",
                              m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
 
-                PobierzWielkoscFizyczna();
+                var wc = PobierzWielkoscFizyczna();
 
                 _Zapytanie = "SELECT typ, nr_fabryczny FROM Sondy WHERE id_sondy = (SELECT id_sondy FROM wzorcowanie_cezem WHERE "
                            + String.Format("id_wzorcowania = {0})", m_data.getValue(SwiadectwoData.DataType.ID_WZORCOWANIA));
@@ -187,6 +190,31 @@ namespace DotBase
                            m_data.getValue(SwiadectwoData.DataType.ID_WZORCOWANIA));
 
                 PobierzDaneTabelowe();
+
+                if (dolaczTabelePunkty)
+                {
+                    var ID_protokolu = wc.Item1;
+                    var Data_wzorcowania = wc.Item2;
+                    var Data_kalibracji = _BazaDanych.TworzTabeleDanych(
+                        "SELECT Data_kalibracji FROM Protokoly_kalibracji_lawy WHERE ID_protokolu=?", ID_protokolu)
+                        .Rows[0].Field<DateTime>(0);
+                    tabpunkt = TworzTabelePunktow(Data_kalibracji, Data_wzorcowania);
+                }
+
+                if (tabpunkt != null)
+                {
+                    _SzablonPodstawowy = _SzablonPodstawowy
+                        .Replace("<!tabpunkt>", tabpunkt)
+                        .Replace("<!tabpunkt_begin>", "")
+                        .Replace("<!tabpunkt_end>", "");
+                }
+                else
+                {
+                    _SzablonPodstawowy = _SzablonPodstawowy
+                        .Replace("<!tabpunkt>", "")
+                        .Replace("<!tabpunkt_begin>", "<!--")
+                        .Replace("<!tabpunkt_end>", "-->");
+                }
 
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c1>", ch.ToString());
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c2>", TranslacjaForm.Tlumacz(m_data.getValue(SwiadectwoData.DataType.WIELKOSC_FIZYCZNA), jezyk));
@@ -209,6 +237,54 @@ namespace DotBase
                 {
                     _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!korekcja_jednostki>", "-");
                 }
+            }
+
+            private string TworzTabelePunktow(DateTime Data_kalibracji, DateTime Data_wzorcowania)
+            {
+                _Zapytanie = "SELECT odleglosc, id_zrodla, wskazanie, wahanie, zakres, dolaczyc FROM Pomiary_cez WHERE id_wzorcowania IN (SELECT id_wzorcowania FROM "
+                           + String.Format("Wzorcowanie_cezem WHERE id_karty = {0} AND rodzaj_wzorcowania='md' AND dolacz=true)",
+                             m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
+
+                var wzorcowanieMocDawki = new WzorcowanieMocDawki(Int32.Parse(m_data.getValue(SwiadectwoData.DataType.NR_KARTY)), "md");
+
+                var _OdpowiedzBazy = _BazaDanych.TworzTabeleDanych(_Zapytanie);
+
+                if (null == _OdpowiedzBazy || null == _OdpowiedzBazy.Rows || 0 == _OdpowiedzBazy.Rows.Count)
+                    return null;
+
+                var res = new StringBuilder();
+                var tabPunkt = new List<Tuple<double, double>>();
+                var tabDaneDlaWartWzor = new List<Tuple<double, int>>();
+
+                foreach (DataRow wiersz in _OdpowiedzBazy.Rows)
+                {
+                    tabPunkt.Add(new Tuple<double, double>(
+                        wiersz.Field<double>("wskazanie"),
+                        wiersz.Field<double>("wahanie")
+                        ));
+                    tabDaneDlaWartWzor.Add(new Tuple<double, int>(
+                        wiersz.Field<double>("odleglosc"),
+                        wiersz.Field<short>("id_zrodla")
+                        ));
+                }
+
+                var tabWartWzor = wzorcowanieMocDawki.LiczWartoscWzorcowa(
+                    tabDaneDlaWartWzor.ToArray(),
+                    Data_kalibracji.ToString("yyyy-MM-dd"),
+                    m_data.getValue(SwiadectwoData.DataType.JEDNOSTKA).Replace("&mu;", "u"),
+                    Data_wzorcowania);
+
+                for (int i = 0; i < tabPunkt.Count; i++)
+                {
+                    res.AppendFormat("<tr><td>{0}</td><td>{1}&nbsp;±&nbsp;{2}</td><td>{3}&nbsp;±&nbsp;{4}</td></tr>",
+                        i + 1,
+                        tabWartWzor[i].ToString("0.00"),
+                        (tabWartWzor[i] * 0.02).ToString("0.00"),
+                        tabPunkt[i].Item1,
+                        tabPunkt[i].Item2);
+                }
+
+                return res.ToString();
             }
 
             //********************************************************************************************
@@ -872,10 +948,12 @@ namespace DotBase
             }
 
             //********************************************************************************************
-            private void PobierzWielkoscFizyczna()
+            private Tuple<int, DateTime> PobierzWielkoscFizyczna()
             //********************************************************************************************
             {
-                m_data.setValue(SwiadectwoData.DataType.WIELKOSC_FIZYCZNA, _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<string>(0));
+                var row = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0];
+                m_data.setValue(SwiadectwoData.DataType.WIELKOSC_FIZYCZNA, row.Field<string>(0));
+                return new Tuple<int,DateTime>(row.Field<short>(1), row.Field<DateTime>(2));
             }
 
             //********************************************************************************************
@@ -978,12 +1056,12 @@ namespace DotBase
             }
 
             //********************************************************************************************
-            public bool UtworzDokument(string sciezka)
+            public bool UtworzDokument(string sciezka, bool dolaczTabelePunkty)
             //********************************************************************************************
             {
                 bool ok = PobierzDanePierwszaStrona();
                 ok = ok && UtworzPierwszaStrone();
-                ok = ok && PobierzDaneDrugaStrona();
+                ok = ok && PobierzDaneDrugaStrona(dolaczTabelePunkty);
                 ok = ok && UtworzDrugaStrone();
                 ok = ok && ZapiszPlikWynikowy(sciezka);
                 return ok;

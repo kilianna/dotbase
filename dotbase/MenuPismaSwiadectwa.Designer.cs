@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.Button nrPismaPrzycisk;
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.odlaczWykresBox = new System.Windows.Forms.CheckBox();
             this.nrPismaRok = new System.Windows.Forms.TextBox();
             this.nrPismaStalaCzesc = new System.Windows.Forms.TextBox();
             this.uwD = new System.Windows.Forms.TextBox();
@@ -67,6 +68,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.zapiszToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.swiadectEnBtn = new System.Windows.Forms.Button();
+            this.dolaczTabPunktyBox = new System.Windows.Forms.CheckBox();
             nrPismaPrzycisk = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -88,6 +90,8 @@
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.dolaczTabPunktyBox);
+            this.groupBox3.Controls.Add(this.odlaczWykresBox);
             this.groupBox3.Controls.Add(this.nrPismaRok);
             this.groupBox3.Controls.Add(this.nrPismaStalaCzesc);
             this.groupBox3.Controls.Add(this.uwD);
@@ -128,6 +132,19 @@
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Dane dotyczące świadectwa wzorcowania\\pisma przewodniego";
+            // 
+            // odlaczWykresBox
+            // 
+            this.odlaczWykresBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.odlaczWykresBox.AutoEllipsis = true;
+            this.odlaczWykresBox.Location = new System.Drawing.Point(516, 419);
+            this.odlaczWykresBox.Margin = new System.Windows.Forms.Padding(4);
+            this.odlaczWykresBox.Name = "odlaczWykresBox";
+            this.odlaczWykresBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.odlaczWykresBox.Size = new System.Drawing.Size(320, 21);
+            this.odlaczWykresBox.TabIndex = 25;
+            this.odlaczWykresBox.Text = "Odłącz wykres";
+            this.odlaczWykresBox.UseVisualStyleBackColor = true;
             // 
             // nrPismaRok
             // 
@@ -279,7 +296,7 @@
             // 
             this.poprawa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.poprawa.AutoEllipsis = true;
-            this.poprawa.Location = new System.Drawing.Point(765, 39);
+            this.poprawa.Location = new System.Drawing.Point(516, 361);
             this.poprawa.Margin = new System.Windows.Forms.Padding(4);
             this.poprawa.Name = "poprawa";
             this.poprawa.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -382,7 +399,7 @@
             // 
             this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox1.AutoEllipsis = true;
-            this.checkBox1.Location = new System.Drawing.Point(765, 69);
+            this.checkBox1.Location = new System.Drawing.Point(516, 390);
             this.checkBox1.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -523,6 +540,19 @@
             this.swiadectEnBtn.UseVisualStyleBackColor = true;
             this.swiadectEnBtn.Click += new System.EventHandler(this.swiadectEnBtn_Click);
             // 
+            // dolaczTabPunktyBox
+            // 
+            this.dolaczTabPunktyBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dolaczTabPunktyBox.AutoEllipsis = true;
+            this.dolaczTabPunktyBox.Location = new System.Drawing.Point(516, 448);
+            this.dolaczTabPunktyBox.Margin = new System.Windows.Forms.Padding(4);
+            this.dolaczTabPunktyBox.Name = "dolaczTabPunktyBox";
+            this.dolaczTabPunktyBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dolaczTabPunktyBox.Size = new System.Drawing.Size(320, 21);
+            this.dolaczTabPunktyBox.TabIndex = 26;
+            this.dolaczTabPunktyBox.Text = "Dołącz tabelę z punktami";
+            this.dolaczTabPunktyBox.UseVisualStyleBackColor = true;
+            // 
             // MenuPismaSwiadectwaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -589,5 +619,7 @@
         private System.Windows.Forms.Button swiadectEnBtn;
         private System.Windows.Forms.TextBox nrPismaRok;
         private System.Windows.Forms.TextBox nrPismaStalaCzesc;
+        private System.Windows.Forms.CheckBox odlaczWykresBox;
+        private System.Windows.Forms.CheckBox dolaczTabPunktyBox;
     }
 }

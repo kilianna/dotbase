@@ -37,12 +37,14 @@ namespace DotBase
 			private readonly string EVIDENCE_CORRECTION_MARKER = "P";
             PismoPrzewodnieData m_data = new PismoPrzewodnieData();
             StringBuilder m_templateToFill = DocumentsTemplatesFactory.getInstance().create(DocumentsTemplatesFactory.TemplateType.SCIEZKA_PISMO_PRZEWODNIE);
+            private bool odlaczWykres;
 
             //****************************************************************************************
-            public PismoPrzewodnie(int nrKarty, DateTime dataWystawienia, DateTime dataWykonania, string uwaga, string nrPisma, string rokPisma, bool przedluzonaWaznosc, bool poprawa)
+            public PismoPrzewodnie(int nrKarty, DateTime dataWystawienia, DateTime dataWykonania, string uwaga, string nrPisma, string rokPisma, bool przedluzonaWaznosc, bool poprawa, bool odlaczWykres)
                 : base(Jezyk.PL)
             //****************************************************************************************
             {
+                this.odlaczWykres = odlaczWykres;
                 _NrKarty = nrKarty.ToString();
                 m_data.setValue(PismoPrzewodnieData.DataType.NR_KARTY, _NrKarty);
                 m_data.setValue(PismoPrzewodnieData.DataType.DATA_WYSTAWIENIA, dataWystawienia.ToString("dd.MM.yyyy"));
@@ -252,7 +254,9 @@ namespace DotBase
                 if (0 != _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0))
                 {
                     UsunKomentarzeDotWzorcowaniaCezem();
-                    m_data.setValue(PismoPrzewodnieData.DataType.INFO_WYKRES, "<li>Wykres kalibracyjny w zakresie mocy dawki</li>");
+                    if (!odlaczWykres) {
+                        m_data.setValue(PismoPrzewodnieData.DataType.INFO_WYKRES, "<li>Wykres kalibracyjny w zakresie mocy dawki</li>");
+                    }
                 }
 
                 _Zapytanie = String.Format("SELECT COUNT(*) FROM Wzorcowanie_cezem WHERE rodzaj_wzorcowania IN('sd', 'sm') AND id_karty = {0}", _NrKarty);

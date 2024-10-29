@@ -57,6 +57,20 @@ namespace WzorcowanieMocDawkiSpace
         public List<double> LiczWartoscWzorcowa(ref DataGridView tabela, string protokol, string jednostka, DateTime dataWzorcowania)
         //---------------------------------------------------------------
         {
+            var tabelaDane = new Tuple<double, int>[tabela.RowCount - 1];
+            for (int i = 0; i < tabela.RowCount - 1; ++i)
+            {
+                tabelaDane[i] = new Tuple<double, int>(
+                    N.doubleParse(tabela.Rows[i].Cells[0].Value.ToString()),
+                    Int32.Parse(tabela.Rows[i].Cells[1].Value.ToString()));
+            }
+            return LiczWartoscWzorcowa(tabelaDane, protokol, jednostka, dataWzorcowania);
+        }
+
+        //---------------------------------------------------------------
+        public List<double> LiczWartoscWzorcowa(Tuple<double, int>[] tabela, string protokol, string jednostka, DateTime dataWzorcowania)
+        //---------------------------------------------------------------
+        {
             _Zapytanie = String.Format("SELECT Data_kalibracji, id_protokolu FROM Protokoly_kalibracji_lawy WHERE data_kalibracji=#{0}#", protokol);
             DateTime dataKalibracjiLawy = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<DateTime>(0);
             int idProtokolu = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<short>(1);
@@ -74,13 +88,13 @@ namespace WzorcowanieMocDawkiSpace
 
             double mocKermy;
 
-            for (int i = 0; i < tabela.RowCount - 1; ++i)
+            for (int i = 0; i < tabela.Length; ++i)
             {
                 try
                 {
                     _Zapytanie = "SELECT moc_kermy FROM Pomiary_wzorcowe WHERE "
                                + String.Format("odleglosc={0} AND id_zrodla={1} AND id_protokolu={2}",
-                                 tabela.Rows[i].Cells[0].Value, tabela.Rows[i].Cells[1].Value, idProtokolu);
+                                 tabela[i].Item1, tabela[i].Item2, idProtokolu);
                     mocKermy = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<double>(0);
                 }
                 catch (Exception)
