@@ -98,7 +98,10 @@ namespace DotBase
                 {
                     if (retrieveAllData() && fillDocument() && saveDocument(path))
                     {
-                        System.Diagnostics.Process.Start(path);
+                        if (!DebugOptions.nieOtwieraj)
+                        {
+                            System.Diagnostics.Process.Start(path);
+                        }
                         return true;
                     }
                 }

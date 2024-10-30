@@ -123,7 +123,7 @@ namespace DotBase
                 _Cennik.ShowDialog();
             }
             else
-                MessageBox.Show("Brak danych do obliczeń. Zapewne połączenie z bazą zostało przerwane.");
+                MyMessageBox.Show("Brak danych do obliczeń. Zapewne połączenie z bazą zostało przerwane.");
         }
 
         //-------------------------------------------------------------
@@ -133,12 +133,12 @@ namespace DotBase
         {
             if (false == SprawdzPoprawnoscDanych())
             {
-                MessageBox.Show("Nie podano wszystkich potrzebnych informacji, aby dodać kartę.", "Uwaga");
+                MyMessageBox.Show("Nie podano wszystkich potrzebnych informacji, aby dodać kartę.", "Uwaga");
                 return;
             }
             if (false == SprawdzIstnieniePrzyrzadu())
             {
-                MessageBox.Show("Wybrany przyrząd nie istnieje!", "Uwaga");
+                MyMessageBox.Show("Wybrany przyrząd nie istnieje!", "Uwaga");
                 return;
             }
 
@@ -300,7 +300,7 @@ namespace DotBase
 
             if (false == _KartaPrzyjecia.PobierzDanePoczatkowe())
             {
-                MessageBox.Show("Brak danych do wyświetlenia.");
+                MyMessageBox.Show("Brak danych do wyświetlenia.");
                 return;
             }
 
@@ -347,7 +347,7 @@ namespace DotBase
             if (false == _KartaPrzyjecia.PobierzDane(idKart))
             {
                 ZablokujPrzyciski();
-                MessageBox.Show("Brak danych do wyświetlenia.");
+                MyMessageBox.Show("Brak danych do wyświetlenia.");
                 return;
             }
 
@@ -507,7 +507,7 @@ namespace DotBase
             }
             else
             {
-                MessageBox.Show("Nie wybrano przyrządu który możnaby edytować.", "Uwaga");
+                MyMessageBox.Show("Nie wybrano przyrządu który możnaby edytować.", "Uwaga");
             }
         }
 

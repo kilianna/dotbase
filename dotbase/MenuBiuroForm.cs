@@ -59,7 +59,7 @@ namespace DotBase
 
             if (false == _KartaPrzyjeciaForm.InicjalizujTrybPrzegladaniaOrazEdycji())
             {
-                MessageBox.Show("Brak danych lub połaczenie z bazą zostało przerwane.");
+                MyMessageBox.Show("Brak danych lub połaczenie z bazą zostało przerwane.");
                 return;
             }
             _KartaPrzyjeciaForm.WyswietlDanePoczatkowe();
@@ -76,7 +76,7 @@ namespace DotBase
 
             if (false == _CennikForm.Inicjalizuj())
             {
-                MessageBox.Show("Nie udało sie załadować danych z bazy. Prawdopodobnie połączenie zostało przerwane.");
+                MyMessageBox.Show("Nie udało sie załadować danych z bazy. Prawdopodobnie połączenie zostało przerwane.");
                 _CennikForm.Close();
                 return;
             }
@@ -95,7 +95,7 @@ namespace DotBase
 
             if (false == _RejestrZlecenForm.Inicjalizuj())
             {
-                MessageBox.Show("Nie udało sie załadować danych z bazy. Prawdopodobnie połączenie zostało przerwane.");
+                MyMessageBox.Show("Nie udało sie załadować danych z bazy. Prawdopodobnie połączenie zostało przerwane.");
                 _RejestrZlecenForm.Close();
                 return;
             }

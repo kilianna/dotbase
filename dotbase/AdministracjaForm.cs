@@ -106,14 +106,14 @@ namespace DotBase
             {
                 if (index >= 0 && index != listaView.SelectedCells[i].RowIndex)
                 {
-                    MessageBox.Show(this, "Tylko jeden użytkownik na raz moży być usunięty!", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MyMessageBox.Show(this, "Tylko jeden użytkownik na raz moży być usunięty!", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 index = listaView.SelectedCells[i].RowIndex;
             }
             if (index < 0 || index >= list.Length) return;
             if (list[index] == Users.CurrentUser) return;
-            if (MessageBox.Show(this, "Czy usunąć użytkownika: " + list[index].Name + "?", "Usuń", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+            if (MyMessageBox.Show(this, "Czy usunąć użytkownika: " + list[index].Name + "?", "Usuń", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
                 Users.RemoveUser(list[index]);
                 zaladujTabele();
@@ -127,12 +127,12 @@ namespace DotBase
             {
                 if (unique.Contains(usr.Name))
                 {
-                    MessageBox.Show(this, "Tabela zawiera zdublowane nazwy użytkowników!", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MyMessageBox.Show(this, "Tabela zawiera zdublowane nazwy użytkowników!", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 else if (usr.Name == "")
                 {
-                    MessageBox.Show(this, "Tabela zawiera puste nazwy użytkowników!", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MyMessageBox.Show(this, "Tabela zawiera puste nazwy użytkowników!", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 unique.Add(usr.Name);

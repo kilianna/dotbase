@@ -52,7 +52,7 @@ namespace Wykres
                     case "zakres ":
                         return "range ";
                     default:
-                        MessageBox.Show("Nie ma tłumaczenie wyrażenia:\r\n" + pl, "Błąd krytyczny", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MyMessageBox.Show("Nie ma tłumaczenie wyrażenia:\r\n" + pl, "Błąd krytyczny", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 };
             }

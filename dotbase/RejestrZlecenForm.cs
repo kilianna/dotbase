@@ -57,7 +57,7 @@ namespace DotBase
             }
 
             if (false == PobierzDanePodstawowe() || false == PobierzDaneStatystyczne())
-                MessageBox.Show("Nie można pobrać danych. Prawdopodobnie połączenie z bazą danych zostało przerwane.");
+                MyMessageBox.Show("Nie można pobrać danych. Prawdopodobnie połączenie z bazą danych zostało przerwane.");
         }
 
         //----------------------------------------------------------
@@ -225,14 +225,14 @@ namespace DotBase
             dataGridView1.Rows.Clear();
 
             if (false == PobierzDanePodstawowe() || false == PobierzDaneStatystyczne())
-                MessageBox.Show("Nie można pobrać danych. Prawdopodobnie połączenie z bazą danych zostało przerwane.");
+                MyMessageBox.Show("Nie można pobrać danych. Prawdopodobnie połączenie z bazą danych zostało przerwane.");
         }
 
         //----------------------------------------------------------
         private void PrzejdzDoZlecenia(object sender, EventArgs e)
         //----------------------------------------------------------
         {
-            MessageBox.Show(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
+            MyMessageBox.Show(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
         }
 
         private void RejestrZlecenForm_Load(object sender, EventArgs e)

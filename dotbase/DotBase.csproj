@@ -101,6 +101,12 @@
       <DependentUpon>CennikForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="MyMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyMessageBox.Designer.cs">
+      <DependentUpon>MyMessageBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Szablony\DocxData.cs" />
     <Compile Include="Szablony\DocxGenerator.cs" />
     <Compile Include="Szablony\DocxOverrideWindow.cs">
@@ -116,6 +122,14 @@
       <DependentUpon>DocxWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Szablony\swiad_wzor.cs" />
+    <Compile Include="Test\TestBase.cs" />
+    <Compile Include="Test\TestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Test\TestForm.Designer.cs">
+      <DependentUpon>TestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Test\TestSwiadHtmlVsDocx.cs" />
     <Compile Include="ExceptionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -417,11 +431,17 @@
     <EmbeddedResource Include="DaneWzorcoweMocDawki.resx">
       <DependentUpon>DaneWzorcoweMocDawki.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MyMessageBox.resx">
+      <DependentUpon>MyMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Szablony\DocxOverrideWindow.resx">
       <DependentUpon>DocxOverrideWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Szablony\DocxWindow.resx">
       <DependentUpon>DocxWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test\TestForm.resx">
+      <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ExceptionForm.resx">
       <DependentUpon>ExceptionForm.cs</DependentUpon>
@@ -590,6 +610,10 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\error.png" />
+    <None Include="Resources\question.png" />
+    <None Include="Resources\info.png" />
+    <None Include="Resources\warning.png" />
     <Content Include="SwiadectwoWydrukTeksty-en.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

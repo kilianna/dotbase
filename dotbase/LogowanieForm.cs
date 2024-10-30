@@ -76,7 +76,7 @@ namespace DotBase
             catch (Exception ex)
             {
                 log("Connection failed: {0}", ex.ToString());
-                MessageBox.Show(this, "Nie można połączyć się z bazą danych.\r\nSprawdź, czy z bazą jest skojarzony poprawny plik użytkowników.\r\n" + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MyMessageBox.Show(this, "Nie można połączyć się z bazą danych.\r\nSprawdź, czy z bazą jest skojarzony poprawny plik użytkowników.\r\n" + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

@@ -31,7 +31,7 @@ namespace DotBase
 
             if (false == okno.Inicjalizuj())
             {
-                MessageBox.Show("Brak odpowiednich danych w bazie do wyświetlenia.");
+                MyMessageBox.Show("Brak odpowiednich danych w bazie do wyświetlenia.");
             }
 
             okno.ShowDialog();
@@ -46,7 +46,7 @@ namespace DotBase
             
             if (false == okno.Inicjalizuj())
             {
-                MessageBox.Show("Brak odpowiednich danych w bazie do wyświetlenia.");
+                MyMessageBox.Show("Brak odpowiednich danych w bazie do wyświetlenia.");
             }
 
             okno.ShowDialog();
@@ -61,7 +61,7 @@ namespace DotBase
             
             if (false == okno.Inicjalizuj())
             {
-                MessageBox.Show("Brak odpowiednich danych w bazie do wyświetlenia.");
+                MyMessageBox.Show("Brak odpowiednich danych w bazie do wyświetlenia.");
             }
 
             okno.ShowDialog();
@@ -76,7 +76,7 @@ namespace DotBase
 
             if (false == okno.Inicjalizuj())
             {
-                MessageBox.Show("Brak odpowiednich danych w bazie do wyświetlenia.");
+                MyMessageBox.Show("Brak odpowiednich danych w bazie do wyświetlenia.");
             }
 
             okno.ShowDialog();
@@ -109,7 +109,7 @@ namespace DotBase
                     var usunPersonalne = MessageBox.Show(this, "Czy usunąć dane personalne zleceniodawców?", "Pytanie", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes;
                     if (!BazaDanychWrapper.Eksportuj(LogowanieForm.Instancja.PlikBazy, LogowanieForm.Instancja.Users.DatabasePassword, eksportujDlg.FileName, form.Haslo, usunPersonalne ? new BazaDanychWrapper.TransformujBazeDelegate(UsunDanePersonalne) : null))
                     {
-                        MessageBox.Show(this, "Nie udało się wyeskportować bazy danych.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MyMessageBox.Show(this, "Nie udało się wyeskportować bazy danych.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }

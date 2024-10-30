@@ -53,6 +53,10 @@ namespace DotBase.Szablony
                 proc.StartInfo.FileName = xml2docxExe;
                 proc.StartInfo.Arguments = String.Format("-d \"{0}\" \"{1}\" \"{2}\"",
                     escapeArg(jsonFile), escapeArg(template), escapeArg(output));
+                if (DebugOptions.docx)
+                {
+                    proc.StartInfo.Arguments += " --debug";
+                }
                 proc.StartInfo.UseShellExecute = false;
                 proc.StartInfo.RedirectStandardOutput = true;
                 proc.StartInfo.RedirectStandardError = true;

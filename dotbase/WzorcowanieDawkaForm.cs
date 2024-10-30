@@ -117,31 +117,31 @@ namespace DotBase
 
             if (false == _WzorcowanieDawka.PrzygotujDaneOgolneDoZapisu(textBox1.Text, textBox2.Text, dateTimePicker1.Value, NadpisywanieStarychDanych))
             {
-                MessageBox.Show("Dane ogólne są błędne.", "Uwaga");
+                MyMessageBox.Show("Dane ogólne są błędne.", "Uwaga");
                 return false;
             }
 
             if (false == _WzorcowanieDawka.PrzygotujDanePrzyrzaduDoZapisu(textBox3.Text, textBox4.Text, textBox6.Text, textBox5.Text, comboBox1.Text, comboBox2.Text))
             {
-                MessageBox.Show("Dane przyrządu są błędne.", "Uwaga");
+                MyMessageBox.Show("Dane przyrządu są błędne.", "Uwaga");
                 return false;
             }
 
             if (false == _WzorcowanieDawka.PrzygotujDaneWarunkowDoZapisu(textBox7.Text, textBox8.Text, textBox9.Text, textBox10.Text))
             {
-                MessageBox.Show("Dane warunków są błędne.", "Uwaga");
+                MyMessageBox.Show("Dane warunków są błędne.", "Uwaga");
                 return false;
             }
 
             if (false == _WzorcowanieDawka.PrzygotujDaneWzorcowoPomiaroweDoZapisu(ref dataGridView1, comboBox3.Text, textBox17.Text, textBox18.Text))
             {
-                MessageBox.Show("Dane wzorcowo-pomiarowe są błędne.", "Uwaga");
+                MyMessageBox.Show("Dane wzorcowo-pomiarowe są błędne.", "Uwaga");
                 return false;
             }
 
             if (false == _WzorcowanieDawka.PrzygotujDaneWspolczynnikowDoZapisu(textBox15.Text, textBox16.Text, checkBox1.Checked, textBox11.Text, textBox12.Text, textBox18.Text, textBox19.Text, getRownowaznikDawki()))
             {
-                MessageBox.Show("Dane współczynników są błędne.", "Uwaga");
+                MyMessageBox.Show("Dane współczynników są błędne.", "Uwaga");
                 return false;
             }
             
@@ -155,7 +155,7 @@ namespace DotBase
             if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "" ||
                 comboBox1.SelectedIndex < 0 || comboBox2.SelectedIndex < 0)
             {
-                MessageBox.Show("Błędne dane przyrządu.", "Uwaga");
+                MyMessageBox.Show("Błędne dane przyrządu.", "Uwaga");
                 return false;
             }
 
@@ -494,7 +494,7 @@ namespace DotBase
             }
             else
             {
-                MessageBox.Show("Nie istnieje mniejszy arkusz dla danego wzorcowania.");
+                MyMessageBox.Show("Nie istnieje mniejszy arkusz dla danego wzorcowania.");
             }
         }
 
@@ -513,7 +513,7 @@ namespace DotBase
             {
                 _WzorcowanieDawka.StworzNowyArkusz();
                 WyswietlDanePodstawowe();
-                MessageBox.Show("To nowy arkusz który nie istnieje jeszcze w bazie. Zostanie on zapisany automatycznie.", "Uwaga");
+                MyMessageBox.Show("To nowy arkusz który nie istnieje jeszcze w bazie. Zostanie on zapisany automatycznie.", "Uwaga");
             }
         }
 
@@ -531,7 +531,7 @@ namespace DotBase
             }
             else
             {
-                MessageBox.Show("Nie istnieje mniejszy arkusz dla danego wzorcowania.");
+                MyMessageBox.Show("Nie istnieje mniejszy arkusz dla danego wzorcowania.");
             }
         }
 
@@ -551,7 +551,7 @@ namespace DotBase
             {
                 _WzorcowanieDawka.StworzNowyArkusz();
                 WyswietlDanePodstawowe();
-                MessageBox.Show("To nowy arkusz który nie istnieje jeszcze w bazie. Zostanie on zapisany automatycznie.", "Uwaga");
+                MyMessageBox.Show("To nowy arkusz który nie istnieje jeszcze w bazie. Zostanie on zapisany automatycznie.", "Uwaga");
             }
         }
 
@@ -681,7 +681,7 @@ namespace DotBase
             Dokumenty.ProtokolDawka protokol = new Dokumenty.ProtokolDawka(model);
             if (false == protokol.generateDocument(sciezka))
             {
-                MessageBox.Show("Nie podano wszystkich potrzebnych danych!", "Uwaga");
+                MyMessageBox.Show("Nie podano wszystkich potrzebnych danych!", "Uwaga");
             }
         }
 
@@ -703,7 +703,7 @@ namespace DotBase
             }
             catch (Exception)
             {
-                MessageBox.Show("Brak wszystkich danych potrzebnych do wyświetlenia danych wzorcowych.", "Uwaga");
+                MyMessageBox.Show("Brak wszystkich danych potrzebnych do wyświetlenia danych wzorcowych.", "Uwaga");
             }
         }
 
