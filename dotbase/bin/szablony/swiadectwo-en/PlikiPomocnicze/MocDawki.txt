@@ -2,11 +2,31 @@
 				<table id="tabnag">
 					<tr><td>Type of probe:</td><td><!c3></td><td>Serial number of probe:</td><td><!c4></td></tr>
 				</table>
+				<!tabpunkt_begin>
+				<table id="tabpunkt">
+					<thead>
+					<tr>
+						<th rowspan="2" style="width: 12mm">Lp.</th>
+						<th style="width: 26mm">NOMINAL VALUE</th>
+						<th style="width: 26mm">MEASURED VALUE</th>
+						<th style="width: 26mm">CALIBRATION FACTOR</th>
+					</tr>
+					<tr>
+						<th style="font-size: 10pt"><!c5></th>
+						<th style="font-size: 10pt"><!c5></th>
+						<th style="font-size: 10pt"><!korekcja_jednostki></th>
+					</tr>
+					</thead>
+					<!tabpunkt>
+				</table>
+				<!tabpunkt_end>
+				<!tabwyn_begin>
 				<table id="tabwyn">
 					<tr><th>INSTRUMENT MEASURING<BR>RANGE</th><th>CALIBRATION<BR>FACTOR</th></tr>
 					<tr><th style="font-size: 10pt"><!c5></th><th style="font-size: 10pt"><!korekcja_jednostki></th></tr>
 					<!tabela>
 				</table>
+				<!tabwyn_end>
 				<div id="komentarz">The measured value of <!wielkosc_fizyczna> should be multiplied by the respective value of calibration factor for the given
 measuring range.
 				</div>
