@@ -28,6 +28,14 @@ namespace DotBase.Szablony
             {
                 cisnienie = wilgotnosc = temperatura = x;
             }
+            public static double Min(double a, double? b)
+            {
+                return (b == null) ? a : Math.Min(a, (double)b);
+            }
+            public static double Max(double a, double? b)
+            {
+                return (b == null) ? a : Math.Max(a, (double)b);
+            }
         }
 
         // Dane wejściowe
@@ -118,23 +126,23 @@ namespace DotBase.Szablony
 
             foreach (var tabela in new Szablon.Row_wzorcowanie_cezem[][] { tabelaMD, tabelaD, tabelaSM, tabelaSD }) {
                 foreach (var row in tabela) {
-                    warunkiMin.temperatura = Math.Min(warunkiMin.temperatura, row.Temperatura);
-                    warunkiMin.wilgotnosc = Math.Min(warunkiMin.wilgotnosc, row.wilgotnosc);
-                    warunkiMin.cisnienie = Math.Min(warunkiMin.cisnienie, row.Cisnienie);
-                    warunkiMax.temperatura = Math.Max(warunkiMax.temperatura, row.Temperatura);
-                    warunkiMax.wilgotnosc = Math.Max(warunkiMax.wilgotnosc, row.wilgotnosc);
-                    warunkiMax.cisnienie = Math.Max(warunkiMax.cisnienie, row.Cisnienie);
+                    warunkiMin.temperatura = Warunki.Min(warunkiMin.temperatura, row.Temperatura);
+                    warunkiMin.wilgotnosc = Warunki.Min(warunkiMin.wilgotnosc, row.wilgotnosc);
+                    warunkiMin.cisnienie = Warunki.Min(warunkiMin.cisnienie, row.Cisnienie);
+                    warunkiMax.temperatura = Warunki.Max(warunkiMax.temperatura, row.Temperatura);
+                    warunkiMax.wilgotnosc = Warunki.Max(warunkiMax.wilgotnosc, row.wilgotnosc);
+                    warunkiMax.cisnienie = Warunki.Max(warunkiMax.cisnienie, row.Cisnienie);
                 }
             }
 
             foreach (var row in tabelaS)
             {
-                warunkiMin.temperatura = Math.Min(warunkiMin.temperatura, row.Temperatura);
-                warunkiMin.wilgotnosc = Math.Min(warunkiMin.wilgotnosc, row.Wilgotnosc);
-                warunkiMin.cisnienie = Math.Min(warunkiMin.cisnienie, row.Cisnienie);
-                warunkiMax.temperatura = Math.Max(warunkiMax.temperatura, row.Temperatura);
-                warunkiMax.wilgotnosc = Math.Max(warunkiMax.wilgotnosc, row.Wilgotnosc);
-                warunkiMax.cisnienie = Math.Max(warunkiMax.cisnienie, row.Cisnienie);
+                warunkiMin.temperatura = Warunki.Min(warunkiMin.temperatura, row.Temperatura);
+                warunkiMin.wilgotnosc = Warunki.Min(warunkiMin.wilgotnosc, row.Wilgotnosc);
+                warunkiMin.cisnienie = Warunki.Min(warunkiMin.cisnienie, row.Cisnienie);
+                warunkiMax.temperatura = Warunki.Max(warunkiMax.temperatura, row.Temperatura);
+                warunkiMax.wilgotnosc = Warunki.Max(warunkiMax.wilgotnosc, row.Wilgotnosc);
+                warunkiMax.cisnienie = Warunki.Max(warunkiMax.cisnienie, row.Cisnienie);
             }
 
             metoda =

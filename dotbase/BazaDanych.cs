@@ -770,7 +770,13 @@ namespace DotBase
                     int oleDbTypeNumber = col.Field<int>(11);
                     OleDbType oleDbType = (OleDbType)oleDbTypeNumber;
                     string colName = col.Field<string>(3);
-                    szablon += F(3, tabelaId, colName, oleDbToNetTypeConverter(oleDbTypeNumber), oleDbType.ToString(), @"
+                    var colIsNullable = col.Field<bool>(10);
+                    var csTuple = oleDbToNetTypeConverter(oleDbTypeNumber);
+                    var csType = csTuple.Item1;
+                    var csIsNullable = csTuple.Item2;
+                    if (colIsNullable && !csIsNullable)
+                        csType += "?";
+                    szablon += F(3, tabelaId, colName, csType, oleDbType.ToString(), @"
                         public Szablon_{0} {1}({2} value)
                         {{
                             SetField(""{1}"", value, OleDbType.{3});
@@ -787,9 +793,9 @@ namespace DotBase
                             return this;
                         }}
                         "*/);
-                    wiersz += F(3, tabelaId, colName, oleDbToNetTypeConverter(oleDbTypeNumber), oleDbType.ToString(), @"
+                    wiersz += F(3, tabelaId, colName, csType, oleDbType.ToString(), @"
                         public {2} {1};");
-                    wierszConstr += F(4, tabelaId, colName, oleDbToNetTypeConverter(oleDbTypeNumber), oleDbType.ToString(), @"
+                    wierszConstr += F(4, tabelaId, colName, csType, oleDbType.ToString(), @"
                         if (cols.ContainsKey(""{1}""))
                             {1} = row.Field<{2}>(cols[""{1}""]);");
                 }
@@ -929,47 +935,47 @@ namespace DotBase
 
 #endif
 
-        static private string oleDbToNetTypeConverter(int oleDbTypeNumber)
+        static private Tuple<string, bool> oleDbToNetTypeConverter(int oleDbTypeNumber)
         {
             switch (oleDbTypeNumber)
             {
-                case 0: return "object";
-                case 2: return "short";
-                case 3: return "int";
-                case 4: return "float";
-                case 5: return "double";
-                case 6: return "decimal";
-                case 7: return "DateTime";
-                case 8: return "string";
-                case 9: return "object";
-                case 10: return "Exception";
-                case 11: return "bool";
-                case 12: return "object";
-                case 13: return "object";
-                case 14: return "decimal";
-                case 16: return "sbyte";
-                case 17: return "byte";
-                case 18: return "ushort";
-                case 19: return "uint";
-                case 20: return "long";
-                case 21: return "ulong";
-                case 64: return "DateTime";
-                case 72: return "Guid";
-                case 128: return "byte[]";
-                case 129: return "string";
-                case 130: return "string";
-                case 131: return "decimal";
-                case 133: return "DateTime";
-                case 134: return "TimeSpan";
-                case 135: return "DateTime";
-                case 138: return "object";
-                case 139: return "decimal";
-                case 200: return "string";
-                case 201: return "string";
-                case 202: return "string";
-                case 203: return "string";
-                case 204: return "byte[]";
-                case 205: return "byte[]";
+                case 0: return Tuple.Create("object", true);
+                case 2: return Tuple.Create("short", false);
+                case 3: return Tuple.Create("int", false);
+                case 4: return Tuple.Create("float", false);
+                case 5: return Tuple.Create("double", false);
+                case 6: return Tuple.Create("decimal", false);
+                case 7: return Tuple.Create("DateTime", false);
+                case 8: return Tuple.Create("string", true);
+                case 9: return Tuple.Create("object", true);
+                case 10: return Tuple.Create("Exception", true);
+                case 11: return Tuple.Create("bool", false);
+                case 12: return Tuple.Create("object", true);
+                case 13: return Tuple.Create("object", true);
+                case 14: return Tuple.Create("decimal", false);
+                case 16: return Tuple.Create("sbyte", false);
+                case 17: return Tuple.Create("byte", false);
+                case 18: return Tuple.Create("ushort", false);
+                case 19: return Tuple.Create("uint", false);
+                case 20: return Tuple.Create("long", false);
+                case 21: return Tuple.Create("ulong", false);
+                case 64: return Tuple.Create("DateTime", false);
+                case 72: return Tuple.Create("Guid", false);
+                case 128: return Tuple.Create("byte[]", true);
+                case 129: return Tuple.Create("string", true);
+                case 130: return Tuple.Create("string", true);
+                case 131: return Tuple.Create("decimal", false);
+                case 133: return Tuple.Create("DateTime", false);
+                case 134: return Tuple.Create("TimeSpan", false);
+                case 135: return Tuple.Create("DateTime", false);
+                case 138: return Tuple.Create("object", true);
+                case 139: return Tuple.Create("decimal", false);
+                case 200: return Tuple.Create("string", true);
+                case 201: return Tuple.Create("string", true);
+                case 202: return Tuple.Create("string", true);
+                case 203: return Tuple.Create("string", true);
+                case 204: return Tuple.Create("byte[]", true);
+                case 205: return Tuple.Create("byte[]", true);
             }
             throw (new Exception("DataType Not Supported"));
         }
