@@ -569,7 +569,7 @@ namespace DotBase
                 {
                     comboBox5.Items.Add( row.Field<string>(0) );
                 }
-                comboBox5.Items.Add("moc indywidualnego równoważnika dawki Hₚ(10)");
+                comboBox5.Items.Add("moc indywidualnego równoważnika dawki Hp(10)");
             }
         }
 
@@ -580,8 +580,13 @@ namespace DotBase
             e.Cancel = !N.PotwierdzenieZapisz(this, ZapiszDane, true, false);
         }
 
-        //---------------------------------------------------------------
         private void protokółToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            generujProtokol(true);
+        }
+
+        //---------------------------------------------------------------
+        private void generujProtokol(bool dolaczZakres)
         //---------------------------------------------------------------
         {
             string sciezka = _DocumentationPathsLoader.GetPath("ProtokolyMocDawkiWynik", Jezyk.PL) + textBox1.Text + "MocDawki.html";
@@ -597,7 +602,7 @@ namespace DotBase
             model.tlo = textBox5.Text;
             model.tabela = dataGridView1.Rows;
             
-            Dokumenty.ProtokolMocDawki protokol = new Dokumenty.ProtokolMocDawki(model);
+            Dokumenty.ProtokolMocDawki protokol = new Dokumenty.ProtokolMocDawki(model, dolaczZakres);
             if (!protokol.generateDocument(sciezka))
             {
                 MessageBox.Show("Nie podano wszystkich potrzebnych danych!", "Uwaga");
@@ -835,5 +840,11 @@ namespace DotBase
         {
             N.SprawdzZakres(sender as TextBox);
         }
+
+        private void prorokółToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            generujProtokol(false);
+        }
+
     }
 }

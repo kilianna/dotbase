@@ -39,8 +39,6 @@ namespace Wykres
                         return null;
                     case " r.":
                         return "";
-                    case "Hₚ (0,07) ":
-                        return "Hₚ (0.07) ";
                     case "Hp (0,07) ":
                         return "Hp (0.07) ";
                     case "Wartości wzorcowe ":
@@ -356,11 +354,9 @@ namespace Wykres
                 {
                     if (wielkoscFizycznaZOkna != null && (
                         wielkoscFizycznaZOkna.IndexOf("Hp(10)") >= 0 ||
-                        wielkoscFizycznaZOkna.IndexOf("Hₚ(10)") >= 0 ||
-                        wielkoscFizycznaZOkna.IndexOf("Hp (10)") >= 0 ||
-                        wielkoscFizycznaZOkna.IndexOf("Hₚ (10)") >= 0))
+                        wielkoscFizycznaZOkna.IndexOf("Hp (10)") >= 0))
                     {
-                        wielkoscFizyczna = "\u1E22ₚ (10) ";
+                        wielkoscFizyczna = "\u1E22p (10) ";
                     }
                     else
                     {

@@ -58,12 +58,14 @@ namespace DotBase
         {
             ProtokolMocDawkiData m_data = new ProtokolMocDawkiData();
             ProtokolMocDawkiModel m_model;
+            private bool dolaczZakres;
 
             //***************************************************
-            public ProtokolMocDawki(ProtokolMocDawkiModel model)
+            public ProtokolMocDawki(ProtokolMocDawkiModel model, bool dolaczZakres)
                 : base(DocumentsTemplatesFactory.TemplateType.SCIEZKA_PROTOKOL_MOC_DAWKI)
             //***************************************************
             {
+                this.dolaczZakres = dolaczZakres;
                 WczytajSzablon(StaleWzorcowan.stale.PROTOKOL_MOC_DAWKI);
                 m_model = model;
             }
@@ -77,7 +79,9 @@ namespace DotBase
                     m_templateToFill.Replace("<!jednostka>", m_data.getValue(ProtokolMocDawkiData.DataType.JEDNOSTKA))
                                     .Replace("<!wielk_fiz>", m_data.getValue(ProtokolMocDawkiData.DataType.WIELKOSC_FIZYCZNA))
                                     .Replace("<!tlo>", m_data.getValue(ProtokolMocDawkiData.DataType.TLO))
-                                    .Replace("<!tabela>", m_data.getValue(ProtokolMocDawkiData.DataType.TABELA));
+                                    .Replace("<!tabela>", m_data.getValue(ProtokolMocDawkiData.DataType.TABELA))
+                                    .Replace("<!zakresBegin>", dolaczZakres ? "" : "<!--")
+                                    .Replace("<!zakresEnd>", dolaczZakres ? "" : "-->");
 
                     return WypelnijDanePodstawowe() &&
                            WypelnijDanePrzyrzadu() &&
@@ -156,9 +160,12 @@ namespace DotBase
                                         tabela[i].Cells[1].Value.ToString(),
                                         wartoscWzorcowa.ToString(Precyzja.Ustaw(wartoscWzorcowa)),
                                         tabela[i].Cells[2].Value.ToString())
-                        + String.Format("<td><span>{0}</span></td> <td><span>{1}</span></td> </tr>",
-                                        tabela[i].Cells[3].Value.ToString(),
-                                        tabela[i].Cells[4].Value.ToString());
+                        + String.Format("<td><span>{0}</span></td>", tabela[i].Cells[3].Value.ToString());
+                        if (dolaczZakres)
+                        {
+                            tabelaDoWpisania += String.Format("<td><span>{0}</span></td>", tabela[i].Cells[4].Value.ToString());
+                        }
+                        tabelaDoWpisania += "</tr>";
                         ++licznik;
                     }
                 }

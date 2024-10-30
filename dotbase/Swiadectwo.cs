@@ -611,13 +611,13 @@ namespace DotBase
 
                 if (wielkosc_fizyczna[0] == 0)
                 {
-                    _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!wielkosc>", "indywidualny równoważnik dawki Hₚ(10)");
-                    _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!wielkosc2>", "indywidualnego równoważnika dawki Hₚ(10)");
+                    _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!wielkosc>", "indywidualny równoważnik dawki Hp(10)");
+                    _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!wielkosc2>", "indywidualnego równoważnika dawki Hp(10)");
                 }
                 else if (wielkosc_fizyczna[0] == 1)
                 {
-                    _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!wielkosc>", "indywidualny równoważnik dawki Hₚ(0,07)");
-                    _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!wielkosc2>", "indywidualnego równoważnika dawki Hₚ(0,07)");
+                    _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!wielkosc>", "indywidualny równoważnik dawki Hp(0,07)");
+                    _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!wielkosc2>", "indywidualnego równoważnika dawki Hp(0,07)");
                 }
                 else
                 {
