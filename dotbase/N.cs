@@ -16,6 +16,7 @@ namespace DotBase
         public static bool dontSave = false;
         public static bool nieOtwieraj = false;
         public static bool messageBox = false;
+        public static bool stopTest = false;
     };
 
     public static class N

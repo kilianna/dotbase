@@ -1,11 +1,123 @@
-
+import http from 'http';
+import fs from 'fs';
+import path from 'path';
+import open from 'open';
 import { convertXmlToText, normalizeText } from './convert-xml';
-import * as fs from 'node:fs';
 import * as child_process from 'node:child_process';
 import * as util from 'util';
 
-let oldDataBase: { [key: string]: string } = JSON.parse(fs.readFileSync('convert-html/out.json', 'utf-8'));
-let idList: number[] = fs.readFileSync('../dotbase/bin/wyniki/Swiadectwo/done.txt', 'utf-8').split(/(?:\r?\n)+/).filter(x => x).map(x => parseInt(x));
+let DIR = 'C:\\work\\ania\\dotbase\\dotbase\\bin\\wyniki\\Swiadectwo\\';
+
+
+// Your custom function for a specific URL
+function listContent(req: http.IncomingMessage, res: http.ServerResponse<http.IncomingMessage>) {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    let out: string[] = [];
+
+    for (let file of fs.readdirSync(DIR)) {
+        if (file.match(/^[0-9]+SwiadectwoWynik\.html$/i)) {
+            let c = fs.readFileSync(DIR + file, 'utf8');
+            out.push(file);
+        }
+    }
+
+    res.end(JSON.stringify(out));
+}
+
+function getHtmlFile(req: http.IncomingMessage, res: http.ServerResponse<http.IncomingMessage>) {
+    res.writeHead(200, { 'Content-Type': 'text/html;charset=UTF-8' });
+    let name = req.url?.substring(6);
+    let cnt: string;
+    try {
+        cnt = fs.readFileSync(DIR + name, 'utf-8');
+    } catch (err) { cnt = ''; }
+    res.end(cnt);
+}
+
+function saveOutput(req: http.IncomingMessage, res: http.ServerResponse<http.IncomingMessage>) {
+    res.writeHead(200, { 'Content-Type': 'text/plain;charset=UTF-8' });
+    let body = '';
+
+    // Listen for incoming data chunks
+    req.on('data', chunk => {
+        body += chunk.toString(); // Convert Buffer to string
+    });
+
+    // When all data has been received
+    req.on('end', () => {
+        const jsonData = JSON.parse(body); // Parse the JSON data
+        fs.appendFileSync('convert-html/out.json', `${JSON.stringify(jsonData.file)}:${JSON.stringify(jsonData.text)},\n`);
+        res.end('OK');
+    });
+}
+
+fs.writeFileSync('convert-html/out.json', '{\n');
+
+// Server to serve files and handle dynamic URL
+let serverInstance = http.createServer((req, res) => {
+    const requestedUrl = req.url;
+
+    if (requestedUrl === '/list') {
+        listContent(req, res);
+    } else if (requestedUrl === '/out') {
+        saveOutput(req, res);
+    } else if (requestedUrl === '/close') {
+        res.writeHead(200, { 'Content-Type': 'text/plain;charset=UTF-8' });
+        res.end('OK');
+        continueAfterServer();
+    } else if (requestedUrl?.startsWith('/html/')) {
+        getHtmlFile(req, res);
+    } else {
+        // Serve static files for other URLs
+        const filePath = path.join(__dirname, 'convert-html', requestedUrl === '/' ? 'index.html' : requestedUrl!);
+        const extname = path.extname(filePath);
+        let contentType = 'text/html';
+
+        switch (extname) {
+            case '.js':
+                contentType = 'application/javascript';
+                break;
+            case '.css':
+                contentType = 'text/css';
+                break;
+            case '.json':
+                contentType = 'application/json';
+                break;
+            case '.png':
+                contentType = 'image/png';
+                break;
+            case '.jpg':
+                contentType = 'image/jpeg';
+                break;
+        }
+
+        fs.readFile(filePath, (error, content) => {
+            if (error) {
+                if (error.code == 'ENOENT') {
+                    // Page not found
+                    res.writeHead(404, { 'Content-Type': 'text/html' });
+                    res.end('<h1>404 Not Found</h1>');
+                } else {
+                    // Server error
+                    res.writeHead(500);
+                    res.end(`Server Error: ${error.code}`);
+                }
+            } else {
+                // Serve the file content
+                res.writeHead(200, { 'Content-Type': contentType });
+                res.end(content, 'utf-8');
+            }
+        });
+    }
+}).listen(8180, () => {
+    console.log('Server running at http://localhost:8180/');
+    open('http://localhost:8180/');
+});
+
+
+
+let oldDataBase: { [key: string]: string };
+let idList: number[];
 
 function idGroup(x: number): string {
     if (x < 100) return 'xx';
@@ -123,6 +235,35 @@ function removeExceptions(diff: Diff): void {
                 continue;
             }
 
+            // Zaokrąglenia liczb
+            if (typeof entry === 'object'
+                && entry.new.length === 1 && entry.new[0].match(/^-?\d+(?:[.,]\d+)?$/)
+                && entry.old.length === 1 && entry.old[0].match(/^-?\d+(?:[.,]\d+)?$/)
+            ) {
+                let newMatch = entry.new[0].match(/^-?\d+(?:[.,](\d+))?$/)!;
+                let oldMatch = entry.old[0].match(/^-?\d+(?:[.,](\d+))?$/)!;
+                let digits = Math.min(newMatch[1]?.length ?? 0, oldMatch[1]?.length ?? 0);
+                let newNumber = parseFloat(entry.new[0].replace(',', '.') ?? '0');
+                let oldNumber = parseFloat(entry.old[0].replace(',', '.') ?? '0');
+                newNumber = Math.round(newNumber * (10 ** digits));
+                oldNumber = Math.round(oldNumber * (10 ** digits));
+                if (Math.abs(newNumber - oldNumber) < 0.0001) {
+                    group[i] = entry.new[0];
+                }
+                continue;
+            }
+
+            // UZ i Uz w tabeli
+            if (typeof entry === 'object'
+                && entry.new.length === 1 && entry.new[0] === 'UZ'
+                && entry.old.length === 1 && entry.old[0] === 'Uz'
+                && next1 === 'Izotop'
+
+            ) {
+                group[i] = entry.new[0];
+                continue;
+            }
+
             if (typeof entry === 'object'
                 && entry.new.length === 2
                 && entry.old.length === 1 && entry.old[0] === entry.new[0].replace('-', '') + entry.new[1]
@@ -220,30 +361,26 @@ let output = `
         <body>
             <table>`;
 
-for (let i = 0; i < idList.length; i++) {
-    let id = idList[i];
-    process.stdout.write(`\r${id} ${Math.round(i / idList.length * 100)}%        `)
-    compare(id);
+async function continueAfterServer() {
+
+    serverInstance.close();
+    fs.appendFileSync('convert-html/out.json', `"":null}\n`);
+
+    oldDataBase = JSON.parse(fs.readFileSync('convert-html/out.json', 'utf-8'));
+    idList = fs.readFileSync('../dotbase/bin/wyniki/Swiadectwo/done.txt', 'utf-8').split(/(?:\r?\n)+/).filter(x => x).map(x => parseInt(x));
+
+    for (let i = 0; i < idList.length; i++) {
+        let id = idList[i];
+        process.stdout.write(`\r${id} ${Math.round(i / idList.length * 100)}%        `)
+        compare(id);
+    }
+    process.stdout.write('\n');
+
+    output += `
+                </table>
+            </body>
+        </html>`;
+
+    fs.writeFileSync('result.html', output);
+    open(fs.realpathSync('result.html'));
 }
-process.stdout.write('\n');
-
-output += `
-            </table>
-        </body>
-    </html>`;
-
-fs.writeFileSync('result.html', output);
-
-/*
-let c = fs.readFileSync('C:/work/ania/dotbase/dotbase/bin/wyniki/Swiadectwo/190xx/19000SwiadectwoWynik.tmp.docx.executed.xml', 'utf-8');
-let a = convertXmlToText(c);
-
-let bt = fs.readFileSync('convert-html/out.json', 'utf-8');
-let bo : {[key: string] : string} = JSON.parse(bt);
-let b = normalizeText(bo["19000SwiadectwoWynik.html"]);
-
-fs.writeFileSync('a.txt', a);
-fs.writeFileSync('b.txt', b);
-
-console.log(a);
-*/
