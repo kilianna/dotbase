@@ -4,25 +4,30 @@
 				</table>
 				<!tabpunkt_begin>
 				<table id="tabpunkt">
+					<thead>
 					<tr>
-						<th rowspan="2" style="width: 10mm">Lp.</th>
-						<th style="width: 40mm">WARTOŚĆ WZORCOWA</th>
-						<th style="width: 40mm">WARTOŚĆ ZMIERZONA</th>
+						<th rowspan="2" style="width: 12mm">Lp.</th>
+						<th style="width: 26mm">WARTOŚĆ WZORCOWA</th>
+						<th style="width: 26mm">WARTOŚĆ ZMIERZONA</th>
+						<th style="width: 26mm">WARTOŚĆ WSPÓŁCZYNNIKA POPRAWKOWEGO</th>
 					</tr>
 					<tr>
 						<th style="font-size: 10pt"><!c5></th>
 						<th style="font-size: 10pt"><!c5></th>
+						<th style="font-size: 10pt"><!korekcja_jednostki></th>
 					</tr>
+					</thead>
 					<!tabpunkt>
 				</table>
-				<div style="height: 7mm;"></div>
 				<!tabpunkt_end>
+				<!tabwyn_begin>
 				<table id="tabwyn">
 					<tr><th>ZAKRES POMIAROWY<BR>PRZYRZĄDU</th><th>WARTOŚĆ <BR> WSPÓŁCZYNNIKA <BR> POPRAWKOWEGO</th></tr>
 					<tr><th style="font-size: 10pt"><!c5></th><th style="font-size: 10pt"><!korekcja_jednostki></th></tr>
 					<!tabela>
 				</table>
-<div id="komentarz">Zmierzoną wartość <!wielkosc_fizyczna> należy pomnożyć przez odpowiednią wartość współczynnika <br>
+				<!tabwyn_end>
+<div id="komentarz">Zmierzoną wartość <!wielkosc_fizyczna> należy pomnożyć przez odpowiednią wartość współczynnika
 				poprawkowego dla danego zakresu pomiarowego przyrządu.
 				</div>
 <div class="uwaga"><!uwaga></div>

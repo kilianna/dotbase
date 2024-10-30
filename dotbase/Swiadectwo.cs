@@ -189,9 +189,9 @@ namespace DotBase
                 _Zapytanie = String.Format("SELECT zakres, wspolczynnik, niepewnosc FROM Wyniki_moc_dawki WHERE id_wzorcowania = {0}",
                            m_data.getValue(SwiadectwoData.DataType.ID_WZORCOWANIA));
 
-                PobierzDaneTabelowe();
+                var wartWspPop = PobierzDaneTabelowe();
 
-                if (dolaczTabelePunkty)
+                if (dolaczTabelePunkty && wartWspPop != null)
                 {
                     var ID_protokolu = wc.Item1;
                     var Data_wzorcowania = wc.Item2;
@@ -206,14 +206,19 @@ namespace DotBase
                     _SzablonPodstawowy = _SzablonPodstawowy
                         .Replace("<!tabpunkt>", tabpunkt)
                         .Replace("<!tabpunkt_begin>", "")
-                        .Replace("<!tabpunkt_end>", "");
+                        .Replace("<!tabpunkt_end>", "")
+                        .Replace("<!tabwyn_begin>", "<!--")
+                        .Replace("<!tabwyn_end>", "-->")
+                        .Replace("<!wart_wsp_pop>", wartWspPop);
                 }
                 else
                 {
                     _SzablonPodstawowy = _SzablonPodstawowy
                         .Replace("<!tabpunkt>", "")
                         .Replace("<!tabpunkt_begin>", "<!--")
-                        .Replace("<!tabpunkt_end>", "-->");
+                        .Replace("<!tabpunkt_end>", "-->")
+                        .Replace("<!tabwyn_begin>", "")
+                        .Replace("<!tabwyn_end>", "");
                 }
 
                 _SzablonPodstawowy = _SzablonPodstawowy.Replace("<!c1>", ch.ToString());
@@ -276,12 +281,16 @@ namespace DotBase
 
                 for (int i = 0; i < tabPunkt.Count; i++)
                 {
-                    res.AppendFormat("<tr><td>{0}</td><td>{1}&nbsp;±&nbsp;{2}</td><td>{3}&nbsp;±&nbsp;{4}</td></tr>",
+                    res.AppendFormat("<tr><td>{0}</td><td>{1}&nbsp;±&nbsp;{2}</td><td>{3}&nbsp;±&nbsp;{4}</td>",
                         i + 1,
                         tabWartWzor[i].ToString("0.00"),
                         (tabWartWzor[i] * 0.02).ToString("0.00"),
                         tabPunkt[i].Item1,
                         tabPunkt[i].Item2);
+                    if (i == 0) {
+                        res.AppendFormat("<td rowspan=\"{0}\"><!wart_wsp_pop></td>", tabPunkt.Count);
+                    }
+                    res.Append("</tr>");
                 }
 
                 return res.ToString();
@@ -722,9 +731,10 @@ namespace DotBase
             }
 
             //********************************************************************************************
-            private void PobierzDaneTabelowe()
+            private string PobierzDaneTabelowe()
             //********************************************************************************************
             {
+                string wartWspPop = null;
                 List<double> zakres = new List<double>();
                 List<double> wspolczynnik = new List<double>();
                 List<double> niepewnosc = new List<double>();
@@ -755,6 +765,9 @@ namespace DotBase
                     {
                         _Tabela.AppendFormat("<tr><td>{0}</td><td>{1} &plusmn; {2}</td></tr>", zakres[i].ToString("G"), String.Format("{0:0.00}", wspolczynnik[i]), String.Format("{0:0.00}", niepewnosc[i]));
                     }
+                    if (zakres.Count == 1) {
+                        wartWspPop = String.Format("{0} &plusmn; {1}", String.Format("{0:0.00}", wspolczynnik[0]), String.Format("{0:0.00}", niepewnosc[0]));
+                    }
                 }
                 else
                 {
@@ -762,7 +775,12 @@ namespace DotBase
                     {
                         _Tabela.AppendFormat("<tr><td>{0}</td><td>{1} &plusmn; {2}</td></tr>", zakres[i].ToString("G"), wspolczynnik[i].ToString("G"), niepewnosc[i].ToString("G"));
                     }
+                    if (zakres.Count == 1) {
+                        wartWspPop = String.Format("{0} &plusmn; {1}", wspolczynnik[0].ToString("G"), niepewnosc[0].ToString("G"));
+                    }
                 }
+
+                return wartWspPop;
             }
 
             //********************************************************************************************
