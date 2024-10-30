@@ -542,6 +542,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Resources\logTemplate.accdb.gz" />
+    <None Include="Szablony\swiad_wzor-en.json" />
     <None Include="Szablony\swiad_wzor.json" />
   </ItemGroup>
   <ItemGroup>
