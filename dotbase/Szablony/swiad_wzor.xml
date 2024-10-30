@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<%! eval(utils.include("wspolne.js") + "\n" + utils.include("swiad_wzor.js")) %>
+<%!
+
+const metody = {
+    wzor1: 'Procedura pomiarowa WZOR-1 (wyd. 7 z dn. 15.09.2023)',
+    wzor2: 'Procedura pomiarowa WZOR-2 (wyd. 6 z dn. 15.09.2023)',
+    wzor1wzor2: 'Procedura pomiarowa WZOR-1 (wyd. 7 z dn. 15.09.2023) oraz procedura pomiarowa WZOR-2 (wyd. 6 z dn. 15.09.2023)',
+};
+
+const spojnosciPomiarowe = {
+    gum: 'Świadectwo jest wydane w ramach porozumienia EA MLA w zakresie wzorcowania i potwierdza spójność wyników pomiarów z wzorcami utrzymanymi w GUM.',
+    si: 'Świadectwo jest wydane w ramach porozumienia EA MLA w zakresie wzorcowania i potwierdza spójność wyników pomiarów z jednostkami miar Międzynarodowego Układu Jednostek Miar (SI).',
+};
+
+nr_swiadectwa =  nr_karty + '/' + data_wydania.rok;
+if (poprawa) {
+    nr_swiadectwa += 'P';
+}
+
+%>
 <document>
   <p-style id="Normal" name="Normal">
     <font face="Arial" size="10pt"/>
@@ -112,7 +130,7 @@
     </tr>
     <tr>
       <td>METODA WZORCOWANIA</td>
-      <td colspan= "2"><% metoda %></td>
+      <td colspan= "2"><% metody[metoda] %></td>
     </tr>
     <tr>
       <td>UZUPEŁNIENIA, ODSTĘPSTWA, OGRANICZENIA METODY</td>
