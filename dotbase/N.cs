@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using System.Diagnostics;
+using System.IO;
 using System.Security.Cryptography;
 
 namespace DotBase
@@ -159,6 +161,12 @@ namespace DotBase
             {
                 textBox.BackColor = System.Drawing.Color.Orange;
             }
+        }
+
+        public static string getProgramDir()
+        {
+            var file = Process.GetCurrentProcess().MainModule.FileName;
+            return Path.GetDirectoryName(file);
         }
 
 

@@ -1,0 +1,15 @@
+﻿{
+    "nazwa": "radiometr",
+    "typ": "EKO-C",
+    "nr_fab": "735/2010",
+    "rok": "2010",
+    "producent": "POLON EKOLAB",
+    "zleceniodawca": "Zakład Fizyki Radiacyjnej i Dozymetrii Instytut Fizyki Jądrowej PAN",
+    "adres": "ul. Radzikowskiego 152 31-342 Kraków",
+    "metoda": "Procedura pomiarowa WZOR-1 (wyd. 7 z dn. 15.09.2023)",
+    "cisnienie": "978",
+    "temperatura": "23",
+    "wilgotnosc": "59",
+    "data_przyjecia": "17 września 2023",
+    "data_wykonania": "18 września 2023"
+}
