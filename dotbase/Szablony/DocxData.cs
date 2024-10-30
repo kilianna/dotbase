@@ -36,8 +36,14 @@ namespace DotBase.Szablony
     abstract class DocxData
     {
         public Constants stale;
+        public Jezyk jezyk;
 
         protected abstract string FileName { get; }
+
+        protected virtual bool PreProcess(IWin32Window owner)
+        {
+            return true;
+        }
 
         public DocxData()
         {
@@ -46,18 +52,27 @@ namespace DotBase.Szablony
 
         public void Generate(IWin32Window owner)
         {
-            Type thisType = this.GetType();
-            var win = new DocxWindow();
-            var outputFile = Path.Combine(N.getProgramDir(), FileName);
-            win.generate(owner, thisType.Name, this, outputFile);
-            win.Dispose();
+            bool valid = PreProcess(owner);
+            if (valid)
+            {
+                Type thisType = this.GetType();
+                var win = new DocxWindow();
+                var outputFile = Path.Combine(N.getProgramDir(), FileName);
+                var templateFile = String.Format(@"{0}\Szablony\{1}{2}.xml", N.getProgramDir(), thisType.Name, JezykTools.kocowka(jezyk));
+                if (!File.Exists(templateFile)) {
+                    templateFile = String.Format(@"{0}\Szablony\{1}.xml", N.getProgramDir(), thisType.Name);
+                }
+                win.generate(owner, templateFile, this, outputFile);
+                win.Dispose();
+            }
         }
 
-        protected string DirGroup(string id, int count = 2)
+        protected object DirGroup<T>(T id, int count = 2)
         {
-            if (id.Length > count)
+            var idStr = id.ToString();
+            if (idStr.Length > count)
             {
-                return id.Substring(0, id.Length - count) + new string('x', count);
+                return idStr.Substring(0, idStr.Length - count) + new string('x', count);
             }
             else
             {
