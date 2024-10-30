@@ -24,19 +24,16 @@ if (poprawa) {
   </p-style>
 
   <section
-      border="single black 0.5mm 5mm, single black 0.5mm 5mm, single black 0.5mm 2.5mm"
+      border="single black 0.5mm 5mm"
       width="21cm" height="29.7cm"
-      margin="1cm 0.7cm 1cm 1cm" headerMargin="1cm" footerMargin="1cm" />
+      margin="1cm 1cm 1cm 1cm" headerMargin="1cm" footerMargin="1cm" />
 
   <header page="first">
     <p align="center" preserve="y">
-      <img src="ifj.png" width="2.2cm" height="2cm" horizontal="margin left"
-      vertical="top-margin 3.24cm"
-            /><img src="pca.png" width="1.77cm" height="3cm" horizontal="margin right"
-    vertical="page 2cm"
-            /><img src="ilac-mra.png" width="1.77cm" height="1.77cm" horizontal="margin right"
-    vertical="page 5.4cm"
-            /><b>Laboratorium Wzorcowania Przyrządów Dozymetrycznych</b><br/>
+      <img src="ifj.png" width="2.2cm" height="2cm" horizontal="page 1.5cm" vertical="top-margin 2.2cm"
+        /><img src="pca.png" width="1.77cm" height="3cm" horizontal="right-margin -2.27cm" vertical="page 1.1cm"
+        /><img src="ilac-mra.png" width="1.77cm" height="1.77cm" horizontal="right-margin -2.27cm" vertical="page 4.4cm"
+        /><b>Laboratorium Wzorcowania Przyrządów Dozymetrycznych</b><br/>
       Instytut Fizyki Jądrowej im. Henryka Niewodniczańskiego<br/>
       Polskiej Akademii Nauk<br/>
       ul. Radzikowskiego 152, PL 31-342 Kraków<br/>
@@ -50,7 +47,7 @@ if (poprawa) {
     <p>
       <font size="22pt" bold="y">ŚWIADECTWO WZORCOWANIA</font>
     </p>
-    <p tabs="1cm, 10cm center, 16cm right" border="none, none, single black 0.3mm">
+    <p tabs="1cm, 10.5cm center, 18cm right" border="none, none, single black 0.3mm">
       <br/>
       <tab/>Data wydania:&nbsp; <% data_wydania.tekst[jezyk] %>
       <tab/>Nr świadectwa:&nbsp; <b><% nr_swiadectwa %></b>
@@ -68,8 +65,8 @@ if (poprawa) {
     <p align="center">
       ŚWIADECTWO WZORCOWANIA wydane przez LABORATORIUM AKREDYTOWANE Nr AP 029<br/>
     </p>
-    <p tabs="1cm, 10cm center, 16cm right" border="none, none, single black 0.3mm">
-      <tab/>Data wydania:&nbsp; 10 stycznia 2024
+    <p tabs="1cm, 10.5cm center, 18cm right" border="none, none, single black 0.3mm">
+      <tab/>Data wydania:&nbsp; <% data_wydania.tekst[jezyk] %>
       <tab/>Nr świadectwa:&nbsp; <b><% nr_swiadectwa %></b>
       <tab/>Strona&nbsp; <page-number/>/<total-pages/><br/>
     </p>
@@ -148,7 +145,7 @@ if (poprawa) {
         <b>Ciśnienie</b>
       </td>
       <td>
-        ( <% tabeleMin.cisnienie - stale.UNCERTAINITY_PRESSURE_VALUE %> - <% tabeleMax.cisnienie + stale.UNCERTAINITY_PRESSURE_VALUE %> ) hPa
+        ( <!-- TODO: % tabeleMin.cisnienie - stale.UNCERTAINITY_PRESSURE_VALUE % > - < % tabeleMax.cisnienie + stale.UNCERTAINITY_PRESSURE_VALUE %--> ) hPa
       </td>
     </tr>
     <tr>
@@ -156,7 +153,7 @@ if (poprawa) {
         <b>Temperatura</b>
       </td>
       <td>
-        ( <% tabeleMin.temperatura - stale.UNCERTAINITY_TEMPERATURE_VALUE %> - <% tabeleMax.temperatura + stale.UNCERTAINITY_TEMPERATURE_VALUE %> ) °C
+        ( <!-- TODO: % tabeleMin.temperatura - stale.UNCERTAINITY_TEMPERATURE_VALUE % > - < % tabeleMax.temperatura + stale.UNCERTAINITY_TEMPERATURE_VALUE %--> ) °C
       </td>
     </tr>
     <tr>
@@ -164,13 +161,13 @@ if (poprawa) {
         <b>Wilgotność</b>
       </td>
       <td>
-        ( <% tabeleMin.wilgotnosc - stale.UNCERTAINITY_HUMIDITY_VALUE %> - <% tabeleMax.wilgotnosc + stale.UNCERTAINITY_HUMIDITY_VALUE %> ) %
+        ( <!-- TODO: % tabeleMin.wilgotnosc - stale.UNCERTAINITY_HUMIDITY_VALUE % > - < % tabeleMax.wilgotnosc + stale.UNCERTAINITY_HUMIDITY_VALUE %--> ) %
       </td>
     </tr>
     <tr>
       <td>DATA PRZYJĘCIA DO WZORCOWANIA</td>
       <td colspan= "2">
-        <% data_przyjecia.tekst[jezyk] %></td>
+        <% zlecenie.Data_przyjecia.tekst[jezyk] %></td>
     </tr>
     <tr>
       <td>DATA WYKONANIA WZORCOWANIA</td>
@@ -179,7 +176,7 @@ if (poprawa) {
     </tr>
     <tr>
       <td>SPÓJNOŚĆ POMIAROWA</td>
-      <td colspan= "2" p-align="justify"><% spojnoscPomiarowa %></td>
+      <td colspan= "2" p-align="justify"><!-- TODO: % spojnoscPomiarowa %--></td>
     </tr>
     <tr>
       <td>WYNIKI WZORCOWANIA</td>
