@@ -36,6 +36,17 @@ const rownowaznikiDawki = [
   },
 ];
 
+const jednostkiDoKorekcji = new Set([
+  'cps',
+  'cpm',
+  '1/s',
+  '1/min',
+  'imp/s',
+  'imp/min',
+  's-1',
+  'bq/cm2',
+]);
+
 nr_swiadectwa =  nr_karty + '/' + data_wydania.rok;
 if (poprawa) {
     nr_swiadectwa += 'P';
@@ -221,8 +232,47 @@ if (poprawa) {
 
   <%! /* ------------------------------- Moc Dawki ---------------------------- */ %>
 
-  <p><% litera(i) %>) </p>
+  <p><% litera(i) %>) Wzorcowanie źródłem gamma: Cs-137; <% wzorcowanie.Wielkosc_fizyczna %></p>
   <p></p>
+  <%! pokazSonde() %>
+  <p></p>
+
+  <%!
+  let jednostka =
+    (jednostkiDoKorekcji.has(wyn.jednostka.Jednostka.toLowerCase()))
+      ? `(μGy/h)/(${wyn.jednostka.Jednostka})`
+      : wyn.jednostka.Jednostka;
+  %>
+
+  <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">
+    <tc width="8.5cm" />
+    <tc width="8.5cm" />
+    <tr font-bold="1">
+      <td>ZAKRES POMIAROWY PRZYRZĄDU</td>
+      <td>WARTOŚĆ WSPÓŁCZYNNIKA POPRAWKOWEGO</td>
+    </tr>
+    <tr font-bold="1">
+      <td><% jednostka %></td>
+      <td>-</td>
+    </tr>
+    <%! for (let row of wyn.tabela) { %>
+    <tr>
+      <td><% tekst(row.zakres, 5) %></td>
+      <%! digits = calcDigits(3, row.wspolczynnik, 2, row.niepewnosc) %>
+      <td><% fixed(row.wspolczynnik, digits) %> ± <% fixed(row.niepewnosc, digits) %></td>
+    </tr>
+    <%! } %>
+  </table>
+
+  <p></p>
+  <p>Zmierzoną wartość <% wzorcowanie.Wielkosc_fizyczna.replace('moc', 'mocy') %> należy pomnożyć
+    przez odpowiednią wartość współczynnika poprawkowego dla danego zakresu pomiarowego przyrządu.</p>
+  <p></p>
+
+  <%! if (uwMD?.trim()) { %>
+  <p><%= multiline(uwMD) %></p>
+  <p></p>
+  <%! } %>
 
 <%! } else if (wzorcowanie.Rodzaj_wzorcowania == "d") { %>
 
@@ -363,8 +413,62 @@ if (poprawa) {
 
   <%! /* ------------------------------- Skazenia ---------------------------- */ %>
 
-  <p><% litera(i) %>) </p>
+  <p><% litera(i) %>) Wzorcowanie źródłami powierzchniowymi</p>
   <p></p>
+
+  <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">
+    <tc width="0.75cm" />
+    <tc width="2cm" />
+    <tc width="2cm" />
+    <tc width="2cm" />
+    <tc width="2cm" />
+    <tc width="2cm" />
+    <tc width="3cm" />
+    <tc width="2cm" />
+    <tc width="3.25cm" />
+    <tr font-bold="1">
+      <td rowspan="3">Lp.</td>
+      <td colspan="3">Sonda</td>
+      <td colspan="3">Źródło</td>
+      <td rowspan="3">Jednostka przyrządu</td>
+      <td rowspan="2">Współczynnik kalibracyjny na jednostkę przyrządu (*)</td>
+    </tr>
+    <tr font-bold="1">
+      <td rowspan="2">Typ</td>
+      <td rowspan="2">Nr fabryczny</td>
+      <td>U<sub>Z</sub></td>
+      <td rowspan="2">Izotop</td>
+      <td rowspan="2">Rodzaj promie-<br/>niowania</td>
+      <td>Powierzchniowa emisja promieniowania</td>
+    </tr>
+    <tr font-bold="1">
+      <td>V</td>
+      <td>1/(cm<sup>2</sup>⋅s)</td>
+      <td>1/(cm<sup>2</sup>)</td>
+    </tr>
+  </table>
+
+  <p></p>
+  <p>
+    (*) liczbę cząstek emitowanych przez powierzchnię 1 cm<sup>2</sup> w ciągu 1 sekundy oblicza się mnożąc wskazania
+    przyrządu (wyrażone w jednostkach podanych w tabeli) przez współczynnik kalibracyjny
+  </p>
+  <p></p>
+
+  <%! /*
+<div class="wzornag"><!c1>) </div>
+<table id="wynikiska">
+	<tr><th rowspan="3">Lp.</th><th colspan="3">Sonda</th><th colspan="3">Źródło</th><th rowspan="3">Jednostka przyrządu</th><th rowspan="2">Współczynnik kalibracyjny<br>na jednostkę przyrządu (*)</th></tr>
+	<tr><td rowspan="2">Typ</td><td rowspan="2">Nr fabryczny</td><td>U<sub>z</sub></td><td rowspan="2">Izotop</td><td rowspan="2">Rodzaj promieniowania</td><td>Powierzchniowa emisja promieniowania</td></tr>
+	<tr><td>V</td><td>1/(cm<sup>2</sup>&sdot;s)</td><td>1/(cm<sup>2</sup>)</td></tr>				
+	<!tabela>	
+	</table>
+<div id="komentarzska"><p style="margin: 0; padding: 0;">(*) liczbę cząstek emitowanych przez powierzchnię 1 cm<sup>2</sup> w ciągu 1 sekundy oblicza się mnożąc wskazania</p>
+<p style="text-indent: 4mm; margin: 0; padding: 0;">przyrządu (wyrażone w jednostkach podanych w tabeli) przez współczynnik kalibracyjny</p>
+</div>
+<div class="uwaga"><!uwaga></div>
+
+  */%>
 
 <%! } %>
 
