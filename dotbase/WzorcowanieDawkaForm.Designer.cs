@@ -504,10 +504,10 @@
             this.radioButton4.Location = new System.Drawing.Point(634, 282);
             this.radioButton4.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(97, 21);
+            this.radioButton4.Size = new System.Drawing.Size(70, 21);
             this.radioButton4.TabIndex = 24;
             this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Moc kermy";
+            this.radioButton4.Text = "Kerma";
             this.radioButton4.UseVisualStyleBackColor = true;
             // 
             // radioButton3
