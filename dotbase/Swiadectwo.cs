@@ -51,8 +51,6 @@ namespace DotBase
 
         class Swiadectwo : Wydruki
         {
-            //Szablony.swiad_wzor szablon = new Szablony.swiad_wzor();
-
             StringBuilder _Tabela;
             StringBuilder _SzablonGlownyWzorcowania;
             StringBuilder _SzablonDrugiejStrony;
@@ -62,7 +60,7 @@ namespace DotBase
 
             enum staleZrodel { STRONT_SLABY = 2, WEGIEL_SLABY, AMERYK = 7, STRONT_SILNY, WEGIEL_SILNY, CHLOR, PLUTON = 17, STRONT_NAJSILNIEJSZY };
 
-            //enum szablon { DAWKA, MOC_DAWKI, SKAZENIA, SYG_DAWKI, SYG_MOCY_DAWKI };
+            enum szablon { DAWKA, MOC_DAWKI, SKAZENIA, SYG_DAWKI, SYG_MOCY_DAWKI };
 
 
             override protected bool fillDocument() { return true; }
@@ -70,28 +68,16 @@ namespace DotBase
 			override protected bool saveDocument(string path) { return true; }
 
             //********************************************************************************************
-            public Swiadectwo(int nrKarty, DateTime dataWydania, DateTime dataWykonania, DateTime dataPrzyjecia, String sprawdzil, bool poprawa, string uwMD, string uwD, string uwS, string uwSMD, string uwSD, Jezyk jezykSwiadectwa) : base(jezykSwiadectwa)
+            public Swiadectwo(int nrKarty, DateTime dataWydania, DateTime dataWykonania, DateTime dataPrzyjecia, String sprawdzil, string poprawa, string uwMD, string uwD, string uwS, string uwSMD, string uwSD, Jezyk jezykSwiadectwa) : base(jezykSwiadectwa)
             //********************************************************************************************
             {
-                /*szablon.nr_karty = nrKarty.ToString();
-                szablon.data_wydania = dataWydania;
-                szablon.data_wykonania = dataWykonania;
-                szablon.data_przyjecia = dataPrzyjecia;
-                szablon.sprawdzil = sprawdzil;
-                szablon.poprawa = poprawa;
-                szablon.uwMD = uwMD;
-                szablon.uwD = uwD;
-                szablon.uwS = uwS;
-                szablon.uwSMD = uwSMD;
-                szablon.uwSD = uwSD;
-                szablon.jezyk = jezykSwiadectwa;*/
                 m_data.setValue(SwiadectwoData.DataType.NR_KARTY, nrKarty.ToString());
                 m_data.setValue(SwiadectwoData.DataType.DATA_WYDANIA, formatujDate(dataWydania));
                 m_data.setValue(SwiadectwoData.DataType.ROK, dataWydania.Year.ToString());
                 m_data.setValue(SwiadectwoData.DataType.DATA_WYKONANIA, formatujDate(dataWykonania));
                 m_data.setValue(SwiadectwoData.DataType.DATA_PRZYJECIA, formatujDate(dataPrzyjecia));
                 m_data.setValue(SwiadectwoData.DataType.SPRAWDZIL, sprawdzil);
-                m_data.setValue(SwiadectwoData.DataType.POPRAWA, poprawa.ToString());
+                m_data.setValue(SwiadectwoData.DataType.POPRAWA, poprawa);
                 m_data.setValue(SwiadectwoData.DataType.UWAGA_MD, uwMD);
                 m_data.setValue(SwiadectwoData.DataType.UWAGA_D, uwD);
                 m_data.setValue(SwiadectwoData.DataType.UWAGA_S, uwS);
@@ -1142,72 +1128,6 @@ namespace DotBase
                 _Zapytanie = String.Format("SELECT COUNT(*) FROM Wzorcowanie_cezem WHERE id_karty = {0} AND rodzaj_wzorcowania = 'sm' AND Dolacz=true",
                                            m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
                 m_data.setValue(SwiadectwoData.DataType.WZ_SYG_MOCY_DAWKI_ILE, _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0).ToString());
-            }
-
-            public Szablony.DocxData pobierzDaneSzablonu()
-            {
-                try
-                {
-                    pobierzDaneSzablonu2();
-                }
-                catch (Exception)
-                {
-                    return null;
-                }
-                return null;
-            }
-
-            public void pobierzDaneSzablonu2()
-            {
-                /*
-                // ------------------------------ Dane Przyrządu ------------------------------
-
-                szablon.przyrzad = _BazaDanych.TworzTabeleDanych(
-                    "SELECT * FROM Dozymetry "+
-                    "WHERE id_dozymetru=(SELECT id_dozymetru FROM Karta_przyjecia WHERE id_karty = ?)",
-                    szablon.nr_karty).Rows[0];
-
-                // ------------------------------ Dane Zleceniodawcy ------------------------------
-
-                szablon.zleceniodawca = _BazaDanych.TworzTabeleDanych(
-                    "SELECT * FROM Zleceniodawca WHERE id_zleceniodawcy = " +
-                    "(SELECT id_zleceniodawcy FROM Zlecenia WHERE id_zlecenia = " +
-                    "(SELECT id_zlecenia FROM Karta_przyjecia WHERE id_karty = ?))",
-                    szablon.nr_karty).Rows[0];
-
-                // ------------------------------ Dane Wzorcowania Cezem ------------------------------
-
-                szablon.tabelaMD = _BazaDanych.TworzTabeleDanych(
-                    "SELECT * FROM wzorcowanie_cezem WHERE id_karty = ? AND rodzaj_wzorcowania='md' AND dolacz=true",
-                    szablon.nr_karty).Rows;
-                szablon.tabelaD = _BazaDanych.TworzTabeleDanych(
-                    "SELECT * FROM wzorcowanie_cezem WHERE id_karty = ? AND rodzaj_wzorcowania='d' AND dolacz=true",
-                    szablon.nr_karty).Rows;
-                szablon.tabelaSM = _BazaDanych.TworzTabeleDanych(
-                    "SELECT * FROM wzorcowanie_cezem WHERE id_karty = ? AND rodzaj_wzorcowania='sm' AND dolacz=true",
-                    szablon.nr_karty).Rows;
-                szablon.tabelaSD = _BazaDanych.TworzTabeleDanych(
-                    "SELECT * FROM wzorcowanie_cezem WHERE id_karty = ? AND rodzaj_wzorcowania='sd' AND dolacz=true",
-                    szablon.nr_karty).Rows;
-                szablon.tabelaS = _BazaDanych.TworzTabeleDanych(
-                    "SELECT * FROM wzorcowanie_zrodlami_powierzchniowymi where id_karty = ? AND dolacz=true",
-                    szablon.nr_karty).Rows;
-
-                // ------------------------------ jednostki ------------------------------
-
-                try
-                {
-                    szablon.jednostki = _BazaDanych.TworzTabeleDanych(
-                        "SELECT * FROM Jednostki WHERE ID_jednostki=" +
-                        "(SELECT TOP 1 ID_jednostki FROM wzorcowanie_cezem WHERE ID_karty=? AND rodzaj_wzorcowania='md')",
-                        szablon.nr_karty).Rows[0];
-                }
-                catch
-                {
-                    szablon.jednostki = null;
-                }*/
-
-
             }
         }
     }
