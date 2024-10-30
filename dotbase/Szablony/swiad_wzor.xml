@@ -182,6 +182,79 @@ if (poprawa) {
 
   <p></p>
 
+<%! for (let i = 0; i < wyniki.length; i++) {
+  let wyn = wyniki[i];
+  let wzorcowanie = wyn.wzorcowanie_zrodlami_powierzchniowymi || wyn.wzorcowanie_cezem;
+
+  function pokazSonde() {
+    %><p tabs="1cm, 9cm"><tab/>Typ sondy:&nbsp;
+    <% wyn.sonda ? wyn.sonda.Typ : 'nie dotyczy' %><tab/>Numer fabryczny sondy:&nbsp;
+    <% wyn.sonda ? wyn.sonda.Nr_fabryczny : 'nie dotyczy' %></p><%!
+  }
+
+  %>
+
+<%! if (wzorcowanie.Rodzaj_wzorcowania == "md") { /* Moc Dawki */ %>
+
+  <p><% litera(i) %>) </p>
+  <p></p>
+
+<%! } else if (wzorcowanie.Rodzaj_wzorcowania == "d") /* Dawka */ { %>
+
+  <p><% litera(i) %>) </p>
+  <p></p>
+
+<%! } else if (wzorcowanie.Rodzaj_wzorcowania == "sm") /* Syg Mocy Dawki */ { %>
+
+  <p><% litera(i) %>) Wzorcowanie źródłem gamma: Cs-137; moc przestrzennego równoważnika dawki (sygnalizator progowy)</p>
+  <p></p>
+  <p>Zestawienie nastawień przyrządu i odpowiadających im rzeczywistych wartości, przy których włączona zostaje sygnalizacja ostrzegawcza.</p>
+  <p></p>
+  <%! pokazSonde() %>
+  <p></p>
+  <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm">
+    <tc width="4.5cm" />
+    <tc width="6.5cm" />
+    <tc width="6.0cm" />
+    <tr font-bold="1">
+      <td>USTAWIONY PRÓG</td>
+      <td>RZECZYWISTE WARTOŚCI, PRZY KTÓRYCH WŁĄCZONA ZOSTAJE SYGNALIZACJA OSTRZEGAWCZA</td>
+      <td>WARTOŚĆ WSPÓŁCZYNNIKA POPRAWKOWEGO</td>
+    </tr>
+    <tr>
+      <td><% mikro(wyn.jenostka?.Jednostka || blad('Brak jednostki')) %></td>
+      <td><% mikro(wyn.jenostka?.Jednostka || blad('Brak jednostki')) %></td>
+      <td>-</td>
+    </tr>
+    <%! for (let row of wyn.tabela) { %>
+    <tr>
+      <td><% row.prog %></td>
+      <td><% row.wartosc_zmierzona %> ± <% row.niepewnosc %></td>
+      <td><% row.wspolczynnik %> ± <% row.niepewnosc_wspolczynnika %></td>
+    </tr>
+    <%! } %>
+  </table>
+
+  <p></p>
+  <p>Wybraną wartość progu należy pomnożyć przez odpowiednią wartość współczynnika poprawkowego.</p>
+  <p></p>
+  <p>UWAGA</p>
+  <p></p>
+
+<%! } else if (wzorcowanie.Rodzaj_wzorcowania == "sd") /* Syg Dawki */ { %>
+
+  <p><% litera(i) %>) </p>
+  <p></p>
+
+<%! } else  { /* Skazenia */ %>
+
+  <p><% litera(i) %>) </p>
+  <p></p>
+
+<%! } %>
+
+<%! } %>
+
   <p>
     <br/>
     <br/>
