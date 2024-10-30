@@ -93,7 +93,7 @@ namespace DotBase
                                                                            dataWykonania.Value,
                                                                            table.Rows[0].Field<DateTime>("Data_przyjecia"),
                                                                            textBox4.Text,
-                                                                           poprawa.Checked.ToString(),
+                                                                           poprawa.Checked,
                                                                            uwMD.Text,
                                                                            uwD.Text,
                                                                            uwS.Text,
