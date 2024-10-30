@@ -164,12 +164,12 @@ if (poprawa) {
     <tr>
       <td><b>Temperatura</b></td>
       <td>( <% tekst(warunkiMin.temperatura - stale.UNCERTAINITY_TEMPERATURE_VALUE) %>
-          - <% tekst(warunkiMax.temperatura + stale.UNCERTAINITY_TEMPERATURE_VALUE) %> ) hPa</td>
+          - <% tekst(warunkiMax.temperatura + stale.UNCERTAINITY_TEMPERATURE_VALUE) %> ) <sup>o</sup>C</td>
     </tr>
     <tr>
       <td><b>Wilgotność</b></td>
       <td>( <% tekst(warunkiMin.wilgotnosc - stale.UNCERTAINITY_HUMIDITY_VALUE) %>
-          - <% tekst(warunkiMax.wilgotnosc + stale.UNCERTAINITY_HUMIDITY_VALUE) %> ) hPa</td>
+          - <% tekst(warunkiMax.wilgotnosc + stale.UNCERTAINITY_HUMIDITY_VALUE) %> ) %</td>
     </tr>
     <tr>
       <td>DATA PRZYJĘCIA DO WZORCOWANIA</td>
