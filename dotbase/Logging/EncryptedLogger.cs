@@ -108,7 +108,7 @@ namespace DotBase.Logging
             if (failure != null && SynchronizationContext.Current != null)
             {
                 Monitor.Exit(lk);
-                MessageBox.Show("Błąd zapisywania logów diagnostycznych: " + failure, "Błąd");
+                MyMessageBox.Show("Błąd zapisywania logów diagnostycznych: " + failure, "Błąd");
                 Monitor.Enter(lk);
                 failure = null;
             }

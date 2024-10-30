@@ -110,8 +110,6 @@
             this.Name = "MenuGlowneForm";
             this.Text = "Menu główne";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MenuGlowneForm_FormClosing);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MenuGlowneForm_FormClosed);
-            this.Load += new System.EventHandler(this.MenuGlowneForm_Load);
             this.Shown += new System.EventHandler(this.MenuGlowneForm_Shown);
             this.ResumeLayout(false);
 
