@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Data.OleDb;
 using System.Threading;
 using DotBase.Logging;
+using System.Runtime.InteropServices;
 
 namespace DotBase
 {
@@ -12,9 +13,13 @@ namespace DotBase
     {
         static Logger log = Log.create();
 
+        [DllImport("shcore.dll")]
+        static extern int SetProcessDpiAwareness(int a);
+
         [STAThread]
         static void Main(string[] args)
         {
+            SetProcessDpiAwareness(2);
             zmienJezyk(Jezyk.PL);
             if (args.Length > 0 && (args[0] == "--version" || args[0] == "--pretty-version"))
             {

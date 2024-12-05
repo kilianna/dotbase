@@ -1,4 +1,5 @@
 /dotbase/obj/
+/dotbase/.vs
 /dotbase/bin/Debug/
 /dotbase/bin/Release/
 /dotbase/bin/wyniki/**/*.html
@@ -18,3 +19,5 @@
 !/manual/Instrukcja.tex
 /manual/Wersja.tex
 /temp/
+/.vs
+
