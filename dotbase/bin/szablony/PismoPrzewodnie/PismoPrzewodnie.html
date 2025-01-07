@@ -2,7 +2,6 @@
 
 	<head>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<link rel="stylesheet" href="style.css" type="text/css" />
 	<style type="text/css">
 	*
 {
@@ -12,89 +11,6 @@ padding: 0%;
 margin: 0%;
 }
 
-span
-{
-font-size: 11 pt;
-font-weight: normal;
-color: black;
-padding-left: 10;
-}
-
-#page
-{
-margin: 0 auto;
-width: 210mm;
-height: 297mm;
-padding: 10mm 5mm 5mm 5mm;
-border: 1px solid #FFFFFF;
-}
-
-#container
-{
-position: absolute;
-margin: 0 auto;
-width: 210mm;
-height: 297mm;
-}
-
-/*----------------nagłówek 1-----------------------*/
-#header
-{
-font-family: "Arial Black";
-margin: 0 auto;
-width: 100%;
-height: 30mm;
-text-align: center;
-padding-top: 15;
-padding-bottom: 15;
-}
-
-#leftheader
-{
-height: 100%;
-width: 20.00%;
-float: left;
-padding-top: 10;
-}
-
-#rightheader
-{
-height: 100%;
-width: 80.00%;
-float: left;
-}
-
-#header h1
-{
-padding: 0;
-font-size: 21pt;
-font-weight: bold;
-}
-
-#header h2
-{
-font-family: Arial;
-padding: 10;
-font-size: 11pt;
-font-weight: bold;
-}
-
-#header h3
-{
-font-size: 12pt;
-font-weight: bold;
-}
-
-/*----------------nagłówek 2-----------------------*/
-
-#header2
-{
-font-family: "Times New Roman";
-margin: 0 auto;
-width: 90%;
-height: 30mm;
-}
-
 /*----------------nagłówek 3-----------------------*/
 
 #header3
@@ -102,8 +18,7 @@ height: 30mm;
 font-family: "Times New Roman";
 font-size: 13pt;
 text-align: right;
-margin: 0 auto;
-width: 90%;
+margin-top: 15pt;
 }
 
 /*----------------nagłówek 4-----------------------*/
@@ -112,10 +27,7 @@ width: 90%;
 {
 font-family: "Times New Roman";
 font-size: 13pt;
-margin: 0 auto;
-width: 90%;
 line-height: 150%; 
-padding-left: 16mm;
 }
 
 /*----------------nagłówek 5-----------------------*/
@@ -126,8 +38,6 @@ font-family: "Times New Roman";
 font-size: 13pt;
 font-weight: bold;
 text-align: right;
-margin: 0 auto;
-width: 90%;
 }
 
 /*----------------zawartość-----------------------*/
@@ -135,18 +45,12 @@ width: 90%;
 #content
 {
 font-family: "Times New Roman";
-margin: 0 auto;
-width: 100%;
 font-size: 13pt;
-padding-left: 20;
 }
 
 #akapit1
 {
-width: 85%;
 padding-top: 20;
-padding-left: 50;
-padding-right: 50;
 line-height: 180%; 
 font-size: 13 pt;
 text-align: justify;
@@ -154,10 +58,7 @@ text-align: justify;
 
 #akapit2
 {
-width: 85%;
 padding-top: 20;
-padding-left: 50;
-padding-right: 50;
 line-height: 180%; 
 text-align: justify;
 font-size: 13 pt;
@@ -165,10 +66,7 @@ font-size: 13 pt;
 
 #akapit3
 {
-width: 85%;
 padding-top: 20;
-padding-left: 50;
-padding-right: 50;
 line-height: 180%; 
 text-align: justify;
 font-size: 13 pt;
@@ -176,116 +74,86 @@ font-size: 13 pt;
 
 #uwaga
 {
-width: 85%;
 text-align: justify;
-padding-top: 20;
-padding-left: 50;
 padding-right: 50;
 line-height: 180%; 
 font-size: 13 pt;
 }
 
-.col70
-{
-font-size: 9pt;
-font-weight: bold;
-float:left;
-width: 70.00%;
-text-indent: 20;
+header {
+	width: 160mm;
+	min-height: 2.4cm;
 }
 
-.col75
-{
-font-size: 9pt;
-font-weight: bold;
-float:left;
-width: 75.00%;
+footer {
+	width: 160mm;
+}
+	
+@page {
+  size: A4 portrait;
+  margin: 12mm 25mm 12mm 25mm;
 }
 
-.col25
-{
-font-size: 9pt;
-font-weight: bold;
-float:left;
-width: 25.00%;
-text-align: right;
+html, body {
+    width: 160mm;
+	padding: 0;
+	margin: 0;
+  }
+
+@media print {
+
+    table.paging thead td {
+		height: 2.8cm;
+    }
+	
+    table.paging tfoot td {
+        height: 3.5cm;
+    }
+	
+	header {
+		position: fixed;
+		top: 0;
+	}
+
+  footer {
+    position: fixed;
+    bottom: 0;
+  }
+
 }
 
-.col30
-{
-font-size: 9pt;
-font-weight: bold;
-float:left;
-width: 30.00%;
-text-align: right;
-}
-
-.col35
-{
-font-size: 9pt;
-font-weight: bold;
-float:left;
-width: 35.00%;
-text-align: center;
-}
-
-hr
-{
-margin-bottom: 10;
-margin-top: 10;
-}
-
-/*----------------stopka-----------------------*/
-
-#footer
-{
-position: absolute; bottom: 15.01mm;
-margin: 0 auto;
-width: 100%mm;
-left: 25mm;
-}
-
-#footer p
-{
-font-size: 12pt;
-}
 	</style>
 	</head>
 
 	<body>
-		<div id = "page">
-			<div id = "container">
-				
-				<div id = "header">
-					<div id = "leftheader">
-						<img src="IFJ.JPG" alt="logo" align = "bottom" />
-					</div>
-					<div id = "rightheader">
-						<h1>INSTYTUT FIZYKI JĄDROWEJ</h1>
-						<h2>im. Henryka Niewodniczańskiego <br> Polskiej Akademii Nauk</h2>
-						<h3>Laboratorium Wzorcowania Przyrządów Dozymetrycznych</h3>
-					</div>
-					</div>
-				
-				<div id = "header2">
-				<hr style="clear: left;">
-					<div class="col35">ul. Radzikowskiego 152, 31-342 Kraków</div>
-					<div class="col35">Tel./Faks: (+48 12) 662 84 86</div>
-					<div class="col30">e-mail: <u>wzorcowanie@ifj.edu.pl</div>
-					<div class="col70">http:// wzorcowanie.ifj.edu.pl</u></div>
-					<div class="col30"></div>
-				<hr style="clear: left;"><hr>
-				</div>
-				
-				<div id = "header3">
+
+		<header style="font-family: 'Book Antiqua'; font-weight: bold; border-bottom: 0.5pt solid black;">
+	
+			<img src="ifj-gr.png" style="width: 20mm; float: left;" />
+		
+			<div style="font-size: 14pt; text-align: center; letter-spacing: 3pt;">
+				INSTYTUT FIZYKI JĄDROWEJ<br>
+				im. Henryka Niewodniczańskiego<br>
+				Polskiej Akademii Nauk
+				<span style="font-size: 5pt;"><br clear="both">&nbsp;</span>
+			</div>
+			<div style="font-size: 11pt; text-align: center; letter-spacing: 2.7pt; margin-bottom: 2.8mm;">
+				Laboratorium Wzorcowania Przyrządów Dozymetrycznych
+			</div>
+		
+		</header>
+		
+		<table class=paging><thead><tr><td>&nbsp;</td></tr></thead><tbody><tr><td>
+						
+				<div id="header3">
 				Kraków, <!c1>
 				</div>
 
-				<div id = "header4">
+				<div id="header4">
 				<!c2><br><!c3>
 				</div>				
 				
-				<div id = "header5">
+				<div id="header5">
 					<!c4>/W/LWPD/<!c4rok>
 				</div>	
 				
@@ -314,15 +182,31 @@ font-size: 12pt;
 					
 					
 				</div>
-				
-				<div id = "footer">
-					<p>Załączniki:</p>
-					<ol>
-						<li>Świadectwo Wzorcowania nr <!c8>/<!c5> </li>	
-						<!c11>
-					</ol>
-				</div>
-			</div>
-		</div>
+
+</td></tr></tbody><tfoot><tr><td>&nbsp;</td></tr></tfoot></table>
+
+<footer style="height: 3.3cm;"> 
+	
+	<div style="height: 2cm;">
+	<p>Załączniki:</p>
+	<ol style="margin-left: 0.7cm;">
+		<li>Świadectwo Wzorcowania nr <!c8>/<!c5> </li>	
+		<!c11>
+	</ol>
+	</div>
+
+	<div style="font-family: 'Book Antiqua'; font-size: 8pt; border-top: 0.5pt solid black;">
+	<div style="float: left;">
+		ul. Radzikowskiego 152, 31-342 Kraków<br/>
+		www.ifj.edu.pl<br/>
+		www.wzorcowanie.ifj.edu.pl<br/>
+	</div>
+	<div style="float: right;">
+		tel.: +48 12 662 8486; +48 692 771 875<br>
+		e-mail: wzorcowanie@ifj.edu.pl<br>
+	</div>
+	</div>
+</footer>
+
 	</body>
 </html>
