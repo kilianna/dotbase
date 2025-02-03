@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace DotBase.Szablony
 {
@@ -38,6 +39,24 @@ namespace DotBase.Szablony
             }
         }
 
+        public class Wynik
+        {
+            public double prog;
+            public double wartosc_zmierzona;
+            public double niepewnosc;
+            public double wspolczynnik;
+            public double niepewnosc_wspolczynnika;
+        }
+
+        public class Wyniki
+        {
+            public Szablon.Row_wzorcowanie_cezem wzorcowanie_cezem;
+            public Szablon.Row_Wzorcowanie_zrodlami_powierzchniowymi wzorcowanie_zrodlami_powierzchniowymi;
+            public Szablon.Row_Sondy sonda;
+            public Szablon.Row_Jednostki jenostka;
+            public List<Wynik> tabela = new List<Wynik>();
+        }
+
         // Dane wejściowe
         public int nr_karty;
         public DateTime data_wydania;
@@ -59,6 +78,7 @@ namespace DotBase.Szablony
         public Szablon.Row_Karta_przyjecia kartaPrzyjecia;
         public Szablon.Row_Zlecenia zlecenie;
         public Szablon.Row_Zleceniodawca zleceniodawca;
+        public List<Wyniki> wyniki;
 
         protected override string FileName
         {
@@ -161,7 +181,76 @@ namespace DotBase.Szablony
                     spojnoscPomiarowa = SpojnoscPomiarowa.gum;
             }
 
+            wyniki = new List<Wyniki>();
+
+            foreach (var row in tabelaMD) DodajWyniki(row);
+            foreach (var row in tabelaD) DodajWyniki(row);
+            foreach (var row in tabelaSM) DodajWyniki(row);
+            foreach (var row in tabelaSD) DodajWyniki(row);
+            foreach (var row in tabelaS) DodajWyniki(row);
+
             return true;
+        }
+
+        private void DodajWyniki(Szablon.Row_Wzorcowanie_zrodlami_powierzchniowymi row)
+        {
+            var wyn = new Wyniki();
+            wyn.wzorcowanie_zrodlami_powierzchniowymi = row;
+            wyn.sonda = baza.Sondy
+                .WHERE()
+                    .ID_sondy(row.ID_sondy ?? -1)
+                .GET_OPTIONAL();
+            wyniki.Add(wyn);
+        }
+
+        private void DodajWyniki(Szablon.Row_wzorcowanie_cezem row)
+        {
+            var wyn = new Wyniki();
+            wyn.wzorcowanie_cezem = row;
+
+            wyn.sonda = baza.Sondy
+                .WHERE().ID_sondy(row.ID_sondy ?? -1)
+                .GET_OPTIONAL();
+
+            wyn.jenostka = baza.Jednostki
+                .WHERE().ID_jednostki(row.ID_jednostki)
+                .GET_OPTIONAL();
+
+            if (row.Rodzaj_wzorcowania == "sm")
+            {
+                IList<double> computedFactors = null;
+                IList<double> computedUncertainity = null;
+
+                if (!N.proceduraOd20230915(data_wykonania))
+                {
+                    computedFactors = SygnalizacjaMocyDawkiUtils.computeFactors(nr_karty.ToString());
+                    computedUncertainity = SygnalizacjaMocyDawkiUtils.computeUncertainity(nr_karty.ToString());
+                }
+
+                var tab = baza.Sygnalizacja
+                    .WHERE().ID_wzorcowania(row.ID_wzorcowania)
+                    .GET();
+                for (int i = 0; i < tab.Length; i++)
+                {
+                    var tabRow = tab[i];
+                    var w = new Wynik();
+                    w.prog = Wymagany(tabRow.Prog, "Prog jest NULL");
+                    w.wartosc_zmierzona = Wymagany(tabRow.Wartosc_zmierzona, "Wartosc_zmierzona jest NULL");
+                    w.niepewnosc = Wymagany(tabRow.Niepewnosc, "Niepewnosc jest NULL");
+                    if (computedFactors == null)
+                    {
+                        w.wspolczynnik = tabRow.Wspolczynnik;
+                        w.niepewnosc_wspolczynnika = tabRow.Niepewnosc_Wspolczynnika;
+                    }
+                    else
+                    {
+                        w.wspolczynnik = computedFactors[i];
+                        w.niepewnosc_wspolczynnika = computedUncertainity[i];
+                    }
+                    wyn.tabela.Add(w);
+                }
+            }
+            wyniki.Add(wyn);
         }
     }
 }

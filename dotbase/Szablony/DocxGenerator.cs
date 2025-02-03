@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Data;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Collections;
 
 namespace DotBase.Szablony
 {
@@ -204,6 +205,27 @@ namespace DotBase.Szablony
                 else if (data is Dictionary<string, string>)
                 {
                     objToJson(data as Dictionary<string, string>, result, indent);
+                    return;
+                }
+                else if (data is IList)
+                {
+                    var list = data as IList;
+                    var arr = new object[list.Count];
+                    for (int i = 0; i < arr.Length; i++)
+                    {
+                        arr[i] = list[i];
+                    }
+                    valueToJson(arr, result, indent);
+                    return;
+                }
+                else if (data is IDictionary)
+                {
+                    var dictionary = data as IDictionary;
+                    var typed = new Dictionary<string, object>();
+                    foreach (DictionaryEntry item in dictionary) {
+                        typed.Add(item.Key.ToString(), item.Value);
+                    }
+                    objToJson(typed, result, indent);
                     return;
                 }
                 result.Append('{');
