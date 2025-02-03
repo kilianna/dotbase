@@ -6,7 +6,7 @@ import { convertXmlToText, normalizeText } from './convert-xml';
 import * as child_process from 'node:child_process';
 import * as util from 'util';
 
-let DIR = 'C:\\work\\ania\\dotbase\\dotbase\\bin\\wyniki\\Swiadectwo\\';
+let DIR = '../dotbase/bin/wyniki/Swiadectwo/';
 
 
 // Your custom function for a specific URL
@@ -237,12 +237,18 @@ function removeExceptions(diff: Diff): void {
 
             // Zaokrąglenia liczb
             if (typeof entry === 'object'
-                && entry.new.length === 1 && entry.new[0].match(/^-?\d+(?:[.,]\d+)?$/)
-                && entry.old.length === 1 && entry.old[0].match(/^-?\d+(?:[.,]\d+)?$/)
+                && entry.new.length === 1 && entry.new[0].match(/^-?\d+(?:[.,](\d+))?$/)
+                && entry.old.length === 1 && entry.old[0].match(/^-?\d+(?:[.,](\d+))?(?:e[+-]\d+)?$/i)
             ) {
                 let newMatch = entry.new[0].match(/^-?\d+(?:[.,](\d+))?$/)!;
-                let oldMatch = entry.old[0].match(/^-?\d+(?:[.,](\d+))?$/)!;
-                let digits = Math.min(newMatch[1]?.length ?? 0, oldMatch[1]?.length ?? 0);
+                let oldMatch = entry.old[0].match(/^-?\d+(?:[.,](\d+))?(?:e[+-]\d+)?$/i)!;
+                let digits: number;
+                if (oldMatch[2]) {
+                    let exp = parseInt(oldMatch[2]);
+                    digits = Math.min(newMatch[1]?.length ?? 0, (oldMatch[1]?.length ?? 0) - exp);
+                } else {
+                    digits = Math.min(newMatch[1]?.length ?? 0, oldMatch[1]?.length ?? 0);
+                }
                 let newNumber = parseFloat(entry.new[0].replace(',', '.') ?? '0');
                 let oldNumber = parseFloat(entry.old[0].replace(',', '.') ?? '0');
                 newNumber = Math.round(newNumber * (10 ** digits));

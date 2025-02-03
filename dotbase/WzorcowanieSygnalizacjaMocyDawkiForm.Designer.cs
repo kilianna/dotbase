@@ -69,7 +69,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.textBox13 = new DotBase.Controls.SimpleHtmlTextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Prog = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Odl1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -556,10 +556,9 @@
             // 
             this.textBox13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox13.Enabled = false;
+            this.textBox13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox13.Location = new System.Drawing.Point(15, 293);
             this.textBox13.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox13.Multiline = true;
             this.textBox13.Name = "textBox13";
             this.textBox13.Size = new System.Drawing.Size(1144, 179);
             this.textBox13.TabIndex = 13;
@@ -868,7 +867,6 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
@@ -931,7 +929,6 @@
         private System.Windows.Forms.TextBox textBox12;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox textBox13;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -953,6 +950,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Niepewnosc;
         private System.Windows.Forms.DataGridViewTextBoxColumn Wspolczynnik;
         private System.Windows.Forms.DataGridViewTextBoxColumn NiepWsp;
+        private Controls.SimpleHtmlTextBox textBox13;
 
 
     }

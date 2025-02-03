@@ -126,5 +126,9 @@ export function convertXmlToText(xmlSource: string): string {
 }
 
 export function normalizeText(text: string): string {
-    return text.replace('‑', '-').replace(/[\x01- \s]+/gi, '\n').trim();
+    return text
+        .replace('‑', '-')
+        .replace(/[\x01- \s]+/gi, '\n')
+        .replace(/μ/g, 'µ')
+        .trim();
 }

@@ -470,5 +470,10 @@ namespace DotBase.Controls
             catch (Exception) { }
         }
 
+
+        public void Clear()
+        {
+            rt.Clear();
+        }
     }
 }

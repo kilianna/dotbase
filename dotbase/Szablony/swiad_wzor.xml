@@ -247,16 +247,19 @@ for (let i = 0; i < wyniki.length; i++) {
 
   <%! /* ------------------------------- Moc Dawki ---------------------------- */ %>
 
+  <!-- TODO: Potrzeba dodać tabelę (zaimplementowano później, więc tutaj jej jeszcze nie ma) -->
+
   <p><% litera(podpunkt++) %>) Wzorcowanie źródłem gamma: Cs-137; <% wzorcowanie.Wielkosc_fizyczna %></p>
   <p></p>
   <%! pokazSonde() %>
   <p></p>
 
   <%!
-  let jednostka =
-    (jednostkiDoKorekcji.has(wyn.jednostka.Jednostka.toLowerCase()))
-      ? `(µGy/h)/(${wyn.jednostka.Jednostka})`
-      : wyn.jednostka.Jednostka;
+  let jednostka = wyn.jednostka.Jednostka;
+  let korekcjaJednostki = '-';
+  if (jednostkiDoKorekcji.has(wyn.jednostka.Jednostka.toLowerCase())) {
+    korekcjaJednostki = `(µGy/h)/(${wyn.jednostka.Jednostka})`;
+  }
   %>
 
   <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">
@@ -268,7 +271,7 @@ for (let i = 0; i < wyniki.length; i++) {
     </tr>
     <tr font-bold="1">
       <td><% mikro(jednostka) %></td>
-      <td>-</td>
+      <td><% mikro(korekcjaJednostki) %></td>
     </tr>
     <%! for (let row of wyn.tabela) { %>
     <tr>
@@ -285,7 +288,7 @@ for (let i = 0; i < wyniki.length; i++) {
   <p></p>
 
   <%! if (uwMD?.trim()) { %>
-  <p><%= multiline(uwMD) %></p>
+  <p><%= simpleHtml(uwMD) %></p>
   <p></p>
   <%! } %>
 
@@ -329,7 +332,7 @@ for (let i = 0; i < wyniki.length; i++) {
   <p></p>
 
   <%! if (uwD?.trim()) { %>
-  <p><%= multiline(uwD) %></p>
+  <p><%= simpleHtml(uwD) %></p>
   <p></p>
   <%! } %>
 
@@ -374,7 +377,7 @@ for (let i = 0; i < wyniki.length; i++) {
   <p></p>
 
   <%! if (uwSMD?.trim()) { %>
-  <p><%= multiline(uwSMD) %></p>
+  <p><%= simpleHtml(uwSMD) %></p>
   <p></p>
   <%! } %>
 
@@ -427,7 +430,7 @@ for (let i = 0; i < wyniki.length; i++) {
   <p></p>
 
   <%! if (uwSD?.trim()) { %>
-  <p><%= multiline(uwSD) %></p>
+  <p><%= simpleHtml(uwSD) %></p>
   <p></p>
   <%! } %>
 
