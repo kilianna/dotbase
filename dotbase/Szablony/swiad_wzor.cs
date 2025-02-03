@@ -199,10 +199,16 @@ namespace DotBase.Szablony
         {
             var wyn = new Wyniki();
             wyn.wzorcowanie_zrodlami_powierzchniowymi = row;
+
             wyn.sonda = baza.Sondy
                 .WHERE()
                     .ID_sondy(row.ID_sondy ?? -1)
                 .GET_OPTIONAL();
+
+            wyn.jednostka = baza.Jednostki
+                .WHERE().ID_jednostki(row.ID_jednostki ?? -1)
+                .GET_OPTIONAL();
+
             wyniki.Add(wyn);
         }
 
@@ -219,7 +225,11 @@ namespace DotBase.Szablony
                 .WHERE().ID_jednostki(row.ID_jednostki)
                 .GET_OPTIONAL();
 
-            if (row.Rodzaj_wzorcowania == "d")
+            if (row.Rodzaj_wzorcowania == "md")
+            {
+                DodajTabeleMD(row, wyn);
+            }
+            else if (row.Rodzaj_wzorcowania == "d")
             {
                 DodajTabeleD(row, wyn);
             }
@@ -233,6 +243,22 @@ namespace DotBase.Szablony
             }
 
             wyniki.Add(wyn);
+        }
+
+        private void DodajTabeleMD(Szablon.Row_wzorcowanie_cezem row, Wyniki wyn)
+        {
+            var tab = baza.wyniki_moc_dawki
+                .WHERE().ID_wzorcowania(row.ID_wzorcowania)
+                .GET();
+            for (int i = 0; i < tab.Length; i++)
+            {
+                var tabRow = tab[i];
+                var w = new Wynik();
+                w.zakres = Wymagany(tabRow.ZAKRES, "Zakres w tabeli 'Dawka' jest wymagany");
+                w.wspolczynnik = Wymagany(tabRow.Wspolczynnik, "Wspolczynnik w tabeli 'Dawka' jest wymagany");
+                w.niepewnosc = Wymagany(tabRow.Niepewnosc, "Niepewnosc w tabeli 'Dawka' jest wymagana");
+                wyn.tabela.Add(w);
+            }
         }
 
         private void DodajTabeleD(Szablon.Row_wzorcowanie_cezem row, Wyniki wyn)
