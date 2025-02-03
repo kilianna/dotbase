@@ -382,6 +382,24 @@ namespace DotBase
             return format;
         }
 
+        public static void podswietlKomorke(bool warunek, DataGridViewCell cell)
+        {
+            if (warunek)
+            {
+                cell.Style.BackColor = Color.Red;
+                cell.Style.ForeColor = Color.Yellow;
+            }
+        }
+
+        private void podswietlWspolczynnik(DataGridView tabela, int index, double wspolczynnik, double niepewnosc)
+        {
+            var wspNaCzerwono = wspolczynnik < 0.1 || wspolczynnik > 2.0;
+            var niepNaCzerwono = wspolczynnik < 0.000001 || niepewnosc / wspolczynnik > 0.4;
+            podswietlKomorke(wspNaCzerwono, tabela.Rows[index].Cells[1]);
+            podswietlKomorke(niepNaCzerwono, tabela.Rows[index].Cells[2]);
+        }
+
+
         //---------------------------------------------------------------
         private void WyswietlDaneWspolczynnikow()
         //---------------------------------------------------------------
@@ -404,7 +422,8 @@ namespace DotBase
                 {
                     format = UstawFormatWspolczynnikowOrazNiepewnosci(wspolczynnik);
 
-                    dataGridView2.Rows.Add(wspolczynnik.Zakres.ToString("G"), wspolczynnik.Wartosc.ToString(format), wspolczynnik.Niepewnosc.ToString(format));
+                    var index = dataGridView2.Rows.Add(wspolczynnik.Zakres.ToString("G"), wspolczynnik.Wartosc.ToString(format), wspolczynnik.Niepewnosc.ToString(format));
+                    podswietlWspolczynnik(dataGridView2, index, wspolczynnik.Wartosc, wspolczynnik.Niepewnosc);
                 }
             }
 
@@ -692,7 +711,8 @@ namespace DotBase
 
                 for (int i = 0; i < zakresPrzyrzadu.Count; ++i)
                 {
-                    tabela2.Rows.Add(zakresPrzyrzadu[i].ToString("G"), wspolczynniki[i].ToString(format), niepewnosc[i].ToString(format));
+                    var index = tabela2.Rows.Add(zakresPrzyrzadu[i].ToString("G"), wspolczynniki[i].ToString(format), niepewnosc[i].ToString(format));
+                    podswietlWspolczynnik(tabela2, index, wspolczynniki[i], niepewnosc[i]);
                 }
             }
             else

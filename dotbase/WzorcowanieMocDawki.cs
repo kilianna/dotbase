@@ -1341,6 +1341,11 @@ namespace WzorcowanieMocDawkiSpace
                         {
                             wierszTabeli.Cells[3].Value = wspolczynnik;
                             wierszTabeli.Cells[4].Value = niepewnosc;
+                            double obecny;
+                            Double.TryParse(wierszTabeli.Cells[1].Value.ToString(), out obecny);
+                            var poprzedni = wiersz.Field<double>(1);
+                            var naCzerwono = obecny < 0.000001 || Math.Abs(obecny - poprzedni) / obecny > 0.2;
+                            WzorcowanieMocDawkiForm.podswietlKomorke(naCzerwono, wierszTabeli.Cells[3]);
                             break;
                         }
                     }
