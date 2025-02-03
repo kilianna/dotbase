@@ -336,10 +336,6 @@ namespace DotBase
                     }
                     throw;
                 }
-                finally
-                {
-                    BazaDanychWrapper.Rozlacz();
-                }
                 if (dane.Rows.Count < min || dane.Rows.Count > max)
                 {
                     string message = (min == max) ?

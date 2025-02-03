@@ -38,7 +38,7 @@ namespace DotBase
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            var res = MessageBox.Show(this,
+            var res = MyMessageBox.Show(this,
                 "Zamknięcie programu grozi utraceniem ostatnio wprowadzonych danych w aktualnym oknie programu.\r\n\r\n" +
                 "Czy chcesz kontynuować?",
                 "Ostrzeżenie", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
@@ -53,7 +53,7 @@ namespace DotBase
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            var res = MessageBox.Show(this,
+            var res = MyMessageBox.Show(this,
                 "Zignorowanie problemu grozi pojawieniem się trudnych do naprawienia błędów w bazie danych.\r\n\r\n" +
                 "Czy chcesz kontynuować?",
                 "Ostrzeżenie", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);

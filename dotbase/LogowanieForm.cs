@@ -241,7 +241,7 @@ namespace DotBase
         }
 
         private bool edycjaOstrzezenie(string pytanie) {
-            var res = MessageBox.Show(this, 
+            var res = MyMessageBox.Show(this, 
                 String.Format(
                     "Zmiana ustawień użytkowników jest krytyczną czynnością, którą należy przeprowadzać w odpowiedni sposób.\r\n\r\n" +
                     "Zanim to zrobisz upewnij się, że:\r\n" +
