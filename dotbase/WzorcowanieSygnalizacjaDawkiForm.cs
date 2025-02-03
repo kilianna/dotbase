@@ -185,6 +185,7 @@ namespace DotBase
                     dataGridView1.Rows[i].Cells["Niepewnosc"].Value = wyniki[1][i].ToString("0.00");
                     dataGridView1.Rows[i].Cells["Wspolczynnik"].Value = wyniki[2][i].ToString("0.00");
                     dataGridView1.Rows[i].Cells["Niepewnosc_wsp"].Value = wyniki[3][i].ToString("0.00");
+                    podswietlNaCzerwono(dataGridView1.Rows[i].Cells, wyniki[2][i], wyniki[3][i]);
                 }
                 
             }
@@ -423,7 +424,8 @@ namespace DotBase
             {
                 foreach (KlasyPomocniczeSygDawki.DawkaWartosciWzorcowoPomiarowe.DawkaWartoscWzorcowoPomiarowa dane in _WzorcowanieSygDawki.Pomiary.Dane)
                 {
-                    dataGridView1.Rows.Add(dane.Prog, "", dane.Tzmierzony, dane.WartRzeczywista, dane.Niepewnosc, dane.WartZmierzona, dane.Wspolczynnik, dane.Niepewnosc_wsp);
+                    var index = dataGridView1.Rows.Add(dane.Prog, "", dane.Tzmierzony, dane.WartRzeczywista, dane.Niepewnosc, dane.WartZmierzona, dane.Wspolczynnik, dane.Niepewnosc_wsp);
+                    podswietlNaCzerwono(dataGridView1.Rows[index].Cells, dane.Wspolczynnik, dane.Niepewnosc_wsp);
                 }
             }
 
@@ -432,6 +434,12 @@ namespace DotBase
 
             textBox14.Text = _WzorcowanieSygDawki.Pomiary.odleglosc.ToString();
             textBox15.Text = _WzorcowanieSygDawki.Pomiary.zrodlo.ToString();
+        }
+
+        private void podswietlNaCzerwono(DataGridViewCellCollection row, double wspolczynnik, double niepewnosc)
+        {
+            WzorcowanieMocDawkiForm.podswietlKomorke(wspolczynnik < 0.1 || wspolczynnik > 2.0, row["Wspolczynnik"]);
+            WzorcowanieMocDawkiForm.podswietlKomorke(wspolczynnik < 0.0000001 || niepewnosc / wspolczynnik > 0.4, row["Niepewnosc_wsp"]);
         }
 
         //---------------------------------------------------------------
