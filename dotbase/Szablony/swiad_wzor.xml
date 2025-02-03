@@ -13,6 +13,29 @@ const spojnosciPomiarowe = {
     si: 'Świadectwo jest wydane w ramach porozumienia EA MLA w zakresie wzorcowania i potwierdza spójność wyników pomiarów z jednostkami miar Międzynarodowego Układu Jednostek Miar (SI).',
 };
 
+const rownowaznikiDawki = [
+  // Indywidualny_HP07: 0
+  {
+    co: 'indywidualny równoważnik dawki Hp(10)',
+    czego: 'indywidualnego równoważnika dawki Hp(10)',
+  },
+  // Indywidualny_HP10: 1
+  {
+    co: 'indywidualny równoważnik dawki Hp(0,07)',
+    czego: 'indywidualnego równoważnika dawki Hp(0,07)',
+  },
+  // Przestrzenny: 2
+  {
+    co: 'przestrzenny równoważnik dawki H*(10)',
+    czego: 'przestrzennego równoważnika dawki H*(10)',
+  },
+  // Kerma: 3
+  {
+    co: 'kerma w powietrzu',
+    czego: 'kermy w powietrzu',
+  },
+];
+
 nr_swiadectwa =  nr_karty + '/' + data_wydania.rok;
 if (poprawa) {
     nr_swiadectwa += 'P';
@@ -194,17 +217,60 @@ if (poprawa) {
 
   %>
 
-<%! if (wzorcowanie.Rodzaj_wzorcowania == "md") { /* Moc Dawki */ %>
+<%! if (wzorcowanie.Rodzaj_wzorcowania == "md") { %>
+
+  <%! /* ------------------------------- Moc Dawki ---------------------------- */ %>
 
   <p><% litera(i) %>) </p>
   <p></p>
 
-<%! } else if (wzorcowanie.Rodzaj_wzorcowania == "d") /* Dawka */ { %>
+<%! } else if (wzorcowanie.Rodzaj_wzorcowania == "d") { %>
 
-  <p><% litera(i) %>) </p>
+  <%! /* ------------------------------- Dawka ---------------------------- */ %>
+
+  <%!
+  let wielkosciFizyczne = [...new Set(wyn.tabela.map(row => row.wielkosc_fizyczna))];
+  %>
+
+  <p><% litera(i) %>) Wzorcowanie źródłem gamma: Cs-137;
+    <% wielkosciFizyczne.map(w => rownowaznikiDawki[w].co).filter(w => w).join('; ') %></p>
+  <p></p>
+  <%! pokazSonde() %>
   <p></p>
 
-<%! } else if (wzorcowanie.Rodzaj_wzorcowania == "sm") /* Syg Mocy Dawki */ { %>
+  <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">
+    <tc width="8.5cm" />
+    <tc width="8.5cm" />
+    <tr font-bold="1">
+      <td>ZAKRES POMIAROWY PRZYRZĄDU</td>
+      <td>WARTOŚĆ WSPÓŁCZYNNIKA POPRAWKOWEGO</td>
+    </tr>
+    <tr font-bold="1">
+      <td>mSv</td>
+      <td>-</td>
+    </tr>
+    <%! for (let row of wyn.tabela) { %>
+    <tr>
+      <td><% tekst(row.zakres, 5) %></td>
+      <%! digits = calcDigits(3, row.wspolczynnik, 2, row.niepewnosc) %>
+      <td><% fixed(row.wspolczynnik, digits) %> ± <% fixed(row.niepewnosc, digits) %></td>
+    </tr>
+    <%! } %>
+  </table>
+
+  <p></p>
+  <p>Zmierzoną wartość <% wielkosciFizyczne.map(w => rownowaznikiDawki[w].czego).filter(w => w).join(' oraz ') %>
+    należy pomnożyć przez wartość współczynnika poprawkowego.</p>
+  <p></p>
+
+  <%! if (uwD?.trim()) { %>
+  <p><%= multiline(uwD) %></p>
+  <p></p>
+  <%! } %>
+
+<%! } else if (wzorcowanie.Rodzaj_wzorcowania == "sm") { %>
+
+  <%! /* ------------------------------- Syg Mocy Dawki ---------------------------- */ %>
 
   <p><% litera(i) %>) Wzorcowanie źródłem gamma: Cs-137; moc przestrzennego równoważnika dawki (sygnalizator progowy)</p>
   <p></p>
@@ -212,7 +278,8 @@ if (poprawa) {
   <p></p>
   <%! pokazSonde() %>
   <p></p>
-  <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm">
+
+  <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">
     <tc width="4.5cm" />
     <tc width="6.5cm" />
     <tc width="6.0cm" />
@@ -221,16 +288,18 @@ if (poprawa) {
       <td>RZECZYWISTE WARTOŚCI, PRZY KTÓRYCH WŁĄCZONA ZOSTAJE SYGNALIZACJA OSTRZEGAWCZA</td>
       <td>WARTOŚĆ WSPÓŁCZYNNIKA POPRAWKOWEGO</td>
     </tr>
-    <tr>
-      <td><% mikro(wyn.jenostka?.Jednostka || blad('Brak jednostki')) %></td>
-      <td><% mikro(wyn.jenostka?.Jednostka || blad('Brak jednostki')) %></td>
+    <tr font-bold="1">
+      <td><% mikro(wyn.jednostka?.Jednostka || blad('Brak jednostki w SMD')) %></td>
+      <td><% mikro(wyn.jednostka?.Jednostka || blad('Brak jednostki w SMD')) %></td>
       <td>-</td>
     </tr>
     <%! for (let row of wyn.tabela) { %>
     <tr>
-      <td><% row.prog %></td>
-      <td><% row.wartosc_zmierzona %> ± <% row.niepewnosc %></td>
-      <td><% row.wspolczynnik %> ± <% row.niepewnosc_wspolczynnika %></td>
+      <td><% tekst(row.prog, 5) %></td>
+      <%! digits = calcDigits(3, row.wartosc_zmierzona, 2, row.niepewnosc) %>
+      <td><% fixed(row.wartosc_zmierzona, digits) %> ± <% fixed(row.niepewnosc, digits) %></td>
+      <%! digits = calcDigits(3, row.wspolczynnik, 2, row.niepewnosc_wspolczynnika) %>
+      <td><% fixed(row.wspolczynnik, digits) %> ± <% fixed(row.niepewnosc_wspolczynnika, digits) %></td>
     </tr>
     <%! } %>
   </table>
@@ -238,15 +307,61 @@ if (poprawa) {
   <p></p>
   <p>Wybraną wartość progu należy pomnożyć przez odpowiednią wartość współczynnika poprawkowego.</p>
   <p></p>
-  <p>UWAGA</p>
+
+  <%! if (uwSMD?.trim()) { %>
+  <p><%= multiline(uwSMD) %></p>
+  <p></p>
+  <%! } %>
+
+<%! } else if (wzorcowanie.Rodzaj_wzorcowania == "sd") { %>
+
+  <%! /* ------------------------------- Syg Dawki ---------------------------- */ %>
+
+  <p><% litera(i) %>) Wzorcowanie źródłem gamma: Cs-137; przestrzenny równoważnik dawki (sygnalizator progowy)</p>
+  <p></p>
+  <p>Zestawienie nastawień przyrządu i odpowiadających im rzeczywistych wartości, przy których włączona zostaje sygnalizacja ostrzegawcza.</p>
+  <p></p>
+  <%! pokazSonde() %>
   <p></p>
 
-<%! } else if (wzorcowanie.Rodzaj_wzorcowania == "sd") /* Syg Dawki */ { %>
+  <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">
+    <tc width="4.5cm" />
+    <tc width="6.5cm" />
+    <tc width="6.0cm" />
+    <tr font-bold="1">
+      <td>USTAWIONY PRÓG</td>
+      <td>RZECZYWISTE WARTOŚCI, PRZY KTÓRYCH WŁĄCZONA ZOSTAJE SYGNALIZACJA OSTRZEGAWCZA</td>
+      <td>WARTOŚĆ WSPÓŁCZYNNIKA POPRAWKOWEGO</td>
+    </tr>
+    <tr font-bold="1">
+      <%! let jedn = mikro(wyn.jednostka?.Jednostka.split('/')[0] || blad('Brak jednostki w SD')); %>
+      <td><% jedn %></td>
+      <td><% jedn %></td>
+      <td>-</td>
+    </tr>
+    <%! for (let row of wyn.tabela) { %>
+    <tr>
+      <td><% tekst(row.prog, 5) %></td>
+      <%! digits = calcDigits(3, row.wartosc_wzorcowa, 2, row.niepewnosc) %>
+      <td><% fixed(row.wartosc_wzorcowa, digits) %> ± <% fixed(row.niepewnosc, digits) %></td>
+      <%! digits = calcDigits(3, row.wspolczynnik, 2, row.niepewnosc_wspolczynnika) %>
+      <td><% fixed(row.wspolczynnik, digits) %> ± <% fixed(row.niepewnosc_wspolczynnika, digits) %></td>
+    </tr>
+    <%! } %>
+  </table>
 
-  <p><% litera(i) %>) </p>
+  <p></p>
+  <p>Wybraną wartość progu należy pomnożyć przez odpowiednią wartość współczynnika poprawkowego.</p>
   <p></p>
 
-<%! } else  { /* Skazenia */ %>
+  <%! if (uwSD?.trim()) { %>
+  <p><%= multiline(uwSD) %></p>
+  <p></p>
+  <%! } %>
+
+<%! } else  { %>
+
+  <%! /* ------------------------------- Skazenia ---------------------------- */ %>
 
   <p><% litera(i) %>) </p>
   <p></p>
