@@ -101,6 +101,12 @@
       <DependentUpon>CennikForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="Controls\SimpleHtmlTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SimpleHtmlTextBox.Designer.cs">
+      <DependentUpon>SimpleHtmlTextBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +134,12 @@
     </Compile>
     <Compile Include="Test\TestForm.Designer.cs">
       <DependentUpon>TestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Test\TestHtmlControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Test\TestHtmlControl.Designer.cs">
+      <DependentUpon>TestHtmlControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Test\TestSwiadHtmlVsDocx.cs" />
     <Compile Include="ExceptionForm.cs">
@@ -428,6 +440,9 @@
     <EmbeddedResource Include="CennikForm.resx">
       <DependentUpon>CennikForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SimpleHtmlTextBox.resx">
+      <DependentUpon>SimpleHtmlTextBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DaneWzorcoweMocDawki.resx">
       <DependentUpon>DaneWzorcoweMocDawki.cs</DependentUpon>
     </EmbeddedResource>
@@ -448,6 +463,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Logging\DecryptLogsForm.resx">
       <DependentUpon>DecryptLogsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test\TestHtmlControl.resx">
+      <DependentUpon>TestHtmlControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TranslacjaForm.resx">
       <DependentUpon>TranslacjaForm.cs</DependentUpon>

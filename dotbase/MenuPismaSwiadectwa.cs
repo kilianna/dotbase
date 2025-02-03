@@ -170,68 +170,6 @@ namespace DotBase
             return poprawa.Checked ? "P" : "";
         }
 
-        private void WstawZnakSpecjalny(object sender, KeyEventArgs e)
-        {
-            TextBox uwTextBox = (TextBox)sender;
-
-            int i = uwTextBox.SelectionStart;
-
-            if (e.Alt && 77 == e.KeyValue)
-            {    
-                const string stringDoWstawienia = "&mu;";
-                int dlugoscWstawienia = stringDoWstawienia.Length;
-
-                uwTextBox.Text = uwTextBox.Text.Insert(uwTextBox.SelectionStart, stringDoWstawienia);
-                uwTextBox.SelectionStart = i + dlugoscWstawienia;
-            }
-            else if (e.Alt && 84 == e.KeyValue)
-            {
-                const string stringDoWstawienia = "&nbsp;";
-                int dlugoscWstawienia = stringDoWstawienia.Length;
-
-                uwTextBox.Text = uwTextBox.Text.Insert(uwTextBox.SelectionStart, stringDoWstawienia);
-                uwTextBox.SelectionStart = i + dlugoscWstawienia;
-            }
-            else if (e.Alt && 66 == e.KeyValue)
-            {
-                i = uwTextBox.SelectionStart;
-                int i2 = i + uwTextBox.SelectionLength;
-
-                uwTextBox.Text = uwTextBox.Text.Insert(i2, "</b>");
-                uwTextBox.Text = uwTextBox.Text.Insert(i, "<b>");
-
-                uwTextBox.SelectionStart = i2 + 7;
-            }
-            else if (e.Alt && 80 == e.KeyValue)
-            {
-                const string stringDoWstawienia = "<br>";
-                int dlugoscWstawienia = stringDoWstawienia.Length;
-
-                uwTextBox.Text = uwTextBox.Text.Insert(uwTextBox.SelectionStart, stringDoWstawienia);
-                uwTextBox.SelectionStart = i + dlugoscWstawienia;
-            }
-            else if (e.Alt && 68 == e.KeyValue)
-            {
-                i = uwTextBox.SelectionStart;
-                int i2 = i + uwTextBox.SelectionLength;
-
-                uwTextBox.Text = uwTextBox.Text.Insert(i2, "</sub>");
-                uwTextBox.Text = uwTextBox.Text.Insert(i, "<sub>");
-
-                uwTextBox.SelectionStart = i2 + 11;
-            }
-            else if (e.Alt && 71 == e.KeyValue)
-            {
-                i = uwTextBox.SelectionStart;
-                int i2 = i + uwTextBox.SelectionLength;
-
-                uwTextBox.Text = uwTextBox.Text.Insert(i2, "</sup>");
-                uwTextBox.Text = uwTextBox.Text.Insert(i, "<sup>");
-
-                uwTextBox.SelectionStart = i2 + 11;
-            }
-        }
-
         private void ZamykanieOkna(object sender, FormClosingEventArgs e)
         {
             e.Cancel = !N.PotwierdzenieZapisz(this, ZapiszDane, true, false);

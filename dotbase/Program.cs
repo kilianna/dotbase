@@ -29,6 +29,7 @@ namespace DotBase
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.AddMessageFilter(new GlobalKeyFilter());
+            //Application.Run(new Test.TestHtmlControl());
             Application.Run(new LogowanieForm());
             log("Normalne wyjście z aplikacji");
             Cleanup();
