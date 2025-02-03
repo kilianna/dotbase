@@ -50,7 +50,7 @@ namespace DotBase
             if (nazwa == null)
             {
                 nazwa = idProtokolu.ToString("000") + data.Year;
-                MessageBox.Show("Nazwa protokołu nie może zostać automatycznie wyznaczona! Używam " + nazwa + ".");
+                MyMessageBox.Show("Nazwa protokołu nie może zostać automatycznie wyznaczona! Używam " + nazwa + ".");
             }
 
             /*_Zapytanie = String.Format("DELETE FROM Protokoly_Kalibracji_Lawy WHERE id_protokolu = {0}", idProtokolu);

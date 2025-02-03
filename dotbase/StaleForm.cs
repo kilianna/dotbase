@@ -28,7 +28,7 @@ namespace DotBase
         {
             if (false == TestujMozliwoscZapisu())
             {
-                MessageBox.Show("Część danych jest niepoprawnych. Zapis nie jest możliwy.");
+                MyMessageBox.Show("Część danych jest niepoprawnych. Zapis nie jest możliwy.");
                 return;
             }
 
@@ -39,7 +39,7 @@ namespace DotBase
         private void button2_Click(object sender, EventArgs e)
         //---------------------------------------------------------
         {
-            if (DialogResult.Yes == MessageBox.Show("Czy na pewno wyjść? Jeśli wprowadziłeś zmiany bez zatwierdzenia nie zostaną zapamiętane.", "Kończenie pracy", MessageBoxButtons.YesNo))
+            if (DialogResult.Yes == MyMessageBox.Show("Czy na pewno wyjść? Jeśli wprowadziłeś zmiany bez zatwierdzenia nie zostaną zapamiętane.", "Kończenie pracy", MessageBoxButtons.YesNo))
                 Dispose();
         }
 

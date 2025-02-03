@@ -117,11 +117,14 @@ namespace DotBase
                                                                            jezykSwiadectwa);
                 if (swiadectwo.UtworzDokument(sciezka, dolaczTabPunktyBox.Checked))
                 {
-                    System.Diagnostics.Process.Start(sciezka);
+                    if (!DebugOptions.nieOtwieraj)
+                    {
+                        System.Diagnostics.Process.Start(sciezka);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Nie istnieją dane z których można by sporządzić świadectwo.", "Uwaga!");
+                    MyMessageBox.Show("Nie istnieją dane z których można by sporządzić świadectwo.", "Uwaga!");
                 }
             }
             finally
@@ -135,12 +138,12 @@ namespace DotBase
             int nrPisma, rokPisma;
             if (false == int.TryParse(nrPismaNumer.Text, out nrPisma))
             {
-                MessageBox.Show("Nie podano numeru pisma! Lub numer pisma nie jest liczbą naturalną!", "Błąd!");
+                MyMessageBox.Show("Nie podano numeru pisma! Lub numer pisma nie jest liczbą naturalną!", "Błąd!");
                 return;
             }
             if (false == int.TryParse(nrPismaRok.Text, out rokPisma))
             {
-                MessageBox.Show("Nie podano roku dla numeru pisma! Lub numer pisma nie jest liczbą naturalną!", "Błąd!");
+                MyMessageBox.Show("Nie podano roku dla numeru pisma! Lub numer pisma nie jest liczbą naturalną!", "Błąd!");
                 return;
             }
 
@@ -158,7 +161,7 @@ namespace DotBase
 			Dokumenty.PismoPrzewodnie pismo = new Dokumenty.PismoPrzewodnie(_NumerKarty, dataWystawienia.Value, dataWykonania.Value, textBox1.Text, nrPismaNumer.Text, nrPismaRok.Text, checkBox1.Checked, poprawa.Checked, odlaczWykresBox.Checked);
             if (!pismo.generateDocument(sciezka))
             {
-                MessageBox.Show("Nie można stowrzyć dokumentu z powodu braku danych lub ich błędnych wartości.", "Uwaga");
+                MyMessageBox.Show("Nie można stowrzyć dokumentu z powodu braku danych lub ich błędnych wartości.", "Uwaga");
             }
         }
 
@@ -308,7 +311,7 @@ namespace DotBase
         {
             if (nrPismaRok.Text.Trim() == dataWystawienia.Value.Year.ToString())
             {
-                MessageBox.Show(this, "Rok z daty wystawienia się nie zmienił. Nie ma potrzeby podownego generowania numeru dla tego roku", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MyMessageBox.Show(this, "Rok z daty wystawienia się nie zmienił. Nie ma potrzeby podownego generowania numeru dla tego roku", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {

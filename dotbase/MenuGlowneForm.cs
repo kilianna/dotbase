@@ -17,6 +17,9 @@ namespace DotBase
         private MenuBiuroForm        _MenuBiuro;
         private MenuWzorcowanieForm      _Wzorcowanie;
         private MenuUstawieniaForm       _MenuUstawienia;
+#if DEBUG
+        private Test.TestForm _TestForm;
+#endif
 
         //-------------------------------------------------------------------
         public MenuGlowneForm()
@@ -48,7 +51,7 @@ namespace DotBase
             }
             else
             {
-                MessageBox.Show("Brak odpowiednich danych. Możliwy jest brak połączenia z bazą danych.");
+                MyMessageBox.Show("Brak odpowiednich danych. Możliwy jest brak połączenia z bazą danych.");
                 _Wzorcowanie.Close();   
             }
         }
@@ -110,6 +113,23 @@ namespace DotBase
             {
                 DialogResult = System.Windows.Forms.DialogResult.OK;
             }
+#if DEBUG
+            if (_TestForm != null)
+            {
+                _TestForm.Close();
+                _TestForm.Dispose();
+                _TestForm = null;
+            }
+#endif
+        }
+
+        private void MenuGlowneForm_Shown(object sender, EventArgs e)
+        {
+#if DEBUG
+            _TestForm = new Test.TestForm();
+            _TestForm.Show();
+            _TestForm.WindowState = FormWindowState.Minimized;
+#endif
         }
 
     }

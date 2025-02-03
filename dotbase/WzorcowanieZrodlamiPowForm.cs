@@ -48,7 +48,7 @@ namespace DotBase
         private void BlokujPrzyciski()
         //---------------------------------------------------------------
         {
-            MessageBox.Show("Blokuj");
+            MyMessageBox.Show("Blokuj");
         }
 
         //---------------------------------------------------------------
@@ -61,7 +61,7 @@ namespace DotBase
 
             if (false == _WzorcowanieZrodlamiPow.ZnajdzMniejszyArkusz())
             {
-                MessageBox.Show("Nie istnieje mniejszy arkusz dla danego źródła.");
+                MyMessageBox.Show("Nie istnieje mniejszy arkusz dla danego źródła.");
                 return;
             }
 
@@ -84,7 +84,7 @@ namespace DotBase
             {
                 _WzorcowanieZrodlamiPow.StworzNowyArkusz();
                 WyswietlDanePodstawowe();
-                MessageBox.Show("To nowy arkusz. Zostanie on zapisany automatycznie po wprowadzeniu danych.");
+                MyMessageBox.Show("To nowy arkusz. Zostanie on zapisany automatycznie po wprowadzeniu danych.");
             }
             else
             {
@@ -104,7 +104,7 @@ namespace DotBase
 
             if (0 == textBox3.Text.Length || 0 == textBox4.Text.Length)
             {
-                MessageBox.Show("Brak odpowiednich danych do wyszukania sond.");
+                MyMessageBox.Show("Brak odpowiednich danych do wyszukania sond.");
                 return;
             }
 
@@ -229,31 +229,31 @@ namespace DotBase
         {
             if (false == _WzorcowanieZrodlamiPow.PrzygotujDaneOgolneDoZapisu(textBox1.Text, textBoxArkusz.Text, dateTimePicker1.Value, NadpisywanieStarychDanych, textBox2.Text))
             {
-                MessageBox.Show("Błędne dane ogólne.", "Uwaga");
+                MyMessageBox.Show("Błędne dane ogólne.", "Uwaga");
                 return false;
             }
 
             if (false == _WzorcowanieZrodlamiPow.PrzygotujDanePrzyrzaduDoZapisu(textBox3.Text, textBox4.Text, textBox7.Text, textBox9.Text, comboBox2.Text, comboBox3.Text, textBox8.Text))
             {
-                MessageBox.Show("Błędne dane przyrządu.", "Uwaga");
+                MyMessageBox.Show("Błędne dane przyrządu.", "Uwaga");
                 return false;
             }
 
             if (false == _WzorcowanieZrodlamiPow.PrzygotujDaneWarunkowDoZapisu(textBox14.Text, textBox15.Text, textBox16.Text, textBox12.Text, textBox11.Text, textBox10.Text))
             {
-                MessageBox.Show("Błędne dane warunków.", "Uwaga");
+                MyMessageBox.Show("Błędne dane warunków.", "Uwaga");
                 return false;
             }
 
             if (false == _WzorcowanieZrodlamiPow.PrzygotujDaneWzorcowoPomiaroweDoZapisu(ref dataGridView1, comboBox1.Text, textBox13.Text))
             {
-                MessageBox.Show("Błędne dane wzorcowo-pomiarowe.", "Uwaga");
+                MyMessageBox.Show("Błędne dane wzorcowo-pomiarowe.", "Uwaga");
                 return false;
             }
 
             if (false == _WzorcowanieZrodlamiPow.PrzygotujDaneWspolczynnikowDoZapisu(textBox21.Text, textBox22.Text, textBox17.Text, textBox18.Text, checkBox1.Checked))
             {
-                MessageBox.Show("Błędne dane współczynników.", "Uwaga");
+                MyMessageBox.Show("Błędne dane współczynników.", "Uwaga");
                 return false;
             }
             
@@ -266,7 +266,7 @@ namespace DotBase
         {
             if (textBox3.Text == "" || textBox4.Text == "" || comboBox2.SelectedIndex < 0 || comboBox3.SelectedIndex < 0)
             {
-                MessageBox.Show("Dane przyrządu są niepoprawne.","Uwaga");
+                MyMessageBox.Show("Dane przyrządu są niepoprawne.","Uwaga");
                 return false;
             }
 
@@ -339,7 +339,7 @@ namespace DotBase
 
             if (false == _WzorcowanieZrodlamiPow.Inicjalizuj())
             {
-                MessageBox.Show("Brak odpowiednich danych do wyswietlenia lub połączenie z bazą zostało przerwane.");
+                MyMessageBox.Show("Brak odpowiednich danych do wyswietlenia lub połączenie z bazą zostało przerwane.");
                 return;
             }
 
@@ -359,7 +359,7 @@ namespace DotBase
             }
             else
             {
-                MessageBox.Show("Brak odpowiednich danych do wyswietlenia lub połączenie z bazą zostało przerwane.");
+                MyMessageBox.Show("Brak odpowiednich danych do wyswietlenia lub połączenie z bazą zostało przerwane.");
             }
         }
 
@@ -517,7 +517,7 @@ namespace DotBase
                 }
                 else
                 {
-                    MessageBox.Show("Część danych jest niepoprawnych lub niepodanych. Nadpisanie danych niemożliwe", "Uwaga");
+                    MyMessageBox.Show("Część danych jest niepoprawnych lub niepodanych. Nadpisanie danych niemożliwe", "Uwaga");
                     return false;
                 }
             }
@@ -537,7 +537,7 @@ namespace DotBase
                 }
                 else
                 {
-                    MessageBox.Show("Część danych jest niepoprawnych lub niepodanych. Nadpisanie danych niemożliwe", "Uwaga");
+                    MyMessageBox.Show("Część danych jest niepoprawnych lub niepodanych. Nadpisanie danych niemożliwe", "Uwaga");
                     return false;
                 }
             }
@@ -695,7 +695,7 @@ namespace DotBase
             Dokumenty.ProtokolZrodlaPowierzchniowe dokument = new Dokumenty.ProtokolZrodlaPowierzchniowe(model);
             if (false == dokument.generateDocument(sciezka))
             {
-                MessageBox.Show("Nie podano wszystkich potrzebnych danych!", "Uwaga");
+                MyMessageBox.Show("Nie podano wszystkich potrzebnych danych!", "Uwaga");
             }
         }
 
