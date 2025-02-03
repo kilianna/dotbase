@@ -241,25 +241,41 @@ function removeExceptions(diff: Diff): void {
             }
 
             // Zaokrąglenia liczb
+            // Zaokrąglenia liczb
             if (typeof entry === 'object'
-                && entry.new.length === 1 && entry.new[0].match(/^-?\d+(?:[.,](\d+))?$/)
-                && entry.old.length === 1 && entry.old[0].match(/^-?\d+(?:[.,](\d+))?(?:e[+-]\d+)?$/i)
+                && entry.new.length > 0 && entry.new.length === entry.old.length
+                && entry.new.every(x => x.match(/^-?\d+(?:[.,](\d+))?$/))
+                && entry.old.every(x => x.match(/^-?\d+(?:[.,](\d+))?(?:e[+-]\d+)?$/i))
             ) {
-                let newMatch = entry.new[0].match(/^-?\d+(?:[.,](\d+))?$/)!;
-                let oldMatch = entry.old[0].match(/^-?\d+(?:[.,](\d+))?(?:e[+-]\d+)?$/i)!;
-                let digits: number;
-                if (oldMatch[2]) {
-                    let exp = parseInt(oldMatch[2]);
-                    digits = Math.min(newMatch[1]?.length ?? 0, (oldMatch[1]?.length ?? 0) - exp);
-                } else {
-                    digits = Math.min(newMatch[1]?.length ?? 0, oldMatch[1]?.length ?? 0);
+                let matchingCount = 0;
+                for (let wordIndex = 0; wordIndex < entry.new.length; wordIndex++) {
+                    let entryNew = entry.new[wordIndex];
+                    let entryOld = entry.old[wordIndex];
+                    for (let retry = 0; retry < 2; retry++) {
+                        let newMatch = entryNew.match(/^-?\d+(?:[.,](\d+))?$/)!;
+                        let oldMatch = entryOld.match(/^-?\d+(?:[.,](\d+))?(?:e[+-]\d+)?$/i)!;
+                        let digits: number;
+                        if (oldMatch[2]) {
+                            let exp = parseInt(oldMatch[2]);
+                            digits = Math.min(newMatch[1]?.length ?? 0, (oldMatch[1]?.length ?? 0) - exp);
+                        } else {
+                            digits = Math.min(newMatch[1]?.length ?? 0, oldMatch[1]?.length ?? 0);
+                        }
+                        let newNumber = parseFloat(entryNew.replace(',', '.') ?? '0');
+                        let oldNumber = parseFloat(entryOld.replace(',', '.') ?? '0');
+                        newNumber = Math.round(newNumber * (10 ** digits));
+                        oldNumber = Math.round(oldNumber * (10 ** digits));
+                        if (Math.abs(newNumber - oldNumber) < 0.0001) {
+                            matchingCount++;
+                        } else if (entryOld.endsWith('5') && entryNew.length < entryOld.length && retry === 0) {
+                            entryNew += '5';
+                            continue;
+                        }
+                        break;
+                    }
                 }
-                let newNumber = parseFloat(entry.new[0].replace(',', '.') ?? '0');
-                let oldNumber = parseFloat(entry.old[0].replace(',', '.') ?? '0');
-                newNumber = Math.round(newNumber * (10 ** digits));
-                oldNumber = Math.round(oldNumber * (10 ** digits));
-                if (Math.abs(newNumber - oldNumber) < 0.0001) {
-                    group[i] = entry.new[0];
+                if (matchingCount === entry.new.length) {
+                    group[i] = entry.new.join(' ');
                 }
                 continue;
             }
@@ -281,6 +297,16 @@ function removeExceptions(diff: Diff): void {
                 && entry.old.length === 0
                 && typeof prev2 === 'string' && prev2.startsWith('równoważnik')
                 && prev1 === 'dawki'
+            ) {
+                group[i] = entry.new[0];
+                continue;
+            }
+
+            // pomiarów z->ze wzorcami
+            if (typeof entry === 'object'
+                && entry.new.length === 1 && entry.new[0] === 'ze'
+                && entry.old.length === 1 && entry.old[0] === 'z'
+                && next1 === 'wzorcami'
             ) {
                 group[i] = entry.new[0];
                 continue;
