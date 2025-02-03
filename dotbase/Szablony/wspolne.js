@@ -62,7 +62,7 @@ function tekst(x, y) {
 function multiline(x) {
     return x
         .trim()
-        .replace(/&mu;/g, 'μ')
+        .replace(/&mu;/g, 'µ')
         .replace(/&nbsp;/g, '\xA0')
         .split(/\r?\n/)
         .map(v => escape(v))
@@ -79,7 +79,7 @@ function litera(x) {
 }
 
 function mikro(x) {
-    return x.replace(/u/g, 'μ');
+    return x.replace(/u/g, 'µ');
 }
 
 function blad(x) {
