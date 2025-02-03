@@ -20,21 +20,35 @@ namespace DotBase.Test
 
         public delegate void ResumeDelegate();
         Timer timer = new Timer();
+        Timer timerIdle = new Timer();
         bool idleWait = false;
         Queue<QueueItem> queue = new Queue<QueueItem>();
         EventHandler handler;
         protected BazaDanychWrapper baza = new BazaDanychWrapper();
+        static HashSet<TestBase> activeTests = new HashSet<TestBase>();
 
         public TestBase()
         {
             handler = new EventHandler(Application_Idle);
             timer.Tick += new EventHandler(timer_Tick);
+            timerIdle.Tick += new EventHandler(timerIdle_Tick);
             Application.Idle += handler;
+            activeTests.Add(this);
+        }
+
+        void timerIdle_Tick(object sender, EventArgs e)
+        {
+            timerIdle.Enabled = false;
+            Application.OpenForms[0].BeginInvoke((Action)(() =>
+            {
+                Application_Idle(null, null);
+            }));
         }
 
         void timer_Tick(object sender, EventArgs e)
         {
             timer.Enabled = false;
+            timerIdle.Enabled = false;
             if (queue.Count > 0)
             {
                 var active = queue.Dequeue();
@@ -44,12 +58,15 @@ namespace DotBase.Test
                     idleWait = false;
                     timer.Interval = queue.Peek().delay + LONG_DELAY;
                     timer.Enabled = true;
+                    timerIdle.Interval = SHORT_DELAY;
+                    timerIdle.Enabled = true;
                 }
             }
         }
 
         void Application_Idle(object sender, EventArgs e)
         {
+            timerIdle.Enabled = false;
             if (queue.Count > 0 && (!timer.Enabled || !idleWait))
             {
                 timer.Enabled = false;
@@ -70,6 +87,8 @@ namespace DotBase.Test
                 idleWait = false;
                 timer.Interval = item.delay + LONG_DELAY;
                 timer.Enabled = true;
+                timerIdle.Interval = SHORT_DELAY;
+                timerIdle.Enabled = true;
             }
         }
 
@@ -126,6 +145,7 @@ namespace DotBase.Test
         {
             Application.Idle -= handler;
             timer.Dispose();
+            activeTests.Remove(this);
         }
     }
 }

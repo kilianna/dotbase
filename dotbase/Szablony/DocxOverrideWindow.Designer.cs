@@ -102,8 +102,8 @@
         #endregion
 
         private System.Windows.Forms.Label komunikat;
-        private System.Windows.Forms.Button nadpisz;
         private System.Windows.Forms.Button anuluj;
         private System.Windows.Forms.Button nowaNazwa;
+        private System.Windows.Forms.Button nadpisz;
     }
 }

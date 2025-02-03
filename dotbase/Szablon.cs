@@ -58,8 +58,15 @@ namespace DotBase
 
             protected void SetField(string name, object value, OleDbType oleDbType)
             {
+                SetField(name, value, oleDbType, null);
+            }
+
+            protected void SetField(string name, object value, OleDbType oleDbType, string oper)
+            {
                 if (where)
                 {
+                    if (oper == null) oper = "***=?";
+                    oper = oper.Replace("***", name);
                     if (!firstEntry)
                     {
                         query += " AND ";
@@ -67,13 +74,14 @@ namespace DotBase
                         logParameters += ",\r\n";
                     }
                     firstEntry = false;
-                    query += "(" + name + "=?)";
-                    selectQuery += "(" + name + "=?)";
-                    logParameters += "WHERE " + name + "=" + toLogString(value);
+                    query += "(" + oper + ")";
+                    selectQuery += "(" + oper + ")";
+                    logParameters += "WHERE " + oper.Replace("?", toLogString(value));
                     parameters.Add(new ValueWithOleDbType(value, oleDbType));
                 }
                 else if (typPolecenia == TypPolecenia.UPDATE)
                 {
+                    if (oper != null) throw new ApplicationException("Nieprawidłowa składnia polecenia!");
                     if (!firstEntry)
                     {
                         query += ", ";
@@ -88,6 +96,7 @@ namespace DotBase
                 }
                 else if (typPolecenia == TypPolecenia.INSERT)
                 {
+                    if (oper != null) throw new ApplicationException("Nieprawidłowa składnia polecenia!");
                     if (!firstEntry)
                     {
                         query += ", ";

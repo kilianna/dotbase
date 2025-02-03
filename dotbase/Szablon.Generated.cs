@@ -25,6 +25,11 @@ namespace DotBase
                 SetField("Data_wzorcowania", value, OleDbType.Date);
                 return this;
             }
+            public Szablon_Atesty_zrodel Data_wzorcowania(DateTime? value, string oper)
+            {
+                SetField("Data_wzorcowania", value, OleDbType.Date, oper);
+                return this;
+            }
             public Szablon_Atesty_zrodel Data_wzorcowania(Order order)
             {
                 SetOrder("Data_wzorcowania", order);
@@ -38,6 +43,11 @@ namespace DotBase
             public Szablon_Atesty_zrodel Emisja_powierzchniowa(double? value)
             {
                 SetField("Emisja_powierzchniowa", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_Atesty_zrodel Emisja_powierzchniowa(double? value, string oper)
+            {
+                SetField("Emisja_powierzchniowa", value, OleDbType.Double, oper);
                 return this;
             }
             public Szablon_Atesty_zrodel Emisja_powierzchniowa(Order order)
@@ -55,6 +65,11 @@ namespace DotBase
                 SetField("ID_atestu", value, OleDbType.SmallInt);
                 return this;
             }
+            public Szablon_Atesty_zrodel ID_atestu(short? value, string oper)
+            {
+                SetField("ID_atestu", value, OleDbType.SmallInt, oper);
+                return this;
+            }
             public Szablon_Atesty_zrodel ID_atestu(Order order)
             {
                 SetOrder("ID_atestu", order);
@@ -70,6 +85,11 @@ namespace DotBase
                 SetField("ID_zrodla", value, OleDbType.SmallInt);
                 return this;
             }
+            public Szablon_Atesty_zrodel ID_zrodla(short? value, string oper)
+            {
+                SetField("ID_zrodla", value, OleDbType.SmallInt, oper);
+                return this;
+            }
             public Szablon_Atesty_zrodel ID_zrodla(Order order)
             {
                 SetOrder("ID_zrodla", order);
@@ -83,6 +103,11 @@ namespace DotBase
             public Szablon_Atesty_zrodel Niepewnosc(double? value)
             {
                 SetField("Niepewnosc", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_Atesty_zrodel Niepewnosc(double? value, string oper)
+            {
+                SetField("Niepewnosc", value, OleDbType.Double, oper);
                 return this;
             }
             public Szablon_Atesty_zrodel Niepewnosc(Order order)
@@ -152,6 +177,11 @@ namespace DotBase
                 SetField("Pole0", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Błędy_wklejania Pole0(string value, string oper)
+            {
+                SetField("Pole0", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Błędy_wklejania Pole0(Order order)
             {
                 SetOrder("Pole0", order);
@@ -207,6 +237,11 @@ namespace DotBase
                 SetField("Uwagi", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Budzetniepewnosci Uwagi(string value, string oper)
+            {
+                SetField("Uwagi", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Budzetniepewnosci Uwagi(Order order)
             {
                 SetOrder("Uwagi", order);
@@ -222,6 +257,11 @@ namespace DotBase
                 SetField("wartosc", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Budzetniepewnosci wartosc(double? value, string oper)
+            {
+                SetField("wartosc", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Budzetniepewnosci wartosc(Order order)
             {
                 SetOrder("wartosc", order);
@@ -235,6 +275,11 @@ namespace DotBase
             public Szablon_Budzetniepewnosci Wielkosc(string value)
             {
                 SetField("Wielkosc", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Budzetniepewnosci Wielkosc(string value, string oper)
+            {
+                SetField("Wielkosc", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Budzetniepewnosci Wielkosc(Order order)
@@ -298,6 +343,11 @@ namespace DotBase
                 SetField("Cena", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Cennik Cena(double? value, string oper)
+            {
+                SetField("Cena", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Cennik Cena(Order order)
             {
                 SetOrder("Cena", order);
@@ -311,6 +361,11 @@ namespace DotBase
             public Szablon_Cennik Usluga(string value)
             {
                 SetField("Usluga", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Cennik Usluga(string value, string oper)
+            {
+                SetField("Usluga", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Cennik Usluga(Order order)
@@ -371,6 +426,11 @@ namespace DotBase
                 SetField("ID_dozymetru", value, OleDbType.Integer);
                 return this;
             }
+            public Szablon_Dozymetry ID_dozymetru(int value, string oper)
+            {
+                SetField("ID_dozymetru", value, OleDbType.Integer, oper);
+                return this;
+            }
             public Szablon_Dozymetry ID_dozymetru(Order order)
             {
                 SetOrder("ID_dozymetru", order);
@@ -384,6 +444,11 @@ namespace DotBase
             public Szablon_Dozymetry Nazwa(string value)
             {
                 SetField("Nazwa", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Dozymetry Nazwa(string value, string oper)
+            {
+                SetField("Nazwa", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Dozymetry Nazwa(Order order)
@@ -401,6 +466,11 @@ namespace DotBase
                 SetField("Nr_fabryczny", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Dozymetry Nr_fabryczny(string value, string oper)
+            {
+                SetField("Nr_fabryczny", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Dozymetry Nr_fabryczny(Order order)
             {
                 SetOrder("Nr_fabryczny", order);
@@ -414,6 +484,11 @@ namespace DotBase
             public Szablon_Dozymetry Producent(string value)
             {
                 SetField("Producent", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Dozymetry Producent(string value, string oper)
+            {
+                SetField("Producent", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Dozymetry Producent(Order order)
@@ -431,6 +506,11 @@ namespace DotBase
                 SetField("Rok_produkcji", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Dozymetry Rok_produkcji(string value, string oper)
+            {
+                SetField("Rok_produkcji", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Dozymetry Rok_produkcji(Order order)
             {
                 SetOrder("Rok_produkcji", order);
@@ -444,6 +524,11 @@ namespace DotBase
             public Szablon_Dozymetry Typ(string value)
             {
                 SetField("Typ", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Dozymetry Typ(string value, string oper)
+            {
+                SetField("Typ", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Dozymetry Typ(Order order)
@@ -516,6 +601,11 @@ namespace DotBase
                 SetField("Haslo", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Hasla Haslo(string value, string oper)
+            {
+                SetField("Haslo", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Hasla Haslo(Order order)
             {
                 SetOrder("Haslo", order);
@@ -529,6 +619,11 @@ namespace DotBase
             public Szablon_Hasla Login(string value)
             {
                 SetField("Login", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Hasla Login(string value, string oper)
+            {
+                SetField("Login", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Hasla Login(Order order)
@@ -589,6 +684,11 @@ namespace DotBase
                 SetField("ID_jednostki", value, OleDbType.Integer);
                 return this;
             }
+            public Szablon_Jednostki ID_jednostki(int value, string oper)
+            {
+                SetField("ID_jednostki", value, OleDbType.Integer, oper);
+                return this;
+            }
             public Szablon_Jednostki ID_jednostki(Order order)
             {
                 SetOrder("ID_jednostki", order);
@@ -602,6 +702,11 @@ namespace DotBase
             public Szablon_Jednostki Jednostka(string value)
             {
                 SetField("Jednostka", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Jednostki Jednostka(string value, string oper)
+            {
+                SetField("Jednostka", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Jednostki Jednostka(Order order)
@@ -619,6 +724,11 @@ namespace DotBase
                 SetField("Przelicznik", value, OleDbType.Single);
                 return this;
             }
+            public Szablon_Jednostki Przelicznik(float? value, string oper)
+            {
+                SetField("Przelicznik", value, OleDbType.Single, oper);
+                return this;
+            }
             public Szablon_Jednostki Przelicznik(Order order)
             {
                 SetOrder("Przelicznik", order);
@@ -634,6 +744,11 @@ namespace DotBase
                 SetField("SI", value, OleDbType.Boolean);
                 return this;
             }
+            public Szablon_Jednostki SI(bool value, string oper)
+            {
+                SetField("SI", value, OleDbType.Boolean, oper);
+                return this;
+            }
             public Szablon_Jednostki SI(Order order)
             {
                 SetOrder("SI", order);
@@ -647,6 +762,11 @@ namespace DotBase
             public Szablon_Jednostki Wielkosc_fizyczna(string value)
             {
                 SetField("Wielkosc_fizyczna", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Jednostki Wielkosc_fizyczna(string value, string oper)
+            {
+                SetField("Wielkosc_fizyczna", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Jednostki Wielkosc_fizyczna(Order order)
@@ -716,6 +836,11 @@ namespace DotBase
                 SetField("Akcesoria", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Karta_przyjecia Akcesoria(string value, string oper)
+            {
+                SetField("Akcesoria", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Karta_przyjecia Akcesoria(Order order)
             {
                 SetOrder("Akcesoria", order);
@@ -729,6 +854,11 @@ namespace DotBase
             public Szablon_Karta_przyjecia Ameryk(bool value)
             {
                 SetField("Ameryk", value, OleDbType.Boolean);
+                return this;
+            }
+            public Szablon_Karta_przyjecia Ameryk(bool value, string oper)
+            {
+                SetField("Ameryk", value, OleDbType.Boolean, oper);
                 return this;
             }
             public Szablon_Karta_przyjecia Ameryk(Order order)
@@ -746,6 +876,11 @@ namespace DotBase
                 SetField("Cena", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Karta_przyjecia Cena(double? value, string oper)
+            {
+                SetField("Cena", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Karta_przyjecia Cena(Order order)
             {
                 SetOrder("Cena", order);
@@ -759,6 +894,11 @@ namespace DotBase
             public Szablon_Karta_przyjecia Chlor(bool value)
             {
                 SetField("Chlor", value, OleDbType.Boolean);
+                return this;
+            }
+            public Szablon_Karta_przyjecia Chlor(bool value, string oper)
+            {
+                SetField("Chlor", value, OleDbType.Boolean, oper);
                 return this;
             }
             public Szablon_Karta_przyjecia Chlor(Order order)
@@ -776,6 +916,11 @@ namespace DotBase
                 SetField("Dawka", value, OleDbType.Boolean);
                 return this;
             }
+            public Szablon_Karta_przyjecia Dawka(bool value, string oper)
+            {
+                SetField("Dawka", value, OleDbType.Boolean, oper);
+                return this;
+            }
             public Szablon_Karta_przyjecia Dawka(Order order)
             {
                 SetOrder("Dawka", order);
@@ -786,9 +931,14 @@ namespace DotBase
                 AddField("Dawka");
                 return this;
             }
-            public Szablon_Karta_przyjecia ID_dozymetru(int value)
+            public Szablon_Karta_przyjecia ID_dozymetru(int? value)
             {
                 SetField("ID_dozymetru", value, OleDbType.Integer);
+                return this;
+            }
+            public Szablon_Karta_przyjecia ID_dozymetru(int? value, string oper)
+            {
+                SetField("ID_dozymetru", value, OleDbType.Integer, oper);
                 return this;
             }
             public Szablon_Karta_przyjecia ID_dozymetru(Order order)
@@ -801,9 +951,14 @@ namespace DotBase
                 AddField("ID_dozymetru");
                 return this;
             }
-            public Szablon_Karta_przyjecia ID_karty(int value)
+            public Szablon_Karta_przyjecia ID_karty(int? value)
             {
                 SetField("ID_karty", value, OleDbType.Integer);
+                return this;
+            }
+            public Szablon_Karta_przyjecia ID_karty(int? value, string oper)
+            {
+                SetField("ID_karty", value, OleDbType.Integer, oper);
                 return this;
             }
             public Szablon_Karta_przyjecia ID_karty(Order order)
@@ -821,6 +976,11 @@ namespace DotBase
                 SetField("ID_zlecenia", value, OleDbType.Integer);
                 return this;
             }
+            public Szablon_Karta_przyjecia ID_zlecenia(int? value, string oper)
+            {
+                SetField("ID_zlecenia", value, OleDbType.Integer, oper);
+                return this;
+            }
             public Szablon_Karta_przyjecia ID_zlecenia(Order order)
             {
                 SetOrder("ID_zlecenia", order);
@@ -834,6 +994,11 @@ namespace DotBase
             public Szablon_Karta_przyjecia Moc_dawki(bool value)
             {
                 SetField("Moc_dawki", value, OleDbType.Boolean);
+                return this;
+            }
+            public Szablon_Karta_przyjecia Moc_dawki(bool value, string oper)
+            {
+                SetField("Moc_dawki", value, OleDbType.Boolean, oper);
                 return this;
             }
             public Szablon_Karta_przyjecia Moc_dawki(Order order)
@@ -851,6 +1016,11 @@ namespace DotBase
                 SetField("Nr_pisma", value, OleDbType.Integer);
                 return this;
             }
+            public Szablon_Karta_przyjecia Nr_pisma(int? value, string oper)
+            {
+                SetField("Nr_pisma", value, OleDbType.Integer, oper);
+                return this;
+            }
             public Szablon_Karta_przyjecia Nr_pisma(Order order)
             {
                 SetOrder("Nr_pisma", order);
@@ -864,6 +1034,11 @@ namespace DotBase
             public Szablon_Karta_przyjecia Pluton(bool value)
             {
                 SetField("Pluton", value, OleDbType.Boolean);
+                return this;
+            }
+            public Szablon_Karta_przyjecia Pluton(bool value, string oper)
+            {
+                SetField("Pluton", value, OleDbType.Boolean, oper);
                 return this;
             }
             public Szablon_Karta_przyjecia Pluton(Order order)
@@ -881,6 +1056,11 @@ namespace DotBase
                 SetField("Rok", value, OleDbType.Integer);
                 return this;
             }
+            public Szablon_Karta_przyjecia Rok(int? value, string oper)
+            {
+                SetField("Rok", value, OleDbType.Integer, oper);
+                return this;
+            }
             public Szablon_Karta_przyjecia Rok(Order order)
             {
                 SetOrder("Rok", order);
@@ -894,6 +1074,11 @@ namespace DotBase
             public Szablon_Karta_przyjecia Rok_pisma(int? value)
             {
                 SetField("Rok_pisma", value, OleDbType.Integer);
+                return this;
+            }
+            public Szablon_Karta_przyjecia Rok_pisma(int? value, string oper)
+            {
+                SetField("Rok_pisma", value, OleDbType.Integer, oper);
                 return this;
             }
             public Szablon_Karta_przyjecia Rok_pisma(Order order)
@@ -911,6 +1096,11 @@ namespace DotBase
                 SetField("Sprawdzenie", value, OleDbType.Boolean);
                 return this;
             }
+            public Szablon_Karta_przyjecia Sprawdzenie(bool value, string oper)
+            {
+                SetField("Sprawdzenie", value, OleDbType.Boolean, oper);
+                return this;
+            }
             public Szablon_Karta_przyjecia Sprawdzenie(Order order)
             {
                 SetOrder("Sprawdzenie", order);
@@ -924,6 +1114,11 @@ namespace DotBase
             public Szablon_Karta_przyjecia Stront_najsilniejszy(bool value)
             {
                 SetField("Stront_najsilniejszy", value, OleDbType.Boolean);
+                return this;
+            }
+            public Szablon_Karta_przyjecia Stront_najsilniejszy(bool value, string oper)
+            {
+                SetField("Stront_najsilniejszy", value, OleDbType.Boolean, oper);
                 return this;
             }
             public Szablon_Karta_przyjecia Stront_najsilniejszy(Order order)
@@ -941,6 +1136,11 @@ namespace DotBase
                 SetField("Stront_silny", value, OleDbType.Boolean);
                 return this;
             }
+            public Szablon_Karta_przyjecia Stront_silny(bool value, string oper)
+            {
+                SetField("Stront_silny", value, OleDbType.Boolean, oper);
+                return this;
+            }
             public Szablon_Karta_przyjecia Stront_silny(Order order)
             {
                 SetOrder("Stront_silny", order);
@@ -954,6 +1154,11 @@ namespace DotBase
             public Szablon_Karta_przyjecia Stront_slaby(bool value)
             {
                 SetField("Stront_slaby", value, OleDbType.Boolean);
+                return this;
+            }
+            public Szablon_Karta_przyjecia Stront_slaby(bool value, string oper)
+            {
+                SetField("Stront_slaby", value, OleDbType.Boolean, oper);
                 return this;
             }
             public Szablon_Karta_przyjecia Stront_slaby(Order order)
@@ -971,6 +1176,11 @@ namespace DotBase
                 SetField("Syg_dawki", value, OleDbType.Boolean);
                 return this;
             }
+            public Szablon_Karta_przyjecia Syg_dawki(bool value, string oper)
+            {
+                SetField("Syg_dawki", value, OleDbType.Boolean, oper);
+                return this;
+            }
             public Szablon_Karta_przyjecia Syg_dawki(Order order)
             {
                 SetOrder("Syg_dawki", order);
@@ -984,6 +1194,11 @@ namespace DotBase
             public Szablon_Karta_przyjecia Syg_mocy_dawki(bool value)
             {
                 SetField("Syg_mocy_dawki", value, OleDbType.Boolean);
+                return this;
+            }
+            public Szablon_Karta_przyjecia Syg_mocy_dawki(bool value, string oper)
+            {
+                SetField("Syg_mocy_dawki", value, OleDbType.Boolean, oper);
                 return this;
             }
             public Szablon_Karta_przyjecia Syg_mocy_dawki(Order order)
@@ -1001,6 +1216,11 @@ namespace DotBase
                 SetField("Test_na_skazenia", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Karta_przyjecia Test_na_skazenia(string value, string oper)
+            {
+                SetField("Test_na_skazenia", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Karta_przyjecia Test_na_skazenia(Order order)
             {
                 SetOrder("Test_na_skazenia", order);
@@ -1014,6 +1234,11 @@ namespace DotBase
             public Szablon_Karta_przyjecia Uszkodzony(bool value)
             {
                 SetField("Uszkodzony", value, OleDbType.Boolean);
+                return this;
+            }
+            public Szablon_Karta_przyjecia Uszkodzony(bool value, string oper)
+            {
+                SetField("Uszkodzony", value, OleDbType.Boolean, oper);
                 return this;
             }
             public Szablon_Karta_przyjecia Uszkodzony(Order order)
@@ -1031,6 +1256,11 @@ namespace DotBase
                 SetField("Uwagi", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Karta_przyjecia Uwagi(string value, string oper)
+            {
+                SetField("Uwagi", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Karta_przyjecia Uwagi(Order order)
             {
                 SetOrder("Uwagi", order);
@@ -1044,6 +1274,11 @@ namespace DotBase
             public Szablon_Karta_przyjecia Wegiel_silny(bool value)
             {
                 SetField("Wegiel_silny", value, OleDbType.Boolean);
+                return this;
+            }
+            public Szablon_Karta_przyjecia Wegiel_silny(bool value, string oper)
+            {
+                SetField("Wegiel_silny", value, OleDbType.Boolean, oper);
                 return this;
             }
             public Szablon_Karta_przyjecia Wegiel_silny(Order order)
@@ -1061,6 +1296,11 @@ namespace DotBase
                 SetField("Wegiel_slaby", value, OleDbType.Boolean);
                 return this;
             }
+            public Szablon_Karta_przyjecia Wegiel_slaby(bool value, string oper)
+            {
+                SetField("Wegiel_slaby", value, OleDbType.Boolean, oper);
+                return this;
+            }
             public Szablon_Karta_przyjecia Wegiel_slaby(Order order)
             {
                 SetOrder("Wegiel_slaby", order);
@@ -1074,6 +1314,11 @@ namespace DotBase
             public Szablon_Karta_przyjecia Wykonano(bool value)
             {
                 SetField("Wykonano", value, OleDbType.Boolean);
+                return this;
+            }
+            public Szablon_Karta_przyjecia Wykonano(bool value, string oper)
+            {
+                SetField("Wykonano", value, OleDbType.Boolean, oper);
                 return this;
             }
             public Szablon_Karta_przyjecia Wykonano(Order order)
@@ -1094,8 +1339,8 @@ namespace DotBase
             public double? Cena;
             public bool Chlor;
             public bool Dawka;
-            public int ID_dozymetru;
-            public int ID_karty;
+            public int? ID_dozymetru;
+            public int? ID_karty;
             public int? ID_zlecenia;
             public bool Moc_dawki;
             public int? Nr_pisma;
@@ -1135,9 +1380,9 @@ namespace DotBase
                 if (cols.ContainsKey("Dawka"))
                     Dawka = row.Field<bool>(cols["Dawka"]);
                 if (cols.ContainsKey("ID_dozymetru"))
-                    ID_dozymetru = row.Field<int>(cols["ID_dozymetru"]);
+                    ID_dozymetru = row.Field<int?>(cols["ID_dozymetru"]);
                 if (cols.ContainsKey("ID_karty"))
-                    ID_karty = row.Field<int>(cols["ID_karty"]);
+                    ID_karty = row.Field<int?>(cols["ID_karty"]);
                 if (cols.ContainsKey("ID_zlecenia"))
                     ID_zlecenia = row.Field<int?>(cols["ID_zlecenia"]);
                 if (cols.ContainsKey("Moc_dawki"))
@@ -1203,6 +1448,11 @@ namespace DotBase
                 SetField("Dolaczyc", value, OleDbType.Boolean);
                 return this;
             }
+            public Szablon_Pomiary_cez Dolaczyc(bool value, string oper)
+            {
+                SetField("Dolaczyc", value, OleDbType.Boolean, oper);
+                return this;
+            }
             public Szablon_Pomiary_cez Dolaczyc(Order order)
             {
                 SetOrder("Dolaczyc", order);
@@ -1216,6 +1466,11 @@ namespace DotBase
             public Szablon_Pomiary_cez ID_wzorcowania(int? value)
             {
                 SetField("ID_wzorcowania", value, OleDbType.Integer);
+                return this;
+            }
+            public Szablon_Pomiary_cez ID_wzorcowania(int? value, string oper)
+            {
+                SetField("ID_wzorcowania", value, OleDbType.Integer, oper);
                 return this;
             }
             public Szablon_Pomiary_cez ID_wzorcowania(Order order)
@@ -1233,6 +1488,11 @@ namespace DotBase
                 SetField("ID_zrodla", value, OleDbType.SmallInt);
                 return this;
             }
+            public Szablon_Pomiary_cez ID_zrodla(short? value, string oper)
+            {
+                SetField("ID_zrodla", value, OleDbType.SmallInt, oper);
+                return this;
+            }
             public Szablon_Pomiary_cez ID_zrodla(Order order)
             {
                 SetOrder("ID_zrodla", order);
@@ -1246,6 +1506,11 @@ namespace DotBase
             public Szablon_Pomiary_cez Odleglosc(double? value)
             {
                 SetField("Odleglosc", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_Pomiary_cez Odleglosc(double? value, string oper)
+            {
+                SetField("Odleglosc", value, OleDbType.Double, oper);
                 return this;
             }
             public Szablon_Pomiary_cez Odleglosc(Order order)
@@ -1263,6 +1528,11 @@ namespace DotBase
                 SetField("Wahanie", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Pomiary_cez Wahanie(double? value, string oper)
+            {
+                SetField("Wahanie", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Pomiary_cez Wahanie(Order order)
             {
                 SetOrder("Wahanie", order);
@@ -1278,6 +1548,11 @@ namespace DotBase
                 SetField("Wskazanie", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Pomiary_cez Wskazanie(double? value, string oper)
+            {
+                SetField("Wskazanie", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Pomiary_cez Wskazanie(Order order)
             {
                 SetOrder("Wskazanie", order);
@@ -1291,6 +1566,11 @@ namespace DotBase
             public Szablon_Pomiary_cez Zakres(string value)
             {
                 SetField("Zakres", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Pomiary_cez Zakres(string value, string oper)
+            {
+                SetField("Zakres", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Pomiary_cez Zakres(Order order)
@@ -1366,6 +1646,11 @@ namespace DotBase
                 SetField("Czas", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Pomiary_dawka Czas(double? value, string oper)
+            {
+                SetField("Czas", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Pomiary_dawka Czas(Order order)
             {
                 SetOrder("Czas", order);
@@ -1379,6 +1664,11 @@ namespace DotBase
             public Szablon_Pomiary_dawka Dolaczyc(bool value)
             {
                 SetField("Dolaczyc", value, OleDbType.Boolean);
+                return this;
+            }
+            public Szablon_Pomiary_dawka Dolaczyc(bool value, string oper)
+            {
+                SetField("Dolaczyc", value, OleDbType.Boolean, oper);
                 return this;
             }
             public Szablon_Pomiary_dawka Dolaczyc(Order order)
@@ -1396,6 +1686,11 @@ namespace DotBase
                 SetField("ID_wzorcowania", value, OleDbType.Integer);
                 return this;
             }
+            public Szablon_Pomiary_dawka ID_wzorcowania(int? value, string oper)
+            {
+                SetField("ID_wzorcowania", value, OleDbType.Integer, oper);
+                return this;
+            }
             public Szablon_Pomiary_dawka ID_wzorcowania(Order order)
             {
                 SetOrder("ID_wzorcowania", order);
@@ -1411,6 +1706,11 @@ namespace DotBase
                 SetField("Wartosc_wzorcowa", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Pomiary_dawka Wartosc_wzorcowa(double? value, string oper)
+            {
+                SetField("Wartosc_wzorcowa", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Pomiary_dawka Wartosc_wzorcowa(Order order)
             {
                 SetOrder("Wartosc_wzorcowa", order);
@@ -1424,6 +1724,11 @@ namespace DotBase
             public Szablon_Pomiary_dawka Wskazanie(double? value)
             {
                 SetField("Wskazanie", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_Pomiary_dawka Wskazanie(double? value, string oper)
+            {
+                SetField("Wskazanie", value, OleDbType.Double, oper);
                 return this;
             }
             public Szablon_Pomiary_dawka Wskazanie(Order order)
@@ -1493,6 +1798,11 @@ namespace DotBase
                 SetField("ID_pomiaru", value, OleDbType.Integer);
                 return this;
             }
+            public Szablon_Pomiary_powierzchniowe ID_pomiaru(int value, string oper)
+            {
+                SetField("ID_pomiaru", value, OleDbType.Integer, oper);
+                return this;
+            }
             public Szablon_Pomiary_powierzchniowe ID_pomiaru(Order order)
             {
                 SetOrder("ID_pomiaru", order);
@@ -1506,6 +1816,11 @@ namespace DotBase
             public Szablon_Pomiary_powierzchniowe ID_wzorcowania(int? value)
             {
                 SetField("ID_wzorcowania", value, OleDbType.Integer);
+                return this;
+            }
+            public Szablon_Pomiary_powierzchniowe ID_wzorcowania(int? value, string oper)
+            {
+                SetField("ID_wzorcowania", value, OleDbType.Integer, oper);
                 return this;
             }
             public Szablon_Pomiary_powierzchniowe ID_wzorcowania(Order order)
@@ -1523,6 +1838,11 @@ namespace DotBase
                 SetField("Pomiar", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Pomiary_powierzchniowe Pomiar(double? value, string oper)
+            {
+                SetField("Pomiar", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Pomiary_powierzchniowe Pomiar(Order order)
             {
                 SetOrder("Pomiar", order);
@@ -1536,6 +1856,11 @@ namespace DotBase
             public Szablon_Pomiary_powierzchniowe Tlo(double? value)
             {
                 SetField("Tlo", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_Pomiary_powierzchniowe Tlo(double? value, string oper)
+            {
+                SetField("Tlo", value, OleDbType.Double, oper);
                 return this;
             }
             public Szablon_Pomiary_powierzchniowe Tlo(Order order)
@@ -1602,6 +1927,11 @@ namespace DotBase
                 SetField("ID_protokolu", value, OleDbType.SmallInt);
                 return this;
             }
+            public Szablon_Pomiary_wzorcowe ID_protokolu(short? value, string oper)
+            {
+                SetField("ID_protokolu", value, OleDbType.SmallInt, oper);
+                return this;
+            }
             public Szablon_Pomiary_wzorcowe ID_protokolu(Order order)
             {
                 SetOrder("ID_protokolu", order);
@@ -1615,6 +1945,11 @@ namespace DotBase
             public Szablon_Pomiary_wzorcowe ID_zrodla(short? value)
             {
                 SetField("ID_zrodla", value, OleDbType.SmallInt);
+                return this;
+            }
+            public Szablon_Pomiary_wzorcowe ID_zrodla(short? value, string oper)
+            {
+                SetField("ID_zrodla", value, OleDbType.SmallInt, oper);
                 return this;
             }
             public Szablon_Pomiary_wzorcowe ID_zrodla(Order order)
@@ -1632,6 +1967,11 @@ namespace DotBase
                 SetField("Moc_kermy", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Pomiary_wzorcowe Moc_kermy(double? value, string oper)
+            {
+                SetField("Moc_kermy", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Pomiary_wzorcowe Moc_kermy(Order order)
             {
                 SetOrder("Moc_kermy", order);
@@ -1647,6 +1987,11 @@ namespace DotBase
                 SetField("Niepewnosc", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Pomiary_wzorcowe Niepewnosc(double? value, string oper)
+            {
+                SetField("Niepewnosc", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Pomiary_wzorcowe Niepewnosc(Order order)
             {
                 SetOrder("Niepewnosc", order);
@@ -1660,6 +2005,11 @@ namespace DotBase
             public Szablon_Pomiary_wzorcowe Odleglosc(double? value)
             {
                 SetField("Odleglosc", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_Pomiary_wzorcowe Odleglosc(double? value, string oper)
+            {
+                SetField("Odleglosc", value, OleDbType.Double, oper);
                 return this;
             }
             public Szablon_Pomiary_wzorcowe Odleglosc(Order order)
@@ -1729,6 +2079,11 @@ namespace DotBase
                 SetField("Data_kalibracji", value, OleDbType.Date);
                 return this;
             }
+            public Szablon_Protokoly_kalibracji_lawy Data_kalibracji(DateTime? value, string oper)
+            {
+                SetField("Data_kalibracji", value, OleDbType.Date, oper);
+                return this;
+            }
             public Szablon_Protokoly_kalibracji_lawy Data_kalibracji(Order order)
             {
                 SetOrder("Data_kalibracji", order);
@@ -1744,6 +2099,11 @@ namespace DotBase
                 SetField("ID_protokolu", value, OleDbType.SmallInt);
                 return this;
             }
+            public Szablon_Protokoly_kalibracji_lawy ID_protokolu(short? value, string oper)
+            {
+                SetField("ID_protokolu", value, OleDbType.SmallInt, oper);
+                return this;
+            }
             public Szablon_Protokoly_kalibracji_lawy ID_protokolu(Order order)
             {
                 SetOrder("ID_protokolu", order);
@@ -1757,6 +2117,11 @@ namespace DotBase
             public Szablon_Protokoly_kalibracji_lawy Nazwa(string value)
             {
                 SetField("Nazwa", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Protokoly_kalibracji_lawy Nazwa(string value, string oper)
+            {
+                SetField("Nazwa", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Protokoly_kalibracji_lawy Nazwa(Order order)
@@ -1820,6 +2185,11 @@ namespace DotBase
                 SetField("EN", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Slownik EN(string value, string oper)
+            {
+                SetField("EN", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Slownik EN(Order order)
             {
                 SetOrder("EN", order);
@@ -1833,6 +2203,11 @@ namespace DotBase
             public Szablon_Slownik PL(string value)
             {
                 SetField("PL", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Slownik PL(string value, string oper)
+            {
+                SetField("PL", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Slownik PL(Order order)
@@ -1893,6 +2268,11 @@ namespace DotBase
                 SetField("ID_dozymetru", value, OleDbType.Integer);
                 return this;
             }
+            public Szablon_Sondy ID_dozymetru(int? value, string oper)
+            {
+                SetField("ID_dozymetru", value, OleDbType.Integer, oper);
+                return this;
+            }
             public Szablon_Sondy ID_dozymetru(Order order)
             {
                 SetOrder("ID_dozymetru", order);
@@ -1906,6 +2286,11 @@ namespace DotBase
             public Szablon_Sondy ID_sondy(int value)
             {
                 SetField("ID_sondy", value, OleDbType.Integer);
+                return this;
+            }
+            public Szablon_Sondy ID_sondy(int value, string oper)
+            {
+                SetField("ID_sondy", value, OleDbType.Integer, oper);
                 return this;
             }
             public Szablon_Sondy ID_sondy(Order order)
@@ -1923,6 +2308,11 @@ namespace DotBase
                 SetField("Nr_fabryczny", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Sondy Nr_fabryczny(string value, string oper)
+            {
+                SetField("Nr_fabryczny", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Sondy Nr_fabryczny(Order order)
             {
                 SetOrder("Nr_fabryczny", order);
@@ -1936,6 +2326,11 @@ namespace DotBase
             public Szablon_Sondy Typ(string value)
             {
                 SetField("Typ", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Sondy Typ(string value, string oper)
+            {
+                SetField("Typ", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Sondy Typ(Order order)
@@ -2002,6 +2397,11 @@ namespace DotBase
                 SetField("Nazwa", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Stale Nazwa(string value, string oper)
+            {
+                SetField("Nazwa", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Stale Nazwa(Order order)
             {
                 SetOrder("Nazwa", order);
@@ -2017,6 +2417,11 @@ namespace DotBase
                 SetField("Uwagi", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Stale Uwagi(string value, string oper)
+            {
+                SetField("Uwagi", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Stale Uwagi(Order order)
             {
                 SetOrder("Uwagi", order);
@@ -2030,6 +2435,11 @@ namespace DotBase
             public Szablon_Stale Wartosc(double? value)
             {
                 SetField("Wartosc", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_Stale Wartosc(double? value, string oper)
+            {
+                SetField("Wartosc", value, OleDbType.Double, oper);
                 return this;
             }
             public Szablon_Stale Wartosc(Order order)
@@ -2093,6 +2503,11 @@ namespace DotBase
                 SetField("Autoryzowal", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Swiadectwo Autoryzowal(string value, string oper)
+            {
+                SetField("Autoryzowal", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Swiadectwo Autoryzowal(Order order)
             {
                 SetOrder("Autoryzowal", order);
@@ -2106,6 +2521,11 @@ namespace DotBase
             public Szablon_Swiadectwo Data_wykonania(DateTime? value)
             {
                 SetField("Data_wykonania", value, OleDbType.Date);
+                return this;
+            }
+            public Szablon_Swiadectwo Data_wykonania(DateTime? value, string oper)
+            {
+                SetField("Data_wykonania", value, OleDbType.Date, oper);
                 return this;
             }
             public Szablon_Swiadectwo Data_wykonania(Order order)
@@ -2123,6 +2543,11 @@ namespace DotBase
                 SetField("Data_wystawienia", value, OleDbType.Date);
                 return this;
             }
+            public Szablon_Swiadectwo Data_wystawienia(DateTime? value, string oper)
+            {
+                SetField("Data_wystawienia", value, OleDbType.Date, oper);
+                return this;
+            }
             public Szablon_Swiadectwo Data_wystawienia(Order order)
             {
                 SetOrder("Data_wystawienia", order);
@@ -2136,6 +2561,11 @@ namespace DotBase
             public Szablon_Swiadectwo Id_karty(int value)
             {
                 SetField("Id_karty", value, OleDbType.Integer);
+                return this;
+            }
+            public Szablon_Swiadectwo Id_karty(int value, string oper)
+            {
+                SetField("Id_karty", value, OleDbType.Integer, oper);
                 return this;
             }
             public Szablon_Swiadectwo Id_karty(Order order)
@@ -2153,6 +2583,11 @@ namespace DotBase
                 SetField("Poprawa", value, OleDbType.Boolean);
                 return this;
             }
+            public Szablon_Swiadectwo Poprawa(bool value, string oper)
+            {
+                SetField("Poprawa", value, OleDbType.Boolean, oper);
+                return this;
+            }
             public Szablon_Swiadectwo Poprawa(Order order)
             {
                 SetOrder("Poprawa", order);
@@ -2166,6 +2601,11 @@ namespace DotBase
             public Szablon_Swiadectwo Uwaga(string value)
             {
                 SetField("Uwaga", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Swiadectwo Uwaga(string value, string oper)
+            {
+                SetField("Uwaga", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Swiadectwo Uwaga(Order order)
@@ -2183,6 +2623,11 @@ namespace DotBase
                 SetField("UwagaD", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Swiadectwo UwagaD(string value, string oper)
+            {
+                SetField("UwagaD", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Swiadectwo UwagaD(Order order)
             {
                 SetOrder("UwagaD", order);
@@ -2196,6 +2641,11 @@ namespace DotBase
             public Szablon_Swiadectwo UwagaMD(string value)
             {
                 SetField("UwagaMD", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Swiadectwo UwagaMD(string value, string oper)
+            {
+                SetField("UwagaMD", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Swiadectwo UwagaMD(Order order)
@@ -2213,6 +2663,11 @@ namespace DotBase
                 SetField("UwagaS", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Swiadectwo UwagaS(string value, string oper)
+            {
+                SetField("UwagaS", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Swiadectwo UwagaS(Order order)
             {
                 SetOrder("UwagaS", order);
@@ -2226,6 +2681,11 @@ namespace DotBase
             public Szablon_Swiadectwo UwagaSD(string value)
             {
                 SetField("UwagaSD", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Swiadectwo UwagaSD(string value, string oper)
+            {
+                SetField("UwagaSD", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Swiadectwo UwagaSD(Order order)
@@ -2243,6 +2703,11 @@ namespace DotBase
                 SetField("UwagaSMD", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Swiadectwo UwagaSMD(string value, string oper)
+            {
+                SetField("UwagaSMD", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Swiadectwo UwagaSMD(Order order)
             {
                 SetOrder("UwagaSMD", order);
@@ -2256,6 +2721,11 @@ namespace DotBase
             public Szablon_Swiadectwo Waznosc_dwa_lata(bool value)
             {
                 SetField("Waznosc_dwa_lata", value, OleDbType.Boolean);
+                return this;
+            }
+            public Szablon_Swiadectwo Waznosc_dwa_lata(bool value, string oper)
+            {
+                SetField("Waznosc_dwa_lata", value, OleDbType.Boolean, oper);
                 return this;
             }
             public Szablon_Swiadectwo Waznosc_dwa_lata(Order order)
@@ -2346,6 +2816,11 @@ namespace DotBase
                 SetField("ID_wzorcowania", value, OleDbType.Integer);
                 return this;
             }
+            public Szablon_Sygnalizacja ID_wzorcowania(int? value, string oper)
+            {
+                SetField("ID_wzorcowania", value, OleDbType.Integer, oper);
+                return this;
+            }
             public Szablon_Sygnalizacja ID_wzorcowania(Order order)
             {
                 SetOrder("ID_wzorcowania", order);
@@ -2359,6 +2834,11 @@ namespace DotBase
             public Szablon_Sygnalizacja Niepewnosc(double? value)
             {
                 SetField("Niepewnosc", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_Sygnalizacja Niepewnosc(double? value, string oper)
+            {
+                SetField("Niepewnosc", value, OleDbType.Double, oper);
                 return this;
             }
             public Szablon_Sygnalizacja Niepewnosc(Order order)
@@ -2376,6 +2856,11 @@ namespace DotBase
                 SetField("Niepewnosc_Wspolczynnika", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Sygnalizacja Niepewnosc_Wspolczynnika(double value, string oper)
+            {
+                SetField("Niepewnosc_Wspolczynnika", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Sygnalizacja Niepewnosc_Wspolczynnika(Order order)
             {
                 SetOrder("Niepewnosc_Wspolczynnika", order);
@@ -2389,6 +2874,11 @@ namespace DotBase
             public Szablon_Sygnalizacja odleglosc1(double? value)
             {
                 SetField("odleglosc1", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_Sygnalizacja odleglosc1(double? value, string oper)
+            {
+                SetField("odleglosc1", value, OleDbType.Double, oper);
                 return this;
             }
             public Szablon_Sygnalizacja odleglosc1(Order order)
@@ -2406,6 +2896,11 @@ namespace DotBase
                 SetField("odleglosc2", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Sygnalizacja odleglosc2(double? value, string oper)
+            {
+                SetField("odleglosc2", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Sygnalizacja odleglosc2(Order order)
             {
                 SetOrder("odleglosc2", order);
@@ -2419,6 +2914,11 @@ namespace DotBase
             public Szablon_Sygnalizacja Prog(double? value)
             {
                 SetField("Prog", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_Sygnalizacja Prog(double? value, string oper)
+            {
+                SetField("Prog", value, OleDbType.Double, oper);
                 return this;
             }
             public Szablon_Sygnalizacja Prog(Order order)
@@ -2436,6 +2936,11 @@ namespace DotBase
                 SetField("Uwagi", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Sygnalizacja Uwagi(string value, string oper)
+            {
+                SetField("Uwagi", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Sygnalizacja Uwagi(Order order)
             {
                 SetOrder("Uwagi", order);
@@ -2449,6 +2954,11 @@ namespace DotBase
             public Szablon_Sygnalizacja Wartosc_zmierzona(double? value)
             {
                 SetField("Wartosc_zmierzona", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_Sygnalizacja Wartosc_zmierzona(double? value, string oper)
+            {
+                SetField("Wartosc_zmierzona", value, OleDbType.Double, oper);
                 return this;
             }
             public Szablon_Sygnalizacja Wartosc_zmierzona(Order order)
@@ -2466,6 +2976,11 @@ namespace DotBase
                 SetField("Wspolczynnik", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Sygnalizacja Wspolczynnik(double value, string oper)
+            {
+                SetField("Wspolczynnik", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Sygnalizacja Wspolczynnik(Order order)
             {
                 SetOrder("Wspolczynnik", order);
@@ -2481,6 +2996,11 @@ namespace DotBase
                 SetField("zrodlo1", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Sygnalizacja zrodlo1(double? value, string oper)
+            {
+                SetField("zrodlo1", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Sygnalizacja zrodlo1(Order order)
             {
                 SetOrder("zrodlo1", order);
@@ -2494,6 +3014,11 @@ namespace DotBase
             public Szablon_Sygnalizacja zrodlo2(double? value)
             {
                 SetField("zrodlo2", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_Sygnalizacja zrodlo2(double? value, string oper)
+            {
+                SetField("zrodlo2", value, OleDbType.Double, oper);
                 return this;
             }
             public Szablon_Sygnalizacja zrodlo2(Order order)
@@ -2581,6 +3106,11 @@ namespace DotBase
                 SetField("Czas_zmierzony", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Sygnalizacja_dawka Czas_zmierzony(double? value, string oper)
+            {
+                SetField("Czas_zmierzony", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Sygnalizacja_dawka Czas_zmierzony(Order order)
             {
                 SetOrder("Czas_zmierzony", order);
@@ -2594,6 +3124,11 @@ namespace DotBase
             public Szablon_Sygnalizacja_dawka ID_wzorcowania(int? value)
             {
                 SetField("ID_wzorcowania", value, OleDbType.Integer);
+                return this;
+            }
+            public Szablon_Sygnalizacja_dawka ID_wzorcowania(int? value, string oper)
+            {
+                SetField("ID_wzorcowania", value, OleDbType.Integer, oper);
                 return this;
             }
             public Szablon_Sygnalizacja_dawka ID_wzorcowania(Order order)
@@ -2611,6 +3146,11 @@ namespace DotBase
                 SetField("ID_zrodla", value, OleDbType.Integer);
                 return this;
             }
+            public Szablon_Sygnalizacja_dawka ID_zrodla(int? value, string oper)
+            {
+                SetField("ID_zrodla", value, OleDbType.Integer, oper);
+                return this;
+            }
             public Szablon_Sygnalizacja_dawka ID_zrodla(Order order)
             {
                 SetOrder("ID_zrodla", order);
@@ -2624,6 +3164,11 @@ namespace DotBase
             public Szablon_Sygnalizacja_dawka Niepewnosc(double value)
             {
                 SetField("Niepewnosc", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_Sygnalizacja_dawka Niepewnosc(double value, string oper)
+            {
+                SetField("Niepewnosc", value, OleDbType.Double, oper);
                 return this;
             }
             public Szablon_Sygnalizacja_dawka Niepewnosc(Order order)
@@ -2641,6 +3186,11 @@ namespace DotBase
                 SetField("Niepewnosc_wsp", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Sygnalizacja_dawka Niepewnosc_wsp(double value, string oper)
+            {
+                SetField("Niepewnosc_wsp", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Sygnalizacja_dawka Niepewnosc_wsp(Order order)
             {
                 SetOrder("Niepewnosc_wsp", order);
@@ -2654,6 +3204,11 @@ namespace DotBase
             public Szablon_Sygnalizacja_dawka Odleglosc(double? value)
             {
                 SetField("Odleglosc", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_Sygnalizacja_dawka Odleglosc(double? value, string oper)
+            {
+                SetField("Odleglosc", value, OleDbType.Double, oper);
                 return this;
             }
             public Szablon_Sygnalizacja_dawka Odleglosc(Order order)
@@ -2671,6 +3226,11 @@ namespace DotBase
                 SetField("Prog", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Sygnalizacja_dawka Prog(double? value, string oper)
+            {
+                SetField("Prog", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Sygnalizacja_dawka Prog(Order order)
             {
                 SetOrder("Prog", order);
@@ -2684,6 +3244,11 @@ namespace DotBase
             public Szablon_Sygnalizacja_dawka Wartosc_wzorcowa(double? value)
             {
                 SetField("Wartosc_wzorcowa", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_Sygnalizacja_dawka Wartosc_wzorcowa(double? value, string oper)
+            {
+                SetField("Wartosc_wzorcowa", value, OleDbType.Double, oper);
                 return this;
             }
             public Szablon_Sygnalizacja_dawka Wartosc_wzorcowa(Order order)
@@ -2701,6 +3266,11 @@ namespace DotBase
                 SetField("Wartosc_zmierzona", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Sygnalizacja_dawka Wartosc_zmierzona(double? value, string oper)
+            {
+                SetField("Wartosc_zmierzona", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Sygnalizacja_dawka Wartosc_zmierzona(Order order)
             {
                 SetOrder("Wartosc_zmierzona", order);
@@ -2714,6 +3284,11 @@ namespace DotBase
             public Szablon_Sygnalizacja_dawka Wspolczynnik(double value)
             {
                 SetField("Wspolczynnik", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_Sygnalizacja_dawka Wspolczynnik(double value, string oper)
+            {
+                SetField("Wspolczynnik", value, OleDbType.Double, oper);
                 return this;
             }
             public Szablon_Sygnalizacja_dawka Wspolczynnik(Order order)
@@ -2798,6 +3373,11 @@ namespace DotBase
                 SetField("ID_wzorcowania", value, OleDbType.Integer);
                 return this;
             }
+            public Szablon_Wyniki_dawka ID_wzorcowania(int? value, string oper)
+            {
+                SetField("ID_wzorcowania", value, OleDbType.Integer, oper);
+                return this;
+            }
             public Szablon_Wyniki_dawka ID_wzorcowania(Order order)
             {
                 SetOrder("ID_wzorcowania", order);
@@ -2811,6 +3391,11 @@ namespace DotBase
             public Szablon_Wyniki_dawka ID_zrodla(int? value)
             {
                 SetField("ID_zrodla", value, OleDbType.Integer);
+                return this;
+            }
+            public Szablon_Wyniki_dawka ID_zrodla(int? value, string oper)
+            {
+                SetField("ID_zrodla", value, OleDbType.Integer, oper);
                 return this;
             }
             public Szablon_Wyniki_dawka ID_zrodla(Order order)
@@ -2828,6 +3413,11 @@ namespace DotBase
                 SetField("Niepewnosc", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Wyniki_dawka Niepewnosc(double? value, string oper)
+            {
+                SetField("Niepewnosc", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Wyniki_dawka Niepewnosc(Order order)
             {
                 SetOrder("Niepewnosc", order);
@@ -2841,6 +3431,11 @@ namespace DotBase
             public Szablon_Wyniki_dawka Odleglosc(double? value)
             {
                 SetField("Odleglosc", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_Wyniki_dawka Odleglosc(double? value, string oper)
+            {
+                SetField("Odleglosc", value, OleDbType.Double, oper);
                 return this;
             }
             public Szablon_Wyniki_dawka Odleglosc(Order order)
@@ -2858,6 +3453,11 @@ namespace DotBase
                 SetField("Wielkosc_fizyczna", value, OleDbType.Integer);
                 return this;
             }
+            public Szablon_Wyniki_dawka Wielkosc_fizyczna(int? value, string oper)
+            {
+                SetField("Wielkosc_fizyczna", value, OleDbType.Integer, oper);
+                return this;
+            }
             public Szablon_Wyniki_dawka Wielkosc_fizyczna(Order order)
             {
                 SetOrder("Wielkosc_fizyczna", order);
@@ -2873,6 +3473,11 @@ namespace DotBase
                 SetField("Wspolczynnik", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Wyniki_dawka Wspolczynnik(double? value, string oper)
+            {
+                SetField("Wspolczynnik", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Wyniki_dawka Wspolczynnik(Order order)
             {
                 SetOrder("Wspolczynnik", order);
@@ -2886,6 +3491,11 @@ namespace DotBase
             public Szablon_Wyniki_dawka Zakres(double? value)
             {
                 SetField("Zakres", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_Wyniki_dawka Zakres(double? value, string oper)
+            {
+                SetField("Zakres", value, OleDbType.Double, oper);
                 return this;
             }
             public Szablon_Wyniki_dawka Zakres(Order order)
@@ -2961,6 +3571,11 @@ namespace DotBase
                 SetField("ID_wzorcowania", value, OleDbType.Integer);
                 return this;
             }
+            public Szablon_wyniki_moc_dawki ID_wzorcowania(int? value, string oper)
+            {
+                SetField("ID_wzorcowania", value, OleDbType.Integer, oper);
+                return this;
+            }
             public Szablon_wyniki_moc_dawki ID_wzorcowania(Order order)
             {
                 SetOrder("ID_wzorcowania", order);
@@ -2974,6 +3589,11 @@ namespace DotBase
             public Szablon_wyniki_moc_dawki Niepewnosc(double? value)
             {
                 SetField("Niepewnosc", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_wyniki_moc_dawki Niepewnosc(double? value, string oper)
+            {
+                SetField("Niepewnosc", value, OleDbType.Double, oper);
                 return this;
             }
             public Szablon_wyniki_moc_dawki Niepewnosc(Order order)
@@ -2991,6 +3611,11 @@ namespace DotBase
                 SetField("Wspolczynnik", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_wyniki_moc_dawki Wspolczynnik(double? value, string oper)
+            {
+                SetField("Wspolczynnik", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_wyniki_moc_dawki Wspolczynnik(Order order)
             {
                 SetOrder("Wspolczynnik", order);
@@ -3004,6 +3629,11 @@ namespace DotBase
             public Szablon_wyniki_moc_dawki ZAKRES(double? value)
             {
                 SetField("ZAKRES", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_wyniki_moc_dawki ZAKRES(double? value, string oper)
+            {
+                SetField("ZAKRES", value, OleDbType.Double, oper);
                 return this;
             }
             public Szablon_wyniki_moc_dawki ZAKRES(Order order)
@@ -3070,6 +3700,11 @@ namespace DotBase
                 SetField("Cisnienie", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_wzorcowanie_cezem Cisnienie(double? value, string oper)
+            {
+                SetField("Cisnienie", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_wzorcowanie_cezem Cisnienie(Order order)
             {
                 SetOrder("Cisnienie", order);
@@ -3083,6 +3718,11 @@ namespace DotBase
             public Szablon_wzorcowanie_cezem Data_wzorcowania(DateTime? value)
             {
                 SetField("Data_wzorcowania", value, OleDbType.Date);
+                return this;
+            }
+            public Szablon_wzorcowanie_cezem Data_wzorcowania(DateTime? value, string oper)
+            {
+                SetField("Data_wzorcowania", value, OleDbType.Date, oper);
                 return this;
             }
             public Szablon_wzorcowanie_cezem Data_wzorcowania(Order order)
@@ -3100,6 +3740,11 @@ namespace DotBase
                 SetField("Dolacz", value, OleDbType.Boolean);
                 return this;
             }
+            public Szablon_wzorcowanie_cezem Dolacz(bool value, string oper)
+            {
+                SetField("Dolacz", value, OleDbType.Boolean, oper);
+                return this;
+            }
             public Szablon_wzorcowanie_cezem Dolacz(Order order)
             {
                 SetOrder("Dolacz", order);
@@ -3115,6 +3760,11 @@ namespace DotBase
                 SetField("ID_arkusza", value, OleDbType.SmallInt);
                 return this;
             }
+            public Szablon_wzorcowanie_cezem ID_arkusza(short? value, string oper)
+            {
+                SetField("ID_arkusza", value, OleDbType.SmallInt, oper);
+                return this;
+            }
             public Szablon_wzorcowanie_cezem ID_arkusza(Order order)
             {
                 SetOrder("ID_arkusza", order);
@@ -3125,9 +3775,14 @@ namespace DotBase
                 AddField("ID_arkusza");
                 return this;
             }
-            public Szablon_wzorcowanie_cezem ID_jednostki(int value)
+            public Szablon_wzorcowanie_cezem ID_jednostki(int? value)
             {
                 SetField("ID_jednostki", value, OleDbType.Integer);
+                return this;
+            }
+            public Szablon_wzorcowanie_cezem ID_jednostki(int? value, string oper)
+            {
+                SetField("ID_jednostki", value, OleDbType.Integer, oper);
                 return this;
             }
             public Szablon_wzorcowanie_cezem ID_jednostki(Order order)
@@ -3145,6 +3800,11 @@ namespace DotBase
                 SetField("ID_karty", value, OleDbType.Integer);
                 return this;
             }
+            public Szablon_wzorcowanie_cezem ID_karty(int? value, string oper)
+            {
+                SetField("ID_karty", value, OleDbType.Integer, oper);
+                return this;
+            }
             public Szablon_wzorcowanie_cezem ID_karty(Order order)
             {
                 SetOrder("ID_karty", order);
@@ -3158,6 +3818,11 @@ namespace DotBase
             public Szablon_wzorcowanie_cezem ID_protokolu(short? value)
             {
                 SetField("ID_protokolu", value, OleDbType.SmallInt);
+                return this;
+            }
+            public Szablon_wzorcowanie_cezem ID_protokolu(short? value, string oper)
+            {
+                SetField("ID_protokolu", value, OleDbType.SmallInt, oper);
                 return this;
             }
             public Szablon_wzorcowanie_cezem ID_protokolu(Order order)
@@ -3175,6 +3840,11 @@ namespace DotBase
                 SetField("ID_sondy", value, OleDbType.Integer);
                 return this;
             }
+            public Szablon_wzorcowanie_cezem ID_sondy(int? value, string oper)
+            {
+                SetField("ID_sondy", value, OleDbType.Integer, oper);
+                return this;
+            }
             public Szablon_wzorcowanie_cezem ID_sondy(Order order)
             {
                 SetOrder("ID_sondy", order);
@@ -3188,6 +3858,11 @@ namespace DotBase
             public Szablon_wzorcowanie_cezem ID_wzorcowania(int value)
             {
                 SetField("ID_wzorcowania", value, OleDbType.Integer);
+                return this;
+            }
+            public Szablon_wzorcowanie_cezem ID_wzorcowania(int value, string oper)
+            {
+                SetField("ID_wzorcowania", value, OleDbType.Integer, oper);
                 return this;
             }
             public Szablon_wzorcowanie_cezem ID_wzorcowania(Order order)
@@ -3205,6 +3880,11 @@ namespace DotBase
                 SetField("Inne_nastawy", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_wzorcowanie_cezem Inne_nastawy(string value, string oper)
+            {
+                SetField("Inne_nastawy", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_wzorcowanie_cezem Inne_nastawy(Order order)
             {
                 SetOrder("Inne_nastawy", order);
@@ -3218,6 +3898,11 @@ namespace DotBase
             public Szablon_wzorcowanie_cezem Napiecie_zasilania_sondy(string value)
             {
                 SetField("Napiecie_zasilania_sondy", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_wzorcowanie_cezem Napiecie_zasilania_sondy(string value, string oper)
+            {
+                SetField("Napiecie_zasilania_sondy", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_wzorcowanie_cezem Napiecie_zasilania_sondy(Order order)
@@ -3235,6 +3920,11 @@ namespace DotBase
                 SetField("Osoba_sprawdzajaca", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_wzorcowanie_cezem Osoba_sprawdzajaca(string value, string oper)
+            {
+                SetField("Osoba_sprawdzajaca", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_wzorcowanie_cezem Osoba_sprawdzajaca(Order order)
             {
                 SetOrder("Osoba_sprawdzajaca", order);
@@ -3248,6 +3938,11 @@ namespace DotBase
             public Szablon_wzorcowanie_cezem Osoba_wzorcujaca(string value)
             {
                 SetField("Osoba_wzorcujaca", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_wzorcowanie_cezem Osoba_wzorcujaca(string value, string oper)
+            {
+                SetField("Osoba_wzorcujaca", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_wzorcowanie_cezem Osoba_wzorcujaca(Order order)
@@ -3265,6 +3960,11 @@ namespace DotBase
                 SetField("Rodzaj_wzorcowania", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_wzorcowanie_cezem Rodzaj_wzorcowania(string value, string oper)
+            {
+                SetField("Rodzaj_wzorcowania", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_wzorcowanie_cezem Rodzaj_wzorcowania(Order order)
             {
                 SetOrder("Rodzaj_wzorcowania", order);
@@ -3278,6 +3978,11 @@ namespace DotBase
             public Szablon_wzorcowanie_cezem Temperatura(double? value)
             {
                 SetField("Temperatura", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_wzorcowanie_cezem Temperatura(double? value, string oper)
+            {
+                SetField("Temperatura", value, OleDbType.Double, oper);
                 return this;
             }
             public Szablon_wzorcowanie_cezem Temperatura(Order order)
@@ -3295,6 +4000,11 @@ namespace DotBase
                 SetField("Tlo", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_wzorcowanie_cezem Tlo(string value, string oper)
+            {
+                SetField("Tlo", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_wzorcowanie_cezem Tlo(Order order)
             {
                 SetOrder("Tlo", order);
@@ -3308,6 +4018,11 @@ namespace DotBase
             public Szablon_wzorcowanie_cezem Uwagi(string value)
             {
                 SetField("Uwagi", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_wzorcowanie_cezem Uwagi(string value, string oper)
+            {
+                SetField("Uwagi", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_wzorcowanie_cezem Uwagi(Order order)
@@ -3325,6 +4040,11 @@ namespace DotBase
                 SetField("Wielkosc_fizyczna", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_wzorcowanie_cezem Wielkosc_fizyczna(string value, string oper)
+            {
+                SetField("Wielkosc_fizyczna", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_wzorcowanie_cezem Wielkosc_fizyczna(Order order)
             {
                 SetOrder("Wielkosc_fizyczna", order);
@@ -3338,6 +4058,11 @@ namespace DotBase
             public Szablon_wzorcowanie_cezem wilgotnosc(double? value)
             {
                 SetField("wilgotnosc", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_wzorcowanie_cezem wilgotnosc(double? value, string oper)
+            {
+                SetField("wilgotnosc", value, OleDbType.Double, oper);
                 return this;
             }
             public Szablon_wzorcowanie_cezem wilgotnosc(Order order)
@@ -3357,7 +4082,7 @@ namespace DotBase
             public DateTime? Data_wzorcowania;
             public bool Dolacz;
             public short? ID_arkusza;
-            public int ID_jednostki;
+            public int? ID_jednostki;
             public int? ID_karty;
             public short? ID_protokolu;
             public int? ID_sondy;
@@ -3391,7 +4116,7 @@ namespace DotBase
                 if (cols.ContainsKey("ID_arkusza"))
                     ID_arkusza = row.Field<short?>(cols["ID_arkusza"]);
                 if (cols.ContainsKey("ID_jednostki"))
-                    ID_jednostki = row.Field<int>(cols["ID_jednostki"]);
+                    ID_jednostki = row.Field<int?>(cols["ID_jednostki"]);
                 if (cols.ContainsKey("ID_karty"))
                     ID_karty = row.Field<int?>(cols["ID_karty"]);
                 if (cols.ContainsKey("ID_protokolu"))
@@ -3449,6 +4174,11 @@ namespace DotBase
                 SetField("Cisnienie", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Cisnienie(double? value, string oper)
+            {
+                SetField("Cisnienie", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Cisnienie(Order order)
             {
                 SetOrder("Cisnienie", order);
@@ -3462,6 +4192,11 @@ namespace DotBase
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Data_wzorcowania(DateTime? value)
             {
                 SetField("Data_wzorcowania", value, OleDbType.Date);
+                return this;
+            }
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Data_wzorcowania(DateTime? value, string oper)
+            {
+                SetField("Data_wzorcowania", value, OleDbType.Date, oper);
                 return this;
             }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Data_wzorcowania(Order order)
@@ -3479,6 +4214,11 @@ namespace DotBase
                 SetField("Dolacz", value, OleDbType.Boolean);
                 return this;
             }
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Dolacz(bool value, string oper)
+            {
+                SetField("Dolacz", value, OleDbType.Boolean, oper);
+                return this;
+            }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Dolacz(Order order)
             {
                 SetOrder("Dolacz", order);
@@ -3492,6 +4232,11 @@ namespace DotBase
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ID_arkusza(int? value)
             {
                 SetField("ID_arkusza", value, OleDbType.Integer);
+                return this;
+            }
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ID_arkusza(int? value, string oper)
+            {
+                SetField("ID_arkusza", value, OleDbType.Integer, oper);
                 return this;
             }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ID_arkusza(Order order)
@@ -3509,6 +4254,11 @@ namespace DotBase
                 SetField("ID_jednostki", value, OleDbType.Integer);
                 return this;
             }
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ID_jednostki(int? value, string oper)
+            {
+                SetField("ID_jednostki", value, OleDbType.Integer, oper);
+                return this;
+            }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ID_jednostki(Order order)
             {
                 SetOrder("ID_jednostki", order);
@@ -3522,6 +4272,11 @@ namespace DotBase
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ID_karty(int? value)
             {
                 SetField("ID_karty", value, OleDbType.Integer);
+                return this;
+            }
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ID_karty(int? value, string oper)
+            {
+                SetField("ID_karty", value, OleDbType.Integer, oper);
                 return this;
             }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ID_karty(Order order)
@@ -3539,6 +4294,11 @@ namespace DotBase
                 SetField("ID_sondy", value, OleDbType.Integer);
                 return this;
             }
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ID_sondy(int? value, string oper)
+            {
+                SetField("ID_sondy", value, OleDbType.Integer, oper);
+                return this;
+            }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ID_sondy(Order order)
             {
                 SetOrder("ID_sondy", order);
@@ -3552,6 +4312,11 @@ namespace DotBase
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ID_wzorcowania(int value)
             {
                 SetField("ID_wzorcowania", value, OleDbType.Integer);
+                return this;
+            }
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ID_wzorcowania(int value, string oper)
+            {
+                SetField("ID_wzorcowania", value, OleDbType.Integer, oper);
                 return this;
             }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ID_wzorcowania(Order order)
@@ -3569,6 +4334,11 @@ namespace DotBase
                 SetField("ID_zrodla", value, OleDbType.Integer);
                 return this;
             }
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ID_zrodla(int? value, string oper)
+            {
+                SetField("ID_zrodla", value, OleDbType.Integer, oper);
+                return this;
+            }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ID_zrodla(Order order)
             {
                 SetOrder("ID_zrodla", order);
@@ -3582,6 +4352,11 @@ namespace DotBase
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Inne_nastawy(string value)
             {
                 SetField("Inne_nastawy", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Inne_nastawy(string value, string oper)
+            {
+                SetField("Inne_nastawy", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Inne_nastawy(Order order)
@@ -3599,6 +4374,11 @@ namespace DotBase
                 SetField("Mnoznik_korekcyjny", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Mnoznik_korekcyjny(double? value, string oper)
+            {
+                SetField("Mnoznik_korekcyjny", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Mnoznik_korekcyjny(Order order)
             {
                 SetOrder("Mnoznik_korekcyjny", order);
@@ -3612,6 +4392,11 @@ namespace DotBase
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Napiecie_zasilania_sondy(string value)
             {
                 SetField("Napiecie_zasilania_sondy", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Napiecie_zasilania_sondy(string value, string oper)
+            {
+                SetField("Napiecie_zasilania_sondy", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Napiecie_zasilania_sondy(Order order)
@@ -3629,6 +4414,11 @@ namespace DotBase
                 SetField("Niepewnosc", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Niepewnosc(double? value, string oper)
+            {
+                SetField("Niepewnosc", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Niepewnosc(Order order)
             {
                 SetOrder("Niepewnosc", order);
@@ -3642,6 +4432,11 @@ namespace DotBase
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Odleglosc_zrodlo_sonda(double? value)
             {
                 SetField("Odleglosc_zrodlo_sonda", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Odleglosc_zrodlo_sonda(double? value, string oper)
+            {
+                SetField("Odleglosc_zrodlo_sonda", value, OleDbType.Double, oper);
                 return this;
             }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Odleglosc_zrodlo_sonda(Order order)
@@ -3659,6 +4454,11 @@ namespace DotBase
                 SetField("Osoba_sprawdzajaca", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Osoba_sprawdzajaca(string value, string oper)
+            {
+                SetField("Osoba_sprawdzajaca", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Osoba_sprawdzajaca(Order order)
             {
                 SetOrder("Osoba_sprawdzajaca", order);
@@ -3672,6 +4472,11 @@ namespace DotBase
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Osoba_wzorcujaca(string value)
             {
                 SetField("Osoba_wzorcujaca", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Osoba_wzorcujaca(string value, string oper)
+            {
+                SetField("Osoba_wzorcujaca", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Osoba_wzorcujaca(Order order)
@@ -3689,6 +4494,11 @@ namespace DotBase
                 SetField("Podstawka", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Podstawka(string value, string oper)
+            {
+                SetField("Podstawka", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Podstawka(Order order)
             {
                 SetOrder("Podstawka", order);
@@ -3702,6 +4512,11 @@ namespace DotBase
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Temperatura(double? value)
             {
                 SetField("Temperatura", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Temperatura(double? value, string oper)
+            {
+                SetField("Temperatura", value, OleDbType.Double, oper);
                 return this;
             }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Temperatura(Order order)
@@ -3719,6 +4534,11 @@ namespace DotBase
                 SetField("Tlo", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Tlo(double? value, string oper)
+            {
+                SetField("Tlo", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Tlo(Order order)
             {
                 SetOrder("Tlo", order);
@@ -3732,6 +4552,11 @@ namespace DotBase
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Uwagi(string value)
             {
                 SetField("Uwagi", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Uwagi(string value, string oper)
+            {
+                SetField("Uwagi", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Uwagi(Order order)
@@ -3749,6 +4574,11 @@ namespace DotBase
                 SetField("Wilgotnosc", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Wilgotnosc(double? value, string oper)
+            {
+                SetField("Wilgotnosc", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Wilgotnosc(Order order)
             {
                 SetOrder("Wilgotnosc", order);
@@ -3764,6 +4594,11 @@ namespace DotBase
                 SetField("wspolczynnik", value, OleDbType.Double);
                 return this;
             }
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi wspolczynnik(double? value, string oper)
+            {
+                SetField("wspolczynnik", value, OleDbType.Double, oper);
+                return this;
+            }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi wspolczynnik(Order order)
             {
                 SetOrder("wspolczynnik", order);
@@ -3777,6 +4612,11 @@ namespace DotBase
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Zakres(string value)
             {
                 SetField("Zakres", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Zakres(string value, string oper)
+            {
+                SetField("Zakres", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Zakres(Order order)
@@ -3900,6 +4740,11 @@ namespace DotBase
                 SetField("Adres_platnika", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Zlecenia Adres_platnika(string value, string oper)
+            {
+                SetField("Adres_platnika", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Zlecenia Adres_platnika(Order order)
             {
                 SetOrder("Adres_platnika", order);
@@ -3913,6 +4758,11 @@ namespace DotBase
             public Szablon_Zlecenia Data_przyjecia(DateTime? value)
             {
                 SetField("Data_przyjecia", value, OleDbType.Date);
+                return this;
+            }
+            public Szablon_Zlecenia Data_przyjecia(DateTime? value, string oper)
+            {
+                SetField("Data_przyjecia", value, OleDbType.Date, oper);
                 return this;
             }
             public Szablon_Zlecenia Data_przyjecia(Order order)
@@ -3930,6 +4780,11 @@ namespace DotBase
                 SetField("Data_zwrotu", value, OleDbType.Date);
                 return this;
             }
+            public Szablon_Zlecenia Data_zwrotu(DateTime? value, string oper)
+            {
+                SetField("Data_zwrotu", value, OleDbType.Date, oper);
+                return this;
+            }
             public Szablon_Zlecenia Data_zwrotu(Order order)
             {
                 SetOrder("Data_zwrotu", order);
@@ -3943,6 +4798,11 @@ namespace DotBase
             public Szablon_Zlecenia Ekspres(bool value)
             {
                 SetField("Ekspres", value, OleDbType.Boolean);
+                return this;
+            }
+            public Szablon_Zlecenia Ekspres(bool value, string oper)
+            {
+                SetField("Ekspres", value, OleDbType.Boolean, oper);
                 return this;
             }
             public Szablon_Zlecenia Ekspres(Order order)
@@ -3960,6 +4820,11 @@ namespace DotBase
                 SetField("Forma_przyjecia", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Zlecenia Forma_przyjecia(string value, string oper)
+            {
+                SetField("Forma_przyjecia", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Zlecenia Forma_przyjecia(Order order)
             {
                 SetOrder("Forma_przyjecia", order);
@@ -3973,6 +4838,11 @@ namespace DotBase
             public Szablon_Zlecenia Forma_zwrotu(string value)
             {
                 SetField("Forma_zwrotu", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Zlecenia Forma_zwrotu(string value, string oper)
+            {
+                SetField("Forma_zwrotu", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Zlecenia Forma_zwrotu(Order order)
@@ -3990,6 +4860,11 @@ namespace DotBase
                 SetField("ID_zlecenia", value, OleDbType.Integer);
                 return this;
             }
+            public Szablon_Zlecenia ID_zlecenia(int? value, string oper)
+            {
+                SetField("ID_zlecenia", value, OleDbType.Integer, oper);
+                return this;
+            }
             public Szablon_Zlecenia ID_zlecenia(Order order)
             {
                 SetOrder("ID_zlecenia", order);
@@ -4000,9 +4875,14 @@ namespace DotBase
                 AddField("ID_zlecenia");
                 return this;
             }
-            public Szablon_Zlecenia ID_zleceniodawcy(int value)
+            public Szablon_Zlecenia ID_zleceniodawcy(int? value)
             {
                 SetField("ID_zleceniodawcy", value, OleDbType.Integer);
+                return this;
+            }
+            public Szablon_Zlecenia ID_zleceniodawcy(int? value, string oper)
+            {
+                SetField("ID_zleceniodawcy", value, OleDbType.Integer, oper);
                 return this;
             }
             public Szablon_Zlecenia ID_zleceniodawcy(Order order)
@@ -4020,6 +4900,11 @@ namespace DotBase
                 SetField("Nazwa_platnika", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Zlecenia Nazwa_platnika(string value, string oper)
+            {
+                SetField("Nazwa_platnika", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Zlecenia Nazwa_platnika(Order order)
             {
                 SetOrder("Nazwa_platnika", order);
@@ -4033,6 +4918,11 @@ namespace DotBase
             public Szablon_Zlecenia NIP_platnika(string value)
             {
                 SetField("NIP_platnika", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Zlecenia NIP_platnika(string value, string oper)
+            {
+                SetField("NIP_platnika", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Zlecenia NIP_platnika(Order order)
@@ -4050,6 +4940,11 @@ namespace DotBase
                 SetField("Nr_zlecenia_klienta", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Zlecenia Nr_zlecenia_klienta(string value, string oper)
+            {
+                SetField("Nr_zlecenia_klienta", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Zlecenia Nr_zlecenia_klienta(Order order)
             {
                 SetOrder("Nr_zlecenia_klienta", order);
@@ -4063,6 +4958,11 @@ namespace DotBase
             public Szablon_Zlecenia Nr_zlecenia_rejestr(int? value)
             {
                 SetField("Nr_zlecenia_rejestr", value, OleDbType.Integer);
+                return this;
+            }
+            public Szablon_Zlecenia Nr_zlecenia_rejestr(int? value, string oper)
+            {
+                SetField("Nr_zlecenia_rejestr", value, OleDbType.Integer, oper);
                 return this;
             }
             public Szablon_Zlecenia Nr_zlecenia_rejestr(Order order)
@@ -4080,6 +4980,11 @@ namespace DotBase
                 SetField("Osoba_przyjmujaca", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Zlecenia Osoba_przyjmujaca(string value, string oper)
+            {
+                SetField("Osoba_przyjmujaca", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Zlecenia Osoba_przyjmujaca(Order order)
             {
                 SetOrder("Osoba_przyjmujaca", order);
@@ -4093,6 +4998,11 @@ namespace DotBase
             public Szablon_Zlecenia Uwagi(string value)
             {
                 SetField("Uwagi", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Zlecenia Uwagi(string value, string oper)
+            {
+                SetField("Uwagi", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Zlecenia Uwagi(Order order)
@@ -4115,7 +5025,7 @@ namespace DotBase
             public string Forma_przyjecia;
             public string Forma_zwrotu;
             public int? ID_zlecenia;
-            public int ID_zleceniodawcy;
+            public int? ID_zleceniodawcy;
             public string Nazwa_platnika;
             public string NIP_platnika;
             public string Nr_zlecenia_klienta;
@@ -4147,7 +5057,7 @@ namespace DotBase
                 if (cols.ContainsKey("ID_zlecenia"))
                     ID_zlecenia = row.Field<int?>(cols["ID_zlecenia"]);
                 if (cols.ContainsKey("ID_zleceniodawcy"))
-                    ID_zleceniodawcy = row.Field<int>(cols["ID_zleceniodawcy"]);
+                    ID_zleceniodawcy = row.Field<int?>(cols["ID_zleceniodawcy"]);
                 if (cols.ContainsKey("Nazwa_platnika"))
                     Nazwa_platnika = row.Field<string>(cols["Nazwa_platnika"]);
                 if (cols.ContainsKey("NIP_platnika"))
@@ -4189,6 +5099,11 @@ namespace DotBase
                 SetField("Adres", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Zleceniodawca Adres(string value, string oper)
+            {
+                SetField("Adres", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Zleceniodawca Adres(Order order)
             {
                 SetOrder("Adres", order);
@@ -4202,6 +5117,11 @@ namespace DotBase
             public Szablon_Zleceniodawca email(string value)
             {
                 SetField("email", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Zleceniodawca email(string value, string oper)
+            {
+                SetField("email", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Zleceniodawca email(Order order)
@@ -4219,6 +5139,11 @@ namespace DotBase
                 SetField("Faks", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Zleceniodawca Faks(string value, string oper)
+            {
+                SetField("Faks", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Zleceniodawca Faks(Order order)
             {
                 SetOrder("Faks", order);
@@ -4232,6 +5157,11 @@ namespace DotBase
             public Szablon_Zleceniodawca ID_zleceniodawcy(int value)
             {
                 SetField("ID_zleceniodawcy", value, OleDbType.Integer);
+                return this;
+            }
+            public Szablon_Zleceniodawca ID_zleceniodawcy(int value, string oper)
+            {
+                SetField("ID_zleceniodawcy", value, OleDbType.Integer, oper);
                 return this;
             }
             public Szablon_Zleceniodawca ID_zleceniodawcy(Order order)
@@ -4249,6 +5179,11 @@ namespace DotBase
                 SetField("IFJ", value, OleDbType.Boolean);
                 return this;
             }
+            public Szablon_Zleceniodawca IFJ(bool value, string oper)
+            {
+                SetField("IFJ", value, OleDbType.Boolean, oper);
+                return this;
+            }
             public Szablon_Zleceniodawca IFJ(Order order)
             {
                 SetOrder("IFJ", order);
@@ -4262,6 +5197,11 @@ namespace DotBase
             public Szablon_Zleceniodawca NIP(string value)
             {
                 SetField("NIP", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Zleceniodawca NIP(string value, string oper)
+            {
+                SetField("NIP", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Zleceniodawca NIP(Order order)
@@ -4279,6 +5219,11 @@ namespace DotBase
                 SetField("Osoba_kontaktowa", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Zleceniodawca Osoba_kontaktowa(string value, string oper)
+            {
+                SetField("Osoba_kontaktowa", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Zleceniodawca Osoba_kontaktowa(Order order)
             {
                 SetOrder("Osoba_kontaktowa", order);
@@ -4292,6 +5237,11 @@ namespace DotBase
             public Szablon_Zleceniodawca Rabat(string value)
             {
                 SetField("Rabat", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Zleceniodawca Rabat(string value, string oper)
+            {
+                SetField("Rabat", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Zleceniodawca Rabat(Order order)
@@ -4309,6 +5259,11 @@ namespace DotBase
                 SetField("Telefon", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Zleceniodawca Telefon(string value, string oper)
+            {
+                SetField("Telefon", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Zleceniodawca Telefon(Order order)
             {
                 SetOrder("Telefon", order);
@@ -4324,6 +5279,11 @@ namespace DotBase
                 SetField("Uwagi", value, OleDbType.WChar);
                 return this;
             }
+            public Szablon_Zleceniodawca Uwagi(string value, string oper)
+            {
+                SetField("Uwagi", value, OleDbType.WChar, oper);
+                return this;
+            }
             public Szablon_Zleceniodawca Uwagi(Order order)
             {
                 SetOrder("Uwagi", order);
@@ -4337,6 +5297,11 @@ namespace DotBase
             public Szablon_Zleceniodawca Zleceniodawca(string value)
             {
                 SetField("Zleceniodawca", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Zleceniodawca Zleceniodawca(string value, string oper)
+            {
+                SetField("Zleceniodawca", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_Zleceniodawca Zleceniodawca(Order order)
@@ -4424,6 +5389,11 @@ namespace DotBase
                 SetField("Czas_polowicznego_rozpadu", value, OleDbType.Single);
                 return this;
             }
+            public Szablon_zrodla_powierzchniowe Czas_polowicznego_rozpadu(float? value, string oper)
+            {
+                SetField("Czas_polowicznego_rozpadu", value, OleDbType.Single, oper);
+                return this;
+            }
             public Szablon_zrodla_powierzchniowe Czas_polowicznego_rozpadu(Order order)
             {
                 SetOrder("Czas_polowicznego_rozpadu", order);
@@ -4437,6 +5407,11 @@ namespace DotBase
             public Szablon_zrodla_powierzchniowe Czas_polowicznego_rozpadu_dni(float? value)
             {
                 SetField("Czas_polowicznego_rozpadu_dni", value, OleDbType.Single);
+                return this;
+            }
+            public Szablon_zrodla_powierzchniowe Czas_polowicznego_rozpadu_dni(float? value, string oper)
+            {
+                SetField("Czas_polowicznego_rozpadu_dni", value, OleDbType.Single, oper);
                 return this;
             }
             public Szablon_zrodla_powierzchniowe Czas_polowicznego_rozpadu_dni(Order order)
@@ -4454,6 +5429,11 @@ namespace DotBase
                 SetField("Id_zrodla", value, OleDbType.Integer);
                 return this;
             }
+            public Szablon_zrodla_powierzchniowe Id_zrodla(int value, string oper)
+            {
+                SetField("Id_zrodla", value, OleDbType.Integer, oper);
+                return this;
+            }
             public Szablon_zrodla_powierzchniowe Id_zrodla(Order order)
             {
                 SetOrder("Id_zrodla", order);
@@ -4467,6 +5447,11 @@ namespace DotBase
             public Szablon_zrodla_powierzchniowe Nazwa(string value)
             {
                 SetField("Nazwa", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_zrodla_powierzchniowe Nazwa(string value, string oper)
+            {
+                SetField("Nazwa", value, OleDbType.WChar, oper);
                 return this;
             }
             public Szablon_zrodla_powierzchniowe Nazwa(Order order)
@@ -4484,6 +5469,11 @@ namespace DotBase
                 SetField("Niepewnosc", value, OleDbType.Single);
                 return this;
             }
+            public Szablon_zrodla_powierzchniowe Niepewnosc(float? value, string oper)
+            {
+                SetField("Niepewnosc", value, OleDbType.Single, oper);
+                return this;
+            }
             public Szablon_zrodla_powierzchniowe Niepewnosc(Order order)
             {
                 SetOrder("Niepewnosc", order);
@@ -4497,6 +5487,11 @@ namespace DotBase
             public Szablon_zrodla_powierzchniowe Numer(int? value)
             {
                 SetField("Numer", value, OleDbType.Integer);
+                return this;
+            }
+            public Szablon_zrodla_powierzchniowe Numer(int? value, string oper)
+            {
+                SetField("Numer", value, OleDbType.Integer, oper);
                 return this;
             }
             public Szablon_zrodla_powierzchniowe Numer(Order order)

@@ -100,7 +100,7 @@ namespace DotBase.Szablony
                 .GET_ONE();
 
             przyrzad = baza.Dozymetry
-                .WHERE().ID_dozymetru(kartaPrzyjecia.ID_dozymetru)
+                .WHERE().ID_dozymetru(kartaPrzyjecia.ID_dozymetru ?? -1)
                 .GET_ONE();
 
             zlecenie = baza.Zlecenia
@@ -108,7 +108,7 @@ namespace DotBase.Szablony
                 .GET_ONE();
 
             zleceniodawca = baza.Zleceniodawca
-                .WHERE().ID_zleceniodawcy(zlecenie.ID_zleceniodawcy)
+                .WHERE().ID_zleceniodawcy(zlecenie.ID_zleceniodawcy ?? -1)
                 .GET_ONE();
 
             var tabelaMD = baza.wzorcowanie_cezem
@@ -188,7 +188,7 @@ namespace DotBase.Szablony
             {
                 var jednostka = baza.Jednostki
                     .SELECT().SI()
-                    .WHERE().ID_jednostki(tabelaMD[0].ID_jednostki)
+                    .WHERE().ID_jednostki(tabelaMD[0].ID_jednostki ?? -1)
                     .GET_OPTIONAL();
                 if (jednostka != null && !jednostka.SI)
                     spojnoscPomiarowa = SpojnoscPomiarowa.gum;
@@ -249,7 +249,7 @@ namespace DotBase.Szablony
                 .GET_OPTIONAL();
 
             wyn.jednostka = baza.Jednostki
-                .WHERE().ID_jednostki(row.ID_jednostki)
+                .WHERE().ID_jednostki(row.ID_jednostki ?? -1)
                 .GET_OPTIONAL();
 
             if (row.Rodzaj_wzorcowania == "md")
