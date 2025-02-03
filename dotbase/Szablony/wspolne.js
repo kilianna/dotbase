@@ -1,4 +1,17 @@
 ﻿
+const ustawieniaJezykow = {
+    PL: {
+        alfabet: 'abcdefghijklmnoprstuwyz',
+        kropka: ',',
+    },
+    EN: {
+        alfabet: 'abcdefghijklmnopqrstuvwxyz',
+        kropka: '.',
+    }
+}
+
+ustawieniaJezyka = ustawieniaJezykow[jezyk];
+
 function escape(unsafe)
 {
     return unsafe
@@ -31,6 +44,7 @@ function tekst(x, y) {
         while (result.indexOf('.') >= 0 && (result[result.length - 1] == '0' || result[result.length - 1] == '.')) {
             result = result.substring(0, result.length - 1);
         }
+        result = result.replace('.', ustawieniaJezyka.kropka);
         return result;
     } else if (typeof x === 'string') {
         return x;
@@ -50,9 +64,7 @@ function multiline(x) {
 }
 
 function litera(x) {
-    const alfabet =
-        jezyk == 'PL' ? 'abcdefghijklmnoprstuwyz'
-        : 'abcdefghijklmnopqrstuvwxyz'
+    const alfabet = ustawieniaJezyka.alfabet;
     if (x < alfabet.length) {
         return alfabet[x];
     } else {
@@ -67,4 +79,81 @@ function mikro(x) {
 function blad(x) {
     console.log(`ERROR: ${x}`);
     return `⚠ ⚠ 𝐄𝐑𝐑𝐎𝐑: ${x} ⚠ ⚠`;
+}
+
+function _getSignificant(digits, significant, data) {
+    let minSignificant = Infinity;
+    let cutOff = Infinity;
+    for (let num of data) {
+        num *= 1;
+        let str = num.toFixed(digits)
+            .replace(/\./, '')
+            .replace(/^0+/, '');
+        minSignificant = Math.min(minSignificant, str.length);
+        cutOff = Math.min(cutOff, Math.max(str.match(/0*$/)[0].length, str.length - significant));
+    }
+    return [minSignificant, cutOff];
+}
+
+function _fractionDigits(significant, data) {
+
+    let minSignificant, cutOff;
+    let digits = 20;
+
+    for (let i = 0; i < 20; i++) {
+        [minSignificant, cutOff] = _getSignificant(i, significant, data);
+        if (minSignificant >= significant) {
+            digits = i;
+            let [minSignificant1, cutOff1] = _getSignificant(i + 1, significant, data);
+            if (minSignificant1 == significant) {
+                digits = i + 1;
+                cutOff = cutOff1;
+            }
+            break;
+        }
+    }
+    digits = Math.max(0, digits - cutOff);
+    return digits;
+}
+
+function _flattenAbs(value, arr) {
+    if (value instanceof Array) {
+        for (let x of value) {
+            _flattenAbs(x, arr);
+        }
+    } else {
+        arr.push(Math.abs(1 * value));
+    }
+    return arr;
+}
+
+function calcDigits(...args) {
+    let digits = 0;
+    let min = 0;
+    let max = 20;
+    for (let i = 0; i < args.length; ) {
+        let significant = args[i++];
+        if (typeof significant === 'object') {
+            if (significant.min !== undefined) min = significant.min;
+            if (significant.max !== undefined) max = significant.max;
+            continue;
+        }
+        let data = args[i++];
+        data = _flattenAbs(data, []).filter(x => x > 1e-20);
+        if (data.length == 0) continue;
+        let fd = _fractionDigits(significant, data);
+        digits = Math.max(digits, fd);
+    }
+    return Math.min(max, Math.max(min, digits));
+}
+
+function fixed(value, digits) {
+    let result;
+    if (value instanceof Array) {
+        result = value.map(x => fixed(x, digits));
+    } else {
+        result = (1 * value).toFixed(digits);
+    }
+    result = result.replace('.', ustawieniaJezyka.kropka);
+    return result;
 }
