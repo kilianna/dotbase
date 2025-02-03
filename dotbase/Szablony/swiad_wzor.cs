@@ -101,7 +101,8 @@ namespace DotBase.Szablony
         protected override string FileName
         {
             get {
-                return String.Format(@"..\wyniki\Swiadectwo\{0}\{1}SwiadectwoWynik{2}.docx", DirGroup(nr_karty), nr_karty, JezykTools.kocowka(jezyk));
+                return String.Format(@"..\wyniki\Swiadectwo\{0}\{1}{2}SwiadectwoWynik{3}.docx",
+                    DirGroup(nr_karty), nr_karty, poprawa ? "P" : "", JezykTools.kocowka(jezyk));
             }
         }
 
