@@ -19,7 +19,8 @@ namespace DotBase.Test
         private void swiadHtmlVsDocxButton_Click(object sender, EventArgs e)
         {
             var test = new TestSwiadHtmlVsDocx();
-            test.run();
+            test.run(textHtmlDocxFrom.Text, textHtmlDocxTo.Text, checkHtmlDocxForce.Checked);
         }
+
     }
 }

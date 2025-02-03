@@ -151,10 +151,12 @@ if (poprawa) {
       <td>METODA WZORCOWANIA</td>
       <td colspan="2"><% metody[metoda] %></td>
     </tr>
+    <!-- TODO: Docelowo, w programie powinien być pole, który to włącza i pozwala na wpisanie tego tekstu.
     <tr>
       <td>UZUPEŁNIENIA, ODSTĘPSTWA, OGRANICZENIA METODY</td>
       <td colspan="2">Nie wystąpiły</td>
     </tr>
+    -->
     <tr>
       <td>MIEJSCE WYKONANIA DZIAŁALNOŚCI LABORATORYJNEJ</td>
       <td colspan="2">W siedzibie laboratorium</td>

@@ -1,30 +1,30 @@
 {
-  "nr_karty": 18999,
+  "nr_karty": 20033,
   "data_wydania": {
     "tekst": {
-      "EN": "18 September 2023",
-      "PL": "18 września 2023"
+      "EN": "04 October 2024",
+      "PL": "04 października 2024"
     },
-    "rok": 2023,
-    "miesiac": 9,
-    "dzien": 18,
-    "godzina": 20,
-    "minuta": 43,
-    "sekunda": 48,
-    "milisekunda": 631
+    "rok": 2024,
+    "miesiac": 10,
+    "dzien": 4,
+    "godzina": 12,
+    "minuta": 25,
+    "sekunda": 16,
+    "milisekunda": 48
   },
   "data_wykonania": {
     "tekst": {
-      "EN": "18 September 2023",
-      "PL": "18 września 2023"
+      "EN": "04 October 2024",
+      "PL": "04 października 2024"
     },
-    "rok": 2023,
-    "miesiac": 9,
-    "dzien": 18,
-    "godzina": 20,
-    "minuta": 43,
-    "sekunda": 48,
-    "milisekunda": 615
+    "rok": 2024,
+    "miesiac": 10,
+    "dzien": 4,
+    "godzina": 12,
+    "minuta": 25,
+    "sekunda": 16,
+    "milisekunda": 48
   },
   "sprawdzil": "P. Bilski",
   "poprawa": false,
@@ -33,49 +33,49 @@
   "uwS": "",
   "uwSMD": "",
   "uwSD": "",
-  "metoda": "wzor1",
+  "metoda": "wzor1wzor2",
   "spojnoscPomiarowa": "si",
   "warunkiMin": {
-    "cisnienie": 545,
-    "wilgotnosc": 5,
-    "temperatura": 5
+    "cisnienie": 984.6,
+    "wilgotnosc": 49.2,
+    "temperatura": 22.8
   },
   "warunkiMax": {
-    "cisnienie": 977,
-    "wilgotnosc": 66.6,
-    "temperatura": 20.5
+    "cisnienie": 985.7,
+    "wilgotnosc": 50.3,
+    "temperatura": 23
   },
   "przyrzad": {
-    "ID_dozymetru": 4238,
+    "ID_dozymetru": 3052,
     "Nazwa": "radiometr",
-    "Nr_fabryczny": "01A0FDEB",
-    "Producent": "Mirion",
+    "Nr_fabryczny": "310011",
+    "Producent": "Ludlum Measurements Inc.",
     "Rok_produkcji": "nie podano",
-    "Typ": "DMC 3000 PRD"
+    "Typ": "Model 14C Survey Meter"
   },
   "kartaPrzyjecia": {
     "Akcesoria": "",
-    "Ameryk": false,
+    "Ameryk": true,
     "Cena": 0,
     "Chlor": false,
-    "Dawka": true,
-    "ID_dozymetru": 4238,
-    "ID_karty": 18999,
-    "ID_zlecenia": 13264,
-    "Moc_dawki": false,
-    "Nr_pisma": 1,
+    "Dawka": false,
+    "ID_dozymetru": 3052,
+    "ID_karty": 20033,
+    "ID_zlecenia": 13854,
+    "Moc_dawki": true,
+    "Nr_pisma": 732,
     "Pluton": false,
-    "Rok": 2023,
-    "Rok_pisma": 2023,
+    "Rok": 2024,
+    "Rok_pisma": 2024,
     "Sprawdzenie": false,
     "Stront_najsilniejszy": false,
     "Stront_silny": false,
-    "Stront_slaby": false,
+    "Stront_slaby": true,
     "Syg_dawki": false,
-    "Syg_mocy_dawki": true,
+    "Syg_mocy_dawki": false,
     "Test_na_skazenia": "brak skażeń",
     "Uszkodzony": false,
-    "Uwagi": "Numer poprzedniego świadectwa: 18943/2023",
+    "Uwagi": "Numer poprzedniego świadectwa: 18862/2023.",
     "Wegiel_silny": false,
     "Wegiel_slaby": false,
     "Wykonano": false
@@ -84,12 +84,12 @@
     "Adres_platnika": "",
     "Data_przyjecia": {
       "tekst": {
-        "EN": "17 September 2023",
-        "PL": "17 września 2023"
+        "EN": "30 September 2024",
+        "PL": "30 września 2024"
       },
-      "rok": 2023,
+      "rok": 2024,
       "miesiac": 9,
-      "dzien": 17,
+      "dzien": 30,
       "godzina": 0,
       "minuta": 0,
       "sekunda": 0,
@@ -97,54 +97,54 @@
     },
     "Data_zwrotu": {
       "tekst": {
-        "EN": "01 October 2023",
-        "PL": "01 października 2023"
+        "EN": "14 October 2024",
+        "PL": "14 października 2024"
       },
-      "rok": 2023,
+      "rok": 2024,
       "miesiac": 10,
-      "dzien": 1,
+      "dzien": 14,
       "godzina": 0,
       "minuta": 0,
       "sekunda": 0,
       "milisekunda": 0
     },
-    "Ekspres": true,
+    "Ekspres": false,
     "Forma_przyjecia": "osobiście",
     "Forma_zwrotu": "osobiście",
-    "ID_zlecenia": 13264,
-    "ID_zleceniodawcy": 672,
+    "ID_zlecenia": 13854,
+    "ID_zleceniodawcy": 820,
     "Nazwa_platnika": "",
     "NIP_platnika": "",
     "Nr_zlecenia_klienta": "",
-    "Nr_zlecenia_rejestr": 365,
-    "Osoba_przyjmujaca": "A. Kilian",
+    "Nr_zlecenia_rejestr": 417,
+    "Osoba_przyjmujaca": "E. Rączka",
     "Uwagi": "Brak"
   },
   "zleceniodawca": {
-    "Adres": "ul. Radzikowskiego 152\r\n31-342 Kraków",
+    "Adres": "ul. Radzikowskiego 152; 31-342 Kraków",
     "email": " ",
     "Faks": " ",
-    "ID_zleceniodawcy": 672,
-    "IFJ": false,
+    "ID_zleceniodawcy": 820,
+    "IFJ": true,
     "NIP": " ",
-    "Osoba_kontaktowa": "Katarzyna Zbroja",
+    "Osoba_kontaktowa": "Liliana Stolarczyk",
     "Rabat": "",
-    "Telefon": "6628441",
+    "Telefon": " ",
     "Uwagi": " ",
-    "Zleceniodawca": "Zakład Fizyki Radiacyjnej i Dozymetrii\r\nInstytut Fizyki Jądrowej PAN"
+    "Zleceniodawca": "Instytut Fizyki Jądrowej PAN w Krakowie; Centrum Cyklotronowe Bronowice"
   },
   "wyniki": [
     {
       "wzorcowanie_cezem": {
-        "Cisnienie": 977,
+        "Cisnienie": 984.6,
         "Data_wzorcowania": {
           "tekst": {
-            "EN": "18 September 2023",
-            "PL": "18 września 2023"
+            "EN": "03 October 2024",
+            "PL": "03 października 2024"
           },
-          "rok": 2023,
-          "miesiac": 9,
-          "dzien": 18,
+          "rok": 2024,
+          "miesiac": 10,
+          "dzien": 3,
           "godzina": 0,
           "minuta": 0,
           "sekunda": 0,
@@ -152,81 +152,26 @@
         },
         "Dolacz": true,
         "ID_arkusza": 1,
-        "ID_jednostki": 0,
-        "ID_karty": 18999,
+        "ID_jednostki": 15,
+        "ID_karty": 20033,
         "ID_protokolu": 24,
-        "ID_sondy": 4877,
-        "ID_wzorcowania": 19715,
+        "ID_sondy": 3540,
+        "ID_wzorcowania": 20991,
         "Inne_nastawy": "nie dotyczy",
         "Napiecie_zasilania_sondy": "nie dotyczy",
-        "Osoba_sprawdzajaca": "J. Drop",
-        "Osoba_wzorcujaca": "A.Kilian",
-        "Rodzaj_wzorcowania": "d",
-        "Temperatura": 20.5,
-        "Tlo": "0.0",
-        "Uwagi": "Numer poprzedniego świadectwa 18943/2023",
-        "Wielkosc_fizyczna": "nie dotyczy",
-        "wilgotnosc": 66.6
-      },
-      "wzorcowanie_zrodlami_powierzchniowymi": null,
-      "sonda": {
-        "ID_dozymetru": 4238,
-        "ID_sondy": 4877,
-        "Nr_fabryczny": "nie dotyczy",
-        "Typ": "detektor własny"
-      },
-      "jednostka": null,
-      "tabela": [
-        {
-          "prog": 0,
-          "wartosc_zmierzona": 0,
-          "wartosc_wzorcowa": 0,
-          "niepewnosc": 0.101,
-          "wspolczynnik": 0.951,
-          "niepewnosc_wspolczynnika": 0,
-          "zakres": 1000,
-          "wielkosc_fizyczna": 3
-        }
-      ]
-    },
-    {
-      "wzorcowanie_cezem": {
-        "Cisnienie": 545,
-        "Data_wzorcowania": {
-          "tekst": {
-            "EN": "25 March 2024",
-            "PL": "25 marca 2024"
-          },
-          "rok": 2024,
-          "miesiac": 3,
-          "dzien": 25,
-          "godzina": 0,
-          "minuta": 0,
-          "sekunda": 0,
-          "milisekunda": 0
-        },
-        "Dolacz": true,
-        "ID_arkusza": 2,
-        "ID_jednostki": 15,
-        "ID_karty": 18999,
-        "ID_protokolu": 24,
-        "ID_sondy": 4877,
-        "ID_wzorcowania": 19721,
-        "Inne_nastawy": "Numer poprzedniego świadectwa 18943/2023.",
-        "Napiecie_zasilania_sondy": "nie dotyczy",
-        "Osoba_sprawdzajaca": "5",
-        "Osoba_wzorcujaca": "45",
-        "Rodzaj_wzorcowania": "sm",
-        "Temperatura": 5,
+        "Osoba_sprawdzajaca": "P. Bilski",
+        "Osoba_wzorcujaca": "E. Jasińska",
+        "Rodzaj_wzorcowania": "md",
+        "Temperatura": 22.8,
         "Tlo": "0",
-        "Uwagi": "Brak",
-        "Wielkosc_fizyczna": "nie dotyczy",
-        "wilgotnosc": 5
+        "Uwagi": "Numer poprzedniego świadectwa: 18862/2023.",
+        "Wielkosc_fizyczna": "moc przestrzennego równoważnika dawki",
+        "wilgotnosc": 50.2
       },
       "wzorcowanie_zrodlami_powierzchniowymi": null,
       "sonda": {
-        "ID_dozymetru": 4238,
-        "ID_sondy": 4877,
+        "ID_dozymetru": 3052,
+        "ID_sondy": 3540,
         "Nr_fabryczny": "nie dotyczy",
         "Typ": "detektor własny"
       },
@@ -237,8 +182,281 @@
         "SI": true,
         "Wielkosc_fizyczna": "moc przestrzennego równoważnika dawki"
       },
+      "zrodlo": null,
+      "atest": null,
       "tabela": [
-      ]
+        {
+          "prog": 0,
+          "wartosc_zmierzona": 0,
+          "wartosc_wzorcowa": 0,
+          "niepewnosc": 0.14,
+          "wspolczynnik": 0.81,
+          "niepewnosc_wspolczynnika": 0,
+          "zakres": 20000,
+          "wielkosc_fizyczna": 0
+        }
+      ],
+      "emisja_pow": 0
+    },
+    {
+      "wzorcowanie_cezem": {
+        "Cisnienie": 984.7,
+        "Data_wzorcowania": {
+          "tekst": {
+            "EN": "03 October 2024",
+            "PL": "03 października 2024"
+          },
+          "rok": 2024,
+          "miesiac": 10,
+          "dzien": 3,
+          "godzina": 0,
+          "minuta": 0,
+          "sekunda": 0,
+          "milisekunda": 0
+        },
+        "Dolacz": true,
+        "ID_arkusza": 2,
+        "ID_jednostki": 15,
+        "ID_karty": 20033,
+        "ID_protokolu": 24,
+        "ID_sondy": 4109,
+        "ID_wzorcowania": 20992,
+        "Inne_nastawy": "nie dotyczy",
+        "Napiecie_zasilania_sondy": "nie dotyczy",
+        "Osoba_sprawdzajaca": "P. Bilski",
+        "Osoba_wzorcujaca": "E. Jasińska",
+        "Rodzaj_wzorcowania": "md",
+        "Temperatura": 22.8,
+        "Tlo": "0",
+        "Uwagi": "Numer poprzedniego świadectwa: 18862/2023.",
+        "Wielkosc_fizyczna": "moc przestrzennego równoważnika dawki",
+        "wilgotnosc": 50.3
+      },
+      "wzorcowanie_zrodlami_powierzchniowymi": null,
+      "sonda": {
+        "ID_dozymetru": 3052,
+        "ID_sondy": 4109,
+        "Nr_fabryczny": "PR355338",
+        "Typ": "44-9"
+      },
+      "jednostka": {
+        "ID_jednostki": 15,
+        "Jednostka": "uSv/h",
+        "Przelicznik": 0.826,
+        "SI": true,
+        "Wielkosc_fizyczna": "moc przestrzennego równoważnika dawki"
+      },
+      "zrodlo": null,
+      "atest": null,
+      "tabela": [
+        {
+          "prog": 0,
+          "wartosc_zmierzona": 0,
+          "wartosc_wzorcowa": 0,
+          "niepewnosc": 0.19,
+          "wspolczynnik": 1.17,
+          "niepewnosc_wspolczynnika": 0,
+          "zakres": 2,
+          "wielkosc_fizyczna": 0
+        },
+        {
+          "prog": 0,
+          "wartosc_zmierzona": 0,
+          "wartosc_wzorcowa": 0,
+          "niepewnosc": 0.15,
+          "wspolczynnik": 1.1,
+          "niepewnosc_wspolczynnika": 0,
+          "zakres": 20,
+          "wielkosc_fizyczna": 0
+        },
+        {
+          "prog": 0,
+          "wartosc_zmierzona": 0,
+          "wartosc_wzorcowa": 0,
+          "niepewnosc": 0.19,
+          "wspolczynnik": 0.82,
+          "niepewnosc_wspolczynnika": 0,
+          "zakres": 200,
+          "wielkosc_fizyczna": 0
+        },
+        {
+          "prog": 0,
+          "wartosc_zmierzona": 0,
+          "wartosc_wzorcowa": 0,
+          "niepewnosc": 0.11,
+          "wspolczynnik": 0.77,
+          "niepewnosc_wspolczynnika": 0,
+          "zakres": 2000,
+          "wielkosc_fizyczna": 0
+        }
+      ],
+      "emisja_pow": 0
+    },
+    {
+      "wzorcowanie_cezem": null,
+      "wzorcowanie_zrodlami_powierzchniowymi": {
+        "Cisnienie": 985.7,
+        "Data_wzorcowania": {
+          "tekst": {
+            "EN": "04 October 2024",
+            "PL": "04 października 2024"
+          },
+          "rok": 2024,
+          "miesiac": 10,
+          "dzien": 4,
+          "godzina": 0,
+          "minuta": 0,
+          "sekunda": 0,
+          "milisekunda": 0
+        },
+        "Dolacz": true,
+        "ID_arkusza": 1,
+        "ID_jednostki": 7,
+        "ID_karty": 20033,
+        "ID_sondy": 4109,
+        "ID_wzorcowania": 9668,
+        "ID_zrodla": 2,
+        "Inne_nastawy": "nie dotyczy",
+        "Mnoznik_korekcyjny": 1.02,
+        "Napiecie_zasilania_sondy": "nie dotyczy",
+        "Niepewnosc": 0.0176409258171011,
+        "Odleglosc_zrodlo_sonda": 2,
+        "Osoba_sprawdzajaca": "P. Bilski",
+        "Osoba_wzorcujaca": "E. Jasińska",
+        "Podstawka": "PP-37-W",
+        "Temperatura": 23,
+        "Tlo": null,
+        "Uwagi": "Numer poprzedniego świadectwa: 18862/2023.",
+        "Wilgotnosc": 49.2,
+        "wspolczynnik": 0.14369644620724,
+        "Zakres": "0,1"
+      },
+      "sonda": {
+        "ID_dozymetru": 3052,
+        "ID_sondy": 4109,
+        "Nr_fabryczny": "PR355338",
+        "Typ": "44-9"
+      },
+      "jednostka": {
+        "ID_jednostki": 7,
+        "Jednostka": "cps",
+        "Przelicznik": 1,
+        "SI": true,
+        "Wielkosc_fizyczna": "moc kermy w powietrzu"
+      },
+      "zrodlo": {
+        "Czas_polowicznego_rozpadu": 28.8,
+        "Czas_polowicznego_rozpadu_dni": 10519,
+        "Id_zrodla": 2,
+        "Nazwa": "Sr-90/Y-90 (słaby)",
+        "Niepewnosc": 26,
+        "Numer": 591
+      },
+      "atest": {
+        "Data_wzorcowania": {
+          "tekst": {
+            "EN": "16 November 2021",
+            "PL": "16 listopada 2021"
+          },
+          "rok": 2021,
+          "miesiac": 11,
+          "dzien": 16,
+          "godzina": 0,
+          "minuta": 0,
+          "sekunda": 0,
+          "milisekunda": 0
+        },
+        "Emisja_powierzchniowa": 1.282,
+        "ID_atestu": 24,
+        "ID_zrodla": 2,
+        "Niepewnosc": 0.01025
+      },
+      "tabela": [
+      ],
+      "emisja_pow": 1.21998443551878
+    },
+    {
+      "wzorcowanie_cezem": null,
+      "wzorcowanie_zrodlami_powierzchniowymi": {
+        "Cisnienie": 985.6,
+        "Data_wzorcowania": {
+          "tekst": {
+            "EN": "04 October 2024",
+            "PL": "04 października 2024"
+          },
+          "rok": 2024,
+          "miesiac": 10,
+          "dzien": 4,
+          "godzina": 0,
+          "minuta": 0,
+          "sekunda": 0,
+          "milisekunda": 0
+        },
+        "Dolacz": true,
+        "ID_arkusza": 2,
+        "ID_jednostki": 7,
+        "ID_karty": 20033,
+        "ID_sondy": 4109,
+        "ID_wzorcowania": 9669,
+        "ID_zrodla": 7,
+        "Inne_nastawy": "nie dotyczy",
+        "Mnoznik_korekcyjny": 0.97,
+        "Napiecie_zasilania_sondy": "nie dotyczy",
+        "Niepewnosc": 0.0373649006839135,
+        "Odleglosc_zrodlo_sonda": 2,
+        "Osoba_sprawdzajaca": "P. Bilski",
+        "Osoba_wzorcujaca": "E. Jasińska",
+        "Podstawka": "PP-79-W",
+        "Temperatura": 22.9,
+        "Tlo": null,
+        "Uwagi": "Numer poprzedniego świadectwa: 18862/2023.",
+        "Wilgotnosc": 49.3,
+        "wspolczynnik": 0.313845465133346,
+        "Zakres": "100"
+      },
+      "sonda": {
+        "ID_dozymetru": 3052,
+        "ID_sondy": 4109,
+        "Nr_fabryczny": "PR355338",
+        "Typ": "44-9"
+      },
+      "jednostka": {
+        "ID_jednostki": 7,
+        "Jednostka": "cps",
+        "Przelicznik": 1,
+        "SI": true,
+        "Wielkosc_fizyczna": "moc kermy w powietrzu"
+      },
+      "zrodlo": {
+        "Czas_polowicznego_rozpadu": 432.6,
+        "Czas_polowicznego_rozpadu_dni": 158004,
+        "Id_zrodla": 7,
+        "Nazwa": "Am-241",
+        "Niepewnosc": 219,
+        "Numer": 999
+      },
+      "atest": {
+        "Data_wzorcowania": {
+          "tekst": {
+            "EN": "16 November 2021",
+            "PL": "16 listopada 2021"
+          },
+          "rok": 2021,
+          "miesiac": 11,
+          "dzien": 16,
+          "godzina": 0,
+          "minuta": 0,
+          "sekunda": 0,
+          "milisekunda": 0
+        },
+        "Emisja_powierzchniowa": 16.22,
+        "ID_atestu": 25,
+        "ID_zrodla": 7,
+        "Niepewnosc": 0.01102
+      },
+      "tabela": [
+      ],
+      "emisja_pow": 15.6608901534095
     }
   ],
   "stale": {
@@ -262,6 +480,10 @@
       "PL": ""
     },
     {
+      "EN": "built-in detector",
+      "PL": "detektor własny"
+    },
+    {
       "EN": "radiometer",
       "PL": "radiometr"
     },
@@ -270,11 +492,7 @@
       "PL": "moc dawki ekspozycyjnej"
     },
     {
-      "EN": "built-in probe",
-      "PL": "detektor własny"
-    },
-    {
-      "EN": "na",
+      "EN": "NA",
       "PL": "nie dotyczy"
     },
     {
@@ -290,16 +508,40 @@
       "PL": "mocy przestrzennego równoważnika dawki"
     },
     {
-      "EN": "contamination monitor",
-      "PL": "miernik skażeń"
+      "EN": "kerma in air rate",
+      "PL": "moc kermy w powietrzu"
     },
     {
-      "EN": "not specified",
-      "PL": "nie podano"
+      "EN": "kerma in air rate",
+      "PL": "mocy kermy w powietrzu"
+    },
+    {
+      "EN": "dosimeter",
+      "PL": "dozymetr"
     },
     {
       "EN": "dosemeter",
-      "PL": "dawkomierz"
+      "PL": "monitor promieniowania gamma"
+    },
+    {
+      "EN": "not given",
+      "PL": "nie podano"
+    },
+    {
+      "EN": "***",
+      "PL": "dj-2000e"
+    },
+    {
+      "EN": "***",
+      "PL": "vf 0801230"
+    },
+    {
+      "EN": "***",
+      "PL": "moc indywidualnego równoważnika dawki hₚ(10)"
+    },
+    {
+      "EN": "***",
+      "PL": "mocy indywidualnego równoważnika dawki hₚ(10)"
     }
   ]
 }

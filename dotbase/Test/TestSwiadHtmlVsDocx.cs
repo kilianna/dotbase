@@ -14,12 +14,22 @@ namespace DotBase.Test
         Szablon.Row_Karta_przyjecia karta;
         HashSet<int> doneIds = new HashSet<int>();
         int index = 0;
+        bool force;
 
-        public void run()
+        public void run(string fromIdText, string toIdText, bool force)
         {
+            int fromId = 0;
+            int toId = 999999999;
+            if (fromIdText.Trim().Length > 0)
+                fromId = Int32.Parse(fromIdText.Trim());
+            if (toIdText.Trim().Length > 0)
+                toId = Int32.Parse(toIdText.Trim());
             DebugOptions.stopTest = false;
             karty = baza.Karta_przyjecia
                 .SELECT().ID_karty()
+                .WHERE()
+                    .ID_karty(fromId, "***>=?")
+                    .ID_karty(toId, "***<=?")
                 .ORDER_BY().ID_karty(Order.DESC)
                 .GET();
             index = 0;
@@ -29,6 +39,7 @@ namespace DotBase.Test
             DebugOptions.messageBox = true;
             var menuForm = getForm<MenuGlowneForm>();
             press(field<Button>(menuForm, "button2"));
+            this.force = force;
             string[] lines = new string[0];
             try
             {
@@ -57,7 +68,7 @@ namespace DotBase.Test
                     return;
                 }
                 karta = karty[index];
-                if (doneIds.Contains(karta.ID_karty))
+                if (!force && doneIds.Contains(karta.ID_karty ?? -1))
                 {
                     Debug.WriteLine(String.Format("Karta {0}/{1}, id {2} - ALREADY DONE", karty.Length - index, karty.Length, karty[index].ID_karty));
                     index++;
@@ -81,41 +92,32 @@ namespace DotBase.Test
                     press(field<Button>(swiadectwoForm, "button1"));
                     wait(800, () =>
                     {
-                        var docxWindow = getForm<Szablony.DocxWindow>(true);
-                        wait(docxWindow == null ? 0 : 3000, () =>
+                        var overrideForm = getForm<Szablony.DocxOverrideWindow>(true);
+                        if (overrideForm != null)
                         {
-                            docxWindow = getForm<Szablony.DocxWindow>(true);
-                            if (docxWindow != null)
+                            press(field<Button>(overrideForm, "nadpisz"));
+                        }
+                        wait(() =>
+                        {
+                            var docxWindow = getForm<Szablony.DocxWindow>(true);
+                            wait(docxWindow == null ? 0 : 3000, () =>
                             {
-                                throw new ApplicationException("Converting took too long or error happend.");
-                            }
-                            var messageBox = getForm<MyMessageBox>(true);
-                            if (messageBox != null)
-                            {
-                                var messageText = field<TextBox>(messageBox, "messageBox").Text;
-                                if (messageBox.Text.StartsWith("Uwaga"))
+                                docxWindow = getForm<Szablony.DocxWindow>(true);
+                                if (docxWindow != null)
                                 {
-                                    File.WriteAllText(N.getProgramDir() + @"\..\wyniki\Swiadectwo\old-" + karta.ID_karty + ".txt", messageText);
+                                    throw new ApplicationException("Converting took too long or error happend.");
                                 }
-                                else if (messageBox.Text.StartsWith("Błąd"))
-                                {
-                                    File.WriteAllText(N.getProgramDir() + @"\..\wyniki\Swiadectwo\new-" + karta.ID_karty + ".txt", messageText);
-                                }
-                                else
-                                {
-                                    throw new ApplicationException("Unexpected message box.");
-                                }
-                                press(messageBox.AcceptButton as Control);
-                            }
-                            wait(() =>
-                            {
-                                messageBox = getForm<MyMessageBox>(true);
+                                var messageBox = getForm<MyMessageBox>(true);
                                 if (messageBox != null)
                                 {
                                     var messageText = field<TextBox>(messageBox, "messageBox").Text;
                                     if (messageBox.Text.StartsWith("Uwaga"))
                                     {
                                         File.WriteAllText(N.getProgramDir() + @"\..\wyniki\Swiadectwo\old-" + karta.ID_karty + ".txt", messageText);
+                                    }
+                                    else if (messageBox.Text.StartsWith("Błąd"))
+                                    {
+                                        File.WriteAllText(N.getProgramDir() + @"\..\wyniki\Swiadectwo\new-" + karta.ID_karty + ".txt", messageText);
                                     }
                                     else
                                     {
@@ -125,12 +127,29 @@ namespace DotBase.Test
                                 }
                                 wait(() =>
                                 {
-                                    swiadectwoForm.Close();
-                                    doneIds.Add(karta.ID_karty);
-                                    File.WriteAllText(N.getProgramDir() + @"\..\wyniki\Swiadectwo\done.txt", string.Join("\n", doneIds.ToArray()));
-                                    index++;
-                                    if (!DebugOptions.stopTest)
-                                        wait(run2);
+                                    messageBox = getForm<MyMessageBox>(true);
+                                    if (messageBox != null)
+                                    {
+                                        var messageText = field<TextBox>(messageBox, "messageBox").Text;
+                                        if (messageBox.Text.StartsWith("Uwaga"))
+                                        {
+                                            File.WriteAllText(N.getProgramDir() + @"\..\wyniki\Swiadectwo\old-" + karta.ID_karty + ".txt", messageText);
+                                        }
+                                        else
+                                        {
+                                            throw new ApplicationException("Unexpected message box.");
+                                        }
+                                        press(messageBox.AcceptButton as Control);
+                                    }
+                                    wait(() =>
+                                    {
+                                        swiadectwoForm.Close();
+                                        doneIds.Add(karta.ID_karty ?? -1);
+                                        File.WriteAllText(N.getProgramDir() + @"\..\wyniki\Swiadectwo\done.txt", string.Join("\n", doneIds.ToArray()));
+                                        index++;
+                                        if (!DebugOptions.stopTest)
+                                            wait(run2);
+                                    });
                                 });
                             });
                         });
@@ -138,5 +157,6 @@ namespace DotBase.Test
                 });
             });
         }
+
     }
 }

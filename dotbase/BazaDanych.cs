@@ -793,6 +793,11 @@ namespace DotBase
                             SetField(""{1}"", value, OleDbType.{3});
                             return this;
                         }}
+                        public Szablon_{0} {1}({2} value, string oper)
+                        {{
+                            SetField(""{1}"", value, OleDbType.{3}, oper);
+                            return this;
+                        }}
                         public Szablon_{0} {1}(Order order)
                         {{
                             SetOrder(""{1}"", order);
