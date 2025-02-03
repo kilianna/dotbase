@@ -1,0 +1,17 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build sample template",
+            "type": "shell",
+            "command": "mkdir \"${workspaceFolder}\\temp\" & \"${workspaceFolder}\\dotbase\\bin\\Debug\\xml2docx-win.exe\" -d \"${fileDirname}\\${fileBasenameNoExtension}.json\" \"${file}\" \"${workspaceFolder}\\temp\\${fileBasenameNoExtension}.docx\" && start \"Word\" \"${workspaceFolder}\\temp\\${fileBasenameNoExtension}.docx\" && echo. > \"${workspaceFolder}\\temp\\x.js\"",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
