@@ -3,13 +3,13 @@
 <%!
 
 const metody = {
-    wzor1: 'Procedura pomiarowa WZOR-1 (wyd. 7 z dn. 15.09.2023)',
-    wzor2: 'Procedura pomiarowa WZOR-2 (wyd. 6 z dn. 15.09.2023)',
-    wzor1wzor2: 'Procedura pomiarowa WZOR-1 (wyd. 7 z dn. 15.09.2023) oraz procedura pomiarowa WZOR-2 (wyd. 6 z dn. 15.09.2023)',
+    wzor1: 'Procedura pomiarowa WZOR-1 (wyd. 8 z dn. 21.05.2024)',
+    wzor2: 'Procedura pomiarowa WZOR-2 (wyd. 7 z dn. 21.05.2024)',
+    wzor1wzor2: 'Procedura pomiarowa WZOR-1 (wyd. 8 z dn. 21.05.2024) oraz procedura pomiarowa WZOR-2 (wyd. 7 z dn. 21.05.2024)',
 };
 
 const spojnosciPomiarowe = {
-    gum: 'Świadectwo jest wydane w ramach porozumienia EA MLA w zakresie wzorcowania i potwierdza spójność wyników pomiarów z wzorcami utrzymanymi w GUM.',
+    gum: 'Świadectwo jest wydane w ramach porozumienia EA MLA w zakresie wzorcowania i potwierdza spójność wyników pomiarów ze wzorcami utrzymanymi w GUM.',
     si: 'Świadectwo jest wydane w ramach porozumienia EA MLA w zakresie wzorcowania i potwierdza spójność wyników pomiarów z jednostkami miar Międzynarodowego Układu Jednostek Miar (SI).',
 };
 
@@ -18,21 +18,25 @@ const rownowaznikiDawki = [
   {
     co: 'indywidualny równoważnik dawki Hp(10)',
     czego: 'indywidualnego równoważnika dawki Hp(10)',
+    jednostka: 'mSv',
   },
   // Indywidualny_HP10: 1
   {
     co: 'indywidualny równoważnik dawki Hp(0,07)',
     czego: 'indywidualnego równoważnika dawki Hp(0,07)',
+    jednostka: 'mSv',
   },
   // Przestrzenny: 2
   {
     co: 'przestrzenny równoważnik dawki H*(10)',
     czego: 'przestrzennego równoważnika dawki H*(10)',
+    jednostka: 'mSv',
   },
   // Kerma: 3
   {
     co: 'kerma w powietrzu',
     czego: 'kermy w powietrzu',
+    jednostka: 'mGy',
   },
 ];
 
@@ -72,7 +76,7 @@ if (poprawa) {
       Instytut Fizyki Jądrowej im. Henryka Niewodniczańskiego<br/>
       Polskiej Akademii Nauk<br/>
       ul. Radzikowskiego 152, PL 31-342 Kraków<br/>
-      tel. 012/6628486, faks 012/6628066, e-mail: wzorcowanie@ifj.edu.pl<br/>
+      tel. 012/6628486, e-mail: wzorcowanie@ifj.edu.pl<br/>
       <br/>
       Laboratorium wzorcujące akredytowane przez<br/>
       Polskie Centrum Akredytacji, sygnatariusza porozumień EA MLA i ILAC MRA<br/>
@@ -218,9 +222,9 @@ if (poprawa) {
 
 <%!
 let wynikiS = [];
-let i;
+let podpunkt = 0;
 
-for (i = 0; i < wyniki.length; i++) {
+for (let i = 0; i < wyniki.length; i++) {
   let wyn = wyniki[i];
   let wzorcowanie = wyn.wzorcowanie_cezem;
 
@@ -241,7 +245,7 @@ for (i = 0; i < wyniki.length; i++) {
 
   <%! /* ------------------------------- Moc Dawki ---------------------------- */ %>
 
-  <p><% litera(i) %>) Wzorcowanie źródłem gamma: Cs-137; <% wzorcowanie.Wielkosc_fizyczna %></p>
+  <p><% litera(podpunkt++) %>) Wzorcowanie źródłem gamma: Cs-137; <% wzorcowanie.Wielkosc_fizyczna %></p>
   <p></p>
   <%! pokazSonde() %>
   <p></p>
@@ -261,7 +265,7 @@ for (i = 0; i < wyniki.length; i++) {
       <td>WARTOŚĆ WSPÓŁCZYNNIKA POPRAWKOWEGO</td>
     </tr>
     <tr font-bold="1">
-      <td><% jednostka %></td>
+      <td><% mikro(jednostka) %></td>
       <td>-</td>
     </tr>
     <%! for (let row of wyn.tabela) { %>
@@ -291,7 +295,7 @@ for (i = 0; i < wyniki.length; i++) {
   let wielkosciFizyczne = [...new Set(wyn.tabela.map(row => row.wielkosc_fizyczna))];
   %>
 
-  <p><% litera(i) %>) Wzorcowanie źródłem gamma: Cs-137;
+  <p><% litera(podpunkt++) %>) Wzorcowanie źródłem gamma: Cs-137;
     <% wielkosciFizyczne.map(w => rownowaznikiDawki[w].co).filter(w => w).join('; ') %></p>
   <p></p>
   <%! pokazSonde() %>
@@ -305,7 +309,7 @@ for (i = 0; i < wyniki.length; i++) {
       <td>WARTOŚĆ WSPÓŁCZYNNIKA POPRAWKOWEGO</td>
     </tr>
     <tr font-bold="1">
-      <td>mSv</td>
+      <td><% wielkosciFizyczne.map(w => rownowaznikiDawki[w].jednostka).filter(w => w).join(' oraz ') %></td>
       <td>-</td>
     </tr>
     <%! for (let row of wyn.tabela) { %>
@@ -331,7 +335,7 @@ for (i = 0; i < wyniki.length; i++) {
 
   <%! /* ------------------------------- Syg Mocy Dawki ---------------------------- */ %>
 
-  <p><% litera(i) %>) Wzorcowanie źródłem gamma: Cs-137; moc przestrzennego równoważnika dawki (sygnalizator progowy)</p>
+  <p><% litera(podpunkt++) %>) Wzorcowanie źródłem gamma: Cs-137; moc przestrzennego równoważnika dawki (sygnalizator progowy)</p>
   <p></p>
   <p>Zestawienie nastawień przyrządu i odpowiadających im rzeczywistych wartości, przy których włączona zostaje sygnalizacja ostrzegawcza.</p>
   <p></p>
@@ -376,7 +380,7 @@ for (i = 0; i < wyniki.length; i++) {
 
   <%! /* ------------------------------- Syg Dawki ---------------------------- */ %>
 
-  <p><% litera(i) %>) Wzorcowanie źródłem gamma: Cs-137; przestrzenny równoważnik dawki (sygnalizator progowy)</p>
+  <p><% litera(podpunkt++) %>) Wzorcowanie źródłem gamma: Cs-137; przestrzenny równoważnik dawki (sygnalizator progowy)</p>
   <p></p>
   <p>Zestawienie nastawień przyrządu i odpowiadających im rzeczywistych wartości, przy których włączona zostaje sygnalizacja ostrzegawcza.</p>
   <p></p>
@@ -425,6 +429,10 @@ for (i = 0; i < wyniki.length; i++) {
   <p></p>
   <%! } %>
 
+<%! } else { %>
+  
+  <% blad('Nieznany rodzaj wzorcowania') %>
+
 <%! } %>
 
 <%! } %>
@@ -433,7 +441,7 @@ for (i = 0; i < wyniki.length; i++) {
 
   <%! /* ------------------------------- Skazenia ---------------------------- */ %>
 
-  <p><% litera(i) %>) Wzorcowanie źródłami powierzchniowymi</p>
+  <p><% litera(podpunkt++) %>) Wzorcowanie źródłami powierzchniowymi</p>
   <p></p>
 
   <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">

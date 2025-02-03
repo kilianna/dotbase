@@ -5,12 +5,13 @@
   "description": "",
   "main": "main.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compare": "npx tsx compare.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "jsdom": "^24.1.0",
+    "open": "^10.1.0",
     "tsx": "^4.11.0",
     "typescript": "^5.4.5",
     "xml-js": "^1.6.11"
