@@ -389,6 +389,11 @@ namespace DotBase
                 cell.Style.BackColor = Color.Red;
                 cell.Style.ForeColor = Color.Yellow;
             }
+            else if (cell.Style.BackColor == Color.Red)
+            {
+                cell.Style.BackColor = SystemColors.Window;
+                cell.Style.ForeColor = SystemColors.WindowText;
+            }
         }
 
         private void podswietlWspolczynnik(DataGridView tabela, int index, double wspolczynnik, double niepewnosc)
