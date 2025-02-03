@@ -9,95 +9,63 @@ namespace DotBase.Test
 {
     internal class TestBase : IDisposable
     {
-        private const int SHORT_DELAY = 20;
-        private const int LONG_DELAY = 3000;
+        private const int POLL_PERIOD = 50;
 
         struct QueueItem
         {
-            public int delay;
+            public DateTime timeout;
             public ResumeDelegate resume;
+            public PollDelegate poll;
         };
 
         public delegate void ResumeDelegate();
+        public delegate bool PollDelegate();
         Timer timer = new Timer();
-        Timer timerIdle = new Timer();
-        bool idleWait = false;
         Queue<QueueItem> queue = new Queue<QueueItem>();
-        EventHandler handler;
         protected BazaDanychWrapper baza = new BazaDanychWrapper();
         static HashSet<TestBase> activeTests = new HashSet<TestBase>();
 
         public TestBase()
         {
-            handler = new EventHandler(Application_Idle);
             timer.Tick += new EventHandler(timer_Tick);
-            timerIdle.Tick += new EventHandler(timerIdle_Tick);
-            Application.Idle += handler;
+            timer.Interval = POLL_PERIOD;
             activeTests.Add(this);
-        }
-
-        void timerIdle_Tick(object sender, EventArgs e)
-        {
-            timerIdle.Enabled = false;
-            Application.OpenForms[0].BeginInvoke((Action)(() =>
-            {
-                Application_Idle(null, null);
-            }));
         }
 
         void timer_Tick(object sender, EventArgs e)
         {
-            timer.Enabled = false;
-            timerIdle.Enabled = false;
-            if (queue.Count > 0)
-            {
-                var active = queue.Dequeue();
-                active.resume();
-                if (!timer.Enabled && queue.Count > 0)
-                {
-                    idleWait = false;
-                    timer.Interval = queue.Peek().delay + LONG_DELAY;
-                    timer.Enabled = true;
-                    timerIdle.Interval = SHORT_DELAY;
-                    timerIdle.Enabled = true;
-                }
-            }
-        }
-
-        void Application_Idle(object sender, EventArgs e)
-        {
-            timerIdle.Enabled = false;
-            if (queue.Count > 0 && (!timer.Enabled || !idleWait))
+            var next = queue.Peek();
+            if (next.poll())
             {
                 timer.Enabled = false;
-                idleWait = true;
-                timer.Interval = queue.Peek().delay + SHORT_DELAY;
-                timer.Enabled = true;
+                queue.Dequeue();
+                next.resume();
+            }
+            else if (next.timeout < DateTime.Now)
+            {
+                throw new ApplicationException("Timeout when waiting in test.");
             }
         }
 
-        public void wait(int delay, ResumeDelegate resume)
+        public void wait(PollDelegate poll, ResumeDelegate resume)
         {
             QueueItem item;
-            item.delay = delay;
+            item.poll = poll;
             item.resume = resume;
+            item.timeout = DateTime.Now.AddSeconds(5);
             queue.Enqueue(item);
             if (!timer.Enabled)
             {
-                idleWait = false;
-                timer.Interval = item.delay + LONG_DELAY;
                 timer.Enabled = true;
-                timerIdle.Interval = SHORT_DELAY;
-                timerIdle.Enabled = true;
             }
         }
 
         public void wait(ResumeDelegate resume)
         {
-            wait(0, resume);
+            wait(() => { return true; }, resume);
         }
 
-        public static T getForm<T>(bool optional = false)
+        public static T getForm<T>(bool required)
         {
             var type = typeof(T);
             List<object> list = new List<object>();
@@ -111,7 +79,7 @@ namespace DotBase.Test
             }
             if (list.Count == 0)
             {
-                if (optional) return default(T);
+                if (!required) return default(T);
                 throw new ApplicationException("Missing expected form: " + typeof(T).Name);
             }
             else if (list.Count != 1)
@@ -143,7 +111,6 @@ namespace DotBase.Test
 
         public void Dispose()
         {
-            Application.Idle -= handler;
             timer.Dispose();
             activeTests.Remove(this);
         }
