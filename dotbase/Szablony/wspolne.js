@@ -176,6 +176,16 @@ function fixed(value, digits) {
     return result;
 }
 
+function numberAsIs(value) {
+    value = 1 * value;
+    const numberSignificantDigits = 13;
+    let intDigits = Math.abs(value).toFixed(0).length;
+    let fracDigits = Math.min(20, Math.max(0, numberSignificantDigits - intDigits));
+    return value.toFixed(fracDigits)
+        .replace(/0/g, ' ').trimEnd().replace(/ /g, '0')
+        .replace('.', ' ').trimEnd().replace(' ', ustawieniaJezyka.kropka);
+}
+
 function simpleHtml(x) {
     let tokens = x
         .split(/(&[a-z]+;|[ \t]*\r?\n|<\/?[a-z]+(?:[^a-z>][^>]*)?>)/gi)

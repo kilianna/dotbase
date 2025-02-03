@@ -71,12 +71,18 @@ namespace WzorcowanieMocDawkiSpace
         public List<double> LiczWartoscWzorcowa(Tuple<double, int>[] tabela, string protokol, string jednostka, DateTime dataWzorcowania)
         //---------------------------------------------------------------
         {
+            _Zapytanie = String.Format("SELECT przelicznik FROM Jednostki WHERE jednostka='{0}'", jednostka);
+            var przelicznikJendnostki = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<float>(0);
+            return LiczWartoscWzorcowa(tabela, protokol, przelicznikJendnostki, dataWzorcowania);
+        }
+
+        //---------------------------------------------------------------
+        public List<double> LiczWartoscWzorcowa(Tuple<double, int>[] tabela, string protokol, double przelicznikJendnostki, DateTime dataWzorcowania)
+        //---------------------------------------------------------------
+        {
             _Zapytanie = String.Format("SELECT Data_kalibracji, id_protokolu FROM Protokoly_kalibracji_lawy WHERE data_kalibracji=#{0}#", protokol);
             DateTime dataKalibracjiLawy = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<DateTime>(0);
             int idProtokolu = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<short>(1);
-
-            _Zapytanie = String.Format("SELECT przelicznik FROM Jednostki WHERE jednostka='{0}'", jednostka);
-            double przelicznik = _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<float>(0);
 
             int roznicaDni = (dataWzorcowania - dataKalibracjiLawy).Days;
 
@@ -102,7 +108,7 @@ namespace WzorcowanieMocDawkiSpace
                     mocKermy = 0;
                 }
 
-                wartoscWzorcowa.Add(mocKermy / przelicznik * korektaRozpad);
+                wartoscWzorcowa.Add(mocKermy / przelicznikJendnostki * korektaRozpad);
             }
 
             return wartoscWzorcowa;
