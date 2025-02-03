@@ -86,6 +86,10 @@ namespace DotBase.Szablony
             var all = new List<string>();
             if (File.Exists(outputFile))
                 all.Add(outputFile);
+            if (!Directory.Exists(outputFileDir))
+            {
+                Directory.CreateDirectory(outputFileDir);
+            }
             foreach (var file in Directory.EnumerateFiles(outputFileDir, outputFileWithoutExt + " (*).docx"))
                 all.Add(file);
 
