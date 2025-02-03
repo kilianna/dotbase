@@ -1,4 +1,13 @@
 ﻿
+
+function initialize() {
+    try {
+        ustawieniaJezyka = ustawieniaJezykow[jezyk];
+    } catch (e) {
+        ustawieniaJezyka = ustawieniaJezykow['PL'];
+    }
+}
+
 const ustawieniaJezykow = {
     PL: {
         alfabet: 'abcdefghijklmnoprstuwyz',
@@ -10,15 +19,14 @@ const ustawieniaJezykow = {
     }
 }
 
-ustawieniaJezyka = ustawieniaJezykow[jezyk];
+let ustawieniaJezyka;
 
-function escape(unsafe)
-{
+function escape(unsafe) {
     return unsafe
-         .replace(/&/g, "&amp;")
-         .replace(/</g, "&lt;")
-         .replace(/>/g, "&gt;");
- }
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+}
 
 function tekst(x, y) {
     if (typeof x === 'number') {
@@ -62,8 +70,6 @@ function tekst(x, y) {
 function multiline(x) {
     return x
         .trim()
-        .replace(/&mu;/g, 'µ')
-        .replace(/&nbsp;/g, '\xA0')
         .split(/\r?\n/)
         .map(v => escape(v))
         .join('<br/>');
@@ -139,7 +145,7 @@ function calcDigits(...args) {
     let digits = 0;
     let min = 0;
     let max = 20;
-    for (let i = 0; i < args.length; ) {
+    for (let i = 0; i < args.length;) {
         let significant = args[i++];
         if (typeof significant === 'object') {
             if (significant.min !== undefined) min = significant.min;
@@ -168,4 +174,100 @@ function fixed(value, digits) {
     }
     result = result.replace('.', ustawieniaJezyka.kropka);
     return result;
+}
+
+function simpleHtml(x) {
+    let tokens = x
+        .split(/(&[a-z]+;|[ \t]*\r?\n|<\/?[a-z]+(?:[^a-z>][^>]*)?>)/gi)
+        .filter(x => x.length);
+    let res = '';
+    let afterBreak = false;
+    let tagsStack = [];
+    nextTokenLoop:
+    for (let token of tokens) {
+
+        if (token.startsWith('&')) {
+            afterBreak = false;
+            switch (token.toLowerCase()) {
+                case '&nbsp;':
+                case '&amp;':
+                case '&lt;':
+                case '&gt;':
+                case '&quot;':
+                    res += token.toLowerCase();
+                    continue nextTokenLoop;
+                case '&mu;':
+                    res += 'µ'
+                    continue nextTokenLoop;
+            }
+        }
+
+        if (token.endsWith('\n')) {
+            if (!afterBreak) {
+                res += '<br/>';
+            }
+            afterBreak = false;
+            continue nextTokenLoop;
+        }
+
+        if (token.startsWith('</')) {
+            afterBreak = false;
+            let name = token.match(/^<\/([a-z]+)/i)[1].toLowerCase();
+            let index = tagsStack.lastIndexOf(name);
+            if (index >= 0) {
+                while (tagsStack.length > index) {
+                    let name = tagsStack.pop();
+                    res += `</${name}>`;
+                }
+                continue nextTokenLoop;
+            }
+        } else if (token.startsWith('<')) {
+            afterBreak = false;
+            let name = token.match(/^<([a-z]+)/i)[1].toLowerCase();
+            switch (name) {
+                case 'br':
+                    res += '<br/>';
+                    afterBreak = true;
+                    continue nextTokenLoop;
+                case 'b':
+                case 'i':
+                case 'u':
+                case 'sup':
+                case 'sub':
+                    res += `<${name}>`;
+                    tagsStack.push(name);
+                    continue nextTokenLoop;
+            }
+        }
+
+        afterBreak = false;
+
+        res += escape(token);
+    }
+    while (tagsStack.length > 0) {
+        let name = tagsStack.pop();
+        res += `</${name}>`;
+    }
+    return res;
+}
+
+function test() {
+    console.log(simpleHtml('test'));
+    console.log(simpleHtml('test<br />'));
+    console.log(simpleHtml(`<b><i>bold</i></b>
+        some<br>
+        asdfdskfjslkdjf<br>  
+        asdfasf<break>    
+        ssadsd<BR> fg
+        df<b>i</b><i>
+        gdfg
+        &amp;
+        &mu;
+        `));
+}
+
+initialize();
+
+if (typeof globalThis.process !== 'undefined' && globalThis.process.argv[2] === '__test__') {
+    test();
 }

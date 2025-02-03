@@ -116,6 +116,8 @@ namespace DotBase.Szablony
                     .ID_karty(nr_karty)
                     .Rodzaj_wzorcowania("md")
                     .Dolacz(true)
+                .ORDER_BY()
+                    .ID_wzorcowania(Order.DESC)
                 .GET();
 
             var tabelaD = baza.wzorcowanie_cezem
@@ -123,6 +125,8 @@ namespace DotBase.Szablony
                     .ID_karty(nr_karty)
                     .Rodzaj_wzorcowania("d")
                     .Dolacz(true)
+                .ORDER_BY()
+                    .ID_wzorcowania(Order.DESC)
                 .GET();
 
             var tabelaSM = baza.wzorcowanie_cezem
@@ -130,6 +134,8 @@ namespace DotBase.Szablony
                     .ID_karty(nr_karty)
                     .Rodzaj_wzorcowania("sm")
                     .Dolacz(true)
+                .ORDER_BY()
+                    .ID_wzorcowania(Order.DESC)
                 .GET();
 
             var tabelaSD = baza.wzorcowanie_cezem
@@ -137,6 +143,8 @@ namespace DotBase.Szablony
                     .ID_karty(nr_karty)
                     .Rodzaj_wzorcowania("sd")
                     .Dolacz(true)
+                .ORDER_BY()
+                    .ID_wzorcowania(Order.DESC)
                 .GET();
 
             var tabelaS = baza.Wzorcowanie_zrodlami_powierzchniowymi
@@ -144,7 +152,7 @@ namespace DotBase.Szablony
                     .ID_karty(nr_karty)
                     .Dolacz(true)
                 .ORDER_BY()
-                    .ID_wzorcowania()
+                    .ID_wzorcowania(Order.ASC)
                 .GET();
 
             var ogolemIlosc = tabelaMD.Length + tabelaD.Length + tabelaSM.Length + tabelaSD.Length + tabelaS.Length;
