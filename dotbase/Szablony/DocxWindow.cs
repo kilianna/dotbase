@@ -97,7 +97,7 @@ namespace DotBase.Szablony
             {
                 log(String.Format("Moving file from {0} to {1}.", tempFile, outputFile));
                 File.Move(tempFile, outputFile);
-                Close();
+                readyFile(outputFile);
                 return;
             }
             else
@@ -186,6 +186,11 @@ namespace DotBase.Szablony
                     }
                 }
             } while (!copySuccess);
+            readyFile(file);
+        }
+
+        private void readyFile(string file)
+        {
             Close();
             var proc = new Process();
             proc.StartInfo.FileName = file;

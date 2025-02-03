@@ -1,15 +1,161 @@
-﻿{
-    "nazwa": "radiometr",
-    "typ": "EKO-C",
-    "nr_fab": "735/2010",
-    "rok": "2010",
-    "producent": "POLON EKOLAB",
-    "zleceniodawca": "Zakład Fizyki Radiacyjnej i Dozymetrii Instytut Fizyki Jądrowej PAN",
-    "adres": "ul. Radzikowskiego 152 31-342 Kraków",
-    "metoda": "Procedura pomiarowa WZOR-1 (wyd. 7 z dn. 15.09.2023)",
-    "cisnienie": "978",
-    "temperatura": "23",
-    "wilgotnosc": "59",
-    "data_przyjecia": "17 września 2023",
-    "data_wykonania": "18 września 2023"
+﻿
+{
+  "jezyk": "PL",
+  "nr_karty": "19000",
+  "data_przyjecia": {
+    "tekst": {
+      "EN": "17 September 2023",
+      "PL": "17 września 2023"
+    },
+    "rok": 2023,
+    "miesiac": 9,
+    "dzien": 17,
+    "godzina": 0,
+    "minuta": 0,
+    "sekunda": 0,
+    "milisekunda": 0
+  },
+  "data_wykonania": {
+    "tekst": {
+      "EN": "18 September 2023",
+      "PL": "18 września 2023"
+    },
+    "rok": 2023,
+    "miesiac": 9,
+    "dzien": 18,
+    "godzina": 20,
+    "minuta": 41,
+    "sekunda": 15,
+    "milisekunda": 121
+  },
+  "data_wydania": {
+    "tekst": {
+      "EN": "18 September 2023",
+      "PL": "18 września 2023"
+    },
+    "rok": 2023,
+    "miesiac": 9,
+    "dzien": 18,
+    "godzina": 20,
+    "minuta": 41,
+    "sekunda": 15,
+    "milisekunda": 152
+  },
+  "sprawdzil": "P. Bilski",
+  "zleceniodawca": {
+    "id_zleceniodawcy": 672,
+    "zleceniodawca": "Zakład Fizyki Radiacyjnej i Dozymetrii\r\nInstytut Fizyki Jądrowej PAN",
+    "adres": "ul. Radzikowskiego 152\r\n31-342 Kraków",
+    "osoba_kontaktowa": "Katarzyna Zbroja",
+    "telefon": "6628441",
+    "faks": " ",
+    "email": " ",
+    "uwagi": " ",
+    "rabat": "",
+    "nip": " ",
+    "ifj": false
+  },
+  "przyrzad": {
+    "id_dozymetru": 3659,
+    "typ": "PM1610B-01",
+    "nr_fabryczny": "171720",
+    "rok_produkcji": "nie podano",
+    "producent": "POLIMASTER",
+    "nazwa": "radiometr"
+  },
+  "jednostki": null,
+  "poprawa": false,
+  "uwMD": "",
+  "uwD": "",
+  "uwS": "",
+  "uwSMD": "",
+  "uwSD": "",
+  "tabelaMD": [],
+  "tabelaD": [],
+  "tabelaSM": [
+    {
+      "id_wzorcowania": 19716,
+      "id_arkusza": 1,
+      "id_protokolu": 24,
+      "id_karty": 19000,
+      "data_wzorcowania": {
+        "tekst": {
+          "EN": "18 September 2023",
+          "PL": "18 września 2023"
+        },
+        "rok": 2023,
+        "miesiac": 9,
+        "dzien": 18,
+        "godzina": 0,
+        "minuta": 0,
+        "sekunda": 0,
+        "milisekunda": 0
+      },
+      "cisnienie": 986,
+      "temperatura": 21,
+      "wilgotnosc": 53,
+      "id_sondy": 4230,
+      "napiecie_zasilania_sondy": "nie dotyczy",
+      "inne_nastawy": "Numer poprzedniego świadectwa 18831/2023",
+      "id_jednostki": 15,
+      "tlo": "0",
+      "uwagi": "Brak",
+      "osoba_wzorcujaca": "A.Kilian",
+      "dolacz": true,
+      "osoba_sprawdzajaca": "J. Drop",
+      "wielkosc_fizyczna": "nie dotyczy",
+      "rodzaj_wzorcowania": "sm"
+    }
+  ],
+  "tabelaSD": [
+    {
+      "id_wzorcowania": 19717,
+      "id_arkusza": 2,
+      "id_protokolu": 24,
+      "id_karty": 19000,
+      "data_wzorcowania": {
+        "tekst": {
+          "EN": "18 September 2023",
+          "PL": "18 września 2023"
+        },
+        "rok": 2023,
+        "miesiac": 9,
+        "dzien": 18,
+        "godzina": 0,
+        "minuta": 0,
+        "sekunda": 0,
+        "milisekunda": 0
+      },
+      "cisnienie": 987.9,
+      "temperatura": 21.1,
+      "wilgotnosc": 58,
+      "id_sondy": 4230,
+      "napiecie_zasilania_sondy": "nie dotyczy",
+      "inne_nastawy": "nie dotyczy",
+      "id_jednostki": 15,
+      "tlo": "0",
+      "uwagi": "Numer poprzedniego świadectwa 18831/2023",
+      "osoba_wzorcujaca": "A.Kilian",
+      "dolacz": true,
+      "osoba_sprawdzajaca": "J. Drop",
+      "wielkosc_fizyczna": "nie dotyczy",
+      "rodzaj_wzorcowania": "sd"
+    }
+  ],
+  "tabelaS": [],
+  "stale": {
+    "UNCERTAINITY_PRESSURE_VALUE": 1.5,
+    "UNCERTAINITY_TEMPERATURE_VALUE": 0.5,
+    "UNCERTAINITY_HUMIDITY_VALUE": 2,
+    "CS_HALF_TIME_VALUE": 10964,
+    "UT_D": 0.1,
+    "UT_SD": 1,
+    "UKJED": 0.04,
+    "DELTA_L_D": 1,
+    "DELTA_L_MD": 3,
+    "ut": 1,
+    "ukT12Cs": 8,
+    "T12Cs": 10964
+  }
 }
+

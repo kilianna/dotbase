@@ -3,9 +3,13 @@ using System.Text;
 using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Data;
+using System.Collections.Generic;
+using System.Globalization;
 
 namespace DotBase.Szablony
 {
+
     class DocxGenerator
     {
         private static string xml2docxExe;
@@ -115,7 +119,7 @@ namespace DotBase.Szablony
         }
 
 
-        private static string jsonStringify(object data)
+        public static string jsonStringify(object data)
         {
             var sb = new StringBuilder();
             valueToJson(data, sb, "");
@@ -124,7 +128,7 @@ namespace DotBase.Szablony
 
         private static void valueToJson(object data, StringBuilder result, string indent)
         {
-            if (data == null)
+            if (data == null || data is DBNull)
             {
                 result.Append("null");
                 return;
@@ -171,8 +175,33 @@ namespace DotBase.Szablony
             {
                 result.Append(String.Format("{0}", data).Replace(',', '.'));
             }
+            else if (data is DateTime)
+            {
+                objToJson((DateTime)data, result, indent);
+                return;
+            }
             else if (type.IsClass)
             {
+                if (data is DataRowCollection)
+                {
+                    objToJson(data as DataRowCollection, result, indent);
+                    return;
+                }
+                else if (data is DataTable)
+                {
+                    objToJson(data as DataTable, result, indent);
+                    return;
+                }
+                else if (data is DataRow)
+                {
+                    objToJson(data as DataRow, null, result, indent);
+                    return;
+                }
+                else if (data is Dictionary<string, string>)
+                {
+                    objToJson(data as Dictionary<string, string>, result, indent);
+                    return;
+                }
                 result.Append('{');
                 var fields = type.GetFields();
                 var first = true;
@@ -198,8 +227,95 @@ namespace DotBase.Szablony
             }
             else
             {
-                throw new ApplicationException(String.Format("Unable to convert JSON value: {0}", data));
+                throw new ApplicationException(String.Format("Unable to convert JSON value: {0}, type {1}", data, type));
             }
+        }
+
+        private static void objToJson<T>(Dictionary<string, T> dictionary, StringBuilder result, string indent)
+        {
+            result.Append('{');
+            var first = true;
+            foreach (var item in dictionary)
+            {
+                if (!first) result.Append(',');
+                result.Append("\n");
+                result.Append(indent);
+                result.Append("  ");
+                strToJson(item.Key, result);
+                result.Append(": ");
+                valueToJson(item.Value, result, indent + "  ");
+                first = false;
+            }
+            result.Append('\n');
+            result.Append(indent);
+            result.Append('}');
+        }
+
+        private static void objToJson(DateTime data, StringBuilder result, string indent)
+        {
+            valueToJson(new DocxDateTime(data), result, indent);
+        }
+
+        private static void objToJson(DataTable data, StringBuilder result, string indent)
+        {
+            objToJson(data.Rows, result, indent);
+        }
+
+        private static void objToJson(DataRowCollection data, StringBuilder result, string indent)
+        {
+            if (data.Count == 0)
+            {
+                result.Append("[]");
+                return;
+            }
+
+            var row = data[0];
+            string[] columns = new string[row.Table.Columns.Count];
+            for (var i = 0; i < columns.Length; i++) {
+                columns[i] = row.Table.Columns[i].ColumnName.ToLower();
+            }
+
+            result.Append('[');
+
+            for (var i = 0; i < data.Count; i++)
+            {
+                if (i != 0) result.Append(',');
+                result.Append("\n");
+                result.Append(indent);
+                result.Append("  ");
+                objToJson(data[i], columns, result, indent + "  ");
+            }
+            result.Append('\n');
+            result.Append(indent);
+            result.Append(']');
+        }
+
+        private static void objToJson(DataRow row, string[] columns, StringBuilder result, string indent)
+        {
+            if (columns == null)
+            {
+                columns = new string[row.Table.Columns.Count];
+                for (var i = 0; i < columns.Length; i++)
+                {
+                    columns[i] = row.Table.Columns[i].ColumnName.ToLower();
+                }
+            }
+            result.Append('{');
+            var first = true;
+            for (var i = 0; i < columns.Length; i++)
+            {
+                if (!first) result.Append(',');
+                result.Append("\n");
+                result.Append(indent);
+                result.Append("  ");
+                strToJson(columns[i], result);
+                result.Append(": ");
+                valueToJson(row.ItemArray[i], result, indent + "  ");
+                first = false;
+            }
+            result.Append('\n');
+            result.Append(indent);
+            result.Append('}');
         }
 
         private static void strToJson(string str, StringBuilder result)
