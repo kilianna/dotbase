@@ -127,6 +127,8 @@ function _flattenAbs(value, arr) {
     return arr;
 }
 
+let currentDigits = 0;
+
 function calcDigits(...args) {
     let digits = 0;
     let min = 0;
@@ -144,11 +146,15 @@ function calcDigits(...args) {
         let fd = _fractionDigits(significant, data);
         digits = Math.max(digits, fd);
     }
-    return Math.min(max, Math.max(min, digits));
+    currentDigits = Math.min(max, Math.max(min, digits));
+    return currentDigits;
 }
 
 function fixed(value, digits) {
     let result;
+    if (digits === undefined) { // TODO: Skip "digits" argument where possible
+        digits = currentDigits;
+    }
     if (value instanceof Array) {
         result = value.map(x => fixed(x, digits));
     } else {
