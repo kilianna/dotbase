@@ -15,8 +15,9 @@ namespace DotBase.Test
         HashSet<int> doneIds = new HashSet<int>();
         int index = 0;
         bool force;
+        bool zalTabPun;
 
-        public void run(string fromIdText, string toIdText, bool force)
+        public void run(string fromIdText, string toIdText, bool force, bool zalTabPun)
         {
             int fromId = 0;
             int toId = 999999999;
@@ -40,6 +41,7 @@ namespace DotBase.Test
             var menuForm = getForm<MenuGlowneForm>();
             press(field<Button>(menuForm, "button2"));
             this.force = force;
+            this.zalTabPun = zalTabPun;
             string[] lines = new string[0];
             try
             {
@@ -89,6 +91,11 @@ namespace DotBase.Test
                 wait(() =>
                 {
                     var swiadectwoForm = getForm<MenuPismaSwiadectwaForm>();
+                    if (zalTabPun)
+                    {
+                        var tabPunBox = field<CheckBox>(swiadectwoForm, "dolaczTabPunktyBox");
+                        tabPunBox.Checked = true;
+                    }
                     press(field<Button>(swiadectwoForm, "button1"));
                     wait(800, () =>
                     {

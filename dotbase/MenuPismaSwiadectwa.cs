@@ -88,6 +88,7 @@ namespace DotBase
             szablon.uwS = uwS.Text;
             szablon.uwSMD = uwSMD.Text;
             szablon.uwSD = uwSD.Text;
+            szablon.dolaczTabPunktow = dolaczTabPunktyBox.Checked;
             szablon.Generate(this);
 
             Program.zmienJezyk(jezykSwiadectwa);

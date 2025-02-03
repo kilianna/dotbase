@@ -34,30 +34,31 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.checkHtmlDocxForce = new System.Windows.Forms.CheckBox();
+            this.zalTabPunBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // swiadHtmlVsDocxButton
             // 
             this.swiadHtmlVsDocxButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.swiadHtmlVsDocxButton.Location = new System.Drawing.Point(15, 35);
+            this.swiadHtmlVsDocxButton.Location = new System.Drawing.Point(12, 57);
             this.swiadHtmlVsDocxButton.Name = "swiadHtmlVsDocxButton";
             this.swiadHtmlVsDocxButton.Size = new System.Drawing.Size(241, 32);
-            this.swiadHtmlVsDocxButton.TabIndex = 5;
+            this.swiadHtmlVsDocxButton.TabIndex = 6;
             this.swiadHtmlVsDocxButton.Text = "Swiad. HTML vs DOCX";
             this.swiadHtmlVsDocxButton.UseVisualStyleBackColor = true;
             this.swiadHtmlVsDocxButton.Click += new System.EventHandler(this.swiadHtmlVsDocxButton_Click);
             // 
             // textHtmlDocxFrom
             // 
-            this.textHtmlDocxFrom.Location = new System.Drawing.Point(185, 6);
+            this.textHtmlDocxFrom.Location = new System.Drawing.Point(185, 20);
             this.textHtmlDocxFrom.Name = "textHtmlDocxFrom";
             this.textHtmlDocxFrom.Size = new System.Drawing.Size(71, 22);
             this.textHtmlDocxFrom.TabIndex = 3;
             // 
             // textHtmlDocxTo
             // 
-            this.textHtmlDocxTo.Location = new System.Drawing.Point(42, 6);
+            this.textHtmlDocxTo.Location = new System.Drawing.Point(42, 20);
             this.textHtmlDocxTo.Name = "textHtmlDocxTo";
             this.textHtmlDocxTo.Size = new System.Drawing.Size(71, 22);
             this.textHtmlDocxTo.TabIndex = 1;
@@ -65,7 +66,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(12, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(24, 17);
             this.label1.TabIndex = 0;
@@ -74,7 +75,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(119, 9);
+            this.label2.Location = new System.Drawing.Point(119, 23);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 17);
             this.label2.TabIndex = 2;
@@ -90,11 +91,22 @@
             this.checkHtmlDocxForce.Text = "załącz przetestowane wcześniej";
             this.checkHtmlDocxForce.UseVisualStyleBackColor = true;
             // 
+            // zalTabPunBox
+            // 
+            this.zalTabPunBox.AutoSize = true;
+            this.zalTabPunBox.Location = new System.Drawing.Point(262, 35);
+            this.zalTabPunBox.Name = "zalTabPunBox";
+            this.zalTabPunBox.Size = new System.Drawing.Size(169, 21);
+            this.zalTabPunBox.TabIndex = 5;
+            this.zalTabPunBox.Text = "załącz tabelę punktów";
+            this.zalTabPunBox.UseVisualStyleBackColor = true;
+            // 
             // TestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(523, 253);
+            this.Controls.Add(this.zalTabPunBox);
             this.Controls.Add(this.checkHtmlDocxForce);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -116,5 +128,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox checkHtmlDocxForce;
+        private System.Windows.Forms.CheckBox zalTabPunBox;
     }
 }

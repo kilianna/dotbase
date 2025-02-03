@@ -247,7 +247,8 @@ for (let i = 0; i < wyniki.length; i++) {
 
   <%! /* ------------------------------- Moc Dawki ---------------------------- */ %>
 
-  <!-- TODO: Potrzeba dodać tabelę (zaimplementowano później, więc tutaj jej jeszcze nie ma) -->
+  <!-- TODO: Otoczyć całe podpunkty tablą z jedną komórką (nie łamiącą się na strony) -->
+  <!-- Takie otaczanie zmienia atrybuty wewnętrznej tabeli - może błąd w zml2docx? -->
 
   <p><% litera(podpunkt++) %>) Wzorcowanie źródłem gamma: Cs-137; <% wzorcowanie.Wielkosc_fizyczna %></p>
   <p></p>
@@ -261,6 +262,50 @@ for (let i = 0; i < wyniki.length; i++) {
     korekcjaJednostki = `(µGy/h)/(${wyn.jednostka.Jednostka})`;
   }
   %>
+
+  <%! if (dolaczTabPunktow && wyn.tabela.length === 1) { %>
+
+  <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">
+    <tc width="14mm" />
+    <tc width="52mm" />
+    <tc width="52mm" />
+    <tc width="52mm" />
+    <tr font-bold="1">
+      <td rowspan="2">Lp.</td>
+      <td>WARTOŚĆ WZORCOWA</td>
+      <td>WARTOŚĆ ZMIERZONA</td>
+      <td>WARTOŚĆ WSPÓŁCZYNNIKA POPRAWKOWEGO</td>
+    </tr>
+    <tr font-bold="1">
+      <td><% mikro(jednostka) %></td>
+      <td><% mikro(jednostka) %></td>
+      <td><% mikro(korekcjaJednostki) %></td>
+    </tr>
+    <%! for (let [rowIndex, row] of wyn.tabela.entries()) { %>
+    <%!
+      let args = [];
+      for (let punkt of row.punkty) {
+        args.push(2, punkt.wzorcowa, 1, punkt.wzorcowa_niepewnosc);
+      }
+      let wartDigits = calcDigits(...args);
+    %>
+    <%! for (let [punktIndex, punkt] of row.punkty.entries()) { %>
+    <tr>
+      <td><% punktIndex + 1 %></td>
+      <td><% fixed(punkt.wzorcowa, wartDigits) %> ± <% fixed(punkt.wzorcowa_niepewnosc, wartDigits) %></td>
+      <td><% numberAsIs(punkt.zmierzona) %> ± <% numberAsIs(punkt.zmierzona_niepewnosc) %></td>
+      <%! if (punktIndex === 0) { %>
+        <%! calcDigits(2, row.wspolczynnik, 2, row.niepewnosc) %>
+        <td rowspan="<% row.punkty.length %>"><% fixed(row.wspolczynnik) %> ± <% fixed(row.niepewnosc) %></td>
+      <%! } %>
+    </tr>
+    <%! } %>
+    <%! } %>
+  </table>
+
+  <p></p>
+
+  <%! } else { %>
 
   <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">
     <tc width="8.5cm" />
@@ -281,6 +326,8 @@ for (let i = 0; i < wyniki.length; i++) {
     </tr>
     <%! } %>
   </table>
+
+  <%! } %>
 
   <p></p>
   <p>Zmierzoną wartość <% wzorcowanie.Wielkosc_fizyczna.replace('moc', 'mocy') %> należy pomnożyć

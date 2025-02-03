@@ -2,6 +2,7 @@
 using System.Data;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using WzorcowanieMocDawkiSpace;
 
 namespace DotBase.Szablony
 {
@@ -39,6 +40,14 @@ namespace DotBase.Szablony
             }
         }
 
+        public class Punkt
+        {
+            public double wzorcowa;
+            public double wzorcowa_niepewnosc;
+            public double zmierzona;
+            public double zmierzona_niepewnosc;
+        }
+
         public class Wynik
         {
             public double prog;
@@ -50,6 +59,7 @@ namespace DotBase.Szablony
             public double zakres;
             public int wielkosc_fizyczna;
             public object row;
+            public List<Punkt> punkty;
         }
 
         public class Wyniki
@@ -75,6 +85,7 @@ namespace DotBase.Szablony
         public string uwS;
         public string uwSMD;
         public string uwSD;
+        public bool dolaczTabPunktow;
 
         // Dane wyliczone w PreProcess
         public Metoda metoda;
@@ -293,9 +304,60 @@ namespace DotBase.Szablony
                 w.zakres = Wymagany(tabRow.ZAKRES, "Zakres w tabeli 'Dawka' jest wymagany");
                 w.wspolczynnik = Wymagany(tabRow.Wspolczynnik, "Wspolczynnik w tabeli 'Dawka' jest wymagany");
                 w.niepewnosc = Wymagany(tabRow.Niepewnosc, "Niepewnosc w tabeli 'Dawka' jest wymagana");
+                if (dolaczTabPunktow)
+                {
+                    DateTime dataKalibracji = baza.Protokoly_kalibracji_lawy
+                        .WHERE().ID_protokolu(row.ID_protokolu)
+                        .GET_ONE().Data_kalibracji ?? default(DateTime);
+                    w.punkty = TworzPunktyMD(dataKalibracji, row.Data_wzorcowania ?? default(DateTime), row.ID_wzorcowania, wyn.jednostka.Przelicznik ?? 0);
+                }
                 w.row = tabRow;
                 wyn.tabela.Add(w);
             }
+        }
+
+        private List<Punkt> TworzPunktyMD(DateTime dataKalibracji, DateTime dataWzorcowania, int idWzorcowania, double przelicznikJednostki)
+        {
+            var wzorcowanieMocDawki = new WzorcowanieMocDawki(this.nr_karty, "md");
+
+            var pomiarRows = baza.Pomiary_cez
+                .WHERE().ID_wzorcowania(idWzorcowania)
+                .GET();
+
+            var tabPunkt = new List<Tuple<double, double>>();
+            var tabDaneDlaWartWzor = new List<Tuple<double, int>>();
+
+            foreach (var pomiarRow in pomiarRows)
+            {
+                tabPunkt.Add(new Tuple<double, double>(
+                    pomiarRow.Wskazanie ?? 0,
+                    pomiarRow.Wahanie ?? 0
+                    ));
+                tabDaneDlaWartWzor.Add(new Tuple<double, int>(
+                    pomiarRow.Odleglosc ?? 0,
+                    pomiarRow.ID_zrodla ?? -1
+                    ));
+            }
+
+            var tabWartWzor = wzorcowanieMocDawki.LiczWartoscWzorcowa(
+                tabDaneDlaWartWzor.ToArray(),
+                dataKalibracji.ToString("yyyy-MM-dd"),
+                przelicznikJednostki,
+                dataWzorcowania);
+
+            var res = new List<Punkt>();
+
+            for (int i = 0; i < tabPunkt.Count; i++)
+            {
+                var p = new Punkt();
+                p.wzorcowa = tabWartWzor[i];
+                p.wzorcowa_niepewnosc = tabWartWzor[i] * 0.02;
+                p.zmierzona = tabPunkt[i].Item1;
+                p.zmierzona_niepewnosc = tabPunkt[i].Item2;
+                res.Add(p);
+            }
+
+            return res;
         }
 
         private void DodajTabeleD(Szablon.Row_wzorcowanie_cezem row, Wyniki wyn)
