@@ -63,7 +63,7 @@
 ---------------------------------------------------------------------
 
     Karta_przyjecia.ID_karty, typ Integer, domyślnie 0, precyzja 10, niewymagane Nie, pozycja 1, flagi X-X- -X-X
-    Karta_przyjecia.ID_dozymetru, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 2, flagi X-X- -XXX
+    Karta_przyjecia.ID_dozymetru, typ Integer, domyślnie 0, precyzja 10, niewymagane Nie, pozycja 2, flagi X-X- -X-X
     Karta_przyjecia.Akcesoria, typ WChar, długość 250, niewymagane Tak, pozycja 3, flagi X-X- -XX-
     Karta_przyjecia.Test_na_skazenia, typ WChar, długość 50, niewymagane Tak, pozycja 4, flagi X-X- -XX-
     Karta_przyjecia.Uwagi, typ WChar, długość 255, niewymagane Tak, pozycja 5, flagi X-X- -XX-
@@ -245,7 +245,7 @@
     wzorcowanie_cezem.ID_sondy, typ Integer, precyzja 10, niewymagane Tak, pozycja 9, flagi X-X- -XXX
     wzorcowanie_cezem.Napiecie_zasilania_sondy, typ WChar, długość 50, niewymagane Tak, pozycja 10, flagi X-X- -XX-
     wzorcowanie_cezem.Inne_nastawy, typ WChar, długość 255, niewymagane Tak, pozycja 11, flagi X-X- -XX-
-    wzorcowanie_cezem.ID_jednostki, typ Integer, domyślnie 1, precyzja 10, niewymagane Tak, pozycja 12, flagi X-X- -XXX
+    wzorcowanie_cezem.ID_jednostki, typ Integer, domyślnie 1, precyzja 10, niewymagane Nie, pozycja 12, flagi X-X- -X-X
     wzorcowanie_cezem.Tlo, typ WChar, długość 50, niewymagane Tak, pozycja 13, flagi X-X- -XX-
     wzorcowanie_cezem.Uwagi, typ WChar, długość 0, niewymagane Tak, pozycja 14, flagi X-X- XXX-
     wzorcowanie_cezem.Osoba_wzorcujaca, typ WChar, długość 50, niewymagane Tak, pozycja 15, flagi X-X- -XX-
@@ -287,7 +287,7 @@
 ---------------------------------------------------------------------
 
     Zlecenia.ID_zlecenia, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 1, flagi X-X- -XXX
-    Zlecenia.ID_zleceniodawcy, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 2, flagi X-X- -XXX
+    Zlecenia.ID_zleceniodawcy, typ Integer, domyślnie 0, precyzja 10, niewymagane Nie, pozycja 2, flagi X-X- -X-X
     Zlecenia.Data_przyjecia, typ Date, precyzja 0, niewymagane Tak, pozycja 3, flagi X-X- -XXX
     Zlecenia.Data_zwrotu, typ Date, precyzja 0, niewymagane Tak, pozycja 4, flagi X-X- -XXX
     Zlecenia.Forma_przyjecia, typ WChar, długość 50, niewymagane Tak, pozycja 5, flagi X-X- -XX-
