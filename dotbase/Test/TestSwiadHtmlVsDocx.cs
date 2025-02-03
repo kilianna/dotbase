@@ -12,8 +12,8 @@ namespace DotBase.Test
     {
         Szablon.Row_Karta_przyjecia[] karty;
         Szablon.Row_Karta_przyjecia karta;
+        HashSet<int> doneIds = new HashSet<int>();
         int index = 0;
-
 
         public void run()
         {
@@ -28,19 +28,41 @@ namespace DotBase.Test
             DebugOptions.messageBox = true;
             var menuForm = getForm<MenuGlowneForm>();
             press(field<Button>(menuForm, "button2"));
+            var lines = File.ReadAllLines(N.getProgramDir() + @"\..\wyniki\Swiadectwo\done.txt");
+            foreach (var line in lines)
+            {
+                int x;
+                if (Int32.TryParse(line, out x))
+                {
+                    doneIds.Add(x);
+                }
+            }
             wait(run2);
         }
 
         private void run2()
         {
             var wzorcowanieForm = getForm<MenuWzorcowanieForm>();
-            if (index >= karty.Length)
+            while (true)
             {
-                Debug.WriteLine("----- DONE -----");
-                return;
+                if (index >= karty.Length)
+                {
+                    Debug.WriteLine("----- DONE -----");
+                    return;
+                }
+                karta = karty[index];
+                if (doneIds.Contains(karta.ID_karty))
+                {
+                    Debug.WriteLine(String.Format("Karta {0}/{1}, id {2} - ALREADY DONE", karty.Length - index, karty.Length, karty[index].ID_karty));
+                    index++;
+                    continue;
+                }
+                else
+                {
+                    Debug.WriteLine(String.Format("Karta {0}/{1}, id {2} - PROCESSING", karty.Length - index, karty.Length, karty[index].ID_karty));
+                    break;
+                }
             }
-            Debug.WriteLine(String.Format("Karta {0}/{1}, id {2}", karty.Length - index, karty.Length, karty[index].ID_karty));
-            karta = karty[index++];
             var id = field<NumericUpDown>(wzorcowanieForm, "numericUpDown1");
             id.Select(0, id.Text.Length);
             send(id, karta.ID_karty + "{TAB}");
@@ -51,7 +73,7 @@ namespace DotBase.Test
                 {
                     var swiadectwoForm = getForm<MenuPismaSwiadectwaForm>();
                     press(field<Button>(swiadectwoForm, "button1"));
-                    wait(500, () =>
+                    wait(800, () =>
                     {
                         var docxWindow = getForm<Szablony.DocxWindow>(true);
                         wait(docxWindow == null ? 0 : 3000, () =>
@@ -98,6 +120,9 @@ namespace DotBase.Test
                                 wait(() =>
                                 {
                                     swiadectwoForm.Close();
+                                    doneIds.Add(karta.ID_karty);
+                                    File.WriteAllText(N.getProgramDir() + @"\..\wyniki\Swiadectwo\done.txt", string.Join("\n", doneIds.ToArray()));
+                                    index++;
                                     wait(run2);
                                 });
                             });

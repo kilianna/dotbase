@@ -1,0 +1,58 @@
+
+body, table {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+table {
+    border-spacing: 0px;
+    border-bottom: 1px solid #CCC;
+    border-right: 1px solid #CCC;
+}
+
+td {
+    border-top: 1px solid #CCC;
+    border-left: 1px solid #CCC;
+    margin: 0px;
+    padding: 4px 16px;
+}
+
+tr.diff {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+td.id {
+    font-weight: bold;
+}
+
+td.changes {
+    font-weight: bold;
+    color: #800;
+}
+
+td:first-child {
+    width: 5em;
+}
+
+td:nth-child(2) {
+    width: 100%;
+}
+
+/*span.normal {}*/
+
+span.old {
+    display: inline-block;
+    background-color: #ff000029;
+    padding: 2px 5px;
+    border-radius: 4px;
+    text-decoration: line-through;
+    text-decoration-color: #ff000076;
+}
+
+span.new {
+    
+    display: inline-block;
+    background-color: #3cff003e;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-weight: bold;
+}
