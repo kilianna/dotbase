@@ -508,7 +508,7 @@ for (let i = 0; i < wyniki.length; i++) {
         <td><% wyn.sonda ? wyn.sonda.Nr_fabryczny : 'nie dotyczy' %></td>
         <td><% wzorcowanie.Napiecie_zasilania_sondy %></td>
         <td><% wyn.zrodlo?.Nazwa?.replace(/\(.*\)/, '').trim() || blad('Nie ma źródla') %> </td>
-        <td><% wyn.zrodlo?.Nazwa?.toLowerCase() === 'am-241' || wyn.zrodlo?.Nazwa?.toLowerCase() === 'Pu-239' ? 'α' : 'β' %></td>
+        <td><% wyn.zrodlo?.Nazwa?.toLowerCase() === 'am-241' || wyn.zrodlo?.Nazwa?.toLowerCase() === 'pu-239' ? 'α' : 'β' %></td>
         <td><% fixed(wyn.emisja_pow, 2) %></td>
         <td><% wyn.jednostka.Jednostka %></td>
         <%! digits = calcDigits(2, wzorcowanie.wspolczynnik, 2, wzorcowanie.Niepewnosc) %>
