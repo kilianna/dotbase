@@ -731,5 +731,32 @@ namespace DotBase
         {
             N.SprawdzZakres(sender as TextBox);
         }
+
+        private void sprawdzPodswietlenieWyn(object sender, EventArgs e)
+        {
+            double wspolczynnik;
+            double niepewnosc;
+            double poprzedni;
+            Double.TryParse(textBox11.Text, out wspolczynnik);
+            Double.TryParse(textBox12.Text, out niepewnosc);
+            Double.TryParse(textBox13.Text, out poprzedni);
+            podswietlNaCzerwono(textBox11, wspolczynnik < 0.5 || wspolczynnik > 2.0);
+            podswietlNaCzerwono(textBox12, wspolczynnik < 0.0000001 || niepewnosc / wspolczynnik > 0.4);
+            podswietlNaCzerwono(textBox13, Math.Abs(wspolczynnik - poprzedni) / wspolczynnik > 0.2);
+        }
+
+        private void podswietlNaCzerwono(TextBox textBox, bool warunek)
+        {
+            if (warunek)
+            {
+                textBox.BackColor = Color.Red;
+                textBox.ForeColor = Color.Yellow;
+            }
+            else
+            {
+                textBox.BackColor = textBox15.BackColor;
+                textBox.ForeColor = textBox15.ForeColor;
+            }
+        }
     }
 }
