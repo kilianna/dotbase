@@ -91,18 +91,6 @@ namespace DotBase.Controls
             rt.SelectedText = (sender as ToolStripItem).Tag.ToString();
         }
 
-        private void twardaSpacjaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var start = rt.SelectionStart;
-            rt.SelectedText = "\xA0";
-            rt.SelectionStart = start;
-            rt.SelectionLength = 1;
-            rt.SelectionBackColor = Color.Silver;
-            rt.SelectionLength = 0;
-            rt.SelectionStart = start + 1;
-            rt.SelectionBackColor = rt.BackColor;
-        }
-
         private void wytnijToolStripMenuItem_Click(object sender, EventArgs e)
         {
             rt.Cut();
@@ -145,7 +133,7 @@ namespace DotBase.Controls
                         rt.SelectedText = "µ";
                         break;
                     case Keys.Space:
-                        twardaSpacjaToolStripMenuItem_Click(sender, e);
+                        rt.SelectedText = "‿";
                         break;
                     case Keys.C:
                         kopiujToolStripMenuItem_Click(sender, e);
@@ -248,14 +236,6 @@ namespace DotBase.Controls
             }
         }
 
-        private void rt_SelectionChanged(object sender, EventArgs e)
-        {
-            if (rt.SelectionLength == 0 && rt.SelectionBackColor != rt.BackColor)
-            {
-                rt.SelectionBackColor = rt.BackColor;
-            }
-        }
-
         private void rt_Validating(object sender, CancelEventArgs e)
         {
             validateContent();
@@ -267,7 +247,6 @@ namespace DotBase.Controls
         {
             var res = new StringBuilder();
             res.Append(@"{\rtf1\ansi\ansicpg1250\deff0\deflang1045{\fonttbl{\f0\fnil\fcharset238 Microsoft Sans Serif;}}");
-            res.Append(@"{\colortbl ;\red192\green192\blue192;}");
             res.Append(@"\viewkind4\uc1\pard\f0\fs17 ");
             var rtf = html
                 .Replace("\\", "\\\\")
@@ -297,7 +276,8 @@ namespace DotBase.Controls
                 .Replace("<SUB>", @"\dn4\fs13 ")
                 .Replace("</sub>", @"\up0\fs17 ")
                 .Replace("</SUB>", @"\up0\fs17 ")
-                .Replace("&nbsp;", "\\highlight1\xA0\\highlight0 ")
+                .Replace("\xA0", "‿")
+                .Replace("&nbsp;", "‿")
                 .Replace("&amp;", "&")
                 .Replace("&lt;", "<")
                 .Replace("&gt;", ">")
@@ -409,6 +389,7 @@ namespace DotBase.Controls
                     case '\n':
                         res.Append("<br/>");
                         break;
+                    case '‿':
                     case '\xA0':
                         res.Append("&nbsp;");
                         break;
@@ -474,6 +455,12 @@ namespace DotBase.Controls
         public void Clear()
         {
             rt.Clear();
+        }
+
+        public bool Enabled
+        {
+            get { return rt.Enabled; }
+            set { rt.Enabled = value; }
         }
     }
 }

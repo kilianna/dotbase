@@ -49,6 +49,7 @@ namespace DotBase.Szablony
             public double niepewnosc_wspolczynnika;
             public double zakres;
             public int wielkosc_fizyczna;
+            public object row;
         }
 
         public class Wyniki
@@ -292,6 +293,7 @@ namespace DotBase.Szablony
                 w.zakres = Wymagany(tabRow.ZAKRES, "Zakres w tabeli 'Dawka' jest wymagany");
                 w.wspolczynnik = Wymagany(tabRow.Wspolczynnik, "Wspolczynnik w tabeli 'Dawka' jest wymagany");
                 w.niepewnosc = Wymagany(tabRow.Niepewnosc, "Niepewnosc w tabeli 'Dawka' jest wymagana");
+                w.row = tabRow;
                 wyn.tabela.Add(w);
             }
         }
@@ -309,6 +311,7 @@ namespace DotBase.Szablony
                 w.wspolczynnik = Wymagany(tabRow.Wspolczynnik, "Wspolczynnik w tabeli 'Dawka' jest wymagany");
                 w.niepewnosc = Wymagany(tabRow.Niepewnosc, "Niepewnosc w tabeli 'Dawka' jest wymagana");
                 w.wielkosc_fizyczna = Wymagany(tabRow.Wielkosc_fizyczna, "Wielkosc_fizyczna w tabeli 'Dawka' jest wymagana");
+                w.row = tabRow;
                 wyn.tabela.Add(w);
             }
         }
@@ -344,6 +347,7 @@ namespace DotBase.Szablony
                     w.wspolczynnik = computedFactors[i];
                     w.niepewnosc_wspolczynnika = computedUncertainity[i];
                 }
+                w.row = tabRow;
                 wyn.tabela.Add(w);
             }
         }
@@ -380,6 +384,7 @@ namespace DotBase.Szablony
                     w.wspolczynnik = computedFactors[i];
                     w.niepewnosc_wspolczynnika = computedUncertainity[i];
                 }
+                w.row = tabRow;
                 wyn.tabela.Add(w);
             }
         }
