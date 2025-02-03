@@ -43,6 +43,10 @@ namespace DotBase.Szablony
                 }
                 json = jsonStringify(data);
                 jsonFile = Path.GetTempPath() + Guid.NewGuid().ToString() + ".json";
+#if DEBUG
+                string jsonDebug = (new Uri(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase) + @"\..\..\Szablony\" + Path.GetFileNameWithoutExtension(template) + ".json")).LocalPath;
+                File.WriteAllText(jsonDebug, json);
+#endif
                 File.WriteAllText(jsonFile, json);
                 proc = new Process();
                 proc.StartInfo.FileName = xml2docxExe;
