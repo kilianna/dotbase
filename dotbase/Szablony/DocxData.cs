@@ -79,7 +79,7 @@ namespace DotBase.Szablony
             }
             catch (ProcessingException ex)
             {
-                MessageBox.Show(owner, ex.Message, "Błąd przetwarzania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MyMessageBox.Show(owner, ex.Message, "Błąd przetwarzania danych!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

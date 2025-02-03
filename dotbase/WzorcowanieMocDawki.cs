@@ -144,7 +144,7 @@ namespace WzorcowanieMocDawkiSpace
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show(String.Format("Dane w wierszu {0} są nieprawidłowe. Sprawdź poprawność wprowadzonych liczb.", i), "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MyMessageBox.Show(String.Format("Dane w wierszu {0} są nieprawidłowe. Sprawdź poprawność wprowadzonych liczb.", i), "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
@@ -171,7 +171,7 @@ namespace WzorcowanieMocDawkiSpace
 
             if (kpr < 0 || kT < 0 || kt < 0 || kr < 0)
             {
-                MessageBox.Show("Brakuje niezbędnych danych w tabeli 'Budzetniepewnosci' w bazie danych", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MyMessageBox.Show("Brakuje niezbędnych danych w tabeli 'Budzetniepewnosci' w bazie danych", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
@@ -188,7 +188,7 @@ namespace WzorcowanieMocDawkiSpace
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show(String.Format("Nie można znaleźć danych w Pomiarach Wzorcowych dla wiersza {0}", punktIndex + 1), "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MyMessageBox.Show(String.Format("Nie można znaleźć danych w Pomiarach Wzorcowych dla wiersza {0}", punktIndex + 1), "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
@@ -307,7 +307,7 @@ namespace WzorcowanieMocDawkiSpace
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show(String.Format("Dane w wierszu {0} są nieprawidłowe. Sprawdź poprawność wprowadzonych liczb.", i), "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MyMessageBox.Show(String.Format("Dane w wierszu {0} są nieprawidłowe. Sprawdź poprawność wprowadzonych liczb.", i), "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
@@ -335,7 +335,7 @@ namespace WzorcowanieMocDawkiSpace
 
             if (ut < 0 || ukT12Cs < 0 || T12Cs < 0)
             {
-                MessageBox.Show("Brakuje niezbędnych danych w tabeli 'Stale' w bazie danych", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MyMessageBox.Show("Brakuje niezbędnych danych w tabeli 'Stale' w bazie danych", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
@@ -353,7 +353,7 @@ namespace WzorcowanieMocDawkiSpace
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show(String.Format("Nie można znaleźć danych w Pomiarach Wzorcowych dla wiersza {0}", punktIndex + 1), "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MyMessageBox.Show(String.Format("Nie można znaleźć danych w Pomiarach Wzorcowych dla wiersza {0}", punktIndex + 1), "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
@@ -472,7 +472,7 @@ namespace WzorcowanieMocDawkiSpace
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show(String.Format("Dane w wierszu {0} są nieprawidłowe. Sprawdź poprawność wprowadzonych liczb.", i), "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MyMessageBox.Show(String.Format("Dane w wierszu {0} są nieprawidłowe. Sprawdź poprawność wprowadzonych liczb.", i), "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
@@ -502,7 +502,7 @@ namespace WzorcowanieMocDawkiSpace
 
             if (ut < 0 || ukT12Cs < 0 || T12Cs < 0 || ukjed < 0)
             {
-                MessageBox.Show("Brakuje niezbędnych danych w tabeli 'Stale' w bazie danych", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MyMessageBox.Show("Brakuje niezbędnych danych w tabeli 'Stale' w bazie danych", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
@@ -521,7 +521,7 @@ namespace WzorcowanieMocDawkiSpace
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show(String.Format("Nie można znaleźć danych w Pomiarach Wzorcowych dla wiersza {0}", punktIndex + 1), "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MyMessageBox.Show(String.Format("Nie można znaleźć danych w Pomiarach Wzorcowych dla wiersza {0}", punktIndex + 1), "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }

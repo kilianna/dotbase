@@ -49,31 +49,31 @@ namespace DotBase
 
             if (false == _WzorcowanieSygDawki.PrzygotujDaneOgolneDoZapisu(textBox1.Text, textBox2.Text, dateTimePicker1.Value, NadpisywanieStarychDanych))
             {
-                MessageBox.Show("Dane ogólne są błędne.", "Uwaga");
+                MyMessageBox.Show("Dane ogólne są błędne.", "Uwaga");
                 return false;
             }
 
             if (false == _WzorcowanieSygDawki.PrzygotujDanePrzyrzaduDoZapisu(textBox3.Text, textBox4.Text, textBox6.Text, textBox5.Text, comboBox1.Text, comboBox2.Text))
             {
-                MessageBox.Show("Dane przyrządu są błędne.", "Uwaga");
+                MyMessageBox.Show("Dane przyrządu są błędne.", "Uwaga");
                 return false;
             }
 
             if (false == _WzorcowanieSygDawki.PrzygotujDaneWarunkowDoZapisu(textBox7.Text, textBox8.Text, textBox9.Text, textBox10.Text))
             {
-                MessageBox.Show("Dane warunków są błędne.", "Uwaga");
+                MyMessageBox.Show("Dane warunków są błędne.", "Uwaga");
                 return false;
             }
 
             if (false == _WzorcowanieSygDawki.PrzygotujDaneWzorcowoPomiaroweDoZapisu(ref dataGridView1, comboBox3.Text, textBox15.Text, textBox14.Text, comboBox4.Text))
             {
-                MessageBox.Show("Dane wzorcowo-pomiarowe są błędne.", "Uwaga");
+                MyMessageBox.Show("Dane wzorcowo-pomiarowe są błędne.", "Uwaga");
                 return false;
             }
 
             if (false == _WzorcowanieSygDawki.PrzygotujDaneProtokolowDoZapisu(textBox11.Text, textBox12.Text, checkBox1.Checked))
             {
-                MessageBox.Show("Dane współczynników są błędne.", "Uwaga");
+                MyMessageBox.Show("Dane współczynników są błędne.", "Uwaga");
                 return false;
             }
 
@@ -198,7 +198,7 @@ namespace DotBase
             if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "" ||
                 comboBox1.SelectedIndex < 0 || comboBox2.SelectedIndex < 0)
             {
-                MessageBox.Show("Błędne dane przyrządu.", "Uwaga");
+                MyMessageBox.Show("Błędne dane przyrządu.", "Uwaga");
                 return false;
             }
 
@@ -589,7 +589,7 @@ namespace DotBase
             Dokumenty.ProtokolSygnalizacjaDawki protokol = new Dokumenty.ProtokolSygnalizacjaDawki(model);
             if (!protokol.generateDocument(sciezka))
             {
-                MessageBox.Show("Nie podano wszystkich potrzebnych danych!", "Uwaga");
+                MyMessageBox.Show("Nie podano wszystkich potrzebnych danych!", "Uwaga");
             }
         }
 
@@ -613,7 +613,7 @@ namespace DotBase
             }
             catch (Exception)
             {
-                MessageBox.Show("Brak wszystkich danych potrzebnych do wyświetlenia danych wzorcowych.", "Uwaga");
+                MyMessageBox.Show("Brak wszystkich danych potrzebnych do wyświetlenia danych wzorcowych.", "Uwaga");
             }
         }
 

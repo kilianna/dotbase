@@ -33,7 +33,7 @@ namespace DotBase
 
             if (false == ZaladujDanePoczatkowe())
             {
-                MessageBox.Show("Brak danych do wyświetlenia. Może być to problem z brakiem połączenia z bazą danych.");
+                MyMessageBox.Show("Brak danych do wyświetlenia. Może być to problem z brakiem połączenia z bazą danych.");
             }
             else
             {
@@ -71,12 +71,12 @@ namespace DotBase
         private void button2_Click(object sender, EventArgs e)
         //--------------------------------------------------------------------
         {
-            if (DialogResult.No == MessageBox.Show("Czy na pewno usunąć?", "Usuwanie zlecenia", MessageBoxButtons.YesNo))
+            if (DialogResult.No == MyMessageBox.Show("Czy na pewno usunąć?", "Usuwanie zlecenia", MessageBoxButtons.YesNo))
                 return;
 
             _Zlecenie.UsunZlecenie((int)numericUpDown1.Value);
 
-            if (DialogResult.No == MessageBox.Show("Czy usunąć karty powiązane ze zleceniem?", "Usuwanie kart", MessageBoxButtons.YesNo))
+            if (DialogResult.No == MyMessageBox.Show("Czy usunąć karty powiązane ze zleceniem?", "Usuwanie kart", MessageBoxButtons.YesNo))
             {
                 numericUpDown1.Value = _Zlecenie.ZnajdzOstatnieZlecenie();
                 return;
@@ -120,7 +120,7 @@ namespace DotBase
             }
             else
             {
-                MessageBox.Show("Połączenie z bazą został przerwane.");
+                MyMessageBox.Show("Połączenie z bazą został przerwane.");
             }
         }
 
@@ -154,7 +154,7 @@ namespace DotBase
                 }
                 else
                 {
-                    MessageBox.Show(this, "Nie zapisano danych z powodu błędu.", "Błąd zapisu do bazy danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MyMessageBox.Show(this, "Nie zapisano danych z powodu błędu.", "Błąd zapisu do bazy danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
@@ -181,7 +181,7 @@ namespace DotBase
             {
                 CzyscOkno();
                 ZablokujPrzyciski();
-                MessageBox.Show("Zlecenie o tym numerze nie istnieje lub połączenie z bazą zostało zerwane.");
+                MyMessageBox.Show("Zlecenie o tym numerze nie istnieje lub połączenie z bazą zostało zerwane.");
                 return;
             }
             
@@ -197,7 +197,7 @@ namespace DotBase
             }
             else
             {
-                MessageBox.Show("Brak danych dla tego numeru.");
+                MyMessageBox.Show("Brak danych dla tego numeru.");
             }
         }
 
@@ -267,7 +267,7 @@ namespace DotBase
             }
             else
             {
-                MessageBox.Show("Brak danych do wyświetlenia. Może być to problem z brakiem połączenia z bazą danych.");
+                MyMessageBox.Show("Brak danych do wyświetlenia. Może być to problem z brakiem połączenia z bazą danych.");
             }
         }
 
@@ -528,7 +528,7 @@ namespace DotBase
         {
             if( false == SprawdzPoprawnoscDanychZleceniodawcy())
             {
-                MessageBox.Show("Część danych wymaganych do zapisu nie jest podana.");
+                MyMessageBox.Show("Część danych wymaganych do zapisu nie jest podana.");
                 return;
             }
 
@@ -578,7 +578,7 @@ namespace DotBase
         {
             if (false == SprawdzPoprawnoscDanychZleceniodawcy())
             {
-                MessageBox.Show("Nie wszystkie dane zostały wpisane. Wpisz wszystkie dane, aby dodać zleceniodawcę.", "Błąd");
+                MyMessageBox.Show("Nie wszystkie dane zostały wpisane. Wpisz wszystkie dane, aby dodać zleceniodawcę.", "Błąd");
                 return false;
             }
 
@@ -587,7 +587,7 @@ namespace DotBase
 
             if (false == _Zlecenie.DodajZleceniodawce(ref zleceniodawca))
             {
-                MessageBox.Show("Podany zleceniodawca już istnieje.", "Błąd");
+                MyMessageBox.Show("Podany zleceniodawca już istnieje.", "Błąd");
                 return false;
             }
 
@@ -665,7 +665,7 @@ namespace DotBase
             WydrukiMeldunek wydrukiMeldunek = new WydrukiMeldunek(model);
             if(!wydrukiMeldunek.generateDocument(path))
             {
-                MessageBox.Show("Sprawdź czy zlecenie zostało na pewno wykonane.", "Uwaga");
+                MyMessageBox.Show("Sprawdź czy zlecenie zostało na pewno wykonane.", "Uwaga");
             }
         }
 

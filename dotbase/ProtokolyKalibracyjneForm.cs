@@ -61,7 +61,7 @@ namespace DotBase
             else
             {
                 button2.Enabled = false;
-                MessageBox.Show("Brak danych dla danego id.");
+                MyMessageBox.Show("Brak danych dla danego id.");
             }
         }
 
@@ -81,7 +81,7 @@ namespace DotBase
             else
             {
                 button2.Enabled = false;
-                MessageBox.Show("Brak danych dla danej daty.");
+                MyMessageBox.Show("Brak danych dla danej daty.");
             }
 
         }
@@ -142,7 +142,7 @@ namespace DotBase
                                wiadomosc += "pozostałych wierszy danych. Powinien zawierać 4 kolumny. ";
                                wiadomosc += "Dane powinny znajdować się w arkuszu = Arkusz1.";
                                
-                        MessageBox.Show(wiadomosc, "Błąd");
+                        MyMessageBox.Show(wiadomosc, "Błąd");
                         return;
                     }
                     
@@ -184,7 +184,7 @@ namespace DotBase
         {
             if (false == SprawdzMozliwoscAktualizacjiLubDodania())
             {
-                MessageBox.Show("Dane nie są poprawne. Akcja nie zostanie podjęta.");
+                MyMessageBox.Show("Dane nie są poprawne. Akcja nie zostanie podjęta.");
                 return;
             }
 

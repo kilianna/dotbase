@@ -122,7 +122,7 @@ namespace DotBase
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Część danych została prawdopodobnie źle wpisana.", "Uwaga");
+                    MyMessageBox.Show("Część danych została prawdopodobnie źle wpisana.", "Uwaga");
                 }
             }
 
@@ -212,7 +212,7 @@ namespace DotBase
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Część danych została prawdopodobnie źle wpisana.", "Uwaga");
+                    MyMessageBox.Show("Część danych została prawdopodobnie źle wpisana.", "Uwaga");
                 }
             }
 
