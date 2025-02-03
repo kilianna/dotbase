@@ -212,6 +212,11 @@ function removeExceptions(diff: Diff): void {
     for (let group of diff) {
         for (let i = 0; i < group.length; i++) {
             let entry = group[i];
+            let prev1 = group[i - 1] as DiffEntry | undefined;
+            let prev2 = group[i - 2] as DiffEntry | undefined;
+            let prev3 = group[i - 3] as DiffEntry | undefined;
+            let prev4 = group[i - 4] as DiffEntry | undefined;
+            let prev5 = group[i - 5] as DiffEntry | undefined;
             let next1 = group[i + 1] as DiffEntry | undefined;
             let next2 = group[i + 2] as DiffEntry | undefined;
             let next3 = group[i + 3] as DiffEntry | undefined;
@@ -265,6 +270,17 @@ function removeExceptions(diff: Diff): void {
                 && entry.old.length === 1 && entry.old[0] === 'Uz'
                 && next1 === 'Izotop'
 
+            ) {
+                group[i] = entry.new[0];
+                continue;
+            }
+
+            // Dodanie H*(10)
+            if (typeof entry === 'object'
+                && entry.new.length === 1 && entry.new[0] === 'H*(10)'
+                && entry.old.length === 0
+                && typeof prev2 === 'string' && prev2.startsWith('równoważnik')
+                && prev1 === 'dawki'
             ) {
                 group[i] = entry.new[0];
                 continue;
