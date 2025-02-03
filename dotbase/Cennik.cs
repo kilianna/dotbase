@@ -74,8 +74,8 @@ namespace DotBase
         }
 
         //-------------------------------------------------------
-        public double LiczSume(int ileSk, 
-                               int ileMd, 
+        public double LiczSume(int ileMd,
+                               int ileSk,
                                int ileD, 
                                int ileSyg, 
                                bool RozszerzoneWzorcowanie,

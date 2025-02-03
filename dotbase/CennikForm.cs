@@ -103,8 +103,8 @@ namespace DotBase
                                              (int)numericUpDown2.Value,
                                              (int)numericUpDown3.Value,
                                              (int)numericUpDown4.Value,
-                                             wariantRozszerzonyBox.Checked,
-                                             wariantTrudnyBox.Checked,
+                                             wariantRozszerzonyBox.Checked && wariantRozszerzonyBox.Enabled,
+                                             wariantTrudnyBox.Checked && wariantTrudnyBox.Enabled,
                                              dawkaDlugaBox.Checked,
                                              skazeniaDlugieBox.Checked,
                                              checkBox2.Checked,
@@ -171,9 +171,10 @@ namespace DotBase
             var enabled = !zepsutyCheckBox.Checked && !sprawdzenieCheckBox.Checked;
 
             var jestMocDawki = (int)numericUpDown1.Value > 0;
-            wariantPodstawowyBox.Enabled = enabled && jestMocDawki;
             wariantRozszerzonyBox.Enabled = enabled && jestMocDawki;
             wariantTrudnyBox.Enabled = enabled && jestMocDawki;
+            wariantRozszerzonyBox.Checked = wariantRozszerzonyBox.Checked && wariantRozszerzonyBox.Enabled;
+            wariantTrudnyBox.Checked = wariantTrudnyBox.Checked && wariantTrudnyBox.Enabled;
 
             checkBox2.Enabled = enabled;
             sprawdzenieCheckBox.Enabled = enabled;

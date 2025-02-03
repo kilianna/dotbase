@@ -32,8 +32,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
@@ -51,12 +51,11 @@
             this.label9 = new System.Windows.Forms.Label();
             this.ostrzerzenieLabel = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.wariantTrudnyBox = new System.Windows.Forms.RadioButton();
-            this.wariantRozszerzonyBox = new System.Windows.Forms.RadioButton();
-            this.wariantPodstawowyBox = new System.Windows.Forms.RadioButton();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.skazeniaDlugieBox = new System.Windows.Forms.CheckBox();
             this.dawkaDlugaBox = new System.Windows.Forms.CheckBox();
+            this.wariantRozszerzonyBox = new System.Windows.Forms.CheckBox();
+            this.wariantTrudnyBox = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
@@ -81,9 +80,9 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.numericUpDown1);
             this.groupBox1.Location = new System.Drawing.Point(17, 16);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(217, 202);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
@@ -102,7 +101,7 @@
             // numericUpDown4
             // 
             this.numericUpDown4.Location = new System.Drawing.Point(111, 166);
-            this.numericUpDown4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown4.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown4.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -123,20 +122,6 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Dawka";
             // 
-            // numericUpDown3
-            // 
-            this.numericUpDown3.Location = new System.Drawing.Point(111, 121);
-            this.numericUpDown3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.numericUpDown3.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(67, 22);
-            this.numericUpDown3.TabIndex = 4;
-            this.numericUpDown3.ValueChanged += new System.EventHandler(this.LiczSume);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -148,10 +133,24 @@
             this.label2.Text = "Emisja\r\npowierzchniowa";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
+            // numericUpDown3
+            // 
+            this.numericUpDown3.Location = new System.Drawing.Point(111, 121);
+            this.numericUpDown3.Margin = new System.Windows.Forms.Padding(4);
+            this.numericUpDown3.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.Size = new System.Drawing.Size(67, 22);
+            this.numericUpDown3.TabIndex = 4;
+            this.numericUpDown3.ValueChanged += new System.EventHandler(this.LiczSume);
+            // 
             // numericUpDown2
             // 
             this.numericUpDown2.Location = new System.Drawing.Point(111, 75);
-            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -175,7 +174,7 @@
             // numericUpDown1
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(111, 30);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -199,7 +198,7 @@
             // numericUpDown8
             // 
             this.numericUpDown8.Location = new System.Drawing.Point(241, 23);
-            this.numericUpDown8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown8.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown8.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -213,7 +212,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(16, 516);
+            this.label6.Location = new System.Drawing.Point(17, 492);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(70, 17);
@@ -223,8 +222,8 @@
             // numericUpDown5
             // 
             this.numericUpDown5.DecimalPlaces = 2;
-            this.numericUpDown5.Location = new System.Drawing.Point(115, 513);
-            this.numericUpDown5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown5.Location = new System.Drawing.Point(116, 489);
+            this.numericUpDown5.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown5.Name = "numericUpDown5";
             this.numericUpDown5.Size = new System.Drawing.Size(92, 22);
             this.numericUpDown5.TabIndex = 4;
@@ -234,7 +233,7 @@
             // 
             this.checkBox2.AutoSize = true;
             this.checkBox2.Location = new System.Drawing.Point(8, 23);
-            this.checkBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBox2.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(81, 21);
             this.checkBox2.TabIndex = 6;
@@ -246,8 +245,8 @@
             // 
             this.textBox1.BackColor = System.Drawing.SystemColors.Window;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Location = new System.Drawing.Point(307, 533);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Location = new System.Drawing.Point(308, 509);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(111, 22);
             this.textBox1.TabIndex = 7;
@@ -257,7 +256,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label7.Location = new System.Drawing.Point(231, 534);
+            this.label7.Location = new System.Drawing.Point(232, 510);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(61, 20);
@@ -268,7 +267,7 @@
             // 
             this.sprawdzenieCheckBox.AutoSize = true;
             this.sprawdzenieCheckBox.Location = new System.Drawing.Point(8, 52);
-            this.sprawdzenieCheckBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.sprawdzenieCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.sprawdzenieCheckBox.Name = "sprawdzenieCheckBox";
             this.sprawdzenieCheckBox.Size = new System.Drawing.Size(111, 21);
             this.sprawdzenieCheckBox.TabIndex = 9;
@@ -280,7 +279,7 @@
             // 
             this.zepsutyCheckBox.AutoSize = true;
             this.zepsutyCheckBox.Location = new System.Drawing.Point(8, 80);
-            this.zepsutyCheckBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.zepsutyCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.zepsutyCheckBox.Name = "zepsutyCheckBox";
             this.zepsutyCheckBox.Size = new System.Drawing.Size(81, 21);
             this.zepsutyCheckBox.TabIndex = 10;
@@ -294,9 +293,9 @@
             this.groupBox2.Controls.Add(this.checkBox2);
             this.groupBox2.Controls.Add(this.sprawdzenieCheckBox);
             this.groupBox2.Location = new System.Drawing.Point(249, 16);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(171, 202);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
@@ -305,8 +304,8 @@
             // numericUpDown6
             // 
             this.numericUpDown6.DecimalPlaces = 2;
-            this.numericUpDown6.Location = new System.Drawing.Point(115, 554);
-            this.numericUpDown6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown6.Location = new System.Drawing.Point(116, 530);
+            this.numericUpDown6.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown6.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -320,7 +319,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(16, 556);
+            this.label9.Location = new System.Drawing.Point(17, 532);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(70, 17);
@@ -331,7 +330,7 @@
             // 
             this.ostrzerzenieLabel.AutoSize = true;
             this.ostrzerzenieLabel.ForeColor = System.Drawing.Color.Red;
-            this.ostrzerzenieLabel.Location = new System.Drawing.Point(145, 54);
+            this.ostrzerzenieLabel.Location = new System.Drawing.Point(141, 23);
             this.ostrzerzenieLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ostrzerzenieLabel.Name = "ostrzerzenieLabel";
             this.ostrzerzenieLabel.Size = new System.Drawing.Size(210, 34);
@@ -344,53 +343,14 @@
             this.groupBox3.Controls.Add(this.wariantTrudnyBox);
             this.groupBox3.Controls.Add(this.wariantRozszerzonyBox);
             this.groupBox3.Controls.Add(this.ostrzerzenieLabel);
-            this.groupBox3.Controls.Add(this.wariantPodstawowyBox);
             this.groupBox3.Location = new System.Drawing.Point(17, 238);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox3.Size = new System.Drawing.Size(403, 113);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox3.Size = new System.Drawing.Size(403, 84);
             this.groupBox3.TabIndex = 15;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Wariant wzorcowania mocy dawki";
-            // 
-            // wariantTrudnyBox
-            // 
-            this.wariantTrudnyBox.AutoSize = true;
-            this.wariantTrudnyBox.Location = new System.Drawing.Point(8, 80);
-            this.wariantTrudnyBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.wariantTrudnyBox.Name = "wariantTrudnyBox";
-            this.wariantTrudnyBox.Size = new System.Drawing.Size(74, 21);
-            this.wariantTrudnyBox.TabIndex = 2;
-            this.wariantTrudnyBox.Text = "Trudny";
-            this.wariantTrudnyBox.UseVisualStyleBackColor = true;
-            this.wariantTrudnyBox.CheckedChanged += new System.EventHandler(this.LiczSume);
-            // 
-            // wariantRozszerzonyBox
-            // 
-            this.wariantRozszerzonyBox.AutoSize = true;
-            this.wariantRozszerzonyBox.Location = new System.Drawing.Point(8, 52);
-            this.wariantRozszerzonyBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.wariantRozszerzonyBox.Name = "wariantRozszerzonyBox";
-            this.wariantRozszerzonyBox.Size = new System.Drawing.Size(111, 21);
-            this.wariantRozszerzonyBox.TabIndex = 1;
-            this.wariantRozszerzonyBox.Text = "Rozszerzony";
-            this.wariantRozszerzonyBox.UseVisualStyleBackColor = true;
-            this.wariantRozszerzonyBox.CheckedChanged += new System.EventHandler(this.LiczSume);
-            // 
-            // wariantPodstawowyBox
-            // 
-            this.wariantPodstawowyBox.AutoSize = true;
-            this.wariantPodstawowyBox.Checked = true;
-            this.wariantPodstawowyBox.Location = new System.Drawing.Point(8, 23);
-            this.wariantPodstawowyBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.wariantPodstawowyBox.Name = "wariantPodstawowyBox";
-            this.wariantPodstawowyBox.Size = new System.Drawing.Size(106, 21);
-            this.wariantPodstawowyBox.TabIndex = 0;
-            this.wariantPodstawowyBox.TabStop = true;
-            this.wariantPodstawowyBox.Text = "Podstawowy";
-            this.wariantPodstawowyBox.UseVisualStyleBackColor = true;
-            this.wariantPodstawowyBox.CheckedChanged += new System.EventHandler(this.LiczSume);
             // 
             // groupBox4
             // 
@@ -398,10 +358,10 @@
             this.groupBox4.Controls.Add(this.dawkaDlugaBox);
             this.groupBox4.Controls.Add(this.numericUpDown8);
             this.groupBox4.Controls.Add(this.label8);
-            this.groupBox4.Location = new System.Drawing.Point(16, 370);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox4.Location = new System.Drawing.Point(17, 346);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox4.Size = new System.Drawing.Size(404, 117);
             this.groupBox4.TabIndex = 16;
             this.groupBox4.TabStop = false;
@@ -411,7 +371,7 @@
             // 
             this.skazeniaDlugieBox.AutoSize = true;
             this.skazeniaDlugieBox.Location = new System.Drawing.Point(8, 84);
-            this.skazeniaDlugieBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.skazeniaDlugieBox.Margin = new System.Windows.Forms.Padding(4);
             this.skazeniaDlugieBox.Name = "skazeniaDlugieBox";
             this.skazeniaDlugieBox.Size = new System.Drawing.Size(130, 21);
             this.skazeniaDlugieBox.TabIndex = 12;
@@ -423,7 +383,7 @@
             // 
             this.dawkaDlugaBox.AutoSize = true;
             this.dawkaDlugaBox.Location = new System.Drawing.Point(8, 55);
-            this.dawkaDlugaBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dawkaDlugaBox.Margin = new System.Windows.Forms.Padding(4);
             this.dawkaDlugaBox.Name = "dawkaDlugaBox";
             this.dawkaDlugaBox.Size = new System.Drawing.Size(111, 21);
             this.dawkaDlugaBox.TabIndex = 11;
@@ -431,11 +391,33 @@
             this.dawkaDlugaBox.UseVisualStyleBackColor = true;
             this.dawkaDlugaBox.CheckedChanged += new System.EventHandler(this.LiczSume);
             // 
+            // wariantRozszerzonyBox
+            // 
+            this.wariantRozszerzonyBox.AutoSize = true;
+            this.wariantRozszerzonyBox.Location = new System.Drawing.Point(7, 22);
+            this.wariantRozszerzonyBox.Name = "wariantRozszerzonyBox";
+            this.wariantRozszerzonyBox.Size = new System.Drawing.Size(112, 21);
+            this.wariantRozszerzonyBox.TabIndex = 15;
+            this.wariantRozszerzonyBox.Text = "Rozszerzony";
+            this.wariantRozszerzonyBox.UseVisualStyleBackColor = true;
+            this.wariantRozszerzonyBox.CheckedChanged += new System.EventHandler(this.LiczSume);
+            // 
+            // wariantTrudnyBox
+            // 
+            this.wariantTrudnyBox.AutoSize = true;
+            this.wariantTrudnyBox.Location = new System.Drawing.Point(7, 49);
+            this.wariantTrudnyBox.Name = "wariantTrudnyBox";
+            this.wariantTrudnyBox.Size = new System.Drawing.Size(75, 21);
+            this.wariantTrudnyBox.TabIndex = 16;
+            this.wariantTrudnyBox.Text = "Trudny";
+            this.wariantTrudnyBox.UseVisualStyleBackColor = true;
+            this.wariantTrudnyBox.CheckedChanged += new System.EventHandler(this.LiczSume);
+            // 
             // CennikForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(440, 596);
+            this.ClientSize = new System.Drawing.Size(440, 569);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.numericUpDown6);
@@ -446,7 +428,7 @@
             this.Controls.Add(this.numericUpDown5);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CennikForm";
             this.Text = "Cennik";
             this.Load += new System.EventHandler(this.CennikForm_Load);
@@ -495,11 +477,10 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label ostrzerzenieLabel;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.RadioButton wariantTrudnyBox;
-        private System.Windows.Forms.RadioButton wariantRozszerzonyBox;
-        private System.Windows.Forms.RadioButton wariantPodstawowyBox;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.CheckBox skazeniaDlugieBox;
         private System.Windows.Forms.CheckBox dawkaDlugaBox;
+        private System.Windows.Forms.CheckBox wariantTrudnyBox;
+        private System.Windows.Forms.CheckBox wariantRozszerzonyBox;
     }
 }
