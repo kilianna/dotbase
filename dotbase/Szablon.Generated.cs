@@ -16,7 +16,9 @@ namespace DotBase
             public Szablon_Atesty_zrodel WHERE() { _WHERE(); return this; }
             public Szablon_Atesty_zrodel INFO(string text) { _INFO(text); return this; }
             public Szablon_Atesty_zrodel SELECT() { _SELECT(); return this; }
-            public Row_Atesty_zrodel[] GET() { return Row_Atesty_zrodel._GET(_GET()); }
+            public Row_Atesty_zrodel[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Atesty_zrodel._GET(_GET(min, max, allowException)); }
+            public Row_Atesty_zrodel GET_ONE() { return Row_Atesty_zrodel._GET(_GET(1, 1))[0]; }
+            public Row_Atesty_zrodel GET_OPTIONAL() { var r = Row_Atesty_zrodel._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Atesty_zrodel Data_wzorcowania(DateTime value)
             {
                 SetField("Data_wzorcowania", value, OleDbType.Date);
@@ -115,7 +117,9 @@ namespace DotBase
             public Szablon_Błędy_wklejania WHERE() { _WHERE(); return this; }
             public Szablon_Błędy_wklejania INFO(string text) { _INFO(text); return this; }
             public Szablon_Błędy_wklejania SELECT() { _SELECT(); return this; }
-            public Row_Błędy_wklejania[] GET() { return Row_Błędy_wklejania._GET(_GET()); }
+            public Row_Błędy_wklejania[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Błędy_wklejania._GET(_GET(min, max, allowException)); }
+            public Row_Błędy_wklejania GET_ONE() { return Row_Błędy_wklejania._GET(_GET(1, 1))[0]; }
+            public Row_Błędy_wklejania GET_OPTIONAL() { var r = Row_Błędy_wklejania._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Błędy_wklejania Pole0(string value)
             {
                 SetField("Pole0", value, OleDbType.WChar);
@@ -162,7 +166,9 @@ namespace DotBase
             public Szablon_Budzetniepewnosci WHERE() { _WHERE(); return this; }
             public Szablon_Budzetniepewnosci INFO(string text) { _INFO(text); return this; }
             public Szablon_Budzetniepewnosci SELECT() { _SELECT(); return this; }
-            public Row_Budzetniepewnosci[] GET() { return Row_Budzetniepewnosci._GET(_GET()); }
+            public Row_Budzetniepewnosci[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Budzetniepewnosci._GET(_GET(min, max, allowException)); }
+            public Row_Budzetniepewnosci GET_ONE() { return Row_Budzetniepewnosci._GET(_GET(1, 1))[0]; }
+            public Row_Budzetniepewnosci GET_OPTIONAL() { var r = Row_Budzetniepewnosci._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Budzetniepewnosci Uwagi(string value)
             {
                 SetField("Uwagi", value, OleDbType.WChar);
@@ -235,7 +241,9 @@ namespace DotBase
             public Szablon_Cennik WHERE() { _WHERE(); return this; }
             public Szablon_Cennik INFO(string text) { _INFO(text); return this; }
             public Szablon_Cennik SELECT() { _SELECT(); return this; }
-            public Row_Cennik[] GET() { return Row_Cennik._GET(_GET()); }
+            public Row_Cennik[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Cennik._GET(_GET(min, max, allowException)); }
+            public Row_Cennik GET_ONE() { return Row_Cennik._GET(_GET(1, 1))[0]; }
+            public Row_Cennik GET_OPTIONAL() { var r = Row_Cennik._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Cennik Cena(double value)
             {
                 SetField("Cena", value, OleDbType.Double);
@@ -295,7 +303,9 @@ namespace DotBase
             public Szablon_Dozymetry WHERE() { _WHERE(); return this; }
             public Szablon_Dozymetry INFO(string text) { _INFO(text); return this; }
             public Szablon_Dozymetry SELECT() { _SELECT(); return this; }
-            public Row_Dozymetry[] GET() { return Row_Dozymetry._GET(_GET()); }
+            public Row_Dozymetry[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Dozymetry._GET(_GET(min, max, allowException)); }
+            public Row_Dozymetry GET_ONE() { return Row_Dozymetry._GET(_GET(1, 1))[0]; }
+            public Row_Dozymetry GET_OPTIONAL() { var r = Row_Dozymetry._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Dozymetry ID_dozymetru(int value)
             {
                 SetField("ID_dozymetru", value, OleDbType.Integer);
@@ -407,7 +417,9 @@ namespace DotBase
             public Szablon_Hasla WHERE() { _WHERE(); return this; }
             public Szablon_Hasla INFO(string text) { _INFO(text); return this; }
             public Szablon_Hasla SELECT() { _SELECT(); return this; }
-            public Row_Hasla[] GET() { return Row_Hasla._GET(_GET()); }
+            public Row_Hasla[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Hasla._GET(_GET(min, max, allowException)); }
+            public Row_Hasla GET_ONE() { return Row_Hasla._GET(_GET(1, 1))[0]; }
+            public Row_Hasla GET_OPTIONAL() { var r = Row_Hasla._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Hasla Haslo(string value)
             {
                 SetField("Haslo", value, OleDbType.WChar);
@@ -467,7 +479,9 @@ namespace DotBase
             public Szablon_Jednostki WHERE() { _WHERE(); return this; }
             public Szablon_Jednostki INFO(string text) { _INFO(text); return this; }
             public Szablon_Jednostki SELECT() { _SELECT(); return this; }
-            public Row_Jednostki[] GET() { return Row_Jednostki._GET(_GET()); }
+            public Row_Jednostki[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Jednostki._GET(_GET(min, max, allowException)); }
+            public Row_Jednostki GET_ONE() { return Row_Jednostki._GET(_GET(1, 1))[0]; }
+            public Row_Jednostki GET_OPTIONAL() { var r = Row_Jednostki._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Jednostki ID_jednostki(int value)
             {
                 SetField("ID_jednostki", value, OleDbType.Integer);
@@ -566,7 +580,9 @@ namespace DotBase
             public Szablon_Karta_przyjecia WHERE() { _WHERE(); return this; }
             public Szablon_Karta_przyjecia INFO(string text) { _INFO(text); return this; }
             public Szablon_Karta_przyjecia SELECT() { _SELECT(); return this; }
-            public Row_Karta_przyjecia[] GET() { return Row_Karta_przyjecia._GET(_GET()); }
+            public Row_Karta_przyjecia[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Karta_przyjecia._GET(_GET(min, max, allowException)); }
+            public Row_Karta_przyjecia GET_ONE() { return Row_Karta_przyjecia._GET(_GET(1, 1))[0]; }
+            public Row_Karta_przyjecia GET_OPTIONAL() { var r = Row_Karta_przyjecia._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Karta_przyjecia Akcesoria(string value)
             {
                 SetField("Akcesoria", value, OleDbType.WChar);
@@ -925,7 +941,9 @@ namespace DotBase
             public Szablon_Pomiary_cez WHERE() { _WHERE(); return this; }
             public Szablon_Pomiary_cez INFO(string text) { _INFO(text); return this; }
             public Szablon_Pomiary_cez SELECT() { _SELECT(); return this; }
-            public Row_Pomiary_cez[] GET() { return Row_Pomiary_cez._GET(_GET()); }
+            public Row_Pomiary_cez[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Pomiary_cez._GET(_GET(min, max, allowException)); }
+            public Row_Pomiary_cez GET_ONE() { return Row_Pomiary_cez._GET(_GET(1, 1))[0]; }
+            public Row_Pomiary_cez GET_OPTIONAL() { var r = Row_Pomiary_cez._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Pomiary_cez Dolaczyc(bool value)
             {
                 SetField("Dolaczyc", value, OleDbType.Boolean);
@@ -1050,7 +1068,9 @@ namespace DotBase
             public Szablon_Pomiary_dawka WHERE() { _WHERE(); return this; }
             public Szablon_Pomiary_dawka INFO(string text) { _INFO(text); return this; }
             public Szablon_Pomiary_dawka SELECT() { _SELECT(); return this; }
-            public Row_Pomiary_dawka[] GET() { return Row_Pomiary_dawka._GET(_GET()); }
+            public Row_Pomiary_dawka[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Pomiary_dawka._GET(_GET(min, max, allowException)); }
+            public Row_Pomiary_dawka GET_ONE() { return Row_Pomiary_dawka._GET(_GET(1, 1))[0]; }
+            public Row_Pomiary_dawka GET_OPTIONAL() { var r = Row_Pomiary_dawka._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Pomiary_dawka Czas(double value)
             {
                 SetField("Czas", value, OleDbType.Double);
@@ -1149,7 +1169,9 @@ namespace DotBase
             public Szablon_Pomiary_powierzchniowe WHERE() { _WHERE(); return this; }
             public Szablon_Pomiary_powierzchniowe INFO(string text) { _INFO(text); return this; }
             public Szablon_Pomiary_powierzchniowe SELECT() { _SELECT(); return this; }
-            public Row_Pomiary_powierzchniowe[] GET() { return Row_Pomiary_powierzchniowe._GET(_GET()); }
+            public Row_Pomiary_powierzchniowe[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Pomiary_powierzchniowe._GET(_GET(min, max, allowException)); }
+            public Row_Pomiary_powierzchniowe GET_ONE() { return Row_Pomiary_powierzchniowe._GET(_GET(1, 1))[0]; }
+            public Row_Pomiary_powierzchniowe GET_OPTIONAL() { var r = Row_Pomiary_powierzchniowe._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Pomiary_powierzchniowe ID_pomiaru(int value)
             {
                 SetField("ID_pomiaru", value, OleDbType.Integer);
@@ -1235,7 +1257,9 @@ namespace DotBase
             public Szablon_Pomiary_wzorcowe WHERE() { _WHERE(); return this; }
             public Szablon_Pomiary_wzorcowe INFO(string text) { _INFO(text); return this; }
             public Szablon_Pomiary_wzorcowe SELECT() { _SELECT(); return this; }
-            public Row_Pomiary_wzorcowe[] GET() { return Row_Pomiary_wzorcowe._GET(_GET()); }
+            public Row_Pomiary_wzorcowe[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Pomiary_wzorcowe._GET(_GET(min, max, allowException)); }
+            public Row_Pomiary_wzorcowe GET_ONE() { return Row_Pomiary_wzorcowe._GET(_GET(1, 1))[0]; }
+            public Row_Pomiary_wzorcowe GET_OPTIONAL() { var r = Row_Pomiary_wzorcowe._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Pomiary_wzorcowe ID_protokolu(short value)
             {
                 SetField("ID_protokolu", value, OleDbType.SmallInt);
@@ -1334,7 +1358,9 @@ namespace DotBase
             public Szablon_Protokoly_kalibracji_lawy WHERE() { _WHERE(); return this; }
             public Szablon_Protokoly_kalibracji_lawy INFO(string text) { _INFO(text); return this; }
             public Szablon_Protokoly_kalibracji_lawy SELECT() { _SELECT(); return this; }
-            public Row_Protokoly_kalibracji_lawy[] GET() { return Row_Protokoly_kalibracji_lawy._GET(_GET()); }
+            public Row_Protokoly_kalibracji_lawy[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Protokoly_kalibracji_lawy._GET(_GET(min, max, allowException)); }
+            public Row_Protokoly_kalibracji_lawy GET_ONE() { return Row_Protokoly_kalibracji_lawy._GET(_GET(1, 1))[0]; }
+            public Row_Protokoly_kalibracji_lawy GET_OPTIONAL() { var r = Row_Protokoly_kalibracji_lawy._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Protokoly_kalibracji_lawy Data_kalibracji(DateTime value)
             {
                 SetField("Data_kalibracji", value, OleDbType.Date);
@@ -1407,7 +1433,9 @@ namespace DotBase
             public Szablon_Slownik WHERE() { _WHERE(); return this; }
             public Szablon_Slownik INFO(string text) { _INFO(text); return this; }
             public Szablon_Slownik SELECT() { _SELECT(); return this; }
-            public Row_Slownik[] GET() { return Row_Slownik._GET(_GET()); }
+            public Row_Slownik[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Slownik._GET(_GET(min, max, allowException)); }
+            public Row_Slownik GET_ONE() { return Row_Slownik._GET(_GET(1, 1))[0]; }
+            public Row_Slownik GET_OPTIONAL() { var r = Row_Slownik._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Slownik EN(string value)
             {
                 SetField("EN", value, OleDbType.WChar);
@@ -1467,7 +1495,9 @@ namespace DotBase
             public Szablon_Sondy WHERE() { _WHERE(); return this; }
             public Szablon_Sondy INFO(string text) { _INFO(text); return this; }
             public Szablon_Sondy SELECT() { _SELECT(); return this; }
-            public Row_Sondy[] GET() { return Row_Sondy._GET(_GET()); }
+            public Row_Sondy[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Sondy._GET(_GET(min, max, allowException)); }
+            public Row_Sondy GET_ONE() { return Row_Sondy._GET(_GET(1, 1))[0]; }
+            public Row_Sondy GET_OPTIONAL() { var r = Row_Sondy._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Sondy ID_dozymetru(int value)
             {
                 SetField("ID_dozymetru", value, OleDbType.Integer);
@@ -1553,7 +1583,9 @@ namespace DotBase
             public Szablon_Stale WHERE() { _WHERE(); return this; }
             public Szablon_Stale INFO(string text) { _INFO(text); return this; }
             public Szablon_Stale SELECT() { _SELECT(); return this; }
-            public Row_Stale[] GET() { return Row_Stale._GET(_GET()); }
+            public Row_Stale[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Stale._GET(_GET(min, max, allowException)); }
+            public Row_Stale GET_ONE() { return Row_Stale._GET(_GET(1, 1))[0]; }
+            public Row_Stale GET_OPTIONAL() { var r = Row_Stale._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Stale Nazwa(string value)
             {
                 SetField("Nazwa", value, OleDbType.WChar);
@@ -1626,7 +1658,9 @@ namespace DotBase
             public Szablon_Swiadectwo WHERE() { _WHERE(); return this; }
             public Szablon_Swiadectwo INFO(string text) { _INFO(text); return this; }
             public Szablon_Swiadectwo SELECT() { _SELECT(); return this; }
-            public Row_Swiadectwo[] GET() { return Row_Swiadectwo._GET(_GET()); }
+            public Row_Swiadectwo[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Swiadectwo._GET(_GET(min, max, allowException)); }
+            public Row_Swiadectwo GET_ONE() { return Row_Swiadectwo._GET(_GET(1, 1))[0]; }
+            public Row_Swiadectwo GET_OPTIONAL() { var r = Row_Swiadectwo._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Swiadectwo Autoryzowal(string value)
             {
                 SetField("Autoryzowal", value, OleDbType.WChar);
@@ -1816,7 +1850,9 @@ namespace DotBase
             public Szablon_Sygnalizacja WHERE() { _WHERE(); return this; }
             public Szablon_Sygnalizacja INFO(string text) { _INFO(text); return this; }
             public Szablon_Sygnalizacja SELECT() { _SELECT(); return this; }
-            public Row_Sygnalizacja[] GET() { return Row_Sygnalizacja._GET(_GET()); }
+            public Row_Sygnalizacja[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Sygnalizacja._GET(_GET(min, max, allowException)); }
+            public Row_Sygnalizacja GET_ONE() { return Row_Sygnalizacja._GET(_GET(1, 1))[0]; }
+            public Row_Sygnalizacja GET_OPTIONAL() { var r = Row_Sygnalizacja._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Sygnalizacja ID_wzorcowania(int value)
             {
                 SetField("ID_wzorcowania", value, OleDbType.Integer);
@@ -1993,7 +2029,9 @@ namespace DotBase
             public Szablon_Sygnalizacja_dawka WHERE() { _WHERE(); return this; }
             public Szablon_Sygnalizacja_dawka INFO(string text) { _INFO(text); return this; }
             public Szablon_Sygnalizacja_dawka SELECT() { _SELECT(); return this; }
-            public Row_Sygnalizacja_dawka[] GET() { return Row_Sygnalizacja_dawka._GET(_GET()); }
+            public Row_Sygnalizacja_dawka[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Sygnalizacja_dawka._GET(_GET(min, max, allowException)); }
+            public Row_Sygnalizacja_dawka GET_ONE() { return Row_Sygnalizacja_dawka._GET(_GET(1, 1))[0]; }
+            public Row_Sygnalizacja_dawka GET_OPTIONAL() { var r = Row_Sygnalizacja_dawka._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Sygnalizacja_dawka Czas_zmierzony(double value)
             {
                 SetField("Czas_zmierzony", value, OleDbType.Double);
@@ -2157,7 +2195,9 @@ namespace DotBase
             public Szablon_Wyniki_dawka WHERE() { _WHERE(); return this; }
             public Szablon_Wyniki_dawka INFO(string text) { _INFO(text); return this; }
             public Szablon_Wyniki_dawka SELECT() { _SELECT(); return this; }
-            public Row_Wyniki_dawka[] GET() { return Row_Wyniki_dawka._GET(_GET()); }
+            public Row_Wyniki_dawka[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Wyniki_dawka._GET(_GET(min, max, allowException)); }
+            public Row_Wyniki_dawka GET_ONE() { return Row_Wyniki_dawka._GET(_GET(1, 1))[0]; }
+            public Row_Wyniki_dawka GET_OPTIONAL() { var r = Row_Wyniki_dawka._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Wyniki_dawka ID_wzorcowania(int value)
             {
                 SetField("ID_wzorcowania", value, OleDbType.Integer);
@@ -2282,7 +2322,9 @@ namespace DotBase
             public Szablon_wyniki_moc_dawki WHERE() { _WHERE(); return this; }
             public Szablon_wyniki_moc_dawki INFO(string text) { _INFO(text); return this; }
             public Szablon_wyniki_moc_dawki SELECT() { _SELECT(); return this; }
-            public Row_wyniki_moc_dawki[] GET() { return Row_wyniki_moc_dawki._GET(_GET()); }
+            public Row_wyniki_moc_dawki[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_wyniki_moc_dawki._GET(_GET(min, max, allowException)); }
+            public Row_wyniki_moc_dawki GET_ONE() { return Row_wyniki_moc_dawki._GET(_GET(1, 1))[0]; }
+            public Row_wyniki_moc_dawki GET_OPTIONAL() { var r = Row_wyniki_moc_dawki._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_wyniki_moc_dawki ID_wzorcowania(int value)
             {
                 SetField("ID_wzorcowania", value, OleDbType.Integer);
@@ -2368,7 +2410,9 @@ namespace DotBase
             public Szablon_wzorcowanie_cezem WHERE() { _WHERE(); return this; }
             public Szablon_wzorcowanie_cezem INFO(string text) { _INFO(text); return this; }
             public Szablon_wzorcowanie_cezem SELECT() { _SELECT(); return this; }
-            public Row_wzorcowanie_cezem[] GET() { return Row_wzorcowanie_cezem._GET(_GET()); }
+            public Row_wzorcowanie_cezem[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_wzorcowanie_cezem._GET(_GET(min, max, allowException)); }
+            public Row_wzorcowanie_cezem GET_ONE() { return Row_wzorcowanie_cezem._GET(_GET(1, 1))[0]; }
+            public Row_wzorcowanie_cezem GET_OPTIONAL() { var r = Row_wzorcowanie_cezem._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_wzorcowanie_cezem Cisnienie(double value)
             {
                 SetField("Cisnienie", value, OleDbType.Double);
@@ -2649,7 +2693,9 @@ namespace DotBase
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi WHERE() { _WHERE(); return this; }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi INFO(string text) { _INFO(text); return this; }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi SELECT() { _SELECT(); return this; }
-            public Row_Wzorcowanie_zrodlami_powierzchniowymi[] GET() { return Row_Wzorcowanie_zrodlami_powierzchniowymi._GET(_GET()); }
+            public Row_Wzorcowanie_zrodlami_powierzchniowymi[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Wzorcowanie_zrodlami_powierzchniowymi._GET(_GET(min, max, allowException)); }
+            public Row_Wzorcowanie_zrodlami_powierzchniowymi GET_ONE() { return Row_Wzorcowanie_zrodlami_powierzchniowymi._GET(_GET(1, 1))[0]; }
+            public Row_Wzorcowanie_zrodlami_powierzchniowymi GET_OPTIONAL() { var r = Row_Wzorcowanie_zrodlami_powierzchniowymi._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Cisnienie(double value)
             {
                 SetField("Cisnienie", value, OleDbType.Double);
@@ -2982,7 +3028,9 @@ namespace DotBase
             public Szablon_Zlecenia WHERE() { _WHERE(); return this; }
             public Szablon_Zlecenia INFO(string text) { _INFO(text); return this; }
             public Szablon_Zlecenia SELECT() { _SELECT(); return this; }
-            public Row_Zlecenia[] GET() { return Row_Zlecenia._GET(_GET()); }
+            public Row_Zlecenia[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Zlecenia._GET(_GET(min, max, allowException)); }
+            public Row_Zlecenia GET_ONE() { return Row_Zlecenia._GET(_GET(1, 1))[0]; }
+            public Row_Zlecenia GET_OPTIONAL() { var r = Row_Zlecenia._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Zlecenia Adres_platnika(string value)
             {
                 SetField("Adres_platnika", value, OleDbType.WChar);
@@ -3198,7 +3246,9 @@ namespace DotBase
             public Szablon_Zleceniodawca WHERE() { _WHERE(); return this; }
             public Szablon_Zleceniodawca INFO(string text) { _INFO(text); return this; }
             public Szablon_Zleceniodawca SELECT() { _SELECT(); return this; }
-            public Row_Zleceniodawca[] GET() { return Row_Zleceniodawca._GET(_GET()); }
+            public Row_Zleceniodawca[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Zleceniodawca._GET(_GET(min, max, allowException)); }
+            public Row_Zleceniodawca GET_ONE() { return Row_Zleceniodawca._GET(_GET(1, 1))[0]; }
+            public Row_Zleceniodawca GET_OPTIONAL() { var r = Row_Zleceniodawca._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Zleceniodawca Adres(string value)
             {
                 SetField("Adres", value, OleDbType.WChar);
@@ -3375,7 +3425,9 @@ namespace DotBase
             public Szablon_zrodla_powierzchniowe WHERE() { _WHERE(); return this; }
             public Szablon_zrodla_powierzchniowe INFO(string text) { _INFO(text); return this; }
             public Szablon_zrodla_powierzchniowe SELECT() { _SELECT(); return this; }
-            public Row_zrodla_powierzchniowe[] GET() { return Row_zrodla_powierzchniowe._GET(_GET()); }
+            public Row_zrodla_powierzchniowe[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_zrodla_powierzchniowe._GET(_GET(min, max, allowException)); }
+            public Row_zrodla_powierzchniowe GET_ONE() { return Row_zrodla_powierzchniowe._GET(_GET(1, 1))[0]; }
+            public Row_zrodla_powierzchniowe GET_OPTIONAL() { var r = Row_zrodla_powierzchniowe._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_zrodla_powierzchniowe Czas_polowicznego_rozpadu(float value)
             {
                 SetField("Czas_polowicznego_rozpadu", value, OleDbType.Single);
