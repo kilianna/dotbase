@@ -1,0 +1,20 @@
+{
+  "name": "docx-compare",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jsdom": "^24.1.0",
+    "tsx": "^4.11.0",
+    "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^21.1.7"
+  }
+}
