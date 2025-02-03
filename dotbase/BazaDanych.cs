@@ -684,16 +684,60 @@ namespace DotBase
 
 #if DEBUG
 
+        private static string F(int addIndent, params object[] args)
+        {
+            var result = new StringBuilder();
+            var addIndentStr = new String(' ', 4 * addIndent);    
+            string format = args[args.Length - 1] as string;
+            args = args.Take(args.Length - 1).ToArray();
+            var lines = format.Split('\n');
+            if (lines.Length == 1)
+            {
+                result.Append(addIndentStr);
+                result.AppendLine(lines[0].Trim());
+                return String.Format(result.ToString(), args);
+            }
+            if (lines.Length <= 1 || lines[0].Trim() != "")
+            {
+                throw new ApplicationException("First line must be empty.");
+            }
+            lines = lines.Skip(1).ToArray();
+            var minIndent = 999999999;
+            foreach (var line in lines)
+            {
+                if (line.Trim() == "") continue;
+                var indent = line.Length - line.TrimStart().Length;
+                minIndent = Math.Min(minIndent, indent);
+            }        
+            foreach (var lineRaw in lines)
+            {
+                if (lineRaw.Trim() == "")
+                {
+                    result.AppendLine();
+                }
+                else
+                {
+                    var line = lineRaw.TrimEnd('\r').Substring(minIndent);
+                    result.Append(addIndentStr);
+                    result.AppendLine(line);
+                }
+            }
+            return String.Format(result.ToString(), args);
+        }
+
         static internal void TworzSzablon()
         {
             string tabele = "";
-            string szablon = @"using System;
-using System.Data.OleDb;
+            string szablon = F(0, @"
+                using System;
+                using System.Data;
+                using System.Data.OleDb;
+                using System.Collections.Generic;
 
-namespace DotBase
-{
-    partial class Szablon
-    {";
+                namespace DotBase
+                {{
+                    partial class Szablon
+                    {{");
             DataTable table = manager.connection.GetSchema("tables");
             foreach (DataRow row in table.Rows)
             {
@@ -701,53 +745,82 @@ namespace DotBase
                 string typTabeli = row.Field<string>("TABLE_TYPE");
                 if (tabela.StartsWith("~") || tabela.StartsWith("MSys") || typTabeli != "TABLE") continue;
                 string tabelaId = tabela.Replace(' ', '_');
-                szablon += String.Format(@"
-        public class Szablon_{0} : Tabela
-        {{
-            public Szablon_{0}(BazaDanychWrapper baza, string nazwa) : base(baza, nazwa) {{ }}
-            public Szablon_{0} UPDATE() {{ _UPDATE(); return this; }}
-            public Szablon_{0} INSERT() {{ _INSERT(); return this; }}
-            public Szablon_{0} DELETE() {{ _DELETE(); return this; }}
-            public Szablon_{0} WHERE() {{ _WHERE(); return this; }}
-            public Szablon_{0} INFO(string text) {{ _INFO(text); return this; }}"
-            /*public Szablon_{0} SELECT() {{ _SELECT(); return this; }}" - jeżeli potrzeba SELECT */, tabelaId);
-                tabele += String.Format(@"
-        public Szablon.Szablon_{0} {0} {{ get {{ return new Szablon.Szablon_{0}(this, ""{1}""); }} }}", tabelaId, tabela);
+                szablon += F(2, tabelaId, @"
+                    public class Szablon_{0} : Tabela
+                    {{
+                        public Szablon_{0}(BazaDanychWrapper baza, string nazwa) : base(baza, nazwa) {{ }}
+                        public Szablon_{0} UPDATE() {{ _UPDATE(); return this; }}
+                        public Szablon_{0} INSERT() {{ _INSERT(); return this; }}
+                        public Szablon_{0} DELETE() {{ _DELETE(); return this; }}
+                        public Szablon_{0} WHERE() {{ _WHERE(); return this; }}
+                        public Szablon_{0} INFO(string text) {{ _INFO(text); return this; }}
+                        public Szablon_{0} SELECT() {{ _SELECT(); return this; }}
+                        public Row_{0}[] GET() {{ return Row_{0}._GET(_GET()); }}");
+                tabele += F(2, tabelaId, tabela, @"
+                        public Szablon.Szablon_{0} {0} {{ get {{ return new Szablon.Szablon_{0}(this, ""{1}""); }} }}");
+                var wiersz = F(2, tabelaId, @"
+                    public class Row_{0} : Wiersz
+                    {{");
+                var wierszConstr = "";
                 DataTable schemaTable = manager.connection.GetOleDbSchemaTable(System.Data.OleDb.OleDbSchemaGuid.Columns, new object[] { null, null, tabela, null });
                 foreach (DataRow col in schemaTable.Rows)
                 {
                     int oleDbTypeNumber = col.Field<int>(11);
                     OleDbType oleDbType = (OleDbType)oleDbTypeNumber;
                     string colName = col.Field<string>(3);
-
-                    szablon += String.Format(@"
-            public Szablon_{0} {1}({2} value)
-            {{
-                SetField(""{1}"", value, OleDbType.{3});
-                return this;
-            }}"
-            /*public Szablon_{0} {1}(Tabela subquery) // Jeżeli będzie potrzeba obsłużyć podzapytania
-            {{
-                SetFieldSubquery(""{1}"", subquery);
-                return this;
-            }}
-            public Szablon_{0} {1}() // Jeżeli będzie potrzeba obsłużyć SELECT
-            {{
-                AddField(""{1}"");
-                return this;
-            }}"*/, tabelaId, colName, oleDbToNetTypeConverter(oleDbTypeNumber), oleDbType.ToString());
+                    szablon += F(3, tabelaId, colName, oleDbToNetTypeConverter(oleDbTypeNumber), oleDbType.ToString(), @"
+                        public Szablon_{0} {1}({2} value)
+                        {{
+                            SetField(""{1}"", value, OleDbType.{3});
+                            return this;
+                        }}
+                        public Szablon_{0} {1}()
+                        {{
+                            AddField(""{1}"");
+                            return this;
+                        }}"
+                        /*public Szablon_{0} {1}(Tabela subquery) // Jeżeli będzie potrzeba obsłużyć podzapytania
+                        {{
+                            SetFieldSubquery(""{1}"", subquery);
+                            return this;
+                        }}
+                        "*/);
+                    wiersz += F(3, tabelaId, colName, oleDbToNetTypeConverter(oleDbTypeNumber), oleDbType.ToString(), @"
+                        public {2} {1};");
+                    wierszConstr += F(4, tabelaId, colName, oleDbToNetTypeConverter(oleDbTypeNumber), oleDbType.ToString(), @"
+                        if (cols.ContainsKey(""{1}""))
+                            {1} = row.Field<{2}>(cols[""{1}""]);");
                 }
-                szablon += @"
-        }";
+                wiersz += F(2, tabelaId, "\r\n" + wierszConstr, @"
+                        public Row_{0}(DataRow row)
+                        {{
+                            _init(row, GetColsDict(row));
+                        }}
+                        public Row_{0}(DataRow row, Dictionary<string, int> cols)
+                        {{
+                            _init(row, cols);
+                        }}
+                        private void _init(DataRow row, Dictionary<string, int> cols)
+                        {{{1}            }}
+                        internal static Row_{0}[] _GET(DataTable dane)
+                        {{
+                            var result = new Row_{0}[dane.Rows.Count];
+                            var cols = GetColsDict(dane);
+                            var index = 0;
+                            foreach (DataRow row in dane.Rows)
+                                result[index++] = new Row_{0}(row, cols);
+                            return result;
+                        }}
+                    }}");
+                szablon += F(2, "}}");
+                szablon += wiersz;
             }
-            szablon += @"
-    }
+            szablon += F(0, "\r\n" + tabele, @"
+                    }}
     
-    partial class BazaDanychWrapper
-    {" + tabele + @"
-    }
-}
-";
+                    partial class BazaDanychWrapper
+                    {{{0}    }}
+                }}");
             string path = (new Uri(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase) + @"\..\..\Szablon.Generated.cs")).LocalPath;
             bool write = true;
             try
