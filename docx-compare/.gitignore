@@ -2,3 +2,6 @@
 /convert-html/out.json
 /node_modules/
 /package-lock.json
+/old.txt
+/new.txt
+/result.html
