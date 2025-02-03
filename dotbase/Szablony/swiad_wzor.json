@@ -133,6 +133,131 @@
     "Uwagi": " ",
     "Zleceniodawca": "Zakład Fizyki Radiacyjnej i Dozymetrii\r\nInstytut Fizyki Jądrowej PAN"
   },
+  "wyniki": [
+    {
+      "wzorcowanie_cezem": {
+        "Cisnienie": 986,
+        "Data_wzorcowania": {
+          "tekst": {
+            "EN": "18 September 2023",
+            "PL": "18 września 2023"
+          },
+          "rok": 2023,
+          "miesiac": 9,
+          "dzien": 18,
+          "godzina": 0,
+          "minuta": 0,
+          "sekunda": 0,
+          "milisekunda": 0
+        },
+        "Dolacz": true,
+        "ID_arkusza": 1,
+        "ID_jednostki": 15,
+        "ID_karty": 19000,
+        "ID_protokolu": 24,
+        "ID_sondy": 4230,
+        "ID_wzorcowania": 19716,
+        "Inne_nastawy": "Numer poprzedniego świadectwa 18831/2023",
+        "Napiecie_zasilania_sondy": "nie dotyczy",
+        "Osoba_sprawdzajaca": "J. Drop",
+        "Osoba_wzorcujaca": "A.Kilian",
+        "Rodzaj_wzorcowania": "sm",
+        "Temperatura": 21,
+        "Tlo": "0",
+        "Uwagi": "Brak",
+        "Wielkosc_fizyczna": "nie dotyczy",
+        "wilgotnosc": 53
+      },
+      "wzorcowanie_zrodlami_powierzchniowymi": null,
+      "sonda": {
+        "ID_dozymetru": 3659,
+        "ID_sondy": 4230,
+        "Nr_fabryczny": "nie dotyczy",
+        "Typ": "detektor własny"
+      },
+      "jenostka": {
+        "ID_jednostki": 15,
+        "Jednostka": "uSv/h",
+        "Przelicznik": 0.826,
+        "SI": true,
+        "Wielkosc_fizyczna": "moc przestrzennego równoważnika dawki"
+      },
+      "tabela": [
+        {
+          "prog": 10,
+          "wartosc_zmierzona": 10.41,
+          "niepewnosc": 0.16,
+          "wspolczynnik": 1.04,
+          "niepewnosc_wspolczynnika": 0.1
+        },
+        {
+          "prog": 100,
+          "wartosc_zmierzona": 95.38,
+          "niepewnosc": 1.88,
+          "wspolczynnik": 0.95,
+          "niepewnosc_wspolczynnika": 0.1
+        },
+        {
+          "prog": 200,
+          "wartosc_zmierzona": 198.98,
+          "niepewnosc": 5.11,
+          "wspolczynnik": 0.99,
+          "niepewnosc_wspolczynnika": 0.09
+        }
+      ]
+    },
+    {
+      "wzorcowanie_cezem": {
+        "Cisnienie": 987.9,
+        "Data_wzorcowania": {
+          "tekst": {
+            "EN": "18 September 2023",
+            "PL": "18 września 2023"
+          },
+          "rok": 2023,
+          "miesiac": 9,
+          "dzien": 18,
+          "godzina": 0,
+          "minuta": 0,
+          "sekunda": 0,
+          "milisekunda": 0
+        },
+        "Dolacz": true,
+        "ID_arkusza": 2,
+        "ID_jednostki": 15,
+        "ID_karty": 19000,
+        "ID_protokolu": 24,
+        "ID_sondy": 4230,
+        "ID_wzorcowania": 19717,
+        "Inne_nastawy": "nie dotyczy",
+        "Napiecie_zasilania_sondy": "nie dotyczy",
+        "Osoba_sprawdzajaca": "J. Drop",
+        "Osoba_wzorcujaca": "A.Kilian",
+        "Rodzaj_wzorcowania": "sd",
+        "Temperatura": 21.1,
+        "Tlo": "0",
+        "Uwagi": "Numer poprzedniego świadectwa 18831/2023",
+        "Wielkosc_fizyczna": "nie dotyczy",
+        "wilgotnosc": 58
+      },
+      "wzorcowanie_zrodlami_powierzchniowymi": null,
+      "sonda": {
+        "ID_dozymetru": 3659,
+        "ID_sondy": 4230,
+        "Nr_fabryczny": "nie dotyczy",
+        "Typ": "detektor własny"
+      },
+      "jenostka": {
+        "ID_jednostki": 15,
+        "Jednostka": "uSv/h",
+        "Przelicznik": 0.826,
+        "SI": true,
+        "Wielkosc_fizyczna": "moc przestrzennego równoważnika dawki"
+      },
+      "tabela": [
+      ]
+    }
+  ],
   "stale": {
     "UNCERTAINITY_PRESSURE_VALUE": 1.5,
     "UNCERTAINITY_TEMPERATURE_VALUE": 0.5,
