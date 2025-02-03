@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<%! eval(utils.include("wspolne.js")) %>
 <%!
 
 const metody = {
@@ -49,7 +50,7 @@ if (poprawa) {
     </p>
     <p tabs="1cm, 10.5cm center, 18cm right" border="none, none, single black 0.3mm">
       <br/>
-      <tab/>Data wydania:&nbsp; <% data_wydania.tekst[jezyk] %>
+      <tab/>Data wydania:&nbsp; <% tekst(data_wydania) %>
       <tab/>Nr świadectwa:&nbsp; <b><% nr_swiadectwa %></b>
       <tab/>Strona&nbsp; <page-number/>/<total-pages/><br/>
     </p>
@@ -66,7 +67,7 @@ if (poprawa) {
       ŚWIADECTWO WZORCOWANIA wydane przez LABORATORIUM AKREDYTOWANE Nr AP 029<br/>
     </p>
     <p tabs="1cm, 10.5cm center, 18cm right" border="none, none, single black 0.3mm">
-      <tab/>Data wydania:&nbsp; <% data_wydania.tekst[jezyk] %>
+      <tab/>Data wydania:&nbsp; <% tekst(data_wydania) %>
       <tab/>Nr świadectwa:&nbsp; <b><% nr_swiadectwa %></b>
       <tab/>Strona&nbsp; <page-number/>/<total-pages/><br/>
     </p>
@@ -80,114 +81,84 @@ if (poprawa) {
 
   <p> </p>
   <table border="none" inside-border="none, none" font-avoid-orphans="1" font-vwnbsp="y">
-    <tc width="4cm" font-size="9pt" font-bold="y" td-margin="3mm 5mm 0.9mm 0mm"/>
-    <tc width="3.5cm" font-size="9pt" td-margin="1mm 0mm 0.9mm 0mm"/>
-    <tc width="11cm" font-size="9pt" td-margin="1mm 0mm 0.9mm 0mm"/>
+    <tc width="5cm" font-size="9pt" font-bold="y" td-margin="3.5mm 5mm 1mm 0mm"/>
+    <tc width="3.5cm" font-size="9pt" td-margin="1mm 0mm"/>
+    <tc width="10.5cm" font-size="9pt" td-margin="1mm 0mm"/>
     <tr>
       <td rowspan="5">OBIEKT WZORCOWANIA</td>
-      <td>
-        <b>Nazwa</b>
-      </td>
-      <td>
-        <% przyrzad.nazwa %></td>
+      <td><b>Nazwa</b></td>
+      <td><% przyrzad.Nazwa %></td>
     </tr>
     <tr>
-      <td>
-        <b>Typ</b>
-      </td>
-      <td>
-        <% przyrzad.typ %></td>
+      <td><b>Typ</b></td>
+      <td><% przyrzad.Typ %></td>
     </tr>
     <tr>
-      <td>
-        <b>Numer fabryczny</b>
-      </td>
-      <td>
-        <% przyrzad.nr_fabryczny %></td>
+      <td><b>Numer fabryczny</b></td>
+      <td><% przyrzad.Nr_fabryczny %></td>
     </tr>
     <tr>
-      <td>
-        <b>Producent</b>
-      </td>
-      <td>
-        <% przyrzad.producent %></td>
+      <td><b>Producent</b></td>
+      <td><% przyrzad.Producent %></td>
     </tr>
     <tr>
-      <td>
-        <b>Rok produkcji</b>
-      </td>
-      <td>
-        <% przyrzad.rok_produkcji %></td>
+      <td><b>Rok produkcji</b></td>
+      <td><% przyrzad.Rok_produkcji %></td>
     </tr>
     <tr>
       <td>ZGŁASZAJĄCY</td>
-      <td colspan= "2">
-        <% zleceniodawca.zleceniodawca %><br/><% zleceniodawca.adres %>
-      </td>
+      <td colspan="2"><%= multiline(zleceniodawca.Zleceniodawca) %><br/><%= multiline(zleceniodawca.Adres) %></td>
     </tr>
     <tr>
       <td>METODA WZORCOWANIA</td>
-      <td colspan= "2"><% metody[metoda] %></td>
+      <td colspan="2"><% metody[metoda] %></td>
     </tr>
     <tr>
       <td>UZUPEŁNIENIA, ODSTĘPSTWA, OGRANICZENIA METODY</td>
-      <td colspan= "2">Nie wystąpiły</td>
+      <td colspan="2">Nie wystąpiły</td>
     </tr>
     <tr>
       <td>MIEJSCE WYKONANIA DZIAŁALNOŚCI LABORATORYJNEJ</td>
-      <td colspan= "2">W siedzibie laboratorium</td>
+      <td colspan="2">W siedzibie laboratorium</td>
     </tr>
     <tr>
-      <td rowspan="3">
-        <b>WARUNKI ŚRODOWISKOWE</b>
-      </td>
-      <td>
-        <b>Ciśnienie</b>
-      </td>
-      <td>
-        ( <!-- TODO: % tabeleMin.cisnienie - stale.UNCERTAINITY_PRESSURE_VALUE % > - < % tabeleMax.cisnienie + stale.UNCERTAINITY_PRESSURE_VALUE %--> ) hPa
-      </td>
+      <td rowspan="3"><b>WARUNKI ŚRODOWISKOWE</b></td>
+      <td><b>Ciśnienie</b></td>
+      <td>( <% tekst(warunkiMin.cisnienie - stale.UNCERTAINITY_PRESSURE_VALUE) %>
+          - <% tekst(warunkiMax.cisnienie + stale.UNCERTAINITY_PRESSURE_VALUE) %> ) hPa</td>
     </tr>
     <tr>
-      <td>
-        <b>Temperatura</b>
-      </td>
-      <td>
-        ( <!-- TODO: % tabeleMin.temperatura - stale.UNCERTAINITY_TEMPERATURE_VALUE % > - < % tabeleMax.temperatura + stale.UNCERTAINITY_TEMPERATURE_VALUE %--> ) °C
-      </td>
+      <td><b>Temperatura</b></td>
+      <td>( <% tekst(warunkiMin.temperatura - stale.UNCERTAINITY_TEMPERATURE_VALUE) %>
+          - <% tekst(warunkiMax.temperatura + stale.UNCERTAINITY_TEMPERATURE_VALUE) %> ) hPa</td>
     </tr>
     <tr>
-      <td>
-        <b>Wilgotność</b>
-      </td>
-      <td>
-        ( <!-- TODO: % tabeleMin.wilgotnosc - stale.UNCERTAINITY_HUMIDITY_VALUE % > - < % tabeleMax.wilgotnosc + stale.UNCERTAINITY_HUMIDITY_VALUE %--> ) %
-      </td>
+      <td><b>Wilgotność</b></td>
+      <td>( <% tekst(warunkiMin.wilgotnosc - stale.UNCERTAINITY_HUMIDITY_VALUE) %>
+          - <% tekst(warunkiMax.wilgotnosc + stale.UNCERTAINITY_HUMIDITY_VALUE) %> ) hPa</td>
     </tr>
     <tr>
       <td>DATA PRZYJĘCIA DO WZORCOWANIA</td>
-      <td colspan= "2">
-        <% zlecenie.Data_przyjecia.tekst[jezyk] %></td>
+      <td colspan="2"><% tekst(zlecenie.Data_przyjecia) %></td>
     </tr>
     <tr>
       <td>DATA WYKONANIA WZORCOWANIA</td>
-      <td colspan= "2">
-        <% data_wykonania.tekst[jezyk] %></td>
+      <td colspan="2"><% tekst(data_wykonania) %></td>
     </tr>
     <tr>
       <td>SPÓJNOŚĆ POMIAROWA</td>
-      <td colspan= "2" p-align="justify"><!-- TODO: % spojnoscPomiarowa %--></td>
+      <td colspan="2" p-align="justify"><% spojnosciPomiarowe[spojnoscPomiarowa] %></td>
     </tr>
     <tr>
       <td>WYNIKI WZORCOWANIA</td>
-      <td colspan= "2" p-align="justify">
+      <td colspan="2" p-align="justify">
         Podano na stronie 2 niniejszego świadectwa wraz z wartościami niepewności pomiaru. Wyniki dotyczą
         wyłącznie obiektów poddanych wzorcowaniu.
       </td>
     </tr>
     <tr>
       <td>NIEPEWNOŚĆ WYNIKU POMIARU</td>
-      <td colspan= "2" p-align="justify">
+      <td colspan="2" p-align="justify">
         Niepewność wyniku pomiaru została określona zgodnie z dokumentem EA‑4/02&nbsp;M:2022. Podane
         wartości niepewności stanowią niepewności rozszerzone przy prawdopodobieństwie rozszerzenia ok.&nbsp;95% i&nbsp;współczynniku rozszerzenia <i>k</i> = 2.
       </td>
@@ -195,7 +166,6 @@ if (poprawa) {
   </table>
 
   <p>
-    <!-- Create PageBreak class object directly into paragraph. -->
     <PageBreak/>
   </p>
 
@@ -211,8 +181,6 @@ if (poprawa) {
   </table>
 
   <p></p>
-
-  <p>a) Wzorcowanie źródłem gamma: Cs-137; moc przestrzennego równoważnika dawki </p>
 
   <p>
     <br/>
