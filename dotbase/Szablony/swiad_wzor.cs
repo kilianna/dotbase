@@ -57,7 +57,10 @@ namespace DotBase.Szablony
             public Szablon.Row_Wzorcowanie_zrodlami_powierzchniowymi wzorcowanie_zrodlami_powierzchniowymi;
             public Szablon.Row_Sondy sonda;
             public Szablon.Row_Jednostki jednostka;
+            public Szablon.Row_zrodla_powierzchniowe zrodlo;
+            public Szablon.Row_Atesty_zrodel atest;
             public List<Wynik> tabela = new List<Wynik>();
+            public double emisja_pow;
         }
 
         // Dane wejściowe
@@ -140,6 +143,8 @@ namespace DotBase.Szablony
                 .WHERE()
                     .ID_karty(nr_karty)
                     .Dolacz(true)
+                .ORDER_BY()
+                    .ID_wzorcowania()
                 .GET();
 
             var ogolemIlosc = tabelaMD.Length + tabelaD.Length + tabelaSM.Length + tabelaSD.Length + tabelaS.Length;
@@ -203,11 +208,28 @@ namespace DotBase.Szablony
             wyn.sonda = baza.Sondy
                 .WHERE()
                     .ID_sondy(row.ID_sondy ?? -1)
-                .GET_OPTIONAL();
+                .GET_ONE();
 
             wyn.jednostka = baza.Jednostki
                 .WHERE().ID_jednostki(row.ID_jednostki ?? -1)
-                .GET_OPTIONAL();
+                .GET_ONE();
+
+            wyn.zrodlo = baza.zrodla_powierzchniowe
+                .WHERE().Id_zrodla(row.ID_zrodla ?? -1)
+                .GET_ONE();
+
+            wyn.atest = baza.Atesty_zrodel
+                .WHERE().ID_zrodla((short)wyn.zrodlo.Id_zrodla)
+                .ORDER_BY().ID_atestu(Order.DESC) // TODO: Bierz atest z konkretnej daty
+                .GET(1)[0];
+
+
+            double mnoznikKorekcyjny = wyn.wzorcowanie_zrodlami_powierzchniowymi.Mnoznik_korekcyjny ?? 0;
+            DateTime dataWzorcowaniaPrzyrzadu = wyn.wzorcowanie_zrodlami_powierzchniowymi.Data_wzorcowania ?? default(DateTime);
+            double emisja = wyn.atest.Emisja_powierzchniowa ?? 0;
+            DateTime dataWzorcowaniaZrodla = wyn.atest.Data_wzorcowania ?? default(DateTime);
+            double czasPolowicznegoRozpadu = wyn.zrodlo.Czas_polowicznego_rozpadu ?? 1;
+            wyn.emisja_pow = mnoznikKorekcyjny * emisja * Math.Exp(-Math.Log(2) / czasPolowicznegoRozpadu * (dataWzorcowaniaPrzyrzadu - dataWzorcowaniaZrodla).Days / 365.25);
 
             wyniki.Add(wyn);
         }

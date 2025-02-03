@@ -38,6 +38,7 @@ namespace DotBase
             private string nazwa;
             private TypPolecenia typPolecenia = TypPolecenia.NONE;
             private bool where = false;
+            private string orderBy = null;
             private List<ValueWithOleDbType> parameters = new List<ValueWithOleDbType>();
             private string query = "";
             private string selectQuery = "";
@@ -116,7 +117,12 @@ namespace DotBase
 
             protected void AddField(string name)
             {
-                if (!where && typPolecenia == TypPolecenia.SELECT)
+                if (orderBy != null)
+                {
+                    if (orderBy.Length > 0) orderBy += ", ";
+                    orderBy += name;
+                }
+                else if (!where && typPolecenia == TypPolecenia.SELECT)
                 {
                     if (!firstEntry)
                     {
@@ -129,6 +135,16 @@ namespace DotBase
                 {
                     throw new ApplicationException("Nieprawidłowa składnia polecenia!");
                 }
+            }
+
+            protected void SetOrder(string name, Order order)
+            {
+                if (orderBy == null)
+                {
+                    throw new ApplicationException("Nieprawidłowa składnia polecenia!");
+                }
+                if (orderBy.Length > 0) orderBy += ", ";
+                orderBy += name + order.keyword;
             }
 
             protected void SetFieldSubquery(string name, Tabela subquery)
@@ -170,6 +186,13 @@ namespace DotBase
                     throw new ApplicationException("Nieprawidłowa składnia polecenia!");
                 typPolecenia = TypPolecenia.SELECT;
                 query = "SELECT ";
+            }
+
+            protected void _ORDER_BY()
+            {
+                if (typPolecenia != TypPolecenia.NONE && typPolecenia != TypPolecenia.SELECT)
+                    throw new ApplicationException("Nieprawidłowa składnia polecenia!");
+                orderBy = "";
             }
 
             protected void _WHERE()
@@ -283,6 +306,10 @@ namespace DotBase
                 else if (typPolecenia != TypPolecenia.SELECT)
                 {
                     throw new ApplicationException("Nieprawidłowa składnia polecenia!");
+                }
+                if (orderBy != null && orderBy.Length > 0)
+                {
+                    query += " ORDER BY " + orderBy;
                 }
                 DataTable dane = new DataTable();
                 var cmd = baza.UtworzProstePolecenie(query);
