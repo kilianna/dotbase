@@ -340,8 +340,23 @@ for (let i = 0; i < wyniki.length; i++) {
 
   <%! /* ------------------------------- Syg Mocy Dawki ---------------------------- */ %>
 
+  <%!
+  let opisowy = undefined;
+  for (let row of wyn.tabela) {
+    if (row.row.Uwagi !== '') opisowy = row.row.Uwagi;
+  }
+  %>
+
   <p><% litera(podpunkt++) %>) Wzorcowanie źródłem gamma: Cs-137; moc przestrzennego równoważnika dawki (sygnalizator progowy)</p>
   <p></p>
+
+  <%! if (opisowy) { %>
+
+  <p><%= simpleHtml(opisowy) %></p>
+  <p></p>
+  
+  <%! } else { %>
+
   <p>Zestawienie nastawień przyrządu i odpowiadających im rzeczywistych wartości, przy których włączona zostaje sygnalizacja ostrzegawcza.</p>
   <p></p>
   <%! pokazSonde() %>
@@ -375,6 +390,8 @@ for (let i = 0; i < wyniki.length; i++) {
   <p></p>
   <p>Wybraną wartość progu należy pomnożyć przez odpowiednią wartość współczynnika poprawkowego.</p>
   <p></p>
+
+  <%! } %>
 
   <%! if (uwSMD?.trim()) { %>
   <p><%= simpleHtml(uwSMD) %></p>

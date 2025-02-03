@@ -42,6 +42,8 @@
             this.µMikroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.twardaSpacjaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.plusMiniusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
+            this.innyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.wytnijToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kopiujToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,8 +52,6 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.cofnijToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.powtórzToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
-            this.innyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,10 +65,9 @@
             this.rt.Location = new System.Drawing.Point(0, 0);
             this.rt.Name = "rt";
             this.rt.ShortcutsEnabled = false;
-            this.rt.Size = new System.Drawing.Size(505, 346);
+            this.rt.Size = new System.Drawing.Size(520, 364);
             this.rt.TabIndex = 0;
             this.rt.Text = "";
-            this.rt.SelectionChanged += new System.EventHandler(this.rt_SelectionChanged);
             this.rt.TextChanged += new System.EventHandler(this.rt_TextChanged);
             this.rt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.rt_KeyDown);
             this.rt.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.rt_PreviewKeyDown);
@@ -88,7 +87,7 @@
             this.cofnijToolStripMenuItem,
             this.powtórzToolStripMenuItem});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(247, 230);
+            this.contextMenu.Size = new System.Drawing.Size(247, 208);
             this.contextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenu_Opening);
             // 
             // formatToolStripMenuItem
@@ -172,8 +171,9 @@
             this.twardaSpacjaToolStripMenuItem.Name = "twardaSpacjaToolStripMenuItem";
             this.twardaSpacjaToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Space";
             this.twardaSpacjaToolStripMenuItem.Size = new System.Drawing.Size(264, 24);
-            this.twardaSpacjaToolStripMenuItem.Text = "_ &Twarda spacja";
-            this.twardaSpacjaToolStripMenuItem.Click += new System.EventHandler(this.twardaSpacjaToolStripMenuItem_Click);
+            this.twardaSpacjaToolStripMenuItem.Tag = "‿";
+            this.twardaSpacjaToolStripMenuItem.Text = "‿ &Twarda spacja";
+            this.twardaSpacjaToolStripMenuItem.Click += new System.EventHandler(this.µMikroToolStripMenuItem_Click);
             // 
             // plusMiniusToolStripMenuItem
             // 
@@ -182,6 +182,18 @@
             this.plusMiniusToolStripMenuItem.Tag = "±";
             this.plusMiniusToolStripMenuItem.Text = "± &Plus Minius";
             this.plusMiniusToolStripMenuItem.Click += new System.EventHandler(this.µMikroToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(261, 6);
+            // 
+            // innyToolStripMenuItem
+            // 
+            this.innyToolStripMenuItem.Name = "innyToolStripMenuItem";
+            this.innyToolStripMenuItem.Size = new System.Drawing.Size(264, 24);
+            this.innyToolStripMenuItem.Text = "Inny";
+            this.innyToolStripMenuItem.Click += new System.EventHandler(this.innyToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -241,18 +253,6 @@
             this.powtórzToolStripMenuItem.Text = "&Powtórz";
             this.powtórzToolStripMenuItem.Click += new System.EventHandler(this.powtórzToolStripMenuItem_Click);
             // 
-            // toolStripMenuItem4
-            // 
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(261, 6);
-            // 
-            // innyToolStripMenuItem
-            // 
-            this.innyToolStripMenuItem.Name = "innyToolStripMenuItem";
-            this.innyToolStripMenuItem.Size = new System.Drawing.Size(264, 24);
-            this.innyToolStripMenuItem.Text = "Inny";
-            this.innyToolStripMenuItem.Click += new System.EventHandler(this.innyToolStripMenuItem_Click);
-            // 
             // SimpleHtmlTextBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -260,7 +260,7 @@
             this.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Controls.Add(this.rt);
             this.Name = "SimpleHtmlTextBox";
-            this.Size = new System.Drawing.Size(505, 346);
+            this.Size = new System.Drawing.Size(520, 364);
             this.contextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
