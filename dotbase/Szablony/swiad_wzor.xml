@@ -283,17 +283,11 @@ for (let i = 0; i < wyniki.length; i++) {
       <td><% mikro(korekcjaJednostki) %></td>
     </tr>
     <%! for (let [rowIndex, row] of wyn.tabela.entries()) { %>
-    <%!
-      let args = [];
-      for (let punkt of row.punkty) {
-        args.push(2, punkt.wzorcowa, 1, punkt.wzorcowa_niepewnosc);
-      }
-      let wartDigits = calcDigits(...args);
-    %>
     <%! for (let [punktIndex, punkt] of row.punkty.entries()) { %>
     <tr>
       <td><% punktIndex + 1 %></td>
-      <td><% fixed(punkt.wzorcowa, wartDigits) %> ± <% fixed(punkt.wzorcowa_niepewnosc, wartDigits) %></td>
+      <%! calcDigits(2, punkt.wzorcowa, 2, punkt.wzorcowa_niepewnosc) %>
+      <td><% fixed(punkt.wzorcowa) %> ± <% fixed(punkt.wzorcowa_niepewnosc) %></td>
       <td><% numberAsIs(punkt.zmierzona) %> ± <% numberAsIs(punkt.zmierzona_niepewnosc) %></td>
       <%! if (punktIndex === 0) { %>
         <%! calcDigits(2, row.wspolczynnik, 2, row.niepewnosc) %>

@@ -200,7 +200,7 @@ namespace DotBase
                     var Data_kalibracji = _BazaDanych.TworzTabeleDanych(
                         "SELECT Data_kalibracji FROM Protokoly_kalibracji_lawy WHERE ID_protokolu=?", ID_protokolu)
                         .Rows[0].Field<DateTime>(0);
-                    tabpunkt = TworzTabelePunktow(Data_kalibracji, Data_wzorcowania);
+                    tabpunkt = TworzTabelePunktow(Data_kalibracji, Data_wzorcowania, m_data.getValue(SwiadectwoData.DataType.ID_WZORCOWANIA));
                 }
 
                 if (tabpunkt != null)
@@ -246,15 +246,13 @@ namespace DotBase
                 }
             }
 
-            private string TworzTabelePunktow(DateTime Data_kalibracji, DateTime Data_wzorcowania)
+            private string TworzTabelePunktow(DateTime Data_kalibracji, DateTime Data_wzorcowania, string idWzorcowania)
             {
-                _Zapytanie = "SELECT odleglosc, id_zrodla, wskazanie, wahanie, zakres, dolaczyc FROM Pomiary_cez WHERE id_wzorcowania IN (SELECT id_wzorcowania FROM "
-                           + String.Format("Wzorcowanie_cezem WHERE id_karty = {0} AND rodzaj_wzorcowania='md' AND dolacz=true)",
-                             m_data.getValue(SwiadectwoData.DataType.NR_KARTY));
+                _Zapytanie = "SELECT odleglosc, id_zrodla, wskazanie, wahanie, zakres, dolaczyc FROM Pomiary_cez WHERE id_wzorcowania = ?";
 
                 var wzorcowanieMocDawki = new WzorcowanieMocDawki(Int32.Parse(m_data.getValue(SwiadectwoData.DataType.NR_KARTY)), "md");
 
-                var _OdpowiedzBazy = _BazaDanych.TworzTabeleDanych(_Zapytanie);
+                var _OdpowiedzBazy = _BazaDanych.TworzTabeleDanych(_Zapytanie, idWzorcowania);
 
                 if (null == _OdpowiedzBazy || null == _OdpowiedzBazy.Rows || 0 == _OdpowiedzBazy.Rows.Count)
                     return null;
