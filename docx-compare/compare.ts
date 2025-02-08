@@ -4,6 +4,7 @@ import path from 'path';
 import open from 'open';
 import { convertXmlToText, normalizeText } from './convert-xml';
 import * as child_process from 'node:child_process';
+import { exceptions } from './exceptions';
 import * as util from 'util';
 
 let DIR = '../dotbase/bin/wyniki/Swiadectwo/';
@@ -15,6 +16,7 @@ function listContent(req: http.IncomingMessage, res: http.ServerResponse<http.In
     let out: string[] = [];
 
     for (let file of fs.readdirSync(DIR)) {
+        if (forceId && !file.startsWith(forceId.toString())) continue;
         if (file.match(/^[0-9]+SwiadectwoWynik\.html$/i)) {
             let c = fs.readFileSync(DIR + file, 'utf8');
             out.push(file);
@@ -54,66 +56,67 @@ function saveOutput(req: http.IncomingMessage, res: http.ServerResponse<http.Inc
 fs.writeFileSync('convert-html/out.json', '{\n');
 
 // Server to serve files and handle dynamic URL
-let serverInstance = http.createServer((req, res) => {
-    const requestedUrl = req.url;
+function startServer() {
+    return http.createServer((req, res) => {
+        const requestedUrl = req.url;
 
-    if (requestedUrl === '/list') {
-        listContent(req, res);
-    } else if (requestedUrl === '/out') {
-        saveOutput(req, res);
-    } else if (requestedUrl === '/close') {
-        res.writeHead(200, { 'Content-Type': 'text/plain;charset=UTF-8' });
-        res.end('OK');
-        continueAfterServer();
-    } else if (requestedUrl?.startsWith('/html/')) {
-        getHtmlFile(req, res);
-    } else {
-        // Serve static files for other URLs
-        const filePath = path.join(__dirname, 'convert-html', requestedUrl === '/' ? 'index.html' : requestedUrl!);
-        const extname = path.extname(filePath);
-        let contentType = 'text/html';
+        if (requestedUrl === '/list') {
+            listContent(req, res);
+        } else if (requestedUrl === '/out') {
+            saveOutput(req, res);
+        } else if (requestedUrl === '/close') {
+            res.writeHead(200, { 'Content-Type': 'text/plain;charset=UTF-8' });
+            res.end('OK');
+            continueAfterServer();
+        } else if (requestedUrl?.startsWith('/html/')) {
+            getHtmlFile(req, res);
+        } else {
+            // Serve static files for other URLs
+            const filePath = path.join(__dirname, 'convert-html', requestedUrl === '/' ? 'index.html' : requestedUrl!);
+            const extname = path.extname(filePath);
+            let contentType = 'text/html';
 
-        switch (extname) {
-            case '.js':
-                contentType = 'application/javascript';
-                break;
-            case '.css':
-                contentType = 'text/css';
-                break;
-            case '.json':
-                contentType = 'application/json';
-                break;
-            case '.png':
-                contentType = 'image/png';
-                break;
-            case '.jpg':
-                contentType = 'image/jpeg';
-                break;
-        }
-
-        fs.readFile(filePath, (error, content) => {
-            if (error) {
-                if (error.code == 'ENOENT') {
-                    // Page not found
-                    res.writeHead(404, { 'Content-Type': 'text/html' });
-                    res.end('<h1>404 Not Found</h1>');
-                } else {
-                    // Server error
-                    res.writeHead(500);
-                    res.end(`Server Error: ${error.code}`);
-                }
-            } else {
-                // Serve the file content
-                res.writeHead(200, { 'Content-Type': contentType });
-                res.end(content, 'utf-8');
+            switch (extname) {
+                case '.js':
+                    contentType = 'application/javascript';
+                    break;
+                case '.css':
+                    contentType = 'text/css';
+                    break;
+                case '.json':
+                    contentType = 'application/json';
+                    break;
+                case '.png':
+                    contentType = 'image/png';
+                    break;
+                case '.jpg':
+                    contentType = 'image/jpeg';
+                    break;
             }
-        });
-    }
-}).listen(8180, () => {
-    console.log('Server running at http://localhost:8180/');
-    open('http://localhost:8180/');
-});
 
+            fs.readFile(filePath, (error, content) => {
+                if (error) {
+                    if (error.code == 'ENOENT') {
+                        // Page not found
+                        res.writeHead(404, { 'Content-Type': 'text/html' });
+                        res.end('<h1>404 Not Found</h1>');
+                    } else {
+                        // Server error
+                        res.writeHead(500);
+                        res.end(`Server Error: ${error.code}`);
+                    }
+                } else {
+                    // Serve the file content
+                    res.writeHead(200, { 'Content-Type': contentType });
+                    res.end(content, 'utf-8');
+                }
+            });
+        }
+    }).listen(8180, () => {
+        console.log('Server running at http://localhost:8180/');
+        open('http://localhost:8180/');
+    });
+}
 
 
 let oldDataBase: { [key: string]: string };
@@ -208,7 +211,12 @@ function replaceRange(entry: DiffEntry | undefined, invert: boolean, min: number
     return result;
 }
 
-function removeExceptions(diff: Diff): void {
+function compareStringArrays(arr1: string[], arr2: string[]): boolean {
+    if (arr1.length !== arr2.length) return false;
+    return arr1.every((item, index) => item === arr2[index]);
+}
+
+function removeExceptions(diff: Diff, id: number): void {
     for (let group of diff) {
         for (let i = 0; i < group.length; i++) {
             let entry = group[i];
@@ -223,6 +231,19 @@ function removeExceptions(diff: Diff): void {
             let next4 = group[i + 4] as DiffEntry | undefined;
             let next5 = group[i + 5] as DiffEntry | undefined;
 
+            // Ignoruj wyjątki z pliku
+            if (typeof entry === 'object') {
+                let joined = entry.old.join(' ') + '=>' + entry.new.join(' ');
+                if (joined in exceptions) {
+                    let ids = new Set(exceptions[joined].toString().split(/\s*,\s*/));
+                    if (ids.has(id.toString())) {
+                        group[i] = entry.new.join(' ');
+                        continue;
+                    }
+                }
+            }
+
+            // Ignoruj strony
             if (entry === 'Strona'
                 && typeof next1 === 'object'
                 && next1.new.length === 1 && next1.old.length === 1
@@ -232,6 +253,7 @@ function removeExceptions(diff: Diff): void {
                 continue;
             }
 
+            // Literówka "źródami"
             if (typeof entry === 'object'
                 && entry.new.length === 1 && entry.new[0] === 'źródłami'
                 && entry.old.length === 1 && entry.old[0] === 'źródami'
@@ -240,7 +262,6 @@ function removeExceptions(diff: Diff): void {
                 continue;
             }
 
-            // Zaokrąglenia liczb
             // Zaokrąglenia liczb
             if (typeof entry === 'object'
                 && entry.new.length > 0 && entry.new.length === entry.old.length
@@ -312,6 +333,7 @@ function removeExceptions(diff: Diff): void {
                 continue;
             }
 
+            // Dzielenie wyrazów w nowym
             if (typeof entry === 'object'
                 && entry.new.length === 2
                 && entry.old.length === 1 && entry.old[0] === entry.new[0].replace('-', '') + entry.new[1]
@@ -320,6 +342,7 @@ function removeExceptions(diff: Diff): void {
                 continue;
             }
 
+            // Dzielenie wyrazów w starym
             if (typeof entry === 'object'
                 && entry.old.length === 2
                 && entry.new.length === 1 && entry.new[0] === entry.old[0].replace('-', '') + entry.old[1]
@@ -328,18 +351,17 @@ function removeExceptions(diff: Diff): void {
                 continue;
             }
 
+            // Zmiana zakresów
             if (entry === 'Ciśnienie' && next1 === '(' && next3 === '-' && next5 === ')') {
                 group[i + 2] = replaceRange(next2, false, 900, 1100);
                 group[i + 4] = replaceRange(next4, true, 900, 1100);
                 continue;
             }
-
             if (entry === 'Temperatura' && next1 === '(' && next3 === '-' && next5 === ')') {
                 group[i + 2] = replaceRange(next2, false, 1, 45);
                 group[i + 4] = replaceRange(next4, true, 1, 45);
                 continue;
             }
-
             if (entry === 'Wilgotność' && next1 === '(' && next3 === '-' && next5 === ')') {
                 group[i + 2] = replaceRange(next2, false, 10, 95);
                 group[i + 4] = replaceRange(next4, true, 10, 95);
@@ -372,7 +394,7 @@ function compare(id: number) {
         diffText = e.stdout;
     }
     let diff = parseDiff(diffText);
-    removeExceptions(diff);
+    removeExceptions(diff, id);
     let changes = 0;
     for (let group of diff)
         for (let entry of group)
@@ -415,7 +437,11 @@ async function continueAfterServer() {
     fs.appendFileSync('convert-html/out.json', `"":null}\n`);
 
     oldDataBase = JSON.parse(fs.readFileSync('convert-html/out.json', 'utf-8'));
-    idList = fs.readFileSync('../dotbase/bin/wyniki/Swiadectwo/done.txt', 'utf-8').split(/(?:\r?\n)+/).filter(x => x).map(x => parseInt(x));
+    if (forceId) {
+        idList = [forceId];
+    } else {
+        idList = fs.readFileSync('../dotbase/bin/wyniki/Swiadectwo/done.txt', 'utf-8').split(/(?:\r?\n)+/).filter(x => x).map(x => parseInt(x));
+    }
 
     for (let i = 0; i < idList.length; i++) {
         let id = idList[i];
@@ -432,3 +458,7 @@ async function continueAfterServer() {
     fs.writeFileSync('result.html', output);
     open(fs.realpathSync('result.html'));
 }
+
+let forceId: number | undefined = undefined;
+//forceId = 20219;
+let serverInstance = startServer();

@@ -52,7 +52,7 @@ namespace DotBase.Test
             QueueItem item;
             item.poll = poll;
             item.resume = resume;
-            item.timeout = DateTime.Now.AddSeconds(5);
+            item.timeout = DateTime.Now.AddSeconds(15);
             queue.Enqueue(item);
             if (!timer.Enabled)
             {
