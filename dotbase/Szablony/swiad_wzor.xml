@@ -16,14 +16,14 @@ const spojnosciPomiarowe = {
 const rownowaznikiDawki = [
   // Indywidualny_HP07: 0
   {
-    co: 'indywidualny równoważnik dawki Hp(10)',
-    czego: 'indywidualnego równoważnika dawki Hp(10)',
+    co: 'indywidualny równoważnik dawki H<sub>P</sub>(10)',
+    czego: 'indywidualnego równoważnika dawki H<sub>P</sub>(10)',
     jednostka: 'mSv',
   },
   // Indywidualny_HP10: 1
   {
-    co: 'indywidualny równoważnik dawki Hp(0,07)',
-    czego: 'indywidualnego równoważnika dawki Hp(0,07)',
+    co: 'indywidualny równoważnik dawki H<sub>P</sub>(0,07)',
+    czego: 'indywidualnego równoważnika dawki H<sub>P</sub>(0,07)',
     jednostka: 'mSv',
   },
   // Przestrzenny: 2
@@ -343,7 +343,7 @@ for (let i = 0; i < wyniki.length; i++) {
   %>
 
   <p><% litera(podpunkt++) %>) Wzorcowanie źródłem gamma: Cs-137;
-    <% wielkosciFizyczne.map(w => rownowaznikiDawki[w].co).filter(w => w).join('; ') %></p>
+    <%= wielkosciFizyczne.map(w => rownowaznikiDawki[w].co).filter(w => w).join('; ') %></p>
   <p></p>
   <%! pokazSonde() %>
   <p></p>
@@ -369,7 +369,7 @@ for (let i = 0; i < wyniki.length; i++) {
   </table>
 
   <p></p>
-  <p>Zmierzoną wartość <% wielkosciFizyczne.map(w => rownowaznikiDawki[w].czego).filter(w => w).join(' oraz ') %>
+  <p>Zmierzoną wartość <%= wielkosciFizyczne.map(w => rownowaznikiDawki[w].czego).filter(w => w).join(' oraz ') %>
     należy pomnożyć przez wartość współczynnika poprawkowego.</p>
   <p></p>
 

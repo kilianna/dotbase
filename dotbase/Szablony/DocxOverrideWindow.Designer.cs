@@ -43,7 +43,7 @@
             this.komunikat.Name = "komunikat";
             this.komunikat.Size = new System.Drawing.Size(524, 104);
             this.komunikat.TabIndex = 0;
-            this.komunikat.Text = "Plik o nazwie \"{0}\" już istnieje.\r\n\r\nCo zrobić?";
+            this.komunikat.Text = "Plik o nazwie \"{0}\" już istnieje w docelowym katalogu:\r\n{1}\r\n\r\nCo chcesz zrobić?";
             // 
             // nadpisz
             // 

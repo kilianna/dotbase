@@ -127,6 +127,7 @@
     <Compile Include="Szablony\DocxWindow.Designer.cs">
       <DependentUpon>DocxWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Szablony\DocxCompare.cs" />
     <Compile Include="Szablony\swiad_wzor.cs" />
     <Compile Include="Test\TestBase.cs" />
     <Compile Include="Test\TestForm.cs">
@@ -628,6 +629,9 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Szablony\xml2docx-win.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\error.png" />
     <None Include="Resources\question.png" />
     <None Include="Resources\info.png" />
@@ -651,9 +655,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Szablony\pca.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Szablony\swiad_wzor.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Szablony\swiad_wzor.xml">
