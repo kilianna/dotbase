@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace DotBase.Szablony
 {
@@ -14,7 +15,8 @@ namespace DotBase.Szablony
         public DocxOverrideWindow(string file, string altername)
         {
             InitializeComponent();
-            komunikat.Text = String.Format(komunikat.Text, file);
+            file = Path.GetFullPath(file);
+            komunikat.Text = String.Format(komunikat.Text, Path.GetFileName(file), Path.GetDirectoryName(file));
             nowaNazwa.Text = String.Format(nowaNazwa.Text, altername);
         }
 

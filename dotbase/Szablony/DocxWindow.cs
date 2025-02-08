@@ -84,8 +84,8 @@ namespace DotBase.Szablony
                 {
                     error(errorMessage);
                 }
-                //try { File.Delete(tempFile); }
-                //catch { };
+                try { File.Delete(tempFile); }
+                catch { };
             }
         }
 
@@ -101,38 +101,41 @@ namespace DotBase.Szablony
             foreach (var file in Directory.EnumerateFiles(outputFileDir, outputFileWithoutExt + " (*).docx"))
                 all.Add(file);
 
-            if (all.Count == 0)
+            if (all.Count > 0)
             {
-                log(String.Format("Moving file from {0} to {1}.", tempFile, outputFile));
+                log("Istniejące warianty pliku:\n" + String.Join("\n", all));
+                foreach (var file in all)
+                {
+                    if (!EnsureAccess(file)) continue;
+                    if (compareDocx(file, tempFile))
+                    {
+                        var result = MyMessageBox.Show(
+                            this,
+                            String.Format("Wygenerowany dokument jest identyczny z wcześniej zapisanym " +
+                            "pod nazwą \"{0}\".\r\n\r\n" +
+                            "Czy chcesz otworzyć poprzedni dokument?", Path.GetFileName(file)),
+                            "Plik już istnieje",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Question);
+                        if (result == System.Windows.Forms.DialogResult.Yes)
+                        {
+                            readyFile(file);
+                            return;
+                        }
+                        break;
+                    }
+                }
+            }
+
+            if (!File.Exists(outputFile))
+            {
+                log(String.Format("Przenoszenie pliku z {0} do {1}.", tempFile, outputFile));
                 File.Move(tempFile, outputFile);
                 readyFile(outputFile);
                 return;
             }
             else
             {
-                log("Istniejące warianty pliku:\n" + String.Join("\n", all));
-            }
-
-            /* TODO: compare temp file with main and all others
-             * if the same as main: inform that nothing changed
-             * if the same as some other: inform that:
-             * Plik o nazwie "{0}" już istnije.
-             * Istnieje też plik o nazwie "{1}", który jest identyczny z wygenerowanym aktualnie.
-             * Co chcesz zrobić?
-             * - Nadpisz plik "{0}"
-             * - Pokaż plik "{1}"
-             * Otherwise, do normal procedure.
-             */
-            bool theSame = false; 
-            if (theSame)
-            {
-                Close();
-                MyMessageBox.Show(owner, "Wygenerowany dokument jest identyczny z wcześniej zapisanym.\r\n\r\n" +
-                    "Nie wprowadzono żadnych zmian.", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            if (File.Exists(outputFile)) {
                 int i = 1;
                 string alternateName = String.Format(@"{0}\{1} ({2}).docx", outputFileDir, outputFileWithoutExt, i);
                 while (all.Contains(alternateName))
@@ -149,19 +152,61 @@ namespace DotBase.Szablony
                     log("Cancel");
                     Close();
                 }
+                else if (result == System.Windows.Forms.DialogResult.OK)
+                {
+                    log("Overriding...");
+                    saveToFile(outputFile);
+                }
                 else
                 {
-                    if (result == System.Windows.Forms.DialogResult.OK)
+                    log("Renaming to: " + alternateName);
+                    saveToFile(alternateName);
+                }
+            }
+        }
+
+        private bool EnsureAccess(string file)
+        {
+            while (true)
+            {
+                try
+                {
+                    File.Open(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete).Dispose();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    var result = MyMessageBox.Show(
+                        this,
+                        String.Format("Nie można uzyskać dostępu do pliku \"{0}\". " +
+                        "Może on być używany przez program Word. " +
+                        "Zamknij wszystkie programy używające ten plik "+
+                        "i spróbuj ponownie.", Path.GetFileName(file)),
+                        "Brak dostępu do pliku",
+                        MessageBoxButtons.RetryCancel,
+                        MessageBoxIcon.Warning);
+                    if (result == System.Windows.Forms.DialogResult.Retry)
                     {
-                        log("Overriding...");
-                        saveToFile(outputFile);
+                        continue;
                     }
                     else
                     {
-                        log("Renaming to: " + alternateName);
-                        saveToFile(alternateName);
+                        return false;
                     }
                 }
+            }
+        }
+
+        private bool compareDocx(string file1, string file2)
+        {
+            try
+            {
+                return DocxCompare.Compare(file1, file2);
+            }
+            catch (Exception ex)
+            {
+                log(String.Format("Porównanie \"{0}\" i \"{1}\" nie jest możliwe: {2}", file1, file2, ex.Message));
+                return false;
             }
         }
 
@@ -180,14 +225,14 @@ namespace DotBase.Szablony
                 {
                     log(ex.ToString());
                     copySuccess = false;
-                    var result2 = MyMessageBox.Show(
+                    var result = MyMessageBox.Show(
                         this,
                         String.Format("Nie można zapisać pliku \"{0}\".\r\nSprawdź, czy nie masz go " +
                             "otwartego w programie Word.", Path.GetFileName(file)),
                         "Błąd zapisu",
                         MessageBoxButtons.RetryCancel,
                         MessageBoxIcon.Error);
-                    if (result2 == System.Windows.Forms.DialogResult.Cancel)
+                    if (result == System.Windows.Forms.DialogResult.Cancel)
                     {
                         log("Cancel");
                         return;
@@ -199,35 +244,14 @@ namespace DotBase.Szablony
 
         private void readyFile(string file)
         {
-            Close();
+            try { Close(); }
+            catch (Exception) { }
             if (DebugOptions.nieOtwieraj) return;
             var proc = new Process();
-            //proc.StartInfo.FileName = file;
-            proc.StartInfo.FileName = @"c:\work\ania\dotbase\temp\.vnev\Scripts\pythonw.exe";
-            proc.StartInfo.Arguments = @"C:\work\ania\dotbase\temp\reopen.py " + '"' + file + '"';
+            proc.StartInfo.FileName = file;
             proc.StartInfo.UseShellExecute = true;
             proc.Start();
             proc.Dispose();
         }
     }
 }
-/*
- * if exists:
- *     generate in temp
- *     compare
- *     if the same
- *          close window
- *          return
- *     ask what to do:
- *          override
- *          rename to xyz (10).docx
- *          cancel
- *              additionally: show old, show new
- *     while override error:
- *          ask to close Word and retry
- * else (not exists)
- *      generate directly
- * 
- * on generate error:
- *      show error message
- */

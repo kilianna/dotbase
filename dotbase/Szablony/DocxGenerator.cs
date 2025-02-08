@@ -17,15 +17,16 @@ namespace DotBase.Szablony
         public delegate void onFinishedDelegate(bool success, string errorMessage);
         public event onFinishedDelegate onFinished;
         private string json;
+        private string jsonFile;
         private Process proc;
         private StringBuilder stdout = new StringBuilder();
         private StringBuilder stderr = new StringBuilder();
 
         static DocxGenerator() {
             var dir = N.getProgramDir();
-            xml2docxExe = dir + "\\xml2docx.exe";
+            xml2docxExe = dir + @"\Szablony\xml2docx.exe";
             if (!File.Exists(xml2docxExe)) {
-                xml2docxExe = dir + "\\xml2docx-win.exe";
+                xml2docxExe = dir + @"\Szablony\xml2docx-win.exe";
             }
             if (!File.Exists(xml2docxExe))
             {
@@ -35,7 +36,7 @@ namespace DotBase.Szablony
 
         public void generate(string template, object data, string output)
         {
-            string jsonFile = null; // TODO: delete file when done
+            jsonFile = null;
             try
             {
                 if (xml2docxExe == null)
@@ -73,6 +74,11 @@ namespace DotBase.Szablony
             }
             catch (Exception ex)
             {
+                if (jsonFile != null) {
+                    try { File.Delete(jsonFile); }
+                    catch (Exception) { }
+                    jsonFile = null;
+                }
                 if (onFinished != null)
                 {
                     onFinished.Invoke(false, ex.Message);
@@ -105,6 +111,11 @@ namespace DotBase.Szablony
 
         private void proc_Exited(object sender, EventArgs e)
         {
+            if (jsonFile != null) {
+                try { File.Delete(jsonFile); }
+                catch (Exception) { }
+                jsonFile = null;
+            }
             if (onFinished != null)
             {
                 if (proc.ExitCode == 0)

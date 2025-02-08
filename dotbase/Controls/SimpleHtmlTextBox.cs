@@ -457,7 +457,7 @@ namespace DotBase.Controls
             rt.Clear();
         }
 
-        public bool Enabled
+        new public bool Enabled
         {
             get { return rt.Enabled; }
             set { rt.Enabled = value; }

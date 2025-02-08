@@ -89,6 +89,16 @@ namespace DotBase.Test
             // Czekaj na zmianę karty
             wait(() =>
             {
+                // Sprawdź, czy to nie wygenerowało błędu
+                var messageBox2 = getForm<MyMessageBox>(false);
+                if (messageBox2 != null)
+                {
+                    press(messageBox2.AcceptButton as Control);
+                    index++;
+                    if (!DebugOptions.stopTest)
+                        wait(run2);
+                    return;
+                }
                 // Wciśnij "Świadectwo i pismo"
                 press(field<Button>(wzorcowanieForm, "button13"));
                 // Czekaj na okno "Świadectwo i pismo"
