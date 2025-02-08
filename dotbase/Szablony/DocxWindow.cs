@@ -202,7 +202,9 @@ namespace DotBase.Szablony
             Close();
             if (DebugOptions.nieOtwieraj) return;
             var proc = new Process();
-            proc.StartInfo.FileName = file;
+            //proc.StartInfo.FileName = file;
+            proc.StartInfo.FileName = @"c:\work\ania\dotbase\temp\.vnev\Scripts\pythonw.exe";
+            proc.StartInfo.Arguments = @"C:\work\ania\dotbase\temp\reopen.py " + '"' + file + '"';
             proc.StartInfo.UseShellExecute = true;
             proc.Start();
             proc.Dispose();
