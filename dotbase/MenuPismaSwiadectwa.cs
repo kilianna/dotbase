@@ -160,9 +160,23 @@ namespace DotBase
                 .INFO("Zmieniono nr i rok pisma w karcie przyjęcia")
                 .EXECUTE();
 
+            var szablon = new pismo_wzor();
+            szablon.jezyk = Jezyk.PL;
+            szablon.nrPisma = nrPisma;
+            szablon.poprawa = poprawa.Checked;
+            szablon.nrKarty = _NumerKarty;
+            szablon.dataWystawienia = dataWystawienia.Value;
+            szablon.dataWykonania = dataWykonania.Value;
+            szablon.uwaga = textBox1.Text;
+            szablon.rokPisma = rokPisma;
+            szablon.przedluzonaWaznosc = checkBox1.Checked;
+            szablon.odlaczWykresMD = odlaczWykresBoxMD.Checked;
+            szablon.odlaczWykresD = odlaczWykresBoxD.Checked;
+            szablon.Generate(this);
+
             string sciezka = _DocumentationPathsLoader.GetPath("PismoPrzewodnieWynik", Jezyk.PL) + nrPisma + poprawaSuffix() + "PismoPrzewodnieWynik" + _NumerKarty + ".html";
 
-			Dokumenty.PismoPrzewodnie pismo = new Dokumenty.PismoPrzewodnie(_NumerKarty, dataWystawienia.Value, dataWykonania.Value, textBox1.Text, nrPismaNumer.Text, nrPismaRok.Text, checkBox1.Checked, poprawa.Checked, odlaczWykresBox.Checked);
+            Dokumenty.PismoPrzewodnie pismo = new Dokumenty.PismoPrzewodnie(_NumerKarty, dataWystawienia.Value, dataWykonania.Value, textBox1.Text, nrPismaNumer.Text, nrPismaRok.Text, checkBox1.Checked, poprawa.Checked, odlaczWykresBoxMD.Checked, odlaczWykresBoxD.Checked);
             if (!pismo.generateDocument(sciezka))
             {
                 MyMessageBox.Show("Nie można stowrzyć dokumentu z powodu braku danych lub ich błędnych wartości.", "Uwaga");

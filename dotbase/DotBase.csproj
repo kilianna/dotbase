@@ -128,6 +128,7 @@
       <DependentUpon>DocxWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Szablony\DocxCompare.cs" />
+    <Compile Include="Szablony\pismo_wzor.cs" />
     <Compile Include="Szablony\swiad_wzor.cs" />
     <Compile Include="Test\TestBase.cs" />
     <Compile Include="Test\TestForm.cs">
@@ -581,8 +582,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Resources\logTemplate.accdb.gz" />
-    <None Include="Szablony\swiad_wzor-en.json" />
-    <None Include="Szablony\swiad_wzor.json" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
@@ -629,6 +628,12 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Szablony\ifj-gr.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Szablony\pismo_wzor.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Szablony\xml2docx-win.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

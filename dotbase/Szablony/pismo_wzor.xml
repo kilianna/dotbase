@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<%! eval(utils.include("wspolne.js")) %>
+<document>
+
+    <!-- SEKCJA I STYLE -->
+    <p-style id="Normal" name="Normal">
+        <font face="Times New Roman" size="13pt"/>
+    </p-style>
+    <section
+        width="21cm"
+        height="29.7cm"
+        orientation="portrait"
+        margin="2.5cm"
+        header-margin="1.25cm"
+        footer-margin="1.25cm"
+    />
+
+    <!-- NAGŁÓWEK -->
+    <header>
+        <p tabs="center 8.89cm">
+            <img src="ifj-gr.png" width="2.01cm" height="1.82cm" horizontal="column 0.11cm" vertical="paragraph -0.12cm"
+            /><b face="Book Antiqua" size="14pt" spacing="3pt"><tab/>INSTYTUT FIZYKI JĄDROWEJ<br/><tab/>im. Henryka Niewodniczańskiego<br/><tab/>POLSKIEJ AKADEMII NAUK</b>
+        </p>
+        <p><font size="6pt">&nbsp;</font></p>
+        <p align="center">
+            <b face="Book Antiqua" size="11pt" spacing="2.9pt">Laboratorium Wzorcowania Przyrządów Dozymetrycznych</b>
+        </p>
+        <p border="none, none, black single 0.75pt 1pt"><font size="6pt">&nbsp;</font></p>
+        <p><font size="7pt">&nbsp;</font></p>
+    </header>
+
+    <!-- STOPKA -->
+    <footer>
+        <p border="black single 0.75pt 1pt, none, none">
+            <font size="2pt">&nbsp;</font>
+        </p>
+        <table border="none" inside-border="none">
+            <tc width="8cm"/>
+            <tc width="8cm"/>
+            <tr>
+                <td><p>
+                    <font face="Book Antiqua" size="8pt">ul. Radzikowskiego 152, 31-342 Kraków<br
+                    />www.ifj.edu.pl<br
+                    />www.wzorcowanie.ifj.edu.pl</font>
+                </p></td>
+                <td><p align="right">
+                    <font face="Book Antiqua" size="8pt">tel.: +48 12 662 8486; +48 692 771 875<br
+                    />e-mail: wzorcowanie@ifj.edu.pl</font>
+                </p></td>
+            </tr>
+        </table>
+    </footer>
+
+    <!-- TREŚĆ -->
+    <p align="right">
+        Kraków, <% tekst(dataWystawienia) %> r.
+    </p>
+    <p>
+        <%= multiline(zleceniodawca.Zleceniodawca.replace(/;/g, '\n')) %><br
+        /><%= multiline(zleceniodawca.Adres.replace(/;/g, '\n')) %>
+    </p>
+    <p align="right">
+        <b><% nrPisma %><% poprawa ? 'P' : '' %>/W/LWPD/<% rokPisma %></b>
+    </p>
+    <p></p>
+    <p line-spacing="1.5">
+        Szanowni Państwo,
+    </p>
+    <p align="justify" line-spacing="1.5">
+        <font vwnbsp="1">uprzejmie informuję, że przyrząd
+        typu <b><% nb(przyrzad.Typ) %></b>
+        nr fab. <b><% nb(przyrzad.Nr_fabryczny) %></b>
+        <%!
+            const usunSondy = { 'nie dotyczy': true, '': true, 'n/a': true, 'n/d': true, 'brak': true };
+            let sondyOk = sondy.filter(sonda => !(sonda.Nr_fabryczny.trim().toLowerCase() in usunSondy));
+            let info;
+            if (sondyOk.length == 0) {
+                info = '';
+            } else if (sondyOk.length == 1) {
+                info = `wraz z sondą <b>${nb(sondyOk[0].Typ)}</b> nr fab. <b>${nb(sondyOk[0].Nr_fabryczny)}</b>`;
+            } else if (sondyOk.length == 2) {
+                info = `wraz z sondami <b>${nb(sondyOk[0].Typ)}</b> nr fab. <b>${nb(sondyOk[0].Nr_fabryczny)}</b>
+                        i <b>${nb(sondyOk[1].Typ)}</b> nr fab. <b>${nb(sondyOk[1].Nr_fabryczny)}</b>`;
+            } else {
+                info = 'wraz z sondami ' + sondyOk
+                    .map(sonda => `<b>${nb(sonda.Typ)}</b> nr fab. <b>${nb(sonda.Nr_fabryczny)}</b>`)
+                    .join(', ');
+            }
+        %>
+        <%= info %>
+        został wykalibrowany dnia <b><% nb(tekst(dataWykonania)) %></b>
+        w Laboratorium Wzorcowania Przyrządów Dozymetrycznych Instytutu Fizyki Jądrowej
+        im. H. Niewodniczańskiego PAN w Krakowie i otrzymał
+        Świadectwo Wzorcowania nr <b><% nrKarty %><% poprawa ? 'P' : '' %>/<% dataWykonania.rok %></b>.</font>
+    </p>
+    <%! if (uwaga.trim()) { %>
+        <p></p>
+        <%= simpleHtml('Uwagi: ' + uwaga, '<p align="justify" line-spacing="1.5"><font vwnbsp="1">***</font></p>') %>
+    <%! } %>
+    <%! if (ileD + ileMD + ileSD + ileSM > 0) { %>
+        <p></p>
+        <p align="justify" line-spacing="1.5">
+            <font vwnbsp="1">Informuję także, że zgodnie z rozporządzeniem Rady Ministrów z dnia 23 grudnia 2002 r.
+            w sprawie wymagań dotyczących sprzętu dozymetrycznego (Dziennik Ustaw Nr 239, poz. 2032, z dnia 31 grudnia 2002 r.)
+            termin następnej kalibracji w/w przyrządu upływa z dniem <b><% nb(tekst(dataNastepna)) %> r</b>.</font>
+        </p>
+    <%! } %>
+    <p></p>
+    <p line-spacing="1.5">
+        Zapraszamy do dalszego korzystania z naszych usług.
+    </p>
+
+    <!-- ZAŁĄCZNIKI -->
+    <table width="16cm" horizontal="page 2.5cm" vertical="margin bottom" border="none"><tr><td>
+        <p><font size="7pt">&nbsp;</font></p>
+        <p>
+            <%! i = 2 %>
+            Załączniki:
+            <br/>&nbsp;&nbsp;1. Świadectwo Wzorcowania nr <% nrKarty %><% poprawa ? 'P' : '' %>/<% dataWykonania.rok %>
+            <%! if (ileMD > 0 && !odlaczWykresMD) { %>
+                <br/>&nbsp;&nbsp;<% i++ %>. Wykres kalibracyjny w zakresie mocy dawki
+            <%! } %>
+            <%! if (ileD > 0 && !odlaczWykresD) { %>
+                <br/>&nbsp;&nbsp;<% i++ %>. Wykres kalibracyjny w zakresie dawki
+            <%! } %>
+        </p>
+        <p><font size="5pt">&nbsp;</font></p>
+    </td></tr></table>
+</document>

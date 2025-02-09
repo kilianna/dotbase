@@ -69,9 +69,8 @@ function tekst(x, y) {
 
 function multiline(x) {
     return x
-        .trim()
         .split(/\r?\n/)
-        .map(v => escape(v))
+        .map(v => escape(v.trim()))
         .join('<br/>');
 }
 
@@ -186,7 +185,7 @@ function numberAsIs(value) {
         .replace('.', ' ').trimEnd().replace(' ', ustawieniaJezyka.kropka);
 }
 
-function simpleHtml(x) {
+function simpleHtml(x, paragraph) {
     let tokens = x
         .split(/(&[a-z]+;|[ \t]*\r?\n|<\/?[a-z]+(?:[^a-z>][^>]*)?>)/gi)
         .filter(x => x.length);
@@ -258,7 +257,19 @@ function simpleHtml(x) {
         let name = tagsStack.pop();
         res += `</${name}>`;
     }
+    if (paragraph) {
+        res = res
+            .split('<br/>')
+            .map(x => paragraph.replace('***', x))
+            .join('');
+    }
     return res;
+}
+
+function nb(text) {
+    return text
+        .replace(/ /g, ' ')
+        .replace(/-/g, '‑');
 }
 
 function test() {

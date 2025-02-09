@@ -52,7 +52,7 @@
             this.label18 = new System.Windows.Forms.Label();
             this.nrPismaStalaCzesc = new System.Windows.Forms.TextBox();
             this.nrPismaRok = new System.Windows.Forms.TextBox();
-            this.odlaczWykresBox = new System.Windows.Forms.CheckBox();
+            this.odlaczWykresBoxMD = new System.Windows.Forms.CheckBox();
             this.dolaczTabPunktyBox = new System.Windows.Forms.CheckBox();
             this.uwMD = new DotBase.Controls.SimpleHtmlTextBox();
             this.uwD = new DotBase.Controls.SimpleHtmlTextBox();
@@ -62,6 +62,8 @@
             this.textBox1 = new DotBase.Controls.SimpleHtmlTextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.odlaczWykresBoxD = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
             nrPismaPrzycisk = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -316,24 +318,24 @@
             this.nrPismaRok.TabIndex = 24;
             this.nrPismaRok.Text = "2024";
             // 
-            // odlaczWykresBox
+            // odlaczWykresBoxMD
             // 
-            this.odlaczWykresBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.odlaczWykresBox.AutoEllipsis = true;
-            this.odlaczWykresBox.Location = new System.Drawing.Point(516, 419);
-            this.odlaczWykresBox.Margin = new System.Windows.Forms.Padding(4);
-            this.odlaczWykresBox.Name = "odlaczWykresBox";
-            this.odlaczWykresBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.odlaczWykresBox.Size = new System.Drawing.Size(320, 21);
-            this.odlaczWykresBox.TabIndex = 25;
-            this.odlaczWykresBox.Text = "Odłącz wykres";
-            this.odlaczWykresBox.UseVisualStyleBackColor = true;
+            this.odlaczWykresBoxMD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.odlaczWykresBoxMD.AutoEllipsis = true;
+            this.odlaczWykresBoxMD.Location = new System.Drawing.Point(624, 448);
+            this.odlaczWykresBoxMD.Margin = new System.Windows.Forms.Padding(4);
+            this.odlaczWykresBoxMD.Name = "odlaczWykresBoxMD";
+            this.odlaczWykresBoxMD.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.odlaczWykresBoxMD.Size = new System.Drawing.Size(118, 21);
+            this.odlaczWykresBoxMD.TabIndex = 25;
+            this.odlaczWykresBoxMD.Text = "mocy dawki";
+            this.odlaczWykresBoxMD.UseVisualStyleBackColor = true;
             // 
             // dolaczTabPunktyBox
             // 
             this.dolaczTabPunktyBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dolaczTabPunktyBox.AutoEllipsis = true;
-            this.dolaczTabPunktyBox.Location = new System.Drawing.Point(516, 448);
+            this.dolaczTabPunktyBox.Location = new System.Drawing.Point(516, 419);
             this.dolaczTabPunktyBox.Margin = new System.Windows.Forms.Padding(4);
             this.dolaczTabPunktyBox.Name = "dolaczTabPunktyBox";
             this.dolaczTabPunktyBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -395,6 +397,8 @@
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.odlaczWykresBoxD);
             this.groupBox3.Controls.Add(this.textBox1);
             this.groupBox3.Controls.Add(this.uwS);
             this.groupBox3.Controls.Add(this.uwSD);
@@ -402,7 +406,7 @@
             this.groupBox3.Controls.Add(this.uwD);
             this.groupBox3.Controls.Add(this.uwMD);
             this.groupBox3.Controls.Add(this.dolaczTabPunktyBox);
-            this.groupBox3.Controls.Add(this.odlaczWykresBox);
+            this.groupBox3.Controls.Add(this.odlaczWykresBoxMD);
             this.groupBox3.Controls.Add(this.nrPismaRok);
             this.groupBox3.Controls.Add(this.nrPismaStalaCzesc);
             this.groupBox3.Controls.Add(this.label18);
@@ -440,6 +444,28 @@
             this.label11.Size = new System.Drawing.Size(361, 17);
             this.label11.TabIndex = 18;
             this.label11.Text = "Formatowanie możliwe po wciśnięciu prawego przycisku.";
+            // 
+            // odlaczWykresBoxD
+            // 
+            this.odlaczWykresBoxD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.odlaczWykresBoxD.AutoEllipsis = true;
+            this.odlaczWykresBoxD.Location = new System.Drawing.Point(750, 448);
+            this.odlaczWykresBoxD.Margin = new System.Windows.Forms.Padding(4);
+            this.odlaczWykresBoxD.Name = "odlaczWykresBoxD";
+            this.odlaczWykresBoxD.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.odlaczWykresBoxD.Size = new System.Drawing.Size(170, 21);
+            this.odlaczWykresBoxD.TabIndex = 33;
+            this.odlaczWykresBoxD.Text = "dawki";
+            this.odlaczWykresBoxD.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(513, 449);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(103, 17);
+            this.label3.TabIndex = 34;
+            this.label3.Text = "Odłącz wykres:";
             // 
             // MenuPismaSwiadectwaForm
             // 
@@ -492,7 +518,7 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox nrPismaStalaCzesc;
         private System.Windows.Forms.TextBox nrPismaRok;
-        private System.Windows.Forms.CheckBox odlaczWykresBox;
+        private System.Windows.Forms.CheckBox odlaczWykresBoxMD;
         private System.Windows.Forms.CheckBox dolaczTabPunktyBox;
         private Controls.SimpleHtmlTextBox uwMD;
         private Controls.SimpleHtmlTextBox uwD;
@@ -502,5 +528,7 @@
         private Controls.SimpleHtmlTextBox textBox1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckBox odlaczWykresBoxD;
     }
 }

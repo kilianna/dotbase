@@ -37,14 +37,16 @@ namespace DotBase
 			private readonly string EVIDENCE_CORRECTION_MARKER = "P";
             PismoPrzewodnieData m_data = new PismoPrzewodnieData();
             StringBuilder m_templateToFill = DocumentsTemplatesFactory.getInstance().create(DocumentsTemplatesFactory.TemplateType.SCIEZKA_PISMO_PRZEWODNIE);
-            private bool odlaczWykres;
+            private bool odlaczWykresMD;
+            private bool odlaczWykresD;
 
             //****************************************************************************************
-            public PismoPrzewodnie(int nrKarty, DateTime dataWystawienia, DateTime dataWykonania, string uwaga, string nrPisma, string rokPisma, bool przedluzonaWaznosc, bool poprawa, bool odlaczWykres)
+            public PismoPrzewodnie(int nrKarty, DateTime dataWystawienia, DateTime dataWykonania, string uwaga, string nrPisma, string rokPisma, bool przedluzonaWaznosc, bool poprawa, bool odlaczWykresMD, bool odlaczWykresD)
                 : base(Jezyk.PL)
             //****************************************************************************************
             {
-                this.odlaczWykres = odlaczWykres;
+                this.odlaczWykresMD = odlaczWykresMD;
+                this.odlaczWykresD = odlaczWykresD;
                 _NrKarty = nrKarty.ToString();
                 m_data.setValue(PismoPrzewodnieData.DataType.NR_KARTY, _NrKarty);
                 m_data.setValue(PismoPrzewodnieData.DataType.DATA_WYSTAWIENIA, dataWystawienia.ToString("dd.MM.yyyy"));
@@ -108,7 +110,10 @@ namespace DotBase
                     if (0 != _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0))
                     {
                         UsunKomentarzeDotWzorcowaniaCezem();
-                        m_data.setValue(PismoPrzewodnieData.DataType.INFO_WYKRES_KALIB, "<li>Wykres kalibracyjny w zakresie dawki</li>");
+                        if (!odlaczWykresD)
+                        {
+                            m_data.setValue(PismoPrzewodnieData.DataType.INFO_WYKRES_KALIB, "<li>Wykres kalibracyjny w zakresie dawki</li>");
+                        }
                     }
                 }
                 catch (Exception)
@@ -254,7 +259,8 @@ namespace DotBase
                 if (0 != _BazaDanych.TworzTabeleDanych(_Zapytanie).Rows[0].Field<int>(0))
                 {
                     UsunKomentarzeDotWzorcowaniaCezem();
-                    if (!odlaczWykres) {
+                    if (!odlaczWykresMD)
+                    {
                         m_data.setValue(PismoPrzewodnieData.DataType.INFO_WYKRES, "<li>Wykres kalibracyjny w zakresie mocy dawki</li>");
                     }
                 }

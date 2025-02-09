@@ -68,11 +68,20 @@ namespace DotBase.Szablony
                     Type thisType = this.GetType();
                     var win = new DocxWindow();
                     var outputFile = Path.Combine(N.getProgramDir(), FileName);
-                    var templateFile = String.Format(@"{0}\Szablony\{1}{2}.xml", N.getProgramDir(), thisType.Name, JezykTools.kocowka(jezyk));
+                    string templateFile;
+#if DEBUG
+                    templateFile = String.Format(@"{0}\..\..\Szablony\{1}{2}.xml", N.getProgramDir(), thisType.Name, JezykTools.kocowka(jezyk));
+                    if (!File.Exists(templateFile))
+                    {
+                        templateFile = String.Format(@"{0}\..\..\Szablony\{1}.xml", N.getProgramDir(), thisType.Name);
+                    }
+#else
+                    templateFile = String.Format(@"{0}\Szablony\{1}{2}.xml", N.getProgramDir(), thisType.Name, JezykTools.kocowka(jezyk));
                     if (!File.Exists(templateFile))
                     {
                         templateFile = String.Format(@"{0}\Szablony\{1}.xml", N.getProgramDir(), thisType.Name);
                     }
+#endif
                     win.generate(owner, templateFile, this, outputFile);
                     win.Dispose();
                 }
