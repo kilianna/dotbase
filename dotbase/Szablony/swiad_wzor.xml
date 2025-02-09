@@ -165,18 +165,18 @@ if (poprawa) {
     <tr>
       <td rowspan="3"><b>WARUNKI ŚRODOWISKOWE</b></td>
       <td><b>Ciśnienie</b></td>
-      <td>( <% tekst(warunkiMin.cisnienie - stale.UNCERTAINITY_PRESSURE_VALUE) %>
-          - <% tekst(warunkiMax.cisnienie + stale.UNCERTAINITY_PRESSURE_VALUE) %> ) hPa</td>
+      <td>(<% tekst(warunkiMin.cisnienie - stale.UNCERTAINITY_PRESSURE_VALUE) %>
+          - <% tekst(warunkiMax.cisnienie + stale.UNCERTAINITY_PRESSURE_VALUE) %>) hPa</td>
     </tr>
     <tr>
       <td><b>Temperatura</b></td>
-      <td>( <% tekst(warunkiMin.temperatura - stale.UNCERTAINITY_TEMPERATURE_VALUE) %>
-          - <% tekst(warunkiMax.temperatura + stale.UNCERTAINITY_TEMPERATURE_VALUE) %> ) <sup>o</sup>C</td>
+      <td>(<% tekst(warunkiMin.temperatura - stale.UNCERTAINITY_TEMPERATURE_VALUE) %>
+          - <% tekst(warunkiMax.temperatura + stale.UNCERTAINITY_TEMPERATURE_VALUE) %>) <sup>o</sup>C</td>
     </tr>
     <tr>
       <td><b>Wilgotność</b></td>
-      <td>( <% tekst(warunkiMin.wilgotnosc - stale.UNCERTAINITY_HUMIDITY_VALUE) %>
-          - <% tekst(warunkiMax.wilgotnosc + stale.UNCERTAINITY_HUMIDITY_VALUE) %> ) %</td>
+      <td>(<% tekst(warunkiMin.wilgotnosc - stale.UNCERTAINITY_HUMIDITY_VALUE) %>
+          - <% tekst(warunkiMax.wilgotnosc + stale.UNCERTAINITY_HUMIDITY_VALUE) %>) %</td>
     </tr>
     <tr>
       <td>DATA PRZYJĘCIA DO WZORCOWANIA</td>
@@ -193,7 +193,7 @@ if (poprawa) {
     <tr>
       <td>WYNIKI WZORCOWANIA</td>
       <td colspan="2" p-align="justify">
-        Podano na stronie 2 niniejszego świadectwa wraz z wartościami niepewności pomiaru. Wyniki dotyczą
+        Podano na kolejnych stronach niniejszego świadectwa wraz z wartościami niepewności pomiaru. Wyniki dotyczą
         wyłącznie obiektów poddanych wzorcowaniu.
       </td>
     </tr>
@@ -237,7 +237,7 @@ for (let i = 0; i < wyniki.length; i++) {
   }
 
   function pokazSonde() {
-    %><p tabs="1cm, 9cm"><tab/>Typ sondy:&nbsp;
+    %><p tabs="9.5cm">Typ sondy:&nbsp;
     <% wyn.sonda ? wyn.sonda.Typ : 'nie dotyczy' %><tab/>Numer fabryczny sondy:&nbsp;
     <% wyn.sonda ? wyn.sonda.Nr_fabryczny : 'nie dotyczy' %></p><%!
   }
@@ -267,17 +267,17 @@ for (let i = 0; i < wyniki.length; i++) {
   <%! if (dolaczTabPunktow && wyn.tabela.length === 1) { %>
 
   <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">
-    <tc width="14mm" />
-    <tc width="52mm" />
-    <tc width="52mm" />
-    <tc width="52mm" />
+    <tc width="19mm" />
+    <tc width="57mm" />
+    <tc width="57mm" />
+    <tc width="57mm" />
     <tr font-bold="1">
       <td rowspan="2">Lp.</td>
-      <td>WARTOŚĆ WZORCOWA</td>
-      <td>WARTOŚĆ ZMIERZONA</td>
-      <td>WARTOŚĆ WSPÓŁCZYNNIKA POPRAWKOWEGO</td>
+      <td>Wartość wzorcowa</td>
+      <td>Wartość zmierzona</td>
+      <td>Wartość współczynnika poprawkowego</td>
     </tr>
-    <tr font-bold="1">
+    <tr>
       <td><% mikro(jednostka) %></td>
       <td><% mikro(jednostka) %></td>
       <td><% mikro(korekcjaJednostki) %></td>
@@ -303,13 +303,13 @@ for (let i = 0; i < wyniki.length; i++) {
   <%! } else { %>
 
   <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">
-    <tc width="8.5cm" />
-    <tc width="8.5cm" />
+    <tc width="9.5cm" />
+    <tc width="9.5cm" />
     <tr font-bold="1">
-      <td>ZAKRES POMIAROWY PRZYRZĄDU</td>
-      <td>WARTOŚĆ WSPÓŁCZYNNIKA POPRAWKOWEGO</td>
+      <td>Zakres pomiarowy przyrządu</td>
+      <td>Wartość współczynnika poprawkowego</td>
     </tr>
-    <tr font-bold="1">
+    <tr>
       <td><% mikro(jednostka) %></td>
       <td><% mikro(korekcjaJednostki) %></td>
     </tr>
@@ -349,13 +349,13 @@ for (let i = 0; i < wyniki.length; i++) {
   <p></p>
 
   <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">
-    <tc width="8.5cm" />
-    <tc width="8.5cm" />
+    <tc width="9.5cm" />
+    <tc width="9.5cm" />
     <tr font-bold="1">
-      <td>ZAKRES POMIAROWY PRZYRZĄDU</td>
-      <td>WARTOŚĆ WSPÓŁCZYNNIKA POPRAWKOWEGO</td>
+      <td>Zakres pomiarowy przyrządu</td>
+      <td>Wartość współczynnika poprawkowego</td>
     </tr>
-    <tr font-bold="1">
+    <tr>
       <td><% wielkosciFizyczne.map(w => rownowaznikiDawki[w].jednostka).filter(w => w).join(' oraz ') %></td>
       <td>-</td>
     </tr>
@@ -405,15 +405,15 @@ for (let i = 0; i < wyniki.length; i++) {
   <p></p>
 
   <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">
-    <tc width="4.5cm" />
-    <tc width="6.5cm" />
-    <tc width="6.0cm" />
+    <tc width="6.34cm" />
+    <tc width="6.33cm" />
+    <tc width="6.33cm" />
     <tr font-bold="1">
-      <td>USTAWIONY PRÓG</td>
-      <td>RZECZYWISTE WARTOŚCI, PRZY KTÓRYCH WŁĄCZONA ZOSTAJE SYGNALIZACJA OSTRZEGAWCZA</td>
-      <td>WARTOŚĆ WSPÓŁCZYNNIKA POPRAWKOWEGO</td>
+      <td>Ustawiony próg</td>
+      <td>Rzeczywiste wartości, przy których włączona zostaje sygnalizacja ostrzegawcza</td>
+      <td>Wartość współczynnika poprawkowego</td>
     </tr>
-    <tr font-bold="1">
+    <tr>
       <td><% mikro(wyn.jednostka?.Jednostka || blad('Brak jednostki w SMD')) %></td>
       <td><% mikro(wyn.jednostka?.Jednostka || blad('Brak jednostki w SMD')) %></td>
       <td>-</td>
@@ -452,15 +452,15 @@ for (let i = 0; i < wyniki.length; i++) {
   <p></p>
 
   <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">
-    <tc width="4.5cm" />
-    <tc width="6.5cm" />
-    <tc width="6.0cm" />
+    <tc width="6.34cm" />
+    <tc width="6.33cm" />
+    <tc width="6.33cm" />
     <tr font-bold="1">
-      <td>USTAWIONY PRÓG</td>
-      <td>RZECZYWISTE WARTOŚCI, PRZY KTÓRYCH WŁĄCZONA ZOSTAJE SYGNALIZACJA OSTRZEGAWCZA</td>
-      <td>WARTOŚĆ WSPÓŁCZYNNIKA POPRAWKOWEGO</td>
+      <td>Ustawiony próg</td>
+      <td>Rzeczywiste wartości, przy których włączona zostaje sygnalizacja ostrzegawcza</td>
+      <td>Wartość współczynnika poprawkowego</td>
     </tr>
-    <tr font-bold="1">
+    <tr>
       <%! let jedn = mikro(wyn.jednostka?.Jednostka.split('/')[0] || blad('Brak jednostki w SD')); %>
       <td><% jedn %></td>
       <td><% jedn %></td>
@@ -533,7 +533,7 @@ for (let i = 0; i < wyniki.length; i++) {
       <td rowspan="2">Rodzaj promie-<br/>niowania</td>
       <td>Powierzchniowa emisja promieniowania</td>
     </tr>
-    <tr font-bold="1">
+    <tr>
       <td>V</td>
       <td>1/(cm<sup>2</sup>⋅s)</td>
       <td>1/(cm<sup>2</sup>)</td>
