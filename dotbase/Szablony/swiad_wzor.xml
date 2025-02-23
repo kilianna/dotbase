@@ -66,13 +66,13 @@ if (poprawa) {
   <section
       border="single black 0.5mm 5mm"
       width="21cm" height="29.7cm"
-      margin="1cm 1cm 1cm 1cm" headerMargin="1cm" footerMargin="1cm" />
+      margin="1.5cm 1.5cm 1.5cm 1.5cm" headerMargin="1.5cm" footerMargin="1.5cm" />
 
   <header page="first">
     <p align="center" preserve="y">
-      <img src="ifj.png" width="2.2cm" height="2cm" horizontal="page 1.5cm" vertical="top-margin 2.2cm"
-        /><img src="pca.png" width="1.77cm" height="3cm" horizontal="right-margin -2.27cm" vertical="page 1.1cm"
-        /><img src="ilac-mra.png" width="1.77cm" height="1.77cm" horizontal="right-margin -2.27cm" vertical="page 4.4cm"
+      <img src="ifj.png" width="2.2cm" height="2cm" horizontal="page 1.8cm" vertical="top-margin 2.6cm"
+        /><img src="pca.png" width="1.77cm" height="3cm" horizontal="right-margin -2.25cm" vertical="page 1.6cm"
+        /><img src="ilac-mra.png" width="1.77cm" height="1.77cm" horizontal="right-margin -2.25cm" vertical="page 4.9cm"
         /><b>Laboratorium Wzorcowania Przyrządów Dozymetrycznych</b><br/>
       Instytut Fizyki Jądrowej im. Henryka Niewodniczańskiego<br/>
       Polskiej Akademii Nauk<br/>
@@ -87,7 +87,7 @@ if (poprawa) {
     <p>
       <font size="22pt" bold="y">ŚWIADECTWO WZORCOWANIA</font>
     </p>
-    <p tabs="1cm, 10.5cm center, 18cm right" border="none, none, single black 0.3mm">
+    <p tabs="1cm, 10.5cm center, 17cm right" border="none, none, single black 0.3mm">
       <br/>
       <tab/>Data wydania:&nbsp; <% tekst(data_wydania) %>
       <tab/>Nr świadectwa:&nbsp; <b><% nr_swiadectwa %></b>
@@ -105,7 +105,7 @@ if (poprawa) {
     <p align="center">
       ŚWIADECTWO WZORCOWANIA wydane przez LABORATORIUM AKREDYTOWANE Nr AP 029<br/>
     </p>
-    <p tabs="1cm, 10.5cm center, 18cm right" border="none, none, single black 0.3mm">
+    <p tabs="1cm, 10.5cm center, 17cm right" border="none, none, single black 0.3mm">
       <tab/>Data wydania:&nbsp; <% tekst(data_wydania) %>
       <tab/>Nr świadectwa:&nbsp; <b><% nr_swiadectwa %></b>
       <tab/>Strona&nbsp; <page-number/>/<total-pages/><br/>
@@ -122,7 +122,7 @@ if (poprawa) {
   <table border="none" inside-border="none, none" font-avoid-orphans="1" font-vwnbsp="y">
     <tc width="5cm" font-size="9pt" font-bold="y" td-margin="3.5mm 5mm 1mm 0mm"/>
     <tc width="3.5cm" font-size="9pt" td-margin="1mm 0mm"/>
-    <tc width="10.5cm" font-size="9pt" td-margin="1mm 0mm"/>
+    <tc width="9.5cm" font-size="9pt" td-margin="1mm 0mm"/>
     <tr>
       <td rowspan="5">OBIEKT WZORCOWANIA</td>
       <td><b>Nazwa</b></td>
@@ -267,10 +267,10 @@ for (let i = 0; i < wyniki.length; i++) {
   <%! if (dolaczTabPunktow && wyn.tabela.length === 1) { %>
 
   <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">
-    <tc width="19mm" />
-    <tc width="57mm" />
-    <tc width="57mm" />
-    <tc width="57mm" />
+    <tc width="18mm" />
+    <tc width="54mm" />
+    <tc width="54mm" />
+    <tc width="54mm" />
     <tr font-bold="1">
       <td rowspan="2">Lp.</td>
       <td>Wartość wzorcowa</td>
@@ -303,8 +303,8 @@ for (let i = 0; i < wyniki.length; i++) {
   <%! } else { %>
 
   <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">
-    <tc width="9.5cm" />
-    <tc width="9.5cm" />
+    <tc width="9cm" />
+    <tc width="9cm" />
     <tr font-bold="1">
       <td>Zakres pomiarowy przyrządu</td>
       <td>Wartość współczynnika poprawkowego</td>
@@ -325,12 +325,12 @@ for (let i = 0; i < wyniki.length; i++) {
   <%! } %>
 
   <p></p>
-  <p>Zmierzoną wartość <% wzorcowanie.Wielkosc_fizyczna.replace('moc', 'mocy') %> należy pomnożyć
+  <p align="justify" font-vwnbsp="1">Zmierzoną wartość <% wzorcowanie.Wielkosc_fizyczna.replace('moc', 'mocy') %> należy pomnożyć
     przez odpowiednią wartość współczynnika poprawkowego dla danego zakresu pomiarowego przyrządu.</p>
   <p></p>
 
   <%! if (uwMD?.trim()) { %>
-  <p><%= simpleHtml(uwMD) %></p>
+  <%= simpleHtml(uwMD, '<p align="justify" font-vwnbsp="1">***</p>') %>
   <p></p>
   <%! } %>
 
@@ -349,8 +349,8 @@ for (let i = 0; i < wyniki.length; i++) {
   <p></p>
 
   <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">
-    <tc width="9.5cm" />
-    <tc width="9.5cm" />
+    <tc width="9cm" />
+    <tc width="9cm" />
     <tr font-bold="1">
       <td>Zakres pomiarowy przyrządu</td>
       <td>Wartość współczynnika poprawkowego</td>
@@ -369,12 +369,12 @@ for (let i = 0; i < wyniki.length; i++) {
   </table>
 
   <p></p>
-  <p>Zmierzoną wartość <%= wielkosciFizyczne.map(w => rownowaznikiDawki[w].czego).filter(w => w).join(' oraz ') %>
+  <p align="justify" font-vwnbsp="1">Zmierzoną wartość <%= wielkosciFizyczne.map(w => rownowaznikiDawki[w].czego).filter(w => w).join(' oraz ') %>
     należy pomnożyć przez wartość współczynnika poprawkowego.</p>
   <p></p>
 
   <%! if (uwD?.trim()) { %>
-  <p><%= simpleHtml(uwD) %></p>
+  <%= simpleHtml(uwD, '<p align="justify" font-vwnbsp="1">***</p>') %>
   <p></p>
   <%! } %>
 
@@ -394,20 +394,21 @@ for (let i = 0; i < wyniki.length; i++) {
 
   <%! if (opisowy) { %>
 
-  <p><%= simpleHtml(opisowy) %></p>
+  <%= simpleHtml(opisowy, '<p align="justify" font-vwnbsp="1">***</p>') %>
   <p></p>
   
   <%! } else { %>
 
-  <p>Zestawienie nastawień przyrządu i odpowiadających im rzeczywistych wartości, przy których włączona zostaje sygnalizacja ostrzegawcza.</p>
+  <p align="justify" font-vwnbsp="1">Zestawienie nastawień przyrządu i odpowiadających im rzeczywistych wartości,
+    przy których włączona zostaje sygnalizacja ostrzegawcza.</p>
   <p></p>
   <%! pokazSonde() %>
   <p></p>
 
   <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">
-    <tc width="6.34cm" />
-    <tc width="6.33cm" />
-    <tc width="6.33cm" />
+    <tc width="6cm" />
+    <tc width="6cm" />
+    <tc width="6cm" />
     <tr font-bold="1">
       <td>Ustawiony próg</td>
       <td>Rzeczywiste wartości, przy których włączona zostaje sygnalizacja ostrzegawcza</td>
@@ -430,13 +431,13 @@ for (let i = 0; i < wyniki.length; i++) {
   </table>
 
   <p></p>
-  <p>Wybraną wartość progu należy pomnożyć przez odpowiednią wartość współczynnika poprawkowego.</p>
+  <p align="justify" font-vwnbsp="1">Wybraną wartość progu należy pomnożyć przez odpowiednią wartość współczynnika poprawkowego.</p>
   <p></p>
 
   <%! } %>
 
   <%! if (uwSMD?.trim()) { %>
-  <p><%= simpleHtml(uwSMD) %></p>
+  <%= simpleHtml(uwSMD, '<p align="justify" font-vwnbsp="1">***</p>') %>
   <p></p>
   <%! } %>
 
@@ -446,15 +447,15 @@ for (let i = 0; i < wyniki.length; i++) {
 
   <p><% litera(podpunkt++) %>) Wzorcowanie źródłem gamma: Cs-137; przestrzenny równoważnik dawki (sygnalizator progowy)</p>
   <p></p>
-  <p>Zestawienie nastawień przyrządu i odpowiadających im rzeczywistych wartości, przy których włączona zostaje sygnalizacja ostrzegawcza.</p>
+  <p align="justify" font-vwnbsp="1">Zestawienie nastawień przyrządu i odpowiadających im rzeczywistych wartości, przy których włączona zostaje sygnalizacja ostrzegawcza.</p>
   <p></p>
   <%! pokazSonde() %>
   <p></p>
 
   <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">
-    <tc width="6.34cm" />
-    <tc width="6.33cm" />
-    <tc width="6.33cm" />
+    <tc width="6cm" />
+    <tc width="6cm" />
+    <tc width="6cm" />
     <tr font-bold="1">
       <td>Ustawiony próg</td>
       <td>Rzeczywiste wartości, przy których włączona zostaje sygnalizacja ostrzegawcza</td>
@@ -485,11 +486,11 @@ for (let i = 0; i < wyniki.length; i++) {
   </table>
 
   <p></p>
-  <p>Wybraną wartość progu należy pomnożyć przez odpowiednią wartość współczynnika poprawkowego.</p>
+  <p align="justify" font-vwnbsp="1">Wybraną wartość progu należy pomnożyć przez odpowiednią wartość współczynnika poprawkowego.</p>
   <p></p>
 
   <%! if (uwSD?.trim()) { %>
-  <p><%= simpleHtml(uwSD) %></p>
+  <%= simpleHtml(uwSD, '<p align="justify" font-vwnbsp="1">***</p>') %>
   <p></p>
   <%! } %>
 
@@ -510,14 +511,14 @@ for (let i = 0; i < wyniki.length; i++) {
 
   <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">
     <tc width="0.75cm" />
-    <tc width="2cm" />
-    <tc width="2cm" />
-    <tc width="2cm" />
+    <tc width="1.7cm" />
+    <tc width="1.9cm" />
+    <tc width="1.9cm" />
     <tc width="2cm" />
     <tc width="2cm" />
     <tc width="3cm" />
     <tc width="2cm" />
-    <tc width="3.25cm" />
+    <tc width="2.75cm" />
     <tr font-bold="1">
       <td rowspan="3">Lp.</td>
       <td colspan="3">Sonda</td>
@@ -560,7 +561,7 @@ for (let i = 0; i < wyniki.length; i++) {
   </table>
 
   <p></p>
-  <p>
+  <p align="justify" font-vwnbsp="1">
     (*) liczbę cząstek emitowanych przez powierzchnię 1 cm<sup>2</sup> w ciągu 1 sekundy oblicza się mnożąc wskazania
     przyrządu (wyrażone w jednostkach podanych w tabeli) przez współczynnik kalibracyjny
   </p>
