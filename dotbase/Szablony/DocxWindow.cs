@@ -144,7 +144,7 @@ namespace DotBase.Szablony
                     alternateName = String.Format(@"{0}\{1} ({2}).docx", outputFileDir, outputFileWithoutExt, i);
                 }
                 log("Plik docelowy istnieje, alternatywna nazwa: " + alternateName);
-                var win = new DocxOverrideWindow(outputFile, Path.GetFileName(alternateName));
+                var win = new DocxOverrideWindow(outputFile, Path.GetFileName(alternateName), all.ToArray());
                 var result = win.ShowDialog();
                 win.Dispose();
                 if (result == System.Windows.Forms.DialogResult.Cancel)

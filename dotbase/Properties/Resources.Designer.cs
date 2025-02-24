@@ -71,15 +71,8 @@ namespace DotBase.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 5cb15df57767a8e01b5be62113886f755a1a4ec9 2024-05-31 11:00:11 +0200 
-        /// dotbase/AdministracjaForm.cs                    |   8 +-
-        /// dotbase/BazaDanych.cs                           |   4 +-
-        /// dotbase/BudzetNiepewnosciForm.cs                |   6 +-
-        /// dotbase/DotBase.csproj                          |  20 ++
-        /// dotbase/HelpKeyFilter.cs                        |   2 +-
-        /// dotbase/KartaPrzyjeciaForm.cs                   |  12 +-
-        /// dotbase/LogowanieForm.cs                        |   4 +-
-        /// dotbase/MenuBiuroForm.cs             [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to 646ef255a6daaa8d3eb5aa4f08b9dc88a69fa999 2025-02-09 17:02:21 +0100 
+        ///.
         /// </summary>
         internal static string GitVersion {
             get {
@@ -104,6 +97,16 @@ namespace DotBase.Properties {
             get {
                 object obj = ResourceManager.GetObject("logTemplate", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap podl {
+            get {
+                object obj = ResourceManager.GetObject("podl", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
