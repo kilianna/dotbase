@@ -14,12 +14,14 @@ on:
         - 'yes'
 jobs:
   build-program:
-    runs-on: windows-2022
+    runs-on: windows-2025
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '4.0.x'
+      - name: Set up .NET
+        shell: cmd
+        run: |
+          nuget install Microsoft.NETFramework.ReferenceAssemblies.net40 -Version 1.0.3 -OutputDirectory .. -Source https://api.nuget.org/v3/index.json
+          xcopy "..\Microsoft.NETFramework.ReferenceAssemblies.net40.1.0.3\build\.NETFramework\v4.0\*" "C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /E /I /Y /Q
       - name: Generate Release Package
         shell: cmd
         run: |
