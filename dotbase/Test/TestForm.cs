@@ -22,5 +22,16 @@ namespace DotBase.Test
             test.run(textHtmlDocxFrom.Text, textHtmlDocxTo.Text, checkHtmlDocxForce.Checked, zalTabPunBox.Checked);
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            new TestTmp().run();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            new TestTmp().run();
+        }
+
     }
 }

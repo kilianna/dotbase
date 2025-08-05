@@ -95,6 +95,12 @@ namespace DotBase.Test
             return (T)info.GetValue(obj);
         }
 
+        public static void method(object obj, string name, params object[] parameters)
+        {
+            var info = obj.GetType().GetMethod(name, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            info.Invoke(obj, parameters);
+        }
+
         public static void send(Control ctrl, string text)
         {
             if (!ctrl.Focus())

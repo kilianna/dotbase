@@ -128,6 +128,7 @@
       <DependentUpon>DocxWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Szablony\DocxCompare.cs" />
+    <Compile Include="Szablony\meldunek_wzor.cs" />
     <Compile Include="Szablony\pismo_wzor.cs" />
     <Compile Include="Szablony\swiad_wzor.cs" />
     <Compile Include="Test\TestBase.cs" />
@@ -159,6 +160,7 @@
     <Compile Include="Logging\Logging.cs" />
     <Compile Include="Login\User.cs" />
     <Compile Include="Login\Users.cs" />
+    <Compile Include="Test\TestTmp.cs" />
     <Compile Include="TranslacjaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -632,6 +634,7 @@
     <Content Include="Szablony\ifj-gr.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Szablony\meldunek_wzor.xml" />
     <Content Include="Szablony\pismo_wzor.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

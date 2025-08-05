@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.swiadHtmlVsDocxButton = new System.Windows.Forms.Button();
             this.textHtmlDocxFrom = new System.Windows.Forms.TextBox();
             this.textHtmlDocxTo = new System.Windows.Forms.TextBox();
@@ -35,6 +36,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.checkHtmlDocxForce = new System.Windows.Forms.CheckBox();
             this.zalTabPunBox = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // swiadHtmlVsDocxButton
@@ -101,11 +104,27 @@
             this.zalTabPunBox.Text = "załącz tabelę punktów";
             this.zalTabPunBox.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(269, 115);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 300;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // TestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(523, 253);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.zalTabPunBox);
             this.Controls.Add(this.checkHtmlDocxForce);
             this.Controls.Add(this.label2);
@@ -129,5 +148,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox checkHtmlDocxForce;
         private System.Windows.Forms.CheckBox zalTabPunBox;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Timer timer1;
     }
 }

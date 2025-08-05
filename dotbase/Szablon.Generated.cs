@@ -19,6 +19,7 @@ namespace DotBase
             public Szablon_Atesty_zrodel ORDER_BY() { _ORDER_BY(); return this; }
             public Row_Atesty_zrodel[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Atesty_zrodel._GET(_GET(min, max, allowException)); }
             public Row_Atesty_zrodel GET_ONE() { return Row_Atesty_zrodel._GET(_GET(1, 1))[0]; }
+            public Row_Atesty_zrodel GET_FIRST() { return Row_Atesty_zrodel._GET(_GET(1))[0]; }
             public Row_Atesty_zrodel GET_OPTIONAL() { var r = Row_Atesty_zrodel._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Atesty_zrodel Data_wzorcowania(DateTime? value)
             {
@@ -171,6 +172,7 @@ namespace DotBase
             public Szablon_Błędy_wklejania ORDER_BY() { _ORDER_BY(); return this; }
             public Row_Błędy_wklejania[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Błędy_wklejania._GET(_GET(min, max, allowException)); }
             public Row_Błędy_wklejania GET_ONE() { return Row_Błędy_wklejania._GET(_GET(1, 1))[0]; }
+            public Row_Błędy_wklejania GET_FIRST() { return Row_Błędy_wklejania._GET(_GET(1))[0]; }
             public Row_Błędy_wklejania GET_OPTIONAL() { var r = Row_Błędy_wklejania._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Błędy_wklejania Pole0(string value)
             {
@@ -231,6 +233,7 @@ namespace DotBase
             public Szablon_Budzetniepewnosci ORDER_BY() { _ORDER_BY(); return this; }
             public Row_Budzetniepewnosci[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Budzetniepewnosci._GET(_GET(min, max, allowException)); }
             public Row_Budzetniepewnosci GET_ONE() { return Row_Budzetniepewnosci._GET(_GET(1, 1))[0]; }
+            public Row_Budzetniepewnosci GET_FIRST() { return Row_Budzetniepewnosci._GET(_GET(1))[0]; }
             public Row_Budzetniepewnosci GET_OPTIONAL() { var r = Row_Budzetniepewnosci._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Budzetniepewnosci Uwagi(string value)
             {
@@ -337,6 +340,7 @@ namespace DotBase
             public Szablon_Cennik ORDER_BY() { _ORDER_BY(); return this; }
             public Row_Cennik[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Cennik._GET(_GET(min, max, allowException)); }
             public Row_Cennik GET_ONE() { return Row_Cennik._GET(_GET(1, 1))[0]; }
+            public Row_Cennik GET_FIRST() { return Row_Cennik._GET(_GET(1))[0]; }
             public Row_Cennik GET_OPTIONAL() { var r = Row_Cennik._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Cennik Cena(double? value)
             {
@@ -420,6 +424,7 @@ namespace DotBase
             public Szablon_Dozymetry ORDER_BY() { _ORDER_BY(); return this; }
             public Row_Dozymetry[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Dozymetry._GET(_GET(min, max, allowException)); }
             public Row_Dozymetry GET_ONE() { return Row_Dozymetry._GET(_GET(1, 1))[0]; }
+            public Row_Dozymetry GET_FIRST() { return Row_Dozymetry._GET(_GET(1))[0]; }
             public Row_Dozymetry GET_OPTIONAL() { var r = Row_Dozymetry._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Dozymetry ID_dozymetru(int value)
             {
@@ -595,6 +600,7 @@ namespace DotBase
             public Szablon_Hasla ORDER_BY() { _ORDER_BY(); return this; }
             public Row_Hasla[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Hasla._GET(_GET(min, max, allowException)); }
             public Row_Hasla GET_ONE() { return Row_Hasla._GET(_GET(1, 1))[0]; }
+            public Row_Hasla GET_FIRST() { return Row_Hasla._GET(_GET(1))[0]; }
             public Row_Hasla GET_OPTIONAL() { var r = Row_Hasla._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Hasla Haslo(string value)
             {
@@ -678,6 +684,7 @@ namespace DotBase
             public Szablon_Jednostki ORDER_BY() { _ORDER_BY(); return this; }
             public Row_Jednostki[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Jednostki._GET(_GET(min, max, allowException)); }
             public Row_Jednostki GET_ONE() { return Row_Jednostki._GET(_GET(1, 1))[0]; }
+            public Row_Jednostki GET_FIRST() { return Row_Jednostki._GET(_GET(1))[0]; }
             public Row_Jednostki GET_OPTIONAL() { var r = Row_Jednostki._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Jednostki ID_jednostki(int value)
             {
@@ -830,6 +837,7 @@ namespace DotBase
             public Szablon_Karta_przyjecia ORDER_BY() { _ORDER_BY(); return this; }
             public Row_Karta_przyjecia[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Karta_przyjecia._GET(_GET(min, max, allowException)); }
             public Row_Karta_przyjecia GET_ONE() { return Row_Karta_przyjecia._GET(_GET(1, 1))[0]; }
+            public Row_Karta_przyjecia GET_FIRST() { return Row_Karta_przyjecia._GET(_GET(1))[0]; }
             public Row_Karta_przyjecia GET_OPTIONAL() { var r = Row_Karta_przyjecia._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Karta_przyjecia Akcesoria(string value)
             {
@@ -1442,6 +1450,7 @@ namespace DotBase
             public Szablon_Pomiary_cez ORDER_BY() { _ORDER_BY(); return this; }
             public Row_Pomiary_cez[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Pomiary_cez._GET(_GET(min, max, allowException)); }
             public Row_Pomiary_cez GET_ONE() { return Row_Pomiary_cez._GET(_GET(1, 1))[0]; }
+            public Row_Pomiary_cez GET_FIRST() { return Row_Pomiary_cez._GET(_GET(1))[0]; }
             public Row_Pomiary_cez GET_OPTIONAL() { var r = Row_Pomiary_cez._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Pomiary_cez Dolaczyc(bool value)
             {
@@ -1640,6 +1649,7 @@ namespace DotBase
             public Szablon_Pomiary_dawka ORDER_BY() { _ORDER_BY(); return this; }
             public Row_Pomiary_dawka[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Pomiary_dawka._GET(_GET(min, max, allowException)); }
             public Row_Pomiary_dawka GET_ONE() { return Row_Pomiary_dawka._GET(_GET(1, 1))[0]; }
+            public Row_Pomiary_dawka GET_FIRST() { return Row_Pomiary_dawka._GET(_GET(1))[0]; }
             public Row_Pomiary_dawka GET_OPTIONAL() { var r = Row_Pomiary_dawka._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Pomiary_dawka Czas(double? value)
             {
@@ -1792,6 +1802,7 @@ namespace DotBase
             public Szablon_Pomiary_powierzchniowe ORDER_BY() { _ORDER_BY(); return this; }
             public Row_Pomiary_powierzchniowe[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Pomiary_powierzchniowe._GET(_GET(min, max, allowException)); }
             public Row_Pomiary_powierzchniowe GET_ONE() { return Row_Pomiary_powierzchniowe._GET(_GET(1, 1))[0]; }
+            public Row_Pomiary_powierzchniowe GET_FIRST() { return Row_Pomiary_powierzchniowe._GET(_GET(1))[0]; }
             public Row_Pomiary_powierzchniowe GET_OPTIONAL() { var r = Row_Pomiary_powierzchniowe._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Pomiary_powierzchniowe ID_pomiaru(int value)
             {
@@ -1921,6 +1932,7 @@ namespace DotBase
             public Szablon_Pomiary_wzorcowe ORDER_BY() { _ORDER_BY(); return this; }
             public Row_Pomiary_wzorcowe[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Pomiary_wzorcowe._GET(_GET(min, max, allowException)); }
             public Row_Pomiary_wzorcowe GET_ONE() { return Row_Pomiary_wzorcowe._GET(_GET(1, 1))[0]; }
+            public Row_Pomiary_wzorcowe GET_FIRST() { return Row_Pomiary_wzorcowe._GET(_GET(1))[0]; }
             public Row_Pomiary_wzorcowe GET_OPTIONAL() { var r = Row_Pomiary_wzorcowe._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Pomiary_wzorcowe ID_protokolu(short? value)
             {
@@ -2073,6 +2085,7 @@ namespace DotBase
             public Szablon_Protokoly_kalibracji_lawy ORDER_BY() { _ORDER_BY(); return this; }
             public Row_Protokoly_kalibracji_lawy[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Protokoly_kalibracji_lawy._GET(_GET(min, max, allowException)); }
             public Row_Protokoly_kalibracji_lawy GET_ONE() { return Row_Protokoly_kalibracji_lawy._GET(_GET(1, 1))[0]; }
+            public Row_Protokoly_kalibracji_lawy GET_FIRST() { return Row_Protokoly_kalibracji_lawy._GET(_GET(1))[0]; }
             public Row_Protokoly_kalibracji_lawy GET_OPTIONAL() { var r = Row_Protokoly_kalibracji_lawy._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Protokoly_kalibracji_lawy Data_kalibracji(DateTime? value)
             {
@@ -2179,6 +2192,7 @@ namespace DotBase
             public Szablon_Slownik ORDER_BY() { _ORDER_BY(); return this; }
             public Row_Slownik[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Slownik._GET(_GET(min, max, allowException)); }
             public Row_Slownik GET_ONE() { return Row_Slownik._GET(_GET(1, 1))[0]; }
+            public Row_Slownik GET_FIRST() { return Row_Slownik._GET(_GET(1))[0]; }
             public Row_Slownik GET_OPTIONAL() { var r = Row_Slownik._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Slownik EN(string value)
             {
@@ -2262,6 +2276,7 @@ namespace DotBase
             public Szablon_Sondy ORDER_BY() { _ORDER_BY(); return this; }
             public Row_Sondy[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Sondy._GET(_GET(min, max, allowException)); }
             public Row_Sondy GET_ONE() { return Row_Sondy._GET(_GET(1, 1))[0]; }
+            public Row_Sondy GET_FIRST() { return Row_Sondy._GET(_GET(1))[0]; }
             public Row_Sondy GET_OPTIONAL() { var r = Row_Sondy._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Sondy ID_dozymetru(int? value)
             {
@@ -2391,6 +2406,7 @@ namespace DotBase
             public Szablon_Stale ORDER_BY() { _ORDER_BY(); return this; }
             public Row_Stale[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Stale._GET(_GET(min, max, allowException)); }
             public Row_Stale GET_ONE() { return Row_Stale._GET(_GET(1, 1))[0]; }
+            public Row_Stale GET_FIRST() { return Row_Stale._GET(_GET(1))[0]; }
             public Row_Stale GET_OPTIONAL() { var r = Row_Stale._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Stale Nazwa(string value)
             {
@@ -2497,6 +2513,7 @@ namespace DotBase
             public Szablon_Swiadectwo ORDER_BY() { _ORDER_BY(); return this; }
             public Row_Swiadectwo[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Swiadectwo._GET(_GET(min, max, allowException)); }
             public Row_Swiadectwo GET_ONE() { return Row_Swiadectwo._GET(_GET(1, 1))[0]; }
+            public Row_Swiadectwo GET_FIRST() { return Row_Swiadectwo._GET(_GET(1))[0]; }
             public Row_Swiadectwo GET_OPTIONAL() { var r = Row_Swiadectwo._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Swiadectwo Autoryzowal(string value)
             {
@@ -2810,6 +2827,7 @@ namespace DotBase
             public Szablon_Sygnalizacja ORDER_BY() { _ORDER_BY(); return this; }
             public Row_Sygnalizacja[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Sygnalizacja._GET(_GET(min, max, allowException)); }
             public Row_Sygnalizacja GET_ONE() { return Row_Sygnalizacja._GET(_GET(1, 1))[0]; }
+            public Row_Sygnalizacja GET_FIRST() { return Row_Sygnalizacja._GET(_GET(1))[0]; }
             public Row_Sygnalizacja GET_OPTIONAL() { var r = Row_Sygnalizacja._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Sygnalizacja ID_wzorcowania(int? value)
             {
@@ -3100,6 +3118,7 @@ namespace DotBase
             public Szablon_Sygnalizacja_dawka ORDER_BY() { _ORDER_BY(); return this; }
             public Row_Sygnalizacja_dawka[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Sygnalizacja_dawka._GET(_GET(min, max, allowException)); }
             public Row_Sygnalizacja_dawka GET_ONE() { return Row_Sygnalizacja_dawka._GET(_GET(1, 1))[0]; }
+            public Row_Sygnalizacja_dawka GET_FIRST() { return Row_Sygnalizacja_dawka._GET(_GET(1))[0]; }
             public Row_Sygnalizacja_dawka GET_OPTIONAL() { var r = Row_Sygnalizacja_dawka._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Sygnalizacja_dawka Czas_zmierzony(double? value)
             {
@@ -3367,6 +3386,7 @@ namespace DotBase
             public Szablon_Wyniki_dawka ORDER_BY() { _ORDER_BY(); return this; }
             public Row_Wyniki_dawka[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Wyniki_dawka._GET(_GET(min, max, allowException)); }
             public Row_Wyniki_dawka GET_ONE() { return Row_Wyniki_dawka._GET(_GET(1, 1))[0]; }
+            public Row_Wyniki_dawka GET_FIRST() { return Row_Wyniki_dawka._GET(_GET(1))[0]; }
             public Row_Wyniki_dawka GET_OPTIONAL() { var r = Row_Wyniki_dawka._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Wyniki_dawka ID_wzorcowania(int? value)
             {
@@ -3565,6 +3585,7 @@ namespace DotBase
             public Szablon_wyniki_moc_dawki ORDER_BY() { _ORDER_BY(); return this; }
             public Row_wyniki_moc_dawki[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_wyniki_moc_dawki._GET(_GET(min, max, allowException)); }
             public Row_wyniki_moc_dawki GET_ONE() { return Row_wyniki_moc_dawki._GET(_GET(1, 1))[0]; }
+            public Row_wyniki_moc_dawki GET_FIRST() { return Row_wyniki_moc_dawki._GET(_GET(1))[0]; }
             public Row_wyniki_moc_dawki GET_OPTIONAL() { var r = Row_wyniki_moc_dawki._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_wyniki_moc_dawki ID_wzorcowania(int? value)
             {
@@ -3694,6 +3715,7 @@ namespace DotBase
             public Szablon_wzorcowanie_cezem ORDER_BY() { _ORDER_BY(); return this; }
             public Row_wzorcowanie_cezem[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_wzorcowanie_cezem._GET(_GET(min, max, allowException)); }
             public Row_wzorcowanie_cezem GET_ONE() { return Row_wzorcowanie_cezem._GET(_GET(1, 1))[0]; }
+            public Row_wzorcowanie_cezem GET_FIRST() { return Row_wzorcowanie_cezem._GET(_GET(1))[0]; }
             public Row_wzorcowanie_cezem GET_OPTIONAL() { var r = Row_wzorcowanie_cezem._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_wzorcowanie_cezem Cisnienie(double? value)
             {
@@ -4168,6 +4190,7 @@ namespace DotBase
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi ORDER_BY() { _ORDER_BY(); return this; }
             public Row_Wzorcowanie_zrodlami_powierzchniowymi[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Wzorcowanie_zrodlami_powierzchniowymi._GET(_GET(min, max, allowException)); }
             public Row_Wzorcowanie_zrodlami_powierzchniowymi GET_ONE() { return Row_Wzorcowanie_zrodlami_powierzchniowymi._GET(_GET(1, 1))[0]; }
+            public Row_Wzorcowanie_zrodlami_powierzchniowymi GET_FIRST() { return Row_Wzorcowanie_zrodlami_powierzchniowymi._GET(_GET(1))[0]; }
             public Row_Wzorcowanie_zrodlami_powierzchniowymi GET_OPTIONAL() { var r = Row_Wzorcowanie_zrodlami_powierzchniowymi._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Wzorcowanie_zrodlami_powierzchniowymi Cisnienie(double? value)
             {
@@ -4734,6 +4757,7 @@ namespace DotBase
             public Szablon_Zlecenia ORDER_BY() { _ORDER_BY(); return this; }
             public Row_Zlecenia[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Zlecenia._GET(_GET(min, max, allowException)); }
             public Row_Zlecenia GET_ONE() { return Row_Zlecenia._GET(_GET(1, 1))[0]; }
+            public Row_Zlecenia GET_FIRST() { return Row_Zlecenia._GET(_GET(1))[0]; }
             public Row_Zlecenia GET_OPTIONAL() { var r = Row_Zlecenia._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Zlecenia Adres_platnika(string value)
             {
@@ -5093,6 +5117,7 @@ namespace DotBase
             public Szablon_Zleceniodawca ORDER_BY() { _ORDER_BY(); return this; }
             public Row_Zleceniodawca[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Zleceniodawca._GET(_GET(min, max, allowException)); }
             public Row_Zleceniodawca GET_ONE() { return Row_Zleceniodawca._GET(_GET(1, 1))[0]; }
+            public Row_Zleceniodawca GET_FIRST() { return Row_Zleceniodawca._GET(_GET(1))[0]; }
             public Row_Zleceniodawca GET_OPTIONAL() { var r = Row_Zleceniodawca._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_Zleceniodawca Adres(string value)
             {
@@ -5383,6 +5408,7 @@ namespace DotBase
             public Szablon_zrodla_powierzchniowe ORDER_BY() { _ORDER_BY(); return this; }
             public Row_zrodla_powierzchniowe[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_zrodla_powierzchniowe._GET(_GET(min, max, allowException)); }
             public Row_zrodla_powierzchniowe GET_ONE() { return Row_zrodla_powierzchniowe._GET(_GET(1, 1))[0]; }
+            public Row_zrodla_powierzchniowe GET_FIRST() { return Row_zrodla_powierzchniowe._GET(_GET(1))[0]; }
             public Row_zrodla_powierzchniowe GET_OPTIONAL() { var r = Row_zrodla_powierzchniowe._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
             public Szablon_zrodla_powierzchniowe Czas_polowicznego_rozpadu(float? value)
             {

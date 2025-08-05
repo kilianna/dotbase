@@ -647,25 +647,45 @@ namespace DotBase
 
         private void podglądToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MeldunekModel model = new MeldunekModel();
-            model.adresZleceniodawcy = textBox2.Text;
-            model.nip = (nipPlatnika.Text.Trim() != "" && innyPlatnik.Checked) ? nipPlatnika.Text : textBox6.Text;
-            model.nazwaPlatnika = nazwaPlatnikaBox.Text;
-            model.adresPlatnika = adresPlatnika.Text;
-            model.innyPlatnik = innyPlatnik.Checked;
-            model.nrZleceniaKlienta = nrZleceniaKlientaText.Text;
-            
-            for (int i = 0; i < dataGridView1.Rows.Count; ++i)
+            try
             {
-                model.nrKart.Add(dataGridView1[0, i].Value.ToString());
-            }
-            model.zleceniodawca = comboBox1.Text;
+                MeldunekModel model = new MeldunekModel();
+                model.adresZleceniodawcy = textBox2.Text;
+                model.nip = (nipPlatnika.Text.Trim() != "" && innyPlatnik.Checked) ? nipPlatnika.Text : textBox6.Text;
+                model.nazwaPlatnika = nazwaPlatnikaBox.Text;
+                model.adresPlatnika = adresPlatnika.Text;
+                model.innyPlatnik = innyPlatnik.Checked;
+                model.nrZleceniaKlienta = nrZleceniaKlientaText.Text;
+                
+                for (int i = 0; i < dataGridView1.Rows.Count; ++i)
+                {
+                    model.nrKart.Add(dataGridView1[0, i].Value.ToString());
+                }
+                model.zleceniodawca = comboBox1.Text;
 
-            string path = new DocumentationPathsLoader().GetPath("MeldunekWynik", Jezyk.PL) + numericUpDown1.Value + "Meldunek.html";
-            WydrukiMeldunek wydrukiMeldunek = new WydrukiMeldunek(model);
-            if(!wydrukiMeldunek.generateDocument(path))
+                string path = new DocumentationPathsLoader().GetPath("MeldunekWynik", Jezyk.PL) + numericUpDown1.Value + "Meldunek.html";
+                WydrukiMeldunek wydrukiMeldunek = new WydrukiMeldunek(model);
+                if (!wydrukiMeldunek.generateDocument(path))
+                {
+                    MyMessageBox.Show("Sprawdź czy zlecenie zostało na pewno wykonane.", "Uwaga");
+                }
+            }
+            finally
             {
-                MyMessageBox.Show("Sprawdź czy zlecenie zostało na pewno wykonane.", "Uwaga");
+                var szablon = new Szablony.meldunek_wzor();
+                szablon.nrZlecenia = (int)numericUpDown1.Value;
+                szablon.adresZleceniodawcy = textBox2.Text;
+                szablon.nip = (nipPlatnika.Text.Trim() != "" && innyPlatnik.Checked) ? nipPlatnika.Text : textBox6.Text;
+                szablon.nazwaPlatnika = nazwaPlatnikaBox.Text;
+                szablon.adresPlatnika = adresPlatnika.Text;
+                szablon.innyPlatnik = innyPlatnik.Checked;
+                szablon.nrZleceniaKlienta = nrZleceniaKlientaText.Text;
+                szablon.zleceniodawca = comboBox1.Text;
+                for (int i = 0; i < dataGridView1.Rows.Count; ++i)
+                {
+                    szablon.nrKart.Add(dataGridView1[0, i].Value.ToString());
+                }
+                szablon.Generate(this);
             }
         }
 

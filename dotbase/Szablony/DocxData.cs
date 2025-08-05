@@ -11,6 +11,7 @@ namespace DotBase.Szablony
     class DocxDateTime
     {
         public Dictionary<string, string> tekst = new Dictionary<string, string>();
+        public Dictionary<string, string> ksiegowa = new Dictionary<string, string>();
         public int rok;
         public int miesiac;
         public int dzien;
@@ -23,6 +24,8 @@ namespace DotBase.Szablony
         {
             tekst[Jezyk.EN.ToString()] = dateTime.ToString("dd MMMM yyyy", new CultureInfo("en-US"));
             tekst[Jezyk.PL.ToString()] = dateTime.ToString("dd MMMM yyyy");
+            ksiegowa[Jezyk.EN.ToString()] = dateTime.ToString("dd\\/MM\\/yyyy", new CultureInfo("en-US"));
+            ksiegowa[Jezyk.PL.ToString()] = dateTime.ToString("dd\\/MM\\/yyyy");
             rok = dateTime.Year;
             miesiac = dateTime.Month;
             dzien = dateTime.Day;
@@ -41,7 +44,7 @@ namespace DotBase.Szablony
     abstract class DocxData
     {
         public Constants stale;
-        public Jezyk jezyk;
+        public Jezyk jezyk = Jezyk.PL;
         public Szablon.Row_Slownik[] slownik;
         protected BazaDanychWrapper baza = new BazaDanychWrapper();
 

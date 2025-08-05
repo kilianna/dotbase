@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<%! eval(utils.include("wspolne.js")) %>
+<document>
+  <p-style id="Normal" name="Normal" spacing="0mm 4mm" line-spacing="1.2">
+    <font face="Times New Roman" size="11pt"/>
+  </p-style>
+
+  <section
+      width="21cm" height="29.7cm"
+      margin="2.5cm 2.5cm 2.5cm 2.5cm" />
+
+  <p tabs="16cm right" spacing="0mm">
+    <tab/>Kraków, dnia <% dataDzisiejsza.ksiegowa.PL %>
+  </p>
+  <p>
+    <b>NLW</b><br/><b>N82002</b>
+  </p>
+  <p>
+    <b>Proforma ☐         Faktura ☑         Kod PKWiU: 71.20.19.0</b>
+  </p>
+  <p align="center" spacing="10mm 10mm">
+    Dział Finansowo-Księgowy<br/>Instytutu Fizyki Jądrowej im. Henryka Niewodniczańskiego Polskiej Akademii Nauk
+  </p>
+  <p>
+    Dotyczy zlecenia numer/<s>umowy numer z dnia</s>: <% nrZleceniaKlienta.trim() ? nrZleceniaKlienta : '—' %>
+  </p>
+
+  <table border="none" inside-border="none" cell-margin="0mm">
+    <tc width="4cm"/>
+    <tc width="12cm"/>
+    <tr>
+      <td colspan="2">
+        Dane podatnika i nabywcy towarów lub usług:
+      </td>
+    </tr>
+<%! if (innyPlatnik) { %>
+    <tr>
+      <td>
+        <p indent="5mm">Pełna nazwa:</p>
+      </td>
+      <td>
+        <b><%= multiline(nazwaPlatnika, ';') %></b>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p indent="5mm">Adres nabywcy:</p>
+      </td>
+      <td>
+        <b><%= multiline(adresPlatnika, ';') %></b>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p indent="5mm">NIP:</p>
+      </td>
+      <td>
+        <b><% nip %></b>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <u>Dane odbiorcy: jeżeli inne niż podatnika i nabywcy (tj. inne niż podane powyżej)</u>
+      </td>
+    </tr>
+<%! } %>
+    <tr>
+      <td>
+        <p indent="5mm">Nazwa odbiorcy:</p>
+      </td>
+      <td>
+        <b><%= multiline(zleceniodawca, ';') %></b>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p indent="5mm">Adres odbiorcy:</p>
+      </td>
+      <td>
+        <b><%= multiline(adresZleceniodawcy, ';') %></b>
+      </td>
+    </tr>
+<%! if (!innyPlatnik) { %>
+    <tr>
+      <td>
+        <p indent="5mm">NIP:</p>
+      </td>
+      <td>
+        <b><% nip %></b>
+      </td>
+    </tr>
+<%! } %>
+    <tr>
+      <td>
+        <p>
+          Kwota netto/<s>brutto</s>:
+        </p>
+      </td>
+      <td>
+        <b><% fixed(wpisy
+                .map(w => w.cena * w.nrFabryczne.length)
+                .reduce((a, x) => (a + x), 0), 2)
+            %> zł</b>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>Termin płatności:</p>
+      </td>
+      <td>
+        <b>30 dni od daty otrzymania faktury</b>
+      </td>
+    </tr>
+  </table>
+  <p>
+    Treść (faktura/<s>faktura proforma</s>):
+  </p>
+  <table border="none" inside-border="none">
+    <tc width="12cm"/>
+    <tc width="4cm"/>
+<%! for (let [i, wpis] of wpisy.entries()) { %>
+    <tr>
+      <td margin="0mm 10mm 0mm 0mm">
+        <p indent="5mm">
+          <b><% i + 1 %>) Radiometr typu <% wpis.typ %> nr <% wpis.nrFabryczne.map(nbsp).join(', ') %></b>
+        </p>
+      </td>
+      <td margin="0mm 0mm 0mm 0mm">
+        <p align="right">
+          <b>po <% fixed(wpis.cena, wpis.cena != Math.round(wpis.cena) ? 2 : 0) %> zł ‑ <% wpis.nrFabryczne.length %> szt.</b>
+        </p>
+      </td>
+    </tr>
+<%! } %>
+  </table>
+  <p>
+    Usługa wykonana (<s>towar dostarczony</s>): <b>
+      <% dataSprzedazy.ksiegowa.PL %></b>
+  </p>
+  <p>
+    Nr św. <% nrKart.map(x => `${x}/${dataSprzedazy.rok}`).join(', ') %>
+  </p>
+  <p tabs="16cm right dot">
+    Tłumaczenie (opis przedmiotu umowy/zlecenia w języku polskim):<tab/><br/><br/><tab/>
+  </p>
+
+</document>

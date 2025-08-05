@@ -768,6 +768,7 @@ namespace DotBase
                         public Szablon_{0} ORDER_BY() {{ _ORDER_BY(); return this; }}
                         public Row_{0}[] GET(int min = 0, int max = 999999999, bool allowException = false) {{ return Row_{0}._GET(_GET(min, max, allowException)); }}
                         public Row_{0} GET_ONE() {{ return Row_{0}._GET(_GET(1, 1))[0]; }}
+                        public Row_{0} GET_FIRST() {{ return Row_{0}._GET(_GET(1))[0]; }}
                         public Row_{0} GET_OPTIONAL() {{ var r = Row_{0}._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }}");
                 tabele += F(2, tabelaId, tabela, @"
                         public Szablon.Szablon_{0} {0} {{ get {{ return new Szablon.Szablon_{0}(this, ""{1}""); }} }}");

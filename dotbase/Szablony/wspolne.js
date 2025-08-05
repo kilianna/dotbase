@@ -67,11 +67,18 @@ function tekst(x, y) {
     }
 }
 
-function multiline(x) {
-    return x
-        .split(/\r?\n/)
-        .map(v => escape(v.trim()))
-        .join('<br/>');
+function multiline(x, sep) {
+    if (sep) {
+        return x
+            .split(new RegExp(`\\s*[\\r\\n${sep}]\\s*`))
+            .map(v => escape(v.trim()))
+            .join('<br/>');
+    } else {
+        return x
+            .split(/\r?\n/)
+            .map(v => escape(v.trim()))
+            .join('<br/>');
+    }
 }
 
 function litera(x) {
@@ -183,6 +190,10 @@ function numberAsIs(value) {
     return value.toFixed(fracDigits)
         .replace(/0/g, ' ').trimEnd().replace(/ /g, '0')
         .replace('.', ' ').trimEnd().replace(' ', ustawieniaJezyka.kropka);
+}
+
+function nbsp(text) {
+    return text.replace(/\s/g, ' ');
 }
 
 function simpleHtml(x, paragraph) {
