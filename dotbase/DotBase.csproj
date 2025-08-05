@@ -634,7 +634,9 @@
     <Content Include="Szablony\ifj-gr.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Szablony\meldunek_wzor.xml" />
+    <Content Include="Szablony\meldunek_wzor.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Szablony\pismo_wzor.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

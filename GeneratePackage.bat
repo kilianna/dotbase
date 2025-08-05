@@ -101,7 +101,7 @@ mkdir %~dp0\dist
 xcopy %~dp0\dotbase\bin\Release %~dp0\dist\Release\ /E /Q /R /Y
 xcopy %~dp0\dotbase\bin\szablony %~dp0\dist\szablony\ /E /Q /R /Y
 xcopy %~dp0\dotbase\bin\wyniki %~dp0\dist\wyniki\ /E /Q /R /Y
-del /s /q %~dp0\dist\wyniki\*.html
+del /s /q %~dp0\dist\wyniki\*.html %~dp0\dist\wyniki\*.docx %~dp0\dist\wyniki\*.json %~dp0\dist\wyniki\*.xml %~dp0\dist\wyniki\*.txt
 %~dp0\dist\Release\DotBase --version > %~dp0\dist\FN-VERSION.txt
 %~dp0\dist\Release\DotBase --pretty-version > %~dp0\dist\VERSION.txt
 if errorlevel 1 goto compile_error
