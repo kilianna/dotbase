@@ -3,9 +3,9 @@
 <%!
 
 const metody = {
-    wzor1: 'Procedura pomiarowa WZOR-1 (wyd. 8 z dn. 21.05.2024)',
-    wzor2: 'Procedura pomiarowa WZOR-2 (wyd. 7 z dn. 21.05.2024)',
-    wzor1wzor2: 'Procedura pomiarowa WZOR-1 (wyd. 8 z dn. 21.05.2024) oraz procedura pomiarowa WZOR-2 (wyd. 7 z dn. 21.05.2024)',
+    wzor1: 'Procedura pomiarowa WZOR-1 (wyd. 9 z dn. 16.07.2025)',
+    wzor2: 'Procedura pomiarowa WZOR-2 (wyd. 8 z dn. 16.07.2025)',
+    wzor1wzor2: 'Procedura pomiarowa WZOR-1 (wyd. 9 z dn. 16.07.2025) oraz procedura pomiarowa WZOR-2 (wyd. 8 z dn. 16.07.2025)',
 };
 
 const spojnosciPomiarowe = {
