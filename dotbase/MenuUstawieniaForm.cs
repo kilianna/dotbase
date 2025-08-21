@@ -14,6 +14,8 @@ namespace DotBase
 {
     public partial class MenuUstawieniaForm : Form
     {
+        public static bool _noScreeshot;
+
         //---------------------------------------------------------
         public MenuUstawieniaForm()
         //---------------------------------------------------------

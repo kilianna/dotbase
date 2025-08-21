@@ -107,6 +107,7 @@
     <Compile Include="Controls\SimpleHtmlTextBox.Designer.cs">
       <DependentUpon>SimpleHtmlTextBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Logging\ScreenShots.cs" />
     <Compile Include="MyMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>

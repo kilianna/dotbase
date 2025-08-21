@@ -11,6 +11,8 @@ namespace DotBase
 {
     public partial class MenuWyszukiwanieForm : Form
     {
+        public static bool _noScreeshot;
+
         //-----------------------------------------------------------------------
         public MenuWyszukiwanieForm()
         //-----------------------------------------------------------------------

@@ -19,6 +19,8 @@ namespace DotBase
 {
     public partial class LogowanieForm : Form
     {
+        public static bool _noScreeshot;
+
         private Logger log = Log.create();
 
         public static LogowanieForm Instancja { private set; get; }

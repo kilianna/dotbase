@@ -11,6 +11,8 @@ namespace DotBase
 {
     public partial class ExceptionForm : Form
     {
+        public static bool _noScreeshot;
+
         public ExceptionForm(string description)
         {
             InitializeComponent();

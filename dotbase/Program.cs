@@ -50,6 +50,7 @@ namespace DotBase
 
         public static void EmergencyExit(string failureDescription)
         {
+            Logging.ScreenShots.SaveScreeShots();
             log("Emergency exit with: {0}", failureDescription ?? "Unknown failure");
             BazaDanychWrapper.failure();
             BazaDanychWrapper.Zakoncz();

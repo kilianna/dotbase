@@ -25,8 +25,19 @@ namespace DotBase.Logging
                 password = p;
             }
         }
+        class FileMessage
+        {
+            public byte[] data;
+            public string fileName;
+            public FileMessage(byte[] _data, string _fileName)
+            {
+                data = _data;
+                fileName = _fileName;
+            }
+        }
         static object lk = new object();
         static Queue<string> logMessages = new Queue<string>(64);
+        static Queue<FileMessage> logFiles = new Queue<FileMessage>(10);
         static Queue<ControlMessage> controlMessages = new Queue<ControlMessage>(3);
         static Thread thread = null;
         static string failure = null;
@@ -99,6 +110,17 @@ namespace DotBase.Logging
             {
                 checkFailure();
                 logMessages.Enqueue(message);
+                Monitor.PulseAll(lk);
+            }
+        }
+
+        public static void PushFile(byte[] data, string fileName)
+        {
+            lock (lk)
+            {
+                checkFailure();
+                logMessages.Enqueue(String.Format("Writing file \"{0}\" of size {1}\r\n", fileName, data.Length));
+                logFiles.Enqueue(new FileMessage(data, fileName));
                 Monitor.PulseAll(lk);
             }
         }
@@ -195,7 +217,7 @@ namespace DotBase.Logging
             rng.GetBytes(salt);
             var iv = new byte[16];
             rng.GetBytes(iv);
-            var fileName = String.Format("{0:yyyy-MM-dd HH_mm_ss.fff}.{1}.enclog", now, (int)salt[0] + 256 * (int)iv[0]);
+            var fileName = String.Format("{0:yyyy-MM-dd HH_mm_ss.fff}.{1}.txt.enclog", now, (int)salt[0] + 256 * (int)iv[0]);
             var subdir = Path.Combine(getDirectory(), month);
             var filePath = Path.Combine(subdir, fileName);
             lock (lk)
@@ -206,14 +228,16 @@ namespace DotBase.Logging
             Directory.CreateDirectory(subdir);
             byte[] key;
             using (var kdf = new Rfc2898DeriveBytes(password, salt, 10000))
+            {
                 key = kdf.GetBytes(16);
+            }
             var aes = Aes.Create();
             aes.Key = key;
             aes.IV = iv;
             aes.Mode = CipherMode.CBC;
             aes.Padding = PaddingMode.PKCS7;
 #           if DEBUG
-            using (var outputDebug = new FileStream(filePath + ".txt", FileMode.CreateNew, FileAccess.Write))
+            using (var outputDebug = new FileStream(filePath.Replace(".enclog", ""), FileMode.CreateNew, FileAccess.Write))
 #           endif
             using (var output = new FileStream(filePath, FileMode.CreateNew, FileAccess.Write))
             {
@@ -233,12 +257,41 @@ namespace DotBase.Logging
                                 string inputLog;
                                 lock (lk)
                                 {
-                                    while (logMessages.Count == 0 && controlMessages.Count == 0)
+                                    while (logMessages.Count == 0 && logFiles.Count == 0 && controlMessages.Count == 0)
                                     {
                                         Monitor.Wait(lk);
                                     }
                                     if (controlMessages.Count > 0) return ReturnType.Control;
-                                    inputLog = logMessages.Dequeue();
+                                    if (logFiles.Count > 0)
+                                    {
+                                        var inputFile = logFiles.Dequeue();
+                                        int counter = 0;
+                                        string logFilePath;
+                                        do
+                                        {
+                                            counter++;
+                                            logFilePath = filePath.Replace(".txt.enclog", String.Format(".{0:D3}.{1}.enclog", counter, inputFile.fileName));
+                                        } while (File.Exists(logFilePath));
+                                        inputLog = String.Format("Attaching file \"{0}\" as \"{1}\" of size {2}\r\n", inputFile.fileName, logFilePath, inputFile.data.Length);
+                                        try
+                                        {
+                                            writeEncryptedFile(logFilePath, inputFile.data, key, salt);
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            inputLog = String.Format(
+                                                "----------------------------------------\r\n" +
+                                                " Exception during writing encrypted file \"{0}\": {1}\r\n" +
+                                                "----------------------------------------\r\n",
+                                                logFilePath, ex.ToString());
+                                        }
+                                    }
+                                    else if (logMessages.Count > 0)
+                                    {
+                                        inputLog = logMessages.Dequeue();
+                                    } else {
+                                        inputLog = "This should not happen!\r\n";
+                                    }
                                     if (inputLog == null) return ReturnType.Exit;
                                 }
                                 var data = Encoding.UTF8.GetBytes(inputLog);
@@ -258,6 +311,52 @@ namespace DotBase.Logging
                                     return ReturnType.Repeat;
                                 }
                             }
+                        }
+                    }
+                    finally
+                    {
+                        try
+                        {
+                            sha.TransformFinalBlock(new byte[0], 0, 0);
+                            cs.Write(sha.Hash, 0, sha.Hash.Length);
+                            cs.Write(footerBytes, 0, footerBytes.Length);
+                        }
+                        catch { }
+                    }
+                }
+            }
+        }
+
+        private static void writeEncryptedFile(string logFilePath, byte[] data, byte[] key, byte[] salt)
+        {
+            var iv = new byte[16];
+            rng.GetBytes(iv);
+            var aes = Aes.Create();
+            aes.Key = key;
+            aes.IV = iv;
+            aes.Mode = CipherMode.CBC;
+            aes.Padding = PaddingMode.PKCS7;
+#           if DEBUG
+            using (var outputDebug = new FileStream(logFilePath.Replace(".enclog", ""), FileMode.CreateNew, FileAccess.Write))
+#           endif
+            using (var output = new FileStream(logFilePath, FileMode.CreateNew, FileAccess.Write))
+            {
+                output.Write(signatureBytes, 0, signatureBytes.Length);
+                output.Write(salt, 0, salt.Length);
+                output.Write(iv, 0, iv.Length);
+                using (var sha = SHA256.Create())
+                using (var cs = new CryptoStream(output, aes.CreateEncryptor(), CryptoStreamMode.Write))
+                {
+                    cs.Write(verificationBytes, 0, verificationBytes.Length);
+                    try
+                    {
+                        using (var ds = new DeflateStream(cs, CompressionMode.Compress, true))
+                        {
+                            sha.TransformBlock(data, 0, data.Length, null, 0);
+#                           if DEBUG
+                            outputDebug.Write(data, 0, data.Length);
+#                           endif
+                            ds.Write(data, 0, data.Length);
                         }
                     }
                     finally

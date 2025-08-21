@@ -12,6 +12,8 @@ namespace DotBase
 {
     public partial class MenuGlowneForm : Form
     {
+        public static bool _noScreeshot;
+
         Logger log = Log.create();
         private MenuWyszukiwanieForm _MenuWyszukiwanie;
         private MenuBiuroForm        _MenuBiuro;

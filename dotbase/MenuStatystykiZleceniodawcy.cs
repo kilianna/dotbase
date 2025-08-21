@@ -11,6 +11,8 @@ namespace DotBase
 {
     public partial class MenuStatystykiZleceniodawcy : Form
     {
+        public static bool _noScreeshot;
+
         //-------------------------------------------------------------------
         public MenuStatystykiZleceniodawcy()
         //-------------------------------------------------------------------

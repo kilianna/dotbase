@@ -11,6 +11,8 @@ namespace DotBase.Test
 {
     public partial class TestHtmlControl : Form
     {
+        public static bool _noScreeshot;
+
         public TestHtmlControl()
         {
             InitializeComponent();

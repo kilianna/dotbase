@@ -11,6 +11,8 @@ namespace DotBase
 {
     public partial class MenuBiuroForm : Form
     {
+        public static bool _noScreeshot;
+
         ZlecenieForm        _ZlecenieForm;
         KartaPrzyjeciaForm  _KartaPrzyjeciaForm;
         CennikForm          _CennikForm;

@@ -11,6 +11,8 @@ namespace DotBase.Test
 {
     public partial class TestForm : Form
     {
+        public static bool _noScreeshot;
+
         public TestForm()
         {
             InitializeComponent();

@@ -48,7 +48,7 @@ namespace DotBase.Logging
             info.AppendFormat("Found {0} files in {1} directories.\r\n", files.Count, dirs);
             foreach (var file in files) {
                 try {
-                    EncryptedLogger.decodeFile(file, Path.ChangeExtension(file, ".txt"), password);
+                    EncryptedLogger.decodeFile(file, Path.ChangeExtension(file, ""), password);
                 } catch (Exception ex) {
                     string msg = ex.Message.Replace(file, "???");
                     if (!problems.ContainsKey(msg)) problems[msg] = new List<string>();
