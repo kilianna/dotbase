@@ -48,7 +48,12 @@ namespace DotBase.Szablony
                 var row1 = baza.Swiadectwo
                     .SELECT().Data_wystawienia()
                     .WHERE().Id_karty(Int32.Parse(nrKarty))
-                    .GET_FIRST();
+                    .GET_OPTIONAL();
+                if (row1 == null)
+                {
+                    MyMessageBox.Show(owner, "Sprawdź czy zlecenie zostało na pewno wykonane w całości.", "Uwaga", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
                 var data = row1.Data_wystawienia ?? new DateTime(0);
                 if (data > dataSprzedazy) dataSprzedazy = data;
 
