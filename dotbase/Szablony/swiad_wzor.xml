@@ -87,8 +87,8 @@ if (poprawa) {
     <p>
       <font size="22pt" bold="y">ŚWIADECTWO WZORCOWANIA</font>
     </p>
+    <p tabs="17cm right" spacing="0pt 6pt"><font size="8pt"><br/><tab/>Znak sprawy: NLW.4851.<% zlecenie.ID_zlecenia %>.<% zlecenie.Data_przyjecia.rok %>.W</font></p>
     <p tabs="1cm, 10.5cm center, 17cm right" border="none, none, single black 0.3mm">
-      <br/>
       <tab/>Data wydania:&nbsp; <% tekst(data_wydania) %>
       <tab/>Nr świadectwa:&nbsp; <b><% nr_swiadectwa %></b>
       <tab/>Strona&nbsp; <page-number/>/<total-pages/><br/>

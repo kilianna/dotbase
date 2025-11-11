@@ -44,6 +44,7 @@ namespace DotBase
                                 .Replace("<!nrArkusza>", m_data.getValue(WydrukiCezData.DataType.NR_ARKUSZA))
                                 .Replace("<!data>", m_data.getValue(WydrukiCezData.DataType.DATA))
                                 .Replace("<!rok>", m_data.getValue(WydrukiCezData.DataType.ROK));
+                WypelnijZnakSprawy(m_templateToFill);
                 return true;
             }
 

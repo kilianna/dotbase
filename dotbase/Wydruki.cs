@@ -309,6 +309,14 @@ namespace DotBase
                 return true;
             }
 
+            virtual public void WypelnijZnakSprawy(StringBuilder documentToFill)
+            {
+                var row1 = _BazaDanych.Karta_przyjecia.SELECT().ID_zlecenia().WHERE().ID_karty(Int32.Parse(_NrKarty)).GET_ONE();
+                var row2 = _BazaDanych.Zlecenia.SELECT().Data_przyjecia().WHERE().ID_zlecenia(row1.ID_zlecenia).GET_ONE();
+                var znak = String.Format("NLW.4851.{0}.{1}.W", row1.ID_zlecenia, row2.Data_przyjecia.Value.Year);
+                documentToFill.Replace("<!znak_sprawy>", znak);
+            }
+
             //********************************************************************************************
             // Jako, że w klasy dziedziczące mogą wymagać większej liczby szablonów ostatecznie zapisanym/wypełnionym
             // szablonem nie musi być szablon podstawowy. Dlatego istnieje możliwość nadpisania tej metody.

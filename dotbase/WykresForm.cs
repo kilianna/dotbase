@@ -51,6 +51,8 @@ namespace Wykres
                         return "Probe: ";
                     case "zakres ":
                         return "range ";
+                    case "Znak sprawy: ":
+                        return "Ref. No.: ";
                     default:
                         MyMessageBox.Show("Nie ma tłumaczenie wyrażenia:\r\n" + pl, "Błąd krytyczny", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
@@ -98,6 +100,7 @@ namespace Wykres
 
                 UstawieniaTytułu(nrKarty, data.Year.ToString());
                 UstawieniaDaty(data);
+                UstawieniaNrSprawy(nrKarty);
                 UstawieniaOsi(UstawienieJednostki(jednostka), rownowaznik_dawki, wielkoscFizycznaZOkna);
 
                 if (SprawdzJednostke(jednostka) != "")
@@ -289,6 +292,25 @@ namespace Wykres
             myText.FontSpec.Size = 9;
             myText.FontSpec.Border.IsVisible = false;
             myText.FontSpec.IsBold = true;
+            myText.IsClippedToChartRect = false;
+            _ObszarRysowniczy.GraphObjList.Add(myText);
+            _ObszarRysowniczy.GraphObjList[0].ZOrder = ZOrder.H_BehindAll;
+        }
+
+        private void UstawieniaNrSprawy(string nrKarty)
+        {
+            var baza = new BazaDanychWrapper();
+            var row1 = baza.Karta_przyjecia.SELECT().ID_zlecenia().WHERE().ID_karty(Int32.Parse(nrKarty)).GET_ONE();
+            var row2 = baza.Zlecenia.SELECT().Data_przyjecia().WHERE().ID_zlecenia(row1.ID_zlecenia).GET_ONE();
+            var znak = String.Format("NLW.4851.{0}.{1}.W", row1.ID_zlecenia, row2.Data_przyjecia.Value.Year);
+
+            TextObj myText;
+            myText = new TextObj(tr("Znak sprawy: ") + znak, 0.97, 0.95, CoordType.PaneFraction, AlignH.Right, AlignV.Top);
+            myText.FontSpec.FontColor = Color.Black;
+            myText.FontSpec.Family = "Arial";
+            myText.FontSpec.Size = 6;
+            myText.FontSpec.IsBold = true;
+            myText.FontSpec.Border.IsVisible = false;
             myText.IsClippedToChartRect = false;
             _ObszarRysowniczy.GraphObjList.Add(myText);
             _ObszarRysowniczy.GraphObjList[0].ZOrder = ZOrder.H_BehindAll;

@@ -83,6 +83,7 @@ namespace DotBase
             {
                 try
                 {
+                    WypelnijZnakSprawy(m_templateToFill);
                     m_templateToFill.Replace("<!nrKarty>", m_data.getValue(ProtokolZrodlaPowierzchnioweData.DataType.NR_KART))
                                         .Replace("<!nrArkusza>", m_data.getValue(ProtokolZrodlaPowierzchnioweData.DataType.NR_ARKUSZA))
                                         .Replace("<!data>", m_data.getValue(ProtokolZrodlaPowierzchnioweData.DataType.DATA))
