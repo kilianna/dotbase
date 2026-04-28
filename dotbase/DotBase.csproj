@@ -176,7 +176,6 @@
     </Compile>
     <Compile Include="GlobalKeyFilter.cs" />
     <Compile Include="Logging\DatabaseLog.cs" />
-    <Compile Include="MeldunekModel.cs" />
     <Compile Include="Multimap.cs" />
     <Compile Include="N.cs" />
     <Compile Include="QueryUtils.cs" />
@@ -219,12 +218,10 @@
     <Compile Include="ProtokolDawkaModel.cs" />
     <Compile Include="ProtokolSygMocyDawkiOpis.cs" />
     <Compile Include="ProtokolSygMocyDawkiTabela.cs" />
-    <Compile Include="PismoPrzewodnieData.cs" />
     <Compile Include="SwiadectwoModel.cs" />
     <Compile Include="SwiadectwoTextsLoader.cs" />
     <Compile Include="SygnalizacjaMocyDawkiUtils.cs" />
     <Compile Include="WydrukiCezData.cs" />
-    <Compile Include="WydrukiMeldunek.cs" />
     <Compile Include="WzorcowanieDawka.cs" />
     <Compile Include="WzorcowanieDawkaForm.cs">
       <SubType>Form</SubType>
@@ -277,7 +274,6 @@
       <DependentUpon>MenuWyszukiwanieForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Narzedzia.cs" />
-    <Compile Include="PismoPrzewodnie.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protokol.cs" />

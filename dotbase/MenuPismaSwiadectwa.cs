@@ -92,6 +92,7 @@ namespace DotBase
                 szablon.uwSD = uwSD.Text;
                 szablon.dolaczTabPunktow = dolaczTabPunktyBox.Checked;
                 szablon.Generate(this);
+                return;
             }
 
             Program.zmienJezyk(jezykSwiadectwa);
@@ -173,14 +174,6 @@ namespace DotBase
             szablon.odlaczWykresMD = odlaczWykresBoxMD.Checked;
             szablon.odlaczWykresD = odlaczWykresBoxD.Checked;
             szablon.Generate(this);
-
-            string sciezka = _DocumentationPathsLoader.GetPath("PismoPrzewodnieWynik", Jezyk.PL) + nrPisma + poprawaSuffix() + "PismoPrzewodnieWynik" + _NumerKarty + ".html";
-
-            Dokumenty.PismoPrzewodnie pismo = new Dokumenty.PismoPrzewodnie(_NumerKarty, dataWystawienia.Value, dataWykonania.Value, textBox1.Text, nrPismaNumer.Text, nrPismaRok.Text, checkBox1.Checked, poprawa.Checked, odlaczWykresBoxMD.Checked, odlaczWykresBoxD.Checked);
-            if (!pismo.generateDocument(sciezka))
-            {
-                MyMessageBox.Show("Nie można stowrzyć dokumentu z powodu braku danych lub ich błędnych wartości.", "Uwaga");
-            }
         }
 
         private string poprawaSuffix()
