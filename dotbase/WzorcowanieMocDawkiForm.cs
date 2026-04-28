@@ -871,5 +871,13 @@ namespace DotBase
             generujProtokol(false);
         }
 
+        private void button7_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dataGridView1.Rows.Count - 1; ++i)
+            {
+                dataGridView1.Rows[i].Cells[6].Value = false;
+            }
+        }
+
     }
 }

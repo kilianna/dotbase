@@ -113,10 +113,11 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.wydrukiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.protokółToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.prorokółToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wykresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wykresENToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.prorokółToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zapiszToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button7 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -499,6 +500,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.button7);
             this.tabPage3.Controls.Add(this.button4);
             this.tabPage3.Controls.Add(this.button2);
             this.tabPage3.Controls.Add(this.textBox5);
@@ -1015,23 +1017,9 @@
             // protokółToolStripMenuItem
             // 
             this.protokółToolStripMenuItem.Name = "protokółToolStripMenuItem";
-            this.protokółToolStripMenuItem.Size = new System.Drawing.Size(158, 24);
+            this.protokółToolStripMenuItem.Size = new System.Drawing.Size(215, 24);
             this.protokółToolStripMenuItem.Text = "Protokół";
             this.protokółToolStripMenuItem.Click += new System.EventHandler(this.protokółToolStripMenuItem_Click);
-            // 
-            // wykresToolStripMenuItem
-            // 
-            this.wykresToolStripMenuItem.Name = "wykresToolStripMenuItem";
-            this.wykresToolStripMenuItem.Size = new System.Drawing.Size(158, 24);
-            this.wykresToolStripMenuItem.Text = "Wykres (PL)";
-            this.wykresToolStripMenuItem.Click += new System.EventHandler(this.wykresToolStripMenuItem_Click);
-            // 
-            // wykresENToolStripMenuItem
-            // 
-            this.wykresENToolStripMenuItem.Name = "wykresENToolStripMenuItem";
-            this.wykresENToolStripMenuItem.Size = new System.Drawing.Size(158, 24);
-            this.wykresENToolStripMenuItem.Text = "Wykres (EN)";
-            this.wykresENToolStripMenuItem.Click += new System.EventHandler(this.wykresToolStripMenuItem_Click);
             // 
             // prorokółToolStripMenuItem
             // 
@@ -1040,12 +1028,37 @@
             this.prorokółToolStripMenuItem.Text = "Protokół bez zakresu";
             this.prorokółToolStripMenuItem.Click += new System.EventHandler(this.prorokółToolStripMenuItem_Click);
             // 
+            // wykresToolStripMenuItem
+            // 
+            this.wykresToolStripMenuItem.Name = "wykresToolStripMenuItem";
+            this.wykresToolStripMenuItem.Size = new System.Drawing.Size(215, 24);
+            this.wykresToolStripMenuItem.Text = "Wykres (PL)";
+            this.wykresToolStripMenuItem.Click += new System.EventHandler(this.wykresToolStripMenuItem_Click);
+            // 
+            // wykresENToolStripMenuItem
+            // 
+            this.wykresENToolStripMenuItem.Name = "wykresENToolStripMenuItem";
+            this.wykresENToolStripMenuItem.Size = new System.Drawing.Size(215, 24);
+            this.wykresENToolStripMenuItem.Text = "Wykres (EN)";
+            this.wykresENToolStripMenuItem.Click += new System.EventHandler(this.wykresToolStripMenuItem_Click);
+            // 
             // zapiszToolStripMenuItem
             // 
             this.zapiszToolStripMenuItem.Name = "zapiszToolStripMenuItem";
             this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
             this.zapiszToolStripMenuItem.Text = "Zapisz";
             this.zapiszToolStripMenuItem.Click += new System.EventHandler(this.zapiszToolStripMenuItem_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(486, 75);
+            this.button7.Margin = new System.Windows.Forms.Padding(4);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(175, 28);
+            this.button7.TabIndex = 20;
+            this.button7.Text = "Odłącz wszystko";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // WzorcowanieMocDawkiForm
             // 
@@ -1179,5 +1192,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Min;
         private System.Windows.Forms.DataGridViewTextBoxColumn Max;
         private System.Windows.Forms.ToolStripMenuItem prorokółToolStripMenuItem;
+        private System.Windows.Forms.Button button7;
     }
 }
