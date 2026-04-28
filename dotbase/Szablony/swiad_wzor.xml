@@ -146,7 +146,7 @@ if (poprawa) {
     </tr>
     <tr>
       <td>ZGŁASZAJĄCY</td>
-      <td colspan="2"><%= multiline(zleceniodawca.Zleceniodawca) %><br/><%= multiline(zleceniodawca.Adres) %></td>
+      <td colspan="2"><%= multiline(zleceniodawca.Zleceniodawca, ';') %><br/><%= multiline(zleceniodawca.Adres, ';') %></td>
     </tr>
     <tr>
       <td>METODA WZORCOWANIA</td>
