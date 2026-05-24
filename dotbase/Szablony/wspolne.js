@@ -99,39 +99,24 @@ function blad(x) {
     return `⚠ ⚠ 𝐄𝐑𝐑𝐎𝐑: ${x} ⚠ ⚠`;
 }
 
-function _getSignificant(digits, significant, data) {
-    let minSignificant = Infinity;
-    let cutOff = Infinity;
-    for (let num of data) {
-        num *= 1;
-        let str = num.toFixed(digits)
-            .replace(/\./, '')
-            .replace(/^0+/, '');
-        minSignificant = Math.min(minSignificant, str.length);
-        cutOff = Math.min(cutOff, Math.max(str.match(/0*$/)[0].length, str.length - significant));
-    }
-    return [minSignificant, cutOff];
-}
-
 function _fractionDigits(significant, data) {
-
-    let minSignificant, cutOff;
-    let digits = 20;
-
-    for (let i = 0; i < 20; i++) {
-        [minSignificant, cutOff] = _getSignificant(i, significant, data);
-        if (minSignificant >= significant) {
-            digits = i;
-            let [minSignificant1, cutOff1] = _getSignificant(i + 1, significant, data);
-            if (minSignificant1 == significant) {
-                digits = i + 1;
-                cutOff = cutOff1;
+    let result = 0;
+    for (let x of data) {
+        let digits;
+        for (digits = 20; digits > 0; digits--) {
+            let str = x.toFixed(digits)
+                .replace(/[.-]/g, '')
+                .replace(/^0+/, '');
+            if (str.length <= significant) {
+                break;
             }
-            break;
         }
+        if (digits == 20) {
+            continue;
+        }
+        result = Math.max(result, digits);
     }
-    digits = Math.max(0, digits - cutOff);
-    return digits;
+    return result;
 }
 
 function _flattenAbs(value, arr) {

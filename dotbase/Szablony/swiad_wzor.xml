@@ -288,7 +288,8 @@ for (let i = 0; i < wyniki.length; i++) {
       <td><% punktIndex + 1 %></td>
       <%! calcDigits(2, punkt.wzorcowa, 2, punkt.wzorcowa_niepewnosc) %>
       <td><% fixed(punkt.wzorcowa) %> ± <% fixed(punkt.wzorcowa_niepewnosc) %></td>
-      <td><% numberAsIs(punkt.zmierzona) %> ± <% numberAsIs(punkt.zmierzona_niepewnosc) %></td>
+      <%! calcDigits(2, punkt.zmierzona, 2, punkt.zmierzona_niepewnosc) %>
+      <td><% fixed(punkt.zmierzona) %> ± <% fixed(punkt.zmierzona_niepewnosc) %></td>
       <%! if (punktIndex === 0) { %>
         <%! calcDigits(2, row.wspolczynnik, 2, row.niepewnosc) %>
         <td rowspan="<% row.punkty.length %>"><% fixed(row.wspolczynnik) %> ± <% fixed(row.niepewnosc) %></td>
