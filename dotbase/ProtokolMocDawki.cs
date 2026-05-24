@@ -153,14 +153,31 @@ namespace DotBase
                     {
                         wartoscWzorcowa = ((double)tabela[i].Cells[5].Value);
 
+                        var zmierzona = (tabela[i].Cells[2].Value is Double) ? (double)tabela[i].Cells[2].Value
+                            : (tabela[i].Cells[2].Value is double) ? (double)tabela[i].Cells[2].Value
+                            : Double.Parse(tabela[i].Cells[2].Value.ToString());
+                        var wahanie = (tabela[i].Cells[3].Value is Double) ? (double)tabela[i].Cells[3].Value
+                            : (tabela[i].Cells[3].Value is double) ? (double)tabela[i].Cells[3].Value
+                            : Double.Parse(tabela[i].Cells[3].Value.ToString());
+
+                        var zmierzonaStr = zmierzona.ToString();
+                        var wahanieStr = wahanie.ToString();
+
+                        if (Math.Abs(wahanie) > 0.0000000001)
+                        {
+                            var digits = FormatowanieLiczb.CalcDigits(2, zmierzona, 2, wahanie);
+                            zmierzonaStr = FormatowanieLiczb.Fixed(zmierzona, digits);
+                            wahanieStr = FormatowanieLiczb.Fixed(wahanie, digits);
+                        }
+
                         tabelaDoWpisania
                         += String.Format("<tr align=\"center\" valign=\"middle\"><td><span>{0}</span></td>", licznik)
                         + String.Format("<td><span>{0}</span></td> <td><span>{1}</span></td> <td><span>{2}</span></td> <td><span>{3}</span></td>",
                                         tabela[i].Cells[0].Value.ToString(),
                                         tabela[i].Cells[1].Value.ToString(),
                                         wartoscWzorcowa.ToString(Precyzja.Ustaw(wartoscWzorcowa)),
-                                        tabela[i].Cells[2].Value.ToString())
-                        + String.Format("<td><span>{0}</span></td>", tabela[i].Cells[3].Value.ToString());
+                                        zmierzonaStr)
+                        + String.Format("<td><span>{0}</span></td>", wahanieStr);
                         if (dolaczZakres)
                         {
                             tabelaDoWpisania += String.Format("<td><span>{0}</span></td>", tabela[i].Cells[4].Value.ToString());

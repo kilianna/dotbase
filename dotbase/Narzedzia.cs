@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace Narzedzia
 {
@@ -695,6 +696,140 @@ namespace KlasyPomocniczeSygMocyDawki
         //********************************************************************
         {
             Dane = new List<DawkaWartoscWzorcowoPomiarowa>();
+        }
+    }
+}
+
+public static class FormatowanieLiczb
+{
+    public sealed class DigitOptions
+    {
+        public int Min = 0;
+        public int Max = 20;
+    }
+
+    public static int CalcDigits(params object[] args)
+    {
+        int digits = 0;
+        int min = 0;
+        int max = 20;
+
+        for (int i = 0; i < args.Length;)
+        {
+            if (args[i] is DigitOptions)
+            {
+                DigitOptions options = args[i] as DigitOptions;
+                min = options.Min;
+                max = options.Max;
+                i++;
+                continue;
+            }
+
+            int significant = Convert.ToInt32(args[i++]);
+            object data = args[i++];
+
+            List<double> values = FlattenAbs(data)
+                .Where(x => x > 1e-20)
+                .ToList();
+
+            if (values.Count == 0)
+                continue;
+
+            int fd = FractionDigits(significant, values);
+
+            digits = Math.Max(digits, fd);
+        }
+
+        return Math.Min(max, Math.Max(min, digits));
+    }
+
+    public static string Fixed(double value, int digits)
+    {
+        // Always use invariant culture internally
+        string result = value.ToString(
+            "F" + digits,
+            System.Globalization.CultureInfo.InvariantCulture);
+
+        // Then force comma separator
+        return result.Replace(".", Thread.CurrentThread.CurrentUICulture.NumberFormat.NumberDecimalSeparator);
+    }
+
+    public static object Fixed(object value, int digits)
+    {
+        if (value is System.Collections.IEnumerable && !(value is string))
+        {
+            var enumerable = value as System.Collections.IEnumerable;
+            var list = new List<object>();
+
+            foreach (object item in enumerable)
+            {
+                list.Add(Fixed(item, digits));
+            }
+
+            return list;
+        }
+
+        return Fixed(Convert.ToDouble(value), digits);
+    }
+
+    private static int FractionDigits(
+        int significant,
+        IEnumerable<double> data)
+    {
+        int result = 0;
+
+        foreach (double x in data)
+        {
+            int digits;
+
+            for (digits = 20; digits > 0; digits--)
+            {
+                string str = x
+                    .ToString(
+                        "F" + digits,
+                        System.Globalization.CultureInfo.InvariantCulture)
+                    .Replace(".", "")
+                    .Replace("-", "")
+                    .TrimStart('0');
+
+                if (str.Length <= significant)
+                    break;
+            }
+
+            if (digits == 20)
+                continue;
+
+            result = Math.Max(result, digits);
+        }
+
+        return result;
+    }
+
+    private static List<double> FlattenAbs(object value)
+    {
+        var result = new List<double>();
+
+        FlattenAbsInternal(value, result);
+
+        return result;
+    }
+
+    private static void FlattenAbsInternal(
+        object value,
+        List<double> result)
+    {
+        if (value is System.Collections.IEnumerable && !(value is string))
+        {
+            var enumerable = value as System.Collections.IEnumerable;
+            foreach (object item in enumerable)
+            {
+                FlattenAbsInternal(item, result);
+            }
+        }
+        else
+        {
+            result.Add(
+                Math.Abs(Convert.ToDouble(value)));
         }
     }
 }

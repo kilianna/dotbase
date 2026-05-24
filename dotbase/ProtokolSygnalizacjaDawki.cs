@@ -139,11 +139,28 @@ namespace DotBase
 
                 for (int i = 0; i < tabela.Rows.Count - 1; ++i)
                 {
+                    var wartosc = (tabela.Rows[i].Cells[3].Value is double) ? (double)tabela.Rows[i].Cells[3].Value :
+                         (tabela.Rows[i].Cells[3].Value is Double) ? (Double)tabela.Rows[i].Cells[3].Value :
+                         Double.Parse(tabela.Rows[i].Cells[3].Value.ToString());
+                    var niep = (tabela.Rows[i].Cells[4].Value is double) ? (double)tabela.Rows[i].Cells[4].Value :
+                         (tabela.Rows[i].Cells[4].Value is Double) ? (Double)tabela.Rows[i].Cells[4].Value :
+                         Double.Parse(tabela.Rows[i].Cells[4].Value.ToString());
+                        
+                    var wartoscStr = wartosc.ToString();
+                    var niepStr = niep.ToString();
+
+                    if (Math.Abs(niep) > 0.0000000001)
+                    {
+                        var digits = FormatowanieLiczb.CalcDigits(2, wartosc, 2, niep);
+                        wartoscStr = FormatowanieLiczb.Fixed(wartosc, digits);
+                        niepStr = FormatowanieLiczb.Fixed(niep, digits);
+                    }
+
                     tabelaDoWpisania.Append(
                     String.Format("</tr><tr align=\"center\" valign=\"middle\"><td><span>{0}</span></td><td><span>{1} &plusmn; {2}</span></td><td><span>{3} &plusmn; {4} </span></td></tr>",
                                   tabela.Rows[i].Cells[0].Value.ToString(),
-                                  tabela.Rows[i].Cells[3].Value.ToString(),
-                                  tabela.Rows[i].Cells[4].Value.ToString(),
+                                  wartoscStr,
+                                  niepStr,
                                   computedFactors != null ? computedFactors[i].ToString("0.00") : tabela.Rows[i].Cells[6].Value.ToString(),
                                   computedFactors != null ? computedUncertainity[i].ToString("0.00") : tabela.Rows[i].Cells[7].Value.ToString()));
                 }
