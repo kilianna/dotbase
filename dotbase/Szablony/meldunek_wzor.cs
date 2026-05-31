@@ -26,6 +26,7 @@ namespace DotBase.Szablony
         public List<string> nrKart = new List<string>();
         public DateTime dataSprzedazy;
         public DateTime dataDzisiejsza;
+        public DateTime dataPrzyjecia;
         public List<Wpis> wpisy = new List<Wpis>();
 
         protected override string FileName

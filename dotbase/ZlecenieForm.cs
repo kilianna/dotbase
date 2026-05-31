@@ -656,6 +656,7 @@ namespace DotBase
             szablon.innyPlatnik = innyPlatnik.Checked;
             szablon.nrZleceniaKlienta = nrZleceniaKlientaText.Text;
             szablon.zleceniodawca = comboBox1.Text;
+            szablon.dataPrzyjecia = dateTimePicker1.Value;
             for (int i = 0; i < dataGridView1.Rows.Count; ++i)
             {
                 szablon.nrKart.Add(dataGridView1[0, i].Value.ToString());
