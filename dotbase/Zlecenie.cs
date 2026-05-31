@@ -59,7 +59,6 @@ namespace DotBase
         public struct DaneZlecenia
         {
             public int Id;
-            public int Nr_rejestru;
             public DateTime DataPrzyjecia;
             public DateTime DataZwrotu;
             public bool Ekspress;
@@ -178,7 +177,7 @@ namespace DotBase
                         .Osoba_przyjmujaca(dane.OsobaPrzyjmujaca)
                         .Uwagi(dane.Uwagi)
                         .Ekspres(dane.Ekspress)
-                        .Nr_zlecenia_rejestr(dane.Nr_rejestru)
+                        .Nr_zlecenia_rejestr(0)
                         .Nazwa_platnika(dane.NazwaPlatnika)
                         .Adres_platnika(dane.AdresPlatnika)
                         .NIP_platnika(dane.NipPlatnika)
@@ -238,7 +237,6 @@ namespace DotBase
             //--------------------------------------------------------------------
             {
                 _DaneZlecenia.Id = _DaneTabela.Rows[0].Field<int>("id_zlecenia");
-                _DaneZlecenia.Nr_rejestru = _DaneTabela.Rows[0].Field<int>("Nr_zlecenia_rejestr");
                 _DaneZlecenia.DataPrzyjecia = _DaneTabela.Rows[0].Field<DateTime>("Data_przyjecia");
                 _DaneZlecenia.DataZwrotu = _DaneTabela.Rows[0].Field<DateTime>("Data_zwrotu");
                 _DaneZlecenia.FormaPrzyjecia = _DaneTabela.Rows[0].Field<string>("Forma_przyjecia");
@@ -382,7 +380,7 @@ namespace DotBase
                         .Ekspres(daneDoZapisu.Ekspress)
                         .Osoba_przyjmujaca(daneDoZapisu.OsobaPrzyjmujaca)
                         .ID_zleceniodawcy(daneDoZapisu.ZleceniodawcaInfo.Id)
-                        .Nr_zlecenia_rejestr(daneDoZapisu.Nr_rejestru)
+                        .Nr_zlecenia_rejestr(0)
                         .Nazwa_platnika(daneDoZapisu.NazwaPlatnika)
                         .Adres_platnika(daneDoZapisu.AdresPlatnika)
                         .NIP_platnika(daneDoZapisu.NipPlatnika)

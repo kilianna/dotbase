@@ -314,7 +314,7 @@ namespace DotBase
             textBox1.ReadOnly = true;
             button1.Enabled = button2.Enabled = button3.Enabled = button5.Enabled = false;
 
-            numericUpDown1.Enabled = numericUpDown2.Enabled = false;
+            numericUpDown1.Enabled = false;
 
             textBox2.Enabled = textBox3.Enabled = textBox4.Enabled = emailTextBox.Enabled = textBox5.Enabled = textBox6.Enabled = jestIFJ.Enabled = true;
             rabatBox.Enabled = true;
@@ -348,7 +348,7 @@ namespace DotBase
 
 
             button1.Enabled = button2.Enabled = button3.Enabled = button5.Enabled = true;
-            numericUpDown1.Enabled = numericUpDown2.Enabled = true;
+            numericUpDown1.Enabled = true;
             textBox2.Enabled = textBox3.Enabled = textBox4.Enabled = emailTextBox.Enabled = textBox5.Enabled = textBox6.Enabled = jestIFJ.Enabled = rabatBox.Enabled = false;
 
             nazwaPlatnikaBox.Enabled = true;
@@ -367,7 +367,7 @@ namespace DotBase
         {
             _TrybEdycji = true;
             button1.Enabled = button2.Enabled = button3.Enabled = button4.Enabled = false;
-            textBox1.Enabled = numericUpDown1.Enabled = numericUpDown2.Enabled = false;
+            textBox1.Enabled = numericUpDown1.Enabled = false;
             button5.Text = "Zatwierdź edycję";
 
             textBox2.Enabled = textBox3.Enabled = rabatBox.Enabled =
@@ -385,7 +385,7 @@ namespace DotBase
         {
             _TrybEdycji = false;
             button1.Enabled = button2.Enabled = button3.Enabled = button4.Enabled = true;
-            textBox1.Enabled = numericUpDown1.Enabled = numericUpDown2.Enabled = true;
+            textBox1.Enabled = numericUpDown1.Enabled = true;
             button5.Text = "Edytuj dane zleceniodawcy";
 
             textBox2.Enabled = textBox3.Enabled = textBox4.Enabled = emailTextBox.Enabled =
@@ -403,7 +403,6 @@ namespace DotBase
         {
             dateTimePicker1.Value = dane.DataPrzyjecia;
             dateTimePicker2.Value = dane.DataZwrotu;
-            numericUpDown2.Value = dane.Nr_rejestru;
             textBox7.Text = dane.FormaPrzyjecia;
             formaPrzyjeciaOld = dane.FormaPrzyjecia;
             textBox8.Text = dane.FormaZwrotu;
@@ -456,7 +455,6 @@ namespace DotBase
             comboBox1.KeyUp -= comboBox1_KeyUp;
 
             numericUpDown1.Value = dane.Id;
-            numericUpDown2.Value = dane.Nr_rejestru;
             WyswietlDaneZleceniodawcy(dane);
             WyswietlDaneZlecenia(dane);
             WyswietlDanePrzyrzadow(dane);
@@ -489,7 +487,6 @@ namespace DotBase
             daneDoZapisu.NazwaPlatnika = innyPlatnik.Checked ? nazwaPlatnikaBox.Text : "";
             daneDoZapisu.AdresPlatnika = innyPlatnik.Checked ? adresPlatnika.Text : "";
             daneDoZapisu.NipPlatnika = innyPlatnik.Checked ? nipPlatnika.Text : "";
-            daneDoZapisu.Nr_rejestru = (int)numericUpDown2.Value;
 
             _Zlecenie.ZapiszDane(daneDoZapisu);
         }
@@ -540,7 +537,6 @@ namespace DotBase
             DaneZlecenia daneZlecenia = new DaneZlecenia();
             daneZlecenia.ZleceniodawcaInfo = new DaneZleceniodawcy();
             daneZlecenia.Id = (int)numericUpDown1.Value;
-            daneZlecenia.Nr_rejestru = (int)numericUpDown2.Value;
             daneZlecenia.ZleceniodawcaInfo.Id = int.Parse(textBox1.Text);
             daneZlecenia.DataPrzyjecia = dateTimePicker1.Value;
             daneZlecenia.DataZwrotu = dateTimePicker1.Value;

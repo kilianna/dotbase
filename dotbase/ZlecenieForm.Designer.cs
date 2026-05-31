@@ -98,8 +98,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.meldunekToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.podglądToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.label15 = new System.Windows.Forms.Label();
             this.nazwaPlatnikaTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -110,7 +108,6 @@
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -178,11 +175,11 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(0, 112);
+            this.tabControl1.Location = new System.Drawing.Point(0, 80);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1080, 514);
+            this.tabControl1.Size = new System.Drawing.Size(1080, 546);
             this.tabControl1.TabIndex = 5;
             this.tabControl1.TabStop = false;
             // 
@@ -588,7 +585,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Size = new System.Drawing.Size(1087, 485);
+            this.tabPage2.Size = new System.Drawing.Size(1072, 517);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Dane zlecenia";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -859,30 +856,6 @@
             this.podglądToolStripMenuItem.Text = "Podgląd";
             this.podglądToolStripMenuItem.Click += new System.EventHandler(this.podglądToolStripMenuItem_Click);
             // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Location = new System.Drawing.Point(237, 74);
-            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(4);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
-            7000,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(116, 22);
-            this.numericUpDown2.TabIndex = 5;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label15.Location = new System.Drawing.Point(17, 76);
-            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(204, 17);
-            this.label15.TabIndex = 8;
-            this.label15.Text = "Numer zlecenia w rejestrze";
-            // 
             // nazwaPlatnikaTimer
             // 
             this.nazwaPlatnikaTimer.Interval = 50;
@@ -893,8 +866,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1080, 626);
-            this.Controls.Add(this.label15);
-            this.Controls.Add(this.numericUpDown2);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -919,7 +890,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -970,8 +940,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem meldunekToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem podglądToolStripMenuItem;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.GroupBox grupaPlatnika;
         private System.Windows.Forms.TextBox nipPlatnika;
         private System.Windows.Forms.Label label16;
