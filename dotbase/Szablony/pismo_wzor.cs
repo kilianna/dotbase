@@ -73,6 +73,11 @@ namespace DotBase.Szablony
                 if (row.ID_sondy != null)
                     idSond.Add(row.ID_sondy ?? 0);
 
+            if (idSond.Count == 0)
+            {
+                throw new ProcessingException("Nie istnieją dane z których można by sporządzić pismo.");
+            }
+
             var sondyTable3 = baza.TworzTabeleDanych(String.Format(@"
                 SELECT * FROM Sondy
                 WHERE ID_sondy IN ({0});", String.Join(",", idSond)));
