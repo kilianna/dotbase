@@ -9,13 +9,11 @@ namespace DotBase.Szablony
 {
     class pismo_wzor: DocxData
     {
-        public int nrPisma;
         public bool poprawa;
         public int nrKarty;
         public DateTime dataWystawienia;
         public DateTime dataWykonania;
         public string uwaga;
-        public int rokPisma;
         public bool przedluzonaWaznosc;
         public bool odlaczWykresMD;
         public bool odlaczWykresD;
@@ -34,8 +32,8 @@ namespace DotBase.Szablony
         {
             get
             {
-                return String.Format(@"..\wyniki\PismoPrzewodnie\{0}\{1}{2}PismoPrzewodnieWynik{3}{4}.docx",
-                    DirGroup(nrPisma), nrPisma, poprawa ? "P" : "", nrKarty, JezykTools.kocowka(jezyk));
+                return String.Format(@"..\wyniki\PismoPrzewodnie\{0}\{1}{2}PismoPrzewodnieWynik{3}.docx",
+                    DirGroup(nrKarty), nrKarty, poprawa ? "P" : "", JezykTools.kocowka(jezyk));
             }
         }
 

@@ -18,33 +18,11 @@ namespace DotBase
 
         public MenuPismaSwiadectwaForm(int numerKarty)
         {
-            int nrPisma;
-            int rokPisma;
             InitializeComponent();
             _NumerKarty = numerKarty;
             _Baza = new BazaDanychWrapper();
             _DocumentationPathsLoader = new DocumentationPathsLoader();
             var rokWystawienia = dataWystawienia.Value.Year;
-
-            try
-            {
-                var row = _Baza.TworzTabeleDanych(String.Format("SELECT nr_pisma, Rok_pisma FROM Karta_przyjecia WHERE id_karty = {0}", _NumerKarty)).Rows[0];
-                nrPisma = row.Field<int>(0);
-                rokPisma = row.Field<int>(1);
-                if (nrPisma == 0 || rokPisma == 0)
-                {
-                    generujNowyNumer();
-                }
-                else
-                {
-                    nrPismaNumer.Text = nrPisma.ToString();
-                    nrPismaRok.Text = rokPisma.ToString();
-                }
-            }
-            catch
-            {
-                generujNowyNumer();
-            }
 
             try
             {
@@ -65,8 +43,6 @@ namespace DotBase
             }
             catch (Exception)
             { }
-
-            oswierzCzescStalaNrPisma();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -140,36 +116,13 @@ namespace DotBase
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int nrPisma, rokPisma;
-            if (false == int.TryParse(nrPismaNumer.Text, out nrPisma))
-            {
-                MyMessageBox.Show("Nie podano numeru pisma! Lub numer pisma nie jest liczbą naturalną!", "Błąd!");
-                return;
-            }
-            if (false == int.TryParse(nrPismaRok.Text, out rokPisma))
-            {
-                MyMessageBox.Show("Nie podano roku dla numeru pisma! Lub numer pisma nie jest liczbą naturalną!", "Błąd!");
-                return;
-            }
-
-            _Baza.Karta_przyjecia
-                .UPDATE()
-                    .Nr_pisma((int)nrPisma)
-                    .Rok_pisma((int)rokPisma)
-                .WHERE()
-                    .ID_karty(_NumerKarty)
-                .INFO("Zmieniono nr i rok pisma w karcie przyjęcia")
-                .EXECUTE();
-
             var szablon = new pismo_wzor();
             szablon.jezyk = Jezyk.PL;
-            szablon.nrPisma = nrPisma;
             szablon.poprawa = poprawa.Checked;
             szablon.nrKarty = _NumerKarty;
             szablon.dataWystawienia = dataWystawienia.Value;
             szablon.dataWykonania = dataWykonania.Value;
             szablon.uwaga = textBox1.Text;
-            szablon.rokPisma = rokPisma;
             szablon.przedluzonaWaznosc = checkBox1.Checked;
             szablon.odlaczWykresMD = odlaczWykresBoxMD.Checked;
             szablon.odlaczWykresD = odlaczWykresBoxD.Checked;
@@ -188,8 +141,7 @@ namespace DotBase
 
         private bool ZapiszDane()
         {
-            int nrPisma, rokPisma;
-            if (textBox4.Text == "" || false == Int32.TryParse(nrPismaNumer.Text, out nrPisma) || false == Int32.TryParse(nrPismaNumer.Text, out rokPisma))
+            if (textBox4.Text == "")
             {
                 return false;
             }
@@ -246,51 +198,5 @@ namespace DotBase
             generujSwiadectwo(Jezyk.EN);
         }
 
-        private void poprawa_CheckedChanged(object sender, EventArgs e)
-        {
-            oswierzCzescStalaNrPisma();
-        }
-
-        private void oswierzCzescStalaNrPisma()
-        {
-            nrPismaStalaCzesc.Text = poprawaSuffix() + "/W/LWPD/";
-        }
-
-        private void nrPismaPrzycisk_Click(object sender, EventArgs e)
-        {
-            if (nrPismaRok.Text.Trim() == dataWystawienia.Value.Year.ToString())
-            {
-                MyMessageBox.Show(this, "Rok z daty wystawienia się nie zmienił. Nie ma potrzeby podownego generowania numeru dla tego roku", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                generujNowyNumer();
-            }
-        }
-
-        private void generujNowyNumer()
-        {
-            int nrPisma, rokPisma;
-            rokPisma = dataWystawienia.Value.Year;
-            try
-            {
-                nrPisma = _Baza.TworzTabeleDanych("SELECT nr_pisma FROM Karta_przyjecia WHERE Rok_pisma=? AND ID_karty=?", rokPisma, _NumerKarty).Rows[0].Field<int>(0);
-            }
-            catch
-            {
-                try
-                {
-                    nrPisma = _Baza.TworzTabeleDanych("SELECT MAX(nr_pisma) FROM Karta_przyjecia WHERE Rok_pisma=?", rokPisma).Rows[0].Field<int>(0) + 1;
-                }
-                catch
-                {
-                    nrPisma = 1;
-                }
-            }
-            nrPismaNumer.Text = nrPisma.ToString();
-            nrPismaRok.Text = rokPisma.ToString();
-            oswierzCzescStalaNrPisma();
-        }
-        
     }
 }

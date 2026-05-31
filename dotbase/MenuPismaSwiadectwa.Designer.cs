@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.Button nrPismaPrzycisk;
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -39,8 +38,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.nrPismaNumer = new System.Windows.Forms.TextBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.poprawa = new System.Windows.Forms.CheckBox();
             this.dataWykonania = new System.Windows.Forms.DateTimePicker();
@@ -50,8 +47,6 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.nrPismaStalaCzesc = new System.Windows.Forms.TextBox();
-            this.nrPismaRok = new System.Windows.Forms.TextBox();
             this.odlaczWykresBoxMD = new System.Windows.Forms.CheckBox();
             this.dolaczTabPunktyBox = new System.Windows.Forms.CheckBox();
             this.uwMD = new DotBase.Controls.SimpleHtmlTextBox();
@@ -61,24 +56,12 @@
             this.uwS = new DotBase.Controls.SimpleHtmlTextBox();
             this.textBox1 = new DotBase.Controls.SimpleHtmlTextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.odlaczWykresBoxD = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
-            nrPismaPrzycisk = new System.Windows.Forms.Button();
+            this.odlaczWykresBoxD = new System.Windows.Forms.CheckBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // nrPismaPrzycisk
-            // 
-            nrPismaPrzycisk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            nrPismaPrzycisk.Location = new System.Drawing.Point(877, 33);
-            nrPismaPrzycisk.Name = "nrPismaPrzycisk";
-            nrPismaPrzycisk.Size = new System.Drawing.Size(161, 42);
-            nrPismaPrzycisk.TabIndex = 25;
-            nrPismaPrzycisk.Text = "Generuj numer dla bieżącej daty";
-            nrPismaPrzycisk.UseVisualStyleBackColor = true;
-            nrPismaPrzycisk.Click += new System.EventHandler(this.nrPismaPrzycisk_Click);
             // 
             // button1
             // 
@@ -179,26 +162,6 @@
             this.label1.TabIndex = 20;
             this.label1.Text = "Uwaga - pismo przewodnie:";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 71);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 17);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Nr pisma:";
-            // 
-            // nrPismaNumer
-            // 
-            this.nrPismaNumer.Location = new System.Drawing.Point(128, 68);
-            this.nrPismaNumer.Margin = new System.Windows.Forms.Padding(4);
-            this.nrPismaNumer.Name = "nrPismaNumer";
-            this.nrPismaNumer.Size = new System.Drawing.Size(38, 22);
-            this.nrPismaNumer.TabIndex = 6;
-            this.nrPismaNumer.Text = "999";
-            this.nrPismaNumer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // checkBox1
             // 
             this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -224,7 +187,6 @@
             this.poprawa.TabIndex = 4;
             this.poprawa.Text = "Poprawa";
             this.poprawa.UseVisualStyleBackColor = true;
-            this.poprawa.CheckedChanged += new System.EventHandler(this.poprawa_CheckedChanged);
             // 
             // dataWykonania
             // 
@@ -295,28 +257,6 @@
             this.label18.Size = new System.Drawing.Size(108, 17);
             this.label18.TabIndex = 12;
             this.label18.Text = "Uwaga - dawka:";
-            // 
-            // nrPismaStalaCzesc
-            // 
-            this.nrPismaStalaCzesc.BackColor = System.Drawing.SystemColors.Window;
-            this.nrPismaStalaCzesc.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.nrPismaStalaCzesc.Location = new System.Drawing.Point(166, 68);
-            this.nrPismaStalaCzesc.Margin = new System.Windows.Forms.Padding(4);
-            this.nrPismaStalaCzesc.Name = "nrPismaStalaCzesc";
-            this.nrPismaStalaCzesc.ReadOnly = true;
-            this.nrPismaStalaCzesc.Size = new System.Drawing.Size(114, 22);
-            this.nrPismaStalaCzesc.TabIndex = 23;
-            this.nrPismaStalaCzesc.Text = "/W/LWPD/";
-            this.nrPismaStalaCzesc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // nrPismaRok
-            // 
-            this.nrPismaRok.Location = new System.Drawing.Point(280, 68);
-            this.nrPismaRok.Margin = new System.Windows.Forms.Padding(4);
-            this.nrPismaRok.Name = "nrPismaRok";
-            this.nrPismaRok.Size = new System.Drawing.Size(48, 22);
-            this.nrPismaRok.TabIndex = 24;
-            this.nrPismaRok.Text = "2024";
             // 
             // odlaczWykresBoxMD
             // 
@@ -407,8 +347,6 @@
             this.groupBox3.Controls.Add(this.uwMD);
             this.groupBox3.Controls.Add(this.dolaczTabPunktyBox);
             this.groupBox3.Controls.Add(this.odlaczWykresBoxMD);
-            this.groupBox3.Controls.Add(this.nrPismaRok);
-            this.groupBox3.Controls.Add(this.nrPismaStalaCzesc);
             this.groupBox3.Controls.Add(this.label18);
             this.groupBox3.Controls.Add(this.label17);
             this.groupBox3.Controls.Add(this.label16);
@@ -419,8 +357,6 @@
             this.groupBox3.Controls.Add(this.poprawa);
             this.groupBox3.Controls.Add(this.label11);
             this.groupBox3.Controls.Add(this.checkBox1);
-            this.groupBox3.Controls.Add(this.nrPismaNumer);
-            this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.label5);
@@ -435,15 +371,14 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Dane dotyczące świadectwa wzorcowania\\pisma przewodniego";
             // 
-            // label11
+            // label3
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(12, 640);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(361, 17);
-            this.label11.TabIndex = 18;
-            this.label11.Text = "Formatowanie możliwe po wciśnięciu prawego przycisku.";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(513, 449);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(103, 17);
+            this.label3.TabIndex = 34;
+            this.label3.Text = "Odłącz wykres:";
             // 
             // odlaczWykresBoxD
             // 
@@ -458,21 +393,21 @@
             this.odlaczWykresBoxD.Text = "dawki";
             this.odlaczWykresBoxD.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // label11
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(513, 449);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(103, 17);
-            this.label3.TabIndex = 34;
-            this.label3.Text = "Odłącz wykres:";
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(12, 640);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(361, 17);
+            this.label11.TabIndex = 18;
+            this.label11.Text = "Formatowanie możliwe po wciśnięciu prawego przycisku.";
             // 
             // MenuPismaSwiadectwaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1062, 763);
-            this.Controls.Add(nrPismaPrzycisk);
             this.Controls.Add(this.swiadectEnBtn);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -505,8 +440,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox nrPismaNumer;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox poprawa;
         private System.Windows.Forms.DateTimePicker dataWykonania;
@@ -516,8 +449,6 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox nrPismaStalaCzesc;
-        private System.Windows.Forms.TextBox nrPismaRok;
         private System.Windows.Forms.CheckBox odlaczWykresBoxMD;
         private System.Windows.Forms.CheckBox dolaczTabPunktyBox;
         private Controls.SimpleHtmlTextBox uwMD;
