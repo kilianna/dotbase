@@ -137,7 +137,7 @@ namespace WzorcowanieMocDawkiSpace
                 try
                 {
                     DataGridViewRow wiersz = tabela.Rows[i];
-                    if (Boolean.Parse(wiersz.Cells[6].Value.ToString()))
+                    if (Boolean.Parse((wiersz.Cells[6].Value ?? "false").ToString()))
                     {
                         odleglosci.Add(N.doubleParse(wiersz.Cells[0].Value.ToString()));
                         zrodla.Add(Int32.Parse(wiersz.Cells[1].Value.ToString()));
@@ -300,7 +300,7 @@ namespace WzorcowanieMocDawkiSpace
                 try
                 {
                     DataGridViewRow wiersz = tabela.Rows[i];
-                    if (Boolean.Parse(wiersz.Cells[6].Value.ToString()))
+                    if (Boolean.Parse((wiersz.Cells[6].Value ?? "false").ToString()))
                     {
                         odleglosci.Add(N.doubleParse(wiersz.Cells[0].Value.ToString()));
                         zrodla.Add(Int32.Parse(wiersz.Cells[1].Value.ToString()));
@@ -465,7 +465,7 @@ namespace WzorcowanieMocDawkiSpace
                 try
                 {
                     DataGridViewRow wiersz = tabela.Rows[i];
-                    if (Boolean.Parse(wiersz.Cells[6].Value.ToString()))
+                    if (Boolean.Parse((wiersz.Cells[6].Value ?? "false").ToString()))
                     {
                         odleglosci.Add(N.doubleParse(wiersz.Cells[0].Value.ToString()));
                         zrodla.Add(Int32.Parse(wiersz.Cells[1].Value.ToString()));
@@ -634,13 +634,13 @@ namespace WzorcowanieMocDawkiSpace
                 {
                     DataGridViewRow wiersz = tabela.Rows[i];
 
-                    string t = wiersz.Cells[6].Value.ToString();
-                    if ("true" == wiersz.Cells[6].Value.ToString().ToLower())
+                    string t = (wiersz.Cells[6].Value ?? "false").ToString();
+                    if ("true" == t.ToLower())
                     {
                         wskazanie.Add(wiersz.Cells[2].Value.ToString());
                         wartosc.Add(wiersz.Cells[5].Value.ToString());
                         zakres.Add(wiersz.Cells[4].Value.ToString());
-                        dolaczyc.Add(wiersz.Cells[6].Value.ToString());
+                        dolaczyc.Add(t);
                         niepewnosc.Add(wiersz.Cells[3].Value.ToString());
                     }
                 }
