@@ -1,0 +1,92 @@
+<document>
+
+  <p-style id="Normal" name="Normal">
+    <font face="Aptos" size="10pt"/>
+  </p-style>
+
+  <section
+      border="single #53788F 0.2mm 4mm, single #53788F 0.2mm 4mm, single #53788F 2mm 4mm, single #53788F 0.2mm 4mm"
+      width="21cm" height="29.7cm"
+      margin="1.4cm 1.4cm 1.4cm 1.4cm" headerMargin="1.4cm" footerMargin="1.4cm" />
+
+  <!--
+
+    szerokość:
+        strona: 21cm
+        marginesy: 2x1.4cm
+        bez marginesów: 18.2cm
+  
+  -->
+
+    <!-- STOPKA -->
+    <footer>
+      <p tabs="18.2cm right">
+        F1/WZOR-2/11.23.1234<tab/>Strona <page-number/> z <total-pages/>
+      </p>
+    </footer>
+
+    <!-- TABELA NAGŁÓWKOWA -->
+    <table width="18.2cm" border="nil">
+        <tc width="1.7cm"/>
+        <tc width="5.2cm"/>
+        <tc width="6.2cm"/>
+        <tc width="5.2cm"/>
+        <tr>
+            <td valign="middle" margin="0mm" border="nil">
+                <img src="ifj.png" width="1.6cm" height="1.453cm" />
+            </td>
+            <td valign="middle" margin="0mm 0mm 0mm 3mm" border="nil, #53788F single 0.2mm 0mm, nil, nil">
+                <p line-spacing="exactly 1.2">
+                <font face="Aptos Narrow" size="8.5pt" color="#004168">LABORATORIUM WZORCOWANIA
+                PRZYRZĄDÓW DOZYMETRYCZNYCH</font>
+                </p>
+            </td>
+            <td valign="middle" margin="0mm 3mm 0mm 3mm" border="nil, #53788F single 0.2mm 0mm, nil, #53788F single 0.2mm 0mm">
+                <p line-spacing="exactly 1.2">
+                <font face="Aptos Narrow" size="14pt" color="#004168" bold="1">PROTOKÓŁ</font>
+                <br/><font face="Aptos Narrow" size="10pt" color="#53788F">WZORCOWANIE W ZAKRESIE
+                <br/>EMISJI POWIERZCHNIOWEJ</font>
+                </p>
+            </td>
+            <td valign="middle" margin="0mm 3mm 0mm 3mm" border="nil, nil, nil, #53788F single 0.2mm 0mm">
+                <table width="4.6cm" border="nil">
+                    <tc width="6.7mm"/>
+                    <tc width="39.3mm"/>
+                    <tr>
+                        <td valign="middle" margin="0mm" border="nil">
+                            <img src="file.png" width="6.5mm" height="6.5mm" />
+                        </td>
+                        <td valign="middle" margin="0mm 0mm 1.8mm 2.5mm" border="nil">
+                            <font face="Aptos Narrow" size="8pt" color="#53788F">Znak sprawy:<br/></font
+                            ><font face="Aptos Narrow" size="9pt" color="#000000">NLW.4851.15037.2026.W</font>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle" margin="0mm" border="nil">
+                            <img src="file.png" width="6.5mm" height="6.5mm" />
+                        </td>
+                        <td valign="middle" margin="0mm 0mm 1.8mm 2.5mm" border="nil">
+                        <p tabs="1.75cm">
+                            <font face="Aptos Narrow" size="8pt" color="#53788F">Nr karty:<tab/>Nr arkusza:<br/></font
+                            ><font face="Aptos Narrow" size="9pt" color="#000000"><b face="Aptos Black">22057</b><tab/>1s</font>
+                        </p>
+                        </td>
+                    </tr>             
+                    <tr>
+                        <td valign="middle" margin="0mm" border="nil">
+                            <img src="cal.png" width="6.5mm" height="6.5mm" />
+                        </td>
+                        <td valign="middle" margin="0mm 0mm 0mm 2.5mm" border="nil">
+                            <font face="Aptos Narrow" size="8pt" color="#53788F">Data:<br/></font
+                            ><font face="Aptos Narrow" size="9pt" color="#000000">12.03.2026</font>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <p>
+    
+    </p>
+</document>
