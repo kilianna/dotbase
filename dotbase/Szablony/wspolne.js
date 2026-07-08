@@ -1,4 +1,4 @@
-﻿
+
 
 function initialize() {
     try {
@@ -61,7 +61,8 @@ function tekst(x, y) {
     } else if (x instanceof Array) {
         return x.map(v => tekst(v, y)).join(', ');
     } else if (typeof x.tekst === 'object') {
-        return x.tekst[jezyk];
+        y = y || 'tekst';
+        return x[y][jezyk];
     } else {
         throw Error('Nie da się tej wartości przekształcić na tekst.');
     }

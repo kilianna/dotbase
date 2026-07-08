@@ -316,6 +316,10 @@ namespace DotBase
                 {
                     throw new ApplicationException("Nieprawidłowa składnia polecenia!");
                 }
+                else if (query.Trim() == "SELECT")
+                {
+                    query += " *";
+                }
                 if (!where)
                 {
                     query += " FROM " + nazwa;

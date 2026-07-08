@@ -7,6 +7,7 @@ using System.Data;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Collections;
+using System.Windows.Forms;
 
 namespace DotBase.Szablony
 {
@@ -217,6 +218,16 @@ namespace DotBase.Szablony
                     objToJson(data as DataRow, null, result, indent);
                     return;
                 }
+                else if (data is DataGridViewRowCollection)
+                {
+                    objToJson(data as DataGridViewRowCollection, result, indent);
+                    return;
+                }
+                else if (data is DataGridViewRow)
+                {
+                    objToJson(data as DataGridViewRow, result, indent);
+                    return;
+                }
                 else if (data is Dictionary<string, string>)
                 {
                     objToJson(data as Dictionary<string, string>, result, indent);
@@ -357,6 +368,32 @@ namespace DotBase.Szablony
             result.Append('\n');
             result.Append(indent);
             result.Append('}');
+        }
+
+        private static void objToJson(DataGridViewRowCollection rows, StringBuilder result, string indent)
+        {
+            var arr = new List<object>();
+            for (int i = 0; i < rows.Count; i++)
+            {
+                if (!rows[i].IsNewRow)
+                {
+                    arr.Add(rows[i]);
+                }
+            }
+            valueToJson(arr.ToArray(), result, indent);
+        }
+
+        private static void objToJson(DataGridViewRow row, StringBuilder result, string indent)
+        {
+            var grid = row.DataGridView;
+            Dictionary<string, object> dict = new Dictionary<string, object>(row.Cells.Count);
+            for (int i = 0; i < row.Cells.Count; i++)
+            {
+                var key = (i < grid.Columns.Count && grid.Columns[i] != null) ? grid.Columns[i].Name : "column_" + i;
+                var value = (row.Cells[i] != null) ? row.Cells[i].Value : null;
+                dict.Add(key, value);
+            }
+            valueToJson(dict, result, indent);
         }
 
         private static void strToJson(string str, StringBuilder result)

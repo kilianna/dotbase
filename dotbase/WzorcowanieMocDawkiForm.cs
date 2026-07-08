@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Narzedzia;
 using WzorcowanieMocDawkiSpace;
+using DotBase.Szablony;
 
 namespace DotBase
 {
@@ -631,6 +632,39 @@ namespace DotBase
             {
                 MyMessageBox.Show("Nie podano wszystkich potrzebnych danych!", "Uwaga");
             }
+
+            var szablon = new wzorcowanie_wzor();
+
+            szablon.typ = wzorcowanie_wzor.Typ.MOC_DAWKI;
+            szablon.jezyk = Jezyk.PL;
+
+            szablon.jednostka = comboBox4.Text;
+            szablon.wielkoscFizyczna = comboBox5.Text;
+            szablon.tlo = textBox5.Text;
+            szablon.tabela = dataGridView1.Rows;
+            szablon.obliczone = dataGridView2.Rows;
+            szablon.dolaczZakres = dolaczZakres;
+
+            szablon.nrKarty = textBox1.Text;
+            szablon.nrArkusza = textBox6.Text;
+            szablon.data = dateTimePicker1.Value;
+
+            szablon.przyrzad.typ = textBox3.Text;
+            szablon.przyrzad.nrFabryczny = textBox4.Text;
+            szablon.przyrzad.inneNastawy = textBox9.Text;
+            szablon.przyrzad.sondaTyp = comboBox1.Text;
+            szablon.przyrzad.sondaNrFabryczny = comboBox2.Text;
+            szablon.przyrzad.napiecieZasilaniaSondy = textBox7.Text;
+
+            szablon.warunki.cisnienie = textBox14.Text;
+            szablon.warunki.temperatura = textBox15.Text;
+            szablon.warunki.wilgotnosc = textBox16.Text;
+            szablon.uwagi = textBox2.Text;
+
+            szablon.wykonal = textBox21.Text;
+            szablon.sprawdzil = textBox22.Text;
+
+            szablon.Generate(this);
         }
 
         //---------------------------------------------------------------

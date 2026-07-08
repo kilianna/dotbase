@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -65,20 +65,21 @@
             this.textBox15 = new System.Windows.Forms.TextBox();
             this.textBox16 = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.button7 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Wskazanie = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Niepewnosc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Min = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Max = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.odleglosc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.zrodlo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.wskazanie = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.niepewnosc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.zakres = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.wartoscWzorcowa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dolacz = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.min = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.max = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
@@ -96,11 +97,6 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.textBox22 = new System.Windows.Forms.TextBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label3 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
@@ -117,7 +113,11 @@
             this.wykresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wykresENToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zapiszToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button7 = new System.Windows.Forms.Button();
+            this.oblZakres = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.oblWspolczynnik = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.oblNiepewnosc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.oblPoprzedniWspolczynnik = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.oblPoprzedniaNiepewnosc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -516,6 +516,17 @@
             this.tabPage3.Text = "Dane wzorcowe i pomiarowe";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(486, 75);
+            this.button7.Margin = new System.Windows.Forms.Padding(4);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(175, 28);
+            this.button7.TabIndex = 20;
+            this.button7.Text = "Odłącz wszystko";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(664, 75);
@@ -562,103 +573,103 @@
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Wskazanie,
-            this.Niepewnosc,
-            this.Column5,
-            this.Column6,
-            this.Column7,
-            this.Min,
-            this.Max});
+            this.odleglosc,
+            this.zrodlo,
+            this.wskazanie,
+            this.niepewnosc,
+            this.zakres,
+            this.wartoscWzorcowa,
+            this.dolacz,
+            this.min,
+            this.max});
             this.dataGridView1.Location = new System.Drawing.Point(8, 114);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.Size = new System.Drawing.Size(1046, 507);
             this.dataGridView1.TabIndex = 1;
             // 
-            // Column1
+            // odleglosc
             // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle7;
-            this.Column1.HeaderText = "Odległość";
-            this.Column1.Name = "Column1";
-            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column1.Width = 96;
+            this.odleglosc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.odleglosc.DefaultCellStyle = dataGridViewCellStyle2;
+            this.odleglosc.HeaderText = "Odległość";
+            this.odleglosc.Name = "odleglosc";
+            this.odleglosc.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.odleglosc.Width = 96;
             // 
-            // Column2
+            // zrodlo
             // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle8;
-            this.Column2.HeaderText = "Źródło";
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 74;
+            this.zrodlo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.zrodlo.DefaultCellStyle = dataGridViewCellStyle3;
+            this.zrodlo.HeaderText = "Źródło";
+            this.zrodlo.Name = "zrodlo";
+            this.zrodlo.Width = 74;
             // 
-            // Wskazanie
+            // wskazanie
             // 
-            this.Wskazanie.HeaderText = "Wskazanie";
-            this.Wskazanie.Name = "Wskazanie";
-            this.Wskazanie.Width = 80;
+            this.wskazanie.HeaderText = "Wskazanie";
+            this.wskazanie.Name = "wskazanie";
+            this.wskazanie.Width = 80;
             // 
-            // Niepewnosc
+            // niepewnosc
             // 
-            this.Niepewnosc.HeaderText = "Niepewność";
-            this.Niepewnosc.Name = "Niepewnosc";
-            this.Niepewnosc.Width = 85;
+            this.niepewnosc.HeaderText = "Niepewność";
+            this.niepewnosc.Name = "niepewnosc";
+            this.niepewnosc.Width = 85;
             // 
-            // Column5
+            // zakres
             // 
-            this.Column5.HeaderText = "Zakres";
-            this.Column5.Name = "Column5";
-            this.Column5.Width = 70;
+            this.zakres.HeaderText = "Zakres";
+            this.zakres.Name = "zakres";
+            this.zakres.Width = 70;
             // 
-            // Column6
+            // wartoscWzorcowa
             // 
-            this.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Column6.HeaderText = "Wartość wzorcowa";
-            this.Column6.Name = "Column6";
-            this.Column6.Width = 137;
+            this.wartoscWzorcowa.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.wartoscWzorcowa.HeaderText = "Wartość wzorcowa";
+            this.wartoscWzorcowa.Name = "wartoscWzorcowa";
+            this.wartoscWzorcowa.Width = 137;
             // 
-            // Column7
+            // dolacz
             // 
-            this.Column7.FalseValue = "false";
-            this.Column7.HeaderText = "Dołącz";
-            this.Column7.Name = "Column7";
-            this.Column7.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Column7.TrueValue = "true";
+            this.dolacz.FalseValue = "false";
+            this.dolacz.HeaderText = "Dołącz";
+            this.dolacz.Name = "dolacz";
+            this.dolacz.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dolacz.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dolacz.TrueValue = "true";
             // 
-            // Min
+            // min
             // 
-            this.Min.HeaderText = "Min";
-            this.Min.Name = "Min";
-            this.Min.Width = 70;
+            this.min.HeaderText = "Min";
+            this.min.Name = "min";
+            this.min.Width = 70;
             // 
-            // Max
+            // max
             // 
-            this.Max.HeaderText = "Max";
-            this.Max.Name = "Max";
-            this.Max.Width = 70;
+            this.max.HeaderText = "Max";
+            this.max.Name = "max";
+            this.max.Width = 70;
             // 
             // groupBox3
             // 
@@ -844,21 +855,21 @@
             // 
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column10,
-            this.Column11,
-            this.Column12,
-            this.Column13,
-            this.Column14});
+            this.oblZakres,
+            this.oblWspolczynnik,
+            this.oblNiepewnosc,
+            this.oblPoprzedniWspolczynnik,
+            this.oblPoprzedniaNiepewnosc});
             this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Top;
             this.dataGridView2.Location = new System.Drawing.Point(4, 4);
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
@@ -866,38 +877,6 @@
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.Size = new System.Drawing.Size(1053, 428);
             this.dataGridView2.TabIndex = 19;
-            // 
-            // Column10
-            // 
-            this.Column10.HeaderText = "Zakres";
-            this.Column10.Name = "Column10";
-            this.Column10.ReadOnly = true;
-            // 
-            // Column11
-            // 
-            this.Column11.HeaderText = "Współczynnik";
-            this.Column11.Name = "Column11";
-            this.Column11.ReadOnly = true;
-            // 
-            // Column12
-            // 
-            this.Column12.HeaderText = "Niepewność";
-            this.Column12.Name = "Column12";
-            this.Column12.ReadOnly = true;
-            // 
-            // Column13
-            // 
-            this.Column13.HeaderText = "Poprzedni współczynnik";
-            this.Column13.Name = "Column13";
-            this.Column13.ReadOnly = true;
-            this.Column13.Width = 190;
-            // 
-            // Column14
-            // 
-            this.Column14.HeaderText = "Poprzednia niepewność";
-            this.Column14.Name = "Column14";
-            this.Column14.ReadOnly = true;
-            this.Column14.Width = 190;
             // 
             // label3
             // 
@@ -1049,16 +1028,37 @@
             this.zapiszToolStripMenuItem.Text = "Zapisz";
             this.zapiszToolStripMenuItem.Click += new System.EventHandler(this.zapiszToolStripMenuItem_Click);
             // 
-            // button7
+            // oblZakres
             // 
-            this.button7.Location = new System.Drawing.Point(486, 75);
-            this.button7.Margin = new System.Windows.Forms.Padding(4);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(175, 28);
-            this.button7.TabIndex = 20;
-            this.button7.Text = "Odłącz wszystko";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.oblZakres.HeaderText = "Zakres";
+            this.oblZakres.Name = "oblZakres";
+            this.oblZakres.ReadOnly = true;
+            // 
+            // oblWspolczynnik
+            // 
+            this.oblWspolczynnik.HeaderText = "Współczynnik";
+            this.oblWspolczynnik.Name = "oblWspolczynnik";
+            this.oblWspolczynnik.ReadOnly = true;
+            // 
+            // oblNiepewnosc
+            // 
+            this.oblNiepewnosc.HeaderText = "Niepewność";
+            this.oblNiepewnosc.Name = "oblNiepewnosc";
+            this.oblNiepewnosc.ReadOnly = true;
+            // 
+            // oblPoprzedniWspolczynnik
+            // 
+            this.oblPoprzedniWspolczynnik.HeaderText = "Poprzedni współczynnik";
+            this.oblPoprzedniWspolczynnik.Name = "oblPoprzedniWspolczynnik";
+            this.oblPoprzedniWspolczynnik.ReadOnly = true;
+            this.oblPoprzedniWspolczynnik.Width = 190;
+            // 
+            // oblPoprzedniaNiepewnosc
+            // 
+            this.oblPoprzedniaNiepewnosc.HeaderText = "Poprzednia niepewność";
+            this.oblPoprzedniaNiepewnosc.Name = "oblPoprzedniaNiepewnosc";
+            this.oblPoprzedniaNiepewnosc.ReadOnly = true;
+            this.oblPoprzedniaNiepewnosc.Width = 190;
             // 
             // WzorcowanieMocDawkiForm
             // 
@@ -1176,22 +1176,22 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
         private System.Windows.Forms.ToolStripMenuItem wykresENToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Wskazanie;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Niepewnosc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Min;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Max;
         private System.Windows.Forms.ToolStripMenuItem prorokółToolStripMenuItem;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn odleglosc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn zrodlo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn wskazanie;
+        private System.Windows.Forms.DataGridViewTextBoxColumn niepewnosc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn zakres;
+        private System.Windows.Forms.DataGridViewTextBoxColumn wartoscWzorcowa;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dolacz;
+        private System.Windows.Forms.DataGridViewTextBoxColumn min;
+        private System.Windows.Forms.DataGridViewTextBoxColumn max;
+        private System.Windows.Forms.DataGridViewTextBoxColumn oblZakres;
+        private System.Windows.Forms.DataGridViewTextBoxColumn oblWspolczynnik;
+        private System.Windows.Forms.DataGridViewTextBoxColumn oblNiepewnosc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn oblPoprzedniWspolczynnik;
+        private System.Windows.Forms.DataGridViewTextBoxColumn oblPoprzedniaNiepewnosc;
     }
 }

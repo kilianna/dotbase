@@ -19,6 +19,7 @@ namespace DotBase.Szablony
         public int minuta;
         public int sekunda;
         public int milisekunda;
+        public long znacznik;
 
         public DocxDateTime(DateTime dateTime)
         {
@@ -33,6 +34,7 @@ namespace DotBase.Szablony
             minuta = dateTime.Minute;
             sekunda = dateTime.Second;
             milisekunda = dateTime.Millisecond;
+            znacznik = dateTime.ToFileTime();
         }
     }
 

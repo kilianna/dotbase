@@ -1438,6 +1438,90 @@ namespace DotBase
                 return result;
             }
         }
+        public class Szablon_Metody : Tabela
+        {
+            public Szablon_Metody(BazaDanychWrapper baza, string nazwa) : base(baza, nazwa) { }
+            public Szablon_Metody UPDATE() { _UPDATE(); return this; }
+            public Szablon_Metody INSERT() { _INSERT(); return this; }
+            public Szablon_Metody DELETE() { _DELETE(); return this; }
+            public Szablon_Metody WHERE() { _WHERE(); return this; }
+            public Szablon_Metody INFO(string text) { _INFO(text); return this; }
+            public Szablon_Metody SELECT() { _SELECT(); return this; }
+            public Szablon_Metody ORDER_BY() { _ORDER_BY(); return this; }
+            public Row_Metody[] GET(int min = 0, int max = 999999999, bool allowException = false) { return Row_Metody._GET(_GET(min, max, allowException)); }
+            public Row_Metody GET_ONE() { return Row_Metody._GET(_GET(1, 1))[0]; }
+            public Row_Metody GET_FIRST() { return Row_Metody._GET(_GET(1))[0]; }
+            public Row_Metody GET_OPTIONAL() { var r = Row_Metody._GET(_GET(0, 1)); return r.Length > 0 ? r[0] : null; }
+            public Szablon_Metody DataRozpoczecia(DateTime value)
+            {
+                SetField("DataRozpoczecia", value, OleDbType.Date);
+                return this;
+            }
+            public Szablon_Metody DataRozpoczecia(DateTime value, string oper)
+            {
+                SetField("DataRozpoczecia", value, OleDbType.Date, oper);
+                return this;
+            }
+            public Szablon_Metody DataRozpoczecia(Order order)
+            {
+                SetOrder("DataRozpoczecia", order);
+                return this;
+            }
+            public Szablon_Metody DataRozpoczecia()
+            {
+                AddField("DataRozpoczecia");
+                return this;
+            }
+            public Szablon_Metody Tekst(string value)
+            {
+                SetField("Tekst", value, OleDbType.WChar);
+                return this;
+            }
+            public Szablon_Metody Tekst(string value, string oper)
+            {
+                SetField("Tekst", value, OleDbType.WChar, oper);
+                return this;
+            }
+            public Szablon_Metody Tekst(Order order)
+            {
+                SetOrder("Tekst", order);
+                return this;
+            }
+            public Szablon_Metody Tekst()
+            {
+                AddField("Tekst");
+                return this;
+            }
+        }
+        public class Row_Metody : Wiersz
+        {
+            public DateTime DataRozpoczecia;
+            public string Tekst;
+            public Row_Metody(DataRow row)
+            {
+                _init(row, GetColsDict(row));
+            }
+            public Row_Metody(DataRow row, Dictionary<string, int> cols)
+            {
+                _init(row, cols);
+            }
+            private void _init(DataRow row, Dictionary<string, int> cols)
+            {
+                if (cols.ContainsKey("DataRozpoczecia"))
+                    DataRozpoczecia = row.Field<DateTime>(cols["DataRozpoczecia"]);
+                if (cols.ContainsKey("Tekst"))
+                    Tekst = row.Field<string>(cols["Tekst"]);
+            }
+            internal static Row_Metody[] _GET(DataTable dane)
+            {
+                var result = new Row_Metody[dane.Rows.Count];
+                var cols = GetColsDict(dane);
+                var index = 0;
+                foreach (DataRow row in dane.Rows)
+                    result[index++] = new Row_Metody(row, cols);
+                return result;
+            }
+        }
         public class Szablon_Pomiary_cez : Tabela
         {
             public Szablon_Pomiary_cez(BazaDanychWrapper baza, string nazwa) : base(baza, nazwa) { }
@@ -5584,6 +5668,7 @@ namespace DotBase
         public Szablon.Szablon_Hasla Hasla { get { return new Szablon.Szablon_Hasla(this, "Hasla"); } }
         public Szablon.Szablon_Jednostki Jednostki { get { return new Szablon.Szablon_Jednostki(this, "Jednostki"); } }
         public Szablon.Szablon_Karta_przyjecia Karta_przyjecia { get { return new Szablon.Szablon_Karta_przyjecia(this, "Karta_przyjecia"); } }
+        public Szablon.Szablon_Metody Metody { get { return new Szablon.Szablon_Metody(this, "Metody"); } }
         public Szablon.Szablon_Pomiary_cez Pomiary_cez { get { return new Szablon.Szablon_Pomiary_cez(this, "Pomiary_cez"); } }
         public Szablon.Szablon_Pomiary_dawka Pomiary_dawka { get { return new Szablon.Szablon_Pomiary_dawka(this, "Pomiary_dawka"); } }
         public Szablon.Szablon_Pomiary_powierzchniowe Pomiary_powierzchniowe { get { return new Szablon.Szablon_Pomiary_powierzchniowe(this, "Pomiary_powierzchniowe"); } }

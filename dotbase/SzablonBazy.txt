@@ -34,7 +34,7 @@
  Dozymetry
 ---------------------------------------------------------------------
 
-    Dozymetry.ID_dozymetru, typ Integer, precyzja 10, niewymagane Nie, pozycja 1, flagi X-X- -X-X
+    Dozymetry.ID_dozymetru, typ Integer, domyślnie 0, precyzja 10, niewymagane Nie, pozycja 1, flagi X-X- -X-X
     Dozymetry.Typ, typ WChar, długość 50, niewymagane Tak, pozycja 2, flagi X-X- -XX-
     Dozymetry.Nr_fabryczny, typ WChar, długość 50, niewymagane Tak, pozycja 3, flagi X-X- -XX-
     Dozymetry.Rok_produkcji, typ WChar, długość 50, niewymagane Tak, pozycja 4, flagi X-X- -XX-
@@ -87,6 +87,13 @@
     Karta_przyjecia.Nr_pisma, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 23, flagi X-X- -XXX
     Karta_przyjecia.Stront_najsilniejszy, typ Boolean, niewymagane Nie, pozycja 24, flagi X-X- -X-X
     Karta_przyjecia.Rok_pisma, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 25, flagi X-X- -XXX
+
+---------------------------------------------------------------------
+ Metody
+---------------------------------------------------------------------
+
+    Metody.DataRozpoczecia, typ Date, precyzja 0, niewymagane Nie, pozycja 1, flagi X-X- -X-X
+    Metody.Tekst, typ WChar, długość 255, niewymagane Tak, pozycja 2, flagi X-X- -XX-
 
 ---------------------------------------------------------------------
  Pomiary_cez
