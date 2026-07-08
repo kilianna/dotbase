@@ -17,6 +17,36 @@ jobs:
     runs-on: windows-2025
     steps:
       - uses: actions/checkout@v3
+
+      - name: Download ttyd (windows)
+        shell: cmd
+        working-directory: ${{ runner.temp }}
+        run: |
+          curl -L https://github.com/tsl0922/ttyd/releases/latest/download/ttyd.win32.exe --output ttyd.exe
+          net stop /y W3SVC
+          netsh advfirewall firewall add rule name="Open Port 8080" dir=in action=allow protocol=TCP localport=8080
+
+      - name: Set cmd as default shell (windows)
+        shell: powershell
+        run: |
+          echo "TTYD_SHELL=C:\Windows\System32\cmd.exe" >> $ENV:GITHUB_ENV
+
+      - name: Install pinggy (windows)
+        shell: cmd
+        run: |
+          echo "Installing pinggy..."
+          npm -y install -y -g pinggy
+
+      - name: Your work starts here (windows non-bash)
+        shell: cmd
+        env:
+          RUNNER_TEMP: ${{ runner.temp }}
+        run: |
+          echo "Starting ttyd on port 8080..."
+          start /i /b "" %RUNNER_TEMP%\ttyd.exe -W -d 0 -p 8080 -w "${{ github.workspace }}" -c "runneradmin:${{ secrets.PASSWORD }}" "${{ env.TTYD_SHELL }}"
+          echo "Starting pinggy to tunnel http://localhost:8080..."
+          npx pinggy --noTui -l http://localhost:8080
+
       - name: Set up .NET
         shell: cmd
         run: |
