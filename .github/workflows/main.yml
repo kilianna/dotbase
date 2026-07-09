@@ -16,7 +16,7 @@ jobs:
   build-program:
     runs-on: windows-2025
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
       - name: Set up .NET
         shell: cmd
         run: |
@@ -26,7 +26,7 @@ jobs:
         shell: cmd
         run: |
           GeneratePackage.bat
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: _tmp
           path: |
@@ -38,12 +38,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-program
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
         with:
           name: _tmp
           path: _tmp
-      - uses: geekyeggo/delete-artifact@v5
+      - uses: geekyeggo/delete-artifact@v6
         with:
           name: _tmp
       - name: Prepare directory structure
@@ -54,7 +54,7 @@ jobs:
       - name: Copy version for Manual
         run: cp _tmp/VERSION.txt manual/Wersja.tex
       - name: Compile LaTeX document
-        uses: xu-cheng/latex-action@v2
+        uses: xu-cheng/latex-action@v4
         with:
           working_directory: manual
           root_file: Instrukcja.tex
@@ -66,7 +66,7 @@ jobs:
           VERSION=`cat ../_tmp/FN-VERSION.txt`
           echo VERSION=$VERSION >> $GITHUB_ENV
           7z a DotBase-$VERSION.7z *
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: DotBase-${{ env.VERSION }}
           path: dist/*.7z
