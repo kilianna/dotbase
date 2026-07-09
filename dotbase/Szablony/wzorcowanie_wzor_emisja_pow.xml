@@ -1,0 +1,118 @@
+
+<!-- PODSTAWKA -->
+<table>
+    <tc width="6.0cm"/>
+    <tc width="12.2cm"/>
+    <tr>
+        <td:head colspan="2" background="<% $nj %>">
+            <p tabs="7.7mm">
+                <img src="img/podstawka.png" width="6.5mm" height="6.5mm" vertical="paragraph -1.4mm" horizontal="character 0mm"  />
+                <font color="<% $tn %>"><tab/><b><% numeruj() %>. PODSTAWKA</b></font>
+            </p>
+        </td:head>
+    </tr>
+    <tr>
+        <td:kom>Podstawka pozycjonująca</td:kom><td:kom><% emisjaPow.podstawka %></td:kom>
+    </tr>
+    <tr>
+        <td:kom>Odległość sonda-źródło</td:kom><td:kom><% emisjaPow.odleglZrSonda %> mm</td:kom>
+    </tr>
+    <tr>
+        <td:kom>Współczynnik poprawkowy</td:kom><td:kom><% emisjaPow.wspKorekcyjny %></td:kom>
+    </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<!-- NAGŁÓWEK: WYNIKI WZORCOWANIA -->
+
+<table border="nil">
+<tc width="7.5cm"/>
+<tc width="0.4cm"/>
+<tc width="10.3cm"/>
+<tr><td colspan="3" border="nil" valign="top" margin="0mm">
+
+<!-- POD-TABELA: DANE PRZYRZĄDU > Nagłówek -->
+<table>
+    <tc width="18.2cm"/>
+    <tr>
+        <td:head background="<% $ct %>" border="nil">
+            <p tabs="7.7mm">
+                <img src="img/wyk-bia.png" width="6.5mm" height="6.5mm" vertical="paragraph -1.4mm" horizontal="character 0mm" />
+                <font color="white"><tab/><b><% numeruj() %>. WYNIKI WZORCOWANIA</b></font>
+            </p>
+        </td:head>
+    </tr>
+</table>
+
+</td></tr>
+<tr><td border="nil" valign="top" margin="0.05mm 0mm 0mm">
+
+<!-- POD-TABELA: DANE PRZYRZĄDU > PRZYRZĄD -->
+<table>
+    <tc width="9mm"/>
+    <tc width="38mm"/>
+    <tc width="28mm"/>
+    <tr>
+    <td:head margin="1.8mm 1mm" background="<% $nj %>"><p align="center"><font face="Aptos Narrow">Lp.</font></p></td:head>
+    <td:head margin="1.8mm 1mm" background="<% $nj %>"><p align="center"><font face="Aptos Narrow">Wskazanie przyrządu<br/><% jednostka %></font></p></td:head>
+    <td:head margin="1.8mm 1mm" background="<% $nj %>"><p align="center"><font face="Aptos Narrow">Tło<br/><% jednostka %></font></p></td:head>
+    </tr>
+    <%!
+    let margin = tabela.length > 8 ? "0mm" : "0.7mm";
+    for (let i = 0; i < tabela.length; i++) {
+        let row = tabela[i];
+        %>
+        <tr>
+        <td:kom margin="<% margin %>"><p align="center"><font face="Aptos Narrow"><% i + 1 %></font></p></td:kom>
+        <td:kom margin="<% margin %>"><p align="center"><% numberAsIs(row.Wskazanie) %></p></td:kom>
+        <td:kom margin="<% margin %>"><p align="center"><% numberAsIs(row.Tlo) %></p></td:kom>
+        </tr>
+    <%! } %>
+</table>
+
+</td>
+<td border="nil" margin="0mm"></td>
+<td border="nil" valign="middle" margin="0.05mm 0mm 0mm">
+
+<!-- POD-TABELA: WYNIKI > WSPÓŁCZYNNIK -->
+<%!
+    let digits = calcDigits(2, emisjaPow.wspolKalibracyjny, 2, emisjaPow.niepWspolKalibracyjnego);
+%>
+<table>
+    <tc width="6.3cm"/>
+    <tc width="4.0cm"/>
+    <tr>
+        <td:kom colspan="2" background="<% $nj %>"><b color="<% $tn %>">WSPÓŁCZYNNIK</b></td:kom>
+    </tr>
+    <tr>
+        <td:kom>Wartość</td:kom><td:kom><b><% fixed(emisjaPow.wspolKalibracyjny, digits) %></b></td:kom>
+    </tr>
+    <tr>
+        <td:kom>Niepewność</td:kom><td:kom><% fixed(emisjaPow.niepWspolKalibracyjnego, digits) %></td:kom>
+    </tr>
+    <tr>
+        <%!
+            let a = toNumber(emisjaPow.niepWspolKalibracyjnego);
+            let b = toNumber(emisjaPow.wspolKalibracyjny);
+            let wzg = '';
+            if (!isNaN(a) && !isNaN(b) && b != 0) {
+                wzg = fixed(a / b * 100, 2) + ' %';
+            }
+        %>
+        <td:kom>Niepewność względna</td:kom><td:kom><% wzg %></td:kom>
+    </tr>
+    <tr>
+        <td:kom>Poprzedni współczynnik</td:kom><td:kom>
+        <%! if (emisjaPow.popWspolKalibracyjny.trim() == '') { %>
+            brak
+        <%! } else { %>
+            <b><% fixed(emisjaPow.popWspolKalibracyjny, digits) %></b>
+        <%! } %>
+        </td:kom>
+    </tr>
+</table>
+
+</td>
+</tr>
+</table>

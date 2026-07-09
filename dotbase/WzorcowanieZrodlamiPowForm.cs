@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Narzedzia;
+using DotBase.Szablony;
 
 namespace DotBase
 {
@@ -697,6 +698,50 @@ namespace DotBase
             {
                 MyMessageBox.Show("Nie podano wszystkich potrzebnych danych!", "Uwaga");
             }
+
+            var szablon = new wzorcowanie_wzor();
+
+            szablon.typ = wzorcowanie_wzor.Typ.EMISJA_POWIERZCHNIOWA;
+            szablon.jezyk = Jezyk.PL;
+
+            szablon.jednostka = comboBox1.Text;
+            szablon.tabela = dataGridView1.Rows;
+
+            szablon.nrKarty = textBox1.Text;
+            szablon.nrArkusza = textBoxArkusz.Text;
+            szablon.data = dateTimePicker1.Value;
+
+            szablon.przyrzad.typ = textBox3.Text;
+            szablon.przyrzad.nrFabryczny = textBox4.Text;
+            szablon.przyrzad.inneNastawy = textBox9.Text;
+            szablon.przyrzad.sondaTyp = comboBox2.Text;
+            szablon.przyrzad.sondaNrFabryczny = comboBox3.Text;
+            szablon.przyrzad.napiecieZasilaniaSondy = textBox7.Text;
+
+            szablon.warunki.cisnienie = textBox14.Text;
+            szablon.warunki.temperatura = textBox15.Text;
+            szablon.warunki.wilgotnosc = textBox16.Text;
+            szablon.uwagi = textBox13.Text;
+
+            szablon.wykonal = textBox21.Text;
+            szablon.sprawdzil = textBox22.Text;
+
+            szablon.emisjaPow.podstawka = textBox12.Text;
+            szablon.emisjaPow.odleglZrSonda = textBox11.Text;
+            szablon.emisjaPow.wspKorekcyjny = textBox10.Text;
+            szablon.emisjaPow.wspolKalibracyjny = textBox17.Text;
+            szablon.emisjaPow.niepWspolKalibracyjnego = textBox18.Text;
+            szablon.emisjaPow.popWspolKalibracyjny = textBox19.Text;
+            szablon.emisjaPow.zakres = textBox8.Text;
+            szablon.emisjaPow.idZrodla= textBox2.Text;
+
+            /* Nie używane dane w tym protokole */
+            szablon.wielkoscFizyczna = "!ERROR!";
+            szablon.tlo = "!ERROR!";
+            szablon.obliczone = null;
+            szablon.dolaczZakres = true;
+
+            szablon.Generate(this);
         }
 
         private void warunki_TextChanged(object sender, EventArgs e)

@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8" ?> 
 <%! eval(utils.include("wspolne.js")) %>
 <%!
+    /* --- Teksty --- */
     let tytuly = {
         MOC_DAWKI: "MOCY DAWKI",
+        EMISJA_POWIERZCHNIOWA: "EMISJI POWIERZCHNIOWEJ",
     };
     let literaArkusza = {
         MOC_DAWKI: "c",
+        EMISJA_POWIERZCHNIOWA: "s",
     };
+
+    /* --- Kolory --- */
+    globalThis.$tn = "#004168"; /* Tekst nagłówka */
+    globalThis.$jt = "#53788F"; /* Jaśniejszy tekst nagłówka */
+    globalThis.$ct = "#53788F"; /* Ciemne tło tabeli i stopki */
+    globalThis.$rm = "#7b97a9"; /* Ramki tabeli i strony  */
+    globalThis.$nj = "#a3bbcb"; /* Nagłówek jasny */
+
     tabela = tabela.filter(r => r.dolacz);
 %>
 <document>
@@ -15,16 +26,15 @@
     <font face="Aptos" size="9pt"/>
   </p-style>
 
-  <DEF:kom valign="middle" margin="1.0mm 1.6mm" border="0.2mm #c4d4de"/>
-  <DEF:head valign="middle" margin="1.8mm 2mm" border="0.2mm #c4d4de"/>
+  <DEF:kom valign="middle" margin="1.0mm 1.6mm" border="0.2mm <% $rm %>"/>
+  <DEF:head valign="middle" margin="1.8mm 2mm" border="0.2mm <% $rm %>"/>
   <DEF:TODO><b color="red">⚠TODO: </b></DEF:TODO>
+  <DEF:ERROR><b color="red">⚠ERROR⚠</b></DEF:ERROR>
 
   <section
-      border="single #c4d4de 0.2mm 4mm, single #c4d4de 0.2mm 4mm, single #c4d4de 0.2mm 0mm, single #c4d4de 0.2mm 4mm"
+      border="single <% $rm %> 0.2mm 4mm, single <% $rm %> 0.2mm 4mm, single <% $rm %> 0.2mm 0mm, single <% $rm %> 0.2mm 4mm"
       width="21cm" height="29.7cm"
       margin="1.2cm 1.4cm 0cm 1.4cm" footer-margin="8mm"/>
-
-
 
   <!--
 
@@ -37,7 +47,7 @@
 
     <!-- STOPKA -->
     <footer>
-      <p tabs="0.7cm, 17.5cm right" background="#53788F">
+      <p tabs="0.7cm, 17.5cm right" background="<% $ct %>">
         <tab/><b color="white">F1/WZOR-2/11.23.1234<tab/>Strona <page-number/> z <total-pages/></b>
       </p>
     </footer>
@@ -54,29 +64,29 @@
                 <img src="img/ifj.png" width="1.6cm" height="1.453cm" />
             </td>
             <!-- LABORATORIUM WZORCOWANIA PRZYRZĄDÓW DOZYMETRYCZNYCH -->
-            <td valign="middle" margin="0mm 0mm 0mm 3mm" border="nil, #c4d4de single 0.2mm 0mm, nil, nil">
+            <td valign="middle" margin="0mm 0mm 0mm 3mm" border="nil, <% $rm %> single 0.2mm 0mm, nil, nil">
                 <p line-spacing="exactly 1.2">
-                <font face="Aptos Narrow" size="8.5pt" color="#004168">LABORATORIUM WZORCOWANIA
+                <font face="Aptos Narrow" size="8.5pt" color="<% $tn %>">LABORATORIUM WZORCOWANIA
                 PRZYRZĄDÓW DOZYMETRYCZNYCH</font>
                 </p>
             </td>
             <!-- PROTOKÓŁ -->
-            <td valign="middle" margin="0mm 3mm 0mm 3mm" border="nil, #c4d4de single 0.2mm 0mm, nil, #c4d4de single 0.2mm 0mm">
+            <td valign="middle" margin="0mm 3mm 0mm 3mm" border="nil, <% $rm %> single 0.2mm 0mm, nil, <% $rm %> single 0.2mm 0mm">
                 <p line-spacing="exactly 1.2">
-                <font face="Aptos Narrow" size="14pt" color="#004168" bold="1">PROTOKÓŁ</font>
-                <br/><font face="Aptos Narrow" size="10pt" color="#53788F">WZORCOWANIE W ZAKRESIE
+                <font face="Aptos Narrow" size="14pt" color="<% $tn %>" bold="1">PROTOKÓŁ</font>
+                <br/><font face="Aptos Narrow" size="10pt" color="<% $jt %>">WZORCOWANIE W ZAKRESIE
                 <br/><% tytuly[typ] %></font>
                 </p>
             </td>
             <!-- IDENTYFIKACJA -->
-            <td valign="middle" margin="0mm 3mm 0mm 3mm" border="nil, nil, nil, #c4d4de single 0.2mm 0mm">
+            <td valign="middle" margin="0mm 3mm 0mm 3mm" border="nil, nil, nil, <% $rm %> single 0.2mm 0mm">
                 <p spacing="0mm 2mm">
-                    <font face="Aptos Narrow" size="8pt" color="#53788F">Znak sprawy:<br/></font
-                    ><font face="Aptos Narrow" size="9pt" color="#000000"><% znakSprawy %></font>
+                    <font face="Aptos Narrow" size="8pt" color="<% $jt %>">Znak sprawy:<br/></font
+                    ><font face="Aptos Narrow" size="9pt"><% znakSprawy %></font>
                 </p>
                 <p tabs="1.4cm, 3.2cm">
-                    <font face="Aptos Narrow" size="8pt" color="#53788F">Nr karty:<tab/>Nr arkusza:<tab/>Data:<br/></font
-                    ><font face="Aptos Narrow" size="9pt" color="#000000"><b face="Aptos Black"><% nrKarty %></b><tab
+                    <font face="Aptos Narrow" size="8pt" color="<% $jt %>">Nr karty:<tab/>Nr arkusza:<tab/>Data:<br/></font
+                    ><font face="Aptos Narrow" size="9pt"><b face="Aptos Black"><% nrKarty %></b><tab
                         /><% nrArkusza %><% literaArkusza[typ] %><tab/><% tekst(data, 'ksiegowa') %></font>
                 </p>
             </td>
@@ -96,10 +106,10 @@
         <tc width="3.9cm"/>
         <tc width="5.8cm"/>
         <tr>
-            <td:head colspan="2" background="#f2faff">
+            <td:head colspan="2" background="<% $nj %>">
                 <p tabs="7.7mm">
                     <img src="img/opcje.png" width="6.5mm" height="6.5mm" vertical="paragraph -1.4mm" horizontal="character 0mm"  />
-                    <font color="#004168"><tab/><b>1. INFORMACJE OGÓLNE</b></font>
+                    <font color="<% $tn %>"><tab/><b><% numeruj() %>. INFORMACJE OGÓLNE</b></font>
                 </p>
             </td:head>
         </tr>
@@ -123,10 +133,10 @@
         <tc width="3.0cm"/>
         <tc width="5.1cm"/>
         <tr>
-            <td:head colspan="2" background="#f2faff">
+            <td:head colspan="2" background="<% $nj %>">
                 <p tabs="7.7mm">
                     <img src="img/user.png" width="6.5mm" height="6.5mm" vertical="paragraph -1.4mm" horizontal="character 0mm" />
-                    <font color="#004168"><tab/><b>2. DANE ZLECENIODAWCY</b></font>
+                    <font color="<% $tn %>"><tab/><b><% numeruj() %>. DANE ZLECENIODAWCY</b></font>
                 </p>
             </td:head>
         </tr>
@@ -151,10 +161,10 @@
     <table border="nil">
     <tc width="18.2cm"/>
     <tr>
-      <td:head background="#f2faff">
+      <td:head background="<% $nj %>">
         <p tabs="7.7mm">
           <img src="img/licznik.png" width="6.5mm" height="6.5mm" vertical="paragraph -1.4mm" horizontal="character 0mm" />
-          <font color="#004168"><tab/><b>3. DANE PRZYRZĄDU</b></font>
+          <font color="<% $tn %>"><tab/><b><% numeruj() %>. DANE PRZYRZĄDU</b></font>
         </p>
       </td:head>
     </tr>
@@ -168,7 +178,7 @@
         <tc width="3.0cm"/>
         <tc width="8.1cm"/>
         <tr>
-            <td:kom colspan="2" border="nil, 0.2mm #c4d4de, 0.2mm #c4d4de"><b color="#004168">PRZYRZĄD</b></td:kom>
+            <td:kom colspan="2" border="nil, 0.2mm <% $rm %>, 0.2mm <% $rm %>"><b color="<% $tn %>">PRZYRZĄD</b></td:kom>
         </tr>
         <tr>
             <td:kom>Typ</td:kom><td:kom><% przyrzad.typ %></td:kom>
@@ -179,6 +189,11 @@
         <tr>
             <td:kom>ID przyrządu</td:kom><td:kom><% kartaPrzyjecia.ID_dozymetru %></td:kom>
         </tr>
+        <%! if (typ === 'EMISJA_POWIERZCHNIOWA') { %>
+        <tr>
+            <td:kom>Zakres pomiarowy</td:kom><td:kom><% emisjaPow.zakres %></td:kom>
+        </tr>
+        <%! } %>
         <tr>
             <td:kom>Inne nastawy</td:kom><td:kom><% przyrzad.inneNastawy %></td:kom>
         </tr>
@@ -193,7 +208,7 @@
         <tc width="3.0cm"/>
         <tc width="3.7cm"/>
         <tr>
-            <td:kom colspan="2" border="nil, 0.2mm #c4d4de, 0.2mm #c4d4de"><b color="#004168">SONDA</b></td:kom>
+            <td:kom colspan="2" border="nil, 0.2mm <% $rm %>, 0.2mm <% $rm %>"><b color="<% $tn %>">SONDA</b></td:kom>
         </tr>
         <tr>
             <td:kom>Typ</td:kom><td:kom><% przyrzad.sondaTyp %></td:kom>
@@ -205,7 +220,7 @@
             <td:kom>ID sondy</td:kom><td:kom><% sonda.ID_sondy %></td:kom>
         </tr>
         <tr>
-            <td:kom>Napięcie zasilania</td:kom><td:kom><% przyrzad.napiecieZasilaniaSondy %></td:kom>
+            <td:kom>Napięcie zasilania</td:kom><td:kom><% przyrzad.napiecieZasilaniaSondy %><% przyrzad.napiecieZasilaniaSondy.match(/^\s*[0-9.,-]+\s*$/) ? " V" : "" %></td:kom>
         </tr>
     </table>
 
@@ -215,23 +230,22 @@
 
     <p>&nbsp;</p>
 
-    <!-- TABELA: INFORMACJE O WZORCOWANIU -->
-
     <table border="nil">
     <tc width="11.1cm"/>
     <tc width="0.4cm"/>
     <tc width="6.7cm"/>
     <tr><td border="nil" valign="top" margin="0.05mm 0mm 0mm">
 
-    <!-- POD-TABELA: INFORMACJE O WZORCOWANIU > INNE INFORMACJE -->
+    <%! if (typ !== 'EMISJA_POWIERZCHNIOWA') { %>
+
     <table>
         <tc width="3.5cm"/>
         <tc width="7.6cm"/>
         <tr>
-            <td:head colspan="2" background="#f2faff">
+            <td:head colspan="2" background="<% $nj %>">
                 <p tabs="7.7mm">
                     <img src="img/prom.png" width="6.5mm" height="6.5mm" vertical="paragraph -1.4mm" horizontal="character 0mm"  />
-                    <font color="#004168"><tab/><b>4. INFORMACJE O WZORCOWANIU</b></font>
+                    <font color="<% $tn %>"><tab/><b><% numeruj() %>. INFORMACJE O WZORCOWANIU</b></font>
                 </p>
             </td:head>
         </tr>
@@ -243,6 +257,32 @@
         </tr>
     </table>
 
+    <%! } else { %>
+
+    <table>
+        <tc width="3.5cm"/>
+        <tc width="7.6cm"/>
+        <tr>
+            <td:head colspan="2" background="<% $nj %>">
+                <p tabs="7.7mm">
+                    <img src="img/prom.png" width="6.5mm" height="6.5mm" vertical="paragraph -1.4mm" horizontal="character 0mm"  />
+                    <font color="<% $tn %>"><tab/><b><% numeruj() %>. ŹRÓDŁO</b></font>
+                </p>
+            </td:head>
+        </tr>
+        <tr>
+            <td:kom>Rodzaj</td:kom><td:kom><b><% emisjaPow.zrodlo.Nazwa %></b></td:kom>
+        </tr>
+        <tr>
+            <td:kom>Nr źródła</td:kom><td:kom><% emisjaPow.zrodlo.Numer %></td:kom>
+        </tr>
+        <tr>
+            <td:kom>Aktualna emisja pow.</td:kom><td:kom><% fixed(emisjaPow.emisjaPowierzchniowa, 2) %> cm<sup>-2</sup>s<sup>-1</sup></td:kom>
+        </tr>
+    </table>
+
+    <%! } %>
+
     </td>
     <td border="nil" margin="0mm"></td>
     <td border="nil" valign="top" margin="0.05mm 0mm 0mm">
@@ -252,10 +292,10 @@
         <tc width="3.7cm"/>
         <tc width="3.0cm"/>
         <tr>
-            <td:head colspan="2" background="#f2faff">
+            <td:head colspan="2" background="<% $nj %>">
                 <p tabs="7.7mm">
                     <img src="img/chmura.png" width="6.5mm" height="6.5mm" vertical="paragraph -1.4mm" horizontal="character 0mm"  />
-                    <font color="#004168"><tab/><b>5. WARUNKI ATMOSFERYCZNE</b></font>
+                    <font color="<% $tn %>"><tab/><b><% numeruj() %>. WARUNKI ATMOSFERYCZNE</b></font>
                 </p>
             </td:head>
         </tr>
@@ -276,87 +316,15 @@
 
     <p>&nbsp;</p>
 
-    <!-- NAGŁÓWEK: WYNIKI WZORCOWANIA -->
+    <!-- TABELA: WYNIKI -->
 
-    <table>
-        <tc width="18.2cm"/>
-        <tr>
-            <td:head background="#53788F" border="nil">
-                <p tabs="7.7mm">
-                    <img src="img/wyk-bia.png" width="6.5mm" height="6.5mm" vertical="paragraph -1.4mm" horizontal="character 0mm" />
-                    <font color="white"><tab/><b>6. WYNIKI WZORCOWANIA</b></font>
-                </p>
-            </td:head>
-        </tr>
-    </table>
-
-    <p><font size="0.1mm">&nbsp;</font></p>
-
-    <table>
-      <tc width="6mm"/>
-      <tc width="17mm"/>
-      <tc width="12mm"/>
-      <tc width="29mm"/>
-      <tc width="29mm"/>
-      <tc width="30mm"/>
-      <%! if (dolaczZakres) { %>
-      <tc width="19mm"/>
-      <tc width="40mm"/>
-      <%! } else { %>
-      <tc width="59mm"/>
-      <%! } %>
-      <tr>
-        <td:head margin="1.8mm 1mm" background="#f2faff"><p align="center"><font face="Aptos Narrow">Lp.</font></p></td:head>
-        <td:head margin="1.8mm 1mm" background="#f2faff"><p align="center"><font face="Aptos Narrow">Odległość</font></p></td:head>
-        <td:head margin="1.8mm 1mm" background="#f2faff"><p align="center"><font face="Aptos Narrow">Źródło</font></p></td:head>
-        <td:head margin="1.8mm 1mm" background="#f2faff"><p align="center"><font face="Aptos Narrow">Wartość wzorcowa<br/>[<% jednostka %>]</font></p></td:head>
-        <td:head margin="1.8mm 1mm" background="#f2faff"><p align="center"><font face="Aptos Narrow">Wartość zmierzona<br/>[<% jednostka %>]</font></p></td:head>
-        <td:head margin="1.8mm 1mm" background="#f2faff"><p align="center"><font face="Aptos Narrow">Wahanie wskazania<br/>[<% jednostka %>]</font></p></td:head>
-        <%! if (dolaczZakres) { %>
-        <td:head margin="1.8mm 1mm" background="#f2faff"><p align="center"><font face="Aptos Narrow">Zakres pomiarowy</font></p></td:head>
-        <%! } %>
-        <td:head margin="1.8mm 1mm" background="#f2faff"><p align="center"><font face="Aptos Narrow">Współczynnik i niepewność<br/>[<% jednostka %>]</font></p></td:head>
-      </tr>
-
-      <%!
-      let zakresy = [];
-      let ostatni = { oblZakres: -1 };
-      for (var i = 0; i < tabela.length; i++) {
-        let row = tabela[i];
-        if (row.zakres != ostatni.oblZakres) {
-            ostatni.end = i;
-            ostatni = obliczone.find(z => z.oblZakres == row.zakres);
-            if (!ostatni) {
-                ostatni = { oblZakres: row.zakres, oblWspolczynnik: "⚠", oblNiepewnosc: "⚠" };
-            }
-            ostatni.begin = i;
-            zakresy[i] = ostatni;
-        }
-      }
-      ostatni.end = tabela.length;
-
-      let margin = tabela.length > 12 ? "0mm" : "0.7mm";
-      for (var i = 0; i < tabela.length; i++) {
-        let row = tabela[i];
-        calcDigits(2, row.wartoscWzorcowa, 2, row.wskazanie, 2, row.niepewnosc);
-      %>
-      <tr>
-        <td:kom margin="<% margin %>"><p align="center"><font face="Aptos Narrow"><% i + 1 %></font></p></td:kom>
-        <td:kom margin="<% margin %>"><p align="center"><% row.odleglosc %></p></td:kom>
-        <td:kom margin="<% margin %>"><p align="center"><% row.zrodlo %></p></td:kom>
-        <td:kom margin="<% margin %>"><p align="center"><% fixed(row.wartoscWzorcowa) %></p></td:kom>
-        <td:kom margin="<% margin %>"><p align="center"><% fixed(row.wskazanie) %></p></td:kom>
-        <td:kom margin="<% margin %>"><p align="center"><% fixed(row.niepewnosc) %></p></td:kom>
-        <%! if (dolaczZakres) { %>
-        <td:kom margin="<% margin %>"><p align="center"><% row.zakres %></p></td:kom>
-        <%! } %>
-        <%! if (zakresy[i]) { %>
-        <td:kom margin="<% margin %>" rowspan="<% zakresy[i].end - zakresy[i].begin %>"><p align="center"
-            ><% zakresy[i].oblWspolczynnik %> ± <% zakresy[i].oblNiepewnosc %></p></td:kom>
-        <%! } %>
-      </tr>
-      <%! } %>
-    </table>
+    <%!
+    if (typ === 'EMISJA_POWIERZCHNIOWA') {
+        %><%= utils.include("wzorcowanie_wzor_emisja_pow.xml") %><%!
+    } else {
+        %><%= utils.include("wzorcowanie_wzor_moc_dawki.xml") %><%!
+    }
+    %>
 
     <p>&nbsp;</p>
 
@@ -364,10 +332,10 @@
     <table>
         <tc width="18.2cm"/>
         <tr>
-            <td:head background="#f2faff">
+            <td:head background="<% $nj %>">
                 <p tabs="7.7mm">
                     <img src="img/komentarz.png" width="6.5mm" height="6.5mm" vertical="paragraph -1.4mm" horizontal="character 0mm" />
-                    <font color="#004168"><tab/><b>7. UWAGI</b></font>
+                    <font color="<% $tn %>"><tab/><b><% numeruj() %>. UWAGI</b></font>
                 </p>
             </td:head>
         </tr>

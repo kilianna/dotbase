@@ -133,6 +133,18 @@ function _flattenAbs(value, arr) {
 
 let currentDigits = 0;
 
+function toNumber(x) {
+    if (typeof x === 'number') {
+        return x;
+    } else if (typeof x === 'string') {
+        return parseFloat(x.replace(',', '.').trim());
+    } else if (Array.isArray(x)) {
+        return x.map(v => toNumber(v));
+    } else {
+        return NaN;
+    }
+}
+
 function calcDigits(...args) {
     let digits = 0;
     let min = 0;
@@ -144,7 +156,7 @@ function calcDigits(...args) {
             if (significant.max !== undefined) max = significant.max;
             continue;
         }
-        let data = args[i++];
+        let data = toNumber(args[i++]);
         data = _flattenAbs(data, []).filter(x => x > 1e-20);
         if (data.length == 0) continue;
         let fd = _fractionDigits(significant, data);
@@ -156,6 +168,7 @@ function calcDigits(...args) {
 
 function fixed(value, digits) {
     let result;
+    value = toNumber(value);
     if (digits === undefined) { // TODO: Skip "digits" argument where possible
         digits = currentDigits;
     }
@@ -169,7 +182,7 @@ function fixed(value, digits) {
 }
 
 function numberAsIs(value) {
-    value = 1 * value;
+    value = toNumber(value);
     const numberSignificantDigits = 13;
     let intDigits = Math.abs(value).toFixed(0).length;
     let fracDigits = Math.min(20, Math.max(0, numberSignificantDigits - intDigits));
@@ -289,3 +302,39 @@ initialize();
 if (typeof globalThis.process !== 'undefined' && globalThis.process.argv[2] === '__test__') {
     test();
 }
+
+let numeracja = {};
+
+function numeruj(name) {
+    name = name || 'default';
+    if (!numeracja[name]) {
+        numeracja[name] = 0;
+    }
+    return ++numeracja[name];
+}
+
+function zerujNumeracje(name) {
+    name = name || 'default';
+    numeracja[name] = 0;
+}
+
+
+globalThis.initialize = initialize;
+globalThis.escape = escape;
+globalThis.tekst = tekst;
+globalThis.multiline = multiline;
+globalThis.litera = litera;
+globalThis.mikro = mikro;
+globalThis.blad = blad;
+globalThis._fractionDigits = _fractionDigits;
+globalThis._flattenAbs = _flattenAbs;
+globalThis.toNumber = toNumber;
+globalThis.calcDigits = calcDigits;
+globalThis.fixed = fixed;
+globalThis.numberAsIs = numberAsIs;
+globalThis.nbsp = nbsp;
+globalThis.simpleHtml = simpleHtml;
+globalThis.nb = nb;
+globalThis.test = test;
+globalThis.numeruj = numeruj;
+globalThis.zerujNumeracje = zerujNumeracje;

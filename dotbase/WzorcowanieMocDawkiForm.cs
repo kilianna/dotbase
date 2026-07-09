@@ -664,6 +664,9 @@ namespace DotBase
             szablon.wykonal = textBox21.Text;
             szablon.sprawdzil = textBox22.Text;
 
+            /* Nie używane dane w tym protokole */
+            szablon.emisjaPow = null;
+
             szablon.Generate(this);
         }
 

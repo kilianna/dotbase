@@ -1,0 +1,82 @@
+
+<!-- NAGŁÓWEK: WYNIKI WZORCOWANIA -->
+
+<table>
+    <tc width="18.2cm"/>
+    <tr>
+        <td:head background="<% $ct %>" border="nil">
+            <p tabs="7.7mm">
+                <img src="img/wyk-bia.png" width="6.5mm" height="6.5mm" vertical="paragraph -1.4mm" horizontal="character 0mm" />
+                <font color="white"><tab/><b><% numeruj() %>. WYNIKI WZORCOWANIA</b></font>
+            </p>
+        </td:head>
+    </tr>
+</table>
+
+<p><font size="0.1mm">&nbsp;</font></p>
+
+<table>
+    <tc width="6mm"/>
+    <tc width="17mm"/>
+    <tc width="12mm"/>
+    <tc width="29mm"/>
+    <tc width="29mm"/>
+    <tc width="30mm"/>
+    <%! if (dolaczZakres) { %>
+    <tc width="19mm"/>
+    <tc width="40mm"/>
+    <%! } else { %>
+    <tc width="59mm"/>
+    <%! } %>
+    <tr>
+    <td:head margin="1.8mm 1mm" background="<% $nj %>"><p align="center"><font face="Aptos Narrow">Lp.</font></p></td:head>
+    <td:head margin="1.8mm 1mm" background="<% $nj %>"><p align="center"><font face="Aptos Narrow">Odległość</font></p></td:head>
+    <td:head margin="1.8mm 1mm" background="<% $nj %>"><p align="center"><font face="Aptos Narrow">Źródło</font></p></td:head>
+    <td:head margin="1.8mm 1mm" background="<% $nj %>"><p align="center"><font face="Aptos Narrow">Wartość wzorcowa<br/>[<% jednostka %>]</font></p></td:head>
+    <td:head margin="1.8mm 1mm" background="<% $nj %>"><p align="center"><font face="Aptos Narrow">Wartość zmierzona<br/>[<% jednostka %>]</font></p></td:head>
+    <td:head margin="1.8mm 1mm" background="<% $nj %>"><p align="center"><font face="Aptos Narrow">Wahanie wskazania<br/>[<% jednostka %>]</font></p></td:head>
+    <%! if (dolaczZakres) { %>
+    <td:head margin="1.8mm 1mm" background="<% $nj %>"><p align="center"><font face="Aptos Narrow">Zakres pomiarowy</font></p></td:head>
+    <%! } %>
+    <td:head margin="1.8mm 1mm" background="<% $nj %>"><p align="center"><font face="Aptos Narrow">Współczynnik i niepewność<br/>[<% jednostka %>]</font></p></td:head>
+    </tr>
+
+    <%!
+    let zakresy = [];
+    let ostatni = { oblZakres: -1 };
+    for (var i = 0; i < tabela.length; i++) {
+    let row = tabela[i];
+    if (row.zakres != ostatni.oblZakres) {
+        ostatni.end = i;
+        ostatni = obliczone.find(z => z.oblZakres == row.zakres);
+        if (!ostatni) {
+            ostatni = { oblZakres: row.zakres, oblWspolczynnik: "⚠", oblNiepewnosc: "⚠" };
+        }
+        ostatni.begin = i;
+        zakresy[i] = ostatni;
+    }
+    }
+    ostatni.end = tabela.length;
+
+    let margin = tabela.length > 12 ? "0mm" : "0.7mm";
+    for (var i = 0; i < tabela.length; i++) {
+    let row = tabela[i];
+    calcDigits(2, row.wartoscWzorcowa, 2, row.wskazanie, 2, row.niepewnosc);
+    %>
+    <tr>
+    <td:kom margin="<% margin %>"><p align="center"><font face="Aptos Narrow"><% i + 1 %></font></p></td:kom>
+    <td:kom margin="<% margin %>"><p align="center"><% row.odleglosc %></p></td:kom>
+    <td:kom margin="<% margin %>"><p align="center"><% row.zrodlo %></p></td:kom>
+    <td:kom margin="<% margin %>"><p align="center"><% fixed(row.wartoscWzorcowa) %></p></td:kom>
+    <td:kom margin="<% margin %>"><p align="center"><% fixed(row.wskazanie) %></p></td:kom>
+    <td:kom margin="<% margin %>"><p align="center"><% fixed(row.niepewnosc) %></p></td:kom>
+    <%! if (dolaczZakres) { %>
+    <td:kom margin="<% margin %>"><p align="center"><% row.zakres %></p></td:kom>
+    <%! } %>
+    <%! if (zakresy[i]) { %>
+    <td:kom margin="<% margin %>" rowspan="<% zakresy[i].end - zakresy[i].begin %>"><p align="center"
+        ><% zakresy[i].oblWspolczynnik %> ± <% zakresy[i].oblNiepewnosc %></p></td:kom>
+    <%! } %>
+    </tr>
+    <%! } %>
+</table>

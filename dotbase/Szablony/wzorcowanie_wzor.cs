@@ -32,6 +32,21 @@ namespace DotBase.Szablony
             public string wilgotnosc;
         };
 
+        public class EmisjaPow
+        {
+            public string podstawka;
+            public string odleglZrSonda;
+            public string wspKorekcyjny;
+            public string wspolKalibracyjny;
+            public string niepWspolKalibracyjnego;
+            public string popWspolKalibracyjny;
+            public string zakres;
+            public string idZrodla;
+            public double emisjaPowierzchniowa;
+            public Szablon.Row_zrodla_powierzchniowe zrodlo;
+            public Szablon.Row_Atesty_zrodel atestZrodla;
+        };
+
         public Typ typ;
         public string jednostka;
         public string wielkoscFizyczna;
@@ -53,6 +68,7 @@ namespace DotBase.Szablony
         public Szablon.Row_Sondy sonda;
         public Szablon.Row_Metody[] metody;
         public DataGridViewRowCollection obliczone;
+        public EmisjaPow emisjaPow = new EmisjaPow();
 
         protected override string FileName
         {
@@ -87,6 +103,26 @@ namespace DotBase.Szablony
             sonda = sondy[0];
 
             metody = baza.Metody.SELECT().GET();
+
+            if (emisjaPow != null)
+            {
+                emisjaPow.zrodlo = baza.zrodla_powierzchniowe
+                    .SELECT()
+                    .WHERE().Id_zrodla(Int32.Parse(emisjaPow.idZrodla))
+                    .GET_ONE();
+
+                emisjaPow.atestZrodla = baza.Atesty_zrodel
+                    .SELECT()
+                    .WHERE().ID_zrodla(Int16.Parse(emisjaPow.idZrodla))
+                    .ORDER_BY().Data_wzorcowania(Order.DESC)
+                    .GET_FIRST();
+
+                emisjaPow.emisjaPowierzchniowa = emisjaPow.atestZrodla.Emisja_powierzchniowa ?? -1;
+                var czasTimeSpan = data - (emisjaPow.atestZrodla.Data_wzorcowania ?? data);
+                double czas = czasTimeSpan.Days;
+                double czasPolowicznegoRozpadu = emisjaPow.zrodlo.Czas_polowicznego_rozpadu ?? Double.PositiveInfinity;
+                emisjaPow.emisjaPowierzchniowa *= Math.Exp(-czas / 365.25 * Math.Log(2.0) / czasPolowicznegoRozpadu);
+            }
 
             return true;
         }

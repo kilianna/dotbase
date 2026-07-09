@@ -695,6 +695,12 @@
     <Content Include="Szablony\wzorcowanie_wzor.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Szablony\wzorcowanie_wzor_emisja_pow.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Szablony\wzorcowanie_wzor_moc_dawki.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Szablony\xml2docx-win.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
