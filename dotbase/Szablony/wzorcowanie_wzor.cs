@@ -74,7 +74,15 @@ namespace DotBase.Szablony
         {
             get
             {
-                return String.Format(@"..\Wyniki\Protokoly\MocDawki\{0}\{1}MocDawki.docx", DirGroup(nrKarty), nrKarty);
+                switch (typ)
+                {
+                    case Typ.EMISJA_POWIERZCHNIOWA:
+                        return String.Format(@"..\Wyniki\Protokoly\Skazenia\{0}\{1}WynikSkazenia{2}s.docx", DirGroup(nrKarty), nrKarty, nrArkusza);
+                    case Typ.MOC_DAWKI:
+                        return String.Format(@"..\Wyniki\Protokoly\MocDawki\{0}\{1}MocDawki.docx", DirGroup(nrKarty), nrKarty);
+                    default:
+                        throw new ApplicationException("Internal error");
+                }
             }
         }
 
