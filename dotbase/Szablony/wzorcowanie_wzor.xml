@@ -2,6 +2,10 @@
 <%! eval(utils.include("wspolne.js")) %>
 <%!
     /* --- Teksty --- */
+    let numeryFormularzy = {
+        MOC_DAWKI: "F1/WZOR-1/09.07.2026",
+        EMISJA_POWIERZCHNIOWA: "F1/WZOR-2/09.07.2026",
+    };
     let tytuly = {
         MOC_DAWKI: "MOCY DAWKI",
         EMISJA_POWIERZCHNIOWA: "EMISJI POWIERZCHNIOWEJ",
@@ -48,7 +52,7 @@
     <!-- STOPKA -->
     <footer>
       <p tabs="0.7cm, 17.5cm right" background="<% $ct %>">
-        <tab/><b color="white">F1/WZOR-2/11.23.1234<tab/>Strona <page-number/> z <total-pages/></b>
+        <tab/><b color="white"><% numeryFormularzy[typ] %><tab/>Strona <page-number/> z <total-pages/></b>
       </p>
     </footer>
 
@@ -115,6 +119,7 @@
         </tr>
         <tr><td:kom>Metoda wzorcowania</td:kom><td:kom>
             <%!
+                metody = metody.filter(m => m.Emisja === (typ === 'EMISJA_POWIERZCHNIOWA'));
                 /* Sortujemy metody po dacie od najnowszej do najstarszej */
                 metody.sort((a, b) => b.DataRozpoczecia.znacznik - a.DataRozpoczecia.znacznik);
                 /* Znajdź najnowszą metodę, która jest nie późniejsza niż data wzorcowania */
@@ -122,7 +127,7 @@
             %>
             <%= escape(metoda.Tekst).replace(new RegExp("\\s*\\("), '<br/>(') %>
         </td:kom></tr>
-        <tr><td:kom>Stanowisko pomiarowe</td:kom><td:kom>Hala kalibracyjna stanowisko WZOR‑1</td:kom></tr>
+        <tr><td:kom>Stanowisko pomiarowe</td:kom><td:kom>Hala kalibracyjna stanowisko WZOR‑<% typ === 'EMISJA_POWIERZCHNIOWA' ? '2' : '1' %></td:kom></tr>
     </table>
 
 

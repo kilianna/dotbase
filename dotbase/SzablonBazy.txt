@@ -92,8 +92,9 @@
  Metody
 ---------------------------------------------------------------------
 
-    Metody.DataRozpoczecia, typ Date, precyzja 0, niewymagane Nie, pozycja 1, flagi X-X- -X-X
-    Metody.Tekst, typ WChar, długość 255, niewymagane Tak, pozycja 2, flagi X-X- -XX-
+    Metody.Emisja, typ Boolean, domyślnie No, niewymagane Nie, pozycja 1, flagi X-X- -X-X
+    Metody.DataRozpoczecia, typ Date, precyzja 0, niewymagane Nie, pozycja 2, flagi X-X- -X-X
+    Metody.Tekst, typ WChar, długość 255, niewymagane Tak, pozycja 3, flagi X-X- -XX-
 
 ---------------------------------------------------------------------
  Pomiary_cez

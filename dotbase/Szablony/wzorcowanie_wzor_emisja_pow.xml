@@ -55,8 +55,8 @@
     <tc width="28mm"/>
     <tr>
     <td:head margin="1.8mm 1mm" background="<% $nj %>"><p align="center"><font face="Aptos Narrow">Lp.</font></p></td:head>
-    <td:head margin="1.8mm 1mm" background="<% $nj %>"><p align="center"><font face="Aptos Narrow">Wskazanie przyrządu<br/><% jednostka %></font></p></td:head>
-    <td:head margin="1.8mm 1mm" background="<% $nj %>"><p align="center"><font face="Aptos Narrow">Tło<br/><% jednostka %></font></p></td:head>
+    <td:head margin="1.8mm 1mm" background="<% $nj %>"><p align="center"><font face="Aptos Narrow">Wskazanie przyrządu<br/>[<% jednostka %>]</font></p></td:head>
+    <td:head margin="1.8mm 1mm" background="<% $nj %>"><p align="center"><font face="Aptos Narrow">Tło<br/>[<% jednostka %>]</font></p></td:head>
     </tr>
     <%!
     let margin = tabela.length > 8 ? "0mm" : "0.7mm";

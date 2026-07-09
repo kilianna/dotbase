@@ -79,7 +79,7 @@ namespace DotBase.Szablony
                     case Typ.EMISJA_POWIERZCHNIOWA:
                         return String.Format(@"..\Wyniki\Protokoly\Skazenia\{0}\{1}WynikSkazenia{2}s.docx", DirGroup(nrKarty), nrKarty, nrArkusza);
                     case Typ.MOC_DAWKI:
-                        return String.Format(@"..\Wyniki\Protokoly\MocDawki\{0}\{1}MocDawki.docx", DirGroup(nrKarty), nrKarty);
+                        return String.Format(@"..\Wyniki\Protokoly\MocDawki\{0}\{1}MocDawki{2}c.docx", DirGroup(nrKarty), nrKarty, nrArkusza);
                     default:
                         throw new ApplicationException("Internal error");
                 }

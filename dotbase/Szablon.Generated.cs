@@ -1472,6 +1472,26 @@ namespace DotBase
                 AddField("DataRozpoczecia");
                 return this;
             }
+            public Szablon_Metody Emisja(bool value)
+            {
+                SetField("Emisja", value, OleDbType.Boolean);
+                return this;
+            }
+            public Szablon_Metody Emisja(bool value, string oper)
+            {
+                SetField("Emisja", value, OleDbType.Boolean, oper);
+                return this;
+            }
+            public Szablon_Metody Emisja(Order order)
+            {
+                SetOrder("Emisja", order);
+                return this;
+            }
+            public Szablon_Metody Emisja()
+            {
+                AddField("Emisja");
+                return this;
+            }
             public Szablon_Metody Tekst(string value)
             {
                 SetField("Tekst", value, OleDbType.WChar);
@@ -1496,6 +1516,7 @@ namespace DotBase
         public class Row_Metody : Wiersz
         {
             public DateTime DataRozpoczecia;
+            public bool Emisja;
             public string Tekst;
             public Row_Metody(DataRow row)
             {
@@ -1509,6 +1530,8 @@ namespace DotBase
             {
                 if (cols.ContainsKey("DataRozpoczecia"))
                     DataRozpoczecia = row.Field<DateTime>(cols["DataRozpoczecia"]);
+                if (cols.ContainsKey("Emisja"))
+                    Emisja = row.Field<bool>(cols["Emisja"]);
                 if (cols.ContainsKey("Tekst"))
                     Tekst = row.Field<string>(cols["Tekst"]);
             }
