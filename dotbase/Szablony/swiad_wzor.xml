@@ -121,7 +121,7 @@ if (poprawa) {
   <p> </p>
   <table border="none" inside-border="none, none" font-avoid-orphans="1" font-vwnbsp="y">
     <tc width="5cm" font-size="9pt" font-bold="y" td-margin="3.5mm 5mm 1mm 0mm"/>
-    <tc width="3.5cm" font-size="9pt" td-margin="1mm 0mm"/>
+    <tc width="3.5cm" font-size="9pt" td-margin="1mm 1mm 0mm"/>
     <tc width="9.5cm" font-size="9pt" td-margin="1mm 0mm"/>
     <tr>
       <td rowspan="5">OBIEKT WZORCOWANIA</td>

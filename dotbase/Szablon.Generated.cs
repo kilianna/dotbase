@@ -129,6 +129,9 @@ namespace DotBase
             public short? ID_atestu;
             public short? ID_zrodla;
             public double? Niepewnosc;
+            public Row_Atesty_zrodel()
+            {
+            }
             public Row_Atesty_zrodel(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -198,6 +201,9 @@ namespace DotBase
         public class Row_Błędy_wklejania : Wiersz
         {
             public string Pole0;
+            public Row_Błędy_wklejania()
+            {
+            }
             public Row_Błędy_wklejania(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -301,6 +307,9 @@ namespace DotBase
             public string Uwagi;
             public double? wartosc;
             public string Wielkosc;
+            public Row_Budzetniepewnosci()
+            {
+            }
             public Row_Budzetniepewnosci(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -387,6 +396,9 @@ namespace DotBase
         {
             public double? Cena;
             public string Usluga;
+            public Row_Cennik()
+            {
+            }
             public Row_Cennik(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -555,6 +567,9 @@ namespace DotBase
             public string Producent;
             public string Rok_produkcji;
             public string Typ;
+            public Row_Dozymetry()
+            {
+            }
             public Row_Dozymetry(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -647,6 +662,9 @@ namespace DotBase
         {
             public string Haslo;
             public string Login;
+            public Row_Hasla()
+            {
+            }
             public Row_Hasla(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -794,6 +812,9 @@ namespace DotBase
             public float? Przelicznik;
             public bool SI;
             public string Wielkosc_fizyczna;
+            public Row_Jednostki()
+            {
+            }
             public Row_Jednostki(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -1367,6 +1388,9 @@ namespace DotBase
             public bool Wegiel_silny;
             public bool Wegiel_slaby;
             public bool Wykonano;
+            public Row_Karta_przyjecia()
+            {
+            }
             public Row_Karta_przyjecia(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -1518,6 +1542,9 @@ namespace DotBase
             public DateTime DataRozpoczecia;
             public bool Emisja;
             public string Tekst;
+            public Row_Metody()
+            {
+            }
             public Row_Metody(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -1709,6 +1736,9 @@ namespace DotBase
             public double? Wahanie;
             public double? Wskazanie;
             public string Zakres;
+            public Row_Pomiary_cez()
+            {
+            }
             public Row_Pomiary_cez(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -1866,6 +1896,9 @@ namespace DotBase
             public int? ID_wzorcowania;
             public double? Wartosc_wzorcowa;
             public double? Wskazanie;
+            public Row_Pomiary_dawka()
+            {
+            }
             public Row_Pomiary_dawka(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -1998,6 +2031,9 @@ namespace DotBase
             public int? ID_wzorcowania;
             public double? Pomiar;
             public double? Tlo;
+            public Row_Pomiary_powierzchniowe()
+            {
+            }
             public Row_Pomiary_powierzchniowe(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -2149,6 +2185,9 @@ namespace DotBase
             public double? Moc_kermy;
             public double? Niepewnosc;
             public double? Odleglosc;
+            public Row_Pomiary_wzorcowe()
+            {
+            }
             public Row_Pomiary_wzorcowe(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -2260,6 +2299,9 @@ namespace DotBase
             public DateTime? Data_kalibracji;
             public short? ID_protokolu;
             public string Nazwa;
+            public Row_Protokoly_kalibracji_lawy()
+            {
+            }
             public Row_Protokoly_kalibracji_lawy(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -2346,6 +2388,9 @@ namespace DotBase
         {
             public string EN;
             public string PL;
+            public Row_Slownik()
+            {
+            }
             public Row_Slownik(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -2472,6 +2517,9 @@ namespace DotBase
             public int ID_sondy;
             public string Nr_fabryczny;
             public string Typ;
+            public Row_Sondy()
+            {
+            }
             public Row_Sondy(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -2581,6 +2629,9 @@ namespace DotBase
             public string Nazwa;
             public string Uwagi;
             public double? Wartosc;
+            public Row_Stale()
+            {
+            }
             public Row_Stale(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -2877,6 +2928,9 @@ namespace DotBase
             public string UwagaSD;
             public string UwagaSMD;
             public bool Waznosc_dwa_lata;
+            public Row_Swiadectwo()
+            {
+            }
             public Row_Swiadectwo(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -3170,6 +3224,9 @@ namespace DotBase
             public double Wspolczynnik;
             public double? zrodlo1;
             public double? zrodlo2;
+            public Row_Sygnalizacja()
+            {
+            }
             public Row_Sygnalizacja(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -3440,6 +3497,9 @@ namespace DotBase
             public double? Wartosc_wzorcowa;
             public double? Wartosc_zmierzona;
             public double Wspolczynnik;
+            public Row_Sygnalizacja_dawka()
+            {
+            }
             public Row_Sygnalizacja_dawka(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -3645,6 +3705,9 @@ namespace DotBase
             public int? Wielkosc_fizyczna;
             public double? Wspolczynnik;
             public double? Zakres;
+            public Row_Wyniki_dawka()
+            {
+            }
             public Row_Wyniki_dawka(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -3781,6 +3844,9 @@ namespace DotBase
             public double? Niepewnosc;
             public double? Wspolczynnik;
             public double? ZAKRES;
+            public Row_wyniki_moc_dawki()
+            {
+            }
             public Row_wyniki_moc_dawki(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -4226,6 +4292,9 @@ namespace DotBase
             public string Uwagi;
             public string Wielkosc_fizyczna;
             public double? wilgotnosc;
+            public Row_wzorcowanie_cezem()
+            {
+            }
             public Row_wzorcowanie_cezem(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -4785,6 +4854,9 @@ namespace DotBase
             public double? Wilgotnosc;
             public double? wspolczynnik;
             public string Zakres;
+            public Row_Wzorcowanie_zrodlami_powierzchniowymi()
+            {
+            }
             public Row_Wzorcowanie_zrodlami_powierzchniowymi(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -5163,6 +5235,9 @@ namespace DotBase
             public int? Nr_zlecenia_rejestr;
             public string Osoba_przyjmujaca;
             public string Uwagi;
+            public Row_Zlecenia()
+            {
+            }
             public Row_Zlecenia(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -5460,6 +5535,9 @@ namespace DotBase
             public string Telefon;
             public string Uwagi;
             public string Zleceniodawca;
+            public Row_Zleceniodawca()
+            {
+            }
             public Row_Zleceniodawca(DataRow row)
             {
                 _init(row, GetColsDict(row));
@@ -5646,6 +5724,9 @@ namespace DotBase
             public string Nazwa;
             public float? Niepewnosc;
             public int? Numer;
+            public Row_zrodla_powierzchniowe()
+            {
+            }
             public Row_zrodla_powierzchniowe(DataRow row)
             {
                 _init(row, GetColsDict(row));

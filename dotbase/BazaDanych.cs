@@ -822,6 +822,9 @@ namespace DotBase
                             {1} = row.Field<{2}>(cols[""{1}""]);");
                 }
                 wiersz += F(2, tabelaId, "\r\n" + wierszConstr, @"
+                        public Row_{0}()
+                        {{
+                        }}
                         public Row_{0}(DataRow row)
                         {{
                             _init(row, GetColsDict(row));

@@ -11,7 +11,7 @@ using System.Diagnostics;
 
 namespace DotBase.Szablony
 {
-    public partial class DocxWindow : Form
+    partial class DocxWindow : Form
     {
         private DocxGenerator gen = new DocxGenerator();
         string templateFile;
@@ -19,7 +19,9 @@ namespace DotBase.Szablony
         string outputFile;
         string outputFileDir;
         string outputFileWithoutExt;
+        bool repeatGeneration = false;
         IWin32Window owner;
+        Translacja translacja;
 
         public DocxWindow()
         {
@@ -44,8 +46,9 @@ namespace DotBase.Szablony
             infoLabel.ForeColor = Color.Red;
         }
 
-        public void generate(IWin32Window owner, string templateFile, object data, string outputFile)
+        public bool generate(IWin32Window owner, string templateFile, object data, string outputFile, Translacja translacja)
         {
+            this.translacja = translacja;
             this.owner = owner;
             this.outputFile = outputFile;
             this.templateFile = templateFile;
@@ -64,29 +67,108 @@ namespace DotBase.Szablony
             log(String.Format("Szablon: {0}\nPlik tymczasowy: {1}\nWyjście: {2}\nGenerowanie...", templateFile, tempFile, outputFile));
             gen.generate(templateFile, data, tempFile);
             ShowDialog(owner);
+            return repeatGeneration;
         }
 
-        delegate void OnFinishedDelegate(bool success, string errorMessage);
+        delegate void OnFinishedDelegate(bool success, string outputMessage);
 
-        void gen_onFinished(bool success, string errorMessage)
+        void gen_onFinished(bool success, string outputMessage)
         {
             if (this.InvokeRequired)
             {
-                this.Invoke(new OnFinishedDelegate(gen_onFinished), success, errorMessage);
+                this.Invoke(new OnFinishedDelegate(gen_onFinished), success, outputMessage);
             }
             else
             {
                 if (success)
                 {
-                    postGenerate();
+                    success = processErrorMessages(outputMessage);
+                }
+                if (!success)
+                {
+                    error(outputMessage);
                 }
                 else
                 {
-                    error(errorMessage);
+                    if (!processTranslateMessages(outputMessage))
+                    {
+                        postGenerate();
+                    }
+                    else
+                    {
+                        repeatGeneration = true;
+                        try { Close(); }
+                        catch (Exception) { }
+                    }
                 }
                 try { File.Delete(tempFile); }
                 catch { };
             }
+        }
+
+        private bool processErrorMessages(string outputMessage)
+        {
+            using (StringReader reader = new StringReader(outputMessage))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    if (line.TrimStart().StartsWith("ERROR:", StringComparison.Ordinal))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        private bool processTranslateMessages(string outputMessage)
+        {
+            bool translationRequested = false;
+            using (StringReader reader = new StringReader(outputMessage))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    if (line.TrimStart().StartsWith("TRANSLATE:", StringComparison.Ordinal))
+                    {
+                        line = line.TrimStart().Substring(10).TrimStart();
+                        if (!line.StartsWith("{{{"))
+                        {
+                            continue;
+                        }
+                        line = line.Substring(3);
+                        var expressionList = new List<string>();
+                        while (true) {
+                            if (line.TrimEnd().EndsWith("}}}"))
+                            {
+                                line = line.TrimEnd();
+                                expressionList.Add(line.Substring(0, line.Length - 3));
+                                break;
+                            }
+                            expressionList.Add(line);
+                            line = reader.ReadLine();
+                            if (line == null)
+                            {
+                                expressionList.Clear();
+                                break;
+                            }
+                        }
+                        var expression = String.Join("\r\n", expressionList);
+                        if (expression != "")
+                        {
+                            translate(expression);
+                            translationRequested = true;
+                        }
+                    }
+                }
+            }
+            return translationRequested;
+        }
+
+        private void translate(string expression)
+        {
+            translacja.ShowDialog(expression, this);
         }
 
         private void postGenerate()

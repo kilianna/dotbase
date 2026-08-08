@@ -163,6 +163,7 @@
     <Compile Include="Login\User.cs" />
     <Compile Include="Login\Users.cs" />
     <Compile Include="Test\TestTmp.cs" />
+    <Compile Include="Translacja.cs" />
     <Compile Include="TranslacjaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -219,8 +220,6 @@
     <Compile Include="ProtokolDawkaModel.cs" />
     <Compile Include="ProtokolSygMocyDawkiOpis.cs" />
     <Compile Include="ProtokolSygMocyDawkiTabela.cs" />
-    <Compile Include="SwiadectwoModel.cs" />
-    <Compile Include="SwiadectwoTextsLoader.cs" />
     <Compile Include="SygnalizacjaMocyDawkiUtils.cs" />
     <Compile Include="WydrukiCezData.cs" />
     <Compile Include="WzorcowanieDawka.cs" />
@@ -353,7 +352,6 @@
     <Compile Include="StatystykaWzorcowanForm.Designer.cs">
       <DependentUpon>StatystykaWzorcowanForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Swiadectwo.cs" />
     <Compile Include="MenuUstawieniaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -708,10 +706,6 @@
     <None Include="Resources\question.png" />
     <None Include="Resources\info.png" />
     <None Include="Resources\warning.png" />
-    <Content Include="SwiadectwoWydrukTeksty-en.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="PathConfig.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -737,10 +731,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\GitVersion.txt" />
-    <Content Include="SwiadectwoWydrukTeksty.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Wydruki\" />

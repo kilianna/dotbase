@@ -15,7 +15,7 @@ namespace DotBase.Szablony
     class DocxGenerator
     {
         private static string xml2docxExe;
-        public delegate void onFinishedDelegate(bool success, string errorMessage);
+        public delegate void onFinishedDelegate(bool success, string outputMessage);
         public event onFinishedDelegate onFinished;
         private string json;
         private string jsonFile;
@@ -82,7 +82,7 @@ namespace DotBase.Szablony
                 }
                 if (onFinished != null)
                 {
-                    onFinished.Invoke(false, ex.Message);
+                    onFinished(false, ex.Message);
                 }
             }
         }
@@ -119,23 +119,17 @@ namespace DotBase.Szablony
             }
             if (onFinished != null)
             {
-                if (proc.ExitCode == 0)
+                var sb = new StringBuilder();
+                sb.Append(stderr);
+                sb.Append("====================================================================\r\n");
+                if (stdout.Length > 0)
                 {
-                    onFinished(true, "");
-                }
-                else
-                {
-                    var sb = new StringBuilder();
-                    sb.Append(stderr);
+                    sb.Append(stdout);
                     sb.Append("====================================================================\r\n");
-                    if (stdout.Length > 0) {
-                        sb.Append(stdout);
-                        sb.Append("====================================================================\r\n");
-                    }
-                    sb.Append("JSON file:\r\n");
-                    sb.Append(json);
-                    onFinished(false, sb.ToString());
                 }
+                sb.Append("JSON file:\r\n");
+                sb.Append(json);
+                onFinished((proc.ExitCode == 0), sb.ToString());
             }
         }
 

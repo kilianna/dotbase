@@ -513,7 +513,7 @@ namespace Wykres
         private void UstawieniaSondy(String sonda)
         //-------------------------------------------------------------------------
         {
-            TextObj myText = new TextObj(tr("Sonda: ") + TranslacjaForm.Tlumacz(sonda, jezyk), 0.097, 0.96, CoordType.PaneFraction, AlignH.Left, AlignV.Center);
+            TextObj myText = new TextObj(tr("Sonda: ") + new Translacja(jezyk).Translate(sonda, false, this), 0.097, 0.96, CoordType.PaneFraction, AlignH.Left, AlignV.Center);
             myText.FontSpec.FontColor = Color.Black;
             myText.FontSpec.Family = "Arial";
             myText.FontSpec.Size = 9;

@@ -1,21 +1,39 @@
 
+let _data;
+let _utils;
 
-function initialize() {
+function initialize(utils) {
+    _utils = utils;
+    _data = utils.data;
     try {
-        ustawieniaJezyka = ustawieniaJezykow[jezyk];
+        ustawieniaJezyka = ustawieniaJezykow[_data.jezyk];
     } catch (e) {
-        ustawieniaJezyka = ustawieniaJezykow['PL'];
+        ustawieniaJezyka = undefined;
+    }
+    if (!ustawieniaJezyka) {
+        ustawieniaJezyka = ustawieniaJezykow.PL;
+    }
+    ustawieniaJezyka.slownik = Object.create(null);
+    for (let texts of _data.slownik) {
+        let translated = texts[ustawieniaJezyka.jezyk];
+        if (translated) {
+            ustawieniaJezyka.slownik[texts.PL] = translated;
+        }
     }
 }
 
 const ustawieniaJezykow = {
     PL: {
+        jezyk: 'PL',
         alfabet: 'abcdefghijklmnoprstuwyz',
         kropka: ',',
+        slownik: {},
     },
     EN: {
+        jezyk: 'EN',
         alfabet: 'abcdefghijklmnopqrstuvwxyz',
         kropka: '.',
+        slownik: {},
     }
 }
 
@@ -282,27 +300,6 @@ function nb(text) {
         .replace(/-/g, '‑');
 }
 
-function test() {
-    console.log(simpleHtml('test'));
-    console.log(simpleHtml('test<br />'));
-    console.log(simpleHtml(`<b><i>bold</i></b>
-        some<br>
-        asdfdskfjslkdjf<br>  
-        asdfasf<break>    
-        ssadsd<BR> fg
-        df<b>i</b><i>
-        gdfg
-        &amp;
-        &mu;
-        `));
-}
-
-initialize();
-
-if (typeof globalThis.process !== 'undefined' && globalThis.process.argv[2] === '__test__') {
-    test();
-}
-
 let numeracja = {};
 
 function numeruj(name) {
@@ -318,6 +315,69 @@ function zerujNumeracje(name) {
     numeracja[name] = 0;
 }
 
+let tr_formatters = [
+    (text) => {
+        // no change
+        return text;
+    },
+    (text) => {
+        // lowercase
+        return text.toLowerCase();
+    },
+    (text) => {
+        // uppercase
+        return text.toUpperCase();
+    },
+    (text) => {
+        // First letter uppercase
+        return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+    },
+    (text) => {
+        // First letter of each word uppercase
+        return text.replace(/\b\w/g, c => c.toUpperCase());
+    }
+];
+
+function tr(text, allowNoTranslation) {
+
+    /*
+    using System.Text.RegularExpressions;
+
+string CapitalizeWords(string text)
+{
+    return Regex.Replace(text, @"\b\w", m => m.Value.ToUpper());
+}
+    */
+    text = text.trim();
+
+    if (text.match(/^[0-9.,-]+$/)) {
+        return text.replace(/[.,]/g, ustawieniaJezyka.kropka);
+    }
+
+    if (ustawieniaJezyka.jezyk === 'PL') {
+        return text;
+    }
+
+    for (let formatter of tr_formatters) {
+        for (let [pl, other] of Object.entries(ustawieniaJezyka.slownik)) {
+            if (formatter(pl) === text) {
+                return formatter(other);
+            }
+        }
+    }
+
+    if (allowNoTranslation) {
+        return text;
+    } else {
+        console.log(`TRANSLATE: {{{${text}}}}`);
+        return `⚠ ⚠ 𝐍𝐎 𝐓𝐑𝐀𝐍𝐒𝐋𝐀𝐓𝐈𝐎𝐍: ${text} ⚠ ⚠`;
+    }
+}
+
+
+function trOpt(text) {
+    return tr(text, true);
+}
 
 globalThis.initialize = initialize;
 globalThis.escape = escape;
@@ -338,3 +398,72 @@ globalThis.nb = nb;
 globalThis.test = test;
 globalThis.numeruj = numeruj;
 globalThis.zerujNumeracje = zerujNumeracje;
+globalThis.tr = tr;
+globalThis.trOpt = trOpt;
+
+
+function test() {
+
+    function test_simpleHtml() {
+        console.log(simpleHtml('test'));
+        console.log(simpleHtml('test<br />'));
+        console.log(simpleHtml(`<b><i>bold</i></b>
+            some<br>
+            asdfdskfjslkdjf<br>  
+            asdfasf<break>    
+            ssadsd<BR> fg
+            df<b>i</b><i>
+            gdfg
+            &amp;
+            &mu;
+            `));
+    }
+
+    function test_tr() {
+        console.log(ustawieniaJezyka);
+        console.log(tr('mocy kermy w powietrzu'));
+        console.log(tr('Mocy kermy w powietrzu'));
+        console.log(tr('Mocy Kermy W Powietrzu'));
+        console.log(tr('dozymetr'));
+        console.log(tr('Dozymetr \t'));
+        console.log(tr(' DOZYMETR '));
+        console.log(tr('Nowe wyrażenie'));
+        console.log(tr('2024'));
+    }
+
+    //test_simpleHtml();
+    test_tr();
+}
+
+function test_get_utils() {
+    let fs = require('fs');
+    console.log('ERROR: If you see this message outside of a test environment, something is wrong.');
+    let csFiles = new Set();
+    let jsonFiles = new Set();
+    for (let file of fs.readdirSync(__dirname)) {
+        if (file.endsWith('.cs')) {
+            csFiles.add(file.substring(0, file.length - 3));
+        } else if (file.endsWith('.json')) {
+            jsonFiles.add(file.substring(0, file.length - 5));
+        }
+    }
+    let commonFiles = new Set([...csFiles].filter(x => jsonFiles.has(x)));
+    if (commonFiles.size === 0) {
+        throw new Error('No common .cs and .json files found in the directory.');
+    }
+    let commonFile = [...commonFiles][0];
+    console.log(`Using JSON file: ${commonFile}.json`);
+    let utils = {
+        data: JSON.parse(fs.readFileSync(__dirname + '/' + commonFile + '.json', 'utf8')),
+    };
+    utils.data.jezyk = 'EN';
+    return utils;
+}
+
+
+if (typeof __utils__ !== 'undefined') {
+    initialize(__utils__);
+} else {
+    initialize(test_get_utils());
+    test();
+}

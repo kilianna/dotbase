@@ -1,59 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<%! eval(utils.include("wspolne.js") + "\n" + utils.include("swiad_wzor.js")) %>
+<%! eval(utils.include("wspolne.js")) %>
+<%!
+
+const metody = {
+    wzor1: 'Calibration procedure WZOR-1 (ed. 9 z dn. 16.07.2025)',
+    wzor2: 'Calibration procedure WZOR-2 (ed. 8 z dn. 16.07.2025)',
+    wzor1wzor2: 'Calibration procedure WZOR-1 (ed. 9 z dn. 16.07.2025) and calibration procedure WZOR-2 (ed. 8 z dn. 16.07.2025)',
+};
+
+const spojnosciPomiarowe = {
+    gum: 'This certificate is issued under the agreement EA MLA in the field of calibration and provides traceability of measurement results to the national standard of gamma-ray kerma in air maintained at the Central Office of Measures (GUM) in Warsaw.',
+    si: 'This certificate is issued under the agreement EA MLA in the field of calibration and provides traceability of measurement results to the International System of Units (SI).',
+};
+
+const rownowaznikiDawki = [
+  // Indywidualny_HP07: 0
+  {
+    co: 'personal dose equivalent H<sub>P</sub>(10)',
+    czego: 'personal dose equivalent H<sub>P</sub>(10)',
+    jednostka: 'mSv',
+  },
+  // Indywidualny_HP10: 1
+  {
+    co: 'personal dose equivalent H<sub>P</sub>(0.07)',
+    czego: 'personal dose equivalent H<sub>P</sub>(0.07)',
+    jednostka: 'mSv',
+  },
+  // Przestrzenny: 2
+  {
+    co: 'ambient dose equivalent H*(10)',
+    czego: 'ambient dose equivalent H*(10)',
+    jednostka: 'mSv',
+  },
+  // Kerma: 3
+  {
+    co: 'kerma in air',
+    czego: 'kerma in air',
+    jednostka: 'mGy',
+  },
+];
+
+const jednostkiDoKorekcji = new Set([
+  'cps',
+  'cpm',
+  '1/s',
+  '1/min',
+  'imp/s',
+  'imp/min',
+  's-1',
+  'bq/cm2',
+]);
+
+if (poprawa) {
+    nr_swiadectwa =  nr_karty + 'P/' + data_wydania.rok;
+} else {
+    nr_swiadectwa =  nr_karty + '/' + data_wydania.rok;
+}
+
+%>
 <document>
   <p-style id="Normal" name="Normal">
     <font face="Arial" size="10pt"/>
   </p-style>
 
   <section
-      border="single black 0.5mm 5mm, single black 0.5mm 5mm, single black 0.5mm 2.5mm"
+      border="single black 0.5mm 5mm"
       width="21cm" height="29.7cm"
-      margin="1cm 0.7cm 1cm 1cm" headerMargin="1cm" footerMargin="1cm" />
+      margin="1.5cm 1.5cm 1.5cm 1.5cm" headerMargin="1.5cm" footerMargin="1.5cm" />
 
   <header page="first">
     <p align="center" preserve="y">
-      <img src="ifj.png" width="2.2cm" height="2cm" horizontal="margin left"
-      vertical="top-margin 3.24cm"
-            /><img src="pca.png" width="1.77cm" height="3cm" horizontal="margin right"
-    vertical="page 2cm"
-            /><img src="ilac-mra.png" width="1.77cm" height="1.77cm" horizontal="margin right"
-    vertical="page 5.4cm"
-            /><b>Laboratorium Wzorcowania Przyrządów Dozymetrycznych</b><br/>
-      Instytut Fizyki Jądrowej im. Henryka Niewodniczańskiego<br/>
-      Polskiej Akademii Nauk<br/>
-      ul. Radzikowskiego 152, PL 31-342 Kraków<br/>
-      tel. 012/6628486, faks 012/6628066, e-mail: wzorcowanie@ifj.edu.pl<br/>
+      <img src="ifj.png" width="2.2cm" height="2cm" horizontal="page 1.8cm" vertical="top-margin 2.6cm"
+        /><img src="pca.png" width="1.77cm" height="3cm" horizontal="right-margin -2.25cm" vertical="page 1.6cm"
+        /><img src="ilac-mra.png" width="1.77cm" height="1.77cm" horizontal="right-margin -2.25cm" vertical="page 4.9cm"
+        /><b>Laboratory for Calibration of Dosimetric Instruments</b><br/>
+      The Henryk Niewodniczański Institute of Nuclear Physics<br/>
+      Polish Academy of Sciences<br/>
+      Radzikowskiego 152, PL 31-342 Kraków<br/>
+      phone 012/6628486, e-mail: wzorcowanie@ifj.edu.pl<br/>
       <br/>
-      Laboratorium wzorcujące akredytowane przez<br/>
-      Polskie Centrum Akredytacji, sygnatariusza porozumień EA MLA i ILAC MRA<br/>
-      dotyczących wzajemnego uznawania świadectw wzorcowania.<br/>
-      Nr akredytacji AP 029.<br/>
+      Calibration laboratory accredited by<br/>
+      Polish Centre of Accreditation, a signatory to EA MLA i ILAC MRA<br/>
+      that include recognition of calibration certificates.<br/>
+      Accreditation No. AP 029.<br/>
     </p>
     <p>
-      <font size="22pt" bold="y">ŚWIADECTWO WZORCOWANIA</font>
+      <font size="22pt" bold="y">CALIBRATION CERTIFICATE</font>
     </p>
-    <p tabs="1cm, 10cm center, 16cm right" border="none, none, single black 0.3mm">
-      <br/>
-      <tab/>Data wydania:&nbsp; <% data_wydania.tekst[jezyk] %>
-      <tab/>Nr świadectwa:&nbsp; <b><% nr_swiadectwa %></b>
-      <tab/>Strona&nbsp; <page-number/>/<total-pages/><br/>
+    <p tabs="17cm right" spacing="0pt 6pt"><font size="8pt"><br/><tab/>Ref. No.: NLW.4851.<% zlecenie.ID_zlecenia %>.<% zlecenie.Data_przyjecia.rok %>.W</font></p>
+    <p tabs="1cm, 10.5cm center, 17cm right" border="none, none, single black 0.3mm">
+      <tab/>Date of issue:&nbsp; <% tekst(data_wydania) %>
+      <tab/>Certificate No.:&nbsp; <b><% nr_swiadectwa %></b>
+      <tab/>Page&nbsp; <page-number/>/<total-pages/><br/>
     </p>
   </header>
 
   <footer page="first">
     <p align="center" border="single black 0.3mm 2mm, none, none">
-      Niniejsze świadectwo bez zgody Laboratorium nie może być powielane inaczej niż w całości.
+      This certificate may not be copied otherwise than as a whole document without the consent of the Laboratory.
     </p>
   </footer>
 
   <header>
     <p align="center">
-      ŚWIADECTWO WZORCOWANIA wydane przez LABORATORIUM AKREDYTOWANE Nr AP 029<br/>
+      CALIBRATION CERTIFICATE issued by ACCREDITED LABORATORY No. AP 029<br/>
     </p>
-    <p tabs="1cm, 10cm center, 16cm right" border="none, none, single black 0.3mm">
-      <tab/>Data wydania:&nbsp; 10 stycznia 2024
-      <tab/>Nr świadectwa:&nbsp; <b><% nr_swiadectwa %></b>
-      <tab/>Strona&nbsp; <page-number/>/<total-pages/><br/>
+    <p tabs="1cm, 10.5cm center, 17cm right" border="none, none, single black 0.3mm">
+      <tab/>Date of issue:&nbsp; <% tekst(data_wydania) %>
+      <tab/>Certificate No.:&nbsp; <b><% nr_swiadectwa %></b>
+      <tab/>Page&nbsp; <page-number/>/<total-pages/><br/>
     </p>
   </header>
 
@@ -65,122 +120,93 @@
 
   <p> </p>
   <table border="none" inside-border="none, none" font-avoid-orphans="1" font-vwnbsp="y">
-    <tc width="4cm" font-size="9pt" font-bold="y" td-margin="3mm 5mm 0.9mm 0mm"/>
-    <tc width="3.5cm" font-size="9pt" td-margin="1mm 0mm 0.9mm 0mm"/>
-    <tc width="11cm" font-size="9pt" td-margin="1mm 0mm 0.9mm 0mm"/>
+    <tc width="5cm" font-size="9pt" font-bold="y" td-margin="3.5mm 5mm 1mm 0mm"/>
+    <tc width="3.5cm" font-size="9pt" td-margin="1mm 1mm 0mm"/>
+    <tc width="9.5cm" font-size="9pt" td-margin="1mm 0mm"/>
     <tr>
-      <td rowspan="5">OBIEKT WZORCOWANIA</td>
-      <td>
-        <b>Nazwa</b>
-      </td>
-      <td>
-        <% przyrzad.nazwa %></td>
+      <td rowspan="5">OBJECT OF CALIBRATION</td>
+      <td><b>Name</b></td>
+      <td><% tr(przyrzad.Nazwa) %></td>
     </tr>
     <tr>
-      <td>
-        <b>Typ</b>
-      </td>
-      <td>
-        <% przyrzad.typ %></td>
+      <td><b>Type</b></td>
+      <td><% trOpt(przyrzad.Typ) %></td>
     </tr>
     <tr>
-      <td>
-        <b>Numer fabryczny</b>
-      </td>
-      <td>
-        <% przyrzad.nr_fabryczny %></td>
+      <td><b>Serial number</b></td>
+      <td><% trOpt(przyrzad.Nr_fabryczny) %></td>
     </tr>
     <tr>
-      <td>
-        <b>Producent</b>
-      </td>
-      <td>
-        <% przyrzad.producent %></td>
+      <td><b>Manufacturer</b></td>
+      <td><% trOpt(przyrzad.Producent) %></td>
     </tr>
     <tr>
-      <td>
-        <b>Rok produkcji</b>
-      </td>
-      <td>
-        <% przyrzad.rok_produkcji %></td>
+      <td><b>Year of production</b></td>
+      <td><% tr(przyrzad.Rok_produkcji) %></td>
     </tr>
     <tr>
-      <td>ZGŁASZAJĄCY</td>
-      <td colspan= "2">
-        <% zleceniodawca.zleceniodawca %><br/><% zleceniodawca.adres %>
-      </td>
+      <td>APPLICANT</td>
+      <td colspan="2"><%= multiline(zleceniodawca.Zleceniodawca, ';') %><br/><%= multiline(zleceniodawca.Adres, ';') %></td>
     </tr>
     <tr>
-      <td>METODA WZORCOWANIA</td>
-      <td colspan= "2"><% metoda %></td>
+      <td>CALIBRATION METHOD</td>
+      <td colspan="2"><% metody[metoda] %></td>
     </tr>
+    <!-- TODO: Docelowo, w programie powinien być pole, który to włącza i pozwala na wpisanie tego tekstu.
     <tr>
       <td>UZUPEŁNIENIA, ODSTĘPSTWA, OGRANICZENIA METODY</td>
-      <td colspan= "2">Nie wystąpiły</td>
+      <td colspan="2">Nie wystąpiły</td>
+    </tr>
+    -->
+    <tr>
+      <td>LOCATION OF LABORATORY ACTIVITY</td>
+      <td colspan="2">At the laboratory permanent facility</td>
     </tr>
     <tr>
-      <td>MIEJSCE WYKONANIA DZIAŁALNOŚCI LABORATORYJNEJ</td>
-      <td colspan= "2">W siedzibie laboratorium</td>
+      <td rowspan="3"><b>ENVIRONMENTAL CONDITIONS</b></td>
+      <td><b>Pressure</b></td>
+      <td>(<% tekst(warunkiMin.cisnienie - stale.UNCERTAINITY_PRESSURE_VALUE) %>
+          - <% tekst(warunkiMax.cisnienie + stale.UNCERTAINITY_PRESSURE_VALUE) %>) hPa</td>
     </tr>
     <tr>
-      <td rowspan="3">
-        <b>WARUNKI ŚRODOWISKOWE</b>
-      </td>
-      <td>
-        <b>Ciśnienie</b>
-      </td>
-      <td>
-        ( <% tabeleMin.cisnienie - stale.UNCERTAINITY_PRESSURE_VALUE %> - <% tabeleMax.cisnienie + stale.UNCERTAINITY_PRESSURE_VALUE %> ) hPa
-      </td>
+      <td><b>Temperature</b></td>
+      <td>(<% tekst(warunkiMin.temperatura - stale.UNCERTAINITY_TEMPERATURE_VALUE) %>
+          - <% tekst(warunkiMax.temperatura + stale.UNCERTAINITY_TEMPERATURE_VALUE) %>) <sup>o</sup>C</td>
     </tr>
     <tr>
-      <td>
-        <b>Temperatura</b>
-      </td>
-      <td>
-        ( <% tabeleMin.temperatura - stale.UNCERTAINITY_TEMPERATURE_VALUE %> - <% tabeleMax.temperatura + stale.UNCERTAINITY_TEMPERATURE_VALUE %> ) °C
-      </td>
+      <td><b>Humidity</b></td>
+      <td>(<% tekst(warunkiMin.wilgotnosc - stale.UNCERTAINITY_HUMIDITY_VALUE) %>
+          - <% tekst(warunkiMax.wilgotnosc + stale.UNCERTAINITY_HUMIDITY_VALUE) %>) %</td>
     </tr>
     <tr>
-      <td>
-        <b>Wilgotność</b>
-      </td>
-      <td>
-        ( <% tabeleMin.wilgotnosc - stale.UNCERTAINITY_HUMIDITY_VALUE %> - <% tabeleMax.wilgotnosc + stale.UNCERTAINITY_HUMIDITY_VALUE %> ) %
-      </td>
+      <td>DATE OF RECEIPT</td>
+      <td colspan="2"><% tekst(zlecenie.Data_przyjecia) %></td>
     </tr>
     <tr>
-      <td>DATA PRZYJĘCIA DO WZORCOWANIA</td>
-      <td colspan= "2">
-        <% data_przyjecia.tekst[jezyk] %></td>
+      <td>DATE OF CALIBRATION</td>
+      <td colspan="2"><% tekst(data_wykonania) %></td>
     </tr>
     <tr>
-      <td>DATA WYKONANIA WZORCOWANIA</td>
-      <td colspan= "2">
-        <% data_wykonania.tekst[jezyk] %></td>
+      <td>TRACEABILITY</td>
+      <td colspan="2" p-align="justify"><% spojnosciPomiarowe[spojnoscPomiarowa] %></td>
     </tr>
     <tr>
-      <td>SPÓJNOŚĆ POMIAROWA</td>
-      <td colspan= "2" p-align="justify"><% spojnoscPomiarowa %></td>
-    </tr>
-    <tr>
-      <td>WYNIKI WZORCOWANIA</td>
-      <td colspan= "2" p-align="justify">
-        Podano na stronie 2 niniejszego świadectwa wraz z wartościami niepewności pomiaru. Wyniki dotyczą
-        wyłącznie obiektów poddanych wzorcowaniu.
+      <td>CALIBRATION RESULTS</td>
+      <td colspan="2" p-align="justify">
+        The results have been presented on page 2 of this certificate including uncertainty of measurement.
+        These results relate only to the objects subjected to calibration.
       </td>
     </tr>
     <tr>
-      <td>NIEPEWNOŚĆ WYNIKU POMIARU</td>
-      <td colspan= "2" p-align="justify">
-        Niepewność wyniku pomiaru została określona zgodnie z dokumentem EA‑4/02&nbsp;M:2022. Podane
-        wartości niepewności stanowią niepewności rozszerzone przy prawdopodobieństwie rozszerzenia ok.&nbsp;95% i&nbsp;współczynniku rozszerzenia <i>k</i> = 2.
+      <td>UNCERTAINTY OF MEASUREMENT</td>
+      <td colspan="2" p-align="justify">
+        Uncertainty of measurement has been evaluated in compliance with EA‑4/02 M:2022.
+        The expanded uncertainty assigned corresponds to a coverage probability of 95% and coverage factor <i>k</i> = 2.
       </td>
     </tr>
   </table>
 
   <p>
-    <!-- Create PageBreak class object directly into paragraph. -->
     <PageBreak/>
   </p>
 
@@ -190,14 +216,359 @@
     <tc width="4cm" font-size="9pt" font-bold="y" td-margin="3mm 5mm 0.9mm 0mm"/>
     <tc width="12.5cm" font-size="9pt" td-margin="1mm 0mm 0.9mm 0mm"/>
     <tr>
-      <td>WYNIKI WZORCOWANIA</td>
-      <td>Wyniki przeprowadzonego wzorcowania przedstawiono poniżej:</td>
+      <td>CALIBRATION RESULTS</td>
+      <td>Calibration results are presented below:</td>
     </tr>
   </table>
 
   <p></p>
 
-  <p>a) Wzorcowanie źródłem gamma: Cs-137; moc przestrzennego równoważnika dawki </p>
+<%!
+let wynikiS = [];
+let podpunkt = 0;
+
+for (let i = 0; i < wyniki.length; i++) {
+  let wyn = wyniki[i];
+  let wzorcowanie = wyn.wzorcowanie_cezem;
+
+  if (wyn.wzorcowanie_zrodlami_powierzchniowymi) {
+    wynikiS.push(wyn);
+    continue;
+  }
+
+  function pokazSonde() {
+    %><p tabs="9.5cm">Type of probe:&nbsp;
+    <% wyn.sonda ? trOpt(wyn.sonda.Typ) : tr('nie dotyczy') %><tab/>Serial number of probe:&nbsp;
+    <% wyn.sonda ? trOpt(wyn.sonda.Nr_fabryczny) : tr('nie dotyczy') %></p><%!
+  }
+
+  %>
+
+<%! if (wzorcowanie.Rodzaj_wzorcowania == "md") { %>
+
+  <%! /* ------------------------------- Moc Dawki ---------------------------- */ %>
+
+  <!-- TODO: Otoczyć całe podpunkty tablą z jedną komórką (nie łamiącą się na strony) -->
+  <!-- Takie otaczanie zmienia atrybuty wewnętrznej tabeli - może błąd w zml2docx? -->
+
+  <p><% litera(podpunkt++) %>) Calibration with Cs-137 gamma-rays; <% tr(wzorcowanie.Wielkosc_fizyczna) %></p>
+  <p></p>
+  <%! pokazSonde() %>
+  <p></p>
+
+  <%!
+  let jednostka = wyn.jednostka.Jednostka;
+  let korekcjaJednostki = '-';
+  if (jednostkiDoKorekcji.has(wyn.jednostka.Jednostka.toLowerCase())) {
+    korekcjaJednostki = `(µGy/h)/(${wyn.jednostka.Jednostka})`;
+  }
+  %>
+
+  <%! if (dolaczTabPunktow && wyn.tabela.length === 1) { %>
+
+  <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">
+    <tc width="18mm" />
+    <tc width="54mm" />
+    <tc width="54mm" />
+    <tc width="54mm" />
+    <tr font-bold="1">
+      <td rowspan="2">No.</td>
+      <td>Nominal value</td>
+      <td>Measured value</td>
+      <td>Calibration factor</td>
+    </tr>
+    <tr>
+      <td><% mikro(jednostka) %></td>
+      <td><% mikro(jednostka) %></td>
+      <td><% mikro(korekcjaJednostki) %></td>
+    </tr>
+    <%! for (let [rowIndex, row] of wyn.tabela.entries()) { %>
+    <%! for (let [punktIndex, punkt] of row.punkty.entries()) { %>
+    <tr>
+      <td><% punktIndex + 1 %></td>
+      <%! calcDigits(2, punkt.wzorcowa, 2, punkt.wzorcowa_niepewnosc) %>
+      <td><% fixed(punkt.wzorcowa) %> ± <% fixed(punkt.wzorcowa_niepewnosc) %></td>
+      <%! calcDigits(2, punkt.zmierzona, 2, punkt.zmierzona_niepewnosc) %>
+      <td><% fixed(punkt.zmierzona) %> ± <% fixed(punkt.zmierzona_niepewnosc) %></td>
+      <%! if (punktIndex === 0) { %>
+        <%! calcDigits(2, row.wspolczynnik, 2, row.niepewnosc) %>
+        <td rowspan="<% row.punkty.length %>"><% fixed(row.wspolczynnik) %> ± <% fixed(row.niepewnosc) %></td>
+      <%! } %>
+    </tr>
+    <%! } %>
+    <%! } %>
+  </table>
+
+  <p></p>
+
+  <%! } else { %>
+
+  <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">
+    <tc width="9cm" />
+    <tc width="9cm" />
+    <tr font-bold="1">
+      <td>Instrument measuring range</td>
+      <td>Calibration factor</td>
+    </tr>
+    <tr>
+      <td><% mikro(jednostka) %></td>
+      <td><% mikro(korekcjaJednostki) %></td>
+    </tr>
+    <%! for (let row of wyn.tabela) { %>
+    <tr>
+      <td><% tekst(row.zakres, 5) %></td>
+      <%! digits = calcDigits(2, row.wspolczynnik, 2, row.niepewnosc) %>
+      <td><% fixed(row.wspolczynnik, digits) %> ± <% fixed(row.niepewnosc, digits) %></td>
+    </tr>
+    <%! } %>
+  </table>
+
+  <%! } %>
+
+  <p></p>
+  <p align="justify" font-vwnbsp="1">The measured value of <% tr(wzorcowanie.Wielkosc_fizyczna.replace('moc', 'mocy')) %> should
+    be multiplied by the respective value of calibration factor for the given measuring range.</p>
+  <p></p>
+
+  <%! if (uwMD?.trim()) { %>
+  <%= simpleHtml(uwMD, '<p align="justify" font-vwnbsp="1">***</p>') %>
+  <p></p>
+  <%! } %>
+
+<%! } else if (wzorcowanie.Rodzaj_wzorcowania == "d") { %>
+
+  <%! /* ------------------------------- Dawka ---------------------------- */ %>
+
+  <%!
+  let wielkosciFizyczne = [...new Set(wyn.tabela.map(row => row.wielkosc_fizyczna))];
+  %>
+
+  <p><% litera(podpunkt++) %>) Calibration with Cs-137 gamma-rays;
+    <%= wielkosciFizyczne.map(w => rownowaznikiDawki[w].co).filter(w => w).join('; ') %></p>
+  <p></p>
+  <%! pokazSonde() %>
+  <p></p>
+
+  <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">
+    <tc width="9cm" />
+    <tc width="9cm" />
+    <tr font-bold="1">
+      <td>Instrument measuring range</td>
+      <td>Calibration factor</td>
+    </tr>
+    <tr>
+      <td><% wielkosciFizyczne.map(w => rownowaznikiDawki[w].jednostka).filter(w => w).join(' oraz ') %></td>
+      <td>-</td>
+    </tr>
+    <%! for (let row of wyn.tabela) { %>
+    <tr>
+      <td><% tekst(row.zakres, 5) %></td>
+      <%! digits = calcDigits(2, row.wspolczynnik, 2, row.niepewnosc) %>
+      <td><% fixed(row.wspolczynnik, digits) %> ± <% fixed(row.niepewnosc, digits) %></td>
+    </tr>
+    <%! } %>
+  </table>
+
+  <p></p>
+  <p align="justify" font-vwnbsp="1">The measured value of <%= wielkosciFizyczne.map(w => rownowaznikiDawki[w].czego).filter(w => w).join(' and ') %>
+    should be multiplied by the respective value of calibration factor for the given measuring range.</p>
+  <p></p>
+
+  <%! if (uwD?.trim()) { %>
+  <%= simpleHtml(uwD, '<p align="justify" font-vwnbsp="1">***</p>') %>
+  <p></p>
+  <%! } %>
+
+<%! } else if (wzorcowanie.Rodzaj_wzorcowania == "sm") { %>
+
+  <%! /* ------------------------------- Syg Mocy Dawki ---------------------------- */ %>
+
+  <%!
+  let opisowy = undefined;
+  for (let row of wyn.tabela) {
+    if (row.row.Uwagi !== '') opisowy = row.row.Uwagi;
+  }
+  %>
+
+  <p><% litera(podpunkt++) %>) Calibration with Cs-137 gamma-rays; ambient dose rate equivalent (threshold indicator)</p>
+  <p></p>
+
+  <%! if (opisowy) { %>
+
+  <%= simpleHtml(opisowy, '<p align="justify" font-vwnbsp="1">***</p>') %>
+  <p></p>
+  
+  <%! } else { %>
+
+  <p align="justify" font-vwnbsp="1">List of instrument settings and the corresponding actual values
+    at which the warning signal is turned on.</p>
+  <p></p>
+  <%! pokazSonde() %>
+  <p></p>
+
+  <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">
+    <tc width="6cm" />
+    <tc width="6cm" />
+    <tc width="6cm" />
+    <tr font-bold="1">
+      <td>Set threshold</td>
+      <td>Actual values on which are switched warning signals</td>
+      <td>Calibration factor</td>
+    </tr>
+    <tr>
+      <td><% mikro(wyn.jednostka?.Jednostka || blad('Brak jednostki w SMD')) %></td>
+      <td><% mikro(wyn.jednostka?.Jednostka || blad('Brak jednostki w SMD')) %></td>
+      <td>-</td>
+    </tr>
+    <%! for (let row of wyn.tabela) { %>
+    <tr>
+      <td><% tekst(row.prog, 5) %></td>
+      <%! digits = calcDigits(2, row.wartosc_zmierzona, 2, row.niepewnosc) %>
+      <td><% fixed(row.wartosc_zmierzona, digits) %> ± <% fixed(row.niepewnosc, digits) %></td>
+      <%! digits = calcDigits(2, row.wspolczynnik, 2, row.niepewnosc_wspolczynnika) %>
+      <td><% fixed(row.wspolczynnik, digits) %> ± <% fixed(row.niepewnosc_wspolczynnika, digits) %></td>
+    </tr>
+    <%! } %>
+  </table>
+
+  <p></p>
+  <p align="justify" font-vwnbsp="1">The set threshold should be multiplied by the respective value of calibration factor.</p>
+  <p></p>
+
+  <%! } %>
+
+  <%! if (uwSMD?.trim()) { %>
+  <%= simpleHtml(uwSMD, '<p align="justify" font-vwnbsp="1">***</p>') %>
+  <p></p>
+  <%! } %>
+
+<%! } else if (wzorcowanie.Rodzaj_wzorcowania == "sd") { %>
+
+  <%! /* ------------------------------- Syg Dawki ---------------------------- */ %>
+
+  <p><% litera(podpunkt++) %>) Calibration with Cs-137 gamma-rays; ambient dose equivalent (threshold indicator)</p>
+  <p></p>
+  <p align="justify" font-vwnbsp="1">List of instrument settings and the corresponding actual values at which the warning signal is turned on.</p>
+  <p></p>
+  <%! pokazSonde() %>
+  <p></p>
+
+  <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">
+    <tc width="6cm" />
+    <tc width="6cm" />
+    <tc width="6cm" />
+    <tr font-bold="1">
+      <td>Set threshold</td>
+      <td>Actual values on which are switched warning signals</td>
+      <td>Calibration factor</td>
+    </tr>
+    <tr>
+      <%! let jedn = mikro(wyn.jednostka?.Jednostka.split('/')[0] || blad('Brak jednostki w SD')); %>
+      <td><% jedn %></td>
+      <td><% jedn %></td>
+      <td>-</td>
+    </tr>
+    <%! for (let row of wyn.tabela) { %>
+    <tr>
+      <td><% tekst(row.prog, 5) %></td>
+      <%! digits = calcDigits(2, row.wartosc_wzorcowa, 2, row.niepewnosc) %>
+          <!-- TODO: Czy wartości i niepewności nie trzeba specyjalnie zaokrąglać, np.
+          rzeczywiste wartości: 10.05 ± 0.549
+          dają rzczywisty zakres: 9.501 ± 10.599
+          zaokrąglone wartości: 10.1 ± 0.5
+          zaokrąglony zakres: 9.6 ± 10.6
+          więc 10.6 jest ok, ale 9.6 jest nieprawidłowe, bo patrząc na rzeczywisty zakres może wyjść np. 9.52, a to jest mniej niż 9.6!
+          -->
+      <td><% fixed(row.wartosc_wzorcowa, digits) %> ± <% fixed(row.niepewnosc, digits) %></td>
+      <%! digits = calcDigits(2, row.wspolczynnik, 2, row.niepewnosc_wspolczynnika) %>
+      <td><% fixed(row.wspolczynnik, digits) %> ± <% fixed(row.niepewnosc_wspolczynnika, digits) %></td>
+    </tr>
+    <%! } %>
+  </table>
+
+  <p></p>
+  <p align="justify" font-vwnbsp="1">The set threshold should be multiplied by the respective value of calibration factor.</p>
+  <p></p>
+
+  <%! if (uwSD?.trim()) { %>
+  <%= simpleHtml(uwSD, '<p align="justify" font-vwnbsp="1">***</p>') %>
+  <p></p>
+  <%! } %>
+
+<%! } else { %>
+  
+  <% blad('Nieznany rodzaj wzorcowania') %>
+
+<%! } %>
+
+<%! } %>
+
+<%! if (wynikiS.length) { %>
+
+  <%! /* ------------------------------- Skazenia ---------------------------- */ %>
+
+  <p><% litera(podpunkt++) %>) Calibration with surface sources</p>
+  <p></p>
+
+  <table inside-border="single black 0.2mm" align="center" p-align="center" td-valign="center" td-margin="1.1mm, 0mm" tr-cant-split="y">
+    <tc width="0.75cm" />
+    <tc width="1.7cm" />
+    <tc width="1.9cm" />
+    <tc width="1.9cm" />
+    <tc width="2cm" />
+    <tc width="2cm" />
+    <tc width="3cm" />
+    <tc width="2cm" />
+    <tc width="2.75cm" />
+    <tr font-bold="1">
+      <td rowspan="3">No.</td>
+      <td colspan="3">Probe</td>
+      <td colspan="3">Source</td>
+      <td rowspan="3">Instrument unit</td>
+      <td rowspan="2">Calibration factor per instrument unit (*)</td>
+    </tr>
+    <tr font-bold="1">
+      <td rowspan="2">Type</td>
+      <td rowspan="2">Serial number</td>
+      <td>U<sub>Z</sub></td>
+      <td rowspan="2">Isotope</td>
+      <td rowspan="2">Type of<br/>radiation</td>
+      <td>Surface emission</td>
+    </tr>
+    <tr>
+      <td>V</td>
+      <td>1/(cm<sup>2</sup>⋅s)</td>
+      <td>1/(cm<sup>2</sup>)</td>
+    </tr>
+    <%!
+      let lp = 0;
+      for (let wyn of wynikiS) {
+        lp++;
+        let wzorcowanie = wyn.wzorcowanie_zrodlami_powierzchniowymi;
+      %>
+      <tr>
+        <td><% lp %></td>
+        <td><% wyn.sonda ? trOpt(wyn.sonda.Typ) : tr('nie dotyczy') %></td>
+        <td><% wyn.sonda ? trOpt(wyn.sonda.Nr_fabryczny) : tr('nie dotyczy') %></td>
+        <td><% trOpt(wzorcowanie.Napiecie_zasilania_sondy) %></td>
+        <td><% wyn.zrodlo?.Nazwa?.replace(/\(.*\)/, '').trim() || blad('Nie ma źródla') %> </td>
+        <td><% wyn.zrodlo?.Nazwa?.toLowerCase() === 'am-241' || wyn.zrodlo?.Nazwa?.toLowerCase() === 'pu-239' ? 'α' : 'β' %></td>
+        <td><% fixed(wyn.emisja_pow, 2) %></td>
+        <td><% wyn.jednostka.Jednostka %></td>
+        <%! digits = calcDigits(2, wzorcowanie.wspolczynnik, 2, wzorcowanie.Niepewnosc) %>
+        <td><% fixed(wzorcowanie.wspolczynnik, digits) %> ± <% fixed(wzorcowanie.Niepewnosc, digits) %></td>
+      </tr>
+    <%! } %>
+  </table>
+
+  <p></p>
+  <p align="justify" font-vwnbsp="1">
+    (*) the number of particles emitted by a surface of 1 cm<sup>2</sup> in 1 second is calculated by multiplying the
+    instrument indications (expressed in the units given in the table) by the calibration factor
+  </p>
+  <p></p>
+
+<%! } %>
 
   <p>
     <br/>
@@ -206,7 +577,7 @@
   </p>
 
   <p tabs="16cm right" border="none">
-    <tab/>Autoryzował(a):<br/>
+    <tab/>Authorized by:<br/>
     <tab/><% sprawdzil %>
   </p>
 
@@ -214,7 +585,7 @@
     <br/>
     <br/>
     <br/>
-    <b>KONIEC</b>
+    <b>THE END</b>
   </p>
 
 </document>

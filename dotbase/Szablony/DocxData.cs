@@ -64,14 +64,13 @@ namespace DotBase.Szablony
 
         public void Generate(IWin32Window owner)
         {
+            var translacja = new Translacja(jezyk);
             try
             {
-                slownik = baza.Slownik.GET();
                 bool valid = PreProcess(owner);
                 if (valid)
                 {
                     Type thisType = this.GetType();
-                    var win = new DocxWindow();
                     var outputFile = Path.Combine(N.getProgramDir(), FileName);
                     string templateFile;
 #if DEBUG
@@ -87,8 +86,14 @@ namespace DotBase.Szablony
                         templateFile = String.Format(@"{0}\Szablony\{1}.xml", N.getProgramDir(), thisType.Name);
                     }
 #endif
-                    win.generate(owner, templateFile, this, outputFile);
-                    win.Dispose();
+                    bool repeat;
+                    do
+                    {
+                        var win = new DocxWindow();
+                        slownik = translacja.slownik;
+                        repeat = win.generate(owner, templateFile, this, outputFile, translacja);
+                        win.Dispose();
+                    } while (repeat);
                 }
             }
             catch (ProcessingException ex)
