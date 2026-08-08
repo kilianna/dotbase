@@ -57,7 +57,11 @@ namespace DotBase
                     NadpiszDaneObliczonychWspolczynnikow() &&
                     NadpiszDaneWzorcoweIPomiarowe()
                    );
-            if (!ok) BazaDanychWrapper.failure();
+            if (!ok)
+            {
+                BazaDanychWrapper.failure();
+                MyMessageBox.Show("Nie zapisano danych - wystąpił nieznany wyjątek. Sprawdź poprawność wpisanych danych.", "Błąd", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+            }
         }
 
         //---------------------------------------------------------------
