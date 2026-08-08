@@ -9,7 +9,7 @@ namespace DotBase
     {
         public enum DataType
         {
-            ZRODLO, ODLEGLOSC, WARTOSC_WZROCOWA, WSKAZANIE, WSPOLCZYNNIK, NIEPEWNOSC, TABELA
+            WARTOSC_WZROCOWA, WSKAZANIE, WSPOLCZYNNIK, NIEPEWNOSC, TABELA
         };
 
         private readonly IDictionary<DataType, String> m_documentData = new Dictionary<DataType, String>();

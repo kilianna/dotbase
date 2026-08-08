@@ -62,6 +62,9 @@ namespace DotBase
                         .Wskazanie(Pomiary.Dane[i].Wskazanie)
                         .Dolaczyc(Pomiary.Dane[i].Dolaczyc)
                         .Wartosc_wzorcowa(Pomiary.Dane[i].WartoscWzorcowa)
+                        .Odleglosc(Pomiary.Dane[i].Odleglosc)
+                        .Niepewnosc(Pomiary.Dane[i].Niepewnosc)
+                        .ID_zrodla(Pomiary.Dane[i].ID_zrodla)
                     .INFO("Nadpisanie danych wzorcowych i pomiarowych")
                     .EXECUTE();
             }
@@ -79,19 +82,6 @@ namespace DotBase
                         .Wielkosc_fizyczna("nie dotyczy")
                     .WHERE()
                         .ID_wzorcowania(IdWzorcowania)
-                    .INFO("Nadpisanie danych wzorcowania i pomiarowych")
-                    .EXECUTE();
-
-                /*_Zapytanie = String.Format("UPDATE Wyniki_dawka SET id_zrodla = {0}, odleglosc = '{1}' WHERE id_wzorcowania = {2}",
-                    Pomiary.zrodlo, Pomiary.odleglosc, _DaneOgolneDoZapisu.IdWzorcowania);
-                _BazaDanych.WykonajPolecenie(_Zapytanie);*/
-
-                _BazaDanych.Wyniki_dawka
-                    .UPDATE()
-                        .ID_zrodla(Pomiary.zrodlo)
-                        .Odleglosc(Pomiary.odleglosc)
-                    .WHERE()
-                        .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
                     .INFO("Nadpisanie danych wzorcowania i pomiarowych")
                     .EXECUTE();
             }
@@ -128,7 +118,7 @@ namespace DotBase
         }
 
         //---------------------------------------------------------------
-        public Narzedzia.Pair<double, double> LiczWspolczynnikOrazNiepewnosc20230915(List<double[]> inputList, double odleglosc, string protokol, int id_zrodla, DateTime dataWzorcowania, int rownowaznikDawki)
+        public Narzedzia.Pair<double, double> LiczWspolczynnikOrazNiepewnosc20230915(List<double[]> inputList, string protokol, DateTime dataWzorcowania, int rownowaznikDawki)
         //---------------------------------------------------------------
         {
             List<double> temporaryValues = new List<double>();
@@ -138,15 +128,10 @@ namespace DotBase
 
             var stale = Constants.getInstance();
 
-            double w_kd = 2 * stale.DELTA_L_D / 2 / Math.Sqrt(3) / 10 / odleglosc;
-
             _Zapytanie = String.Format("SELECT Data_kalibracji, id_protokolu FROM Protokoly_kalibracji_lawy WHERE data_kalibracji=#{0}#", protokol);
             var tab = _BazaDanych.TworzTabeleDanych(_Zapytanie);
             int idProtokolu = tab.Rows[0].Field<short>(1);
             DateTime dataKalibracjiLawy = tab.Rows[0].Field<DateTime>(0);
-
-            tab = _BazaDanych.TworzTabeleDanych("SELECT Niepewnosc FROM Pomiary_wzorcowe WHERE Odleglosc=? AND ID_zrodla=? AND ID_protokolu=?", odleglosc, id_zrodla, idProtokolu);
-            double Pomiary_wzorcowe_Niepewnosc = tab.Rows[0].Field<double>(0);
 
             double roznicaDni = (dataWzorcowania - dataKalibracjiLawy).Days;
 
@@ -168,6 +153,15 @@ namespace DotBase
                 double czas = poprzedni_czas + data[2];
                 poprzedni_czas = czas;
                 double w_t = stale.UT_D / Math.Sqrt(3) / czas;
+                double w_kd = 2 * stale.DELTA_L_D / 2 / Math.Sqrt(3) / 10 / data[3];
+                var row = _BazaDanych.Pomiary_wzorcowe
+                    .SELECT()
+                    .WHERE()
+                        .Odleglosc(data[3])
+                        .ID_zrodla((short)data[4])
+                        .ID_protokolu((short)idProtokolu)
+                    .GET_ONE();
+                double Pomiary_wzorcowe_Niepewnosc = row.Niepewnosc ?? 0.0;
                 double w_k_dla_punktu = Math.Sqrt(Math.Pow(w_t, 2) + Math.Pow(Pomiary_wzorcowe_Niepewnosc, 2) + Math.Pow(ukjed, 2) + Math.Pow(w_kd, 2) + Math.Pow(ktWzgledne, 2));
                 w_k += w_k_dla_punktu;
             }
@@ -185,7 +179,7 @@ namespace DotBase
             return new Narzedzia.Pair<double, double>(wspolczynnik, U_k);
         }
         //---------------------------------------------------------------
-        public List<double> LiczCzas(ref System.Windows.Forms.DataGridView tabela, string protokol, DateTime dataWzorcowania, string odleglosc, string id_zrodla, int rownowaznikDawki)
+        public List<double> LiczCzas(ref System.Windows.Forms.DataGridView tabela, string protokol, DateTime dataWzorcowania, int rownowaznikDawki)
         //---------------------------------------------------------------
         {
             double dzielnik = 0.0;
@@ -218,6 +212,8 @@ namespace DotBase
             {
                 try
                 {
+                    string id_zrodla = (tabela.Rows[i].Cells["Zrodlo"].Value ?? "").ToString().Trim();
+                    string odleglosc = (tabela.Rows[i].Cells["Odleglosc"].Value ?? "").ToString().Trim();
                     _Zapytanie = "SELECT moc_kermy FROM Pomiary_wzorcowe WHERE "
                                + String.Format("odleglosc={0} AND id_zrodla={1} AND id_protokolu={2}",
                                  odleglosc.Replace(",", "."), id_zrodla, idProtokolu);
@@ -264,8 +260,6 @@ namespace DotBase
             _BazaDanych.WykonajPolecenie(_Zapytanie);*/
             _BazaDanych.Wyniki_dawka
                 .UPDATE()
-                    .ID_zrodla(Pomiary.zrodlo)
-                    .Odleglosc(Wspolczynniki.Odleglosc)
                     .Wspolczynnik(Wspolczynniki.Wspolczynnik)
                     .Niepewnosc(Wspolczynniki.Niepewnosc)
                     .Zakres(Wspolczynniki.Zakres)
@@ -343,49 +337,42 @@ namespace DotBase
         public bool PobierzDaneWzorcoweIPomiarowe()
         //---------------------------------------------------------------
         {
-            _Zapytanie = "SELECT czas, wskazanie, dolaczyc, wartosc_wzorcowa FROM Pomiary_dawka WHERE id_wzorcowania "
-                       + String.Format("IN (SELECT id_wzorcowania FROM Wzorcowanie_cezem WHERE id_karty = {0} AND id_arkusza = {1})",
-                       IdKarty, IdArkusza);
+            var wzRow = _BazaDanych.wzorcowanie_cezem
+                .SELECT().ID_wzorcowania()
+                .WHERE().ID_karty(IdKarty).ID_arkusza((short)IdArkusza)
+                .GET_OPTIONAL();
 
-            _OdpowiedzBazy = _BazaDanych.TworzTabeleDanych(_Zapytanie);
-
-            if (null == _OdpowiedzBazy || null == _OdpowiedzBazy.Rows)
+            if (wzRow == null)
+            {
                 return false;
+            }
+
+            var pomiaryRows = _BazaDanych.Pomiary_dawka
+                .SELECT()
+                .WHERE().ID_wzorcowania(wzRow.ID_wzorcowania)
+                .GET();
 
             Pomiary.Dane.Clear();
 
-            foreach (DataRow wiersz in _OdpowiedzBazy.Rows)
+            foreach (var wiersz in pomiaryRows)
             {
-                Pomiary.Dane.Add(
-                                    new KlasyPomocniczeDawka.DawkaWartosciWzorcowoPomiarowe.DawkaWartoscWzorcowoPomiarowa
-                                    (
-                                        wiersz.Field<double>("wartosc_wzorcowa"),
-                                        wiersz.Field<double>("czas"),
-                                        wiersz.Field<double>("wskazanie"),
-                                        wiersz.Field<bool>("dolaczyc")
-                                    )
-                               );
-            }
-
-            _Zapytanie = String.Format("SELECT odleglosc, id_zrodla FROM Wyniki_dawka WHERE id_wzorcowania = {0}", IdWzorcowania);
-            _OdpowiedzBazy = _BazaDanych.TworzTabeleDanych(_Zapytanie);
-
-            try
-            {
-                Pomiary.odleglosc = _OdpowiedzBazy.Rows[0].Field<double>(0);
-                Pomiary.zrodlo = _OdpowiedzBazy.Rows[0].Field<int>(1);
-            }
-            catch(Exception)
-            {
-                Pomiary.odleglosc = 0;
-                Pomiary.zrodlo = 0;
+                Pomiary.Dane.Add(new KlasyPomocniczeDawka.DawkaWartosciWzorcowoPomiarowe.DawkaWartoscWzorcowoPomiarowa
+                    (
+                        wiersz.Wartosc_wzorcowa ?? 0.0,
+                        wiersz.Czas ?? 0.0,
+                        wiersz.Wskazanie ?? 0.0,
+                        wiersz.Dolaczyc,
+                        wiersz.Odleglosc,
+                        wiersz.ID_zrodla,
+                        wiersz.Niepewnosc
+                    ));
             }
 
             return true;
         }
 
         //---------------------------------------------------------------
-        public bool PrzygotujDaneWzorcowoPomiaroweDoZapisu(ref System.Windows.Forms.DataGridView tabela, string protokol, string zrodlo, string odleglosc)
+        public bool PrzygotujDaneWzorcowoPomiaroweDoZapisu(System.Windows.Forms.DataGridView tabela, string protokol)
         //---------------------------------------------------------------
         {
             Pomiary.Dane.Clear();
@@ -394,18 +381,16 @@ namespace DotBase
 
             Pomiary.jednostka = "mSv";
             Pomiary.protokol  = protokol;
-            Pomiary.odleglosc = N.doubleParse(odleglosc);
-            Pomiary.zrodlo    = N.intParse(zrodlo);
 
             try
             {
-                for (int i = 0; tabela.Rows[i].Cells[0].Value != null || i < tabela.Rows.Count - 1; ++i)
+                for (int i = 0; tabela.Rows[i].Cells["WartoscWzorcowa"].Value != null || i < tabela.Rows.Count - 1; ++i)
                 {
                     KlasyPomocniczeDawka.DawkaWartosciWzorcowoPomiarowe.DawkaWartoscWzorcowoPomiarowa temp 
                     = new KlasyPomocniczeDawka.DawkaWartosciWzorcowoPomiarowe.DawkaWartoscWzorcowoPomiarowa();
                     
                     // wartość wzorcowa
-                    sTemp = tabela.Rows[i].Cells[0].Value.ToString();
+                    sTemp = (tabela.Rows[i].Cells["WartoscWzorcowa"].Value ?? "").ToString().Trim();
 
                     if (sTemp != "")
                         temp.WartoscWzorcowa = N.doubleParse(sTemp);
@@ -413,7 +398,7 @@ namespace DotBase
                         temp.WartoscWzorcowa = 0.0;
 
                     // czas
-                    sTemp = tabela.Rows[i].Cells[1].Value.ToString();
+                    sTemp = (tabela.Rows[i].Cells["Czas"].Value ?? "").ToString().Trim();
 
                     if (sTemp != "")
                         temp.Czas = N.doubleParse(sTemp);
@@ -421,7 +406,7 @@ namespace DotBase
                         temp.Czas = 0.0;
 
                     // wskazanie
-                    sTemp = tabela.Rows[i].Cells[2].Value.ToString();
+                    sTemp = (tabela.Rows[i].Cells["Wskazanie"].Value ?? "").ToString().Trim();
 
                     if (sTemp != "")
                         temp.Wskazanie = N.doubleParse(sTemp);
@@ -429,12 +414,36 @@ namespace DotBase
                         temp.Wskazanie = 0.0;
 
                     // dołączyć
-                    sTemp = tabela.Rows[i].Cells[3].Value.ToString();
+                    sTemp = (tabela.Rows[i].Cells["Dolaczyc"].Value ?? "").ToString().Trim();
 
                     if (sTemp != "")
                         temp.Dolaczyc = bool.Parse(sTemp);
                     else
                         temp.Dolaczyc = false;
+
+                    // odległość
+                    sTemp = (tabela.Rows[i].Cells["Odleglosc"].Value ?? "").ToString().Trim();
+
+                    if (sTemp != "")
+                        temp.Odleglosc = N.doubleParse(sTemp);
+                    else
+                        temp.Odleglosc = 0.0;
+
+                    // ID_zrodla
+                    sTemp = (tabela.Rows[i].Cells["Zrodlo"].Value ?? "").ToString().Trim();
+
+                    if (sTemp != "")
+                        temp.ID_zrodla = Int32.Parse(sTemp);
+                    else
+                        temp.ID_zrodla = 0;
+
+                    // Niepewnosc
+                    sTemp = (tabela.Rows[i].Cells["Niepewnosc"].Value ?? "").ToString().Trim();
+
+                    if (sTemp != "")
+                        temp.Niepewnosc = N.doubleParse(sTemp);
+                    else
+                        temp.Niepewnosc = 0.0;
 
                     Pomiary.Dane.Add(temp);
                 }
@@ -448,7 +457,7 @@ namespace DotBase
         }
 
         //---------------------------------------------------------------
-        public bool PrzygotujDaneWspolczynnikowDoZapisu(string wzorcujacy, string sprawdzajacy, bool dolacz, string wspolczynnik, string niepewnosc, string odleglosc, string zakres, int rownowaznikDawki)
+        public bool PrzygotujDaneWspolczynnikowDoZapisu(string wzorcujacy, string sprawdzajacy, bool dolacz, string wspolczynnik, string niepewnosc, string zakres, int rownowaznikDawki)
         //---------------------------------------------------------------
         {
             Wspolczynniki.Wzorcujacy = wzorcujacy;
@@ -467,11 +476,6 @@ namespace DotBase
                 Wspolczynniki.Niepewnosc = temp;
             else
                 Wspolczynniki.Niepewnosc = 0.0;
-
-            if (N.doubleTryParse(odleglosc, out temp))
-                Wspolczynniki.Odleglosc = temp;
-            else
-                Wspolczynniki.Odleglosc = 0.0;
 
             if (N.doubleTryParse(zakres, out temp))
                 Wspolczynniki.Zakres = temp;
@@ -556,8 +560,6 @@ namespace DotBase
             _BazaDanych.Wyniki_dawka
                 .INSERT()
                     .ID_wzorcowania(_DaneOgolneDoZapisu.IdWzorcowania)
-                    .ID_zrodla(Pomiary.zrodlo)
-                    .Odleglosc(Wspolczynniki.Odleglosc)
                     .Wspolczynnik(Wspolczynniki.Wspolczynnik)
                     .Niepewnosc(Wspolczynniki.Niepewnosc)
                     .Zakres(Wspolczynniki.Zakres)

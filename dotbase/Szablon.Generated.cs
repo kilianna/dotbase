@@ -1848,6 +1848,66 @@ namespace DotBase
                 AddField("ID_wzorcowania");
                 return this;
             }
+            public Szablon_Pomiary_dawka ID_zrodla(int value)
+            {
+                SetField("ID_zrodla", value, OleDbType.Integer);
+                return this;
+            }
+            public Szablon_Pomiary_dawka ID_zrodla(int value, string oper)
+            {
+                SetField("ID_zrodla", value, OleDbType.Integer, oper);
+                return this;
+            }
+            public Szablon_Pomiary_dawka ID_zrodla(Order order)
+            {
+                SetOrder("ID_zrodla", order);
+                return this;
+            }
+            public Szablon_Pomiary_dawka ID_zrodla()
+            {
+                AddField("ID_zrodla");
+                return this;
+            }
+            public Szablon_Pomiary_dawka Niepewnosc(double value)
+            {
+                SetField("Niepewnosc", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_Pomiary_dawka Niepewnosc(double value, string oper)
+            {
+                SetField("Niepewnosc", value, OleDbType.Double, oper);
+                return this;
+            }
+            public Szablon_Pomiary_dawka Niepewnosc(Order order)
+            {
+                SetOrder("Niepewnosc", order);
+                return this;
+            }
+            public Szablon_Pomiary_dawka Niepewnosc()
+            {
+                AddField("Niepewnosc");
+                return this;
+            }
+            public Szablon_Pomiary_dawka Odleglosc(double value)
+            {
+                SetField("Odleglosc", value, OleDbType.Double);
+                return this;
+            }
+            public Szablon_Pomiary_dawka Odleglosc(double value, string oper)
+            {
+                SetField("Odleglosc", value, OleDbType.Double, oper);
+                return this;
+            }
+            public Szablon_Pomiary_dawka Odleglosc(Order order)
+            {
+                SetOrder("Odleglosc", order);
+                return this;
+            }
+            public Szablon_Pomiary_dawka Odleglosc()
+            {
+                AddField("Odleglosc");
+                return this;
+            }
             public Szablon_Pomiary_dawka Wartosc_wzorcowa(double? value)
             {
                 SetField("Wartosc_wzorcowa", value, OleDbType.Double);
@@ -1894,6 +1954,9 @@ namespace DotBase
             public double? Czas;
             public bool Dolaczyc;
             public int? ID_wzorcowania;
+            public int ID_zrodla;
+            public double Niepewnosc;
+            public double Odleglosc;
             public double? Wartosc_wzorcowa;
             public double? Wskazanie;
             public Row_Pomiary_dawka()
@@ -1915,6 +1978,12 @@ namespace DotBase
                     Dolaczyc = row.Field<bool>(cols["Dolaczyc"]);
                 if (cols.ContainsKey("ID_wzorcowania"))
                     ID_wzorcowania = row.Field<int?>(cols["ID_wzorcowania"]);
+                if (cols.ContainsKey("ID_zrodla"))
+                    ID_zrodla = row.Field<int>(cols["ID_zrodla"]);
+                if (cols.ContainsKey("Niepewnosc"))
+                    Niepewnosc = row.Field<double>(cols["Niepewnosc"]);
+                if (cols.ContainsKey("Odleglosc"))
+                    Odleglosc = row.Field<double>(cols["Odleglosc"]);
                 if (cols.ContainsKey("Wartosc_wzorcowa"))
                     Wartosc_wzorcowa = row.Field<double?>(cols["Wartosc_wzorcowa"]);
                 if (cols.ContainsKey("Wskazanie"))
@@ -3575,26 +3644,6 @@ namespace DotBase
                 AddField("ID_wzorcowania");
                 return this;
             }
-            public Szablon_Wyniki_dawka ID_zrodla(int? value)
-            {
-                SetField("ID_zrodla", value, OleDbType.Integer);
-                return this;
-            }
-            public Szablon_Wyniki_dawka ID_zrodla(int? value, string oper)
-            {
-                SetField("ID_zrodla", value, OleDbType.Integer, oper);
-                return this;
-            }
-            public Szablon_Wyniki_dawka ID_zrodla(Order order)
-            {
-                SetOrder("ID_zrodla", order);
-                return this;
-            }
-            public Szablon_Wyniki_dawka ID_zrodla()
-            {
-                AddField("ID_zrodla");
-                return this;
-            }
             public Szablon_Wyniki_dawka Niepewnosc(double? value)
             {
                 SetField("Niepewnosc", value, OleDbType.Double);
@@ -3613,26 +3662,6 @@ namespace DotBase
             public Szablon_Wyniki_dawka Niepewnosc()
             {
                 AddField("Niepewnosc");
-                return this;
-            }
-            public Szablon_Wyniki_dawka Odleglosc(double? value)
-            {
-                SetField("Odleglosc", value, OleDbType.Double);
-                return this;
-            }
-            public Szablon_Wyniki_dawka Odleglosc(double? value, string oper)
-            {
-                SetField("Odleglosc", value, OleDbType.Double, oper);
-                return this;
-            }
-            public Szablon_Wyniki_dawka Odleglosc(Order order)
-            {
-                SetOrder("Odleglosc", order);
-                return this;
-            }
-            public Szablon_Wyniki_dawka Odleglosc()
-            {
-                AddField("Odleglosc");
                 return this;
             }
             public Szablon_Wyniki_dawka Wielkosc_fizyczna(int? value)
@@ -3699,9 +3728,7 @@ namespace DotBase
         public class Row_Wyniki_dawka : Wiersz
         {
             public int? ID_wzorcowania;
-            public int? ID_zrodla;
             public double? Niepewnosc;
-            public double? Odleglosc;
             public int? Wielkosc_fizyczna;
             public double? Wspolczynnik;
             public double? Zakres;
@@ -3720,12 +3747,8 @@ namespace DotBase
             {
                 if (cols.ContainsKey("ID_wzorcowania"))
                     ID_wzorcowania = row.Field<int?>(cols["ID_wzorcowania"]);
-                if (cols.ContainsKey("ID_zrodla"))
-                    ID_zrodla = row.Field<int?>(cols["ID_zrodla"]);
                 if (cols.ContainsKey("Niepewnosc"))
                     Niepewnosc = row.Field<double?>(cols["Niepewnosc"]);
-                if (cols.ContainsKey("Odleglosc"))
-                    Odleglosc = row.Field<double?>(cols["Odleglosc"]);
                 if (cols.ContainsKey("Wielkosc_fizyczna"))
                     Wielkosc_fizyczna = row.Field<int?>(cols["Wielkosc_fizyczna"]);
                 if (cols.ContainsKey("Wspolczynnik"))

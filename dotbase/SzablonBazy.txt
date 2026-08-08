@@ -117,6 +117,9 @@
     Pomiary_dawka.Wskazanie, typ Double, precyzja 15, niewymagane Tak, pozycja 3, flagi X-X- -XXX
     Pomiary_dawka.Dolaczyc, typ Boolean, niewymagane Nie, pozycja 4, flagi X-X- -X-X
     Pomiary_dawka.Wartosc_wzorcowa, typ Double, precyzja 15, niewymagane Tak, pozycja 5, flagi X-X- -XXX
+    Pomiary_dawka.Odleglosc, typ Double, domyślnie 0, precyzja 15, niewymagane Nie, pozycja 6, flagi X-X- -X-X
+    Pomiary_dawka.ID_zrodla, typ Integer, domyślnie 0, precyzja 10, niewymagane Nie, pozycja 7, flagi X-X- -X-X
+    Pomiary_dawka.Niepewnosc, typ Double, domyślnie 0, precyzja 15, niewymagane Nie, pozycja 8, flagi X-X- -X-X
 
 ---------------------------------------------------------------------
  Pomiary_powierzchniowe
@@ -222,12 +225,10 @@
 ---------------------------------------------------------------------
 
     Wyniki_dawka.ID_wzorcowania, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 1, flagi X-X- -XXX
-    Wyniki_dawka.ID_zrodla, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 2, flagi X-X- -XXX
-    Wyniki_dawka.Odleglosc, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 3, flagi X-X- -XXX
-    Wyniki_dawka.Wspolczynnik, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 4, flagi X-X- -XXX
-    Wyniki_dawka.Niepewnosc, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 5, flagi X-X- -XXX
-    Wyniki_dawka.Zakres, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 6, flagi X-X- -XXX
-    Wyniki_dawka.Wielkosc_fizyczna, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 7, flagi X-X- -XXX
+    Wyniki_dawka.Wspolczynnik, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 2, flagi X-X- -XXX
+    Wyniki_dawka.Niepewnosc, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 3, flagi X-X- -XXX
+    Wyniki_dawka.Zakres, typ Double, domyślnie 0, precyzja 15, niewymagane Tak, pozycja 4, flagi X-X- -XXX
+    Wyniki_dawka.Wielkosc_fizyczna, typ Integer, domyślnie 0, precyzja 10, niewymagane Tak, pozycja 5, flagi X-X- -XXX
 
 ---------------------------------------------------------------------
  wyniki_moc_dawki

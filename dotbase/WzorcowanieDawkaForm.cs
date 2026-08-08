@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Narzedzia;
+using DotBase.Szablony;
 
 namespace DotBase
 {
@@ -74,7 +75,7 @@ namespace DotBase
             textBox9.Text = "nie dotyczy";
             
             textBox7.Text = textBox8.Text = textBox9.Text = textBox11.Text = textBox12.Text = textBox13.Text =
-            textBox14.Text = textBox15.Text = textBox17.Text = textBox18.Text = "";
+            textBox14.Text = textBox15.Text = "";
             textBox10.Text = "brak";
             textBox16.Text = "P. Bilski";
         
@@ -133,13 +134,13 @@ namespace DotBase
                 return false;
             }
 
-            if (false == _WzorcowanieDawka.PrzygotujDaneWzorcowoPomiaroweDoZapisu(ref dataGridView1, comboBox3.Text, textBox17.Text, textBox18.Text))
+            if (false == _WzorcowanieDawka.PrzygotujDaneWzorcowoPomiaroweDoZapisu(dataGridView1, comboBox3.Text))
             {
                 MyMessageBox.Show("Dane wzorcowo-pomiarowe są błędne.", "Uwaga");
                 return false;
             }
 
-            if (false == _WzorcowanieDawka.PrzygotujDaneWspolczynnikowDoZapisu(textBox15.Text, textBox16.Text, checkBox1.Checked, textBox11.Text, textBox12.Text, textBox18.Text, textBox19.Text, getRownowaznikDawki()))
+            if (false == _WzorcowanieDawka.PrzygotujDaneWspolczynnikowDoZapisu(textBox15.Text, textBox16.Text, checkBox1.Checked, textBox11.Text, textBox12.Text, textBox19.Text, getRownowaznikDawki()))
             {
                 MyMessageBox.Show("Dane współczynników są błędne.", "Uwaga");
                 return false;
@@ -187,14 +188,6 @@ namespace DotBase
             if (comboBox3.Text == "")
                 comboBox3.SelectedItem = comboBox3.Items[comboBox3.Items.Count - 1];
             
-            // źródło
-            if (textBox17.Text == "")
-                textBox17.Text = "0";
-
-            // odległość
-            if (textBox18.Text == "")
-                textBox18.Text = "0";
-
             // współczynnik
             if (textBox11.Text == "")
                 textBox11.Text = "0";
@@ -378,15 +371,19 @@ namespace DotBase
             {
                 foreach (KlasyPomocniczeDawka.DawkaWartosciWzorcowoPomiarowe.DawkaWartoscWzorcowoPomiarowa dane in _WzorcowanieDawka.Pomiary.Dane)
                 {
-                    dataGridView1.Rows.Add(dane.WartoscWzorcowa, dane.Czas.ToString("0.0"), dane.Wskazanie, dane.Dolaczyc);
+                    var row = dataGridView1.Rows[dataGridView1.Rows.Add()];
+                    row.Cells["Odleglosc"].Value = dane.Odleglosc;
+                    row.Cells["Zrodlo"].Value = dane.ID_zrodla;
+                    row.Cells["WartoscWzorcowa"].Value = dane.WartoscWzorcowa;
+                    row.Cells["Czas"].Value = dane.Czas;
+                    row.Cells["Wskazanie"].Value = dane.Wskazanie;
+                    row.Cells["Niepewnosc"].Value = dane.Niepewnosc;
+                    row.Cells["Dolaczyc"].Value = dane.Dolaczyc;
                 }
             }
 
             WyswietlKonkretnaJednostke();
             WyswietlKonkretnyProtokol();
-
-            textBox17.Text = _WzorcowanieDawka.Pomiary.zrodlo.ToString();
-            textBox18.Text = _WzorcowanieDawka.Pomiary.odleglosc.ToString();
         }
 
         //---------------------------------------------------------------
@@ -560,11 +557,11 @@ namespace DotBase
         private void button5_Click(object sender, EventArgs e)
         //---------------------------------------------------------------
         {
-            List<double> dane = _WzorcowanieDawka.LiczCzas(ref dataGridView1, comboBox3.Text, dateTimePicker1.Value, textBox18.Text, textBox17.Text, getRownowaznikDawki());
+            List<double> dane = _WzorcowanieDawka.LiczCzas(ref dataGridView1, comboBox3.Text, dateTimePicker1.Value, getRownowaznikDawki());
             
             for (int i = 0; i < dane.Count; ++i)
             {
-                dataGridView1.Rows[i].Cells[1].Value = dane[i].ToString("0.0");
+                dataGridView1.Rows[i].Cells["Czas"].Value = dane[i].ToString("0.0");
             }
         }
 
@@ -573,7 +570,7 @@ namespace DotBase
         {
             for (int i = 0; i < dataGridView1.Rows.Count - 1; ++i)
             {
-                dataGridView1.Rows[i].Cells[3].Value = true;
+                dataGridView1.Rows[i].Cells["Dolaczyc"].Value = true;
             }
         }
 
@@ -594,7 +591,10 @@ namespace DotBase
                             inputList.Add(new double[] { 
                                 N.doubleParse(row.Cells["WartoscWzorcowa"].Value.ToString()),
                                 N.doubleParse(row.Cells["Wskazanie"].Value.ToString()),
-                                N.doubleParse(row.Cells["Column2"].Value.ToString())
+                                N.doubleParse(row.Cells["Czas"].Value.ToString()),
+                                N.doubleParse(row.Cells["Odleglosc"].Value.ToString()),
+                                N.doubleParse(row.Cells["Zrodlo"].Value.ToString()),
+                                N.doubleParse(row.Cells["Niepewnosc"].Value.ToString())
                             });
                     }
                     else
@@ -610,7 +610,7 @@ namespace DotBase
 
             if (N.proceduraOd20230915(dateTimePicker1.Value))
             {
-                wspolczynnik_niepewnosc = _WzorcowanieDawka.LiczWspolczynnikOrazNiepewnosc20230915(inputList, N.doubleParse(textBox18.Text), comboBox3.Text, Int32.Parse(textBox17.Text), dateTimePicker1.Value, getRownowaznikDawki());
+                wspolczynnik_niepewnosc = _WzorcowanieDawka.LiczWspolczynnikOrazNiepewnosc20230915(inputList, comboBox3.Text, dateTimePicker1.Value, getRownowaznikDawki());
             }
             else
             {
@@ -671,8 +671,6 @@ namespace DotBase
                     new DaneWarunkowModel(textBox7.Text, textBox8.Text, textBox9.Text, textBox10.Text),
                     new DaneWspolczynnikowModel(textBox15.Text, textBox16.Text)
                 );
-            model.zrodlo = textBox17.Text;
-            model.odleglosc = textBox18.Text;
             model.wspolczynnik = textBox11.Text;
             model.niepewnosc = textBox12.Text;
             model.tabela = dataGridView1.Rows;
@@ -683,6 +681,41 @@ namespace DotBase
             {
                 MyMessageBox.Show("Nie podano wszystkich potrzebnych danych!", "Uwaga");
             }
+
+            var szablon = new wzorcowanie_wzor();
+
+            szablon.typ = wzorcowanie_wzor.Typ.DAWKA;
+            szablon.jezyk = Jezyk.PL;
+
+            szablon.jednostka = "⚠⚠⚠ JEDNOSTKA ⚠⚠⚠";
+            szablon.wielkoscFizyczna = "⚠⚠⚠ WIELKOŚ FIZYCZNA ⚠⚠⚠";
+            szablon.tlo = "⚠⚠⚠ TŁO ⚠⚠⚠";
+            szablon.tabela = dataGridView1.Rows;
+            szablon.obliczone = null;
+            szablon.dolaczZakres = false;
+
+            szablon.nrKarty = textBox1.Text;
+            szablon.nrArkusza = textBox2.Text;
+            szablon.data = dateTimePicker1.Value;
+
+            szablon.przyrzad.typ = textBox3.Text;
+            szablon.przyrzad.nrFabryczny = textBox4.Text;
+            szablon.przyrzad.inneNastawy = textBox5.Text;
+            szablon.przyrzad.sondaTyp = comboBox1.Text;
+            szablon.przyrzad.sondaNrFabryczny = comboBox2.Text;
+            szablon.przyrzad.napiecieZasilaniaSondy = textBox6.Text;
+
+            szablon.warunki.cisnienie = textBox7.Text;
+            szablon.warunki.temperatura = textBox8.Text;
+            szablon.warunki.wilgotnosc = textBox9.Text;
+            szablon.uwagi = textBox10.Text;
+
+            szablon.wykonal = textBox15.Text;
+            szablon.sprawdzil = textBox16.Text;
+
+            szablon.emisjaPow = null;
+
+            szablon.Generate(this);
         }
 
         private void PrzejdzDoNastepnegoPola(object sender, KeyPressEventArgs e)

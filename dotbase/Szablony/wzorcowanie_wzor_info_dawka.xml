@@ -1,0 +1,21 @@
+<table>
+    <tc width="3.5cm"/>
+    <tc width="7.6cm"/>
+    <tr>
+        <td:head colspan="2" background="<% $nj %>">
+            <p tabs="7.7mm">
+                <img src="img/prom.png" width="6.5mm" height="6.5mm" vertical="paragraph -1.4mm" horizontal="character 0mm"  />
+                <font color="<% $tn %>"><tab/><b><% numeruj() %>. ŹRÓDŁO</b></font>
+            </p>
+        </td:head>
+    </tr>
+    <tr>
+        <td:kom>Rodzaj</td:kom><td:kom><b>aaaaaaaaa</b></td:kom>
+    </tr>
+    <tr>
+        <td:kom>Nr źródła</td:kom><td:kom>a</td:kom>
+    </tr>
+    <tr>
+        <td:kom>Aktualna emisja pow.</td:kom><td:kom>aaaaaaaaaaaaaa</td:kom>
+    </tr>
+</table>

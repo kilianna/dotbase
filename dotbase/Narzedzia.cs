@@ -401,30 +401,37 @@ namespace KlasyPomocniczeDawka
                 Czas = 0.0;
                 Wskazanie = 0.0;
                 Dolaczyc = false;
+                Odleglosc = 0.0;
+                ID_zrodla = 0;
+                Niepewnosc = 0.0;
             }
 
             //********************************************************************
-            public DawkaWartoscWzorcowoPomiarowa(double wartoscWzorcowa, double czas, double wskazanie, bool dolaczyc)
+            public DawkaWartoscWzorcowoPomiarowa(double wartoscWzorcowa, double czas, double wskazanie, bool dolaczyc, double odleglosc, int zrodlo, double niepewnosc)
             //********************************************************************
             {
                 WartoscWzorcowa = wartoscWzorcowa;
                 Czas = czas;
                 Wskazanie = wskazanie;
                 Dolaczyc = dolaczyc;
+                Odleglosc = odleglosc;
+                ID_zrodla = zrodlo;
+                Niepewnosc = niepewnosc;
             }
 
             public double WartoscWzorcowa { get; set; }
             public double Czas { get; set; }
             public double Wskazanie { get; set; }
             public bool Dolaczyc { get; set; }
+            public double Odleglosc { get; set; }
+            public int ID_zrodla { get; set; }
+            public double Niepewnosc { get; set; }
         }
 
         public List<DawkaWartoscWzorcowoPomiarowa> Dane { get; set; }
 
         public string jednostka { get; set; }
         public string protokol  { get; set; }
-        public double odleglosc { get; set; }
-        public int zrodlo    { get; set; }
 
         //********************************************************************
         public DawkaWartosciWzorcowoPomiarowe()
@@ -438,7 +445,6 @@ namespace KlasyPomocniczeDawka
     {
         public double Wspolczynnik { get; set; }
         public double Niepewnosc   { get; set; }
-        public double Odleglosc { get; set; }
         public double Zakres { get; set; }
         public int RownowaznikDawki { get; set; }
 

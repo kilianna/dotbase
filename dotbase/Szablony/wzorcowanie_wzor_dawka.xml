@@ -1,0 +1,21 @@
+
+<!-- NAGŁÓWEK: WYNIKI WZORCOWANIA -->
+
+<table>
+    <tc width="18.2cm"/>
+    <tr>
+        <td:head background="<% $ct %>" border="nil">
+            <p tabs="7.7mm">
+                <img src="img/wyk-bia.png" width="6.5mm" height="6.5mm" vertical="paragraph -1.4mm" horizontal="character 0mm" />
+                <font color="white"><tab/><b><% numeruj() %>. WYNIKI WZORCOWANIA</b></font>
+            </p>
+        </td:head>
+    </tr>
+</table>
+
+<p><font size="0.1mm">&nbsp;</font></p>
+
+<table>
+    <tc width="6mm"/>
+    <tr><td>Wyniki DAWKA</td></tr>
+</table>

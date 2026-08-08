@@ -13,8 +13,6 @@ namespace DotBase
         public DaneWarunkowModel modelDaneWarunkow;
         public DaneWspolczynnikowModel modelDaneWspolczynnikow;
 
-        public string zrodlo;
-        public string odleglosc;
         public string wspolczynnik;
         public string niepewnosc;
         public DataGridViewRowCollection tabela;

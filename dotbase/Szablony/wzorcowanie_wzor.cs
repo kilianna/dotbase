@@ -12,6 +12,7 @@ namespace DotBase.Szablony
         public enum Typ
         {
             MOC_DAWKI,
+            DAWKA,
             EMISJA_POWIERZCHNIOWA,
         };
 
@@ -80,6 +81,8 @@ namespace DotBase.Szablony
                         return String.Format(@"..\Wyniki\Protokoly\Skazenia\{0}\{1}WynikSkazenia{2}s.docx", DirGroup(nrKarty), nrKarty, nrArkusza);
                     case Typ.MOC_DAWKI:
                         return String.Format(@"..\Wyniki\Protokoly\MocDawki\{0}\{1}MocDawki{2}c.docx", DirGroup(nrKarty), nrKarty, nrArkusza);
+                    case Typ.DAWKA:
+                        return String.Format(@"..\Wyniki\Protokoly\Dawka\{0}\{1}Dawka{2}c.docx", DirGroup(nrKarty), nrKarty, nrArkusza);
                     default:
                         throw new ApplicationException("Internal error");
                 }

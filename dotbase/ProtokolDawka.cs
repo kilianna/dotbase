@@ -50,7 +50,7 @@ namespace DotBase
                            PobierzDaneWarunkow(m_model.modelDaneWarunkow) &&
                            PobierzDaneWspolczynnikow(m_model.modelDaneWspolczynnikow) &&
                            PobierzDaneZleceniodawcy(m_model.modelDanePodstawowe.nrKarty) &&
-                           PobierzDaneWzorcoweIPomiarowe(m_model.zrodlo, m_model.odleglosc, m_model.wspolczynnik, m_model.niepewnosc, m_model.tabela);
+                           PobierzDaneWzorcoweIPomiarowe(m_model.wspolczynnik, m_model.niepewnosc, m_model.tabela);
                 }
                 catch (Exception)
                 {
@@ -77,13 +77,9 @@ namespace DotBase
             #endregion
 
             //***************************************************
-            public bool PobierzDaneWzorcoweIPomiarowe(string zrodlo, string odleglosc, string wspolczynnik, string niepewnosc, DataGridViewRowCollection tabela)
+            public bool PobierzDaneWzorcoweIPomiarowe(string wspolczynnik, string niepewnosc, DataGridViewRowCollection tabela)
             //***************************************************
             {
-                m_protokolDawkaData.setValue(ProtokolDawkaData.DataType.ZRODLO, zrodlo);
-                m_protokolDawkaData.setValue(ProtokolDawkaData.DataType.ODLEGLOSC, odleglosc);
-
-                
                 StringBuilder tabelaDoWpisania = new StringBuilder();
 
                 try
@@ -120,8 +116,8 @@ namespace DotBase
             public bool WypelnijDaneWzorcoweIPomiarowe()
             //***************************************************
             {
-                m_templateToFill.Replace("<!zrodlo>", m_protokolDawkaData.getValue(ProtokolDawkaData.DataType.ZRODLO))
-                                .Replace("<!odleglosc>", m_protokolDawkaData.getValue(ProtokolDawkaData.DataType.ODLEGLOSC))
+                m_templateToFill.Replace("<!zrodlo>", "---ZRODLO---")
+                                .Replace("<!odleglosc>", "----ODLEGLOSC----")
                                 .Replace("<!wspolczynnik>", m_protokolDawkaData.getValue(ProtokolDawkaData.DataType.WSPOLCZYNNIK))
                                 .Replace("<!niepewnosc>", m_protokolDawkaData.getValue(ProtokolDawkaData.DataType.NIEPEWNOSC))
                                 .Replace("<!tabela>", m_protokolDawkaData.getValue(ProtokolDawkaData.DataType.TABELA));

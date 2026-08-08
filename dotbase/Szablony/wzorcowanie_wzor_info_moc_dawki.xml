@@ -1,0 +1,18 @@
+<table>
+    <tc width="3.5cm"/>
+    <tc width="7.6cm"/>
+    <tr>
+        <td:head colspan="2" background="<% $nj %>">
+            <p tabs="7.7mm">
+                <img src="img/prom.png" width="6.5mm" height="6.5mm" vertical="paragraph -1.4mm" horizontal="character 0mm"  />
+                <font color="<% $tn %>"><tab/><b><% numeruj() %>. INFORMACJE O WZORCOWANIU</b></font>
+            </p>
+        </td:head>
+    </tr>
+    <tr>
+        <td:kom>Wielkość fizyczna</td:kom><td:kom><% wielkoscFizyczna %></td:kom>
+    </tr>
+    <tr>
+        <td:kom>Tło</td:kom><td:kom><% tlo %> <% jednostka %></td:kom>
+    </tr>
+</table>

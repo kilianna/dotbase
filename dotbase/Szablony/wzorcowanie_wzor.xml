@@ -4,14 +4,17 @@
     /* --- Teksty --- */
     let numeryFormularzy = {
         MOC_DAWKI: "F1/WZOR-1/09.07.2026",
+        DAWKA: "F1/WZOR-1/09.07.2026",
         EMISJA_POWIERZCHNIOWA: "F1/WZOR-2/09.07.2026",
     };
     let tytuly = {
-        MOC_DAWKI: "MOCY DAWKI",
-        EMISJA_POWIERZCHNIOWA: "EMISJI POWIERZCHNIOWEJ",
+        MOC_DAWKI: "WZORCOWANIE W ZAKRESIE\nMOCY DAWKI",
+        DAWKA: "WZORCOWANIE ŹRÓDŁEM\nCs-137 - DAWKA",
+        EMISJA_POWIERZCHNIOWA: "WZORCOWANIE W ZAKRESIE\nEMISJI POWIERZCHNIOWEJ",
     };
     let literaArkusza = {
         MOC_DAWKI: "c",
+        DAWKA: "c",
         EMISJA_POWIERZCHNIOWA: "s",
     };
 
@@ -78,8 +81,7 @@
             <td valign="middle" margin="0mm 3mm 0mm 3mm" border="nil, <% $rm %> single 0.2mm 0mm, nil, <% $rm %> single 0.2mm 0mm">
                 <p line-spacing="exactly 1.2">
                 <font face="Aptos Narrow" size="14pt" color="<% $tn %>" bold="1">PROTOKÓŁ</font>
-                <br/><font face="Aptos Narrow" size="10pt" color="<% $jt %>">WZORCOWANIE W ZAKRESIE
-                <br/><% tytuly[typ] %></font>
+                <br/><font face="Aptos Narrow" size="10pt" color="<% $jt %>"><%= multiline(tytuly[typ]) %></font>
                 </p>
             </td>
             <!-- IDENTYFIKACJA -->
@@ -235,61 +237,30 @@
 
     <p>&nbsp;</p>
 
+    <%!
+    let infoWzorcowania = '';
+    if (typ === 'EMISJA_POWIERZCHNIOWA') {
+        infoWzorcowania = utils.include("wzorcowanie_wzor_info_emisja_pow.xml").trim();
+    } else if (typ === 'MOC_DAWKI') {
+        infoWzorcowania = utils.include("wzorcowanie_wzor_info_moc_dawki.xml").trim();
+    } else if (typ === 'DAWKA') {
+        infoWzorcowania = utils.include("wzorcowanie_wzor_info_dawka.xml").trim();
+    } else {
+        error("Nieznany typ wzorcowania: " + typ);
+    }
+    %>
+
     <table border="nil">
     <tc width="11.1cm"/>
     <tc width="0.4cm"/>
     <tc width="6.7cm"/>
-    <tr><td border="nil" valign="top" margin="0.05mm 0mm 0mm">
-
-    <%! if (typ !== 'EMISJA_POWIERZCHNIOWA') { %>
-
-    <table>
-        <tc width="3.5cm"/>
-        <tc width="7.6cm"/>
-        <tr>
-            <td:head colspan="2" background="<% $nj %>">
-                <p tabs="7.7mm">
-                    <img src="img/prom.png" width="6.5mm" height="6.5mm" vertical="paragraph -1.4mm" horizontal="character 0mm"  />
-                    <font color="<% $tn %>"><tab/><b><% numeruj() %>. INFORMACJE O WZORCOWANIU</b></font>
-                </p>
-            </td:head>
-        </tr>
-        <tr>
-            <td:kom>Wielkość fizyczna</td:kom><td:kom><% wielkoscFizyczna %></td:kom>
-        </tr>
-        <tr>
-            <td:kom>Tło</td:kom><td:kom><% tlo %> <% jednostka %></td:kom>
-        </tr>
-    </table>
-
-    <%! } else { %>
-
-    <table>
-        <tc width="3.5cm"/>
-        <tc width="7.6cm"/>
-        <tr>
-            <td:head colspan="2" background="<% $nj %>">
-                <p tabs="7.7mm">
-                    <img src="img/prom.png" width="6.5mm" height="6.5mm" vertical="paragraph -1.4mm" horizontal="character 0mm"  />
-                    <font color="<% $tn %>"><tab/><b><% numeruj() %>. ŹRÓDŁO</b></font>
-                </p>
-            </td:head>
-        </tr>
-        <tr>
-            <td:kom>Rodzaj</td:kom><td:kom><b><% emisjaPow.zrodlo.Nazwa %></b></td:kom>
-        </tr>
-        <tr>
-            <td:kom>Nr źródła</td:kom><td:kom><% emisjaPow.zrodlo.Numer %></td:kom>
-        </tr>
-        <tr>
-            <td:kom>Aktualna emisja pow.</td:kom><td:kom><% fixed(emisjaPow.emisjaPowierzchniowa, 2) %> cm<sup>-2</sup>s<sup>-1</sup></td:kom>
-        </tr>
-    </table>
-
-    <%! } %>
-
+    <tr>
+    <%! if (infoWzorcowania) { %>
+    <td border="nil" valign="top" margin="0.05mm 0mm 0mm">
+    <%= infoWzorcowania %>
     </td>
     <td border="nil" margin="0mm"></td>
+    <%! } %>
     <td border="nil" valign="top" margin="0.05mm 0mm 0mm">
 
     <!-- POD-TABELA: INFORMACJE O WZORCOWANIU > WARUNKI ATMOSFERYCZNE -->
@@ -326,8 +297,12 @@
     <%!
     if (typ === 'EMISJA_POWIERZCHNIOWA') {
         %><%= utils.include("wzorcowanie_wzor_emisja_pow.xml") %><%!
-    } else {
+    } else if (typ === 'MOC_DAWKI') {
         %><%= utils.include("wzorcowanie_wzor_moc_dawki.xml") %><%!
+    } else if (typ === 'DAWKA') {
+        %><%= utils.include("wzorcowanie_wzor_dawka.xml") %><%!
+    } else {
+        error("Nieznany typ wzorcowania: " + typ);
     }
     %>
 
