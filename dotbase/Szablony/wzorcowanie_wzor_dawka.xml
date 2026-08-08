@@ -15,7 +15,46 @@
 
 <p><font size="0.1mm">&nbsp;</font></p>
 
+<%!
+    let margin = tabela.length > 12 ? "0mm" : "0.7mm";
+%>
+
 <table>
-    <tc width="6mm"/>
-    <tr><td>Wyniki DAWKA</td></tr>
+    <tc width="8mm"/>
+    <tc width="23mm"/>
+    <tc width="23mm"/>
+    <tc width="23mm"/>
+    <tc width="23mm"/>
+    <tc width="23mm"/>
+    <tc width="23mm"/>
+    <tc width="36mm"/>
+    <tr>
+    <td:head margin="1.8mm 1mm" background="<% $nj %>"><p align="center"><font face="Aptos Narrow">Lp.</font></p></td:head>
+    <td:head margin="1.8mm 1mm" background="<% $nj %>"><p align="center"><font face="Aptos Narrow">Odległość<br/>[cm]</font></p></td:head>
+    <td:head margin="1.8mm 1mm" background="<% $nj %>"><p align="center"><font face="Aptos Narrow">Źródło</font></p></td:head>
+    <td:head margin="1.8mm 1mm" background="<% $nj %>"><p align="center"><font face="Aptos Narrow">Czas<br/>[s]</font></p></td:head>
+    <td:head margin="1.8mm 1mm" background="<% $nj %>"><p align="center"><font face="Aptos Narrow">Wartość wzorcowa<br/>[mSv]</font></p></td:head>
+    <td:head margin="1.8mm 1mm" background="<% $nj %>"><p align="center"><font face="Aptos Narrow">Wskazanie przyrządu<br/>[mSv]</font></p></td:head>
+    <td:head margin="1.8mm 1mm" background="<% $nj %>"><p align="center"><font face="Aptos Narrow">Niepewność wskazania<br/>[mSv]</font></p></td:head>
+    <td:head margin="1.8mm 1mm" background="<% $nj %>"><p align="center"><font face="Aptos Narrow">Współczynnik<br/>poprawkowy</font></p></td:head>
+    </tr>
+    <%!
+    tabela = tabela.filter(row => row.Dolaczyc);
+    for (let i = 0; i < tabela.length; i++) {
+    let row = tabela[i];
+    calcDigits(2, row.WartoscWzorcowa, 2, row.Wskazanie, 2, row.Niepewnosc);
+    %>
+    <tr>
+    <td:kom margin="<% margin %>"><p align="center"><font face="Aptos Narrow"><% i + 1 %></font></p></td:kom>
+    <td:kom margin="<% margin %>"><p align="center"><% tekst(row.Odleglosc) %></p></td:kom>
+    <td:kom margin="<% margin %>"><p align="center"><% row.Zrodlo %></p></td:kom>
+    <td:kom margin="<% margin %>"><p align="center"><% tekst(row.Czas) %></p></td:kom>
+    <td:kom margin="<% margin %>"><p align="center"><% fixed(row.WartoscWzorcowa) %></p></td:kom>
+    <td:kom margin="<% margin %>"><p align="center"><% fixed(row.Wskazanie) %></p></td:kom>
+    <td:kom margin="<% margin %>"><p align="center"><% tekst(row.Niepewnosc) %></p></td:kom>
+    <%! if (i == 0) { %>
+    <td:kom margin="<% margin %>" rowspan="<% tabela.length %>"><p align="center"><% dawka.wspolczynnik %> ± <% dawka.niepWspolczynnika %></p></td:kom>
+    <%! } %>
+    </tr>
+    <%! } %>
 </table>

@@ -14,13 +14,13 @@ const spojnosciPomiarowe = {
 };
 
 const rownowaznikiDawki = [
-  // Indywidualny_HP07: 0
+  // Indywidualny_HP10: 0
   {
     co: 'indywidualny równoważnik dawki H<sub>P</sub>(10)',
     czego: 'indywidualnego równoważnika dawki H<sub>P</sub>(10)',
     jednostka: 'mSv',
   },
-  // Indywidualny_HP10: 1
+  // Indywidualny_HP07: 1
   {
     co: 'indywidualny równoważnik dawki H<sub>P</sub>(0,07)',
     czego: 'indywidualnego równoważnika dawki H<sub>P</sub>(0,07)',

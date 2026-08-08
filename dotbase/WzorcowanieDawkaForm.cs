@@ -21,6 +21,7 @@ namespace DotBase
         //-------------------------------------------------------------------
         {
             InitializeComponent();
+            wielkoscFizycznaBox.Items.AddRange(WzorcowanieDawka.RownowaznikiDawkiText);
             _WzorcowanieDawka = new WzorcowanieDawka(nrKarty, "d");
         
             textBox1.Text = nrKarty.ToString();
@@ -52,14 +53,7 @@ namespace DotBase
         private int getRownowaznikDawki()
         //---------------------------------------------------------------
         {
-            if (radioButton1.Checked)
-                return 0;
-            else if (radioButton2.Checked)
-                return 1;
-            else if (radioButton3.Checked)
-                return 2;
-            else
-                return 3;
+            return wielkoscFizycznaBox.SelectedIndex;
         }
 
         //---------------------------------------------------------------
@@ -247,7 +241,7 @@ namespace DotBase
             WyswietlWszystkieProtokoly();
             WyswietlWszystkieSondy();
             WyswietlPoprzedniWspolczynnikOrazNiepewnosc();
-            radioButton1.Checked = true;
+            wielkoscFizycznaBox.SelectedIndex = 0;
 
             int nrPoprzedniejKalibracji = _WzorcowanieDawka.ZnajdzNrPoprzedniejKalibracji(textBox3.Text, textBox4.Text);
 
@@ -398,18 +392,11 @@ namespace DotBase
                 textBox11.Text = _WzorcowanieDawka.Wspolczynniki.Wspolczynnik.ToString("0.000");
                 textBox12.Text = _WzorcowanieDawka.Wspolczynniki.Niepewnosc.ToString("0.000");
                 textBox19.Text = _WzorcowanieDawka.Wspolczynniki.Zakres.ToString();
-                if (_WzorcowanieDawka.Wspolczynniki.RownowaznikDawki == 0)
-                    radioButton1.Checked = true;
-                else if (_WzorcowanieDawka.Wspolczynniki.RownowaznikDawki == 1)
-                    radioButton2.Checked = true;
-                else if (_WzorcowanieDawka.Wspolczynniki.RownowaznikDawki == 2)
-                    radioButton3.Checked = true;
-                else
-                    radioButton4.Checked = true;
+                wielkoscFizycznaBox.SelectedIndex = _WzorcowanieDawka.Wspolczynniki.RownowaznikDawki;
             }
             else
             {
-                radioButton1.Checked = true;
+                wielkoscFizycznaBox.SelectedIndex = 0;
             }
 
             WyswietlPoprzedniWspolczynnikOrazNiepewnosc();
@@ -688,8 +675,9 @@ namespace DotBase
             szablon.jezyk = Jezyk.PL;
 
             szablon.jednostka = "⚠⚠⚠ JEDNOSTKA ⚠⚠⚠";
-            szablon.wielkoscFizyczna = "⚠⚠⚠ WIELKOŚ FIZYCZNA ⚠⚠⚠";
+            szablon.wielkoscFizyczna = wielkoscFizycznaBox.SelectedItem.ToString();
             szablon.tlo = "⚠⚠⚠ TŁO ⚠⚠⚠";
+            szablon.zakres = textBox19.Text;
             szablon.tabela = dataGridView1.Rows;
             szablon.obliczone = null;
             szablon.dolaczZakres = false;
@@ -714,6 +702,9 @@ namespace DotBase
             szablon.sprawdzil = textBox16.Text;
 
             szablon.emisjaPow = null;
+
+            szablon.dawka.wspolczynnik = textBox11.Text;
+            szablon.dawka.niepWspolczynnika = textBox12.Text;
 
             szablon.Generate(this);
         }
@@ -775,7 +766,7 @@ namespace DotBase
             Double.TryParse(textBox13.Text, out poprzedni);
             podswietlNaCzerwono(textBox11, wspolczynnik < 0.5 || wspolczynnik > 2.0);
             podswietlNaCzerwono(textBox12, wspolczynnik < 0.0000001 || niepewnosc / wspolczynnik > 0.4);
-            podswietlNaCzerwono(textBox13, Math.Abs(wspolczynnik - poprzedni) / wspolczynnik > 0.2);
+            podswietlNaCzerwono(textBox13, wspolczynnik < 0.0000001 || Math.Abs(wspolczynnik - poprzedni) / wspolczynnik > 0.2);
         }
 
         private void podswietlNaCzerwono(TextBox textBox, bool warunek)

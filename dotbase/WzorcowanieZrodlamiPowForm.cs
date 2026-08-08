@@ -738,6 +738,7 @@ namespace DotBase
             /* Nie używane dane w tym protokole */
             szablon.wielkoscFizyczna = "!ERROR!";
             szablon.tlo = "!ERROR!";
+            szablon.zakres = "!ERROR!";
             szablon.obliczone = null;
             szablon.dolaczZakres = true;
 

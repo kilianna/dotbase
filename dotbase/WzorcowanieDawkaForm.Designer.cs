@@ -62,19 +62,16 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label24 = new System.Windows.Forms.Label();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.wielkoscFizycznaBox = new System.Windows.Forms.ComboBox();
+            this.label24 = new System.Windows.Forms.Label();
             this.textBox19 = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.button4 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -482,12 +479,9 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.label24);
-            this.tabPage3.Controls.Add(this.radioButton4);
-            this.tabPage3.Controls.Add(this.radioButton3);
-            this.tabPage3.Controls.Add(this.radioButton2);
-            this.tabPage3.Controls.Add(this.radioButton1);
             this.tabPage3.Controls.Add(this.dataGridView1);
+            this.tabPage3.Controls.Add(this.button6);
+            this.tabPage3.Controls.Add(this.button5);
             this.tabPage3.Controls.Add(this.groupBox6);
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
@@ -497,68 +491,6 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Dane wzorcowe i pomiarowe";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // label24
-            // 
-            this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(12, 475);
-            this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(119, 17);
-            this.label24.TabIndex = 25;
-            this.label24.Text = "Wielkość fizyczna";
-            // 
-            // radioButton4
-            // 
-            this.radioButton4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(731, 501);
-            this.radioButton4.Margin = new System.Windows.Forms.Padding(4);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(70, 21);
-            this.radioButton4.TabIndex = 24;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Kerma";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(731, 471);
-            this.radioButton3.Margin = new System.Windows.Forms.Padding(4);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(280, 21);
-            this.radioButton3.TabIndex = 23;
-            this.radioButton3.Text = "Przestrzenny równoważnik dawki H*(10)";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(416, 499);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(4);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(301, 21);
-            this.radioButton2.TabIndex = 22;
-            this.radioButton2.Text = "Indywidualny równoważnik dawki - Hp(0,07)";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(416, 470);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(4);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(289, 21);
-            this.radioButton1.TabIndex = 21;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Indywidualny równoważnik dawki - Hp(10)";
-            this.radioButton1.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
@@ -590,7 +522,7 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView1.Location = new System.Drawing.Point(8, 73);
+            this.dataGridView1.Location = new System.Drawing.Point(8, 109);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -601,27 +533,72 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView1.Size = new System.Drawing.Size(1019, 389);
+            this.dataGridView1.Size = new System.Drawing.Size(1019, 411);
             this.dataGridView1.TabIndex = 1;
+            // 
+            // button6
+            // 
+            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button6.Location = new System.Drawing.Point(888, 73);
+            this.button6.Margin = new System.Windows.Forms.Padding(4);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(139, 28);
+            this.button6.TabIndex = 3;
+            this.button6.Text = "Dołącz wszystko";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button5
+            // 
+            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button5.Location = new System.Drawing.Point(739, 73);
+            this.button5.Margin = new System.Windows.Forms.Padding(4);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(141, 28);
+            this.button5.TabIndex = 2;
+            this.button5.Text = "Oblicz";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // groupBox6
             // 
             this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox6.Controls.Add(this.wielkoscFizycznaBox);
+            this.groupBox6.Controls.Add(this.label24);
             this.groupBox6.Controls.Add(this.textBox19);
             this.groupBox6.Controls.Add(this.label23);
             this.groupBox6.Controls.Add(this.comboBox3);
             this.groupBox6.Controls.Add(this.label20);
-            this.groupBox6.Controls.Add(this.button5);
-            this.groupBox6.Controls.Add(this.button6);
             this.groupBox6.Location = new System.Drawing.Point(15, 7);
             this.groupBox6.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox6.Size = new System.Drawing.Size(961, 58);
+            this.groupBox6.Size = new System.Drawing.Size(1012, 58);
             this.groupBox6.TabIndex = 0;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Wzorcowanie";
+            // 
+            // wielkoscFizycznaBox
+            // 
+            this.wielkoscFizycznaBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.wielkoscFizycznaBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.wielkoscFizycznaBox.FormattingEnabled = true;
+            this.wielkoscFizycznaBox.Location = new System.Drawing.Point(641, 19);
+            this.wielkoscFizycznaBox.Name = "wielkoscFizycznaBox";
+            this.wielkoscFizycznaBox.Size = new System.Drawing.Size(360, 24);
+            this.wielkoscFizycznaBox.TabIndex = 25;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(515, 24);
+            this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(119, 17);
+            this.label24.TabIndex = 25;
+            this.label24.Text = "Wielkość fizyczna";
             // 
             // textBox19
             // 
@@ -659,30 +636,6 @@
             this.label20.Size = new System.Drawing.Size(60, 17);
             this.label20.TabIndex = 0;
             this.label20.Text = "Protokół";
-            // 
-            // button5
-            // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.Location = new System.Drawing.Point(655, 19);
-            this.button5.Margin = new System.Windows.Forms.Padding(4);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(141, 28);
-            this.button5.TabIndex = 2;
-            this.button5.Text = "Oblicz";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button6
-            // 
-            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button6.Location = new System.Drawing.Point(804, 19);
-            this.button6.Margin = new System.Windows.Forms.Padding(4);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(139, 28);
-            this.button6.TabIndex = 3;
-            this.button6.Text = "Dołącz wszystko";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // tabPage4
             // 
@@ -1010,31 +963,37 @@
             // 
             this.Odleglosc.HeaderText = "Odleglość";
             this.Odleglosc.Name = "Odleglosc";
+            this.Odleglosc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // Zrodlo
             // 
             this.Zrodlo.HeaderText = "Źródło";
             this.Zrodlo.Name = "Zrodlo";
+            this.Zrodlo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // WartoscWzorcowa
             // 
             this.WartoscWzorcowa.HeaderText = "Wartość wzorcowa";
             this.WartoscWzorcowa.Name = "WartoscWzorcowa";
+            this.WartoscWzorcowa.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // Czas
             // 
             this.Czas.HeaderText = "Czas [s]";
             this.Czas.Name = "Czas";
+            this.Czas.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // Wskazanie
             // 
             this.Wskazanie.HeaderText = "Wskazanie";
             this.Wskazanie.Name = "Wskazanie";
+            this.Wskazanie.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // Niepewnosc
             // 
             this.Niepewnosc.HeaderText = "Niepewność";
             this.Niepewnosc.Name = "Niepewnosc";
+            this.Niepewnosc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // Dolaczyc
             // 
@@ -1072,7 +1031,6 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
@@ -1158,15 +1116,12 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.ToolStripMenuItem zapiszToolStripMenuItem;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.ToolStripMenuItem wykresENToolStripMenuItem;
+        private System.Windows.Forms.ComboBox wielkoscFizycznaBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn Odleglosc;
         private System.Windows.Forms.DataGridViewTextBoxColumn Zrodlo;
         private System.Windows.Forms.DataGridViewTextBoxColumn WartoscWzorcowa;

@@ -48,10 +48,17 @@ namespace DotBase.Szablony
             public Szablon.Row_Atesty_zrodel atestZrodla;
         };
 
+        public class Dawka
+        {
+            public string wspolczynnik;
+            public string niepWspolczynnika;
+        };
+
         public Typ typ;
         public string jednostka;
         public string wielkoscFizyczna;
         public string tlo;
+        public string zakres;
         public bool dolaczZakres;
         public string nrKarty;
         public string nrArkusza;
@@ -70,6 +77,7 @@ namespace DotBase.Szablony
         public Szablon.Row_Metody[] metody;
         public DataGridViewRowCollection obliczone;
         public EmisjaPow emisjaPow = new EmisjaPow();
+        public Dawka dawka = new Dawka();
 
         protected override string FileName
         {

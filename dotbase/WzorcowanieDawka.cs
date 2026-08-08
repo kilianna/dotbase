@@ -9,7 +9,19 @@ namespace DotBase
 {
     class WzorcowanieDawka : WzorcowanieCez
     {
-        public enum ROWNOWAZNIKI_DAWKI { Indywidualny_HP07, Indywidualny_HP10, Przestrzenny, Kerma };
+        public enum ROWNOWAZNIKI_DAWKI {
+            Indywidualny_HP10 = 0,
+            Indywidualny_HP07 = 1,
+            Przestrzenny = 2,
+            Kerma = 3,
+        };
+
+        static public string[] RownowaznikiDawkiText = new string[] {
+            "Indywidualny równoważnik dawki - Hp(10)",
+            "Indywidualny równoważnik dawki - Hp(0,07)",
+            "Przestrzenny równoważnik dawki H*(10)",
+            "Kerma",
+        };
 
         public KlasyPomocniczeDawka.DawkaWartosciWzorcowoPomiarowe Pomiary { get; protected set; }
         public KlasyPomocniczeDawka.DawkaWspolczynniki Wspolczynniki { get; protected set; }
@@ -292,7 +304,7 @@ namespace DotBase
             if (null == _OdpowiedzBazy || _OdpowiedzBazy.Rows.Count == 0)
             {
                 Wspolczynniki.Wspolczynnik = Wspolczynniki.Niepewnosc = Wspolczynniki.Zakres = 0.0;
-                Wspolczynniki.RownowaznikDawki = (int)ROWNOWAZNIKI_DAWKI.Indywidualny_HP07;
+                Wspolczynniki.RownowaznikDawki = (int)ROWNOWAZNIKI_DAWKI.Indywidualny_HP10;
             }
             else
             {

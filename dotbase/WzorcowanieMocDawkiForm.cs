@@ -641,6 +641,7 @@ namespace DotBase
             szablon.jednostka = comboBox4.Text;
             szablon.wielkoscFizyczna = comboBox5.Text;
             szablon.tlo = textBox5.Text;
+            szablon.zakres = "!ERROR!";
             szablon.tabela = dataGridView1.Rows;
             szablon.obliczone = dataGridView2.Rows;
             szablon.dolaczZakres = dolaczZakres;
@@ -666,6 +667,7 @@ namespace DotBase
 
             /* Nie używane dane w tym protokole */
             szablon.emisjaPow = null;
+            szablon.dawka = null;
 
             szablon.Generate(this);
         }
